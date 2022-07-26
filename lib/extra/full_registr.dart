@@ -19,6 +19,7 @@ class _FullRegistrState extends State<FullRegistr> {
     "Должность",
     "Город*",
   ];
+  //////lkkbhbugigkyujvh
   ///new thins
   String selectedValue = "Название сети";
   String selectedValue2 = "Должность";
@@ -49,7 +50,7 @@ class _FullRegistrState extends State<FullRegistr> {
                         padding: const EdgeInsets.only(top: 8, right: 8),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
-                          children: const[
+                          children: const [
                             Icon(
                               Icons.close_rounded,
                               size: 30,
@@ -157,7 +158,7 @@ class _FullRegistrState extends State<FullRegistr> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 textSwitch("Не выходить из приложения"),
-                                 ToggleSwitch(
+                                ToggleSwitch(
                                   handlerWidth: 40,
                                   handlerHeight: 12,
                                   tickerSize: 21,
@@ -171,7 +172,7 @@ class _FullRegistrState extends State<FullRegistr> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 textSwitch("Согласен на СМС и Email рассылку"),
-                                 ToggleSwitch(
+                                ToggleSwitch(
                                   handlerWidth: 40,
                                   handlerHeight: 12,
                                   tickerSize: 21,
@@ -185,7 +186,7 @@ class _FullRegistrState extends State<FullRegistr> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 textSwitch("Подтверждаю подлиность данных"),
-                                 ToggleSwitch(
+                                ToggleSwitch(
                                   handlerWidth: 40,
                                   handlerHeight: 12,
                                   tickerSize: 21,
@@ -203,7 +204,7 @@ class _FullRegistrState extends State<FullRegistr> {
                                 const SizedBox(
                                   width: 75,
                                 ),
-                                 ToggleSwitch(
+                                ToggleSwitch(
                                   handlerWidth: 40,
                                   handlerHeight: 12,
                                   tickerSize: 21,
