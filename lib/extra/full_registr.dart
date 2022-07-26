@@ -13,11 +13,13 @@ class FullRegistr extends StatefulWidget {
 }
 
 class _FullRegistrState extends State<FullRegistr> {
+  //list item changed
   final List<String> items = [
     "Название сети",
     "Должность",
     "Город*",
   ];
+  ///new thins
   String selectedValue = "Название сети";
   String selectedValue2 = "Должность";
   String selectedValue3 = "Город*";
