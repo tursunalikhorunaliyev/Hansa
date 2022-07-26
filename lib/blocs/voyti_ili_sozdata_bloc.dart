@@ -8,4 +8,5 @@ class VoytiIliSozdatBloC{
   final controller = StreamController<EntryType>();
   StreamSink<EntryType> get actionSink => controller.sink;
   Stream<EntryType> get actionStream => controller.stream;
+  
 }
