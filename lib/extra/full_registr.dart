@@ -13,6 +13,7 @@ class FullRegistr extends StatefulWidget {
 }
 
 class _FullRegistrState extends State<FullRegistr> {
+  //list item changed
   final List<String> items = [
     "Название сети",
     "Должность",
