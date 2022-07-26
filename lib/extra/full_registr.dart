@@ -3,8 +3,8 @@ import 'package:flip_card/flip_card.dart';
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
 import 'package:provider/provider.dart';
-import 'package:ui_lar/toggle_switcher.dart';
 
 class FullRegistr extends StatefulWidget {
   const FullRegistr({Key? key}) : super(key: key);
@@ -156,7 +156,7 @@ class _FullRegistrState extends State<FullRegistr> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 textSwitch("Не выходить из приложения"),
-                                const ToggleSwitch(
+                                 ToggleSwitch(
                                   handlerWidth: 40,
                                   handlerHeight: 12,
                                   tickerSize: 21,
@@ -170,7 +170,7 @@ class _FullRegistrState extends State<FullRegistr> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 textSwitch("Согласен на СМС и Email рассылку"),
-                                const ToggleSwitch(
+                                 ToggleSwitch(
                                   handlerWidth: 40,
                                   handlerHeight: 12,
                                   tickerSize: 21,
@@ -184,7 +184,7 @@ class _FullRegistrState extends State<FullRegistr> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 textSwitch("Подтверждаю подлиность данных"),
-                                const ToggleSwitch(
+                                 ToggleSwitch(
                                   handlerWidth: 40,
                                   handlerHeight: 12,
                                   tickerSize: 21,
@@ -202,7 +202,7 @@ class _FullRegistrState extends State<FullRegistr> {
                                 const SizedBox(
                                   width: 75,
                                 ),
-                                const ToggleSwitch(
+                                 ToggleSwitch(
                                   handlerWidth: 40,
                                   handlerHeight: 12,
                                   tickerSize: 21,
