@@ -16,6 +16,5 @@ class BackUIBloC {
       list.removeAt(list.length - 1);
     });
   }
-  // nima gapp
   //aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 }
