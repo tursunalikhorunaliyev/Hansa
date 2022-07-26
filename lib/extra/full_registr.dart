@@ -19,8 +19,6 @@ class _FullRegistrState extends State<FullRegistr> {
     "Должность",
     "Город*",
   ];
-  //////lkkbhbugigkyujvh
-  ///new thins
   String selectedValue = "Название сети";
   String selectedValue2 = "Должность";
   String selectedValue3 = "Город*";

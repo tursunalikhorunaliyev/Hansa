@@ -19,54 +19,50 @@ class _SozdatAccauntState extends State<SozdatAccaunt> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-   backgroundColor: const Color(0xFF30353b),
+      backgroundColor: const Color(0xFF30353b),
       body: NotificationListener<OverscrollIndicatorNotification>(
-          onNotification: (notification) {
-            notification.disallowIndicator();
-            return false;
-          },
-        
-         child: Center(
-            child: Stack(
-              children: [
-                Image.asset(
-                  'assets/2.png',
+        onNotification: (notification) {
+          notification.disallowIndicator();
+          return false;
+        },
+        child: Center(
+          child: Stack(
+            clipBehavior: Clip.none,
+            children: [
+              Image.asset(
+                'assets/2.png',
+                fit: BoxFit.fill,
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 300.h),
+                child: Image.asset(
+                  'assets/bg.png',
+                  width: double.infinity,
                   fit: BoxFit.fill,
                 ),
-                Padding(
-                  padding:  EdgeInsets.only( top: 300.h),
-                  child: Image.asset(
-                    'assets/bg.png',
-                    width: double.infinity,
-                    fit: BoxFit.fill,
-                  ),
-                ),
-                Positioned(
+              ),
+              Positioned(
                 bottom: 41,
                 left: 92,
                 right: 92,
-                child: Column(
-                  children: [
-                    Text("По всем вопросам пришите на" , style: GoogleFonts.montserrat(
-                      fontSize: 11,
-                      color: Colors.grey
-                    ),),
-                    Text("Support@hansa-lab.ru" , style: GoogleFonts.montserrat(
-                      fontSize: 11,
-                      color: Colors.grey,
-                      fontWeight: FontWeight.bold
-                      
-                      ),)
-                  ]
-                ),
+                child: Column(children: [
+                  Text(
+                    "По всем вопросам пришите на",
+                    style: GoogleFonts.montserrat(
+                        fontSize: 11, color: Colors.grey),
+                  ),
+                  Text(
+                    "Support@hansa-lab.ru",
+                    style: GoogleFonts.montserrat(
+                        fontSize: 11,
+                        color: Colors.grey,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ]),
               ),
-               
-              
-                
-              ],
-            ),
+            ],
           ),
-        
+        ),
       ),
     );
   }
