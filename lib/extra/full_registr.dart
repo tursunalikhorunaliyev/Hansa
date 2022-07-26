@@ -1,5 +1,4 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:flip_card/flip_card.dart';
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -45,10 +44,10 @@ class _FullRegistrState extends State<FullRegistr> {
                   child: Column(
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(top: 8, right: 8),
+                        padding: const EdgeInsets.only(top: 8, right: 8),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
+                          children: const[
                             Icon(
                               Icons.close_rounded,
                               size: 30,
