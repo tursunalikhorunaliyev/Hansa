@@ -19,7 +19,7 @@ class _SozdatAccauntState extends State<SozdatAccaunt> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFF30353b),
+   backgroundColor: const Color(0xFF30353b),
       body: NotificationListener<OverscrollIndicatorNotification>(
         onNotification: (notification) {
           notification.disallowIndicator();

@@ -1,7 +1,9 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:flip_card/flip_card.dart';
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hansa_app/blocs/bloc_flip_login.dart';
 import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
 import 'package:provider/provider.dart';
 
@@ -27,241 +29,263 @@ class _FullRegistrState extends State<FullRegistr> {
   Widget build(BuildContext context) {
     final provider = Provider.of<FlipCardController>(context);
     final isTablet = Provider.of<bool>(context);
-    return Padding(
-      padding: EdgeInsets.only(top: 230),
-      child: SingleChildScrollView(
-        child: Center(
-          child: Stack(
-            clipBehavior: Clip.none,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 274, bottom: 84),
-                child: Container(
-                  height: isTablet ? 950 : 890,
-                  width: isTablet ? 516 : 346,
-                  decoration: BoxDecoration(
-                      color: const Color(0xFFf2f2f2),
-                      borderRadius: BorderRadius.circular(16)),
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8, right: 8),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: const [
-                            Icon(
+    final providerFlip = Provider.of<GlobalKey<FlipCardState>>(context);
+    final providerFlipLogin = Provider.of<BlocFlipLogin>(context);
+
+    return SingleChildScrollView(
+      child: Center(
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            Padding(
+              padding:  EdgeInsets.only(top:isTablet?446: 274, bottom: 84),
+              child: Container(
+                height: isTablet ? 950 : 890,
+                width: isTablet ? 556 : 346,
+                decoration: BoxDecoration(
+                    color: const Color(0xFFf2f2f2),
+                    borderRadius: BorderRadius.circular(16)),
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8, right: 8),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children:  [
+                          InkWell(
+                            onTap: () {
+                              providerFlipLogin.sink.add(false);
+                              providerFlip.currentState!.toggleCard();
+                            },
+                            child: const Icon(
                               Icons.close_rounded,
                               size: 30,
                               color: Color(0xFF8c8c8b),
                             ),
-                          ],
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 82),
+                      child: Text(
+                        "Регистрация",
+                        style: GoogleFonts.montserrat(
+                            fontSize: 24, fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 18,
+                    ),
+                    textField("Имя*", isTablet ? 45 : 38, isTablet ? 13 : 10,
+                        isTablet ? FontWeight.w600 : FontWeight.normal),
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    textField(
+                        "Фамилия*",
+                        isTablet ? 45 : 38,
+                        isTablet ? 13 : 10,
+                        isTablet ? FontWeight.w600 : FontWeight.normal),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    textField(
+                        "Email*",
+                        isTablet ? 45 : 38,
+                        isTablet ? 13 : 10,
+                        isTablet ? FontWeight.w600 : FontWeight.normal),
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    textField(
+                        "Контактный тефон*",
+                        isTablet ? 45 : 38,
+                        isTablet ? 15 : 10,
+                        isTablet ? FontWeight.w600 : FontWeight.normal),
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    textField(
+                        "Дата рождения*",
+                        isTablet ? 45 : 38,
+                        isTablet ? 15 : 10,
+                        
+                        isTablet ? FontWeight.w600 : FontWeight.normal),
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    dropDown(
+                        "Название сети",
+                        selectedValue,
+                        isTablet ? 538 : 325,
+                        isTablet ? 15 : 10,
+                        isTablet?43:38,
+                        isTablet ? FontWeight.w600 : FontWeight.normal),
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    dropDown(
+                        "Должность",
+                        selectedValue2,
+                        isTablet ? 538 : 325,
+                        isTablet ? 15 : 10,
+                        isTablet?43:38,
+                        isTablet ? FontWeight.w600 : FontWeight.normal),
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    dropDown(
+                        "Город*",
+                        selectedValue3,
+                        isTablet ? 538 : 325,
+                        isTablet ? 15 : 10,
+                        isTablet?43:38,
+                        isTablet ? FontWeight.w600 : FontWeight.normal,
                         ),
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    textField(
+                        "Адрес торговой сети",
+                        isTablet ? 45 : 38,
+                        isTablet ? 13 : 10,
+                        isTablet ? FontWeight.w600 : FontWeight.normal),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Image.asset(
+                    isTablet?  "assets/999.png":"assets/Layer 972.png",
+                      height: 64,
+                      width: 234,
+                    ),
+                    const SizedBox(
+                      height: 14,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Column(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              textSwitch("Не выходить из приложения"),
+                              ToggleSwitch(
+                                handlerWidth: 40,
+                                handlerHeight: 12,
+                                tickerSize: 21,
+                                colorCircle: Colors.green[600],
+                                colorContainer: Colors.grey[300],
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 17,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              textSwitch("Согласен на СМС и Email рассылку"),
+                              ToggleSwitch(
+                                handlerWidth: 40,
+                                handlerHeight: 12,
+                                tickerSize: 21,
+                                
+                                colorCircle: Colors.green[600],
+                                colorContainer: Colors.grey[300],
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 17,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              textSwitch("Подтверждаю подлиность данных"),
+                              ToggleSwitch(
+                                handlerWidth: 40,
+                                handlerHeight: 12,
+                                tickerSize: 21,
+                                
+                                colorCircle: Colors.green[600],
+                                colorContainer: Colors.grey[300],
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 17,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              textSwitch("""Соглашаюсь на обработку 
+           персональных данных"""),
+                              const SizedBox(
+                                width: 75,
+                              ),
+                              ToggleSwitch(
+                                handlerWidth: 40,
+                                handlerHeight: 12,
+                                tickerSize: 21,
+                                
+                                colorCircle: Colors.green[600],
+                                colorContainer: Colors.grey[300],
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 82),
-                        child: Text(
-                          "Регистрация",
-                          style: GoogleFonts.montserrat(
-                              fontSize: 24, fontWeight: FontWeight.w500),
-                        ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 11,
+                        right: 9,
+                        top: 25,
                       ),
-                      const SizedBox(
-                        height: 18,
-                      ),
-                      textField("Имя*", isTablet ? 45 : 38, isTablet ? 13 : 10,
-                          isTablet ? FontWeight.w600 : FontWeight.normal),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      textField(
-                          "Фамилия*",
-                          isTablet ? 45 : 38,
-                          isTablet ? 13 : 10,
-                          isTablet ? FontWeight.w600 : FontWeight.normal),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      textField(
-                          "Email*",
-                          isTablet ? 45 : 38,
-                          isTablet ? 13 : 10,
-                          isTablet ? FontWeight.w600 : FontWeight.normal),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      textField(
-                          "Контактный тефон*",
-                          isTablet ? 45 : 38,
-                          isTablet ? 15 : 10,
-                          isTablet ? FontWeight.w600 : FontWeight.normal),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      textField(
-                          "Дата рождения*",
-                          isTablet ? 45 : 38,
-                          isTablet ? 15 : 10,
-                          isTablet ? FontWeight.w600 : FontWeight.normal),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      dropDown(
-                          "Название сети",
-                          selectedValue,
-                          isTablet ? 495 : 325,
-                          isTablet ? 15 : 10,
-                          isTablet ? FontWeight.w600 : FontWeight.normal),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      dropDown(
-                          "Должность",
-                          selectedValue2,
-                          isTablet ? 495 : 325,
-                          isTablet ? 15 : 10,
-                          isTablet ? FontWeight.w600 : FontWeight.normal),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      dropDown(
-                          "Город*",
-                          selectedValue3,
-                          isTablet ? 495 : 325,
-                          isTablet ? 15 : 10,
-                          isTablet ? FontWeight.w600 : FontWeight.normal),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      textField(
-                          "Адрес торговой сети",
-                          isTablet ? 45 : 38,
-                          isTablet ? 13 : 10,
-                          isTablet ? FontWeight.w600 : FontWeight.normal),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Image.asset(
-                        "assets/Layer 972.png",
-                        height: 64,
-                        width: 234,
-                      ),
-                      const SizedBox(
-                        height: 14,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                textSwitch("Не выходить из приложения"),
-                                ToggleSwitch(
-                                  handlerWidth: 40,
-                                  handlerHeight: 12,
-                                  tickerSize: 21,
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 17,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                textSwitch("Согласен на СМС и Email рассылку"),
-                                ToggleSwitch(
-                                  handlerWidth: 40,
-                                  handlerHeight: 12,
-                                  tickerSize: 21,
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 17,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                textSwitch("Подтверждаю подлиность данных"),
-                                ToggleSwitch(
-                                  handlerWidth: 40,
-                                  handlerHeight: 12,
-                                  tickerSize: 21,
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 17,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                textSwitch("""Соглашаюсь на обработку 
-             персональных данных"""),
-                                const SizedBox(
-                                  width: 75,
-                                ),
-                                ToggleSwitch(
-                                  handlerWidth: 40,
-                                  handlerHeight: 12,
-                                  tickerSize: 21,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 11,
-                          right: 9,
-                          top: 25,
-                        ),
-                        child: GestureDetector(
-                          onTap: () => provider.toggleCard(),
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: 46,
-                            width: 325,
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF25b049),
-                              borderRadius: BorderRadius.circular(70),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 5,
-                                  blurRadius: 7,
-                                  offset: const Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                            ),
-                            child: Text(
-                              "Зарегистрироваться",
-                              style: GoogleFonts.montserrat(
-                                  fontSize: 12, color: const Color(0xFFffffff)),
-                            ),
+                      child: GestureDetector(
+                        onTap: () => provider.toggleCard(),
+                        child: Container(
+                          alignment: Alignment.center,
+                          height: 46,
+                          width: 325,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF25b049),
+                            borderRadius: BorderRadius.circular(70),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 5,
+                                blurRadius: 7,
+                                offset: const Offset(
+                                    0, 3), // changes position of shadow
+                              ),
+                            ],
+                          ),
+                          child: Text(
+                            "Зарегистрироваться",
+                            style: GoogleFonts.montserrat(
+                                fontSize: 12, color: const Color(0xFFffffff)),
                           ),
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-              Positioned(
-                top: isTablet ? 186 : 215,
-                left: isTablet ? 157 : 107,
-                child: isTablet
-                    ? Image.asset("assets/tabletTumLogo.png")
-                    : Image.asset(
-                        "assets/Logo.png",
-                        height: 133,
-                        width: 133,
-                      ),
-              ),
-            ],
-          ),
+            ),
+            Positioned(
+              top: isTablet ? 355 : 215,
+              left: isTablet ? 177 : 107,
+              child: isTablet
+                  ? Image.asset("assets/tabletTumLogo.png")
+                  : Image.asset(
+                      "assets/Logo.png",
+                      height: 133,
+                      width: 133,
+                    ),
+            ),
+          ],
         ),
       ),
     );
@@ -302,7 +326,7 @@ class _FullRegistrState extends State<FullRegistr> {
     );
   }
 
-  Widget dropDown(String text, String choiseValue, double width, double size,
+  Widget dropDown(String text, String choiseValue, double width, double size,double height,
       FontWeight weight) {
     return Padding(
       padding: const EdgeInsets.only(
@@ -310,7 +334,7 @@ class _FullRegistrState extends State<FullRegistr> {
         right: 9,
       ),
       child: Container(
-        height: 38,
+        height: height,
         width: width,
         decoration: BoxDecoration(
           color: const Color(0xFFffffff),

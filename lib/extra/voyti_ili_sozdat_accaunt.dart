@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/blocs/bloc_flip_login.dart';
+import 'package:hansa_app/blocs/login_clicked_bloc.dart';
 import 'package:hansa_app/screens/sozdat_accaunt.dart';
 import 'package:provider/provider.dart';
 
@@ -19,6 +20,8 @@ class VoytiIliSozdatAccaunt extends StatelessWidget {
     final isTablet = Provider.of<bool>(context);
     final providerFlip = Provider.of<GlobalKey<FlipCardState>>(context);
     final provider = Provider.of<BlocFlipLogin>(context);
+    final providerClicked = Provider.of<LoginClickedBloc>(context);
+    
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       builder: (context, child) {
@@ -32,11 +35,9 @@ class VoytiIliSozdatAccaunt extends StatelessWidget {
             ),
             GestureDetector(
               onTap: (() {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const SozdatAccaunt(),
-                    ));
+                  providerClicked.sink.add(false);
+                  provider.sink.add(true);
+                  providerFlip.currentState!.toggleCard();
               }),
               child: Container(
                 height: isTablet ? 50.h : 46.66666666666667.h,
@@ -86,9 +87,9 @@ class VoytiIliSozdatAccaunt extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
+                providerClicked.sink.add(true);
                 provider.sink.add(true);
                 providerFlip.currentState!.toggleCard();
-                print("Salom");
               },
               child: Container(
                 height: isTablet ? 50.h : 46.66666666666667.h,

@@ -20,7 +20,7 @@ class LoginWidget extends StatelessWidget {
                   Padding(
                     padding:  EdgeInsets.only(top: 300.h),
                     child: Image.asset(
-                      'assets/bg.png',
+                     'assets/bg.png',
                     ),
                   ),
                 Positioned(

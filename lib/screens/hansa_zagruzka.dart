@@ -1,11 +1,14 @@
 import 'package:flip_card/flip_card.dart';
+import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hansa_app/blocs/bloc_flip_login.dart';
 import 'package:hansa_app/blocs/login_anim_bloc.dart';
 import 'package:hansa_app/blocs/login_clicked_bloc.dart';
+import 'package:hansa_app/extra/full_registr.dart';
 import 'package:hansa_app/extra/hansa_entry_widget.dart';
 import 'package:hansa_app/extra/login_card.dart';
+import 'package:hansa_app/extra/regis_widget.dart';
 import 'package:provider/provider.dart';
 
 class HansaZagruzka extends StatelessWidget {
@@ -17,6 +20,7 @@ class HansaZagruzka extends StatelessWidget {
     final isTablet = Provider.of<bool>(context);
     final loginAnimBloc = LoginAnimBloc();
     final flipBloc = BlocFlipLogin();
+    final flipCardController = Provider.of<FlipCardController>(context);
     GlobalKey<FlipCardState> key = GlobalKey<FlipCardState>();
     return MultiProvider(
       providers: [
@@ -35,11 +39,19 @@ class HansaZagruzka extends StatelessWidget {
         backgroundColor: const Color(0xff31363c),
         body: Stack(
           children: [
-            Image.asset(
-              isTablet ? "assets/tabletRasm.png" : "assets/Layer 1701.png",
-              width: double.infinity,
-              //height: 376.h,
-              fit: BoxFit.cover,
+            Stack(
+              alignment: Alignment.bottomCenter,
+              children: [
+                Image.asset(
+                  isTablet ? "assets/tabletRasm.png" : "assets/Layer 1701.png",
+                  width: MediaQuery.of(context).size.width,
+                  fit: BoxFit.fill,
+                ),
+                Container(
+                  height: 2,
+                  color: const Color(0xff31363c),
+                ),
+              ],
             ),
             StreamBuilder<bool>(
                 stream: flipBloc.stream,
@@ -59,21 +71,33 @@ class HansaZagruzka extends StatelessWidget {
                     ),
                   );
                 }),
-            FlipCard(
-              key: key,
-              flipOnTouch: false,
-              front: const Align(
-                alignment: Alignment.bottomCenter,
-                child: HansaEntry(),
-              ),
-              back: const Center(
-                child: SingleChildScrollView(
-                    child: Padding(
-                  padding: EdgeInsets.only(top: 206),
-                  child: LoginCard(),
-                )),
-              ),
-            ),
+            StreamBuilder<bool>(
+                stream: bloc.stream,
+                initialData: true,
+                builder: (context, snapshot) {
+                  return FlipCard(
+                    key: key,
+                    flipOnTouch: false,
+                    front: const Align(
+                      alignment: Alignment.bottomCenter,
+                      child: HansaEntry(),
+                    ),
+                    back: Center(
+                      child: snapshot.data == true
+                          ? const SingleChildScrollView(
+                              child: Padding(
+                              padding: EdgeInsets.only(top: 200),
+                              child: LoginCard(),
+                            ))
+                          : FlipCard(
+                              controller: flipCardController,
+                              flipOnTouch: false,
+                              back: const CompleteRegistr(),
+                              front: const FullRegistr(),
+                            ),
+                    ),
+                  );
+                }),
           ],
         ),
       ),
