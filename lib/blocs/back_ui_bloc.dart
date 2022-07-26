@@ -10,11 +10,11 @@ class BackUIBloC {
   BackUIBloC() {
     final bloc = MenuEventsBloC();
     List<MenuActions> list = [MenuActions.welcome];
-    //UI bloc
     stream.listen((event) {
       list.add(event);
       bloc.eventSink.add(list[list.length - 1]);
       list.removeAt(list.length - 1);
     });
   }
+  // asjoidaiokjfndkjafdnj
 }
