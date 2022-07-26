@@ -29,7 +29,7 @@ class _FullRegistrState extends State<FullRegistr> {
     final provider = Provider.of<FlipCardController>(context);
     final isTablet = Provider.of<bool>(context);
     return Padding(
-      padding: EdgeInsets.only(top: 230),
+      padding: const EdgeInsets.only(top: 230),
       child: SingleChildScrollView(
         child: Center(
           child: Stack(

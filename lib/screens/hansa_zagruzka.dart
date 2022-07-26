@@ -50,7 +50,7 @@ class HansaZagruzka extends StatelessWidget {
                     opacity: snapshot.data! ? 1 : 0,
                     curve: Curves.fastOutSlowIn,
                     child: Padding(
-                      padding: EdgeInsets.only(top: 300.h),
+                      padding: EdgeInsets.only(top: 298.h),
                       child: Image.asset(
                         isTablet ? "assets/tabletBgRasm.png" : 'assets/bg.png',
                         width: double.infinity,
