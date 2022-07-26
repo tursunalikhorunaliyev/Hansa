@@ -59,20 +59,25 @@ class HansaZagruzka extends StatelessWidget {
                     ),
                   );
                 }),
-            FlipCard(
-              key: key,
-              flipOnTouch: false,
-              front: const Align(
-                alignment: Alignment.bottomCenter,
-                child: HansaEntry(),
-              ),
-              back: const Center(
-                child: SingleChildScrollView(
-                    child: Padding(
-                  padding: EdgeInsets.only(top: 206),
-                  child: LoginCard(),
-                )),
-              ),
+            StreamBuilder<bool>(
+              stream: bloc.stream,
+              builder: (context, snapshot) {
+                return FlipCard(
+                  key: key,
+                  flipOnTouch: false,
+                  front: const Align(
+                    alignment: Alignment.bottomCenter,
+                    child: HansaEntry(),
+                  ),
+                  back: const Center(
+                    child: SingleChildScrollView(
+                        child: Padding(
+                      padding: EdgeInsets.only(top: 206),
+                      child: LoginCard(),
+                    )),
+                  ),
+                );
+              }
             ),
           ],
         ),
