@@ -83,6 +83,7 @@ class ObucheniyaWidget extends StatelessWidget {
                   ),
                   content: isTablet
                       ? Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Column(
                               children: [
@@ -156,6 +157,7 @@ class ObucheniyaWidget extends StatelessWidget {
                   ),
                   content: isTablet
                       ? Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             Column(
                               children: [
