@@ -66,7 +66,7 @@ class _ChangeProfileState extends State<ChangeProfile> {
           height: isTablet ? 400 : 230,
         ),
         const ReferalSilka(),
-        const SizedBox()
+        
       ],
     );
   }

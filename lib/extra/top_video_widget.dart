@@ -21,13 +21,13 @@ class TopVideoWidget extends StatefulWidget {
 }
 
 class _TopVideoWidgetState extends State<TopVideoWidget> {
-  late ChewieController chewieController;
+ // late ChewieController chewieController;
   late VideoPlayerController videoController;
   initVideo() async {
     videoController = VideoPlayerController.network(
         "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4");
     await videoController.initialize();
-    chewieController = ChewieController(videoPlayerController: videoController);
+  //  chewieController = ChewieController(videoPlayerController: videoController);
   }
 
   @override
@@ -109,10 +109,10 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
                       ),
                     ],
                   ),
-                  AspectRatio(
+                 /*  AspectRatio(
                     aspectRatio: 9 / 16,
                     child: Chewie(controller: chewieController),
-                  ),
+                  ), */
                   const Padding(
                     padding: EdgeInsets.only(top: 13),
                     child: CustomTreningiVideo(),
