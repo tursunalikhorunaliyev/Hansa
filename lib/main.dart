@@ -7,6 +7,7 @@ import 'package:hansa_app/blocs/bloc_play_video.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/blocs/voyti_ili_sozdata_bloc.dart';
 import 'package:hansa_app/screens/hansa_zagruzka.dart';
+import 'package:hansa_app/screens/welcome_screen.dart';
 import 'package:provider/provider.dart';
 
 void main(List<String> args) {
@@ -40,7 +41,7 @@ class MyApp extends StatelessWidget {
         ],
         child: const MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: HansaZagruzka(),
+          home: WelcomeScreen(),
         ),
       ),
     );

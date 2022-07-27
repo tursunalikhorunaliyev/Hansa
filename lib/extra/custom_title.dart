@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 class CustomTitle extends StatelessWidget {
   const CustomTitle({Key? key, required this.imagePath, required this.title})
@@ -10,16 +11,21 @@ class CustomTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isTablet = Provider.of<bool>(context);
     return Container(
       color: const Color(0xffeaeaea),
       child: Padding(
-        padding:  EdgeInsets.only(top: 10.h, bottom: 15.h),
+        padding: EdgeInsets.only(
+          top: isTablet ? 7.h : 10.h,
+          bottom: isTablet ? 8 : 15.h,
+        ),
         child: Row(
           children: [
             Container(
-              width: 70.w,
+              width: isTablet ? 55.w : 70.w,
+              padding: const EdgeInsets.only(left: 40),
               alignment: Alignment.centerRight,
-              decoration:  BoxDecoration(
+              decoration: BoxDecoration(
                 color: const Color(0xffff163e),
                 borderRadius: BorderRadius.only(
                   topRight: Radius.circular(64.r),
@@ -28,7 +34,7 @@ class CustomTitle extends StatelessWidget {
               ),
               child: Padding(
                 padding:
-                     EdgeInsets.only(top: 5.5.h, bottom: 5.5.h, right: 15.w),
+                    EdgeInsets.only(top: 5.5.h, bottom: 5.5.h, right: 15.w),
                 child: Image.asset(
                   imagePath,
                   height: 31.h,
@@ -36,7 +42,7 @@ class CustomTitle extends StatelessWidget {
                 ),
               ),
             ),
-             SizedBox(
+            SizedBox(
               width: 11.w,
             ),
             RichText(
@@ -45,7 +51,7 @@ class CustomTitle extends StatelessWidget {
                   TextSpan(
                     text: "#",
                     style: GoogleFonts.montserrat(
-                      fontSize: 14.sp,
+                      fontSize: isTablet ? 11.sp : 14.sp,
                       color: const Color(0xffff163e),
                     ),
                   ),
@@ -53,7 +59,7 @@ class CustomTitle extends StatelessWidget {
                     text: title,
                     style: GoogleFonts.montserrat(
                       fontWeight: FontWeight.bold,
-                      fontSize: 20.sp,
+                      fontSize: isTablet ? 15.sp : 20.sp,
                       color: const Color(0xff272624),
                     ),
                   ),
