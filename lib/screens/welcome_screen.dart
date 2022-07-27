@@ -8,6 +8,7 @@ import 'package:hansa_app/extra/glavniy_menyu.dart';
 import 'package:hansa_app/extra/top_video_widget.dart';
 import 'package:hansa_app/extra/ui_changer.dart';
 import 'package:provider/provider.dart';
+import 'package:video_player/video_player.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -149,7 +150,11 @@ class WelcomeScreen extends StatelessWidget {
                       duration: const Duration(milliseconds: 300),
                       scale: snapshot.data! ? 1 : 0,
                       curve: Curves.fastLinearToSlowEaseIn,
-                      child: const TopVideoWidget(),
+                      child: TopVideoWidget(
+                        videoController: VideoPlayerController.network(
+                          "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
+                        ),
+                      ),
                     );
                   },
                 ),
