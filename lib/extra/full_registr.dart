@@ -151,11 +151,7 @@ class _FullRegistrState extends State<FullRegistr> {
                     const SizedBox(
                       height: 10,
                     ),
-                    Image.asset(
-                      isTablet ? "assets/999.png" : "assets/Layer 972.png",
-                      height: isTablet ? 84 : 64,
-                      width: isTablet ? 404 : 234,
-                    ),
+                 
                     const SizedBox(
                       height: 14,
                     ),

@@ -56,7 +56,7 @@ class WelcomeWidget extends StatelessWidget {
               ),
             ),
             SizedBox(
-              height: isTablet ? 877 : 567,
+              height: isTablet ? 877 : 566,
               width: isTablet ? 800 : 330,
               child: isTablet
                   ? SingleChildScrollView(

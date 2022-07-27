@@ -14,7 +14,9 @@ import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
 class TopVideoWidget extends StatefulWidget {
-  const TopVideoWidget({Key? key}) : super(key: key);
+  const TopVideoWidget({Key? key, required this.videoController})
+      : super(key: key);
+  final VideoPlayerController videoController;
 
   @override
   State<TopVideoWidget> createState() => _TopVideoWidgetState();
@@ -22,12 +24,10 @@ class TopVideoWidget extends StatefulWidget {
 
 class _TopVideoWidgetState extends State<TopVideoWidget> {
   late ChewieController chewieController;
-  late VideoPlayerController videoController;
   initVideo() async {
-    videoController = VideoPlayerController.network(
-        "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4");
-    await videoController.initialize();
-    chewieController = ChewieController(videoPlayerController: videoController);
+    await widget.videoController.initialize();
+    chewieController =
+        ChewieController(videoPlayerController: widget.videoController);
   }
 
   @override

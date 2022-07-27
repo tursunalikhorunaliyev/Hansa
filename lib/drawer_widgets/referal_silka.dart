@@ -27,8 +27,8 @@ class ReferalSilka extends StatelessWidget {
           indent: isTablet ? 10 : 72,
           endIndent: isTablet ? 10 : 26,
         ),
-         SizedBox(
-          height: isTablet ? 20  : 19,
+        SizedBox(
+          height: isTablet ? 20 : 19,
         ),
         Wrap(
           direction: Axis.horizontal,
@@ -52,8 +52,8 @@ class ReferalSilka extends StatelessWidget {
               width: isTablet ? 30 : 20,
             ),
             SizedBox(
-            height: isTablet ? 60  : 0,
-          ),
+              height: isTablet ? 60 : 0,
+            ),
             Divider(
               color: const Color(0xFF444444),
               thickness: 2,
