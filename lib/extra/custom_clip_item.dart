@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/extra/custom_paint_clipper.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 class CustomClipItem extends StatelessWidget {
   const CustomClipItem({
@@ -24,8 +25,9 @@ class CustomClipItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isTablet = Provider.of<bool>(context);
     return Padding(
-      padding:  EdgeInsets.only(left: 25.w, right: 25.w, top: 11.h, bottom: 5.h),
+      padding: EdgeInsets.only(left: 25.w, right: 25.w, top: 11.h, bottom: 5.h),
       child: SizedBox(
         width: 325.w,
         child: Stack(
@@ -50,12 +52,12 @@ class CustomClipItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding:  EdgeInsets.only(left: 18.w),
+                  padding: EdgeInsets.only(left: 18.w),
                   child: Text(
                     title,
                     style: GoogleFonts.montserrat(
                       color: titleColor,
-                    fontSize: 13.sp,
+                      fontSize: 13.sp,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -73,7 +75,7 @@ class CustomClipItem extends StatelessWidget {
                           borderRadius: BorderRadius.circular(64.r),
                           child: Container(
                             padding: const EdgeInsets.all(7),
-                            constraints:  BoxConstraints(
+                            constraints: BoxConstraints(
                               minWidth: 90.w,
                             ),
                             color: buttonColor,
