@@ -1,4 +1,4 @@
-import 'package:flip_card/flip_card.dart';
+import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,7 +15,7 @@ class LoginCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isTablet = Provider.of<bool>(context);
-    final flip = Provider.of<GlobalKey<FlipCardState>>(context);
+    final flip = Provider.of<Map<String, FlipCardController>>(context);
     final bloc = BlocAnim();
     final provider = Provider.of<BlocFlipLogin>(context);
     return ScreenUtilInit(
@@ -43,7 +43,7 @@ class LoginCard extends StatelessWidget {
                           child: InkWell(
                             onTap: () {
                               provider.sink.add(false);
-                              flip.currentState!.toggleCard();
+                              flip['login']!.toggleCard();
                             },
                             child: Icon(
                               Icons.close_rounded,

@@ -8,7 +8,7 @@ class CompleteRegistr extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<FlipCardController>(context);
+    final provider = Provider.of<Map<String, FlipCardController>>(context);
     final isTablet = Provider.of<bool>(context);
     return Column(
       children: [
@@ -34,7 +34,7 @@ class CompleteRegistr extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(right: 8, top: 8),
                             child: InkWell(
-                              onTap: () => provider.toggleCard(),
+                              onTap: () => provider['signin']!.toggleCard(),
                               child: Icon(
                                 Icons.close_rounded,
                                 size: isTablet ? 30 : 24,

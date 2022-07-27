@@ -26,8 +26,8 @@ class PartIndicator extends StatelessWidget {
         ),
         Image.asset(
           "assets/#Статьи .png",
-          
-          width: 81,
+          height: 100,
+          width: 100,
         )
       ],
     );

@@ -2,6 +2,7 @@ import 'package:flip_card/flip_card.dart';
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hansa_app/blocs/bloc_change_profile.dart';
 import 'package:hansa_app/blocs/bloc_flip_login.dart';
 import 'package:hansa_app/blocs/login_anim_bloc.dart';
 import 'package:hansa_app/blocs/login_clicked_bloc.dart';
@@ -20,16 +21,12 @@ class HansaZagruzka extends StatelessWidget {
     final isTablet = Provider.of<bool>(context);
     final loginAnimBloc = LoginAnimBloc();
     final flipBloc = BlocFlipLogin();
-    final flipCardController = Provider.of<FlipCardController>(context);
-    GlobalKey<FlipCardState> key = GlobalKey<FlipCardState>();
+    final flipCardController = Provider.of<Map<String, FlipCardController>>(context);
     return MultiProvider(
       providers: [
         Provider<LoginClickedBloc>(create: (context) => bloc),
         Provider<LoginAnimBloc>(
           create: (context) => loginAnimBloc,
-        ),
-        Provider<GlobalKey<FlipCardState>>(
-          create: (context) => key,
         ),
         Provider<BlocFlipLogin>(
           create: (context) => flipBloc,
@@ -71,33 +68,33 @@ class HansaZagruzka extends StatelessWidget {
                     ),
                   );
                 }),
-            StreamBuilder<bool>(
-                stream: bloc.stream,
-                initialData: true,
-                builder: (context, snapshot) {
-                  return FlipCard(
-                    key: key,
-                    flipOnTouch: false,
-                    front: const Align(
-                      alignment: Alignment.bottomCenter,
-                      child: HansaEntry(),
-                    ),
-                    back: Center(
-                      child: snapshot.data == true
+            FlipCard(
+              controller: flipCardController['login'],
+              flipOnTouch: false,
+              front: const Align(
+                alignment: Alignment.bottomCenter,
+                child: HansaEntry(),
+              ),
+              back: StreamBuilder<LoginAction>(
+                  stream: bloc.stream,
+                  initialData: LoginAction.signin,
+                  builder: (context, snapshot) {
+                    return Center(
+                      child: snapshot.data == LoginAction.login
                           ? const SingleChildScrollView(
                               child: Padding(
                               padding: EdgeInsets.only(top: 200),
                               child: LoginCard(),
-                            ))
+                            ),)
                           : FlipCard(
-                              controller: flipCardController,
+                              controller: flipCardController['signin'],
                               flipOnTouch: false,
                               back: const CompleteRegistr(),
                               front: const FullRegistr(),
                             ),
-                    ),
-                  );
-                }),
+                    );
+                  }),
+            ),
           ],
         ),
       ),
