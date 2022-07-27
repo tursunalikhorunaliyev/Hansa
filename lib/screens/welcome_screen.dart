@@ -7,6 +7,7 @@ import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/extra/glavniy_menyu.dart';
 import 'package:hansa_app/extra/top_video_widget.dart';
 import 'package:hansa_app/extra/ui_changer.dart';
+import 'package:hansa_app/providers/stack_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
@@ -15,14 +16,18 @@ class WelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("Salom");
     final playProvider = Provider.of<BlocPlayVideo>(context);
     GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
     final isTablet = Provider.of<bool>(context);
     final menuProvider = Provider.of<MenuEventsBloC>(context);
+    final stackProvider  = Provider.of<StackProvider>(context);
     return Provider(
       create: (context) => scaffoldKey,
       child: WillPopScope(
           onWillPop: () async {
+            menuProvider.eventSink.add(stackProvider.list.last);
+            stackProvider.removeStack();
             return false;
           },
           child: Scaffold(

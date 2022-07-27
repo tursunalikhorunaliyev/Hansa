@@ -26,8 +26,21 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
   late ChewieController? chewieController;
   initVideo() async {
     await widget.videoController.initialize();
-    chewieController =
-        ChewieController(videoPlayerController: widget.videoController);
+    chewieController = ChewieController(
+      videoPlayerController: widget.videoController,
+      cupertinoProgressColors: ChewieProgressColors(
+        backgroundColor: const Color(0xff090909),
+        bufferedColor: const Color(0xff090909),
+        playedColor: const Color(0xffff0000),
+        handleColor: const Color(0xffff0000),
+      ),
+      materialProgressColors: ChewieProgressColors(
+        backgroundColor: const Color(0xff090909),
+        bufferedColor: const Color(0xff090909),
+        playedColor: const Color(0xffff0000),
+        handleColor: const Color(0xffff0000),
+      ),
+    );
   }
 
   @override
@@ -112,6 +125,9 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
                         ),
                       ),
                     ],
+                  ),
+                  const SizedBox(
+                    height: 13,
                   ),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(15),
