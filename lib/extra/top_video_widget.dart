@@ -1,3 +1,6 @@
+import 'dart:ffi';
+
+import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -8,6 +11,7 @@ import 'package:hansa_app/extra/custom_black_appbar.dart';
 import 'package:hansa_app/extra/custom_title.dart';
 import 'package:hansa_app/training_section/custom_treningi_video.dart';
 import 'package:provider/provider.dart';
+import 'package:video_player/video_player.dart';
 
 class TopVideoWidget extends StatefulWidget {
   const TopVideoWidget({Key? key}) : super(key: key);
@@ -17,6 +21,21 @@ class TopVideoWidget extends StatefulWidget {
 }
 
 class _TopVideoWidgetState extends State<TopVideoWidget> {
+  late ChewieController chewieController;
+  late VideoPlayerController videoController;
+  initVideo() async {
+    videoController = VideoPlayerController.network(
+        "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4");
+    await videoController.initialize();
+    chewieController = ChewieController(videoPlayerController: videoController);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initVideo();
+  }
+
   @override
   Widget build(BuildContext context) {
     final playProvider = Provider.of<BlocPlayVideo>(context);
@@ -24,7 +43,7 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
       child: Stack(
         children: [
           Container(
-            decoration:  BoxDecoration(
+            decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
@@ -37,8 +56,8 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
             ),
           ),
           GestureDetector(
-            onTap: (){
-              playProvider.sink.add(false); 
+            onTap: () {
+              playProvider.sink.add(false);
             },
           ),
           Column(
@@ -90,9 +109,13 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
                       ),
                     ],
                   ),
-                 const Padding(
-                    padding:  EdgeInsets.only(top: 13),
-                    child:  CustomTreningiVideo(),
+                  AspectRatio(
+                    aspectRatio: 9 / 16,
+                    child: Chewie(controller: chewieController),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 13),
+                    child: CustomTreningiVideo(),
                   )
                 ],
               )
