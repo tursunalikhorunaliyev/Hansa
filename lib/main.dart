@@ -22,14 +22,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = WidgetsBinding.instance.window.physicalSize;
     bool isTablet = (size.width / 3) > 500;
+    Map<String, FlipCardController> map = {"login":FlipCardController(), "signin":FlipCardController()};
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       builder: (context, child) => MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (context) => StackProvider(),),
+          ChangeNotifierProvider(
+            create: (context) => StackProvider(),
+          ),
           Provider<bool>(create: (context) => isTablet),
           Provider(create: (context) => BlocChangeTitle()),
-          Provider(create: (context) => FlipCardController()),
+          Provider(create: (context) => map),
           Provider(create: (context) => VoytiIliSozdatBloC()),
           Provider(
             create: (context) => MenuEventsBloC(),

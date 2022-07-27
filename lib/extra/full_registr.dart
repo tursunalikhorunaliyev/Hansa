@@ -27,9 +27,8 @@ class _FullRegistrState extends State<FullRegistr> {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<FlipCardController>(context);
     final isTablet = Provider.of<bool>(context);
-    final providerFlip = Provider.of<GlobalKey<FlipCardState>>(context);
+    final providerFlip = Provider.of<Map<String, FlipCardController>>(context);
     final providerFlipLogin = Provider.of<BlocFlipLogin>(context);
 
     return SingleChildScrollView(
@@ -55,7 +54,7 @@ class _FullRegistrState extends State<FullRegistr> {
                           InkWell(
                             onTap: () {
                               providerFlipLogin.sink.add(false);
-                              providerFlip.currentState!.toggleCard();
+                              providerFlip['login']!.toggleCard();
                             },
                             child: const Icon(
                               Icons.close_rounded,
@@ -237,7 +236,7 @@ class _FullRegistrState extends State<FullRegistr> {
                         top: isTablet ? 30 : 25,
                       ),
                       child: GestureDetector(
-                        onTap: () => provider.toggleCard(),
+                        onTap: () => providerFlip['signin']!.toggleCard(),
                         child: Container(
                           alignment: Alignment.center,
                           height: isTablet ? 60 : 46,
