@@ -9,6 +9,7 @@ class CompleteRegistr extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<FlipCardController>(context);
+    final isTablet = Provider.of<bool>(context);
     return Column(
       children: [
         Stack(
@@ -22,21 +23,21 @@ class CompleteRegistr extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(5)),
-                  width: 346,
+                      borderRadius: BorderRadius.circular(isTablet ? 16 : 5)),
+                  width: isTablet ? 556 : 346,
                   height: 432,
                   child: Column(
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.end,
-                        children:  [
+                        children: [
                           Padding(
-                            padding: const EdgeInsets.only(right: 5),
+                            padding: const EdgeInsets.only(right: 8, top: 8),
                             child: InkWell(
                               onTap: () => provider.toggleCard(),
-                              child: const Icon(
+                              child: Icon(
                                 Icons.close_rounded,
-                                size: 24,
+                                size: isTablet ? 30 : 24,
                                 color: Color(0xff8c8c8b),
                               ),
                             ),
@@ -98,13 +99,18 @@ class CompleteRegistr extends StatelessWidget {
                 ),
               ),
             ),
+            //Kod yozvomman
             Padding(
-              padding: const EdgeInsets.only(top: 213, left: 130),
-              child: Image.asset(
-                'assets/Logo.png',
-                height: 134,
-                width: 134,
-              ),
+              padding: EdgeInsets.only(top: 213, left: isTablet ? 350 : 130),
+              child: isTablet
+                  ? Image.asset(
+                      'assets/tabletTumLogo.png',
+                    )
+                  : Image.asset(
+                      'assets/Logo.png',
+                      height: 134,
+                      width: 134,
+                    ),
             ),
           ],
         ),
