@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
+    
     Size size = WidgetsBinding.instance.window.physicalSize;
     bool isTablet = (size.width / 3) > 500;
     return ScreenUtilInit(
@@ -33,9 +33,7 @@ class MyApp extends StatelessWidget {
           Provider(
             create: (context) => MenuEventsBloC(),
           ),
-          Provider(
-            create: (context) => scaffoldKey,
-          ),
+          
           Provider(
             create: (context) => BlocPlayVideo(),
           ),
