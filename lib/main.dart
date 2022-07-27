@@ -10,7 +10,6 @@ import 'package:hansa_app/screens/hansa_zagruzka.dart';
 import 'package:provider/provider.dart';
 
 void main(List<String> args) {
-  //hghghgghghggvgv
   runApp(const MyApp());
 }
 

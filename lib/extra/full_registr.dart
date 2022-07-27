@@ -37,20 +37,20 @@ class _FullRegistrState extends State<FullRegistr> {
           clipBehavior: Clip.none,
           children: [
             Padding(
-              padding:  EdgeInsets.only(top:isTablet?446: 274, bottom: 84),
+              padding: EdgeInsets.only(top: isTablet ? 446 : 274, bottom: 84),
               child: Container(
-                height: isTablet ? 950 : 890,
+                height: isTablet ? 1020 : 890,
                 width: isTablet ? 556 : 346,
                 decoration: BoxDecoration(
                     color: const Color(0xFFf2f2f2),
-                    borderRadius: BorderRadius.circular(16)),
+                    borderRadius: BorderRadius.circular(isTablet ? 16 : 5)),
                 child: Column(
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(top: 8, right: 8),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
-                        children:  [
+                        children: [
                           InkWell(
                             onTap: () {
                               providerFlipLogin.sink.add(false);
@@ -66,11 +66,12 @@ class _FullRegistrState extends State<FullRegistr> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 82),
+                      padding: EdgeInsets.only(top: isTablet ? 75 : 82),
                       child: Text(
                         "Регистрация",
                         style: GoogleFonts.montserrat(
-                            fontSize: 24, fontWeight: FontWeight.w500),
+                            fontSize: isTablet ? 28 : 24,
+                            fontWeight: FontWeight.w500),
                       ),
                     ),
                     const SizedBox(
@@ -89,10 +90,7 @@ class _FullRegistrState extends State<FullRegistr> {
                     const SizedBox(
                       height: 5,
                     ),
-                    textField(
-                        "Email*",
-                        isTablet ? 45 : 38,
-                        isTablet ? 13 : 10,
+                    textField("Email*", isTablet ? 45 : 38, isTablet ? 13 : 10,
                         isTablet ? FontWeight.w600 : FontWeight.normal),
                     const SizedBox(
                       height: 4,
@@ -109,7 +107,6 @@ class _FullRegistrState extends State<FullRegistr> {
                         "Дата рождения*",
                         isTablet ? 45 : 38,
                         isTablet ? 15 : 10,
-                        
                         isTablet ? FontWeight.w600 : FontWeight.normal),
                     const SizedBox(
                       height: 4,
@@ -119,7 +116,7 @@ class _FullRegistrState extends State<FullRegistr> {
                         selectedValue,
                         isTablet ? 538 : 325,
                         isTablet ? 15 : 10,
-                        isTablet?43:38,
+                        isTablet ? 43 : 38,
                         isTablet ? FontWeight.w600 : FontWeight.normal),
                     const SizedBox(
                       height: 4,
@@ -129,19 +126,19 @@ class _FullRegistrState extends State<FullRegistr> {
                         selectedValue2,
                         isTablet ? 538 : 325,
                         isTablet ? 15 : 10,
-                        isTablet?43:38,
+                        isTablet ? 43 : 38,
                         isTablet ? FontWeight.w600 : FontWeight.normal),
                     const SizedBox(
                       height: 4,
                     ),
                     dropDown(
-                        "Город*",
-                        selectedValue3,
-                        isTablet ? 538 : 325,
-                        isTablet ? 15 : 10,
-                        isTablet?43:38,
-                        isTablet ? FontWeight.w600 : FontWeight.normal,
-                        ),
+                      "Город*",
+                      selectedValue3,
+                      isTablet ? 538 : 325,
+                      isTablet ? 15 : 10,
+                      isTablet ? 43 : 38,
+                      isTablet ? FontWeight.w600 : FontWeight.normal,
+                    ),
                     const SizedBox(
                       height: 4,
                     ),
@@ -154,9 +151,9 @@ class _FullRegistrState extends State<FullRegistr> {
                       height: 10,
                     ),
                     Image.asset(
-                    isTablet?  "assets/999.png":"assets/Layer 972.png",
-                      height: 64,
-                      width: 234,
+                      isTablet ? "assets/999.png" : "assets/Layer 972.png",
+                      height: isTablet ? 84 : 64,
+                      width: isTablet ? 404 : 234,
                     ),
                     const SizedBox(
                       height: 14,
@@ -168,7 +165,8 @@ class _FullRegistrState extends State<FullRegistr> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              textSwitch("Не выходить из приложения"),
+                              textSwitch("Не выходить из приложения",
+                                  isTablet ? 16 : 11),
                               ToggleSwitch(
                                 handlerWidth: 40,
                                 handlerHeight: 12,
@@ -184,12 +182,12 @@ class _FullRegistrState extends State<FullRegistr> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              textSwitch("Согласен на СМС и Email рассылку"),
+                              textSwitch("Согласен на СМС и Email рассылку",
+                                  isTablet ? 16 : 11),
                               ToggleSwitch(
                                 handlerWidth: 40,
                                 handlerHeight: 12,
                                 tickerSize: 21,
-                                
                                 colorCircle: Colors.green[600],
                                 colorContainer: Colors.grey[300],
                               ),
@@ -201,12 +199,12 @@ class _FullRegistrState extends State<FullRegistr> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              textSwitch("Подтверждаю подлиность данных"),
+                              textSwitch("Подтверждаю подлиность данных",
+                                  isTablet ? 16 : 11),
                               ToggleSwitch(
                                 handlerWidth: 40,
                                 handlerHeight: 12,
                                 tickerSize: 21,
-                                
                                 colorCircle: Colors.green[600],
                                 colorContainer: Colors.grey[300],
                               ),
@@ -219,7 +217,7 @@ class _FullRegistrState extends State<FullRegistr> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               textSwitch("""Соглашаюсь на обработку 
-           персональных данных"""),
+персональных данных""", isTablet ? 16 : 11),
                               const SizedBox(
                                 width: 75,
                               ),
@@ -227,7 +225,6 @@ class _FullRegistrState extends State<FullRegistr> {
                                 handlerWidth: 40,
                                 handlerHeight: 12,
                                 tickerSize: 21,
-                                
                                 colorCircle: Colors.green[600],
                                 colorContainer: Colors.grey[300],
                               ),
@@ -237,17 +234,17 @@ class _FullRegistrState extends State<FullRegistr> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(
+                      padding: EdgeInsets.only(
                         left: 11,
                         right: 9,
-                        top: 25,
+                        top: isTablet ? 30 : 25,
                       ),
                       child: GestureDetector(
                         onTap: () => provider.toggleCard(),
                         child: Container(
                           alignment: Alignment.center,
-                          height: 46,
-                          width: 325,
+                          height: isTablet ? 60 : 46,
+                          width: isTablet ? 535 : 325,
                           decoration: BoxDecoration(
                             color: const Color(0xFF25b049),
                             borderRadius: BorderRadius.circular(70),
@@ -257,14 +254,15 @@ class _FullRegistrState extends State<FullRegistr> {
                                 spreadRadius: 5,
                                 blurRadius: 7,
                                 offset: const Offset(
-                                    0, 3), // changes position of shadow
+                                    0, 15), // changes position of shadow
                               ),
                             ],
                           ),
                           child: Text(
                             "Зарегистрироваться",
                             style: GoogleFonts.montserrat(
-                                fontSize: 12, color: const Color(0xFFffffff)),
+                                fontSize: isTablet ? 18 : 12,
+                                color: const Color(0xFFffffff)),
                           ),
                         ),
                       ),
@@ -325,8 +323,8 @@ class _FullRegistrState extends State<FullRegistr> {
     );
   }
 
-  Widget dropDown(String text, String choiseValue, double width, double size,double height,
-      FontWeight weight) {
+  Widget dropDown(String text, String choiseValue, double width, double size,
+      double height, FontWeight weight) {
     return Padding(
       padding: const EdgeInsets.only(
         left: 11,
@@ -385,11 +383,11 @@ class _FullRegistrState extends State<FullRegistr> {
     );
   }
 
-  Widget textSwitch(String text) {
+  Widget textSwitch(String text, double size) {
     return Text(
       text,
       style: GoogleFonts.montserrat(
-          fontSize: 11,
+          fontSize: size,
           color: const Color(0xFFa1b7c2),
           fontWeight: FontWeight.w500),
     );
