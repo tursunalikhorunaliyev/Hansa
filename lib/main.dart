@@ -6,8 +6,6 @@ import 'package:hansa_app/blocs/bloc_change_title.dart';
 import 'package:hansa_app/blocs/bloc_play_video.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/blocs/voyti_ili_sozdata_bloc.dart';
-import 'package:hansa_app/screens/empty.dart';
-import 'package:hansa_app/screens/hansa_zagruzka.dart';
 import 'package:hansa_app/screens/welcome_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -20,7 +18,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     Size size = WidgetsBinding.instance.window.physicalSize;
     bool isTablet = (size.width / 3) > 500;
     return ScreenUtilInit(
@@ -34,7 +31,6 @@ class MyApp extends StatelessWidget {
           Provider(
             create: (context) => MenuEventsBloC(),
           ),
-          
           Provider(
             create: (context) => BlocPlayVideo(),
           ),
