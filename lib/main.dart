@@ -27,7 +27,9 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 812),
       builder: (context, child) => MultiProvider(
         providers: [
-          ChangeNotifierProvider(create: (context) => StackProvider(),),
+          ChangeNotifierProvider(
+            create: (context) => StackProvider(),
+          ),
           Provider<bool>(create: (context) => isTablet),
           Provider(create: (context) => BlocChangeTitle()),
           Provider(create: (context) => map),
