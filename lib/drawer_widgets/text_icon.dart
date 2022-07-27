@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:provider/provider.dart';
+//Sahar 9 da
 class TextIcon extends StatefulWidget {
   String? text;
   String? iconUrl;
@@ -23,6 +24,7 @@ class TextIcon extends StatefulWidget {
 class _TextIconState extends State<TextIcon> {
   @override
   Widget build(BuildContext context) {
+    final isTablet = Provider.of<bool>(context);
     return Row(
       children: [
         Image.asset(
@@ -36,7 +38,7 @@ class _TextIconState extends State<TextIcon> {
         ),
         Text(
           widget.text.toString(),
-          style: GoogleFonts.montserrat(fontSize: 13, color: widget.rang),
+          style: GoogleFonts.montserrat(fontSize: isTablet ? 18  : 13, color: widget.rang),
         )
       ],
     );

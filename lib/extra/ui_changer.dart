@@ -25,7 +25,6 @@ class UIChanger extends StatelessWidget {
       initialData: MenuActions.welcome,
       builder: (context, snapshot) {
         if (snapshot.data == MenuActions.welcome) {
-          
           return const WelcomeWidget();
         } else if (snapshot.data == MenuActions.obuchayushieMaterial) {
           return const ObucheniyaWidget();

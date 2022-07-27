@@ -1,11 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class EventCards extends StatelessWidget {
-  
   const EventCards(
       {Key? key,
       required this.buttonColor,
@@ -26,122 +24,118 @@ class EventCards extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isTablet = Provider.of<bool>(context);
-    return ScreenUtilInit(
-      designSize: const Size(375, 812),
-      builder: (context, child) => Padding(
-        padding: EdgeInsets.only(top: 10.h),
-        child: Stack(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(top: 167.h),
-              child: Container(
-                width: isTablet ? 175.w : 325.w,
-                height: 93.h,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5.r),
-                    color: const Color(0xffffffff)),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 11),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
+    return Padding(
+      padding: const EdgeInsets.only(top: 10),
+      child: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 167),
+            child: Container(
+              width: isTablet ? 390 : 325,
+              height: 93,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: const Color(0xffffffff)),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 11),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        title,
+                        overflow: TextOverflow.fade,
+                        style: GoogleFonts.montserrat(
+                            fontSize: isTablet ? 14 : 12,
+                            fontWeight: FontWeight.w800),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 23),
+                      child: Container(
+                        alignment: Alignment.center,
+                        
+                        width: isTablet ? 100 : 94,
+                        height: isTablet ? 28  : 25,
+                        decoration: BoxDecoration(
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 2,
+                                blurRadius: 4,
+                                offset: const Offset(
+                                    0, 3), // changes position of shadow
+                              ),
+                            ],
+                            color: const Color(0xffff163e),
+                            borderRadius: BorderRadius.circular(13)),
                         child: Text(
-                          title,
-                          overflow: TextOverflow.fade ,
+                          buttonText,
                           style: GoogleFonts.montserrat(
-                              fontSize: isTablet ? 8.sp  : 12.sp, fontWeight: FontWeight.bold),
+                              fontSize: isTablet ? 12 : 10,
+                              color: const Color(0xffffffff),
+                              fontWeight: FontWeight.w500),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 23.w),
-                        child: Container(
-                          alignment: Alignment.center,
-                          width: isTablet ? 60.w  : 94.w,
-                          height: 25.h,
-                          decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 2,
-                                  blurRadius: 4,
-                                  offset: const Offset(
-                                      0, 3), // changes position of shadow
-                                ),
-                              ],
-                              color: const Color(0xffff163e),
-                              borderRadius: BorderRadius.circular(13.r)),
-                          child: Text(
-                            buttonText,
-                            style: GoogleFonts.montserrat(
-                                fontSize: isTablet ?  8.sp  :   10.sp,
-                                color: const Color(0xffffffff),
-                                fontWeight: FontWeight.w500),
-                          ),
+                    )
+                  ],
+                ),
+              ),
+            ),
+          ),
+          SizedBox(
+              width: isTablet ? 388 : 326,
+              height: isTablet ? 170  : 156,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(5),
+                child: Image.asset(
+                  url,
+                  fit: BoxFit.cover,
+                ),
+              )),
+          isDate
+              ? Padding(
+                  padding: EdgeInsets.only(top: 50, left: isTablet ? 150 : 136),
+                  child: Container(
+                    padding: const EdgeInsets.all(12),
+                    height: isTablet ? 65 : 55,
+                    width: isTablet ? 65 : 55,
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.white,
+                    ),
+                    child: Column(
+                      children: [
+                        Text(
+                          day,
+                          style: TextStyle(fontSize: isTablet ? 14 : 11),
                         ),
-                      )
-                    ],
+                        Text(
+                          month,
+                          style: TextStyle(fontSize: isTablet ? 14 : 11),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
+                )
+              : const SizedBox(),
+          Padding(
+            padding: EdgeInsets.only(
+                top: isTablet ? 143 : 131, left: isTablet ? 305 : 247),
+            child: Container(
+              alignment: Alignment.center,
+              height: isTablet ? 45 : 55,
+              width: isTablet ? 45 : 55,
+              decoration: const BoxDecoration(
+                  color: Color(0xfff1f1f1), shape: BoxShape.circle),
+              child: Icon(
+                CupertinoIcons.heart_fill,
+                size: isTablet ? 28 : 28,
+                color: const Color(0xffed3851),
               ),
             ),
-            Padding(
-              padding:  EdgeInsets.only(left: isTablet ?  1 : 0),
-              child: SizedBox(
-                  width: isTablet ? 175.w : 326.w,
-                  height: 156.h,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(5.r),
-                    child: Image.asset(
-                      url,
-                      fit: BoxFit.cover,
-                    ),
-                  )),
-            ),
-            isDate
-                ? Padding(
-                    padding: EdgeInsets.only(top: 50.h, left: isTablet ?  70.w  :  136.w),
-                    child: Container(
-                      padding: const EdgeInsets.all(12),
-                      height: isTablet ? 35.w : 55.h,
-                      width: isTablet ? 35.w : 55.w,
-                      decoration: const BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.white,
-                      ),
-                      child: Column(
-                        children: [
-                          Text(
-                            day,
-                            style: TextStyle(fontSize: isTablet ? 8.sp : 11.sp),
-                          ),
-                          Text(
-                            month,
-                            style: TextStyle(fontSize: isTablet ? 8.sp : 11.sp),
-                          ),
-                        ],
-                      ),
-                    ),
-                  )
-                : const SizedBox(),
-            Padding(  
-              padding:
-                  EdgeInsets.only(top: isTablet ? 143.h  : 131.h, left: isTablet ? 130.w : 247.w),
-              child: Container(
-                alignment: Alignment.center,
-                height: isTablet ? 35.h : 55.h,
-                width: isTablet ? 35.w : 55.h,
-                decoration: const BoxDecoration(
-                    color: Color(0xfff1f1f1), shape: BoxShape.circle),
-                child: Icon(
-                  CupertinoIcons.heart_fill,
-                  size: isTablet ? 15.sp  : 28.sp,
-                  color: const Color(0xffed3851),
-                ),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
