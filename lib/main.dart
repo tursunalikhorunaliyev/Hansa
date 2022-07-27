@@ -1,7 +1,6 @@
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hansa_app/blocs/back_ui_bloc.dart';
 import 'package:hansa_app/blocs/bloc_change_profile.dart';
 import 'package:hansa_app/blocs/bloc_change_title.dart';
 import 'package:hansa_app/blocs/bloc_play_video.dart';
@@ -27,7 +26,6 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 812),
       builder: (context, child) => MultiProvider(
         providers: [
-          Provider(create: (context) => BackUIBloC(),),
           Provider<bool>(create: (context) => isTablet),
           Provider(create: (context) => BlocChangeTitle()),
           Provider(create: (context) => FlipCardController()),
