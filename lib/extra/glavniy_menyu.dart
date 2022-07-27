@@ -93,7 +93,7 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(
-                      top: isTablet ? 30 : 52, left: isTablet ? 350  : 247),
+                      top: isTablet ? 60 : 52, left: isTablet ? 350  : 247),
                   child: StreamBuilder<ActionChange>(
                       initialData: ActionChange.textIconCard,
                       stream: blocChangeProfileProvider.dataStream,

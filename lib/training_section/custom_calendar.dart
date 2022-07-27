@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -9,13 +10,19 @@ class CustomCalendar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isTablet = Provider.of<bool>(context);
     return Padding(
-      padding:  EdgeInsets.only(left: 25.w, right: 25.w),
+      padding:
+          EdgeInsets.only(left: 25.w, right: 25.w, top: isTablet ? 12.h : 0.h),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(9.r),
+        borderRadius: BorderRadius.circular(isTablet ? 12.r : 9.r),
         child: Container(
           width: 325.w,
-          padding:  EdgeInsets.symmetric(horizontal: 20.w),
+          height: 180.w,
+          padding: EdgeInsets.only(
+            left: 20.w,
+            right: 20.w,
+          ),
           color: const Color(0xff232323),
           child: TableCalendar(
             focusedDay: DateTime(2022, 06, 09),

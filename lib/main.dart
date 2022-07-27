@@ -6,7 +6,10 @@ import 'package:hansa_app/blocs/bloc_change_title.dart';
 import 'package:hansa_app/blocs/bloc_play_video.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/blocs/voyti_ili_sozdata_bloc.dart';
+<<<<<<< HEAD
 import 'package:hansa_app/screens/empty.dart';
+=======
+>>>>>>> b905f518fab17fa87b81defbe3cb85ba390c4156
 import 'package:hansa_app/screens/hansa_zagruzka.dart';
 import 'package:hansa_app/screens/welcome_screen.dart';
 import 'package:provider/provider.dart';
@@ -42,7 +45,7 @@ class MyApp extends StatelessWidget {
         ],
         child: const MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: HansaZagruzka(),
+          home: WelcomeScreen(),
         ),
       ),
     );
