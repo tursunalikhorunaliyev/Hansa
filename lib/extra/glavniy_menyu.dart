@@ -409,16 +409,16 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                                                 child:
                                                                     TextIconCard(),
                                                               ),
-                                snapshot.data == ActionChange.personRekvizit
+                          /*       snapshot.data == ActionChange.personRekvizit
                                     ? SizedBox(
                                         height: isTablet ? 20 : 69,
                                       )
                                     : SizedBox(
                                         height: isTablet ? 60 : 69,
-                                      ),
+                                      ), */
                                 Padding(
-                                  padding: EdgeInsets.only(
-                                      left: 39, top: isTablet ? 150 : 69),
+                                  padding:  EdgeInsets.only(
+                                      left: 39, top: isTablet ? 69 :69),
                                   child: GestureDetector(
                                     onTap: () {
                                       blocChangeProfileProvider.dataSink
