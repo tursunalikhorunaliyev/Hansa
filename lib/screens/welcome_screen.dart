@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hansa_app/blocs/back_ui_bloc.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/extra/glavniy_menyu.dart';
 import 'package:hansa_app/extra/ui_changer.dart';
@@ -14,16 +13,12 @@ class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 /*     final playProvider = Provider.of<BlocPlayVideo>(context); */
+////Tursunali
     GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
     final isTablet = Provider.of<bool>(context);
-    final backProvider = Provider.of<BackUIBloC>(context);
     final menuProvider = Provider.of<MenuEventsBloC>(context);
     return WillPopScope(
         onWillPop: () async{
-         backProvider.stream.listen((event) {
-           menuProvider.eventSink.add(event[event.length-2]);
-         });
-          
           return false;
         },
         child: Scaffold(
