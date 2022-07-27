@@ -2,8 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hansa_app/blocs/bloc_play_video.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/extra/glavniy_menyu.dart';
+import 'package:hansa_app/extra/top_video_widget.dart';
 import 'package:hansa_app/extra/ui_changer.dart';
 import 'package:provider/provider.dart';
 
@@ -12,15 +14,14 @@ class WelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-/*     final playProvider = Provider.of<BlocPlayVideo>(context); */
-////Tursunali
+    final playProvider = Provider.of<BlocPlayVideo>(context);
     GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
     final isTablet = Provider.of<bool>(context);
     final menuProvider = Provider.of<MenuEventsBloC>(context);
     return Provider(
       create: (context) => scaffoldKey,
       child: WillPopScope(
-          onWillPop: () async{
+          onWillPop: () async {
             return false;
           },
           child: Scaffold(
@@ -137,12 +138,10 @@ class WelcomeScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-        
-                      const UIChanger(), 
-                   
+                    const UIChanger(),
                   ],
                 ),
-                /*  StreamBuilder<bool>(
+                StreamBuilder<bool>(
                   stream: playProvider.stream,
                   initialData: false,
                   builder: (context, snapshot) {
@@ -153,7 +152,7 @@ class WelcomeScreen extends StatelessWidget {
                       child: const TopVideoWidget(),
                     );
                   },
-                ), */
+                ),
               ],
             ),
           )),
