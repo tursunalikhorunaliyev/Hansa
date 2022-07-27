@@ -23,9 +23,9 @@ class CompleteRegistr extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(isTablet ? 16 : 5)),
+                      borderRadius: BorderRadius.circular(isTablet ? 18 : 5)),
                   width: isTablet ? 556 : 346,
-                  height: 432,
+                  height: isTablet ? 515 : 432,
                   child: Column(
                     children: [
                       Row(
@@ -38,25 +38,27 @@ class CompleteRegistr extends StatelessWidget {
                               child: Icon(
                                 Icons.close_rounded,
                                 size: isTablet ? 30 : 24,
-                                color: Color(0xff8c8c8b),
+                                color: const Color(0xff8c8c8b),
                               ),
                             ),
                           )
                         ],
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 85),
+                        padding: EdgeInsets.only(top: isTablet ? 70 : 85),
                         child: Text(
                           '        Спасибо\n за регистрацию',
                           style: GoogleFonts.montserrat(
-                              fontSize: 24, fontWeight: FontWeight.w500),
+                              fontSize: isTablet ? 30 : 24,
+                              fontWeight: FontWeight.w500),
                         ),
                       ),
-                      const Padding(
+                      Padding(
                         padding: EdgeInsets.only(top: 17),
                         child: Icon(
                           Icons.done,
                           color: Color(0xff25b049),
+                          size: isTablet ? 28 : 0,
                         ),
                       ),
                       Padding(
@@ -64,31 +66,33 @@ class CompleteRegistr extends StatelessWidget {
                         child: Text(
                           '       Вам на почту \n отправлено письмо\n  с подтверждением\n      Ваших данных',
                           style: GoogleFonts.montserrat(
-                              fontSize: 14, fontWeight: FontWeight.w500),
+                              fontSize: isTablet ? 20 : 14,
+                              fontWeight: FontWeight.w600),
                         ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 37),
                         child: Container(
                           alignment: Alignment.center,
-                          width: 319,
-                          height: 47,
+                          width: isTablet ? 525 : 319,
+                          height: isTablet ? 55 : 47,
                           decoration: BoxDecoration(
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 4,
-                                  blurRadius: 6,
+                                  color: Colors.grey.withOpacity(0.3),
+                                  spreadRadius: 7,
+                                  blurRadius: 9,
                                   offset: const Offset(
-                                      0, 3), // changes position of shadow
+                                      0, 15), // changes position of shadow
                                 ),
                               ],
                               color: Color(0xff25b049),
-                              borderRadius: BorderRadius.circular(23)),
+                              borderRadius:
+                                  BorderRadius.circular(isTablet ? 28 : 23)),
                           child: Text(
                             'Войти в приложение',
                             style: GoogleFonts.montserrat(
-                                fontSize: 13,
+                                fontSize: isTablet ? 16 : 13,
                                 fontWeight: FontWeight.w500,
                                 color: Color(0xffffffff)),
                           ),
@@ -99,9 +103,10 @@ class CompleteRegistr extends StatelessWidget {
                 ),
               ),
             ),
-            //Kod yozvomman
+            //Tugadi
             Padding(
-              padding: EdgeInsets.only(top: 213, left: isTablet ? 350 : 130),
+              padding: EdgeInsets.only(
+                  top: isTablet ? 190 : 213, left: isTablet ? 350 : 130),
               child: isTablet
                   ? Image.asset(
                       'assets/tabletTumLogo.png',
