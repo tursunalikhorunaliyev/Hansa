@@ -7,7 +7,6 @@ class TextFieldForFullRegister extends StatefulWidget {
   final double size;
   final FontWeight weight;
   const TextFieldForFullRegister({Key? key, required this.text, required this.height, required this.size, required this.weight}) : super(key: key);
-
   @override
   State<TextFieldForFullRegister> createState() => _TextFieldForFullRegisterState();
 }
@@ -31,18 +30,15 @@ class _TextFieldForFullRegisterState extends State<TextFieldForFullRegister> {
                 borderRadius: BorderRadius.circular(54),
               ),
               child: TextField(
-                focusNode: focusNode,
                 onChanged: (value) {
                   if(value.isEmpty){
                     isHint = true;
-                    setState(() {
-                      
+                    setState(() {   
                     });
                   }
                   else if(value.length==1){
                     isHint = false;
                     setState(() {
-                      
                     });
                   }
                 },

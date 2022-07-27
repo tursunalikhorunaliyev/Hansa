@@ -16,7 +16,7 @@ class _EmptyScreenState extends State<EmptyScreen> {
   }
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return  Scaffold(
       body: Center(
         child: TextFieldForFullRegister(text: "salom", height: 38, size: 10, weight: FontWeight.normal),
       )
