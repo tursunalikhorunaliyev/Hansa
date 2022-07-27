@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 812),
       builder: (context, child) => MultiProvider(
         providers: [
+          //removed
           Provider<bool>(create: (context) => isTablet),
           Provider(create: (context) => BlocChangeTitle()),
           Provider(create: (context) => FlipCardController()),
