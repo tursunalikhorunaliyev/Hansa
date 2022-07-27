@@ -143,11 +143,11 @@ class _FullRegistrState extends State<FullRegistr> {
                     const SizedBox(
                       height: 4,
                     ),
-                    textField(
-                        "Адрес торговой сети",
-                        isTablet ? 45 : 38,
-                        isTablet ? 13 : 10,
-                        isTablet ? FontWeight.w600 : FontWeight.normal),
+                    TextFieldForFullRegister(
+                      text:  "Адрес торговой сети",
+                     height:   isTablet ? 45 : 38,
+                      size:  isTablet ? 13 : 10,
+                    weight:    isTablet ? FontWeight.w600 : FontWeight.normal),
                     const SizedBox(
                       height: 10,
                     ),
@@ -289,41 +289,7 @@ class _FullRegistrState extends State<FullRegistr> {
     );
   }
 
-  Widget textField(String text, double height, double size, FontWeight weight) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 11, right: 9),
-      child: SizedBox(
-        height: height,
-        child: Container(
-          decoration: BoxDecoration(
-            color: const Color(0xFFffffff),
-            borderRadius: BorderRadius.circular(54),
-          ),
-          child: TextField(
-            cursorHeight: 20,
-            style: GoogleFonts.montserrat(fontSize: 14),
-            decoration: InputDecoration(
-              focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(width: 0.9, color: Colors.grey),
-                borderRadius: BorderRadius.circular(54),
-              ),
-              enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(width: 0.1),
-                  borderRadius: BorderRadius.circular(54)),
-              contentPadding:
-                  const EdgeInsets.symmetric(vertical: 2, horizontal: 13),
-              hintText: text,
-              hintStyle: GoogleFonts.montserrat(
-                  fontWeight: weight,
-                  fontSize: size,
-                  color: const Color(0xFF444444)),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
+  
   Widget dropDown(String text, String choiseValue, double width, double size,
       double height, FontWeight weight) {
     return Padding(
