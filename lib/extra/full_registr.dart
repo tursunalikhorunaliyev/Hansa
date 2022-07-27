@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/blocs/bloc_flip_login.dart';
 import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
+import 'package:hansa_app/extra/text_field_for_full_reg.dart';
 import 'package:provider/provider.dart';
 
 class FullRegistr extends StatefulWidget {
@@ -77,37 +78,37 @@ class _FullRegistrState extends State<FullRegistr> {
                     const SizedBox(
                       height: 18,
                     ),
-                    textField("Имя*", isTablet ? 45 : 38, isTablet ? 13 : 10,
-                        isTablet ? FontWeight.w600 : FontWeight.normal),
+                    TextFieldForFullRegister(text:  "Имя", height: isTablet ? 45 : 38, size: isTablet ? 13 : 10,
+                     weight:   isTablet ? FontWeight.w600 : FontWeight.normal),
                     const SizedBox(
                       height: 4,
                     ),
-                    textField(
-                        "Фамилия*",
-                        isTablet ? 45 : 38,
-                        isTablet ? 13 : 10,
-                        isTablet ? FontWeight.w600 : FontWeight.normal),
+                    TextFieldForFullRegister(
+                       text: "Фамилия",
+                     height:   isTablet ? 45 : 38,
+                      size:  isTablet ? 13 : 10,
+                       weight:  isTablet ? FontWeight.w600 : FontWeight.normal),
                     const SizedBox(
                       height: 5,
                     ),
-                    textField("Email*", isTablet ? 45 : 38, isTablet ? 13 : 10,
-                        isTablet ? FontWeight.w600 : FontWeight.normal),
+                    TextFieldForFullRegister(text: "Email", height: isTablet ? 45 : 38, size: isTablet ? 13 : 10,
+                    weight:    isTablet ? FontWeight.w600 : FontWeight.normal),
                     const SizedBox(
                       height: 4,
                     ),
-                    textField(
-                        "Контактный тефон*",
-                        isTablet ? 45 : 38,
-                        isTablet ? 15 : 10,
-                        isTablet ? FontWeight.w600 : FontWeight.normal),
+                    TextFieldForFullRegister(
+                     text:   "Контактный тефон",
+                     height:   isTablet ? 45 : 38,
+                      size:  isTablet ? 15 : 10,
+                      weight:  isTablet ? FontWeight.w600 : FontWeight.normal),
                     const SizedBox(
                       height: 4,
                     ),
-                    textField(
-                        "Дата рождения*",
-                        isTablet ? 45 : 38,
-                        isTablet ? 15 : 10,
-                        isTablet ? FontWeight.w600 : FontWeight.normal),
+                    TextFieldForFullRegister(
+                       text: "Дата рождения",
+                      height:  isTablet ? 45 : 38,
+                       size: isTablet ? 15 : 10,
+                      weight:   isTablet ? FontWeight.w600 : FontWeight.normal),
                     const SizedBox(
                       height: 4,
                     ),
@@ -142,11 +143,11 @@ class _FullRegistrState extends State<FullRegistr> {
                     const SizedBox(
                       height: 4,
                     ),
-                    textField(
-                        "Адрес торговой сети",
-                        isTablet ? 45 : 38,
-                        isTablet ? 13 : 10,
-                        isTablet ? FontWeight.w600 : FontWeight.normal),
+                    TextFieldForFullRegister(
+                      text:  "Адрес торговой сети",
+                     height:   isTablet ? 45 : 38,
+                      size:  isTablet ? 13 : 10,
+                    weight:    isTablet ? FontWeight.w600 : FontWeight.normal),
                     const SizedBox(
                       height: 10,
                     ),
@@ -244,7 +245,7 @@ class _FullRegistrState extends State<FullRegistr> {
                         child: Container(
                           alignment: Alignment.center,
                           height: isTablet ? 60 : 46,
-                          width: isTablet ? 535 : 325,
+                          width: isTablet ? 525 : 325,
                           decoration: BoxDecoration(
                             color: const Color(0xFF25b049),
                             borderRadius: BorderRadius.circular(70),
@@ -288,41 +289,7 @@ class _FullRegistrState extends State<FullRegistr> {
     );
   }
 
-  Widget textField(String text, double height, double size, FontWeight weight) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 11, right: 9),
-      child: SizedBox(
-        height: height,
-        child: Container(
-          decoration: BoxDecoration(
-            color: const Color(0xFFffffff),
-            borderRadius: BorderRadius.circular(54),
-          ),
-          child: TextField(
-            cursorHeight: 20,
-            style: GoogleFonts.montserrat(fontSize: 14),
-            decoration: InputDecoration(
-              focusedBorder: OutlineInputBorder(
-                borderSide: const BorderSide(width: 0.9, color: Colors.grey),
-                borderRadius: BorderRadius.circular(54),
-              ),
-              enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(width: 0.1),
-                  borderRadius: BorderRadius.circular(54)),
-              contentPadding:
-                  const EdgeInsets.symmetric(vertical: 2, horizontal: 13),
-              hintText: text,
-              hintStyle: GoogleFonts.montserrat(
-                  fontWeight: weight,
-                  fontSize: size,
-                  color: const Color(0xFF444444)),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
+  
   Widget dropDown(String text, String choiseValue, double width, double size,
       double height, FontWeight weight) {
     return Padding(

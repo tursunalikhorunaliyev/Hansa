@@ -13,6 +13,7 @@ class TextIconCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final munuchangerProvider = Provider.of<MenuEventsBloC>(context);
     final scafforlKeyProvider = Provider.of<GlobalKey<ScaffoldState>>(context);
+    final isTablet = Provider.of<bool>(context);
     return Column(
       children: [
         const SizedBox(
@@ -28,8 +29,8 @@ class TextIconCard extends StatelessWidget {
             iconUrl: "assets/free-icon-academic-2599288.png",
           ),
         ),
-        const SizedBox(
-          height: 20,
+        SizedBox(
+          height: isTablet ? 30 : 20,
         ),
         InkWell(
           onTap: () {
@@ -41,8 +42,8 @@ class TextIconCard extends StatelessWidget {
             iconUrl: "assets/free-icon-presentation-582644.png",
           ),
         ),
-        const SizedBox(
-          height: 20,
+        SizedBox(
+          height: isTablet ? 30 : 20,
         ),
         InkWell(
           onTap: () {
@@ -54,12 +55,11 @@ class TextIconCard extends StatelessWidget {
             iconUrl: "assets/free-icon-article-1738703 (1).png",
           ),
         ),
-        const SizedBox(
-          height: 20,
+        SizedBox(
+          height: isTablet ? 30 : 20,
         ),
         InkWell(
           onTap: () {
-            
             munuchangerProvider.eventSink.add(MenuActions.katalog);
             scafforlKeyProvider.currentState!.closeDrawer();
           },
@@ -68,8 +68,8 @@ class TextIconCard extends StatelessWidget {
             iconUrl: "assets/free-icon-catalogue-5116518.png",
           ),
         ),
-        const SizedBox(
-          height: 20,
+        SizedBox(
+          height: isTablet ? 30 : 20,
         ),
         InkWell(
           onTap: () {
@@ -81,8 +81,8 @@ class TextIconCard extends StatelessWidget {
             iconUrl: "assets/free-icon-online-learning-2374323.png",
           ),
         ),
-        const SizedBox(
-          height: 20,
+        SizedBox(
+          height: isTablet ? 30 : 20,
         ),
         InkWell(
           onTap: () {
@@ -94,8 +94,8 @@ class TextIconCard extends StatelessWidget {
             iconUrl: "assets/free-icon-video-1500440.png",
           ),
         ),
-        const SizedBox(
-          height: 20,
+        SizedBox(
+          height: isTablet ? 30 : 20,
         ),
         InkWell(
           onTap: () {
