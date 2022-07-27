@@ -27,8 +27,10 @@ class UIChanger extends StatelessWidget {
         if (snapshot.data == MenuActions.welcome) {
           return const WelcomeWidget();
         } else if (snapshot.data == MenuActions.obuchayushieMaterial) {
+          
           return const ObucheniyaWidget();
         } else if (snapshot.data == MenuActions.prezintatsiya) {
+         
           return const Prezentatsi();
         } else if (snapshot.data == MenuActions.trening) {
           return const Treningi();

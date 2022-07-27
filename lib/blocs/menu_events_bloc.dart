@@ -14,7 +14,6 @@ enum MenuActions {
   oKompanii
 }
 class MenuEventsBloC{
-
   final eventController = StreamController<MenuActions>.broadcast();
   StreamSink<MenuActions> get eventSink => eventController.sink;
   Stream<MenuActions> get eventStream => eventController.stream;

@@ -13,7 +13,7 @@ class OKompanii extends StatelessWidget {
     return Expanded(
       child: Column(
         children: [
-           StreamBuilder<String>(
+           StreamBuilder<dynamic>(
              stream: blocChangeTitleProvider.titleStream,
              initialData: "",
              builder: (context, snapshot) {

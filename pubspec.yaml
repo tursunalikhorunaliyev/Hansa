@@ -42,6 +42,8 @@ dependencies:
   table_calendar: ^3.0.6
   sticky_headers: ^0.3.0+2
   dropdown_button2: ^1.6.3
+  chewie: ^1.3.4
+  video_player: ^2.4.5
 
 
   
