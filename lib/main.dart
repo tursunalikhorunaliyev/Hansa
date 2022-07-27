@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
       builder: (context, child) => MultiProvider(
         providers: [
           //removed
+          //removed
           Provider<bool>(create: (context) => isTablet),
           Provider(create: (context) => BlocChangeTitle()),
           Provider(create: (context) => FlipCardController()),
