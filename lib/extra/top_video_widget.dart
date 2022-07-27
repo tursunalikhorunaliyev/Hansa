@@ -23,7 +23,7 @@ class TopVideoWidget extends StatefulWidget {
 }
 
 class _TopVideoWidgetState extends State<TopVideoWidget> {
-  late ChewieController chewieController;
+  late ChewieController? chewieController;
   initVideo() async {
     await widget.videoController.initialize();
     chewieController =
@@ -58,6 +58,10 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
           GestureDetector(
             onTap: () {
               playProvider.sink.add(false);
+              chewieController!.videoPlayerController
+                ..seekTo(const Duration(seconds: 0))
+                ..pause();
+              setState(() {});
             },
           ),
           Column(
@@ -109,9 +113,17 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
                       ),
                     ],
                   ),
-                  AspectRatio(
-                    aspectRatio: 9 / 16,
-                    child: Chewie(controller: chewieController),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(15),
+                    child: SizedBox(
+                      width: 325,
+                      height: 185,
+                      child: Center(
+                        child: Chewie(
+                          controller: chewieController!,
+                        ),
+                      ),
+                    ),
                   ),
                   const Padding(
                     padding: EdgeInsets.only(top: 13),
