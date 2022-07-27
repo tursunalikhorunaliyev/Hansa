@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hansa_app/blocs/back_ui_bloc.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/middle_part_widgets/welcome_widget.dart';
 import 'package:hansa_app/middle_part_widgets/katalogi.dart';
