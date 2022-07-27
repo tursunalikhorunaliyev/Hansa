@@ -1,7 +1,11 @@
 import 'dart:async';
 
 class BlocChangeTitle {
-  final controller = StreamController<String>.broadcast();
-  StreamSink<String> get titleSink => controller.sink;
-  Stream<String> get titleStream => controller.stream;
+  final controller = StreamController<dynamic>();
+  StreamSink<dynamic> get titleSink => controller.sink;
+  Stream<dynamic> get titleStream => controller.stream;
+
+  close(){
+    controller.close();
+  }
 }

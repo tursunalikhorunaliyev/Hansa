@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hansa_app/blocs/back_ui_bloc.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/middle_part_widgets/welcome_widget.dart';
 import 'package:hansa_app/middle_part_widgets/katalogi.dart';
@@ -28,8 +29,10 @@ class UIChanger extends StatelessWidget {
           
           return const WelcomeWidget();
         } else if (snapshot.data == MenuActions.obuchayushieMaterial) {
+          
           return const ObucheniyaWidget();
         } else if (snapshot.data == MenuActions.prezintatsiya) {
+         
           return const Prezentatsi();
         } else if (snapshot.data == MenuActions.trening) {
           return const Treningi();

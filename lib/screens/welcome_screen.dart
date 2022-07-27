@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hansa_app/blocs/bloc_change_title.dart';
+import 'package:hansa_app/blocs/back_ui_bloc.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/extra/glavniy_menyu.dart';
 import 'package:hansa_app/extra/ui_changer.dart';
@@ -15,23 +15,14 @@ class WelcomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
 /*     final playProvider = Provider.of<BlocPlayVideo>(context); */
     GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
-    final bloc = MenuEventsBloC();
-    final blocChangeTitle = BlocChangeTitle();
     final isTablet = Provider.of<bool>(context);
-    return MultiProvider(
-      providers: [
-        Provider(
-          create: (context) => bloc,
-        ),
-        Provider(
-          create: (context) => scaffoldKey,
-        ),
-        Provider(
-          create: (context) => blocChangeTitle,
-        ),
-      ],
-      child: WillPopScope(
+    final backProvider = Provider.of<BackUIBloC>(context);
+    final menuProvider = Provider.of<MenuEventsBloC>(context);
+    return WillPopScope(
         onWillPop: () async{
+         backProvider.stream.listen((event) {
+           menuProvider.eventSink.add(event[event.length-2]);
+         });
           
           return false;
         },
@@ -41,7 +32,7 @@ class WelcomeScreen extends StatelessWidget {
           key: scaffoldKey,
           bottomNavigationBar: StreamBuilder<MenuActions>(
               initialData: MenuActions.welcome,
-              stream: bloc.eventStream,
+              stream: menuProvider.eventStream,
               builder: (context, snapshot) {
                 return (snapshot.data! == MenuActions.chitatStati)
                     ? const SizedBox()
@@ -168,8 +159,6 @@ class WelcomeScreen extends StatelessWidget {
               ), */
             ],
           ),
-        ),
-      ),
-    );
+        ));
   }
 }
