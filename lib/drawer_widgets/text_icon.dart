@@ -38,7 +38,7 @@ class _TextIconState extends State<TextIcon> {
         ),
         Text(
           widget.text.toString(),
-          style: GoogleFonts.montserrat(fontSize: isTablet ? 18  : 13, color: widget.rang),
+          style: GoogleFonts.montserrat(fontSize: isTablet ? 20  : 13, color: widget.rang),
         )
       ],
     );

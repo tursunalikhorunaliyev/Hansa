@@ -27,18 +27,19 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
     final blocChangeProfileProvider = Provider.of<BlocChangeProfile>(context);
     final isTablet = Provider.of<bool>(context);
     return Drawer(
+      backgroundColor: const Color(0xFF333333),
       width: isTablet ? 435 : 324,
       child: Column(
         children: [
           Container(
-            height: isTablet ? 400  : 283,
+            height: isTablet ? 400 : 283,
             width: isTablet ? 450 : 324,
             decoration: const BoxDecoration(color: Color(0xFF333333)),
             child: Stack(
               children: [
                 Padding(
                   padding: EdgeInsets.only(
-                      top: isTablet ? 70 : 52, left: isTablet ? 10 : 26),
+                      top: isTablet ? 70 : 52, left: isTablet ? 40 : 26),
                   child: Container(
                     decoration: const BoxDecoration(
                       boxShadow: [
@@ -54,32 +55,35 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                     ),
                     child: Image.asset(
                       "assets/192.png",
-                      height: isTablet ? 50 : 46,
-                      width: isTablet ? 50 : 46,
+                      height: isTablet ? 60 : 46,
+                      width: isTablet ? 60 : 46,
                     ),
                   ),
                 ),
                 Padding(
                   padding: EdgeInsets.only(
-                      top: isTablet ? 63 : 39, left: isTablet ? 32 : 120),
+                      top: isTablet ? 60 : 39, left: isTablet ? 120 : 120),
                   child: SizedBox(
-                    height: isTablet ? 100 : 80,
-                    width: isTablet ? 100 : 80,
+                    height: isTablet ? 180 : 80,
+                    width: isTablet ? 180 : 80,
                     child: ClipRRect(
                         borderRadius: BorderRadius.circular(80),
                         child: Image.asset(
                           isTablet
                               ? "assets/shef_povar_oval.png"
                               : "assets/20181005-shefpovar.png",
+                          fit: BoxFit.cover,
                         )),
                   ),
                 ),
                 Padding(
                   padding: EdgeInsets.only(
-                      left: isTablet ? 83 : 170, top: isTablet ? 100 : 85),
+                    top: isTablet ? 130 : 85,
+                    left: isTablet ? 223 : 170,
+                  ),
                   child: Container(
-                    height: isTablet ? 26 : 26,
-                    width: isTablet ? 26 : 26,
+                    height: isTablet ? 40 : 26,
+                    width: isTablet ? 40 : 26,
                     decoration: const BoxDecoration(
                       color: Color(0xFFe21a37),
                       shape: BoxShape.circle,
@@ -87,13 +91,13 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                     child: Icon(
                       Icons.check,
                       color: const Color(0xFFffffff),
-                      size: isTablet ? 10 : 20,
+                      size: isTablet ? 30 : 20,
                     ),
                   ),
                 ),
                 Padding(
                   padding: EdgeInsets.only(
-                      top: isTablet ? 60 : 52, left: isTablet ? 350  : 247),
+                      top: isTablet ? 70 : 52, left: isTablet ? 320 : 247),
                   child: StreamBuilder<ActionChange>(
                       initialData: ActionChange.textIconCard,
                       stream: blocChangeProfileProvider.dataStream,
@@ -107,8 +111,8 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                     .add(ActionChange.izboreny);
                           },
                           child: Container(
-                            height: isTablet ? 38 : 46,
-                            width: isTablet ? 38 : 46,
+                            height: isTablet ? 60 : 46,
+                            width: isTablet ? 60 : 46,
                             decoration: const BoxDecoration(
                               color: Color(0xFF686868),
                               shape: BoxShape.circle,
@@ -122,9 +126,10 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                 ),
                               ],
                             ),
-                            child: const Icon(
+                            child: Icon(
                               Icons.favorite,
-                              color: Color(0xFFffffff),
+                              color: const Color(0xFFffffff),
+                              size: isTablet ? 40 : 20,
                             ),
                           ),
                         );
@@ -132,32 +137,32 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(
-                      top: isTablet ? 135 : 135, left: isTablet ? 60 : 123),
+                      top: isTablet ? 180 : 135, left: isTablet ? 163 : 123),
                   child: Text(
                     " Алексей\nКузнецов",
                     style: TextStyle(
-                        fontSize: isTablet ? 10 : 16,
+                        fontSize: isTablet ? 23 : 16,
                         color: const Color(0xFFffffff)),
                   ),
                 ),
                 Padding(
                   padding: EdgeInsets.only(
-                      top: isTablet ? 178 : 183, left: isTablet ? 70 : 140),
+                      top: isTablet ? 245 : 183, left: isTablet ? 185 : 140),
                   child: Text(
                     "930",
                     style: GoogleFonts.montserrat(
-                        fontSize: isTablet ? 13 : 23,
+                        fontSize: isTablet ? 30 : 23,
                         color: const Color(0xFFff0025),
                         fontWeight: FontWeight.bold),
                   ),
                 ),
                 Padding(
                   padding: EdgeInsets.only(
-                      top: isTablet ? 200 : 205, left: isTablet ? 66 : 131),
+                      top: isTablet ? 280 : 205, left: isTablet ? 175 : 131),
                   child: Text(
                     "баллов",
                     style: GoogleFonts.montserrat(
-                        fontSize: isTablet ? 9 : 16,
+                        fontSize: isTablet ? 20 : 16,
                         color: const Color(0xFFffffff),
                         fontWeight: FontWeight.bold),
                   ),
@@ -166,7 +171,7 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                   children: [
                     Padding(
                       padding: EdgeInsets.only(
-                          top: isTablet ? 230 : 238, left: isTablet ? 45 : 82),
+                          top: isTablet ? 320 : 238, left: isTablet ? 118 : 82),
                       child: StreamBuilder<ActionChange>(
                           initialData: ActionChange.textIconCard,
                           stream: blocChangeProfileProvider.dataStream,
@@ -186,8 +191,8 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                               },
                               child: Container(
                                 alignment: Alignment.center,
-                                height: isTablet ? 28 : 30,
-                                width: isTablet ? 80 : 156,
+                                height: isTablet ? 40 : 30,
+                                width: isTablet ? 200 : 156,
                                 decoration: BoxDecoration(
                                   color: snapshot.data ==
                                           ActionChange.textIconCard
@@ -222,7 +227,7 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                               ? "Редактировать"
                                               : "Сохранить",
                                   style: GoogleFonts.montserrat(
-                                      fontSize: isTablet ? 6 : 12,
+                                      fontSize: isTablet ? 16 : 12,
                                       fontWeight: FontWeight.w500,
                                       color: const Color(0xFFffffff)),
                                 ),
@@ -310,7 +315,7 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                     1,
                     (index) => SizedBox(
                           height: isTablet
-                              ? 940 
+                              ? 940
                               : snapshot.data == ActionChange.textIconCard
                                   ? 500
                                   : snapshot.data == ActionChange.personal
@@ -404,9 +409,13 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                                                 child:
                                                                     TextIconCard(),
                                                               ),
-                                /*  SizedBox(
-                                  height: isTablet ? 150 : 69,
-                                ), */
+                                snapshot.data == ActionChange.personRekvizit
+                                    ? SizedBox(
+                                        height: isTablet ? 20 : 69,
+                                      )
+                                    : SizedBox(
+                                        height: isTablet ? 60 : 69,
+                                      ),
                                 Padding(
                                   padding: EdgeInsets.only(
                                       left: 39, top: isTablet ? 150 : 69),
