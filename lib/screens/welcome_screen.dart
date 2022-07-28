@@ -25,14 +25,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
     final isTablet = Provider.of<bool>(context);
     final menuProvider = Provider.of<MenuEventsBloC>(context);
-    final stackProvider  = Provider.of<StackProvider>(context);
- 
+
     return Provider(
       create: (context) => scaffoldKey,
       child: WillPopScope(
           onWillPop: () async {
-            menuProvider.eventSink.add(stackProvider.list.last);
-            
+           
+            print(menuProvider.list.last.toString());
+           
             return false;
           },
           child: Scaffold(
@@ -43,7 +43,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 initialData: MenuActions.welcome,
                 stream: menuProvider.eventStream,
                 builder: (context, snapshot) {
-                
                   return (snapshot.data! == MenuActions.chitatStati)
                       ? const SizedBox()
                       : SizedBox(
@@ -95,11 +94,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
+<<<<<<< HEAD
                           InkWell(
                             onTap: () {
+=======
+                          IconButton(
+                            onPressed: () {
+>>>>>>> b7693b721305adae2883e6105d44e119b0051796
                               scaffoldKey.currentState!.openDrawer();
                             },
-                            child: Icon(
+                            icon: Icon(
                               Icons.menu,
                               color: const Color(0xff444444),
                               size: isTablet ? 13.sp : 21.sp,

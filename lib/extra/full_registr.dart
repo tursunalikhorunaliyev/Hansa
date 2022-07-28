@@ -77,57 +77,67 @@ class _FullRegistrState extends State<FullRegistr> {
                     const SizedBox(
                       height: 18,
                     ),
-                    TextFieldForFullRegister(text:  "Имя", height: isTablet ? 45 : 38, size: isTablet ? 13 : 10,
-                     weight:   isTablet ? FontWeight.w600 : FontWeight.normal),
+                    TextFieldForFullRegister(
+                        text: "Имя",
+                        height: isTablet ? 45 : 38,
+                        size: isTablet ? 13 : 10,
+                        weight: isTablet ? FontWeight.w600 : FontWeight.normal),
                     const SizedBox(
                       height: 4,
                     ),
                     TextFieldForFullRegister(
-                       text: "Фамилия",
-                     height:   isTablet ? 45 : 38,
-                      size:  isTablet ? 13 : 10,
-                       weight:  isTablet ? FontWeight.w600 : FontWeight.normal),
+                        text: "Фамилия",
+                        height: isTablet ? 45 : 38,
+                        size: isTablet ? 13 : 10,
+                        weight: isTablet ? FontWeight.w600 : FontWeight.normal),
                     const SizedBox(
                       height: 5,
                     ),
-                    TextFieldForFullRegister(text: "Email", height: isTablet ? 45 : 38, size: isTablet ? 13 : 10,
-                    weight:    isTablet ? FontWeight.w600 : FontWeight.normal),
+                    TextFieldForFullRegister(
+                        text: "Email",
+                        height: isTablet ? 45 : 38,
+                        size: isTablet ? 13 : 10,
+                        weight: isTablet ? FontWeight.w600 : FontWeight.normal),
                     const SizedBox(
                       height: 4,
                     ),
                     TextFieldForFullRegister(
-                     text:   "Контактный тефон",
-                     height:   isTablet ? 45 : 38,
-                      size:  isTablet ? 15 : 10,
-                      weight:  isTablet ? FontWeight.w600 : FontWeight.normal),
+                        text: "Контактный тефон",
+                        height: isTablet ? 45 : 38,
+                        size: isTablet ? 15 : 10,
+                        weight: isTablet ? FontWeight.w600 : FontWeight.normal),
                     const SizedBox(
                       height: 4,
                     ),
                     TextFieldForFullRegister(
-                       text: "Дата рождения",
-                      height:  isTablet ? 45 : 38,
-                       size: isTablet ? 15 : 10,
-                      weight:   isTablet ? FontWeight.w600 : FontWeight.normal),
+                        text: "Дата рождения",
+                        height: isTablet ? 45 : 38,
+                        size: isTablet ? 15 : 10,
+                        weight: isTablet ? FontWeight.w600 : FontWeight.normal),
                     const SizedBox(
                       height: 4,
                     ),
                     dropDown(
-                        "Название сети",
-                        selectedValue,
-                        isTablet ? 538 : 325,
-                        isTablet ? 15 : 10,
-                        isTablet ? 43 : 38,
-                        isTablet ? FontWeight.w600 : FontWeight.normal),
+                      "Название сети",
+                      selectedValue,
+                      isTablet ? 538 : 325,
+                      isTablet ? 15 : 10,
+                      isTablet ? 43 : 38,
+                      isTablet ? FontWeight.w600 : FontWeight.normal,
+                      position: 1,
+                    ),
                     const SizedBox(
                       height: 4,
                     ),
                     dropDown(
-                        "Должность",
-                        selectedValue2,
-                        isTablet ? 538 : 325,
-                        isTablet ? 15 : 10,
-                        isTablet ? 43 : 38,
-                        isTablet ? FontWeight.w600 : FontWeight.normal),
+                      "Должность",
+                      selectedValue2,
+                      isTablet ? 538 : 325,
+                      isTablet ? 15 : 10,
+                      isTablet ? 43 : 38,
+                      isTablet ? FontWeight.w600 : FontWeight.normal,
+                      position: 2,
+                    ),
                     const SizedBox(
                       height: 4,
                     ),
@@ -138,19 +148,19 @@ class _FullRegistrState extends State<FullRegistr> {
                       isTablet ? 15 : 10,
                       isTablet ? 43 : 38,
                       isTablet ? FontWeight.w600 : FontWeight.normal,
+                      position: 3,
                     ),
                     const SizedBox(
                       height: 4,
                     ),
                     TextFieldForFullRegister(
-                      text:  "Адрес торговой сети",
-                     height:   isTablet ? 45 : 38,
-                      size:  isTablet ? 13 : 10,
-                    weight:    isTablet ? FontWeight.w600 : FontWeight.normal),
+                        text: "Адрес торговой сети",
+                        height: isTablet ? 45 : 38,
+                        size: isTablet ? 13 : 10,
+                        weight: isTablet ? FontWeight.w600 : FontWeight.normal),
                     const SizedBox(
                       height: 10,
                     ),
-                 
                     const SizedBox(
                       height: 14,
                     ),
@@ -169,6 +179,9 @@ class _FullRegistrState extends State<FullRegistr> {
                                 tickerSize: 21,
                                 colorCircle: Colors.green[600],
                                 colorContainer: Colors.grey[300],
+                                onButton: (){
+                                  print("Не выходить из приложения");
+                                },
                               ),
                             ],
                           ),
@@ -186,6 +199,9 @@ class _FullRegistrState extends State<FullRegistr> {
                                 tickerSize: 21,
                                 colorCircle: Colors.green[600],
                                 colorContainer: Colors.grey[300],
+                                onButton: (){
+                                  print("Согласен на СМС и Email рассылку");
+                                },
                               ),
                             ],
                           ),
@@ -203,6 +219,9 @@ class _FullRegistrState extends State<FullRegistr> {
                                 tickerSize: 21,
                                 colorCircle: Colors.green[600],
                                 colorContainer: Colors.grey[300],
+                                onButton: (){
+                                  print("Подтверждаю подлиность данных");
+                                },
                               ),
                             ],
                           ),
@@ -223,6 +242,9 @@ class _FullRegistrState extends State<FullRegistr> {
                                 tickerSize: 21,
                                 colorCircle: Colors.green[600],
                                 colorContainer: Colors.grey[300],
+                                onButton: (){
+                                  print("Соглашаюсь на обработку персональных данных");
+                                },
                               ),
                             ],
                           ),
@@ -278,15 +300,36 @@ class _FullRegistrState extends State<FullRegistr> {
                       width: 133,
                     ),
             ),
+            Padding(
+               padding:const EdgeInsets.only(
+                 top: 1180, left: 95
+               ),
+               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                 children:  [
+                const   Text(
+                     "По всем вопросам пришите на",
+                     style: TextStyle(fontSize: 11, color: Color(0xFF989a9d)),
+                   ),
+                const   SizedBox(
+                    height: 6,
+                   ),
+                   Text(
+                     "Support@hansa-lab.ru",
+                     style: GoogleFonts.montserrat(fontSize: 11, color: const Color(0xFF989a9d), fontWeight: FontWeight.w700),
+                   ),
+                 ],
+               ),
+             ),
           ],
         ),
       ),
     );
   }
 
-  
   Widget dropDown(String text, String choiseValue, double width, double size,
-      double height, FontWeight weight) {
+      double height, FontWeight weight,
+      {required int position}) {
     return Padding(
       padding: const EdgeInsets.only(
         left: 11,
@@ -303,7 +346,7 @@ class _FullRegistrState extends State<FullRegistr> {
         child: Padding(
           padding: const EdgeInsets.only(right: 16, left: 17),
           child: DropdownButtonHideUnderline(
-            child: DropdownButton2(
+            child: DropdownButton2<String>(
               dropdownWidth: 325,
               dropdownDecoration: const BoxDecoration(
                   color: Color(0xFFf8f8f8),
@@ -331,9 +374,16 @@ class _FullRegistrState extends State<FullRegistr> {
                   .toList(),
               value: choiseValue,
               onChanged: (value) {
-                setState(() {
-                  choiseValue = value as String;
-                });
+                if (position == 1) {
+                  selectedValue = value!;
+                }
+                if (position == 2) {
+                  selectedValue2 = value!;
+                }
+                if (position == 3) {
+                  selectedValue3 = value!;
+                }
+                setState(() {});
               },
               buttonHeight: 40,
               buttonWidth: 140,

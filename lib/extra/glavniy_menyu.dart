@@ -78,12 +78,12 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(
-                    top: isTablet ? 130 : 85,
-                    left: isTablet ? 223 : 170,
+                    top: isTablet ? 125 : 85,
+                    left: isTablet ? 240 : 170,
                   ),
                   child: Container(
-                    height: isTablet ? 40 : 26,
-                    width: isTablet ? 40 : 26,
+                    height: isTablet ? 33 : 26,
+                    width: isTablet ? 33 : 26,
                     decoration: const BoxDecoration(
                       color: Color(0xFFe21a37),
                       shape: BoxShape.circle,
@@ -91,7 +91,7 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                     child: Icon(
                       Icons.check,
                       color: const Color(0xFFffffff),
-                      size: isTablet ? 30 : 20,
+                      size: isTablet ? 20 : 20,
                     ),
                   ),
                 ),
@@ -257,7 +257,8 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                               : false,
                       child: Padding(
                         padding: EdgeInsets.only(
-                            left: 25, top: isTablet ? 349 : 238),
+                            left: isTablet ? 55 : 25,
+                            top: isTablet ? 320 : 238),
                         child: GestureDetector(
                           onTap: () {
                             if (snapshot.data == ActionChange.izboreny) {
@@ -306,6 +307,7 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
             ),
           ),
           StreamBuilder<ActionChange>(
+            initialData: ActionChange.textIconCard,
             stream: blocChangeProfileProvider.dataStream,
             builder: (context, snapshot) {
               return Flexible(
@@ -314,12 +316,10 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                 children: List.generate(
                     1,
                     (index) => SizedBox(
-                          height: isTablet
-                              ? 940
-                              : snapshot.data == ActionChange.textIconCard
-                                  ? 500
+                          height:  snapshot.data == ActionChange.textIconCard
+                                  ? isTablet ? 820  : 500
                                   : snapshot.data == ActionChange.personal
-                                      ? 750
+                                      ? isTablet ? 800  : 750
                                       : snapshot.data == ActionChange.izboreny
                                           ? 780
                                           : snapshot.data ==
@@ -409,16 +409,21 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                                                 child:
                                                                     TextIconCard(),
                                                               ),
-                          /*       snapshot.data == ActionChange.personRekvizit
+                                snapshot.data == ActionChange.personRekvizit
                                     ? SizedBox(
-                                        height: isTablet ? 20 : 69,
+                                        height: isTablet ? 50 : 69,
                                       )
-                                    : SizedBox(
-                                        height: isTablet ? 60 : 69,
-                                      ), */
+                                    : snapshot.data == ActionChange.personal
+                                        ? SizedBox(
+                                            height: isTablet ? 407 : 69,
+                                          )
+                                        : SizedBox(
+                                            height: isTablet ? 200 : 69,
+                                          ),
                                 Padding(
-                                  padding:  EdgeInsets.only(
-                                      left: 39, top: isTablet ? 69 :69),
+                                  padding: const EdgeInsets.only(
+                                    left: 39,
+                                  ),
                                   child: GestureDetector(
                                     onTap: () {
                                       blocChangeProfileProvider.dataSink
