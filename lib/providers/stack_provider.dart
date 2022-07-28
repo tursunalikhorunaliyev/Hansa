@@ -5,10 +5,13 @@ class StackProvider extends ChangeNotifier{
   List<MenuActions> list = [];
 
   addStack(MenuActions action){
+    
     list.add(action);
+  
     notifyListeners();
   }
   removeStack(){
     list.removeAt(list.length-1);
+    
   }
 }

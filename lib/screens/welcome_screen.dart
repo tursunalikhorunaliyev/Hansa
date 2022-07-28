@@ -5,29 +5,33 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/blocs/bloc_play_video.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/extra/glavniy_menyu.dart';
-import 'package:hansa_app/extra/top_video_widget.dart';
 import 'package:hansa_app/extra/ui_changer.dart';
 import 'package:hansa_app/providers/stack_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:video_player/video_player.dart';
 
-class WelcomeScreen extends StatelessWidget {
+class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
 
   @override
+  State<WelcomeScreen> createState() => _WelcomeScreenState();
+}
+
+class _WelcomeScreenState extends State<WelcomeScreen> {
+  @override
   Widget build(BuildContext context) {
-    print("Salom");
+    print("Salommmmmmmmmmm");
     final playProvider = Provider.of<BlocPlayVideo>(context);
     GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
     final isTablet = Provider.of<bool>(context);
     final menuProvider = Provider.of<MenuEventsBloC>(context);
     final stackProvider  = Provider.of<StackProvider>(context);
+ 
+  
     return Provider(
       create: (context) => scaffoldKey,
       child: WillPopScope(
           onWillPop: () async {
-            menuProvider.eventSink.add(stackProvider.list.last);
-            stackProvider.removeStack();
+            menuProvider.eventSink.add(menuProvider.list.last);
             return false;
           },
           child: Scaffold(
@@ -38,6 +42,7 @@ class WelcomeScreen extends StatelessWidget {
                 initialData: MenuActions.welcome,
                 stream: menuProvider.eventStream,
                 builder: (context, snapshot) {
+                
                   return (snapshot.data! == MenuActions.chitatStati)
                       ? const SizedBox()
                       : SizedBox(
@@ -89,6 +94,7 @@ class WelcomeScreen extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
+
                           InkWell(
                             onTap: () {
                               scaffoldKey.currentState!.openDrawer();
@@ -147,7 +153,7 @@ class WelcomeScreen extends StatelessWidget {
                     const UIChanger(),
                   ],
                 ),
-                StreamBuilder<bool>(
+                /* StreamBuilder<bool>(
                   stream: playProvider.stream,
                   initialData: false,
                   builder: (context, snapshot) {
@@ -162,7 +168,7 @@ class WelcomeScreen extends StatelessWidget {
                       ),
                     );
                   },
-                ),
+                ), */
               ],
             ),
           )),
