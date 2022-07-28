@@ -21,7 +21,7 @@ class WelcomeScreen extends StatelessWidget {
     GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
     final isTablet = Provider.of<bool>(context);
     final menuProvider = Provider.of<MenuEventsBloC>(context);
-    final stackProvider  = Provider.of<StackProvider>(context);
+    final stackProvider = Provider.of<StackProvider>(context);
     return Provider(
       create: (context) => scaffoldKey,
       child: WillPopScope(
