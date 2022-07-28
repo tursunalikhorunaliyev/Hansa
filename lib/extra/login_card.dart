@@ -148,7 +148,11 @@ class LoginCard extends StatelessWidget {
                                 colorCircle: Colors.green[600],
                                   tickerSize: isTablet ? 15.sp : 21.sp,
                                   handlerWidth: isTablet ? 30.w : 40.w,
-                                  handlerHeight: isTablet ? 12.h : 12.h))
+                                  handlerHeight: isTablet ? 12.h : 12.h,
+                                  onButton: () {
+                                    
+                                  },
+                                  ))
                         ],
                       ),
                     ),

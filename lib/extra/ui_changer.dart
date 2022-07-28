@@ -19,51 +19,41 @@ import 'package:provider/provider.dart';
 class UIChanger extends StatelessWidget {
   const UIChanger({Key? key}) : super(key: key);
 
-
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<MenuEventsBloC>(context);
-    final stackProvider = Provider.of<StackProvider>(context);
-    
+
     return StreamBuilder<MenuActions>(
       stream: provider.eventStream,
       initialData: MenuActions.welcome,
       builder: (context, snapshot) {
         if (snapshot.data == MenuActions.welcome) {
-      // addStackItem(MenuActions.welcome,context);
+          // addStackItem(MenuActions.welcome,context);
           return const WelcomeWidget();
         } else if (snapshot.data == MenuActions.obuchayushieMaterial) {
-       //    addStackItem(MenuActions.obuchayushieMaterial,context);
+          //    addStackItem(MenuActions.obuchayushieMaterial,context);
           return const ObucheniyaWidget();
         } else if (snapshot.data == MenuActions.prezintatsiya) {
-    //      addStackItem(MenuActions.prezintatsiya,context);
+          //      addStackItem(MenuActions.prezintatsiya,context);
           return const Prezentatsi();
         } else if (snapshot.data == MenuActions.trening) {
-     //    addStackItem(MenuActions.trening, context);
+          //    addStackItem(MenuActions.trening, context);
           return const Treningi();
         } else if (snapshot.data == MenuActions.stati) {
-          
           return const Stati();
         } else if (snapshot.data == MenuActions.katalog) {
-          
           return const Katalogi();
         } else if (snapshot.data == MenuActions.video) {
-           
           return Video();
         } else if (snapshot.data == MenuActions.oProyekt) {
-          
           return const Okompaniya();
         } else if (snapshot.data == MenuActions.presentAndArchive) {
-          
           return const PresentArchive();
         } else if (snapshot.data == MenuActions.chitatStati) {
-          
           return ReadStati();
         } else if (snapshot.data == MenuActions.trainingVideo) {
-          
           return const TreningiVideo();
         } else if (snapshot.data == MenuActions.oKompanii) {
-           
           return const OKompanii();
         } else {
           return const SizedBox();

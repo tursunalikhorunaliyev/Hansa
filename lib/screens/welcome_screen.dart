@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hansa_app/api_services/full_register.dart';
 import 'package:hansa_app/blocs/bloc_play_video.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/extra/glavniy_menyu.dart';
@@ -19,18 +20,19 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
-    print("Salommmmmmmmmmm");
+    BlocSignUp().signUp("Tursunali", "Xorunaliyev", "khorunaliyev@gmail.com", "08.07.1998", "1", "101", "test", "test", "+7 (223) 232-13-12", "1", "1011", "1", "1", "1");
     final playProvider = Provider.of<BlocPlayVideo>(context);
     GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
     final isTablet = Provider.of<bool>(context);
     final menuProvider = Provider.of<MenuEventsBloC>(context);
-    final stackProvider  = Provider.of<StackProvider>(context);
- 
+
     return Provider(
       create: (context) => scaffoldKey,
       child: WillPopScope(
           onWillPop: () async {
-            menuProvider.eventSink.add(menuProvider.list.last);
+           
+            print(menuProvider.list.last.toString());
+           
             return false;
           },
           child: Scaffold(
@@ -41,7 +43,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 initialData: MenuActions.welcome,
                 stream: menuProvider.eventStream,
                 builder: (context, snapshot) {
-                
                   return (snapshot.data! == MenuActions.chitatStati)
                       ? const SizedBox()
                       : SizedBox(
@@ -93,12 +94,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-
+<<<<<<< HEAD
                           InkWell(
                             onTap: () {
+=======
+                          IconButton(
+                            onPressed: () {
+>>>>>>> b7693b721305adae2883e6105d44e119b0051796
                               scaffoldKey.currentState!.openDrawer();
                             },
-                            child: Icon(
+                            icon: Icon(
                               Icons.menu,
                               color: const Color(0xff444444),
                               size: isTablet ? 13.sp : 21.sp,

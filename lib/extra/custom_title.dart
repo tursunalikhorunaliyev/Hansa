@@ -22,24 +22,18 @@ class CustomTitle extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              width: isTablet ? 55.w : 70.w,
-              padding: const EdgeInsets.only(left: 40),
-              alignment: Alignment.centerRight,
-              decoration: BoxDecoration(
-                color: const Color(0xffff163e),
-                borderRadius: BorderRadius.only(
-                  topRight: Radius.circular(64.r),
-                  bottomRight: Radius.circular(64.r),
-                ),
-              ),
-              child: Padding(
-                padding:
-                    EdgeInsets.only(top: 5.5.h, bottom: 5.5.h, right: 15.w),
-                child: Image.asset(
-                  imagePath,
-                  height: 31.h,
-                  width: 31.w,
-                ),
+              alignment: Alignment.center,
+              width: isTablet ? 50.w : 70.w,
+              height: isTablet ? 45.h : 42.h,
+              decoration: const BoxDecoration(
+                  color: Color(0XFFff163e),
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(64),
+                      bottomRight: Radius.circular(64))),
+              child: Image.asset(
+                imagePath,
+                height: isTablet ? 50 : 30.h,
+                width: isTablet ? 70 : 30.w,
               ),
             ),
             SizedBox(

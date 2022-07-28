@@ -47,6 +47,9 @@ class NastroykaWidget extends StatelessWidget {
                 tickerSize: 21,
                 boxShadow: false,
                 colorContainer: const Color(0xFFdddddd),
+                onButton: () {
+                  
+                },
               ),
             ],
           ),
@@ -71,6 +74,9 @@ class NastroykaWidget extends StatelessWidget {
                 tickerSize: 21,
                 boxShadow: false,
                 colorContainer: const Color(0xFFdddddd),
+                onButton: () {
+                  
+                },
               ),
             ],
           ),
@@ -95,6 +101,9 @@ class NastroykaWidget extends StatelessWidget {
                 tickerSize: 21,
                 boxShadow: false,
                 colorContainer: const Color(0xFFdddddd),
+                onButton: () {
+                  
+                },
               ),
             ],
           ),
