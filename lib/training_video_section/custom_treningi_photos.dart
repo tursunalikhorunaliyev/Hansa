@@ -30,14 +30,12 @@ class CustomTreningiPhotos extends StatelessWidget {
                             controller: page,
                             itemCount: 5,
                             itemBuilder: (context, index) {
-                              return Center(
-                                child: SizedBox(
-                                  height: 156,
-                                  width: 325,
-                                  child: Image.asset(
-                                    "assets/tt.png",
-                                    fit: BoxFit.cover,
-                                  ),
+                              return SizedBox(
+                                height: 156,
+                                width: 325,
+                                child: Image.asset(
+                                  "assets/tt.png",
+                                  fit: BoxFit.cover,
                                 ),
                               );
                             },

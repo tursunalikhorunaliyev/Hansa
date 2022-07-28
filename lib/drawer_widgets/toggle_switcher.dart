@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hansa_app/test/bloc.dart';
 
 class ToggleSwitch extends StatefulWidget {
   final double tickerSize;
@@ -7,15 +8,16 @@ class ToggleSwitch extends StatefulWidget {
   Color? colorCircle = Colors.green[600];
   bool? boxShadow = true;
   Color? colorContainer = Colors.grey[300];
-    ToggleSwitch({
+  VoidCallback onButton;
+  ToggleSwitch({
     Key? key,
     required this.tickerSize,
     required this.handlerWidth,
     required this.handlerHeight,
+    required this.onButton,
     this.colorCircle,
     this.boxShadow,
     this.colorContainer,
-
   }) : super(key: key);
 
   @override
@@ -24,6 +26,7 @@ class ToggleSwitch extends StatefulWidget {
 
 class _ToggleSwitchState extends State<ToggleSwitch> {
   Alignment align = Alignment.centerLeft;
+  final bloc = Bloc();
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -37,6 +40,12 @@ class _ToggleSwitchState extends State<ToggleSwitch> {
                   ? Alignment.centerLeft
                   : Alignment.centerRight;
             });
+            if (align == Alignment.centerRight) {
+              bloc.dataSink.add(true);
+            } else {
+              bloc.dataSink.add(false);
+            }
+            widget.onButton();
           },
           child: Stack(
             alignment: Alignment.center,
