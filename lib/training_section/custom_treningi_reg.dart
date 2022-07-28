@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/extra/custom_double_clip_item.dart';
+
 class CustomTreningiReg extends StatelessWidget {
   const CustomTreningiReg({Key? key}) : super(key: key);
 
@@ -19,6 +20,7 @@ class CustomTreningiReg extends StatelessWidget {
                   "assets/event-default.png",
                   height: 155,
                   width: 325,
+                  fit: BoxFit.cover,
                 ),
               ),
               Padding(
