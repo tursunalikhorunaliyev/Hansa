@@ -22,7 +22,7 @@ class VoytiIliSozdatAccaunt extends StatelessWidget {
     final providerFlip = Provider.of<Map<String, FlipCardController>>(context);
     final provider = Provider.of<BlocFlipLogin>(context);
     final providerClicked = Provider.of<LoginClickedBloc>(context);
-    
+
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       builder: (context, child) {
@@ -36,9 +36,9 @@ class VoytiIliSozdatAccaunt extends StatelessWidget {
             ),
             GestureDetector(
               onTap: (() {
-                  providerClicked.sink.add(LoginAction.signin);
-                  provider.sink.add(true);
-                  providerFlip['signin']!.toggleCard();
+                providerClicked.sink.add(LoginAction.signin);
+                provider.sink.add(true);
+                providerFlip['login']!.toggleCard();
               }),
               child: Container(
                 height: isTablet ? 50.h : 46.66666666666667.h,

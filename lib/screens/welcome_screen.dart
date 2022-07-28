@@ -26,7 +26,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     final menuProvider = Provider.of<MenuEventsBloC>(context);
     final stackProvider  = Provider.of<StackProvider>(context);
  
-  
     return Provider(
       create: (context) => scaffoldKey,
       child: WillPopScope(
