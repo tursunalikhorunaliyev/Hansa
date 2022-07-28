@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hansa_app/api_services/full_register.dart';
 import 'package:hansa_app/blocs/bloc_play_video.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/extra/glavniy_menyu.dart';
@@ -19,7 +20,7 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
-    print("Salommmmmmmmmmm");
+    BlocSignUp().signUp("Tursunali", "Xorunaliyev", "khorunaliyev@gmail.com", "08.07.1998", "1", "101", "test", "test", "+7 (223) 232-13-12", "1", "1011", "1", "1", "1");
     final playProvider = Provider.of<BlocPlayVideo>(context);
     GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
     final isTablet = Provider.of<bool>(context);
@@ -30,7 +31,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       create: (context) => scaffoldKey,
       child: WillPopScope(
           onWillPop: () async {
-            menuProvider.eventSink.add(menuProvider.list.last);
+            menuProvider.eventSink.add(stackProvider.list.last);
+            
             return false;
           },
           child: Scaffold(
@@ -93,7 +95,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-
                           InkWell(
                             onTap: () {
                               scaffoldKey.currentState!.openDrawer();
