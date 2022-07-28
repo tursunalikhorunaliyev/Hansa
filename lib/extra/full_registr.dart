@@ -169,6 +169,9 @@ class _FullRegistrState extends State<FullRegistr> {
                                 tickerSize: 21,
                                 colorCircle: Colors.green[600],
                                 colorContainer: Colors.grey[300],
+                                onButton: (){
+                                  print("Не выходить из приложения");
+                                },
                               ),
                             ],
                           ),
@@ -186,6 +189,9 @@ class _FullRegistrState extends State<FullRegistr> {
                                 tickerSize: 21,
                                 colorCircle: Colors.green[600],
                                 colorContainer: Colors.grey[300],
+                                onButton: (){
+                                  print("Согласен на СМС и Email рассылку");
+                                },
                               ),
                             ],
                           ),
@@ -203,6 +209,9 @@ class _FullRegistrState extends State<FullRegistr> {
                                 tickerSize: 21,
                                 colorCircle: Colors.green[600],
                                 colorContainer: Colors.grey[300],
+                                onButton: (){
+                                  print("Подтверждаю подлиность данных");
+                                },
                               ),
                             ],
                           ),
@@ -223,6 +232,9 @@ class _FullRegistrState extends State<FullRegistr> {
                                 tickerSize: 21,
                                 colorCircle: Colors.green[600],
                                 colorContainer: Colors.grey[300],
+                                onButton: (){
+                                  print("Соглашаюсь на обработку персональных данных");
+                                },
                               ),
                             ],
                           ),
@@ -278,6 +290,27 @@ class _FullRegistrState extends State<FullRegistr> {
                       width: 133,
                     ),
             ),
+            Padding(
+               padding:const EdgeInsets.only(
+                 top: 1180, left: 95
+               ),
+               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                 children:  [
+                const   Text(
+                     "По всем вопросам пришите на",
+                     style: TextStyle(fontSize: 11, color: Color(0xFF989a9d)),
+                   ),
+                const   SizedBox(
+                    height: 6,
+                   ),
+                   Text(
+                     "Support@hansa-lab.ru",
+                     style: GoogleFonts.montserrat(fontSize: 11, color: const Color(0xFF989a9d), fontWeight: FontWeight.w700),
+                   ),
+                 ],
+               ),
+             ),
           ],
         ),
       ),

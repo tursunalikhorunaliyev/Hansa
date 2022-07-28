@@ -32,7 +32,7 @@ class Stati extends StatelessWidget {
                         ? "5 новинок из линейки\nстиральных машин Ultimate"
                         : "Обучающий материал для\nсотрудников Леруа Мерлен",
                     buttonText: "Читать",
-                    onTap: (){
+                    onTap: () {
                       statiBloCProvider.eventSink.add(MenuActions.chitatStati);
                     },
                   ),
