@@ -2,6 +2,7 @@ import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hansa_app/blocs/a_example/exxx.dart';
+import 'package:hansa_app/blocs/a_example/sign_screen.dart';
 import 'package:hansa_app/blocs/bloc_change_profile.dart';
 import 'package:hansa_app/blocs/bloc_change_title.dart';
 import 'package:hansa_app/blocs/bloc_play_video.dart';
@@ -50,7 +51,7 @@ class MyApp extends StatelessWidget {
         ],
         child: const MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: HansaZagruzka(),
+          home: SignScreen(),
         ),
       ),
     );

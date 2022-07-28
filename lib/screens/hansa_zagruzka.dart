@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hansa_app/blocs/bloc_change_profile.dart';
 import 'package:hansa_app/blocs/bloc_flip_login.dart';
+import 'package:hansa_app/blocs/bloc_sign.dart';
 import 'package:hansa_app/blocs/login_anim_bloc.dart';
 import 'package:hansa_app/blocs/login_clicked_bloc.dart';
 import 'package:hansa_app/extra/full_registr.dart';
@@ -21,7 +22,8 @@ class HansaZagruzka extends StatelessWidget {
     final isTablet = Provider.of<bool>(context);
     final loginAnimBloc = LoginAnimBloc();
     final flipBloc = BlocFlipLogin();
-    final flipCardController = Provider.of<Map<String, FlipCardController>>(context);
+    final flipCardController =
+        Provider.of<Map<String, FlipCardController>>(context);
     return MultiProvider(
       providers: [
         Provider<LoginClickedBloc>(create: (context) => bloc),
@@ -83,9 +85,10 @@ class HansaZagruzka extends StatelessWidget {
                       child: snapshot.data == LoginAction.login
                           ? const SingleChildScrollView(
                               child: Padding(
-                              padding: EdgeInsets.only(top: 200),
-                              child: LoginCard(),
-                            ),)
+                                padding: EdgeInsets.only(top: 200),
+                                child: LoginCard(),
+                              ),
+                            )
                           : FlipCard(
                               controller: flipCardController['signin'],
                               flipOnTouch: false,
