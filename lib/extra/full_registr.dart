@@ -1,8 +1,16 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flip_card/flip_card.dart';
 import 'package:flip_card/flip_card_controller.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hansa_app/api_models.dart/country_model.dart';
+import 'package:hansa_app/api_models.dart/hansa_country_api.dart';
+import 'package:hansa_app/api_models.dart/hansa_country_type_api.dart';
+import 'package:hansa_app/api_models.dart/hansa_job_api.dart';
+import 'package:hansa_app/api_models.dart/hansa_store_api.dart';
+import 'package:hansa_app/api_models.dart/job_model.dart';
+import 'package:hansa_app/api_models.dart/store_model.dart';
 import 'package:hansa_app/blocs/bloc_flip_login.dart';
 import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
 import 'package:hansa_app/extra/text_field_for_full_reg.dart';
@@ -24,6 +32,20 @@ class _FullRegistrState extends State<FullRegistr> {
   String selectedValue = "Название сети";
   String selectedValue2 = "Должность";
   String selectedValue3 = "Город*";
+  final blocCountryType = HansaCountryTypeAPI();
+  final blocCountry = HansaCountryAPI();
+  final blocStore = HansaStoreAPI();
+  final blocJob = HasnaJobAPI();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    blocCountry.eventSink.add(CountryEnum.country);
+    blocCountryType.eventSink.add(CountryTypeEnum.countryType);
+    blocJob.eventSink.add(JobEnum.job);
+    blocStore.eventSink.add(StoreEnum.store);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -117,39 +139,97 @@ class _FullRegistrState extends State<FullRegistr> {
                     const SizedBox(
                       height: 4,
                     ),
-                    dropDown(
-                      "Название сети",
-                      selectedValue,
-                      isTablet ? 538 : 325,
-                      isTablet ? 15 : 10,
-                      isTablet ? 43 : 38,
-                      isTablet ? FontWeight.w600 : FontWeight.normal,
-                      position: 1,
-                    ),
+                    StreamBuilder<StoreModel>(
+                        stream: blocStore.stream,
+                        builder: (context, snapshot) {
+                          if (snapshot.data != null) {
+                            return dropDown(
+                                "Название сети",
+                                selectedValue,
+                                isTablet ? 538 : 325,
+                                isTablet ? 15 : 10,
+                                isTablet ? 43 : 38,
+                                isTablet ? FontWeight.w600 : FontWeight.normal,
+                                position: 1,
+                                list: snapshot.hasData
+                                    ? snapshot.data!.data.stores
+                                    : items);
+                          } else {
+                            return dropDown(
+                                "Название сети",
+                                selectedValue,
+                                isTablet ? 538 : 325,
+                                isTablet ? 15 : 10,
+                                isTablet ? 43 : 38,
+                                isTablet ? FontWeight.w600 : FontWeight.normal,
+                                position: 1,
+                                list: items);
+                          }
+                        }),
                     const SizedBox(
                       height: 4,
                     ),
-                    dropDown(
-                      "Должность",
-                      selectedValue2,
-                      isTablet ? 538 : 325,
-                      isTablet ? 15 : 10,
-                      isTablet ? 43 : 38,
-                      isTablet ? FontWeight.w600 : FontWeight.normal,
-                      position: 2,
-                    ),
+                    StreamBuilder<JobModel>(
+                        stream: blocJob.stream,
+                        builder: (context, snapshot) {
+                          if (snapshot.data != null) {
+                            return dropDown(
+                              "Должность",
+                              selectedValue2,
+                              isTablet ? 538 : 325,
+                              isTablet ? 15 : 10,
+                              isTablet ? 43 : 38,
+                              isTablet ? FontWeight.w600 : FontWeight.normal,
+                              position: 2,
+                              list: snapshot.hasData
+                                  ? snapshot.data!.data.jobs
+                                  : items,
+                            );
+                          } else {
+                            return dropDown(
+                              "Должность",
+                              selectedValue2,
+                              isTablet ? 538 : 325,
+                              isTablet ? 15 : 10,
+                              isTablet ? 43 : 38,
+                              isTablet ? FontWeight.w600 : FontWeight.normal,
+                              position: 2,
+                              list: items,
+                            );
+                          }
+                        }),
                     const SizedBox(
                       height: 4,
                     ),
-                    dropDown(
-                      "Город*",
-                      selectedValue3,
-                      isTablet ? 538 : 325,
-                      isTablet ? 15 : 10,
-                      isTablet ? 43 : 38,
-                      isTablet ? FontWeight.w600 : FontWeight.normal,
-                      position: 3,
-                    ),
+                    StreamBuilder<CountryModel>(
+                        stream: blocCountry.stream,
+                        builder: (context, snapshot) {
+                          if (snapshot.data != null) {
+                            return dropDown(
+                              "Город*",
+                              selectedValue3,
+                              isTablet ? 538 : 325,
+                              isTablet ? 15 : 10,
+                              isTablet ? 43 : 38,
+                              isTablet ? FontWeight.w600 : FontWeight.normal,
+                              position: 3,
+                              list: snapshot.hasData
+                                  ? snapshot.data!.data.countries
+                                  : items,
+                            );
+                          } else {
+                            return dropDown(
+                              "Город*",
+                              selectedValue3,
+                              isTablet ? 538 : 325,
+                              isTablet ? 15 : 10,
+                              isTablet ? 43 : 38,
+                              isTablet ? FontWeight.w600 : FontWeight.normal,
+                              position: 3,
+                              list: items,
+                            );
+                          }
+                        }),
                     const SizedBox(
                       height: 4,
                     ),
@@ -179,7 +259,7 @@ class _FullRegistrState extends State<FullRegistr> {
                                 tickerSize: 21,
                                 colorCircle: Colors.green[600],
                                 colorContainer: Colors.grey[300],
-                                onButton: (){
+                                onButton: () {
                                   print("Не выходить из приложения");
                                 },
                               ),
@@ -199,7 +279,7 @@ class _FullRegistrState extends State<FullRegistr> {
                                 tickerSize: 21,
                                 colorCircle: Colors.green[600],
                                 colorContainer: Colors.grey[300],
-                                onButton: (){
+                                onButton: () {
                                   print("Согласен на СМС и Email рассылку");
                                 },
                               ),
@@ -219,7 +299,7 @@ class _FullRegistrState extends State<FullRegistr> {
                                 tickerSize: 21,
                                 colorCircle: Colors.green[600],
                                 colorContainer: Colors.grey[300],
-                                onButton: (){
+                                onButton: () {
                                   print("Подтверждаю подлиность данных");
                                 },
                               ),
@@ -242,8 +322,9 @@ class _FullRegistrState extends State<FullRegistr> {
                                 tickerSize: 21,
                                 colorCircle: Colors.green[600],
                                 colorContainer: Colors.grey[300],
-                                onButton: (){
-                                  print("Соглашаюсь на обработку персональных данных");
+                                onButton: () {
+                                  print(
+                                      "Соглашаюсь на обработку персональных данных");
                                 },
                               ),
                             ],
@@ -301,26 +382,27 @@ class _FullRegistrState extends State<FullRegistr> {
                     ),
             ),
             Padding(
-               padding:const EdgeInsets.only(
-                 top: 1180, left: 95
-               ),
-               child: Column(
+              padding: const EdgeInsets.only(top: 1180, left: 95),
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                 children:  [
-                const   Text(
-                     "По всем вопросам пришите на",
-                     style: TextStyle(fontSize: 11, color: Color(0xFF989a9d)),
-                   ),
-                const   SizedBox(
+                children: [
+                  const Text(
+                    "По всем вопросам пришите на",
+                    style: TextStyle(fontSize: 11, color: Color(0xFF989a9d)),
+                  ),
+                  const SizedBox(
                     height: 6,
-                   ),
-                   Text(
-                     "Support@hansa-lab.ru",
-                     style: GoogleFonts.montserrat(fontSize: 11, color: const Color(0xFF989a9d), fontWeight: FontWeight.w700),
-                   ),
-                 ],
-               ),
-             ),
+                  ),
+                  Text(
+                    "Support@hansa-lab.ru",
+                    style: GoogleFonts.montserrat(
+                        fontSize: 11,
+                        color: const Color(0xFF989a9d),
+                        fontWeight: FontWeight.w700),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
@@ -329,7 +411,7 @@ class _FullRegistrState extends State<FullRegistr> {
 
   Widget dropDown(String text, String choiseValue, double width, double size,
       double height, FontWeight weight,
-      {required int position}) {
+      {required int position, required List<String> list}) {
     return Padding(
       padding: const EdgeInsets.only(
         left: 11,
@@ -360,7 +442,7 @@ class _FullRegistrState extends State<FullRegistr> {
               hint: Text(text,
                   style: GoogleFonts.montserrat(
                       fontSize: 10, color: const Color(0xFF444444))),
-              items: items
+              items: list
                   .map((item) => DropdownMenuItem<String>(
                         value: item,
                         child: Text(
