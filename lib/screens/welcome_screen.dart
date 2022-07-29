@@ -20,7 +20,21 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
-    BlocSignUp().signUp("Tursunali", "Xorunaliyev", "khorunaliyev@gmail.com", "08.07.1998", "1", "101", "test", "test", "+7 (223) 232-13-12", "1", "1011", "1", "1", "1");
+    BlocSignUp().signUp(
+        "Tursunali",
+        "Xorunaliyev",
+        "khorunaliyev@gmail.com",
+        "08.07.1998",
+        "1",
+        "101",
+        "test",
+        "test",
+        "+7 (223) 232-13-12",
+        "1",
+        "1011",
+        "1",
+        "1",
+        "1");
     final playProvider = Provider.of<BlocPlayVideo>(context);
     GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
     final isTablet = Provider.of<bool>(context);
@@ -30,9 +44,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       create: (context) => scaffoldKey,
       child: WillPopScope(
           onWillPop: () async {
-           
             print(menuProvider.list.last.toString());
-           
+
             return false;
           },
           child: Scaffold(
@@ -94,13 +107,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-<<<<<<< HEAD
-                          InkWell(
-                            onTap: () {
-=======
                           IconButton(
                             onPressed: () {
->>>>>>> b7693b721305adae2883e6105d44e119b0051796
                               scaffoldKey.currentState!.openDrawer();
                             },
                             icon: Icon(
