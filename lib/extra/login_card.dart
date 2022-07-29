@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hansa_app/api_services/login_api.dart';
 import 'package:hansa_app/blocs/bloc.dart';
 import 'package:hansa_app/blocs/bloc_flip_login.dart';
 import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
@@ -10,8 +11,10 @@ import 'package:hansa_app/screens/welcome_screen.dart';
 import 'package:provider/provider.dart';
 
 class LoginCard extends StatelessWidget {
-  const LoginCard({Key? key}) : super(key: key);
+  LoginCard({Key? key}) : super(key: key);
 
+  final usernameController = TextEditingController();
+  final passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final isTablet = Provider.of<bool>(context);
@@ -67,6 +70,7 @@ class LoginCard extends StatelessWidget {
                           right: isTablet ? 16.w : 24.w,
                           top: isTablet ? 25.h : 30.h),
                       child: TextField(
+                        controller: usernameController,
                         decoration: InputDecoration(
                             hintText: 'Ваш e-mail',
                             hintStyle: GoogleFonts.montserrat(
@@ -93,6 +97,7 @@ class LoginCard extends StatelessWidget {
                           builder: (context, snapshot) {
                             if (snapshot.hasData) {
                               return TextField(
+                                controller: passwordController,
                                 obscureText: (snapshot.data!),
                                 decoration: InputDecoration(
                                     hintText: 'Ваш пароль',
@@ -161,12 +166,15 @@ class LoginCard extends StatelessWidget {
                         bottom: isTablet ? 35.h : 23.h,
                       ),
                       child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
+                        onTap: () async{
+                       bool isCorrect = await  LoginAction(username: usernameController.text, password: passwordController.text).sendRequest();
+                         if(isCorrect){
+                           Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (context) => const WelcomeScreen(),
                               ));
+                         }
                         },
                         child: Container(
                           alignment: Alignment.center,

@@ -26,7 +26,7 @@ class LoginWidget extends StatelessWidget {
                 Positioned(
                  left: 16.w,
                   top: 300.h,
-                  child: const LoginCard())
+                  child:  LoginCard())
                 ],
               ),
             ),
