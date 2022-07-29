@@ -31,7 +31,7 @@ class WelcomeWidget extends StatelessWidget {
                       child: Image.asset(
                         'assets/Lab.png',
                         height: isTablet ? 50 : 12,
-                        width: isTablet ? 70  : 42,
+                        width: isTablet ? 70 : 42,
                       ),
                     ),
                   ),
@@ -87,6 +87,7 @@ class WelcomeWidget extends StatelessWidget {
                                               isDate: true,
                                               month: "июля",
                                               day: "8",
+                                              isFavourite: false,
                                               title:
                                                   '''Минутка ностальгии: смотрим отчеты с тренинговв Екатеринбурге и Перми!''',
                                               url: 'assets/A.png',
@@ -102,6 +103,7 @@ class WelcomeWidget extends StatelessWidget {
                                               isDate: true,
                                               month: "июля",
                                               day: "8",
+                                              isFavourite: false,
                                               title:
                                                   '''Минутка ностальгии: смотрим отчеты с тренинговв Екатеринбурге и Перми!''',
                                               url: 'assets/A.png',
@@ -124,6 +126,7 @@ class WelcomeWidget extends StatelessWidget {
                                   buttonText: 'Смотреть',
                                   isDate: true,
                                   month: "июля",
+                                  isFavourite: false,
                                   day: "8",
                                   title:
                                       '''Минутка ностальгии: смотрим отчеты с тренинговв Екатеринбурге и Перми!''',
