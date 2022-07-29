@@ -1,16 +1,15 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:flip_card/flip_card.dart';
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/country_model.dart';
-import 'package:hansa_app/api_models.dart/hansa_country_api.dart';
-import 'package:hansa_app/api_models.dart/hansa_country_type_api.dart';
-import 'package:hansa_app/api_models.dart/hansa_job_api.dart';
-import 'package:hansa_app/api_models.dart/hansa_store_api.dart';
+import 'package:hansa_app/api_models.dart/country_type_model.dart';
 import 'package:hansa_app/api_models.dart/job_model.dart';
 import 'package:hansa_app/api_models.dart/store_model.dart';
+import 'package:hansa_app/api_services/hansa_country_api.dart';
+import 'package:hansa_app/api_services/hansa_job_api.dart';
 import 'package:hansa_app/blocs/bloc_flip_login.dart';
 import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
 import 'package:hansa_app/extra/text_field_for_full_reg.dart';
@@ -24,28 +23,10 @@ class FullRegistr extends StatefulWidget {
 }
 
 class _FullRegistrState extends State<FullRegistr> {
-  final List<String> items = [
-    "Название сети",
-    "Должность",
-    "Город*",
-  ];
+  List list = [];
   String selectedValue = "Название сети";
   String selectedValue2 = "Должность";
   String selectedValue3 = "Город*";
-  final blocCountryType = HansaCountryTypeAPI();
-  final blocCountry = HansaCountryAPI();
-  final blocStore = HansaStoreAPI();
-  final blocJob = HasnaJobAPI();
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    blocCountry.eventSink.add(CountryEnum.country);
-    blocCountryType.eventSink.add(CountryTypeEnum.countryType);
-    blocJob.eventSink.add(JobEnum.job);
-    blocStore.eventSink.add(StoreEnum.store);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -139,97 +120,39 @@ class _FullRegistrState extends State<FullRegistr> {
                     const SizedBox(
                       height: 4,
                     ),
-                    StreamBuilder<StoreModel>(
-                        stream: blocStore.stream,
-                        builder: (context, snapshot) {
-                          if (snapshot.data != null) {
-                            return dropDown(
-                                "Название сети",
-                                selectedValue,
-                                isTablet ? 538 : 325,
-                                isTablet ? 15 : 10,
-                                isTablet ? 43 : 38,
-                                isTablet ? FontWeight.w600 : FontWeight.normal,
-                                position: 1,
-                                list: snapshot.hasData
-                                    ? snapshot.data!.data.stores
-                                    : items);
-                          } else {
-                            return dropDown(
-                                "Название сети",
-                                selectedValue,
-                                isTablet ? 538 : 325,
-                                isTablet ? 15 : 10,
-                                isTablet ? 43 : 38,
-                                isTablet ? FontWeight.w600 : FontWeight.normal,
-                                position: 1,
-                                list: items);
-                          }
-                        }),
+                    dropDown(
+                      "Название сети",
+                      selectedValue,
+                      isTablet ? 538 : 325,
+                      isTablet ? 15 : 10,
+                      isTablet ? 43 : 38,
+                      isTablet ? FontWeight.w600 : FontWeight.normal,
+                      position: 1,
+                    ),
                     const SizedBox(
                       height: 4,
                     ),
-                    StreamBuilder<JobModel>(
-                        stream: blocJob.stream,
-                        builder: (context, snapshot) {
-                          if (snapshot.data != null) {
-                            return dropDown(
-                              "Должность",
-                              selectedValue2,
-                              isTablet ? 538 : 325,
-                              isTablet ? 15 : 10,
-                              isTablet ? 43 : 38,
-                              isTablet ? FontWeight.w600 : FontWeight.normal,
-                              position: 2,
-                              list: snapshot.hasData
-                                  ? snapshot.data!.data.jobs
-                                  : items,
-                            );
-                          } else {
-                            return dropDown(
-                              "Должность",
-                              selectedValue2,
-                              isTablet ? 538 : 325,
-                              isTablet ? 15 : 10,
-                              isTablet ? 43 : 38,
-                              isTablet ? FontWeight.w600 : FontWeight.normal,
-                              position: 2,
-                              list: items,
-                            );
-                          }
-                        }),
+                    dropDown(
+                      "Должность",
+                      selectedValue2,
+                      isTablet ? 538 : 325,
+                      isTablet ? 15 : 10,
+                      isTablet ? 43 : 38,
+                      isTablet ? FontWeight.w600 : FontWeight.normal,
+                      position: 2,
+                    ),
                     const SizedBox(
                       height: 4,
                     ),
-                    StreamBuilder<CountryModel>(
-                        stream: blocCountry.stream,
-                        builder: (context, snapshot) {
-                          if (snapshot.data != null) {
-                            return dropDown(
-                              "Город*",
-                              selectedValue3,
-                              isTablet ? 538 : 325,
-                              isTablet ? 15 : 10,
-                              isTablet ? 43 : 38,
-                              isTablet ? FontWeight.w600 : FontWeight.normal,
-                              position: 3,
-                              list: snapshot.hasData
-                                  ? snapshot.data!.data.countries
-                                  : items,
-                            );
-                          } else {
-                            return dropDown(
-                              "Город*",
-                              selectedValue3,
-                              isTablet ? 538 : 325,
-                              isTablet ? 15 : 10,
-                              isTablet ? 43 : 38,
-                              isTablet ? FontWeight.w600 : FontWeight.normal,
-                              position: 3,
-                              list: items,
-                            );
-                          }
-                        }),
+                    dropDown(
+                      "Город*",
+                      selectedValue3,
+                      isTablet ? 538 : 325,
+                      isTablet ? 15 : 10,
+                      isTablet ? 43 : 38,
+                      isTablet ? FontWeight.w600 : FontWeight.normal,
+                      position: 3,
+                    ),
                     const SizedBox(
                       height: 4,
                     ),
@@ -411,7 +334,21 @@ class _FullRegistrState extends State<FullRegistr> {
 
   Widget dropDown(String text, String choiseValue, double width, double size,
       double height, FontWeight weight,
-      {required int position, required List<String> list}) {
+      {required int position}) {
+     Provider.of<Future<List>>(context).then((value) {
+       list = value;
+       print(list);
+       print("salom shettan chiqdi");
+      
+     });
+     setState(() {
+       
+     });
+     print(list);
+
+    /* final jobs = Provider.of<Future<List>>(context);
+    final countries = Provider.of<Future<List>>(context);
+    final countryTypes = Provider.of<Future<List>>(context); */
     return Padding(
       padding: const EdgeInsets.only(
         left: 11,
@@ -428,48 +365,54 @@ class _FullRegistrState extends State<FullRegistr> {
         child: Padding(
           padding: const EdgeInsets.only(right: 16, left: 17),
           child: DropdownButtonHideUnderline(
-            child: DropdownButton2<String>(
-              dropdownWidth: 325,
-              dropdownDecoration: const BoxDecoration(
-                  color: Color(0xFFf8f8f8),
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(20),
-                    bottomRight: Radius.circular(20),
-                    topRight: Radius.circular(20),
-                  )),
-              buttonDecoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(54)),
-              hint: Text(text,
-                  style: GoogleFonts.montserrat(
-                      fontSize: 10, color: const Color(0xFF444444))),
-              items: list
-                  .map((item) => DropdownMenuItem<String>(
-                        value: item,
-                        child: Text(
-                          item,
-                          style: GoogleFonts.montserrat(
-                              fontWeight: weight,
-                              fontSize: size,
-                              color: const Color(0xFF444444)),
-                        ),
-                      ))
-                  .toList(),
-              value: choiseValue,
-              onChanged: (value) {
-                if (position == 1) {
-                  selectedValue = value!;
-                }
-                if (position == 2) {
-                  selectedValue2 = value!;
-                }
-                if (position == 3) {
-                  selectedValue3 = value!;
-                }
-                setState(() {});
-              },
-              buttonHeight: 40,
-              buttonWidth: 140,
-              itemHeight: 40,
+            child: FutureBuilder<List>(
+              future: Provider.of<Future<List>>(context),
+              builder: (context, snapshot) {
+                return Text((snapshot.hasData)?snapshot.requireData.toString():"aaaaa");
+                /* return DropdownButton2<String>(
+                  dropdownWidth: 325,
+                  dropdownDecoration: const BoxDecoration(
+                      color: Color(0xFFf8f8f8),
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(20),
+                        bottomRight: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                      )),
+                  buttonDecoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(54)),
+                  hint: Text(text,
+                      style: GoogleFonts.montserrat(
+                          fontSize: 10, color: const Color(0xFF444444))),
+                  items: 
+                      (snapshot.hasData)?snapshot.data!.map((item) => DropdownMenuItem<String>(
+                            value: item,
+                            child: Text(
+                              item,
+                              style: GoogleFonts.montserrat(
+                                  fontWeight: weight,
+                                  fontSize: size,
+                                  color: const Color(0xFF444444)),
+                            ),
+                          ))
+                      .toList():[],
+                  value: choiseValue,
+                  onChanged: (value) {
+                    if (position == 1) {
+                      selectedValue = value!;
+                    }
+                    if (position == 2) {
+                      selectedValue2 = value!;
+                    }
+                    if (position == 3) {
+                      selectedValue3 = value!;
+                    }
+                    setState(() {});
+                  },
+                  buttonHeight: 40,
+                  buttonWidth: 140,
+                  itemHeight: 40,
+                ); */
+              }
             ),
           ),
         ),
