@@ -34,7 +34,7 @@ class _FlipAnimState extends State<FlipAnim> {
                       key: flipKeyv,
                       flipOnTouch: false,
                       front: const SizedBox(),
-                      back: const LoginCard(),
+                      back:  LoginCard(),
                     ),
                   );
                 }

@@ -83,10 +83,10 @@ class HansaZagruzka extends StatelessWidget {
                   builder: (context, snapshot) {
                     return Center(
                       child: snapshot.data == LoginAction.login
-                          ? const SingleChildScrollView(
+                          ?  SingleChildScrollView(
                               child: Padding(
-                                padding: EdgeInsets.only(top: 200),
-                                child: LoginCard(),
+                                padding: const EdgeInsets.only(top: 200),
+                                child:  LoginCard(),
                               ),
                             )
                           : FlipCard(

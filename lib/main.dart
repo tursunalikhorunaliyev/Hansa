@@ -1,12 +1,20 @@
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hansa_app/api_models.dart/hansa_country_api.dart';
+import 'package:hansa_app/api_models.dart/hansa_country_type_api.dart';
+import 'package:hansa_app/api_models.dart/hansa_job_api.dart';
+import 'package:hansa_app/api_models.dart/hansa_store_api.dart';
+import 'package:hansa_app/blocs/a_example/exxx.dart';
+import 'package:hansa_app/blocs/a_example/sign_screen.dart';
 import 'package:hansa_app/blocs/bloc_change_profile.dart';
 import 'package:hansa_app/blocs/bloc_change_title.dart';
 import 'package:hansa_app/blocs/bloc_play_video.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/blocs/voyti_ili_sozdata_bloc.dart';
 import 'package:hansa_app/screens/welcome_screen.dart';
+import 'package:hansa_app/providers/stack_provider.dart';
+import 'package:hansa_app/screens/hansa_zagruzka.dart';
 import 'package:provider/provider.dart';
 
 void main(List<String> args) {
@@ -19,7 +27,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = WidgetsBinding.instance.window.physicalSize;
+
     bool isTablet = (size.width / 3) > 500;
+
     Map<String, FlipCardController> map = {
       "login": FlipCardController(),
       "signin": FlipCardController()
@@ -45,7 +55,7 @@ class MyApp extends StatelessWidget {
         ],
         child: const MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: WelcomeScreen(),
+          home: HansaZagruzka(),
         ),
       ),
     );
