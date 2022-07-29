@@ -44,7 +44,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
       create: (context) => scaffoldKey,
       child: WillPopScope(
           onWillPop: () async {
-            print(menuProvider.list.last.toString());
 
             return false;
           },
