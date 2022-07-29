@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hansa_app/test/bloc.dart';
+import 'package:hansa_app/blocs/toggle_switcher_bloc.dart';
+import 'package:provider/provider.dart';
 
 class ToggleSwitch extends StatefulWidget {
   final double tickerSize;
@@ -26,9 +27,10 @@ class ToggleSwitch extends StatefulWidget {
 
 class _ToggleSwitchState extends State<ToggleSwitch> {
   Alignment align = Alignment.centerLeft;
-  final bloc = Bloc();
+ 
   @override
   Widget build(BuildContext context) {
+    final providerBloc = Provider.of<ToggleSwitcherBloc>(context);
     return Center(
       child: SizedBox(
         height: widget.tickerSize,
@@ -41,9 +43,9 @@ class _ToggleSwitchState extends State<ToggleSwitch> {
                   : Alignment.centerRight;
             });
             if (align == Alignment.centerRight) {
-              bloc.dataSink.add(true);
+              providerBloc.dataSink.add(true);
             } else {
-              bloc.dataSink.add(false);
+              providerBloc.dataSink.add(false);
             }
             widget.onButton();
           },
