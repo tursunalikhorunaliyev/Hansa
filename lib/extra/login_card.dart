@@ -266,7 +266,7 @@ class _LoginCardState extends State<LoginCard> {
     ));
   }
 
-  goToWelcome(token) {
+  goToWelcome(  token) {
     Navigator.push(
         context,
         MaterialPageRoute(
