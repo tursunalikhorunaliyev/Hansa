@@ -2,27 +2,49 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hansa_app/api_services/full_register.dart';
 import 'package:hansa_app/blocs/bloc_play_video.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/extra/glavniy_menyu.dart';
-import 'package:hansa_app/extra/top_video_widget.dart';
 import 'package:hansa_app/extra/ui_changer.dart';
+import 'package:hansa_app/providers/stack_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:video_player/video_player.dart';
 
-class WelcomeScreen extends StatelessWidget {
+class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
 
   @override
+  State<WelcomeScreen> createState() => _WelcomeScreenState();
+}
+
+class _WelcomeScreenState extends State<WelcomeScreen> {
+  @override
   Widget build(BuildContext context) {
+    BlocSignUp().signUp(
+        "Tursunali",
+        "Xorunaliyev",
+        "khorunaliyev@gmail.com",
+        "08.07.1998",
+        "1",
+        "101",
+        "test",
+        "test",
+        "+7 (223) 232-13-12",
+        "1",
+        "1011",
+        "1",
+        "1",
+        "1");
     final playProvider = Provider.of<BlocPlayVideo>(context);
     GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
     final isTablet = Provider.of<bool>(context);
     final menuProvider = Provider.of<MenuEventsBloC>(context);
+
     return Provider(
       create: (context) => scaffoldKey,
       child: WillPopScope(
           onWillPop: () async {
+
             return false;
           },
           child: Scaffold(
@@ -84,11 +106,11 @@ class WelcomeScreen extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          InkWell(
-                            onTap: () {
+                          IconButton(
+                            onPressed: () {
                               scaffoldKey.currentState!.openDrawer();
                             },
-                            child: Icon(
+                            icon: Icon(
                               Icons.menu,
                               color: const Color(0xff444444),
                               size: isTablet ? 13.sp : 21.sp,
@@ -142,7 +164,7 @@ class WelcomeScreen extends StatelessWidget {
                     const UIChanger(),
                   ],
                 ),
-                StreamBuilder<bool>(
+                /* StreamBuilder<bool>(
                   stream: playProvider.stream,
                   initialData: false,
                   builder: (context, snapshot) {
@@ -157,7 +179,7 @@ class WelcomeScreen extends StatelessWidget {
                       ),
                     );
                   },
-                ),
+                ), */
               ],
             ),
           )),

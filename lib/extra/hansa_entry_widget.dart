@@ -36,6 +36,7 @@ class _HansaEntryState extends State<HansaEntry> {
 
   @override
   Widget build(BuildContext context) {
+    print("Hansa Entryyyyyyyyyyyyyyyyyyy");
     final isTablet = Provider.of<bool>(context);
     return ScreenUtilInit(
       designSize: const Size(375, 812),

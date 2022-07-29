@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class TextFieldForFullRegister extends StatefulWidget {
   final String text;
@@ -30,6 +31,14 @@ class _TextFieldForFullRegisterState extends State<TextFieldForFullRegister> {
                 borderRadius: BorderRadius.circular(54),
               ),
               child: TextField(
+                inputFormatters: [
+                   MaskTextInputFormatter(
+                     mask: "##/##/####",
+                     filter: {
+                       "#": RegExp(r'\d|-|/')
+                     }
+                   )
+                ],
                 onChanged: (value) {
                   if(value.isEmpty){
                     isHint = true;

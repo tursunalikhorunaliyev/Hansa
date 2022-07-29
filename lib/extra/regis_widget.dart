@@ -8,7 +8,7 @@ class CompleteRegistr extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<FlipCardController>(context);
+    final provider = Provider.of<Map<String, FlipCardController>>(context);
     final isTablet = Provider.of<bool>(context);
     return Column(
       children: [
@@ -34,7 +34,7 @@ class CompleteRegistr extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(right: 8, top: 8),
                             child: InkWell(
-                              onTap: () => provider.toggleCard(),
+                              onTap: () => provider['signin']!.toggleCard(),
                               child: Icon(
                                 Icons.close_rounded,
                                 size: isTablet ? 30 : 24,
@@ -54,10 +54,10 @@ class CompleteRegistr extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(top: 17),
+                        padding: const EdgeInsets.only(top: 17),
                         child: Icon(
                           Icons.done,
-                          color: Color(0xff25b049),
+                          color: const Color(0xff25b049),
                           size: isTablet ? 28 : 0,
                         ),
                       ),
@@ -86,7 +86,7 @@ class CompleteRegistr extends StatelessWidget {
                                       0, 15), // changes position of shadow
                                 ),
                               ],
-                              color: Color(0xff25b049),
+                              color: const Color(0xff25b049),
                               borderRadius:
                                   BorderRadius.circular(isTablet ? 28 : 23)),
                           child: Text(
@@ -94,7 +94,7 @@ class CompleteRegistr extends StatelessWidget {
                             style: GoogleFonts.montserrat(
                                 fontSize: isTablet ? 16 : 13,
                                 fontWeight: FontWeight.w500,
-                                color: Color(0xffffffff)),
+                                color: const Color(0xffffffff)),
                           ),
                         ),
                       )
@@ -117,6 +117,27 @@ class CompleteRegistr extends StatelessWidget {
                       width: 134,
                     ),
             ),
+             Padding(
+               padding:const EdgeInsets.only(
+                 top: 730, left: 115
+               ),
+               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                 children: const [
+                   Text(
+                     "По всем вопросам пришите на",
+                     style: TextStyle(fontSize: 11, color: Color(0xFF989a9d)),
+                   ),
+                   SizedBox(
+                    height: 6,
+                   ),
+                   Text(
+                     "Support@hansa-lab.ru",
+                     style: TextStyle(fontSize: 11, color: Color(0xFF989a9d)),
+                   ),
+                 ],
+               ),
+             ),
           ],
         ),
       ],

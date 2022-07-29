@@ -41,14 +41,13 @@ dependencies:
   provider: ^6.0.3
   table_calendar: ^3.0.6
   sticky_headers: ^0.3.0+2
-  dropdown_button2: ^1.6.3
+  dropdown_button2: ^1.7.0
   chewie: ^1.3.4
   video_player: ^2.4.5
-  syncfusion_flutter_pdfviewer: ^20.2.40-beta
-  pspdfkit_flutter: any
-  pdfx: ^2.2.0
-  internet_file: ^1.2.0
-
+  http: ^0.13.4
+  mask_text_input_formatter: ^2.3.0
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0  
 
   
   

@@ -1,23 +1,50 @@
-import 'package:flip_card/flip_card.dart';
+import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hansa_app/api_services/login_api.dart';
 import 'package:hansa_app/blocs/bloc.dart';
 import 'package:hansa_app/blocs/bloc_flip_login.dart';
+import 'package:hansa_app/blocs/navigator_bloc.dart';
 import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
 import 'package:hansa_app/screens/welcome_screen.dart';
+import 'package:hansa_app/blocs/toggle_switcher_bloc.dart';
+import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
-class LoginCard extends StatelessWidget {
+class LoginCard extends StatefulWidget {
   const LoginCard({Key? key}) : super(key: key);
+
+  @override
+  State<LoginCard> createState() => _LoginCardState();
+}
+
+class _LoginCardState extends State<LoginCard> {
+  final usernameController = TextEditingController();
+
+  final passwordController = TextEditingController();
+
+  final pagerBloc = NavigatorBloC();
+  @override
+  void initState() {
+    pagerBloc.stream.listen((event) {
+      if (event[2]) {
+        goToWelcome(event[1]);
+      } else {
+        showSnac();
+      }
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final isTablet = Provider.of<bool>(context);
-    final flip = Provider.of<GlobalKey<FlipCardState>>(context);
+    final flip = Provider.of<Map<String, FlipCardController>>(context);
     final bloc = BlocAnim();
     final provider = Provider.of<BlocFlipLogin>(context);
+    final providerSwitcher = Provider.of<ToggleSwitcherBloc>(context);
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       builder: (context, child) => Padding(
@@ -43,7 +70,7 @@ class LoginCard extends StatelessWidget {
                           child: InkWell(
                             onTap: () {
                               provider.sink.add(false);
-                              flip.currentState!.toggleCard();
+                              flip['login']!.toggleCard();
                             },
                             child: Icon(
                               Icons.close_rounded,
@@ -67,6 +94,7 @@ class LoginCard extends StatelessWidget {
                           right: isTablet ? 16.w : 24.w,
                           top: isTablet ? 25.h : 30.h),
                       child: TextField(
+                        controller: usernameController,
                         decoration: InputDecoration(
                             hintText: 'Ваш e-mail',
                             hintStyle: GoogleFonts.montserrat(
@@ -93,6 +121,7 @@ class LoginCard extends StatelessWidget {
                           builder: (context, snapshot) {
                             if (snapshot.hasData) {
                               return TextField(
+                                controller: passwordController,
                                 obscureText: (snapshot.data!),
                                 decoration: InputDecoration(
                                     hintText: 'Ваш пароль',
@@ -146,9 +175,11 @@ class LoginCard extends StatelessWidget {
                               child: ToggleSwitch(
                                 colorContainer: Colors.grey[300],
                                 colorCircle: Colors.green[600],
-                                  tickerSize: isTablet ? 15.sp : 21.sp,
-                                  handlerWidth: isTablet ? 30.w : 40.w,
-                                  handlerHeight: isTablet ? 12.h : 12.h))
+                                tickerSize: isTablet ? 15.sp : 21.sp,
+                                handlerWidth: isTablet ? 30.w : 40.w,
+                                handlerHeight: isTablet ? 12.h : 12.h,
+                                onButton: () {},
+                              ))
                         ],
                       ),
                     ),
@@ -156,39 +187,49 @@ class LoginCard extends StatelessWidget {
                       padding: EdgeInsets.only(
                         bottom: isTablet ? 35.h : 23.h,
                       ),
-                      child: GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const WelcomeScreen(),
-                              ));
-                        },
-                        child: Container(
-                          alignment: Alignment.center,
-                          width: isTablet ? 210.w : 318.w,
-                          height: isTablet ? 48.h : 46.h,
-                          decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 5.r,
-                                  blurRadius: 7.r,
-                                  offset: Offset(
-                                      0.w, 15.h), // changes position of shadow
+                      child: StreamBuilder<bool>(
+                          initialData: false,
+                          stream: providerSwitcher.dataStream,
+                          builder: (context, snapshot) {
+                            return GestureDetector(
+                              onTap: () async {
+                                print(snapshot.data);
+                                print("saloooooom");
+
+                                List isCorrectList = await LoginAction(
+                                        username: usernameController.text,
+                                        password: passwordController.text,
+                                        isSaved: snapshot.data!)
+                                    .sendRequest();
+
+                                pagerBloc.sink.add(isCorrectList);
+                              },
+                              child: Container(
+                                alignment: Alignment.center,
+                                width: isTablet ? 210.w : 318.w,
+                                height: isTablet ? 48.h : 46.h,
+                                decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        spreadRadius: 5.r,
+                                        blurRadius: 7.r,
+                                        offset: Offset(0.w,
+                                            15.h), // changes position of shadow
+                                      ),
+                                    ],
+                                    color: const Color(0xffe21a37),
+                                    borderRadius: BorderRadius.circular(23.r)),
+                                child: Text(
+                                  'Войти',
+                                  style: GoogleFonts.montserrat(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: isTablet ? 10.sp : 12.sp),
                                 ),
-                              ],
-                              color: const Color(0xffe21a37),
-                              borderRadius: BorderRadius.circular(23.r)),
-                          child: Text(
-                            'Войти',
-                            style: GoogleFonts.montserrat(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500,
-                                fontSize: isTablet ? 10.sp : 12.sp),
-                          ),
-                        ),
-                      ),
+                              ),
+                            );
+                          }),
                     ),
                     Padding(
                       padding: EdgeInsets.only(bottom: 36.h),
@@ -216,5 +257,21 @@ class LoginCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  showSnac() {
+    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+      content: Text("Неверный E-mail или пароль"),
+      backgroundColor: Colors.red,
+    ));
+  }
+
+  goToWelcome(token) {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Provider(
+              create: (context) => token, child: const WelcomeScreen()),
+        ));
   }
 }

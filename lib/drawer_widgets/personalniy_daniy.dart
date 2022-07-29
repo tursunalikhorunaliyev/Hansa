@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hansa_app/drawer_widgets/referal_silka.dart';
 import 'package:hansa_app/drawer_widgets/text_field_for_personal.dart';
+import 'package:provider/provider.dart';
 
 class PersonalniyDaniy extends StatefulWidget {
   const PersonalniyDaniy({Key? key}) : super(key: key);
@@ -29,13 +31,14 @@ class _PersonalniyDaniyState extends State<PersonalniyDaniy> {
 
   @override
   Widget build(BuildContext context) {
+    final isTablet = Provider.of<bool>(context);
     return Center(
       child: Column(
         children: [
           Image.asset(
             "assets/user_icons.png",
-            height: 37,
-            width: 37,
+            height: isTablet ? 50 : 37,
+            width: isTablet ? 50 : 37,
           ),
           const SizedBox(
             height: 11,
@@ -43,48 +46,55 @@ class _PersonalniyDaniyState extends State<PersonalniyDaniy> {
           Text(
             "Персональные данные",
             style: GoogleFonts.montserrat(
-                fontSize: 13, color: const Color(0xFFffffff)),
+                fontSize: isTablet ? 16 : 13, color: const Color(0xFFffffff)),
           ),
-          const SizedBox(
-            height: 25,
+          SizedBox(
+            height: isTablet ? 40 : 25,
           ),
           TextFieldForPersonal(text: "Имя", controller: imyaController),
-          const SizedBox(
-            height: 8,
+          SizedBox(
+            height: isTablet ? 15 : 8,
           ),
           TextFieldForPersonal(text: "Фамилия", controller: familyaController),
-          const SizedBox(
-            height: 8,
+          SizedBox(
+            height: isTablet ? 15 : 8,
           ),
           TextFieldForPersonal(
               text: "Дата рождения", controller: dataRojController),
-          const SizedBox(
-            height: 8,
+          SizedBox(
+            height: isTablet ? 15 : 8,
           ),
           TextFieldForPersonal(text: "E-mail", controller: emailController),
-          const SizedBox(
-            height: 8,
+          SizedBox(
+            height: isTablet ? 15 : 8,
           ),
           TextFieldForPersonal(text: "Телефон", controller: telefonController),
-          const SizedBox(
-            height: 8,
+          SizedBox(
+            height: isTablet ? 15 : 8,
           ),
-          TextFieldForPersonal(text: "Магазин", controller: magazinController),
-          const SizedBox(
-            height: 8,
+          TextFieldForPersonal(
+            text: "Магазин",
+            controller: magazinController,
+          ),
+          SizedBox(
+            height: isTablet ? 15 : 8,
           ),
           TextFieldForPersonal(
               text: "Должность", controller: doljnostController),
-          const SizedBox(
-            height: 8,
+          SizedBox(
+            height: isTablet ? 15 : 8,
           ),
           TextFieldForPersonal(text: "Город", controller: gorodController),
-          const SizedBox(
-            height: 8,
+          SizedBox(
+            height: isTablet ? 15 : 8,
           ),
           TextFieldForPersonal(text: "Адрес", controller: adresController),
-          const SizedBox(
-            height: 40,
+          SizedBox(
+            height: isTablet ? 50 : 10,
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: isTablet ? 40 : 10),
+            child: const ReferalSilka(),
           ),
         ],
       ),

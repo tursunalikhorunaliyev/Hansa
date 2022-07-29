@@ -1,8 +1,15 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:flip_card/flip_card.dart';
 import 'package:flip_card/flip_card_controller.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hansa_app/api_models.dart/country_model.dart';
+import 'package:hansa_app/api_models.dart/country_type_model.dart';
+import 'package:hansa_app/api_models.dart/job_model.dart';
+import 'package:hansa_app/api_models.dart/store_model.dart';
+import 'package:hansa_app/api_services/hansa_country_api.dart';
+import 'package:hansa_app/api_services/hansa_job_api.dart';
 import 'package:hansa_app/blocs/bloc_flip_login.dart';
 import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
 import 'package:hansa_app/extra/text_field_for_full_reg.dart';
@@ -16,20 +23,15 @@ class FullRegistr extends StatefulWidget {
 }
 
 class _FullRegistrState extends State<FullRegistr> {
-  final List<String> items = [
-    "Название сети",
-    "Должность",
-    "Город*",
-  ];
+  List list = [];
   String selectedValue = "Название сети";
   String selectedValue2 = "Должность";
   String selectedValue3 = "Город*";
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<FlipCardController>(context);
     final isTablet = Provider.of<bool>(context);
-    final providerFlip = Provider.of<GlobalKey<FlipCardState>>(context);
+    final providerFlip = Provider.of<Map<String, FlipCardController>>(context);
     final providerFlipLogin = Provider.of<BlocFlipLogin>(context);
 
     return SingleChildScrollView(
@@ -55,7 +57,7 @@ class _FullRegistrState extends State<FullRegistr> {
                           InkWell(
                             onTap: () {
                               providerFlipLogin.sink.add(false);
-                              providerFlip.currentState!.toggleCard();
+                              providerFlip['login']!.toggleCard();
                             },
                             child: const Icon(
                               Icons.close_rounded,
@@ -78,57 +80,67 @@ class _FullRegistrState extends State<FullRegistr> {
                     const SizedBox(
                       height: 18,
                     ),
-                    TextFieldForFullRegister(text:  "Имя", height: isTablet ? 45 : 38, size: isTablet ? 13 : 10,
-                     weight:   isTablet ? FontWeight.w600 : FontWeight.normal),
+                    TextFieldForFullRegister(
+                        text: "Имя",
+                        height: isTablet ? 45 : 38,
+                        size: isTablet ? 13 : 10,
+                        weight: isTablet ? FontWeight.w600 : FontWeight.normal),
                     const SizedBox(
                       height: 4,
                     ),
                     TextFieldForFullRegister(
-                       text: "Фамилия",
-                     height:   isTablet ? 45 : 38,
-                      size:  isTablet ? 13 : 10,
-                       weight:  isTablet ? FontWeight.w600 : FontWeight.normal),
+                        text: "Фамилия",
+                        height: isTablet ? 45 : 38,
+                        size: isTablet ? 13 : 10,
+                        weight: isTablet ? FontWeight.w600 : FontWeight.normal),
                     const SizedBox(
                       height: 5,
                     ),
-                    TextFieldForFullRegister(text: "Email", height: isTablet ? 45 : 38, size: isTablet ? 13 : 10,
-                    weight:    isTablet ? FontWeight.w600 : FontWeight.normal),
+                    TextFieldForFullRegister(
+                        text: "Email",
+                        height: isTablet ? 45 : 38,
+                        size: isTablet ? 13 : 10,
+                        weight: isTablet ? FontWeight.w600 : FontWeight.normal),
                     const SizedBox(
                       height: 4,
                     ),
                     TextFieldForFullRegister(
-                     text:   "Контактный тефон",
-                     height:   isTablet ? 45 : 38,
-                      size:  isTablet ? 15 : 10,
-                      weight:  isTablet ? FontWeight.w600 : FontWeight.normal),
+                        text: "Контактный тефон",
+                        height: isTablet ? 45 : 38,
+                        size: isTablet ? 15 : 10,
+                        weight: isTablet ? FontWeight.w600 : FontWeight.normal),
                     const SizedBox(
                       height: 4,
                     ),
                     TextFieldForFullRegister(
-                       text: "Дата рождения",
-                      height:  isTablet ? 45 : 38,
-                       size: isTablet ? 15 : 10,
-                      weight:   isTablet ? FontWeight.w600 : FontWeight.normal),
+                        text: "Дата рождения",
+                        height: isTablet ? 45 : 38,
+                        size: isTablet ? 15 : 10,
+                        weight: isTablet ? FontWeight.w600 : FontWeight.normal),
                     const SizedBox(
                       height: 4,
                     ),
                     dropDown(
-                        "Название сети",
-                        selectedValue,
-                        isTablet ? 538 : 325,
-                        isTablet ? 15 : 10,
-                        isTablet ? 43 : 38,
-                        isTablet ? FontWeight.w600 : FontWeight.normal),
+                      "Название сети",
+                      selectedValue,
+                      isTablet ? 538 : 325,
+                      isTablet ? 15 : 10,
+                      isTablet ? 43 : 38,
+                      isTablet ? FontWeight.w600 : FontWeight.normal,
+                      position: 1,
+                    ),
                     const SizedBox(
                       height: 4,
                     ),
                     dropDown(
-                        "Должность",
-                        selectedValue2,
-                        isTablet ? 538 : 325,
-                        isTablet ? 15 : 10,
-                        isTablet ? 43 : 38,
-                        isTablet ? FontWeight.w600 : FontWeight.normal),
+                      "Должность",
+                      selectedValue2,
+                      isTablet ? 538 : 325,
+                      isTablet ? 15 : 10,
+                      isTablet ? 43 : 38,
+                      isTablet ? FontWeight.w600 : FontWeight.normal,
+                      position: 2,
+                    ),
                     const SizedBox(
                       height: 4,
                     ),
@@ -139,19 +151,19 @@ class _FullRegistrState extends State<FullRegistr> {
                       isTablet ? 15 : 10,
                       isTablet ? 43 : 38,
                       isTablet ? FontWeight.w600 : FontWeight.normal,
+                      position: 3,
                     ),
                     const SizedBox(
                       height: 4,
                     ),
                     TextFieldForFullRegister(
-                      text:  "Адрес торговой сети",
-                     height:   isTablet ? 45 : 38,
-                      size:  isTablet ? 13 : 10,
-                    weight:    isTablet ? FontWeight.w600 : FontWeight.normal),
+                        text: "Адрес торговой сети",
+                        height: isTablet ? 45 : 38,
+                        size: isTablet ? 13 : 10,
+                        weight: isTablet ? FontWeight.w600 : FontWeight.normal),
                     const SizedBox(
                       height: 10,
                     ),
-                 
                     const SizedBox(
                       height: 14,
                     ),
@@ -170,6 +182,9 @@ class _FullRegistrState extends State<FullRegistr> {
                                 tickerSize: 21,
                                 colorCircle: Colors.green[600],
                                 colorContainer: Colors.grey[300],
+                                onButton: () {
+                                  print("Не выходить из приложения");
+                                },
                               ),
                             ],
                           ),
@@ -187,6 +202,9 @@ class _FullRegistrState extends State<FullRegistr> {
                                 tickerSize: 21,
                                 colorCircle: Colors.green[600],
                                 colorContainer: Colors.grey[300],
+                                onButton: () {
+                                  print("Согласен на СМС и Email рассылку");
+                                },
                               ),
                             ],
                           ),
@@ -204,6 +222,9 @@ class _FullRegistrState extends State<FullRegistr> {
                                 tickerSize: 21,
                                 colorCircle: Colors.green[600],
                                 colorContainer: Colors.grey[300],
+                                onButton: () {
+                                  print("Подтверждаю подлиность данных");
+                                },
                               ),
                             ],
                           ),
@@ -224,6 +245,10 @@ class _FullRegistrState extends State<FullRegistr> {
                                 tickerSize: 21,
                                 colorCircle: Colors.green[600],
                                 colorContainer: Colors.grey[300],
+                                onButton: () {
+                                  print(
+                                      "Соглашаюсь на обработку персональных данных");
+                                },
                               ),
                             ],
                           ),
@@ -237,7 +262,7 @@ class _FullRegistrState extends State<FullRegistr> {
                         top: isTablet ? 30 : 25,
                       ),
                       child: GestureDetector(
-                        onTap: () => provider.toggleCard(),
+                        onTap: () => providerFlip['signin']!.toggleCard(),
                         child: Container(
                           alignment: Alignment.center,
                           height: isTablet ? 60 : 46,
@@ -279,15 +304,51 @@ class _FullRegistrState extends State<FullRegistr> {
                       width: 133,
                     ),
             ),
+            Padding(
+              padding: const EdgeInsets.only(top: 1180, left: 95),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Text(
+                    "По всем вопросам пришите на",
+                    style: TextStyle(fontSize: 11, color: Color(0xFF989a9d)),
+                  ),
+                  const SizedBox(
+                    height: 6,
+                  ),
+                  Text(
+                    "Support@hansa-lab.ru",
+                    style: GoogleFonts.montserrat(
+                        fontSize: 11,
+                        color: const Color(0xFF989a9d),
+                        fontWeight: FontWeight.w700),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 
-  
   Widget dropDown(String text, String choiseValue, double width, double size,
-      double height, FontWeight weight) {
+      double height, FontWeight weight,
+      {required int position}) {
+     Provider.of<Future<List>>(context).then((value) {
+       list = value;
+       print(list);
+       print("salom shettan chiqdi");
+      
+     });
+     setState(() {
+       
+     });
+     print(list);
+
+    /* final jobs = Provider.of<Future<List>>(context);
+    final countries = Provider.of<Future<List>>(context);
+    final countryTypes = Provider.of<Future<List>>(context); */
     return Padding(
       padding: const EdgeInsets.only(
         left: 11,
@@ -304,41 +365,54 @@ class _FullRegistrState extends State<FullRegistr> {
         child: Padding(
           padding: const EdgeInsets.only(right: 16, left: 17),
           child: DropdownButtonHideUnderline(
-            child: DropdownButton2(
-              dropdownWidth: 325,
-              dropdownDecoration: const BoxDecoration(
-                  color: Color(0xFFf8f8f8),
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(20),
-                    bottomRight: Radius.circular(20),
-                    topRight: Radius.circular(20),
-                  )),
-              buttonDecoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(54)),
-              hint: Text(text,
-                  style: GoogleFonts.montserrat(
-                      fontSize: 10, color: const Color(0xFF444444))),
-              items: items
-                  .map((item) => DropdownMenuItem<String>(
-                        value: item,
-                        child: Text(
-                          item,
-                          style: GoogleFonts.montserrat(
-                              fontWeight: weight,
-                              fontSize: size,
-                              color: const Color(0xFF444444)),
-                        ),
-                      ))
-                  .toList(),
-              value: choiseValue,
-              onChanged: (value) {
-                setState(() {
-                  choiseValue = value as String;
-                });
-              },
-              buttonHeight: 40,
-              buttonWidth: 140,
-              itemHeight: 40,
+            child: FutureBuilder<List>(
+              future: Provider.of<Future<List>>(context),
+              builder: (context, snapshot) {
+                return Text((snapshot.hasData)?snapshot.requireData.toString():"aaaaa");
+                /* return DropdownButton2<String>(
+                  dropdownWidth: 325,
+                  dropdownDecoration: const BoxDecoration(
+                      color: Color(0xFFf8f8f8),
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(20),
+                        bottomRight: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                      )),
+                  buttonDecoration:
+                      BoxDecoration(borderRadius: BorderRadius.circular(54)),
+                  hint: Text(text,
+                      style: GoogleFonts.montserrat(
+                          fontSize: 10, color: const Color(0xFF444444))),
+                  items: 
+                      (snapshot.hasData)?snapshot.data!.map((item) => DropdownMenuItem<String>(
+                            value: item,
+                            child: Text(
+                              item,
+                              style: GoogleFonts.montserrat(
+                                  fontWeight: weight,
+                                  fontSize: size,
+                                  color: const Color(0xFF444444)),
+                            ),
+                          ))
+                      .toList():[],
+                  value: choiseValue,
+                  onChanged: (value) {
+                    if (position == 1) {
+                      selectedValue = value!;
+                    }
+                    if (position == 2) {
+                      selectedValue2 = value!;
+                    }
+                    if (position == 3) {
+                      selectedValue3 = value!;
+                    }
+                    setState(() {});
+                  },
+                  buttonHeight: 40,
+                  buttonWidth: 140,
+                  itemHeight: 40,
+                ); */
+              }
             ),
           ),
         ),

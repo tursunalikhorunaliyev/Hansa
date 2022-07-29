@@ -5,7 +5,7 @@ import 'package:hansa_app/blocs/login_anim_bloc.dart';
 import 'package:hansa_app/extra/login_card.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
+//
 class FlipAnim extends StatefulWidget {
   const FlipAnim({Key? key}) : super(key: key);
 
@@ -34,7 +34,7 @@ class _FlipAnimState extends State<FlipAnim> {
                       key: flipKeyv,
                       flipOnTouch: false,
                       front: const SizedBox(),
-                      back: const LoginCard(),
+                      back:  LoginCard(),
                     ),
                   );
                 }
