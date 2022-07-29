@@ -12,6 +12,7 @@ import 'package:hansa_app/blocs/bloc_change_title.dart';
 import 'package:hansa_app/blocs/bloc_play_video.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/blocs/voyti_ili_sozdata_bloc.dart';
+import 'package:hansa_app/screens/pdf_viewer.dart';
 import 'package:hansa_app/screens/hansa_zagruzka.dart';
 import 'package:hansa_app/blocs/toggle_switcher_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -41,9 +42,15 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 812),
       builder: (context, child) => MultiProvider(
         providers: [
-          Provider(create: (context) => StoreData().getStores(),),
-          Provider(create: (context) => HasnaJobAPI().getJobs(),),
-          Provider(create: (context) => HansaCountryAPI().getCountries(),),
+          Provider(
+            create: (context) => StoreData().getStores(),
+          ),
+          Provider(
+            create: (context) => HasnaJobAPI().getJobs(),
+          ),
+          Provider(
+            create: (context) => HansaCountryAPI().getCountries(),
+          ),
           Provider(create: (context) => CountryTypeService().getCountryTypes()),
           Provider(create: (context) => ToggleSwitcherBloc()),
           Provider<bool>(create: (context) => isTablet),

@@ -161,12 +161,77 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                 ),
                               ),
                             ),
+<<<<<<< HEAD
                     );
                   } else {
                     welcomeApi.eventSink.add(WelcomeApiAction.fetch);
                     return const Center(child: CircularProgressIndicator());
                   }
                 }),
+=======
+                          ),
+                          Column(
+                            children: List.generate(
+                                20,
+                                (index) => Row(
+                                      children: const [
+                                        Padding(
+                                            padding: EdgeInsets.only(top: 5.0),
+                                            child: EventCards(
+                                              buttonColor: Color(0xffff163e),
+                                              buttonText: 'Смотреть',
+                                              isDate: true,
+                                              month: "июля",
+                                              day: "8",
+                                              isFavourite: false,
+                                              title:
+                                                  '''Минутка ностальгии: смотрим отчеты с тренинговв Екатеринбурге и Перми!''',
+                                              url: 'assets/A.png',
+                                            )),
+                                        SizedBox(
+                                          width: 20,
+                                        ),
+                                        Padding(
+                                            padding: EdgeInsets.only(top: 5.0),
+                                            child: EventCards(
+                                              buttonColor: Color(0xffff163e),
+                                              buttonText: 'Смотреть',
+                                              isDate: true,
+                                              month: "июля",
+                                              day: "8",
+                                              isFavourite: false,
+                                              title:
+                                                  '''Минутка ностальгии: смотрим отчеты с тренинговв Екатеринбурге и Перми!''',
+                                              url: 'assets/A.png',
+                                            )),
+                                      ],
+                                    )),
+                          ),
+                        ],
+                      ),
+                    )
+                  : SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
+                      child: Column(
+                        children: List.generate(
+                            20,
+                            (index) => const Padding(
+                                padding: EdgeInsets.only(top: 5.0),
+                                child: EventCards(
+                                  buttonColor: Color(0xffff163e),
+                                  buttonText: 'Смотреть',
+                                  isDate: true,
+                                  month: "июля",
+                                  isFavourite: false,
+                                  day: "8",
+                                  title:
+                                      '''Минутка ностальгии: смотрим отчеты с тренинговв Екатеринбурге и Перми!''',
+                                  url: 'assets/A.png',
+                                ))),
+                      ),
+                    ),
+            )
+>>>>>>> 2971ea201ac16b3f17f03ceb294d6da7061675f7
           ],
         ),
       ],
