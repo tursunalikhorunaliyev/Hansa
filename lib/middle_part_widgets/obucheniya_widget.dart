@@ -31,7 +31,6 @@ class ObucheniyaWidget extends StatelessWidget {
             title: 'Обучающий материал для сотрудников Леруа Мерлен',
             url:
                 'https://thumbs.dreamstime.com/b/happy-family-having-roast-chicken-dinner-table-18044089.jpg',
-            isFavourite: false,
           ),
         ); //add any Widget in place of Text("Index $i")
       }
