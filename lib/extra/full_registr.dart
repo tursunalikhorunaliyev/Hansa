@@ -6,6 +6,7 @@ import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
 import 'package:hansa_app/enums/full_reg_enum.dart';
 import 'package:hansa_app/extra/modal_sheet_for_full_reg.dart';
 import 'package:hansa_app/extra/text_field_for_full_reg.dart';
+import 'package:hansa_app/providers/full_registr_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
@@ -22,9 +23,16 @@ class _FullRegistrState extends State<FullRegistr> {
   String selectedValue2 = "Должность";
   String selectedValue3 = "Город*";
   final dateRangeController = DateRangePickerController();
+  final imyaTextEditingController = TextEditingController();
+  final familiyaTextEditingController = TextEditingController();
+  final emailTextFielController = TextEditingController();
+  final phoneTextFieldController = TextEditingController();
+  final adresTorgoviySetTextFielController = TextEditingController();
+  
 
   @override
   Widget build(BuildContext context) {
+    final fullRegDataProvider = Provider.of<FullRegisterDataProvider>(context);
     final isTablet = Provider.of<bool>(context);
     final providerFlip = Provider.of<Map<String, FlipCardController>>(context);
     final providerFlipLogin = Provider.of<BlocFlipLogin>(context);
@@ -76,6 +84,7 @@ class _FullRegistrState extends State<FullRegistr> {
                       height: 18,
                     ),
                     TextFieldForFullRegister(
+                      textEditingController: imyaTextEditingController,
                         text: "Имя",
                         height: isTablet ? 45 : 38,
                         size: isTablet ? 13 : 10,
@@ -84,6 +93,7 @@ class _FullRegistrState extends State<FullRegistr> {
                       height: 4,
                     ),
                     TextFieldForFullRegister(
+                      textEditingController: familiyaTextEditingController,
                         text: "Фамилия",
                         height: isTablet ? 45 : 38,
                         size: isTablet ? 13 : 10,
@@ -92,6 +102,7 @@ class _FullRegistrState extends State<FullRegistr> {
                       height: 5,
                     ),
                     TextFieldForFullRegister(
+                      textEditingController: emailTextFielController,
                         text: "Email",
                         height: isTablet ? 45 : 38,
                         size: isTablet ? 13 : 10,
@@ -100,6 +111,7 @@ class _FullRegistrState extends State<FullRegistr> {
                       height: 4,
                     ),
                     TextFieldForFullRegister(
+                      textEditingController: phoneTextFieldController,
                         text: "Контактный тефон",
                         height: isTablet ? 45 : 38,
                         size: isTablet ? 15 : 10,
@@ -156,6 +168,7 @@ class _FullRegistrState extends State<FullRegistr> {
                       height: 4,
                     ),
                     TextFieldForFullRegister(
+                      textEditingController: adresTorgoviySetTextFielController,
                         text: "Адрес торговой сети",
                         height: isTablet ? 45 : 38,
                         size: isTablet ? 13 : 10,
@@ -261,7 +274,15 @@ class _FullRegistrState extends State<FullRegistr> {
                         top: isTablet ? 30 : 25,
                       ),
                       child: GestureDetector(
-                        onTap: () => providerFlip['signin']!.toggleCard(),
+                        onTap: (){
+                          providerFlip['signin']!.toggleCard();
+                          print(imyaTextEditingController.text);
+                          print(familiyaTextEditingController.text);
+                          print(emailTextFielController.text);
+                          print(phoneTextFieldController.text);
+                          print(adresTorgoviySetTextFielController.text);
+                          print(fullRegDataProvider.dataRojdeniya);
+                        },
                         child: Container(
                           alignment: Alignment.center,
                           height: isTablet ? 60 : 46,

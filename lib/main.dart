@@ -12,6 +12,7 @@ import 'package:hansa_app/blocs/bloc_change_title.dart';
 import 'package:hansa_app/blocs/bloc_play_video.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/blocs/voyti_ili_sozdata_bloc.dart';
+import 'package:hansa_app/providers/full_registr_provider.dart';
 import 'package:hansa_app/screens/empty.dart';
 import 'package:hansa_app/screens/pdf_viewer.dart';
 import 'package:hansa_app/screens/hansa_zagruzka.dart';
@@ -50,6 +51,7 @@ class MyApp extends StatelessWidget {
           Provider(
             create: (context) => HansaCountryAPI().getCountries(),
           ),
+          ChangeNotifierProvider(create: (context) => FullRegisterDataProvider(),),
           Provider(create: (context) => CountryTypeService().getCountryTypes()),
           Provider(create: (context) => ToggleSwitcherBloc()),
           Provider<bool>(create: (context) => isTablet),
