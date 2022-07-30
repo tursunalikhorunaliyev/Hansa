@@ -1,5 +1,5 @@
+import 'package:cool_dropdown/cool_dropdown.dart';
 import 'package:flutter/material.dart';
-import 'package:hansa_app/extra/text_field_for_full_reg.dart';
 
 class EmptyScreen extends StatefulWidget {
   const EmptyScreen({Key? key}) : super(key: key);
@@ -18,7 +18,23 @@ class _EmptyScreenState extends State<EmptyScreen> {
   Widget build(BuildContext context) {
     return  Scaffold(
       body: Center(
-        child: TextFieldForFullRegister(text: "salom", height: 38, size: 10, weight: FontWeight.normal),
+        child: ClipRRect(
+
+          borderRadius: BorderRadius.circular(10),
+          child: CoolDropdown(
+        
+            dropdownList: const [
+          {'label': 'apple', 'value': 'apple'}, // label is required and unique
+          {'label': 'banana', 'value': 'banana'},
+          {'label': 'grape', 'value': 'grape'},
+          {'label': 'pineapple', 'value': 'pineapple'},
+          {'label': 'grape fruit', 'value': 'grape fruit'},
+          {'label': 'kiwi', 'value': 'kiwi'},
+            ], 
+            onChange: (){
+        
+            }),
+        )
       )
     );
   }
