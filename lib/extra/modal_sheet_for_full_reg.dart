@@ -33,23 +33,10 @@ class _ModalForFullRegState extends State<ModalForFullReg> {
       child: GestureDetector(
         onTap: () {
           showCupertinoModalPopup(context: context, builder: (context){
-            return Container(
-              width: 360,
-              height: 400,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10)
-              ),
-              child: SfDateRangePicker(
-                controller: dateRangeController,
-                selectionColor: Colors.pink[600],
-                todayHighlightColor: Colors.pink[600],
-                onSelectionChanged: (a){
-                  print(dateRangeController.selectedDate);
-                  Navigator.pop(context);
-                },
-              )
-            );
+            if(){
+
+            }
+            
           });
         },
         child: Stack(
