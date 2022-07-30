@@ -1,11 +1,13 @@
 import 'package:flip_card/flip_card_controller.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/blocs/bloc_flip_login.dart';
 import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
+import 'package:hansa_app/enums/full_reg_enum.dart';
+import 'package:hansa_app/extra/modal_sheet_for_full_reg.dart';
 import 'package:hansa_app/extra/text_field_for_full_reg.dart';
 import 'package:provider/provider.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class FullRegistr extends StatefulWidget {
   const FullRegistr({Key? key}) : super(key: key);
@@ -15,14 +17,11 @@ class FullRegistr extends StatefulWidget {
 }
 
 class _FullRegistrState extends State<FullRegistr> {
-  List list = [
-    "Salom",
-    "Xayr",
-    "Hayrli kun"
-  ];
+  List list = ["Salom", "Xayr", "Hayrli kun"];
   String selectedValue = "Название сети";
   String selectedValue2 = "Должность";
   String selectedValue3 = "Город*";
+  final dateRangeController = DateRangePickerController();
 
   @override
   Widget build(BuildContext context) {
@@ -108,46 +107,50 @@ class _FullRegistrState extends State<FullRegistr> {
                     const SizedBox(
                       height: 4,
                     ),
-                    TextFieldForFullRegister(
-                        text: "Дата рождения",
-                        height: isTablet ? 45 : 38,
-                        size: isTablet ? 15 : 10,
-                        weight: isTablet ? FontWeight.w600 : FontWeight.normal),
-                    const SizedBox(
-                      height: 4,
-                    ),
-                    dropDown(
-                      "Название сети",
-                      selectedValue,
-                      isTablet ? 538 : 325,
-                      isTablet ? 15 : 10,
-                      isTablet ? 43 : 38,
-                      isTablet ? FontWeight.w600 : FontWeight.normal,
-                      position: 1,
+                    ModalForFullReg(
+                      regEnum: FullRegEnum.dataRojdeniya,
+                      text: "Название сети",
+                      width: isTablet ? 538 : 325,
+                      size: isTablet ? 15 : 10,
+                      height: isTablet ? 43 : 38,
+                      fontWeight:
+                          isTablet ? FontWeight.w600 : FontWeight.normal,
                     ),
                     const SizedBox(
                       height: 4,
                     ),
-                    dropDown(
-                      "Должность",
-                      selectedValue2,
-                      isTablet ? 538 : 325,
-                      isTablet ? 15 : 10,
-                      isTablet ? 43 : 38,
-                      isTablet ? FontWeight.w600 : FontWeight.normal,
-                      position: 2,
+                    ModalForFullReg(
+                      regEnum: FullRegEnum.nazvaniyaSeti,
+                      text: "Название сети",
+                      width: isTablet ? 538 : 325,
+                      size: isTablet ? 15 : 10,
+                      height: isTablet ? 43 : 38,
+                      fontWeight:
+                          isTablet ? FontWeight.w600 : FontWeight.normal,
                     ),
                     const SizedBox(
                       height: 4,
                     ),
-                    dropDown(
-                      "Город*",
-                      selectedValue3,
-                      isTablet ? 538 : 325,
-                      isTablet ? 15 : 10,
-                      isTablet ? 43 : 38,
-                      isTablet ? FontWeight.w600 : FontWeight.normal,
-                      position: 3,
+                    ModalForFullReg(
+                      regEnum: FullRegEnum.doljnost,
+                      text: "Должность",
+                      width: isTablet ? 538 : 325,
+                      size: isTablet ? 15 : 10,
+                      height: isTablet ? 43 : 38,
+                      fontWeight:
+                          isTablet ? FontWeight.w600 : FontWeight.normal,
+                    ),
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    ModalForFullReg(
+                      regEnum: FullRegEnum.vibiriteGorod,
+                      text: "Город",
+                      width: isTablet ? 538 : 325,
+                      size: isTablet ? 15 : 10,
+                      height: isTablet ? 43 : 38,
+                      fontWeight:
+                          isTablet ? FontWeight.w600 : FontWeight.normal,
                     ),
                     const SizedBox(
                       height: 4,
@@ -327,46 +330,6 @@ class _FullRegistrState extends State<FullRegistr> {
       ),
     );
   }
-
-  Widget dropDown(String text, String choiseValue, double width, double size,
-      double height, FontWeight weight,
-      {required int position}) {
-    
-     print(list);
-
-    /* final jobs = Provider.of<Future<List>>(context);
-    final countries = Provider.of<Future<List>>(context);
-    final countryTypes = Provider.of<Future<List>>(context); */
-    return Padding(
-      padding: const EdgeInsets.only(
-        left: 11,
-        right: 9,
-      ),
-      child: GestureDetector(
-        onTap: () {
-          showCupertinoModalPopup(context: context, builder: (context){
-            return Container(
-              width: 360,
-              height: 400,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10)
-              ),
-            );
-          });
-        },
-        child: Container(
-          height: height,
-          width: width,
-          decoration: BoxDecoration(
-            color: const Color(0xFFffffff),
-            borderRadius: BorderRadius.circular(54),
-            border: Border.all(width: 0.1),
-          ),
-          ),
-      ));
-  }
-
   Widget textSwitch(String text, double size) {
     return Text(
       text,

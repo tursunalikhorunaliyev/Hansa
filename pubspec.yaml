@@ -51,6 +51,7 @@ dependencies:
   hive_flutter: ^1.1.0
   internet_file: ^1.2.0
   cool_dropdown: ^1.4.2
+  syncfusion_flutter_datepicker: ^20.2.40
 
   
   
