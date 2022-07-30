@@ -21,7 +21,8 @@ class WelcomeApi {
     eventStream.listen(
       (event) async {
         if (event == WelcomeApiAction.fetch) {
-          await getWelcome(token: token).then((value) {
+          i++;
+          await getWelcome(token: token, i: i).then((value) {
             list += value.data.list;
             dataSink.add(list);
           });

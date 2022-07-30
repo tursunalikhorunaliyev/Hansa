@@ -31,7 +31,7 @@ class EventCards extends StatelessWidget {
       child: Stack(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 167),
+            padding: EdgeInsets.only(top: isTablet ? 180 : 167),
             child: Container(
               width: isTablet ? 390 : 325,
               height: 93,
@@ -64,8 +64,7 @@ class EventCards extends StatelessWidget {
                                 color: Colors.grey.withOpacity(0.5),
                                 spreadRadius: 2,
                                 blurRadius: 4,
-                                offset: const Offset(
-                                    0, 3), // changes position of shadow
+                                offset: const Offset(0, 3),
                               ),
                             ],
                             color: const Color(0xffff163e),
@@ -106,6 +105,7 @@ class EventCards extends StatelessWidget {
                       color: Colors.white,
                     ),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
                           day,
@@ -113,7 +113,8 @@ class EventCards extends StatelessWidget {
                         ),
                         Text(
                           month,
-                          style: TextStyle(fontSize: isTablet ? 14 : 11),
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: isTablet ? 9 : 9),
                         ),
                       ],
                     ),
@@ -122,7 +123,7 @@ class EventCards extends StatelessWidget {
               : const SizedBox(),
           Padding(
             padding: EdgeInsets.only(
-                top: isTablet ? 143 : 131, left: isTablet ? 305 : 247),
+                top: isTablet ? 150 : 131, left: isTablet ? 305 : 247),
             child: Container(
                 alignment: Alignment.center,
                 height: isTablet ? 45 : 55,
