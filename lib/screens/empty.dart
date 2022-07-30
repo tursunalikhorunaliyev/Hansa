@@ -1,3 +1,4 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:hansa_app/extra/text_field_for_full_reg.dart';
 
@@ -18,7 +19,15 @@ class _EmptyScreenState extends State<EmptyScreen> {
   Widget build(BuildContext context) {
     return  Scaffold(
       body: Center(
-        child: TextFieldForFullRegister(text: "salom", height: 38, size: 10, weight: FontWeight.normal),
+        child: DropdownButton2(
+          barrierColor: Colors.red,
+          items: [
+            DropdownMenuItem(child: Text("Salom")),
+          
+           
+
+          ],
+        )
       )
     );
   }
