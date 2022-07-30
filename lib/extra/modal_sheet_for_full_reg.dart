@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/enums/full_reg_enum.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
@@ -51,15 +52,36 @@ class _ModalForFullRegState extends State<ModalForFullReg> {
             );
           });
         },
-        child: Container(
-          height: widget.height,
-          width: widget.width,
-          decoration: BoxDecoration(
-            color: const Color(0xFFffffff),
-            borderRadius: BorderRadius.circular(54),
-            border: Border.all(width: 0.1),
-          ),
-          ),
+        child: Stack(
+          children: [
+            Container(
+              height: widget.height,
+              width: widget.width,
+              decoration: BoxDecoration(
+                color: const Color(0xFFffffff),
+                borderRadius: BorderRadius.circular(54),
+                border: Border.all(width: 0.1),
+              ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 13, top: 13),
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: RichText(
+                    text: TextSpan(
+                      children: [
+                        TextSpan(text: widget.text, style: GoogleFonts.montserrat(
+                                fontWeight: widget.fontWeight,
+                                fontSize: widget.size,
+                    
+                              color: const Color(0xFF444444))),
+                      ]
+                    ),
+                  ),
+                ),
+              )
+          ],
+        ),
       ));
   }
 }

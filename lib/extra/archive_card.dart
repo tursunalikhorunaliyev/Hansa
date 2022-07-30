@@ -10,7 +10,9 @@ class ArchiveCard extends StatelessWidget {
       required this.skachat,
       required this.bottomButtonText,
       required this.title,
-      required this.url})
+      required this.url,
+      required this.isFavourite
+      })
       : super(key: key);
   final String url;
   final Color buttonColor;
@@ -18,7 +20,7 @@ class ArchiveCard extends StatelessWidget {
   final String bottomButtonText;
   final String title;
   final Widget? skachat;
-
+  final bool isFavourite;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -114,8 +116,11 @@ class ArchiveCard extends StatelessWidget {
               decoration: BoxDecoration(
                   color: const Color(0xfff1f1f1),
                   borderRadius: BorderRadius.circular(90.w)),
-              child: const Icon(
+              child: isFavourite? const Icon(
                 Icons.favorite,
+                color: Color(0xffed3851),
+              ):const Icon(
+                Icons.favorite_border_sharp,
                 color: Color(0xffed3851),
               ),
             ),
