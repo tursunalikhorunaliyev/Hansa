@@ -4,4 +4,5 @@ class APIUrls {
   String get getCountryTypes =>
       "https://hansa-lab.ru/api/dictionary/country-type";
   String get getCountries => "https://hansa-lab.ru/api/dictionary/city";
+  String get getWelcomeUrl => "http://hansa-lab.ru/api/site/index?page=";
 }

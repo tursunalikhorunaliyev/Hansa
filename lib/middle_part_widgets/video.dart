@@ -56,23 +56,10 @@ class Video extends StatelessWidget {
                               },
                               title: snapshot
                                   .data!.videoListData.list[index].title),
-                          SizedBox(
-                            height: 235,
-                            child: ListView.builder(
-                              physics: const BouncingScrollPhysics(),
-                              itemCount: 15,
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                return Padding(
-                                  padding: EdgeInsets.only(
-                                      left: (index == 0) ? 30 : 0),
-                                  child: GestureDetector(
-                                      onTap: () {},
-                                      child: const CustomVideoListItem()),
-                                );
-                              },
-                            ),
-                          ),
+                          listView(
+                              snapshot.data!.videoListData.list[index].data.list
+                                  .length,
+                              index)
                         ],
                       );
                     }));
@@ -83,4 +70,36 @@ class Video extends StatelessWidget {
       ),
     );
   }
+
+  Widget listView(int itemCount, int indexMain) {
+    return SizedBox(
+        height: 235,
+        child: SingleChildScrollView(
+          
+          physics: const BouncingScrollPhysics(),
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: List.generate(
+                itemCount,
+                (index) => Padding(
+                      padding: EdgeInsets.only(left: (index == 0) ? 30 : 0),
+                      child: GestureDetector(
+                          onTap: () {},
+                          child: CustomVideoListItem(
+                            index: index,
+                            indexMain: indexMain,
+                          )),
+                    )),
+          ),
+        ));
+  }
 }
+/* ListView.builder(
+      
+        itemCount: itemCount,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return 
+        },
+      ), */

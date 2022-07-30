@@ -1,10 +1,6 @@
-import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
-
 class VideoMainOne {
   bool status;
- VideoListData videoListData;
+  VideoListData videoListData;
   VideoMainOne({
     required this.status,
     required this.videoListData,
@@ -12,7 +8,7 @@ class VideoMainOne {
 
   factory VideoMainOne.fromMap(Map<String, dynamic> map) {
     return VideoMainOne(
-      status: map['status'] ,
+      status: map['status'],
       videoListData: VideoListData.fromMap(map['data']),
     );
   }

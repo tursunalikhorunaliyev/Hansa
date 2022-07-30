@@ -12,7 +12,8 @@ class EventCards extends StatelessWidget {
       required this.title,
       required this.isDate,
       required this.day,
-      required this.url})
+      required this.url,
+      required this.isFavourite})
       : super(key: key);
   final String url;
   final Color buttonColor;
@@ -21,6 +22,7 @@ class EventCards extends StatelessWidget {
   final String buttonText;
   final String title;
   final bool isDate;
+  final bool isFavourite;
   @override
   Widget build(BuildContext context) {
     final isTablet = Provider.of<bool>(context);
@@ -54,9 +56,8 @@ class EventCards extends StatelessWidget {
                       padding: const EdgeInsets.only(left: 23),
                       child: Container(
                         alignment: Alignment.center,
-                        
                         width: isTablet ? 100 : 94,
-                        height: isTablet ? 28  : 25,
+                        height: isTablet ? 28 : 25,
                         decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
@@ -85,10 +86,10 @@ class EventCards extends StatelessWidget {
           ),
           SizedBox(
               width: isTablet ? 388 : 326,
-              height: isTablet ? 170  : 156,
+              height: isTablet ? 170 : 156,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(5),
-                child: Image.asset(
+                child: Image.network(
                   url,
                   fit: BoxFit.cover,
                 ),
@@ -123,17 +124,22 @@ class EventCards extends StatelessWidget {
             padding: EdgeInsets.only(
                 top: isTablet ? 143 : 131, left: isTablet ? 305 : 247),
             child: Container(
-              alignment: Alignment.center,
-              height: isTablet ? 45 : 55,
-              width: isTablet ? 45 : 55,
-              decoration: const BoxDecoration(
-                  color: Color(0xfff1f1f1), shape: BoxShape.circle),
-              child: Icon(
-                CupertinoIcons.heart_fill,
-                size: isTablet ? 28 : 28,
-                color: const Color(0xffed3851),
-              ),
-            ),
+                alignment: Alignment.center,
+                height: isTablet ? 45 : 55,
+                width: isTablet ? 45 : 55,
+                decoration: const BoxDecoration(
+                    color: Color(0xfff1f1f1), shape: BoxShape.circle),
+                child: isFavourite
+                    ? Icon(
+                        CupertinoIcons.heart_fill,
+                        size: isTablet ? 28 : 28,
+                        color: const Color(0xffed3851),
+                      )
+                    : Icon(
+                        CupertinoIcons.heart,
+                        size: isTablet ? 28 : 28,
+                        color: const Color(0xffed3851),
+                      )),
           ),
         ],
       ),

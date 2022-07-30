@@ -268,10 +268,12 @@ class _LoginCardState extends State<LoginCard> {
 
   goToWelcome(token) {
     Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => Provider<String>(
-              create: (context) => token.toString(), child: const WelcomeScreen()),
-        ));
+      context,
+      MaterialPageRoute(
+        builder: (context) => Provider<String>(
+            create: (context) => token.toString(),
+            child: const WelcomeScreen()),
+      ),
+    );
   }
 }
