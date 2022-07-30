@@ -53,12 +53,16 @@ class CustomClipItem extends StatelessWidget {
               children: [
                 Padding(
                   padding: EdgeInsets.only(left: 18.w),
-                  child: Text(
-                    title,
-                    style: GoogleFonts.montserrat(
-                      color: titleColor,
-                      fontSize: 13.sp,
-                      fontWeight: FontWeight.bold,
+                  child: SizedBox(
+                    width: 200,
+                    child: Text(
+                      title,
+                      overflow: TextOverflow.clip,
+                      style: GoogleFonts.montserrat(
+                        color: titleColor,
+                        fontSize: 13.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),

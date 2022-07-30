@@ -25,7 +25,8 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
         Column(
           children: [
             Padding(
-              padding: EdgeInsets.only(top: isTablet ? 20 : 9),
+              padding: EdgeInsets.only(
+                  top: isTablet ? 20 : 9, bottom: isTablet ? 20 : 9),
               child: Row(
                 children: [
                   Container(
@@ -75,87 +76,68 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                       height: isTablet ? 877 : 566,
                       width: isTablet ? 800 : 330,
                       child: isTablet
-                          ? SingleChildScrollView(
-                              controller: scroll,
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  const SizedBox(
-                                    height: 20,
+                          ? NotificationListener(
+                              onNotification: (value) {
+                                welcomeApi.eventSink
+                                    .add(WelcomeApiAction.fetch);
+                                return false;
+                              },
+                              child: GridView.builder(
+                                  controller: scroll,
+                                  itemCount: data.length,
+                                  physics: const BouncingScrollPhysics(),
+                                  gridDelegate:
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
                                   ),
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
-                                    child: Image.asset(
-                                      "assets/dobriy.png",
-                                      width: 900,
-                                      fit: BoxFit.fill,
-                                    ),
-                                  ),
-                                  Column(
-                                    children: List.generate(
-                                        20,
-                                        (index) => Row(
-                                              children: [
-                                                Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 5.0),
-                                                    child: EventCards(
-                                                      buttonColor: const Color(
-                                                          0xffff163e),
-                                                      buttonText: 'Смотреть',
-                                                      isDate: true,
-                                                      month: "июля",
-                                                      day: "8",
-                                                      title: data[index].title,
-                                                      url: data[index]
-                                                          .pictureLink,
-                                                      isFavourite: data[index]
-                                                          .isFavorite,
-                                                    )),
-                                                const SizedBox(
-                                                  width: 20,
-                                                ),
-                                                Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 5.0),
-                                                    child: EventCards(
-                                                      buttonColor: const Color(
-                                                          0xffff163e),
-                                                      buttonText: 'Смотреть',
-                                                      isDate: true,
-                                                      month: "июля",
-                                                      day: "8",
-                                                      title: data[index].title,
-                                                      url: data[index]
-                                                          .pictureLink,
-                                                      isFavourite: data[index]
-                                                          .isFavorite,
-                                                    )),
-                                              ],
-                                            )),
-                                  ),
-                                ],
-                              ),
+                                  itemBuilder: (context, index) {
+                                    return Padding(
+                                      padding: const EdgeInsets.only(top: 5.0),
+                                      child: EventCards(
+                                        buttonColor: const Color(0xffff163e),
+                                        buttonText: 'Смотреть',
+                                        isDate: true,
+                                        month: toDateString(snapshot
+                                            .data![index].date
+                                            .substring(5, 7)),
+                                        day: snapshot.data![index].date
+                                            .substring(8, 10),
+                                        title: data[index].title,
+                                        url: data[index].pictureLink,
+                                        isFavourite: data[index].isFavorite,
+                                      ),
+                                    );
+                                  }),
                             )
-                          : SingleChildScrollView(
-                              controller: scroll,
-                              physics: const BouncingScrollPhysics(),
-                              child: Column(
-                                children: List.generate(
-                                  data.length,
-                                  (index) => Padding(
-                                    padding: const EdgeInsets.only(top: 5.0),
-                                    child: EventCards(
-                                      buttonColor: const Color(0xffff163e),
-                                      buttonText: 'Смотреть',
-                                      isDate: true,
-                                      month: "июля",
-                                      day: "8",
-                                      title: data[index].title,
-                                      url: data[index].pictureLink,
-                                      isFavourite: data[index].isFavorite,
+                          : NotificationListener(
+                              onNotification: (value) {
+                                if (value is ScrollEndNotification) {
+                                  welcomeApi.eventSink
+                                      .add(WelcomeApiAction.fetch);
+                                }
+                                return false;
+                              },
+                              child: SingleChildScrollView(
+                                controller: scroll,
+                                physics: const BouncingScrollPhysics(),
+                                child: Column(
+                                  children: List.generate(
+                                    data.length,
+                                    (index) => Padding(
+                                      padding: const EdgeInsets.only(top: 5.0),
+                                      child: EventCards(
+                                        buttonColor: const Color(0xffff163e),
+                                        buttonText: 'Смотреть',
+                                        isDate: true,
+                                        month: toDateString(snapshot
+                                            .data![index].date
+                                            .substring(5, 7)),
+                                        day: snapshot.data![index].date
+                                            .substring(8, 10),
+                                        title: data[index].title,
+                                        url: data[index].pictureLink,
+                                        isFavourite: data[index].isFavorite,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -171,5 +153,33 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
         ),
       ],
     );
+  }
+
+  String toDateString(String m) {
+    if (m == "01") {
+      return "Январь";
+    } else if (m == "02") {
+      return "Февраль";
+    } else if (m == "03") {
+      return "Март";
+    } else if (m == "04") {
+      return "Апрель";
+    } else if (m == "05") {
+      return "Май";
+    } else if (m == "06") {
+      return "Июнь";
+    } else if (m == "07") {
+      return "Июль";
+    } else if (m == "08") {
+      return "Август";
+    } else if (m == "09") {
+      return "Сентябрь";
+    } else if (m == "10") {
+      return "Октябрь";
+    } else if (m == "11") {
+      return "Ноябрь";
+    } else {
+      return "Декабрь";
+    }
   }
 }

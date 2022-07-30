@@ -25,8 +25,8 @@ class CustomCalendar extends StatelessWidget {
           ),
           color: const Color(0xff232323),
           child: TableCalendar(
-            focusedDay: DateTime(2022, 06, 09),
-            currentDay: DateTime(2022, 06, 09),
+            focusedDay: DateTime.now(),
+            currentDay: DateTime.now(),
             firstDay: DateTime(2000),
             lastDay: DateTime(2050),
             headerStyle: HeaderStyle(
