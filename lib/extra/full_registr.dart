@@ -1,15 +1,7 @@
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flip_card/flip_card_controller.dart';
-import 'package:flutter/gestures.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hansa_app/api_models.dart/country_model.dart';
-import 'package:hansa_app/api_models.dart/country_type_model.dart';
-import 'package:hansa_app/api_models.dart/job_model.dart';
-import 'package:hansa_app/api_models.dart/store_model.dart';
-import 'package:hansa_app/api_services/hansa_country_api.dart';
-import 'package:hansa_app/api_services/hansa_job_api.dart';
 import 'package:hansa_app/blocs/bloc_flip_login.dart';
 import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
 import 'package:hansa_app/extra/text_field_for_full_reg.dart';
@@ -23,7 +15,11 @@ class FullRegistr extends StatefulWidget {
 }
 
 class _FullRegistrState extends State<FullRegistr> {
-  List list = [];
+  List list = [
+    "Salom",
+    "Xayr",
+    "Hayrli kun"
+  ];
   String selectedValue = "Название сети";
   String selectedValue2 = "Должность";
   String selectedValue3 = "Город*";
@@ -335,15 +331,7 @@ class _FullRegistrState extends State<FullRegistr> {
   Widget dropDown(String text, String choiseValue, double width, double size,
       double height, FontWeight weight,
       {required int position}) {
-     Provider.of<Future<List>>(context).then((value) {
-       list = value;
-       print(list);
-       print("salom shettan chiqdi");
-      
-     });
-     setState(() {
-       
-     });
+    
      print(list);
 
     /* final jobs = Provider.of<Future<List>>(context);
@@ -354,22 +342,43 @@ class _FullRegistrState extends State<FullRegistr> {
         left: 11,
         right: 9,
       ),
-      child: Container(
-        height: height,
-        width: width,
-        decoration: BoxDecoration(
-          color: const Color(0xFFffffff),
-          borderRadius: BorderRadius.circular(54),
-          border: Border.all(width: 0.1),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.only(right: 16, left: 17),
-          child: DropdownButtonHideUnderline(
-            child: FutureBuilder<List>(
-              future: Provider.of<Future<List>>(context),
-              builder: (context, snapshot) {
-                return Text((snapshot.hasData)?snapshot.requireData.toString():"aaaaa");
-                /* return DropdownButton2<String>(
+      child: GestureDetector(
+        onTap: () {
+          showCupertinoModalPopup(context: context, builder: (context){
+            return Container(
+              width: 360,
+              height: 400,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10)
+              ),
+            );
+          });
+        },
+        child: Container(
+          height: height,
+          width: width,
+          decoration: BoxDecoration(
+            color: const Color(0xFFffffff),
+            borderRadius: BorderRadius.circular(54),
+            border: Border.all(width: 0.1),
+          ),
+          ),
+      ));
+  }
+
+  Widget textSwitch(String text, double size) {
+    return Text(
+      text,
+      style: GoogleFonts.montserrat(
+          fontSize: size,
+          color: const Color(0xFFa1b7c2),
+          fontWeight: FontWeight.w500),
+    );
+  }
+}
+/* DropdownButtonHideUnderline(
+            child:  DropdownButton2<String>(
                   dropdownWidth: 325,
                   dropdownDecoration: const BoxDecoration(
                       color: Color(0xFFf8f8f8),
@@ -384,7 +393,7 @@ class _FullRegistrState extends State<FullRegistr> {
                       style: GoogleFonts.montserrat(
                           fontSize: 10, color: const Color(0xFF444444))),
                   items: 
-                      (snapshot.hasData)?snapshot.data!.map((item) => DropdownMenuItem<String>(
+                     list.map((item) => DropdownMenuItem<String>(
                             value: item,
                             child: Text(
                               item,
@@ -394,7 +403,7 @@ class _FullRegistrState extends State<FullRegistr> {
                                   color: const Color(0xFF444444)),
                             ),
                           ))
-                      .toList():[],
+                      .toList(),
                   value: choiseValue,
                   onChanged: (value) {
                     if (position == 1) {
@@ -411,22 +420,4 @@ class _FullRegistrState extends State<FullRegistr> {
                   buttonHeight: 40,
                   buttonWidth: 140,
                   itemHeight: 40,
-                ); */
-              }
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-
-  Widget textSwitch(String text, double size) {
-    return Text(
-      text,
-      style: GoogleFonts.montserrat(
-          fontSize: size,
-          color: const Color(0xFFa1b7c2),
-          fontWeight: FontWeight.w500),
-    );
-  }
-}
+                )) */

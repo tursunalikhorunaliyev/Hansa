@@ -32,9 +32,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = WidgetsBinding.instance.window.physicalSize;
-
     bool isTablet = (size.width / 3) > 500;
-
     Map<String, FlipCardController> map = {
       "login": FlipCardController(),
       "signin": FlipCardController()
@@ -43,7 +41,6 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 812),
       builder: (context, child) => MultiProvider(
         providers: [
-        
           Provider(
             create: (context) => StoreData().getStores(),
           ),
