@@ -23,7 +23,7 @@ class Video extends StatelessWidget {
     final blocChangeTitleProvider = Provider.of<BlocChangeTitle>(context);
     final token = Provider.of<String>(context);
     final blocVideoApi = BlocVideoApi(token);
-    blocVideoApi.eventSink.add(ActionVideo.View);
+    blocVideoApi.eventSink.add(ActionVideo.view);
     return Expanded(
       child: Column(
         children: [

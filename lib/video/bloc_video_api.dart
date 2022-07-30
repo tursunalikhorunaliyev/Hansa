@@ -5,7 +5,7 @@ import 'package:hansa_app/video/model_video.dart';
 import 'package:http/http.dart';
 
 enum ActionVideo {
-  View,
+  view,
 }
 
 class BlocVideoApi {
@@ -19,7 +19,7 @@ class BlocVideoApi {
 
   BlocVideoApi(token) {
     eventStream.listen((event) async {
-      if (event == ActionVideo.View) {
+      if (event == ActionVideo.view) {
         dataSink.add(await getData(token: token));
       }
     });

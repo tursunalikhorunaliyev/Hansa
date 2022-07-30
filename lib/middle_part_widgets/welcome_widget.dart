@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/welcome_model.dart';
 import 'package:hansa_app/api_services/welcome_api.dart';
@@ -21,8 +22,10 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
     final welcomeApi = WelcomeApi(token);
     welcomeApi.eventSink.add(WelcomeApiAction.fetch);
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Column(
+        
           children: [
             Padding(
               padding: EdgeInsets.only(top: isTablet ? 20 : 9),
@@ -164,7 +167,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                     );
                   } else {
                     welcomeApi.eventSink.add(WelcomeApiAction.fetch);
-                    return const Center(child: CircularProgressIndicator());
+                    return const  Center(child: SpinKitWanderingCubes(color: Colors.red,));
                   }
                 }),
           ],

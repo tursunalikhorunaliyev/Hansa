@@ -10,7 +10,6 @@ import 'package:hansa_app/blocs/navigator_bloc.dart';
 import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
 import 'package:hansa_app/screens/welcome_screen.dart';
 import 'package:hansa_app/blocs/toggle_switcher_bloc.dart';
-import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
 class LoginCard extends StatefulWidget {
@@ -21,9 +20,9 @@ class LoginCard extends StatefulWidget {
 }
 
 class _LoginCardState extends State<LoginCard> {
-  final usernameController = TextEditingController();
+  final usernameController = TextEditingController(text: "shahzodbekkomilov2005@gmail.com");
 
-  final passwordController = TextEditingController();
+  final passwordController = TextEditingController(text: "809656");
 
   final pagerBloc = NavigatorBloC();
   @override

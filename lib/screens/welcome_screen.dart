@@ -32,8 +32,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         builder: (context, snapshot) {
           return WillPopScope(
               onWillPop: () async {
-                print(menuProvider.list.toString());
-                print(menuProvider.list.last.toString());
                 menuProvider.eventSink.add(menuProvider.list.elementAt(menuProvider.list.length - 2));
                 menuProvider.list.remove(menuProvider.list.elementAt(menuProvider.list.length - 1));
                 return false;

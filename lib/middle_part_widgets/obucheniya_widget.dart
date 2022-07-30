@@ -132,7 +132,7 @@ class ObucheniyaWidget extends StatelessWidget {
                                           title: snapshot.data!.data.listGuides
                                               .list[index].title,
                                           url: snapshot.data!.data.listGuides
-                                              .list[index].picture_link,
+                                              .list[index].pictureLink,
                                         )
                                       ]),
                                     ],
@@ -233,7 +233,7 @@ class ObucheniyaWidget extends StatelessWidget {
                                                 .data
                                                 .listArchiveGuides
                                                 .list[index]
-                                                .picture_link,
+                                                .pictureLink,
                                           )
                                         ],
                                       )

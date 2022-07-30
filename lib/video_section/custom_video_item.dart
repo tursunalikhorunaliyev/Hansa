@@ -7,10 +7,10 @@ import 'package:hansa_app/video/model_video.dart';
 import 'package:provider/provider.dart';
 
 class CustomVideoListItem extends StatefulWidget {
-  int index;
-  int indexMain;
+  final int index;
+  final int indexMain;
 
-  CustomVideoListItem({Key? key, required this.index, required this.indexMain})
+  const CustomVideoListItem({Key? key, required this.index, required this.indexMain})
       : super(key: key);
 
   @override
@@ -23,7 +23,7 @@ class _CustomVideoListItemState extends State<CustomVideoListItem> {
     final playProvider = Provider.of<BlocPlayVideo>(context);
     final token = Provider.of<String>(context);
     final blocVideoApi = BlocVideoApi(token);
-    blocVideoApi.eventSink.add(ActionVideo.View);
+    blocVideoApi.eventSink.add(ActionVideo.view);
 
     return Padding(
       padding: const EdgeInsets.only(top: 15, bottom: 12, right: 10),

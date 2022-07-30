@@ -1,6 +1,4 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
-
 class ObucheniyaModel {
   bool status;
   Data data;
@@ -48,16 +46,16 @@ class Guides {
   String title;
   String pdfUrl;
   bool isFavourite;
-  String picture_link;
-  String favourite_link;
+  String pictureLink;
+  String favouriteLink;
   String link;
 
   Guides({
     required this.title,
     required this.pdfUrl,
     required this.isFavourite,
-    required this.picture_link,
-    required this.favourite_link,
+    required this.pictureLink,
+    required this.favouriteLink,
     required this.link,
   });
 
@@ -66,8 +64,8 @@ class Guides {
       title: map['title'] as String,
       pdfUrl: map['PdfUrl'] as String,
       isFavourite: map['isFavourite'] as bool,
-      picture_link: map['picture_link'] as String,
-      favourite_link: map['favourite_link'] as String,
+      pictureLink: map['picture_link'] as String,
+      favouriteLink: map['favourite_link'] as String,
       link: map['_link'] as String,
     );
   }
@@ -89,15 +87,15 @@ class ArchiveGuides {
   String title;
   String pdfUrl;
   bool isFavourite;
-  String picture_link;
-  String favourite_link;
+  String pictureLink;
+  String favouriteLink;
   String link;
   ArchiveGuides({
     required this.title,
     required this.pdfUrl,
     required this.isFavourite,
-    required this.picture_link,
-    required this.favourite_link,
+    required this.pictureLink,
+    required this.favouriteLink,
     required this.link,
   });
 
@@ -106,8 +104,8 @@ class ArchiveGuides {
       title: map['title'] as String,
       pdfUrl: map['PdfUrl'] as String,
       isFavourite: map['isFavourite'] as bool,
-      picture_link: map['picture_link'] as String,
-      favourite_link: map['favourite_link'] as String,
+      pictureLink: map['picture_link'] as String,
+      favouriteLink: map['favourite_link'] as String,
       link: map['_link'] as String,
     );
   }

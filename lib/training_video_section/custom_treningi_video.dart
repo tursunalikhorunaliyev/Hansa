@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomTreningiVideo extends StatelessWidget {
-  CustomTreningiVideo({Key? key}) : super(key: key);
+  const CustomTreningiVideo({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

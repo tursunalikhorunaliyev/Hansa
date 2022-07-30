@@ -9,10 +9,7 @@ import 'package:hansa_app/middle_part_widgets/present_and_achive.dart';
 import 'package:hansa_app/middle_part_widgets/stati.dart';
 import 'package:hansa_app/middle_part_widgets/treningi.dart';
 import 'package:hansa_app/middle_part_widgets/treningi_video.dart';
-import 'package:hansa_app/middle_part_widgets/prezentatsi.dart';
 import 'package:hansa_app/middle_part_widgets/video.dart';
-import 'package:hansa_app/providers/list.dart';
-import 'package:hansa_app/providers/stack_provider.dart';
 import 'package:hansa_app/screens/read_stati.dart';
 import 'package:provider/provider.dart';
 
@@ -28,16 +25,12 @@ class UIChanger extends StatelessWidget {
       initialData: MenuActions.welcome,
       builder: (context, snapshot) {
         if (snapshot.data == MenuActions.welcome) {
-          // addStackItem(MenuActions.welcome,context);
           return const WelcomeWidget();
         } else if (snapshot.data == MenuActions.obuchayushieMaterial) {
-          //    addStackItem(MenuActions.obuchayushieMaterial,context);
           return const ObucheniyaWidget();
         } else if (snapshot.data == MenuActions.prezintatsiya) {
-          //      addStackItem(MenuActions.prezintatsiya,context);
-          return const Prezentatsi();
+          return const PresentArchive();
         } else if (snapshot.data == MenuActions.trening) {
-          //    addStackItem(MenuActions.trening, context);
           return const Treningi();
         } else if (snapshot.data == MenuActions.stati) {
           return const Stati();
