@@ -109,7 +109,7 @@ class _FullRegistrState extends State<FullRegistr> {
                     ),
                     ModalForFullReg(
                       regEnum: FullRegEnum.dataRojdeniya,
-                      text: "",
+                      text: "Дата рождения",
                       width: isTablet ? 538 : 325,
                       size: isTablet ? 15 : 10,
                       height: isTablet ? 43 : 38,

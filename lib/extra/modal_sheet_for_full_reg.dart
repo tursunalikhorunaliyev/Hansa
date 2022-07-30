@@ -23,6 +23,7 @@ class ModalForFullReg extends StatefulWidget {
 
 class _ModalForFullRegState extends State<ModalForFullReg> {
   final dateRangeController = DateRangePickerController();
+  String dataRojdeniya = "";
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -33,8 +34,7 @@ class _ModalForFullRegState extends State<ModalForFullReg> {
       child: GestureDetector(
         onTap: () {
           if(widget.regEnum == FullRegEnum.dataRojdeniya){
-showCupertinoModalPopup(context: context, builder: (context){
-  
+            showCupertinoModalPopup(context: context, builder: (context){
               return Container(
               width: 360,
               height: 400,
@@ -47,13 +47,16 @@ showCupertinoModalPopup(context: context, builder: (context){
                 selectionColor: Colors.pink[600],
                 todayHighlightColor: Colors.pink[600],
                 onSelectionChanged: (a){
-                  print(dateRangeController.selectedDate);
+                  String day = dateRangeController.selectedDate!.day.toString().length==1?"0"+dateRangeController.selectedDate!.day.toString():dateRangeController.selectedDate!.day.toString();
+                  String month = dateRangeController.selectedDate!.month.toString().length==1?"0"+dateRangeController.selectedDate!.month.toString():dateRangeController.selectedDate!.month.toString();
+                  String year = dateRangeController.selectedDate!.year.toString();
+                 setState(() {
+                   dataRojdeniya = day+"."+month+"."+year;
+                 });
                   Navigator.pop(context);
                 },
               )
             );
-            
-            
           });
           }
         },
@@ -75,7 +78,7 @@ showCupertinoModalPopup(context: context, builder: (context){
                   child: RichText(
                     text: TextSpan(
                       children: [
-                        TextSpan(text: widget.text, style: GoogleFonts.montserrat(
+                        TextSpan(text:dataRojdeniya.isEmpty? widget.text:dataRojdeniya, style: GoogleFonts.montserrat(
                                 fontWeight: widget.fontWeight,
                                 fontSize: widget.size,
                     
