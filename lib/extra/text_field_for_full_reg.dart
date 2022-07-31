@@ -7,7 +7,8 @@ class TextFieldForFullRegister extends StatefulWidget {
   final double height;
   final double size;
   final FontWeight weight;
-  const TextFieldForFullRegister({Key? key, required this.text, required this.height, required this.size, required this.weight}) : super(key: key);
+  final TextEditingController textEditingController;
+  const TextFieldForFullRegister({Key? key, required this.text, required this.height, required this.size, required this.weight, required this.textEditingController}) : super(key: key);
   @override
   State<TextFieldForFullRegister> createState() => _TextFieldForFullRegisterState();
 }
@@ -15,7 +16,6 @@ class TextFieldForFullRegister extends StatefulWidget {
 class _TextFieldForFullRegisterState extends State<TextFieldForFullRegister> {
   bool isHint = true;
   final focusNode = FocusNode();
-  
   
   @override
   Widget build(BuildContext context) {
@@ -31,14 +31,8 @@ class _TextFieldForFullRegisterState extends State<TextFieldForFullRegister> {
                 borderRadius: BorderRadius.circular(54),
               ),
               child: TextField(
-                inputFormatters: [
-                   MaskTextInputFormatter(
-                     mask: "##/##/####",
-                     filter: {
-                       "#": RegExp(r'\d|-|/')
-                     }
-                   )
-                ],
+                focusNode: focusNode,
+                controller: widget.textEditingController,
                 onChanged: (value) {
                   if(value.isEmpty){
                     isHint = true;
