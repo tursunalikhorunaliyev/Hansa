@@ -18,20 +18,17 @@ class HansaZagruzka extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = LoginClickedBloc();
     final isTablet = Provider.of<bool>(context);
     final loginAnimBloc = LoginAnimBloc();
     final flipBloc = BlocFlipLogin();
+    final loginClickedBloc = Provider.of<LoginClickedBloc>(context);
     final flipCardController =
         Provider.of<Map<String, FlipCardController>>(context);
+    final providerClicked = Provider.of<LoginClickedBloc>(context);
     return MultiProvider(
       providers: [
-        Provider<LoginClickedBloc>(create: (context) => bloc),
         Provider<LoginAnimBloc>(
           create: (context) => loginAnimBloc,
-        ),
-        Provider<BlocFlipLogin>(
-          create: (context) => flipBloc,
         ),
       ],
       child: Scaffold(
@@ -70,33 +67,47 @@ class HansaZagruzka extends StatelessWidget {
                     ),
                   );
                 }),
-            FlipCard(
-              controller: flipCardController['login'],
-              flipOnTouch: false,
-              front: const Align(
-                alignment: Alignment.bottomCenter,
-                child: HansaEntry(),
-              ),
-              back: StreamBuilder<LoginAction>(
-                  stream: bloc.stream,
+            Provider.value(
+              value: providerClicked,
+              child: FlipCard(
+                controller: flipCardController['login'],
+                flipOnTouch: false,
+                front: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Provider.value(
+                    value: flipBloc,
+                    child: const HansaEntry(),
+                  ),
+                ),
+                back: StreamBuilder<LoginAction>(
+                  stream: loginClickedBloc.stream,
                   initialData: LoginAction.signin,
                   builder: (context, snapshot) {
                     return Center(
                       child: snapshot.data == LoginAction.login
-                          ? const SingleChildScrollView(
+                          ? SingleChildScrollView(
+                              physics: const BouncingScrollPhysics(),
                               child: Padding(
-                                padding: EdgeInsets.only(top: 200),
-                                child: LoginCard(),
+                                padding: const EdgeInsets.only(top: 200),
+                                child: Provider.value(
+                                  value: flipBloc,
+                                  child: const LoginCard(),
+                                ),
                               ),
                             )
                           : FlipCard(
                               controller: flipCardController['signin'],
                               flipOnTouch: false,
                               back: const CompleteRegistr(),
-                              front: const FullRegistr(),
+                              front: Provider.value(
+                                value: flipBloc,
+                                child: const FullRegistr(),
+                              ),
                             ),
                     );
-                  }),
+                  },
+                ),
+              ),
             ),
           ],
         ),

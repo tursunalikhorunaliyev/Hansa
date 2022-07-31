@@ -10,12 +10,15 @@ import 'package:hansa_app/api_services/store_service.dart';
 import 'package:hansa_app/blocs/bloc_change_profile.dart';
 import 'package:hansa_app/blocs/bloc_change_title.dart';
 import 'package:hansa_app/blocs/bloc_play_video.dart';
+import 'package:hansa_app/blocs/login_clicked_bloc.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/blocs/voyti_ili_sozdata_bloc.dart';
+import 'package:hansa_app/middle_part_widgets/o_kompaniya.dart';
 import 'package:hansa_app/screens/empty.dart';
 import 'package:hansa_app/screens/pdf_viewer.dart';
 import 'package:hansa_app/screens/hansa_zagruzka.dart';
 import 'package:hansa_app/blocs/toggle_switcher_bloc.dart';
+import 'package:hansa_app/sobshit_o_problem.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 
@@ -65,6 +68,9 @@ class MyApp extends StatelessWidget {
           Provider(
             create: ((context) => BlocChangeProfile()),
           ),
+          Provider(
+            create: (context) => LoginClickedBloc(),
+          ),
         ],
         child: const MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -74,4 +80,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-        

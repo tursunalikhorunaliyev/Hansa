@@ -117,27 +117,25 @@ class CompleteRegistr extends StatelessWidget {
                       width: 134,
                     ),
             ),
-             Padding(
-               padding:const EdgeInsets.only(
-                 top: 730, left: 115
-               ),
-               child: Column(
+            Padding(
+              padding: const EdgeInsets.only(top: 730, left: 115),
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
-                 children: const [
-                   Text(
-                     "По всем вопросам пришите на",
-                     style: TextStyle(fontSize: 11, color: Color(0xFF989a9d)),
-                   ),
-                   SizedBox(
+                children: const [
+                  Text(
+                    "По всем вопросам пришите на",
+                    style: TextStyle(fontSize: 11, color: Color(0xFF989a9d)),
+                  ),
+                  SizedBox(
                     height: 6,
-                   ),
-                   Text(
-                     "Support@hansa-lab.ru",
-                     style: TextStyle(fontSize: 11, color: Color(0xFF989a9d)),
-                   ),
-                 ],
-               ),
-             ),
+                  ),
+                  Text(
+                    "Support@hansa-lab.ru",
+                    style: TextStyle(fontSize: 11, color: Color(0xFF989a9d)),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ],
