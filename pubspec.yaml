@@ -52,6 +52,8 @@ dependencies:
   internet_file: ^1.2.0
   cool_dropdown: ^1.4.2
   syncfusion_flutter_datepicker: ^20.2.40
+  url_launcher: ^6.1.5
+  filter_list: ^1.0.2
 
   
   

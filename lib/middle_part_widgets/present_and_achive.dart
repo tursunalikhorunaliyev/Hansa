@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/prezintatsi_model.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
@@ -84,6 +83,8 @@ class _PresentArchiveState extends State<PresentArchive> {
                                 Row(),
                                 Column(children: [
                                   ArchiveCard(
+                                    linkPDF: snapshot.data!.data.data
+                                        .dataGuides[index].pdfUrl,
                                     buttonColor: const Color(0xffff163e),
                                     topButtonText: 'Скачать',
                                     bottomButtonText: 'Читать',
@@ -172,6 +173,12 @@ class _PresentArchiveState extends State<PresentArchive> {
                                                   const Color(0xffff163e),
                                               topButtonText: 'Скачать',
                                               bottomButtonText: 'Читать',
+                                              linkPDF: snapshot
+                                                  .data!
+                                                  .data
+                                                  .data
+                                                  .dataGuidesArchive[index]
+                                                  .pdfUrl,
                                               isFavourite: snapshot
                                                   .data!
                                                   .data
@@ -219,9 +226,7 @@ class _PresentArchiveState extends State<PresentArchive> {
                 ]);
               } else {
                 return const Center(
-                  child: SpinKitWanderingCubes(
-                    color: Colors.red,
-                  ),
+                  child: CircularProgressIndicator(),
                 );
               }
             }),
