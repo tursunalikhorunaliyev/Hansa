@@ -1,8 +1,6 @@
 import 'package:filter_list/filter_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/enums/full_reg_enum.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -24,6 +22,7 @@ class ModalForFullReg extends StatefulWidget {
 class _ModalForFullRegState extends State<ModalForFullReg> {
   final dateRangeController = DateRangePickerController();
   String dataRojdeniya = "";
+  String selectedText = "Salom";
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -62,13 +61,14 @@ class _ModalForFullRegState extends State<ModalForFullReg> {
           else if(widget.regEnum == FullRegEnum.doljnost){
             
              FilterListDialog.display<String>(
-               
+              enableOnlySingleSelection: true,
+              selectedListData: [selectedText],
                context, listData: ["Salom","Xayr","Tursunali","Xorunaliyev"], choiceChipLabel: (a)=>a, validateSelectedItem: (list, val)=>list!.contains(val), onItemSearch: (item, query){
                
                return item.toLowerCase().contains(query.toLowerCase());
                
                }, onApplyButtonClick: (list){
-
+                 
                  Navigator.pop(context);
                });
           

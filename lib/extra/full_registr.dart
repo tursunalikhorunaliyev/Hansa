@@ -3,44 +3,40 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/blocs/bloc_flip_login.dart';
 import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
-import 'package:hansa_app/enums/full_reg_enum.dart';
-import 'package:hansa_app/extra/modal_sheet_for_full_reg.dart';
-import 'package:hansa_app/extra/text_field_for_full_reg.dart';
-import 'package:hansa_app/providers/full_registr_provider.dart';
-import 'package:provider/provider.dart';
-import 'package:syncfusion_flutter_datepicker/datepicker.dart';
-
-class FullRegistr extends StatefulWidget {
+ import 'package:hansa_app/enums/full_reg_enum.dart';
+ import 'package:hansa_app/extra/modal_sheet_for_full_reg.dart';
+ import 'package:hansa_app/extra/text_field_for_full_reg.dart';
+ import 'package:hansa_app/providers/full_registr_provider.dart';
+ import 'package:provider/provider.dart';
+ import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+ 
+ class FullRegistr extends StatefulWidget {
   const FullRegistr({Key? key}) : super(key: key);
-
   @override
   State<FullRegistr> createState() => _FullRegistrState();
 }
 
-class _FullRegistrState extends State<FullRegistr> {
-  List list = ["Salom", "Xayr", "Hayrli kun"];
-  String selectedValue = "Название сети";
-  String selectedValue2 = "Должность";
-  String selectedValue3 = "Город*";
-  final dateRangeController = DateRangePickerController();
-  final imyaTextEditingController = TextEditingController();
-  final familiyaTextEditingController = TextEditingController();
-  final emailTextFielController = TextEditingController();
-  final phoneTextFieldController = TextEditingController();
-  final adresTorgoviySetTextFielController = TextEditingController();
+ class _FullRegistrState extends State<FullRegistr> {
+   String selectedValue2 = "Должность";
+   String selectedValue3 = "Город*";
+   final dateRangeController = DateRangePickerController();
+   final imyaTextEditingController = TextEditingController();
+   final familiyaTextEditingController = TextEditingController();
+   final emailTextFielController = TextEditingController();
+   final phoneTextFieldController = TextEditingController();
+   final adresTorgoviySetTextFielController = TextEditingController();
 
-  @override
-  Widget build(BuildContext context) {
-    final fullRegDataProvider = Provider.of<FullRegisterDataProvider>(context);
-    final isTablet = Provider.of<bool>(context);
-    final providerFlip = Provider.of<Map<String, FlipCardController>>(context);
-    final providerFlipLogin = Provider.of<BlocFlipLogin>(context);
 
+   @override
+   Widget build(BuildContext context) {
+     final fullRegDataProvider = Provider.of<FullRegisterDataProvider>(context);
+     final isTablet = Provider.of<bool>(context);
+     final providerFlip = Provider.of<Map<String, FlipCardController>>(context);
+     final providerFlipLogin = Provider.of<BlocFlipLogin>(context);
     return SingleChildScrollView(
-      physics: const BouncingScrollPhysics(),
       child: Center(
         child: GestureDetector(
-          onTap: () {
+          onTap: (){
             FocusManager.instance.primaryFocus?.unfocus();
           },
           child: Stack(
@@ -63,7 +59,6 @@ class _FullRegistrState extends State<FullRegistr> {
                           children: [
                             InkWell(
                               onTap: () {
-                                FocusManager.instance.primaryFocus?.unfocus();
                                 providerFlipLogin.sink.add(false);
                                 providerFlip['login']!.toggleCard();
                               },
@@ -86,93 +81,41 @@ class _FullRegistrState extends State<FullRegistr> {
                         ),
                       ),
                       const SizedBox(
-                        height: 18,
-                      ),
-                      TextFieldForFullRegister(
-                          text: "Имя",
-                          height: isTablet ? 45 : 38,
-                          size: isTablet ? 13 : 10,
-                          weight:
-                              isTablet ? FontWeight.w600 : FontWeight.normal),
+                         height: 18,
+                       ),
+                       TextFieldForFullRegister(
+                         textEditingController: imyaTextEditingController,
+                           text: "Имя",
+                           height: isTablet ? 45 : 38,
+                           size: isTablet ? 13 : 10,
+                          weight: isTablet ? FontWeight.w600 : FontWeight.normal),
                       const SizedBox(
-                        height: 4,
-                      ),
-                      TextFieldForFullRegister(
-                          text: "Фамилия",
-                          height: isTablet ? 45 : 38,
-                          size: isTablet ? 13 : 10,
-                          weight:
-                              isTablet ? FontWeight.w600 : FontWeight.normal),
+                         height: 4,
+                       ),
+                       TextFieldForFullRegister(
+                         textEditingController: familiyaTextEditingController,
+                           text: "Фамилия",
+                           height: isTablet ? 45 : 38,
+                           size: isTablet ? 13 : 10,
+                          weight: isTablet ? FontWeight.w600 : FontWeight.normal),
                       const SizedBox(
-                        height: 5,
-                      ),
-                      TextFieldForFullRegister(
-                          text: "Email",
-                          height: isTablet ? 45 : 38,
-                          size: isTablet ? 13 : 10,
-                          weight:
-                              isTablet ? FontWeight.w600 : FontWeight.normal),
+                         height: 5,
+                       ),
+                       TextFieldForFullRegister(
+                         textEditingController: emailTextFielController,
+                           text: "Email",
+                           height: isTablet ? 45 : 38,
+                           size: isTablet ? 13 : 10,
+                          weight: isTablet ? FontWeight.w600 : FontWeight.normal),
                       const SizedBox(
-                        height: 4,
-                      ),
-                      TextFieldForFullRegister(
-                          text: "Контактный тефон",
-                          height: isTablet ? 45 : 38,
-                          size: isTablet ? 15 : 10,
-                          weight:
-                              isTablet ? FontWeight.w600 : FontWeight.normal),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      ModalForFullReg(
-                        regEnum: FullRegEnum.dataRojdeniya,
-                        text: "Дата рождения",
-                        width: isTablet ? 538 : 325,
-                        size: isTablet ? 15 : 10,
-                        height: isTablet ? 43 : 38,
-                        fontWeight:
-                            isTablet ? FontWeight.w600 : FontWeight.normal,
-                      ),
-                      const SizedBox(
-                        height: 18,
-                      ),
-                      TextFieldForFullRegister(
-                          textEditingController: imyaTextEditingController,
-                          text: "Имя",
-                          height: isTablet ? 45 : 38,
-                          size: isTablet ? 13 : 10,
-                          weight:
-                              isTablet ? FontWeight.w600 : FontWeight.normal),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      TextFieldForFullRegister(
-                          textEditingController: familiyaTextEditingController,
-                          text: "Фамилия",
-                          height: isTablet ? 45 : 38,
-                          size: isTablet ? 13 : 10,
-                          weight:
-                              isTablet ? FontWeight.w600 : FontWeight.normal),
-                      const SizedBox(
-                        height: 5,
-                      ),
-                      TextFieldForFullRegister(
-                          textEditingController: emailTextFielController,
-                          text: "Email",
-                          height: isTablet ? 45 : 38,
-                          size: isTablet ? 13 : 10,
-                          weight:
-                              isTablet ? FontWeight.w600 : FontWeight.normal),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      TextFieldForFullRegister(
-                          textEditingController: phoneTextFieldController,
-                          text: "Контактный тефон",
-                          height: isTablet ? 45 : 38,
-                          size: isTablet ? 15 : 10,
-                          weight:
-                              isTablet ? FontWeight.w600 : FontWeight.normal),
+                         height: 4,
+                       ),
+                       TextFieldForFullRegister(
+                         textEditingController: phoneTextFieldController,
+                           text: "Контактный тефон",
+                           height: isTablet ? 45 : 38,
+                           size: isTablet ? 15 : 10,
+                          weight: isTablet ? FontWeight.w600 : FontWeight.normal),
                       const SizedBox(
                         height: 4,
                       ),
@@ -222,16 +165,14 @@ class _FullRegistrState extends State<FullRegistr> {
                             isTablet ? FontWeight.w600 : FontWeight.normal,
                       ),
                       const SizedBox(
-                        height: 4,
-                      ),
-                      TextFieldForFullRegister(
-                          textEditingController:
-                              adresTorgoviySetTextFielController,
-                          text: "Адрес торговой сети",
-                          height: isTablet ? 45 : 38,
-                          size: isTablet ? 13 : 10,
-                          weight:
-                              isTablet ? FontWeight.w600 : FontWeight.normal),
+                         height: 4,
+                       ),
+                       TextFieldForFullRegister(
+                         textEditingController: adresTorgoviySetTextFielController,
+                           text: "Адрес торговой сети",
+                           height: isTablet ? 45 : 38,
+                           size: isTablet ? 13 : 10,
+                          weight: isTablet ? FontWeight.w600 : FontWeight.normal),
                       const SizedBox(
                         height: 10,
                       ),
@@ -306,7 +247,7 @@ class _FullRegistrState extends State<FullRegistr> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 textSwitch("""Соглашаюсь на обработку 
-персональных данных""", isTablet ? 16 : 11),
+        персональных данных""", isTablet ? 16 : 11),
                                 const SizedBox(
                                   width: 75,
                                 ),
@@ -325,22 +266,28 @@ class _FullRegistrState extends State<FullRegistr> {
                             ),
                           ],
                         ),
-                        const SizedBox(
-                          height: 4,
-                        ),
-                        child: GestureDetector(
-                          onTap: () {
-                            providerFlip['signin']!.toggleCard();
-                            print(imyaTextEditingController.text);
-                            print(familiyaTextEditingController.text);
-                            print(emailTextFielController.text);
-                            print(phoneTextFieldController.text);
-                            print(adresTorgoviySetTextFielController.text);
-                            print(fullRegDataProvider.dataRojdeniya);
-                          },
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: isTablet ? 60 : 46,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(
+                          left: 11,
+                          right: 9,
+                           top: isTablet ? 30 : 25,
+                         ),
+                         child: GestureDetector(
+                           
+                           onTap: (){
+                             FocusManager.instance.primaryFocus?.unfocus();
+                             providerFlip['signin']!.toggleCard();
+                             print(imyaTextEditingController.text);
+                             print(familiyaTextEditingController.text);
+                             print(emailTextFielController.text);
+                             print(phoneTextFieldController.text);
+                             print(adresTorgoviySetTextFielController.text);
+                             print(fullRegDataProvider.dataRojdeniya);
+                           },
+                           child: Container(
+                             alignment: Alignment.center,
+                             height: isTablet ? 60 : 46,
                             width: isTablet ? 525 : 325,
                             decoration: BoxDecoration(
                               color: const Color(0xFF25b049),
@@ -407,7 +354,6 @@ class _FullRegistrState extends State<FullRegistr> {
       ),
     );
   }
-
   Widget textSwitch(String text, double size) {
     return Text(
       text,
@@ -418,47 +364,3 @@ class _FullRegistrState extends State<FullRegistr> {
     );
   }
 }
-/* DropdownButtonHideUnderline(
-            child:  DropdownButton2<String>(
-                  dropdownWidth: 325,
-                  dropdownDecoration: const BoxDecoration(
-                      color: Color(0xFFf8f8f8),
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(20),
-                        bottomRight: Radius.circular(20),
-                        topRight: Radius.circular(20),
-                      )),
-                  buttonDecoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(54)),
-                  hint: Text(text,
-                      style: GoogleFonts.montserrat(
-                          fontSize: 10, color: const Color(0xFF444444))),
-                  items: 
-                     list.map((item) => DropdownMenuItem<String>(
-                            value: item,
-                            child: Text(
-                              item,
-                              style: GoogleFonts.montserrat(
-                                  fontWeight: weight,
-                                  fontSize: size,
-                                  color: const Color(0xFF444444)),
-                            ),
-                          ))
-                      .toList(),
-                  value: choiseValue,
-                  onChanged: (value) {
-                    if (position == 1) {
-                      selectedValue = value!;
-                    }
-                    if (position == 2) {
-                      selectedValue2 = value!;
-                    }
-                    if (position == 3) {
-                      selectedValue3 = value!;
-                    }
-                    setState(() {});
-                  },
-                  buttonHeight: 40,
-                  buttonWidth: 140,
-                  itemHeight: 40,
-                )) */
