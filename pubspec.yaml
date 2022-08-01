@@ -54,6 +54,7 @@ dependencies:
   syncfusion_flutter_datepicker: ^20.2.40
   url_launcher: ^6.1.5
   filter_list: ^1.0.2
+  cached_network_image: ^3.2.1
 
   
   

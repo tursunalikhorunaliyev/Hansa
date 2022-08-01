@@ -16,8 +16,9 @@ class LoginAction {
     Map<String, dynamic> responseMap =
         jsonDecode(response.body) as Map<String, dynamic>;
     print(response.body);
-
+    bool hasToken = false;
     if (responseMap["status"].toString().endsWith("true")) {
+      hasToken = true;
       final box = Hive.box("savedUser");
       if (isSaved) {
         box.put("username", username);
@@ -26,14 +27,16 @@ class LoginAction {
        
       }
       else{
+        box.put("username", username);
+        box.put("password", password);
           box.put("isSaved", false);
       }
 
-       return [username, password, isSaved];
+       return [username, password, hasToken, responseMap["data"]["token"]];
       
     } else {
       return ["", "", false];
     }
-    
+
   }
 }
