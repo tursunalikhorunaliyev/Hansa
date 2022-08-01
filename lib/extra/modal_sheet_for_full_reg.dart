@@ -130,6 +130,24 @@ class _ModalForFullRegState extends State<ModalForFullReg> {
                             Navigator.pop(context);
                           });
                     }
+                    else if(widget.regEnum == FullRegEnum.vibiriteGorod){
+                          FilterListDialog.display<String>(
+                          enableOnlySingleSelection: true,
+                          selectedListData: [selectedText],
+                          context,
+                          listData: [],
+                          choiceChipLabel: (a) => a,
+                          validateSelectedItem: (list, val) =>
+                              list!.contains(val),
+                          onItemSearch: (item, query) {
+                            return item
+                                .toLowerCase()
+                                .contains(query.toLowerCase());
+                          },
+                          onApplyButtonClick: (list) {
+                            Navigator.pop(context);
+                          });
+                    }
                   },
                   child: Stack(
                     children: [
