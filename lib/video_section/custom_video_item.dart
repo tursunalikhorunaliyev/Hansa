@@ -5,12 +5,14 @@ import 'package:hansa_app/blocs/bloc_play_video.dart';
 import 'package:hansa_app/video/bloc_video_api.dart';
 import 'package:hansa_app/video/model_video.dart';
 import 'package:provider/provider.dart';
+import 'package:video_player/video_player.dart';
 
 class CustomVideoListItem extends StatefulWidget {
   final int index;
   final int indexMain;
 
-  const CustomVideoListItem({Key? key, required this.index, required this.indexMain})
+  const CustomVideoListItem(
+      {Key? key, required this.index, required this.indexMain})
       : super(key: key);
 
   @override
@@ -34,51 +36,53 @@ class _CustomVideoListItemState extends State<CustomVideoListItem> {
           color: Colors.white,
           child: Column(
             children: [
-              GestureDetector(
-                onTap: () {
-                  playProvider.sink.add(true);
-                },
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: Stack(
-                    children: [
-                      StreamBuilder<VideoMainOne>(
-                          stream: blocVideoApi.dataStream,
-                          builder: (context, snapshot) {
-                            if (snapshot.data == null) {
-                              return const SizedBox();
-                            } else {
-                              return Image.network(
-                                snapshot
-                                    .data!
-                                    .videoListData
-                                    .list[widget.indexMain]
-                                    .data
-                                    .list[widget.index]
-                                    .pictureLink,
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: StreamBuilder<VideoMainOne>(
+                    stream: blocVideoApi.dataStream,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return Stack(
+                          children: [
+                            Image.network(
+                              snapshot
+                                  .data!
+                                  .videoListData
+                                  .list[widget.indexMain]
+                                  .data
+                                  .list[widget.index]
+                                  .pictureLink,
+                              height: 130,
+                              width: 155,
+                              fit: BoxFit.cover,
+                            ),
+                            InkWell(
+                              onTap: (){
+                              final VideoDetails  video =  snapshot.data!.videoListData.list[widget.indexMain].data.list[widget.index];
+                                playProvider.sink.add([true, video.videoLink,video.title]);
+                                print("Hello");
+                              },
+                              child: Container(
                                 height: 130,
                                 width: 155,
-                                fit: BoxFit.cover,
-                              );
-                            }
-                          }),
-                      Container(
-                        height: 130,
-                        width: 155,
-                        color: Colors.transparent,
-                        alignment: Alignment.center,
-                        child: const Opacity(
-                          opacity: .5,
-                          child: Icon(
-                            CupertinoIcons.play_circle_fill,
-                            size: 25,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                                color: Colors.transparent,
+                                alignment: Alignment.center,
+                                child: const Opacity(
+                                  opacity: .5,
+                                  child: Icon(
+                                    CupertinoIcons.play_circle_fill,
+                                    size: 25,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        );
+                      } else {
+                        return const  SizedBox();
+                      }
+                    }),
               ),
               StreamBuilder<VideoMainOne>(
                   stream: blocVideoApi.dataStream,

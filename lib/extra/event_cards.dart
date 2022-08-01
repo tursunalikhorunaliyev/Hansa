@@ -98,8 +98,8 @@ class EventCards extends StatelessWidget {
                   padding: EdgeInsets.only(top: 50, left: isTablet ? 150 : 136),
                   child: Container(
                     padding: const EdgeInsets.all(12),
-                    height: isTablet ? 65 : 55,
-                    width: isTablet ? 65 : 55,
+                    height: isTablet ? 65 : 65,
+                    width: isTablet ? 65 : 65,
                     decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: Colors.white,

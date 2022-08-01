@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hansa_app/sobshit_o_problem.dart';
+import 'package:hansa_app/extra/sobshit_o_problem.dart';
 
 class Okompaniya extends StatelessWidget {
   const Okompaniya({Key? key}) : super(key: key);

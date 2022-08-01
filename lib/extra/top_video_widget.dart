@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,9 +15,10 @@ import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
 class TopVideoWidget extends StatefulWidget {
-  const TopVideoWidget({Key? key, required this.videoController})
+  final String url;
+  final String title;
+  const TopVideoWidget({Key? key, required this.url, required this.title})
       : super(key: key);
-  final VideoPlayerController videoController;
 
   @override
   State<TopVideoWidget> createState() => _TopVideoWidgetState();
@@ -24,10 +26,19 @@ class TopVideoWidget extends StatefulWidget {
 
 class _TopVideoWidgetState extends State<TopVideoWidget> {
   late ChewieController? chewieController;
-  initVideo() async {
-    await widget.videoController.initialize();
-    chewieController = ChewieController(
-      videoPlayerController: widget.videoController,
+  initVideo() {
+    
+    chewieController = ChewieController(aspectRatio: 16/9,
+    autoPlay: true,
+    allowedScreenSleep: false,
+    autoInitialize: true,
+    deviceOrientationsOnEnterFullScreen: [DeviceOrientation.landscapeLeft, DeviceOrientation.landscapeRight],
+    deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp],
+
+    
+    //deviceOrientationsAfterFullScreen: [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp],
+    allowMuting: false,
+      videoPlayerController: VideoPlayerController.network(widget.url),
       cupertinoProgressColors: ChewieProgressColors(
         backgroundColor: const Color(0xff090909),
         bufferedColor: const Color(0xff090909),
@@ -70,7 +81,7 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
           ),
           GestureDetector(
             onTap: () {
-              playProvider.sink.add(false);
+              playProvider.sink.add([false,"",""]);
               chewieController!.videoPlayerController
                 ..seekTo(const Duration(seconds: 0))
                 ..pause();
@@ -141,9 +152,9 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
                       ),
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 13),
-                    child: CustomTreningiVideo(),
+                   Padding(
+                    padding:const EdgeInsets.only(top: 13),
+                    child: CustomTreningiVideo(title: widget.title,),
                   )
                 ],
               )

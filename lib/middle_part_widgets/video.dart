@@ -57,8 +57,9 @@ class Video extends StatelessWidget {
                               title: snapshot
                                   .data!.videoListData.list[index].title),
                           listView(
-                              snapshot.data!.videoListData.list[index].data.list
-                                  .length,
+                              (snapshot.data!.videoListData.list[index].data.list
+                                  .length < 5)?snapshot.data!.videoListData.list[index].data.list
+                                  .length:5,
                               index)
                         ],
                       );
@@ -74,23 +75,25 @@ class Video extends StatelessWidget {
   Widget listView(int itemCount, int indexMain) {
     return SizedBox(
         height: 235,
-        child: SingleChildScrollView(
-          
-          physics: const BouncingScrollPhysics(),
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: List.generate(
-                itemCount,
-                (index) => Padding(
-                      padding: EdgeInsets.only(left: (index == 0) ? 30 : 0),
-                      child: GestureDetector(
-                          onTap: () {},
-                          child: CustomVideoListItem(
-                            index: index,
-                            indexMain: indexMain,
-                          )),
-                    )),
+        child: Align(
+          alignment: Alignment.centerLeft,
+          child: SingleChildScrollView(
+            
+            physics: const BouncingScrollPhysics(),
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: List.generate(
+                  itemCount,
+                  (index) => Padding(
+                        padding: EdgeInsets.only(left: (index == 0) ? 30 : 0),
+                        child: GestureDetector(
+                            onTap: () {},
+                            child: CustomVideoListItem(
+                              index: index,
+                              indexMain: indexMain,
+                            )),
+                      )),
+            ),
           ),
         ));
   }

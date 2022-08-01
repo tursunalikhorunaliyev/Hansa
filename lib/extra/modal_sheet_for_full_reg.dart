@@ -23,6 +23,8 @@ class _ModalForFullRegState extends State<ModalForFullReg> {
   final dateRangeController = DateRangePickerController();
   String dataRojdeniya = "";
   String selectedText = "Salom";
+
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -59,8 +61,8 @@ class _ModalForFullRegState extends State<ModalForFullReg> {
           });
           }
           else if(widget.regEnum == FullRegEnum.doljnost){
-            
              FilterListDialog.display<String>(
+              
               enableOnlySingleSelection: true,
               selectedListData: [selectedText],
                context, listData: ["Salom","Xayr","Tursunali","Xorunaliyev"], choiceChipLabel: (a)=>a, validateSelectedItem: (list, val)=>list!.contains(val), onItemSearch: (item, query){

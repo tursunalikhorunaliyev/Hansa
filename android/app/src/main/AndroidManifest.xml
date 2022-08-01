@@ -16,7 +16,7 @@
         android:label="hansa_app"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
-        android:screenOrientation="portrait"
+        
         android:usesCleartextTraffic="true">
         
         <activity

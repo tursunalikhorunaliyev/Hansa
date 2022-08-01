@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomTreningiVideo extends StatelessWidget {
-  const CustomTreningiVideo({Key? key}) : super(key: key);
+  final String title;
+  const CustomTreningiVideo({Key? key, required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +24,17 @@ class CustomTreningiVideo extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 15),
-                    child: Text(
-                      "Иммерсивное шоу\n\"Увидимся на кухне\"г.\nЕкатеринбург:     18.04.2019",
-                      style: GoogleFonts.montserrat(
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold,
+                    child: SizedBox(
+                      width: 200,
+                      child: Text(
+                       title,
+                       overflow: TextOverflow.clip,
+                       softWrap: true,
+                       maxLines: 3,
+                        style: GoogleFonts.montserrat(
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
