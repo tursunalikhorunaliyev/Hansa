@@ -28,11 +28,12 @@ class LoginAction {
       else{
           box.put("isSaved", false);
       }
-      
+
        return [username, password, isSaved];
       
     } else {
       return ["", "", false];
     }
+    
   }
 }
