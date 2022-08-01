@@ -12,6 +12,7 @@ import 'package:hansa_app/blocs/login_clicked_bloc.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/blocs/voyti_ili_sozdata_bloc.dart';
 import 'package:hansa_app/providers/full_registr_provider.dart';
+import 'package:hansa_app/screens/empty.dart';
 import 'package:hansa_app/screens/hansa_zagruzka.dart';
 import 'package:hansa_app/blocs/toggle_switcher_bloc.dart';
 import 'package:hansa_app/screens/splash_screen.dart';
@@ -76,7 +77,7 @@ class MyApp extends StatelessWidget {
         ],
         child: const MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: HansaZagruzka(),
+          home: EmptyScreen(),
         ),
       ),
     );
