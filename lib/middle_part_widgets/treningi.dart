@@ -24,9 +24,8 @@ class _TreningiState extends State<Treningi> {
   Widget build(BuildContext context) {
     final menuBloCProvider = Provider.of<MenuEventsBloC>(context);
     final isTablet = Provider.of<bool>(context);
-    // final token = Provider.of<String>(context);
-    final trainingBloc = TrainingAPIBloc(
-        "532dabf5b7d7f72e0033c43676dea4bd0bb42656574723026ba7b48093523705");
+    final token = Provider.of<String>(context);
+    final trainingBloc = TrainingAPIBloc(token);
     trainingBloc.eventSink.add(TrainingAPIEvent.fetch);
     return Scaffold(
       body: Column(

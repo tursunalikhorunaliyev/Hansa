@@ -57,10 +57,15 @@ class _CustomVideoListItemState extends State<CustomVideoListItem> {
                               fit: BoxFit.cover,
                             ),
                             InkWell(
-                              onTap: (){
-                              final VideoDetails  video =  snapshot.data!.videoListData.list[widget.indexMain].data.list[widget.index];
-                                playProvider.sink.add([true, video.videoLink,video.title]);
-                                print("Hello");
+                              onTap: () {
+                                final VideoDetails video = snapshot
+                                    .data!
+                                    .videoListData
+                                    .list[widget.indexMain]
+                                    .data
+                                    .list[widget.index];
+                                playProvider.sink
+                                    .add([true, video.videoLink, video.title]);
                               },
                               child: Container(
                                 height: 130,
@@ -80,7 +85,7 @@ class _CustomVideoListItemState extends State<CustomVideoListItem> {
                           ],
                         );
                       } else {
-                        return const  SizedBox();
+                        return const SizedBox();
                       }
                     }),
               ),

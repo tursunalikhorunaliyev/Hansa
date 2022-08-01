@@ -1,5 +1,5 @@
-import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hansa_app/api_services/country_type_service.dart';
 import 'package:hansa_app/api_services/hansa_job_api.dart';
@@ -23,8 +23,6 @@ void main(List<String> args) async {
   runApp(const MyApp());
 }
 
-//aaaaaa
-
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -46,7 +44,6 @@ class MyApp extends StatelessWidget {
           Provider(
             create: (context) => BlocJob().getJobs(),
           ),
-         
           ChangeNotifierProvider(
             create: (context) => FullRegisterDataProvider(),
           ),
@@ -54,6 +51,7 @@ class MyApp extends StatelessWidget {
           Provider(create: (context) => ToggleSwitcherBloc()),
           Provider<bool>(create: (context) => isTablet),
           Provider(create: (context) => BlocChangeTitle()),
+          Provider(create: (context) => BlocChangeTitleIndex()),
           Provider(create: (context) => map),
           Provider(create: (context) => VoytiIliSozdatBloC()),
           Provider(
