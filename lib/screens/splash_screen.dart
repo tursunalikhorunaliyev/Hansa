@@ -39,7 +39,7 @@ class _SplashScreenState extends State<SplashScreen> {
         await getToken();
         goToWelcome(token);
       });
-      setState(() {});
+      
     } else {
       Navigator.push(context,
           MaterialPageRoute(builder: (context) => const HansaZagruzka()));
