@@ -1,6 +1,6 @@
 class StoreModel {
   bool status;
-  StoreModelData data;
+  Data data;
   StoreModel({
     required this.status,
     required this.data,
@@ -9,28 +9,36 @@ class StoreModel {
   factory StoreModel.fromMap(Map<String, dynamic> map) {
     return StoreModel(
       status: map['status'] as bool,
-      data: StoreModelData.fromMap(
+      data: Data.fromMap(
         map['data'],
       ),
     );
   }
 }
 
+class Data {
+  List<StoreModelData> list;
+  Data({
+    required this.list,
+  });
+
+  factory Data.fromMap(List<dynamic> map) {
+    return Data(list: map.map((e) => StoreModelData.fromMap(e)).toList());
+  }
+}
+
 class StoreModelData {
-  List<String> stores;
+  int id;
+  String name;
   StoreModelData({
-    required this.stores,
+    required this.id,
+    required this.name,
   });
 
   factory StoreModelData.fromMap(Map<String, dynamic> map) {
-    List<String> list = [];
-    List<String> keys = [];
-    for (var element in map.keys) {
-      keys.add(element);
-      list.add(map[element]);
-    }
     return StoreModelData(
-      stores: list,
+      id: map['id'] as int,
+      name: map['name'] as String,
     );
   }
 }

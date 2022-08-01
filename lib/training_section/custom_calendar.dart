@@ -6,11 +6,24 @@ import 'package:table_calendar/table_calendar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomCalendar extends StatelessWidget {
-  const CustomCalendar({Key? key}) : super(key: key);
+  final List dates;
+  const CustomCalendar({Key? key, required this.dates}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    List<DateTime> listDate = [];
+    for (String element in dates) {
+      List<String> date = element.split('-');
+      listDate.add(
+        DateTime(
+          int.parse(date[0]),
+          int.parse(date[1]),
+          int.parse(date[2].substring(0, 2)),
+        ),
+      );
+    }
     final isTablet = Provider.of<bool>(context);
+
     return Padding(
       padding:
           EdgeInsets.only(left: 25.w, right: 25.w, top: isTablet ? 12.h : 0.h),

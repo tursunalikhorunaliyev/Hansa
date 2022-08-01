@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:hansa_app/video/model_video.dart';
 import 'package:http/http.dart';
@@ -21,6 +22,9 @@ class BlocVideoApi {
     eventStream.listen((event) async {
       if (event == ActionVideo.view) {
         dataSink.add(await getData(token: token));
+        dataStream.listen((event) {
+          log(event.status.toString());
+        });
       }
     });
   }

@@ -1,5 +1,5 @@
-import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hansa_app/api_services/country_type_service.dart';
 import 'package:hansa_app/api_services/hansa_job_api.dart';
@@ -10,6 +10,7 @@ import 'package:hansa_app/blocs/bloc_play_video.dart';
 import 'package:hansa_app/blocs/login_clicked_bloc.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/blocs/voyti_ili_sozdata_bloc.dart';
+import 'package:hansa_app/extra/nazvaniya.dart';
 import 'package:hansa_app/providers/full_registr_provider.dart';
 import 'package:hansa_app/screens/hansa_zagruzka.dart';
 import 'package:hansa_app/blocs/toggle_switcher_bloc.dart';
@@ -22,8 +23,6 @@ void main(List<String> args) async {
   await Hive.openBox("savedUser");
   runApp(const MyApp());
 }
-
-//aaaaaa
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -46,7 +45,6 @@ class MyApp extends StatelessWidget {
           Provider(
             create: (context) => BlocJob().getJobs(),
           ),
-         
           ChangeNotifierProvider(
             create: (context) => FullRegisterDataProvider(),
           ),
@@ -54,6 +52,7 @@ class MyApp extends StatelessWidget {
           Provider(create: (context) => ToggleSwitcherBloc()),
           Provider<bool>(create: (context) => isTablet),
           Provider(create: (context) => BlocChangeTitle()),
+          Provider(create: (context) => BlocChangeTitleIndex()),
           Provider(create: (context) => map),
           Provider(create: (context) => VoytiIliSozdatBloC()),
           Provider(
@@ -71,7 +70,7 @@ class MyApp extends StatelessWidget {
         ],
         child: const MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: HansaZagruzka(),
+          home: NazvaniyaWidget(),
         ),
       ),
     );
