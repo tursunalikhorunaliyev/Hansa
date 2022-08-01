@@ -19,11 +19,13 @@ class TraningModelData {
   FutureEvents futureEvents;
   Videos videos;
   EventReports eventReports;
+  Events events;
   TraningModelData({
     required this.webinar,
     required this.futureEvents,
     required this.videos,
     required this.eventReports,
+    required this.events,
   });
 
   factory TraningModelData.fromMap(Map<String, dynamic> map) {
@@ -32,11 +34,21 @@ class TraningModelData {
       futureEvents: FutureEvents.fromMap(map['futureEvents']),
       videos: Videos.fromMap(map['videos']),
       eventReports: EventReports.fromMap(map['eventReports']),
+      events: Events.fromMap(map['events']),
     );
   }
 }
 
-class Events {}
+class Events {
+  List events;
+  Events({
+    required this.events,
+  });
+
+  factory Events.fromMap(List<dynamic> map) {
+    return Events(events: map.map((e) => e).toList());
+  }
+}
 
 class FutureEvents {
   List<FutureEventsData> list;

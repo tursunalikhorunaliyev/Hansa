@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:hansa_app/api_models.dart/training_model.dart';
 import 'package:hansa_app/api_services/training_api_bloc.dart';
@@ -22,11 +24,12 @@ class _TreningiState extends State<Treningi> {
   Widget build(BuildContext context) {
     final menuBloCProvider = Provider.of<MenuEventsBloC>(context);
     final isTablet = Provider.of<bool>(context);
-    final token = Provider.of<String>(context);
-    final trainingBloc = TrainingAPIBloc(token);
+    // final token = Provider.of<String>(context);
+    final trainingBloc = TrainingAPIBloc(
+        "532dabf5b7d7f72e0033c43676dea4bd0bb42656574723026ba7b48093523705");
     trainingBloc.eventSink.add(TrainingAPIEvent.fetch);
-    return Expanded(
-      child: Column(
+    return Scaffold(
+      body: Column(
         children: [
           Expanded(
             child: StreamBuilder<TrainingModel>(
@@ -46,7 +49,8 @@ class _TreningiState extends State<Treningi> {
                             content: Column(
                               children: [
                                 Row(),
-                                const CustomCalendar(),
+                                CustomCalendar(
+                                    dates: snapshot.data!.data.events.events),
                                 isTablet
                                     ? const IpadContainer()
                                     : CustomClipItem(
