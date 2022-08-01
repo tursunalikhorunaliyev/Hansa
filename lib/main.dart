@@ -76,7 +76,7 @@ class MyApp extends StatelessWidget {
         ],
         child: const MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: SplashScreen(),
+          home: HansaZagruzka(),
         ),
       ),
     );

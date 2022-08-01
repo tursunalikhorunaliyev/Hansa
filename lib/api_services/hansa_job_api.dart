@@ -7,11 +7,11 @@ import 'package:http/http.dart';
 enum JobEnum { job }
 
 class BlocJob {
-  final streamController = StreamController<List<String>>.broadcast();
+  final streamController = StreamController<JobModel>.broadcast();
   final eventController = StreamController<JobEnum>.broadcast();
 
-  Stream<List<String>> get stream => streamController.stream;
-  StreamSink<List<String>> get sink => streamController.sink;
+  Stream<JobModel> get stream => streamController.stream;
+  StreamSink<JobModel> get sink => streamController.sink;
 
   Stream<JobEnum> get eventStrem => eventController.stream;
   StreamSink<JobEnum> get eventSink => eventController.sink;
@@ -23,8 +23,8 @@ class BlocJob {
       }
     });
   }
-  Future<List<String>> getJobs() async {
+  Future<JobModel> getJobs() async {
     Response response = await get(Uri.parse(APIUrls().getJobUrl));
-    return JobModel.fromMap(jsonDecode(response.body)).data.jobs;
+    return JobModel.fromMap(jsonDecode(response.body));
   }
 }
