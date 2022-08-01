@@ -1,15 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/blocs/bloc_play_video.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/extra/glavniy_menyu.dart';
 import 'package:hansa_app/extra/top_video_widget.dart';
 import 'package:hansa_app/extra/ui_changer.dart';
-import 'package:hansa_app/providers/stack_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:video_player/video_player.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -118,31 +115,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                       width: 214.w,
                                     ),
                                   ),
-                                  Padding(
-                                    padding: EdgeInsets.only(top: 5.h),
-                                    child: Row(
-                                      children: [
-                                        Text(
-                                          '#Увидимся',
-                                          style: GoogleFonts.montserrat(
-                                              fontSize: 15.sp,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                        Text(
-                                          'нa',
-                                          style: GoogleFonts.montserrat(
-                                              fontSize: 15.sp,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                        Text(
-                                          'кухне',
-                                          style: GoogleFonts.montserrat(
-                                              fontSize: 15.sp,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ],
-                                    ),
-                                  )
                                 ],
                               ),
                               Icon(
@@ -161,7 +133,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       builder: (context, snapshot) {
                         print(snapshot.data!);
                         if(snapshot.data![1].toString().isEmpty){
-                          return SizedBox();
+                          return const SizedBox();
                         }
                         else{
                           return  AnimatedScale(
