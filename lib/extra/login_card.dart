@@ -196,6 +196,7 @@ class _LoginCardState extends State<LoginCard> {
                             initialData: false,
                             stream: providerSwitcher.dataStream,
                             builder: (context, snapshot) {
+                              print(snapshot.data);
                               return GestureDetector(
                                 onTap: () async {
                                   FocusManager.instance.primaryFocus?.unfocus();

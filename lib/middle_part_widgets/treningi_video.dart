@@ -31,7 +31,7 @@ class TreningiVideo extends StatelessWidget {
                   isTablet
                       ? const TabletPhotosItem()
                       : const CustomTreningiPhotos(),
-                  CustomTreningiVideo(),
+                  // CustomTreningiVideo(),
                 ],
               ),
             ),

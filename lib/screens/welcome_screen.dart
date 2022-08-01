@@ -5,9 +5,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/blocs/bloc_play_video.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/extra/glavniy_menyu.dart';
+import 'package:hansa_app/extra/top_video_widget.dart';
 import 'package:hansa_app/extra/ui_changer.dart';
 import 'package:hansa_app/providers/stack_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:video_player/video_player.dart';
 
 class WelcomeScreen extends StatefulWidget {
   const WelcomeScreen({Key? key}) : super(key: key);
@@ -153,22 +155,28 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         const UIChanger(),
                       ],
                     ),
-                    /* StreamBuilder<bool>(
+                    StreamBuilder<List>(
                       stream: playProvider.stream,
-                      initialData: false,
+                      initialData: const  [false,"",""],
                       builder: (context, snapshot) {
-                        return AnimatedScale(
+                        print(snapshot.data!);
+                        if(snapshot.data![1].toString().isEmpty){
+                          return SizedBox();
+                        }
+                        else{
+                          return  AnimatedScale(
                           duration: const Duration(milliseconds: 300),
-                          scale: snapshot.data! ? 1 : 0,
+                          scale: snapshot.data![0] ? 1 : 0,
                           curve: Curves.fastLinearToSlowEaseIn,
                           child: TopVideoWidget(
-                            videoController: VideoPlayerController.network(
-                              "https://flutter.github.io/assets-for-api-docs/assets/videos/butterfly.mp4",
-                            ),
+                            url: snapshot.data![1],
+                            title: snapshot.data![2],
+                            
                           ),
                         );
+                        }
                       },
-                    ), */
+                    ), 
                   ],
                 ),
               ));

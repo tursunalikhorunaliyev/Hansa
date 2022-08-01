@@ -25,11 +25,10 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Column(
-        
           children: [
             Padding(
               padding: EdgeInsets.only(
-                  top: isTablet ? 20 : 9, bottom: isTablet ? 20 : 9),
+                  top: isTablet ? 20 : 9,),
               child: Row(
                 children: [
                   Container(
