@@ -78,7 +78,6 @@ class Video extends StatelessWidget {
         child: Align(
           alignment: Alignment.centerLeft,
           child: SingleChildScrollView(
-            
             physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
             child: Row(
