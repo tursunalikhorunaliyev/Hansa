@@ -1,6 +1,11 @@
+import 'dart:convert';
+
+import 'package:hansa_app/api_models.dart/country_type_model.dart';
+
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 class CountryModel {
   bool status;
-  CountryModelData data;
+  Data data;
   CountryModel({
     required this.status,
     required this.data,
@@ -9,28 +14,36 @@ class CountryModel {
   factory CountryModel.fromMap(Map<String, dynamic> map) {
     return CountryModel(
       status: map['status'],
-      data: CountryModelData.fromMap(
+      data: Data.fromMap(
         map['data'],
       ),
     );
   }
 }
 
+class Data {
+  List<CountryModelData> list;
+  Data({
+    required this.list,
+  });
+
+  factory Data.fromMap(List<dynamic> map) {
+    return Data(list: map.map((e) => CountryModelData.fromMap(e)).toList());
+  }
+}
+
 class CountryModelData {
-  List<String> countries;
+  int id;
+  String name;
   CountryModelData({
-    required this.countries,
+    required this.id,
+    required this.name,
   });
 
   factory CountryModelData.fromMap(Map<String, dynamic> map) {
-    List<String> list = [];
-    List<String> keys = [];
-    for (var element in map.keys) {
-      keys.add(element);
-      list.add(map[element]);
-    }
     return CountryModelData(
-      countries: list,
+      id: map['id'] as int,
+      name: map['name'] as String,
     );
   }
 }

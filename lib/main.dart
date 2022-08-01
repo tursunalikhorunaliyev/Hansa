@@ -2,7 +2,6 @@ import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hansa_app/api_services/country_type_service.dart';
-import 'package:hansa_app/api_services/hansa_country_api.dart';
 import 'package:hansa_app/api_services/hansa_job_api.dart';
 import 'package:hansa_app/api_services/store_service.dart';
 import 'package:hansa_app/blocs/bloc_change_profile.dart';
@@ -14,7 +13,6 @@ import 'package:hansa_app/blocs/voyti_ili_sozdata_bloc.dart';
 import 'package:hansa_app/providers/full_registr_provider.dart';
 import 'package:hansa_app/screens/hansa_zagruzka.dart';
 import 'package:hansa_app/blocs/toggle_switcher_bloc.dart';
-import 'package:hansa_app/screens/splash_screen.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 
@@ -32,7 +30,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Hive.box("savedUser").clear();
     Size size = WidgetsBinding.instance.window.physicalSize;
     bool isTablet = (size.width / 3) > 500;
     Map<String, FlipCardController> map = {
@@ -47,11 +44,9 @@ class MyApp extends StatelessWidget {
             create: (context) => StoreData().getStores(),
           ),
           Provider(
-            create: (context) => HasnaJobAPI().getJobs(),
+            create: (context) => BlocJob().getJobs(),
           ),
-          Provider(
-            create: (context) => HansaCountryAPI().getCountries(),
-          ),
+         
           ChangeNotifierProvider(
             create: (context) => FullRegisterDataProvider(),
           ),
@@ -76,7 +71,7 @@ class MyApp extends StatelessWidget {
         ],
         child: const MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: SplashScreen(),
+          home: HansaZagruzka(),
         ),
       ),
     );

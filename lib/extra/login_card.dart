@@ -30,9 +30,11 @@ class _LoginCardState extends State<LoginCard> {
   void initState() {
     pagerBloc.stream.listen((event) {
       if (event[2]) {
-        goToWelcome(event[1]);
+        goToWelcome(event[3]);
+        print("object");
       } else {
         showSnac();
+        print("NO object");
       }
     });
     super.initState();
