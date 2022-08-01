@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 
@@ -24,12 +23,14 @@ class LoginAction {
         box.put("username", username);
         box.put("password", password);
         box.put("isSaved", true);
+       
       }
       else{
           box.put("isSaved", false);
       }
       
-      return [username, password, isSaved];
+       return [username, password, isSaved];
+      
     } else {
       return ["", "", false];
     }
