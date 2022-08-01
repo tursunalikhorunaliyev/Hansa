@@ -1,6 +1,9 @@
+import 'dart:convert';
+
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 class JobModel {
   bool status;
-  JobModelData data;
+  Data data;
   JobModel({
     required this.status,
     required this.data,
@@ -9,26 +12,34 @@ class JobModel {
   factory JobModel.fromMap(Map<String, dynamic> map) {
     return JobModel(
       status: map['status'] as bool,
-      data: JobModelData.fromMap(map['data']),
+      data: Data.fromMap(map['data']),
     );
   }
 }
 
+class Data {
+  List<JobModelData> jobModelData;
+  Data({
+    required this.jobModelData,
+  });
+
+  factory Data.fromMap(List<dynamic> map) {
+    return Data(jobModelData: map.map((e) => JobModelData.fromMap(e)).toList());
+  }
+}
+
 class JobModelData {
-  List<String> jobs;
+  int id;
+  String name;
   JobModelData({
-    required this.jobs,
+    required this.id,
+    required this.name,
   });
 
   factory JobModelData.fromMap(Map<String, dynamic> map) {
-    List<String> list = [];
-    List<String> keys = [];
-    for (var element in map.keys) {
-      keys.add(element);
-      list.add(map[element]);
-    }
     return JobModelData(
-      jobs: list,
+      id: map['id'] as int,
+      name: map['name'] as String,
     );
   }
 }

@@ -47,7 +47,7 @@ class MyApp extends StatelessWidget {
             create: (context) => StoreData().getStores(),
           ),
           Provider(
-            create: (context) => HasnaJobAPI().getJobs(),
+            create: (context) => BlocJob().getJobs(),
           ),
           Provider(
             create: (context) => HansaCountryAPI().getCountries(),
