@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/blocs/bloc_change_profile.dart';
@@ -13,6 +15,7 @@ import 'package:hansa_app/drawer_widgets/text_icon_card.dart';
 import 'package:provider/provider.dart';
 
 class GlavniyMenyu extends StatefulWidget {
+
   const GlavniyMenyu({Key? key}) : super(key: key);
 
   @override
@@ -21,11 +24,13 @@ class GlavniyMenyu extends StatefulWidget {
 
 class _GlavniyMenyuState extends State<GlavniyMenyu> {
   GlobalKey<ScaffoldState> keyScaffold = GlobalKey();
-
+  
+  
   @override
   Widget build(BuildContext context) {
     final blocChangeProfileProvider = Provider.of<BlocChangeProfile>(context);
     final isTablet = Provider.of<bool>(context);
+
     return Drawer(
       backgroundColor: const Color(0xFF333333),
       width: isTablet ? 435 : 324,
@@ -176,6 +181,7 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                           initialData: ActionChange.textIconCard,
                           stream: blocChangeProfileProvider.dataStream,
                           builder: (context, snapshot) {
+                            log(snapshot.data!.name);
                             return GestureDetector(
                               onTap: () {
                                 snapshot.data == ActionChange.personRekvizit
@@ -401,7 +407,7 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                                                 ActionChange
                                                                     .nastroyka
                                                             ? const NastroykaWidget()
-                                                            : const Padding(
+                                                            :      const Padding(
                                                                 padding: EdgeInsets
                                                                     .only(
                                                                         left:

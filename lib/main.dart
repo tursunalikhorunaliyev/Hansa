@@ -64,6 +64,7 @@ class MyApp extends StatelessWidget {
             create: (context) => LoginClickedBloc(),
           ),
           Provider(create: (context) => BlocFlipLogin()),
+      
         ],
         child: const MaterialApp(
           debugShowCheckedModeBanner: false,
