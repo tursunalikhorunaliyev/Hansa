@@ -1,12 +1,10 @@
-import 'dart:async';
-import 'dart:developer';
-
 import 'package:filter_list/filter_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/country_model.dart';
 import 'package:hansa_app/api_models.dart/job_model.dart';
+import 'package:hansa_app/blocs/bloc_full_register.dart';
 import 'package:hansa_app/blocs/hansa_country_api.dart';
 import 'package:hansa_app/blocs/hansa_job_api.dart';
 import 'package:hansa_app/enums/full_reg_enum.dart';
@@ -37,8 +35,6 @@ class ModalForFullReg extends StatefulWidget {
 }
 
 class _ModalForFullRegState extends State<ModalForFullReg> {
-  final dateRangeController = DateRangePickerController();
-
   String dataRojdeniya = "";
   String selectedText = "Salom";
 
@@ -53,7 +49,6 @@ class _ModalForFullRegState extends State<ModalForFullReg> {
 
   @override
   Widget build(BuildContext context) {
-    // final list = Provider.of<List<TextEditingController>>(context);
     return Padding(
         padding: const EdgeInsets.only(
           left: 11,
@@ -70,6 +65,9 @@ class _ModalForFullRegState extends State<ModalForFullReg> {
                         onTap: () {
                           print(snapshot1.hasData ? "borrrr" : "yoqqqq");
                           if (widget.regEnum == FullRegEnum.dataRojdeniya) {
+                            final dateRangeController =
+                                Provider.of<DateRangePickerController>(context,
+                                    listen: false);
                             showCupertinoModalPopup(
                                 context: context,
                                 builder: (context) {
@@ -121,6 +119,11 @@ class _ModalForFullRegState extends State<ModalForFullReg> {
                                       ));
                                 });
                           } else if (widget.regEnum == FullRegEnum.doljnost) {
+                            final doljnost = Provider.of<TextEditingController>(
+                                context,
+                                listen: false);
+                            final bloc = Provider.of<BlocFullRegister>(context,
+                                listen: false);
                             List<String> listValues = [];
                             List<int> listLKeys = [];
                             for (var element
@@ -130,7 +133,6 @@ class _ModalForFullRegState extends State<ModalForFullReg> {
                             }
                             FilterListDialog.display<String>(
                                 enableOnlySingleSelection: true,
-                                
                                 selectedListData: [selectedText],
                                 context,
                                 listData: listValues,
@@ -143,11 +145,17 @@ class _ModalForFullRegState extends State<ModalForFullReg> {
                                       .contains(query.toLowerCase());
                                 },
                                 onApplyButtonClick: (list1) {
-                                  // list[0].text = list1!.first;
+                                  doljnost.text = list1!.first;
+                                  bloc.ak.add(doljnost.text);
                                   Navigator.pop(context);
                                 });
                           } else if (widget.regEnum ==
                               FullRegEnum.vibiriteGorod) {
+                            final gorod = Provider.of<TextEditingController>(
+                                context,
+                                listen: false);
+                            final bloc = Provider.of<BlocFullRegister>(context,
+                                listen: false);
                             List<String> listValues1 = [];
                             List<int> listLKeys1 = [];
                             for (dynamic element in snapshot1.hasData
@@ -170,20 +178,33 @@ class _ModalForFullRegState extends State<ModalForFullReg> {
                                       .contains(query.toLowerCase());
                                 },
                                 onApplyButtonClick: (list1) {
-                                  // list[1].text = list1!.first;
+                                  gorod.text = list1!.first;
+                                  bloc.bk.add(gorod.text);
                                   Navigator.pop(context);
                                 });
-                          }
-                          else if(widget.regEnum == FullRegEnum.nazvaniyaSeti){
-                            showCupertinoModalPopup(context: context, builder: (context){
-                              return  Container(
-                                  decoration:  BoxDecoration(
-                                   color: Colors.white,
+                          } else if (widget.regEnum ==
+                              FullRegEnum.nazvaniyaSeti) {
+                            final nazvaniya =
+                                Provider.of<TextEditingController>(context,
+                                    listen: false);
+                            final bloc = Provider.of<BlocFullRegister>(context,
+                                listen: false);
+                            showCupertinoModalPopup(
+                                context: context,
+                                builder: (context) {
+                                  return Container(
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
                                           borderRadius:
-                                              BorderRadius.circular(20)
-                                ),
-                                  child: Material(child: NazvaniyaWidget()));
-                            });
+                                              BorderRadius.circular(20)),
+                                      child: Material(
+                                          child: Provider(
+                                        create: (context) => bloc,
+                                        child: NazvaniyaWidget(
+                                          text: nazvaniya,
+                                        ),
+                                      )));
+                                });
                           }
                         },
                         child: Stack(

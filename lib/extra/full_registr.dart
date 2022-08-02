@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/blocs/bloc_flip_login.dart';
+import 'package:hansa_app/blocs/bloc_full_register.dart';
 import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
 import 'package:hansa_app/enums/full_reg_enum.dart';
 import 'package:hansa_app/extra/modal_sheet_for_full_reg.dart';
@@ -17,15 +20,17 @@ class FullRegistr extends StatefulWidget {
 }
 
 class _FullRegistrState extends State<FullRegistr> {
-  String selectedValue2 = "Должность";
-  String selectedValue3 = "Город*";
+  final blocFullRegister = BlocFullRegister();
   final dateRangeController = DateRangePickerController();
   final imyaTextEditingController = TextEditingController();
   final familiyaTextEditingController = TextEditingController();
   final emailTextFielController = TextEditingController();
   final phoneTextFieldController = TextEditingController();
   final adresTorgoviySetTextFielController = TextEditingController();
-  final nazvaniyaTextFieldController = TextEditingController();
+  final nazvaniyaTextFieldController =
+      TextEditingController(text: "Названия сети");
+  final doljnostTextFieldController = TextEditingController(text: "Должность");
+  final gorodTextFieldController = TextEditingController(text: "Город");
   @override
   Widget build(BuildContext context) {
     final fullRegDataProvider = Provider.of<FullRegisterDataProvider>(context);
@@ -123,23 +128,11 @@ class _FullRegistrState extends State<FullRegistr> {
                       const SizedBox(
                         height: 4,
                       ),
-                      ModalForFullReg(
-                        regEnum: FullRegEnum.dataRojdeniya,
-                        text: "Дата рождения",
-                        width: isTablet ? 538 : 325,
-                        size: isTablet ? 15 : 10,
-                        height: isTablet ? 43 : 38,
-                        fontWeight:
-                            isTablet ? FontWeight.w600 : FontWeight.normal,
-                      ),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      Provider<TextEditingController>(
-                        create: (context) => nazvaniyaTextFieldController,
+                      Provider(
+                        create: (context) => dateRangeController,
                         child: ModalForFullReg(
-                          regEnum: FullRegEnum.nazvaniyaSeti,
-                          text: "Название сети",
+                          regEnum: FullRegEnum.dataRojdeniya,
+                          text: "Дата рождения",
                           width: isTablet ? 538 : 325,
                           size: isTablet ? 15 : 10,
                           height: isTablet ? 43 : 38,
@@ -150,26 +143,72 @@ class _FullRegistrState extends State<FullRegistr> {
                       const SizedBox(
                         height: 4,
                       ),
-                      ModalForFullReg(
-                        regEnum: FullRegEnum.doljnost,
-                        text: "Должность",
-                        width: isTablet ? 538 : 325,
-                        size: isTablet ? 15 : 10,
-                        height: isTablet ? 43 : 38,
-                        fontWeight:
-                            isTablet ? FontWeight.w600 : FontWeight.normal,
+                      MultiProvider(
+                        providers: [
+                          Provider(
+                              create: (context) =>
+                                  nazvaniyaTextFieldController),
+                          Provider(create: (context) => blocFullRegister),
+                        ],
+                        child: StreamBuilder<String>(
+                          initialData: "",
+                          stream: blocFullRegister.cm,
+                          builder: (context, snapshot) => ModalForFullReg(
+                            regEnum: FullRegEnum.nazvaniyaSeti,
+                            text: nazvaniyaTextFieldController.text,
+                            width: isTablet ? 538 : 325,
+                            size: isTablet ? 15 : 10,
+                            height: isTablet ? 43 : 38,
+                            fontWeight:
+                                isTablet ? FontWeight.w600 : FontWeight.normal,
+                          ),
+                        ),
                       ),
                       const SizedBox(
                         height: 4,
                       ),
-                      ModalForFullReg(
-                        regEnum: FullRegEnum.vibiriteGorod,
-                        text: "Город",
-                        width: isTablet ? 538 : 325,
-                        size: isTablet ? 15 : 10,
-                        height: isTablet ? 43 : 38,
-                        fontWeight:
-                            isTablet ? FontWeight.w600 : FontWeight.normal,
+                      MultiProvider(
+                        providers: [
+                          Provider(
+                              create: (context) => doljnostTextFieldController),
+                          Provider(create: (context) => blocFullRegister),
+                        ],
+                        child: StreamBuilder<String>(
+                          initialData: "",
+                          stream: blocFullRegister.am,
+                          builder: (context, snapshot) => ModalForFullReg(
+                            regEnum: FullRegEnum.doljnost,
+                            text: doljnostTextFieldController.text,
+                            width: isTablet ? 538 : 325,
+                            size: isTablet ? 15 : 10,
+                            height: isTablet ? 43 : 38,
+                            fontWeight:
+                                isTablet ? FontWeight.w600 : FontWeight.normal,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 4,
+                      ),
+                      MultiProvider(
+                        providers: [
+                          Provider(
+                              create: (context) => gorodTextFieldController),
+                          Provider(create: (context) => blocFullRegister),
+                        ],
+                        child: StreamBuilder<String>(
+                          initialData: "",
+                          stream: blocFullRegister.bm,
+                          builder: (context, snapshot) => ModalForFullReg(
+                            regEnum: FullRegEnum.vibiriteGorod,
+                            text: gorodTextFieldController.text,
+                            width: isTablet ? 538 : 325,
+                            size: isTablet ? 15 : 10,
+                            height: isTablet ? 43 : 38,
+                            fontWeight:
+                                isTablet ? FontWeight.w600 : FontWeight.normal,
+                          ),
+                        ),
                       ),
                       const SizedBox(
                         height: 4,
@@ -259,7 +298,7 @@ class _FullRegistrState extends State<FullRegistr> {
         персональных данных""", isTablet ? 16 : 11),
                                 const SizedBox(
                                   width: 75,
-                                ),     
+                                ),
                                 ToggleSwitch(
                                   handlerWidth: 40,
                                   handlerHeight: 12,
@@ -291,10 +330,11 @@ class _FullRegistrState extends State<FullRegistr> {
                                 familiyaTextEditingController.text,
                                 emailTextFielController.text,
                                 phoneTextFieldController.text,
-                                dateRangeController.displayDate,
+                                dateRangeController.displayDate!
+                                    .toIso8601String(),
                                 nazvaniyaTextFieldController.text,
-                                "",
-                                "",
+                                doljnostTextFieldController.text,
+                                gorodTextFieldController.text,
                                 adresTorgoviySetTextFielController.text);
                           },
                           child: Container(
@@ -314,7 +354,7 @@ class _FullRegistrState extends State<FullRegistr> {
                                 ),
                               ],
                             ),
-                             child: Text(
+                            child: Text(
                               "Зарегистрироваться",
                               style: GoogleFonts.montserrat(
                                   fontSize: isTablet ? 18 : 12,
@@ -379,14 +419,14 @@ class _FullRegistrState extends State<FullRegistr> {
 
   getMal(var ism, var fam, var email, var tel, var date, var nazvaniya,
       var dolj, var gorod, var adres) {
-    print(ism);
-    print(fam);
-    print(email);
-    print(tel);
-    print(date);
-    print(nazvaniya);
-    print(dolj);
-    print(gorod);
-    print(adres);
+    log(ism.toString());
+    log(fam.toString());
+    log(email.toString());
+    log(tel.toString());
+    log(date.toString());
+    log(nazvaniya.toString());
+    log(dolj.toString());
+    log(gorod.toString());
+    log(adres.toString());
   }
 }

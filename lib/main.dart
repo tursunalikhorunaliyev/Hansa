@@ -20,6 +20,7 @@ import 'package:provider/provider.dart';
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
+  Provider.debugCheckInvalidValueType = null;
   await Hive.initFlutter();
   await Hive.openBox("savedUser");
   runApp(const MyApp());
@@ -40,7 +41,6 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 812),
       builder: (context, child) => MultiProvider(
         providers: [
-
           ChangeNotifierProvider(
             create: (context) => FullRegisterDataProvider(),
           ),
