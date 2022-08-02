@@ -7,9 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/country_model.dart';
 import 'package:hansa_app/api_models.dart/job_model.dart';
-import 'package:hansa_app/api_services/hansa_country_api.dart';
-import 'package:hansa_app/api_services/hansa_job_api.dart';
+import 'package:hansa_app/blocs/hansa_country_api.dart';
+import 'package:hansa_app/blocs/hansa_job_api.dart';
 import 'package:hansa_app/enums/full_reg_enum.dart';
+import 'package:hansa_app/extra/nazvaniya.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
@@ -42,10 +43,9 @@ class _ModalForFullRegState extends State<ModalForFullReg> {
   String selectedText = "Salom";
 
   final blocJob = BlocJob();
-  final blocCity = HansaCountryAPI(1);
+  final blocCity = HansaCountryBloC(1);
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     blocJob.eventSink.add(JobEnum.job);
     blocCity.eventSink.add(CityEnum.city);
@@ -53,6 +53,7 @@ class _ModalForFullRegState extends State<ModalForFullReg> {
 
   @override
   Widget build(BuildContext context) {
+    // final list = Provider.of<List<TextEditingController>>(context);
     return Padding(
         padding: const EdgeInsets.only(
           left: 11,
@@ -129,6 +130,7 @@ class _ModalForFullRegState extends State<ModalForFullReg> {
                             }
                             FilterListDialog.display<String>(
                                 enableOnlySingleSelection: true,
+                                
                                 selectedListData: [selectedText],
                                 context,
                                 listData: listValues,
@@ -140,7 +142,8 @@ class _ModalForFullRegState extends State<ModalForFullReg> {
                                       .toLowerCase()
                                       .contains(query.toLowerCase());
                                 },
-                                onApplyButtonClick: (list) {
+                                onApplyButtonClick: (list1) {
+                                  // list[0].text = list1!.first;
                                   Navigator.pop(context);
                                 });
                           } else if (widget.regEnum ==
@@ -166,9 +169,21 @@ class _ModalForFullRegState extends State<ModalForFullReg> {
                                       .toLowerCase()
                                       .contains(query.toLowerCase());
                                 },
-                                onApplyButtonClick: (list) {
+                                onApplyButtonClick: (list1) {
+                                  // list[1].text = list1!.first;
                                   Navigator.pop(context);
                                 });
+                          }
+                          else if(widget.regEnum == FullRegEnum.nazvaniyaSeti){
+                            showCupertinoModalPopup(context: context, builder: (context){
+                              return  Container(
+                                  decoration:  BoxDecoration(
+                                   color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(20)
+                                ),
+                                  child: Material(child: NazvaniyaWidget()));
+                            });
                           }
                         },
                         child: Stack(

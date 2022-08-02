@@ -3,40 +3,40 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/blocs/bloc_flip_login.dart';
 import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
- import 'package:hansa_app/enums/full_reg_enum.dart';
- import 'package:hansa_app/extra/modal_sheet_for_full_reg.dart';
- import 'package:hansa_app/extra/text_field_for_full_reg.dart';
- import 'package:hansa_app/providers/full_registr_provider.dart';
- import 'package:provider/provider.dart';
- import 'package:syncfusion_flutter_datepicker/datepicker.dart';
- 
- class FullRegistr extends StatefulWidget {
+import 'package:hansa_app/enums/full_reg_enum.dart';
+import 'package:hansa_app/extra/modal_sheet_for_full_reg.dart';
+import 'package:hansa_app/extra/text_field_for_full_reg.dart';
+import 'package:hansa_app/providers/full_registr_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+
+class FullRegistr extends StatefulWidget {
   const FullRegistr({Key? key}) : super(key: key);
   @override
   State<FullRegistr> createState() => _FullRegistrState();
 }
 
- class _FullRegistrState extends State<FullRegistr> {
-   String selectedValue2 = "Должность";
-   String selectedValue3 = "Город*";
-   final dateRangeController = DateRangePickerController();
-   final imyaTextEditingController = TextEditingController();
-   final familiyaTextEditingController = TextEditingController();
-   final emailTextFielController = TextEditingController();
-   final phoneTextFieldController = TextEditingController();
-   final adresTorgoviySetTextFielController = TextEditingController();
+class _FullRegistrState extends State<FullRegistr> {
+  String selectedValue2 = "Должность";
+  String selectedValue3 = "Город*";
+  final dateRangeController = DateRangePickerController();
+  final imyaTextEditingController = TextEditingController();
+  final familiyaTextEditingController = TextEditingController();
+  final emailTextFielController = TextEditingController();
+  final phoneTextFieldController = TextEditingController();
+  final adresTorgoviySetTextFielController = TextEditingController();
+  final nazvaniyaTextFieldController = TextEditingController();
+  @override
+  Widget build(BuildContext context) {
+    final fullRegDataProvider = Provider.of<FullRegisterDataProvider>(context);
+    final isTablet = Provider.of<bool>(context);
+    final providerFlip = Provider.of<Map<String, FlipCardController>>(context);
+    final providerFlipLogin = Provider.of<BlocFlipLogin>(context);
 
-
-   @override
-   Widget build(BuildContext context) {
-     final fullRegDataProvider = Provider.of<FullRegisterDataProvider>(context);
-     final isTablet = Provider.of<bool>(context);
-     final providerFlip = Provider.of<Map<String, FlipCardController>>(context);
-     final providerFlipLogin = Provider.of<BlocFlipLogin>(context);
     return SingleChildScrollView(
       child: Center(
         child: GestureDetector(
-          onTap: (){
+          onTap: () {
             FocusManager.instance.primaryFocus?.unfocus();
           },
           child: Stack(
@@ -81,41 +81,45 @@ import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
                         ),
                       ),
                       const SizedBox(
-                         height: 18,
-                       ),
-                       TextFieldForFullRegister(
-                         textEditingController: imyaTextEditingController,
-                           text: "Имя",
-                           height: isTablet ? 45 : 38,
-                           size: isTablet ? 13 : 10,
-                          weight: isTablet ? FontWeight.w600 : FontWeight.normal),
+                        height: 18,
+                      ),
+                      TextFieldForFullRegister(
+                          textEditingController: imyaTextEditingController,
+                          text: "Имя",
+                          height: isTablet ? 45 : 38,
+                          size: isTablet ? 13 : 10,
+                          weight:
+                              isTablet ? FontWeight.w600 : FontWeight.normal),
                       const SizedBox(
-                         height: 4,
-                       ),
-                       TextFieldForFullRegister(
-                         textEditingController: familiyaTextEditingController,
-                           text: "Фамилия",
-                           height: isTablet ? 45 : 38,
-                           size: isTablet ? 13 : 10,
-                          weight: isTablet ? FontWeight.w600 : FontWeight.normal),
+                        height: 4,
+                      ),
+                      TextFieldForFullRegister(
+                          textEditingController: familiyaTextEditingController,
+                          text: "Фамилия",
+                          height: isTablet ? 45 : 38,
+                          size: isTablet ? 13 : 10,
+                          weight:
+                              isTablet ? FontWeight.w600 : FontWeight.normal),
                       const SizedBox(
-                         height: 5,
-                       ),
-                       TextFieldForFullRegister(
-                         textEditingController: emailTextFielController,
-                           text: "Email",
-                           height: isTablet ? 45 : 38,
-                           size: isTablet ? 13 : 10,
-                          weight: isTablet ? FontWeight.w600 : FontWeight.normal),
+                        height: 5,
+                      ),
+                      TextFieldForFullRegister(
+                          textEditingController: emailTextFielController,
+                          text: "Email",
+                          height: isTablet ? 45 : 38,
+                          size: isTablet ? 13 : 10,
+                          weight:
+                              isTablet ? FontWeight.w600 : FontWeight.normal),
                       const SizedBox(
-                         height: 4,
-                       ),
-                       TextFieldForFullRegister(
-                         textEditingController: phoneTextFieldController,
-                           text: "Контактный тефон",
-                           height: isTablet ? 45 : 38,
-                           size: isTablet ? 15 : 10,
-                          weight: isTablet ? FontWeight.w600 : FontWeight.normal),
+                        height: 4,
+                      ),
+                      TextFieldForFullRegister(
+                          textEditingController: phoneTextFieldController,
+                          text: "Контактный тефон",
+                          height: isTablet ? 45 : 38,
+                          size: isTablet ? 15 : 10,
+                          weight:
+                              isTablet ? FontWeight.w600 : FontWeight.normal),
                       const SizedBox(
                         height: 4,
                       ),
@@ -131,14 +135,17 @@ import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
                       const SizedBox(
                         height: 4,
                       ),
-                      ModalForFullReg(
-                        regEnum: FullRegEnum.nazvaniyaSeti,
-                        text: "Название сети",
-                        width: isTablet ? 538 : 325,
-                        size: isTablet ? 15 : 10,
-                        height: isTablet ? 43 : 38,
-                        fontWeight:
-                            isTablet ? FontWeight.w600 : FontWeight.normal,
+                      Provider<TextEditingController>(
+                        create: (context) => nazvaniyaTextFieldController,
+                        child: ModalForFullReg(
+                          regEnum: FullRegEnum.nazvaniyaSeti,
+                          text: "Название сети",
+                          width: isTablet ? 538 : 325,
+                          size: isTablet ? 15 : 10,
+                          height: isTablet ? 43 : 38,
+                          fontWeight:
+                              isTablet ? FontWeight.w600 : FontWeight.normal,
+                        ),
                       ),
                       const SizedBox(
                         height: 4,
@@ -165,14 +172,16 @@ import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
                             isTablet ? FontWeight.w600 : FontWeight.normal,
                       ),
                       const SizedBox(
-                         height: 4,
-                       ),
-                       TextFieldForFullRegister(
-                         textEditingController: adresTorgoviySetTextFielController,
-                           text: "Адрес торговой сети",
-                           height: isTablet ? 45 : 38,
-                           size: isTablet ? 13 : 10,
-                          weight: isTablet ? FontWeight.w600 : FontWeight.normal),
+                        height: 4,
+                      ),
+                      TextFieldForFullRegister(
+                          textEditingController:
+                              adresTorgoviySetTextFielController,
+                          text: "Адрес торговой сети",
+                          height: isTablet ? 45 : 38,
+                          size: isTablet ? 13 : 10,
+                          weight:
+                              isTablet ? FontWeight.w600 : FontWeight.normal),
                       const SizedBox(
                         height: 10,
                       ),
@@ -250,7 +259,7 @@ import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
         персональных данных""", isTablet ? 16 : 11),
                                 const SizedBox(
                                   width: 75,
-                                ),
+                                ),     
                                 ToggleSwitch(
                                   handlerWidth: 40,
                                   handlerHeight: 12,
@@ -271,23 +280,26 @@ import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
                         padding: EdgeInsets.only(
                           left: 11,
                           right: 9,
-                           top: isTablet ? 30 : 25,
-                         ),
-                         child: GestureDetector(
-                           
-                           onTap: (){
-                             FocusManager.instance.primaryFocus?.unfocus();
-                             providerFlip['signin']!.toggleCard();
-                             print(imyaTextEditingController.text);
-                             print(familiyaTextEditingController.text);
-                             print(emailTextFielController.text);
-                             print(phoneTextFieldController.text);
-                             print(adresTorgoviySetTextFielController.text);
-                             print(fullRegDataProvider.dataRojdeniya);
-                           },
-                           child: Container(
-                             alignment: Alignment.center,
-                             height: isTablet ? 60 : 46,
+                          top: isTablet ? 30 : 25,
+                        ),
+                        child: GestureDetector(
+                          onTap: () {
+                            FocusManager.instance.primaryFocus?.unfocus();
+                            providerFlip['signin']!.toggleCard();
+                            getMal(
+                                imyaTextEditingController.text,
+                                familiyaTextEditingController.text,
+                                emailTextFielController.text,
+                                phoneTextFieldController.text,
+                                dateRangeController.displayDate,
+                                nazvaniyaTextFieldController.text,
+                                "",
+                                "",
+                                adresTorgoviySetTextFielController.text);
+                          },
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: isTablet ? 60 : 46,
                             width: isTablet ? 525 : 325,
                             decoration: BoxDecoration(
                               color: const Color(0xFF25b049),
@@ -302,7 +314,7 @@ import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
                                 ),
                               ],
                             ),
-                            child: Text(
+                             child: Text(
                               "Зарегистрироваться",
                               style: GoogleFonts.montserrat(
                                   fontSize: isTablet ? 18 : 12,
@@ -354,6 +366,7 @@ import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
       ),
     );
   }
+
   Widget textSwitch(String text, double size) {
     return Text(
       text,
@@ -362,5 +375,18 @@ import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
           color: const Color(0xFFa1b7c2),
           fontWeight: FontWeight.w500),
     );
+  }
+
+  getMal(var ism, var fam, var email, var tel, var date, var nazvaniya,
+      var dolj, var gorod, var adres) {
+    print(ism);
+    print(fam);
+    print(email);
+    print(tel);
+    print(date);
+    print(nazvaniya);
+    print(dolj);
+    print(gorod);
+    print(adres);
   }
 }

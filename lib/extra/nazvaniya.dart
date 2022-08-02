@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/store_model.dart';
 import 'package:hansa_app/api_services/store_service.dart';
+import 'package:provider/provider.dart';
 
 class NazvaniyaWidget extends StatefulWidget {
   const NazvaniyaWidget({Key? key}) : super(key: key);
@@ -21,22 +20,20 @@ class _NazvaniyaWidgetState extends State<NazvaniyaWidget> {
     bloc.eventSink.add(StoreEnum.store);
   }
 
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Container(
+    final prov =Provider.of<TextEditingController>(context);
+    return SizedBox(
           width: 360,
           height: 400,
-          decoration: BoxDecoration(
-              border: Border.all(width: 1),
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(7), topRight: Radius.circular(7))),
+        
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
                 TextField(
+                  controller: prov,
                   decoration: InputDecoration(
                     focusedBorder: OutlineInputBorder(
                       borderSide:
@@ -62,8 +59,12 @@ class _NazvaniyaWidgetState extends State<NazvaniyaWidget> {
                             itemBuilder: (context, index) {
                               return Column(
                                 children: [
-                                  Text(snapshot.data!.data.list[index].name),
-                                  Divider()
+                                  InkWell(
+                                    onTap: () {
+                                      prov.text = snapshot.data!.data.list[index].name;
+                                    },
+                                    child: Text(snapshot.data!.data.list[index].name)),
+                                 const Divider()
                                 ],
                               );
                             },
@@ -79,7 +80,7 @@ class _NazvaniyaWidgetState extends State<NazvaniyaWidget> {
                     height: 50,
                     width: 340,
                     alignment: Alignment.center,
-                    child: Text(
+                    child:  Text(
                       'OK',
                       style: GoogleFonts.montserrat(
                           fontSize: 15,
@@ -93,8 +94,6 @@ class _NazvaniyaWidgetState extends State<NazvaniyaWidget> {
               ],
             ),
           ),
-        ),
-      ),
-    );
+        );
   }
 }
