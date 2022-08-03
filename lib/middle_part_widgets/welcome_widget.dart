@@ -28,45 +28,13 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
           children: [
             Padding(
               padding: EdgeInsets.only(
-                  top: isTablet ? 20 : 9,),
-              child: Row(
-                children: [
-                  Container(
-                    alignment: Alignment.center,
-                    width: isTablet ? 120 : 70,
-                    height: isTablet ? 70 : 42,
-                    decoration: BoxDecoration(
-                        color: const Color(0XFFff163e),
-                        borderRadius: BorderRadius.only(
-                            topRight: Radius.circular(isTablet ? 40 : 21),
-                            bottomRight: Radius.circular(isTablet ? 40 : 21))),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      child: Image.asset(
-                        'assets/Lab.png',
-                        height: isTablet ? 50 : 12,
-                        width: isTablet ? 70 : 42,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: Text(
-                      '#',
-                      style: GoogleFonts.montserrat(
-                          fontSize: isTablet ? 25 : 14,
-                          fontWeight: FontWeight.w700,
-                          color: const Color(0xffff163e)),
-                    ),
-                  ),
-                  Text(
-                    'Добро пожаловать',
-                    style: GoogleFonts.montserrat(
-                        fontSize: isTablet ? 30 : 20,
-                        fontWeight: FontWeight.bold,
-                        color: const Color(0xff272624)),
-                  ),
-                ],
+                  top: isTablet ? 20 : 9,bottom: isTablet ? 20 : 9),
+              child: Text(
+                'Добро пожаловать',
+                style: GoogleFonts.montserrat(
+                    fontSize: isTablet ? 30 : 20,
+                    fontWeight: FontWeight.bold,
+                    color: const Color(0xff272624)),
               ),
             ),
             StreamBuilder<List<WelcomeModelData>>(

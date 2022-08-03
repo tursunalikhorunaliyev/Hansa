@@ -243,7 +243,7 @@ class ObucheniyaWidget extends StatelessWidget {
                         ],
                       );
                     } else {
-                      return SpinKitWanderingCubes(
+                      return const SpinKitWanderingCubes(
                         color: Colors.red,
                       );
                     }
