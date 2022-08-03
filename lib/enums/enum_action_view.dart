@@ -1,0 +1,3 @@
+enum EnumActionView{
+  view,
+}
