@@ -1,16 +1,21 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PartIndicator extends StatelessWidget {
   PartIndicator({Key? key, required this.icon}) : super(key: key);
   Widget icon;
   @override
   Widget build(BuildContext context) {
+    final isTablet = Provider.of<bool>(context);
     return Row(
       children: [
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 8.0),
+          padding:  EdgeInsets.only(top: isTablet ? 7.h : 10.h,
+          bottom: isTablet ? 8 : 15.h,),
           child: Container(
             width: 70.33333333333333,
             decoration: const BoxDecoration(
@@ -26,7 +31,7 @@ class PartIndicator extends StatelessWidget {
         ),
         Image.asset(
           "assets/#Статьи .png",
-          height: 100,
+          
           width: 100,
         )
       ],

@@ -8,6 +8,7 @@ import 'package:hansa_app/blocs/bloc_flip_login.dart';
 import 'package:hansa_app/blocs/bloc_play_video.dart';
 import 'package:hansa_app/blocs/login_clicked_bloc.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
+import 'package:hansa_app/blocs/read_stati_bloc.dart';
 import 'package:hansa_app/blocs/voyti_ili_sozdata_bloc.dart';
 import 'package:hansa_app/providers/full_registr_provider.dart';
 import 'package:hansa_app/screens/hansa_zagruzka.dart';
@@ -48,6 +49,7 @@ class MyApp extends StatelessWidget {
           Provider(create: (context) => BlocChangeTitleIndex()),
           Provider(create: (context) => map),
           Provider(create: (context) => VoytiIliSozdatBloC()),
+          Provider(create: (context) => ReadStatiBLoC()),
           Provider(
             create: (context) => MenuEventsBloC(),
           ),

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class StatiComment extends StatefulWidget {
-  const StatiComment({Key? key}) : super(key: key);
-
+   StatiComment({Key? key , required this.rating}) : super(key: key);
+String rating;
   @override
   State<StatiComment> createState() => _StatiCommentState();
 }
@@ -41,7 +41,7 @@ class _StatiCommentState extends State<StatiComment> {
                       width: 3,
                     ),
                     Text(
-                      "4.5",
+                      widget.rating,
                       style: GoogleFonts.montserrat(
                           fontSize: 11.51, color: const Color(0xFF919191)),
                     )

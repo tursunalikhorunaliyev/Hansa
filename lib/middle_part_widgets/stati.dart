@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hansa_app/api_models.dart/read_stati_model.dart';
 import 'package:hansa_app/api_models.dart/stati_model.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
+import 'package:hansa_app/blocs/read_stati_bloc.dart';
 import 'package:hansa_app/blocs/stati_bloc.dart';
 import 'package:hansa_app/extra/custom_clip_item.dart';
 import 'package:hansa_app/extra/custom_title.dart';
@@ -16,8 +18,10 @@ class Stati extends StatefulWidget {
 class _StatiState extends State<Stati> {
   @override
   Widget build(BuildContext context) {
+    final readStatiBloCProvider = Provider.of<ReadStatiBLoC>(context);
     final token = Provider.of<String>(context);
     final bloc = StatiBLoC(token);
+    
     final statiBloCProvider = Provider.of<MenuEventsBloC>(context);
     return Expanded(
       child: Column(
@@ -43,9 +47,12 @@ class _StatiState extends State<Stati> {
                             titleColor: const Color(0xff272624),
                             title: snapshot.data!.list.list[index].title,
                             buttonText: "Читать",
-                            onTap: () {
+                            onTap: ()async {
+                             
                               statiBloCProvider.eventSink
                                   .add(MenuActions.chitatStati);
+                           ReadStatiModel statiMOdel =   await  readStatiBloCProvider.getReadStati(token, snapshot.data!.list.list[index].link);
+                                readStatiBloCProvider.sink.add(statiMOdel);
                             },
                           ),
                         ),
