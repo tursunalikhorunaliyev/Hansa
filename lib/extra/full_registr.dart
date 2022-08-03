@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/blocs/bloc_flip_login.dart';
 import 'package:hansa_app/blocs/bloc_full_register.dart';
+import 'package:hansa_app/blocs/bloc_sign.dart';
 import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
 import 'package:hansa_app/enums/full_reg_enum.dart';
 import 'package:hansa_app/extra/modal_sheet_for_full_reg.dart';
@@ -27,10 +28,13 @@ class _FullRegistrState extends State<FullRegistr> {
   final emailTextFielController = TextEditingController();
   final phoneTextFieldController = TextEditingController();
   final adresTorgoviySetTextFielController = TextEditingController();
-  final nazvaniyaTextFieldController =
-      TextEditingController(text: "Названия сети");
-  final doljnostTextFieldController = TextEditingController(text: "Должность");
-  final gorodTextFieldController = TextEditingController(text: "Город");
+  final nazvaniyaTextFieldController = TextEditingController();
+  final doljnostTextFieldController = TextEditingController();
+  final gorodTextFieldController = TextEditingController();
+  final firstToggle = TextEditingController(text: "0");
+  final secondToggle = TextEditingController(text: "0");
+  final thirdToggle = TextEditingController(text: "0");
+  final fourthToggle = TextEditingController(text: "0");
   @override
   Widget build(BuildContext context) {
     final fullRegDataProvider = Provider.of<FullRegisterDataProvider>(context);
@@ -151,11 +155,11 @@ class _FullRegistrState extends State<FullRegistr> {
                           Provider(create: (context) => blocFullRegister),
                         ],
                         child: StreamBuilder<String>(
-                          initialData: "",
+                          initialData: "Названия сети",
                           stream: blocFullRegister.cm,
                           builder: (context, snapshot) => ModalForFullReg(
                             regEnum: FullRegEnum.nazvaniyaSeti,
-                            text: nazvaniyaTextFieldController.text,
+                            text: snapshot.data!,
                             width: isTablet ? 538 : 325,
                             size: isTablet ? 15 : 10,
                             height: isTablet ? 43 : 38,
@@ -174,11 +178,11 @@ class _FullRegistrState extends State<FullRegistr> {
                           Provider(create: (context) => blocFullRegister),
                         ],
                         child: StreamBuilder<String>(
-                          initialData: "",
+                          initialData: "Должность",
                           stream: blocFullRegister.am,
                           builder: (context, snapshot) => ModalForFullReg(
                             regEnum: FullRegEnum.doljnost,
-                            text: doljnostTextFieldController.text,
+                            text: snapshot.data!,
                             width: isTablet ? 538 : 325,
                             size: isTablet ? 15 : 10,
                             height: isTablet ? 43 : 38,
@@ -197,11 +201,11 @@ class _FullRegistrState extends State<FullRegistr> {
                           Provider(create: (context) => blocFullRegister),
                         ],
                         child: StreamBuilder<String>(
-                          initialData: "",
+                          initialData: "Город",
                           stream: blocFullRegister.bm,
                           builder: (context, snapshot) => ModalForFullReg(
                             regEnum: FullRegEnum.vibiriteGorod,
-                            text: gorodTextFieldController.text,
+                            text: snapshot.data!,
                             width: isTablet ? 538 : 325,
                             size: isTablet ? 15 : 10,
                             height: isTablet ? 43 : 38,
@@ -236,15 +240,18 @@ class _FullRegistrState extends State<FullRegistr> {
                               children: [
                                 textSwitch("Не выходить из приложения",
                                     isTablet ? 16 : 11),
-                                ToggleSwitch(
-                                  handlerWidth: 40,
-                                  handlerHeight: 12,
-                                  tickerSize: 21,
-                                  colorCircle: Colors.green[600],
-                                  colorContainer: Colors.grey[300],
-                                  onButton: () {
-                                    print("Не выходить из приложения");
-                                  },
+                                Provider(
+                                  create: (context) => firstToggle,
+                                  child: ToggleSwitch(
+                                    handlerWidth: 40,
+                                    handlerHeight: 12,
+                                    tickerSize: 21,
+                                    colorCircle: Colors.green[600],
+                                    colorContainer: Colors.grey[300],
+                                    onButton: () {
+                                      print("Не выходить из приложения");
+                                    },
+                                  ),
                                 ),
                               ],
                             ),
@@ -256,15 +263,18 @@ class _FullRegistrState extends State<FullRegistr> {
                               children: [
                                 textSwitch("Согласен на СМС и Email рассылку",
                                     isTablet ? 16 : 11),
-                                ToggleSwitch(
-                                  handlerWidth: 40,
-                                  handlerHeight: 12,
-                                  tickerSize: 21,
-                                  colorCircle: Colors.green[600],
-                                  colorContainer: Colors.grey[300],
-                                  onButton: () {
-                                    print("Согласен на СМС и Email рассылку");
-                                  },
+                                Provider(
+                                  create: (context) => secondToggle,
+                                  child: ToggleSwitch(
+                                    handlerWidth: 40,
+                                    handlerHeight: 12,
+                                    tickerSize: 21,
+                                    colorCircle: Colors.green[600],
+                                    colorContainer: Colors.grey[300],
+                                    onButton: () {
+                                      print("Согласен на СМС и Email рассылку");
+                                    },
+                                  ),
                                 ),
                               ],
                             ),
@@ -276,15 +286,18 @@ class _FullRegistrState extends State<FullRegistr> {
                               children: [
                                 textSwitch("Подтверждаю подлиность данных",
                                     isTablet ? 16 : 11),
-                                ToggleSwitch(
-                                  handlerWidth: 40,
-                                  handlerHeight: 12,
-                                  tickerSize: 21,
-                                  colorCircle: Colors.green[600],
-                                  colorContainer: Colors.grey[300],
-                                  onButton: () {
-                                    print("Подтверждаю подлиность данных");
-                                  },
+                                Provider(
+                                  create: (context) => thirdToggle,
+                                  child: ToggleSwitch(
+                                    handlerWidth: 40,
+                                    handlerHeight: 12,
+                                    tickerSize: 21,
+                                    colorCircle: Colors.green[600],
+                                    colorContainer: Colors.grey[300],
+                                    onButton: () {
+                                      print("Подтверждаю подлиность данных");
+                                    },
+                                  ),
                                 ),
                               ],
                             ),
@@ -299,16 +312,19 @@ class _FullRegistrState extends State<FullRegistr> {
                                 const SizedBox(
                                   width: 75,
                                 ),
-                                ToggleSwitch(
-                                  handlerWidth: 40,
-                                  handlerHeight: 12,
-                                  tickerSize: 21,
-                                  colorCircle: Colors.green[600],
-                                  colorContainer: Colors.grey[300],
-                                  onButton: () {
-                                    print(
-                                        "Соглашаюсь на обработку персональных данных");
-                                  },
+                                Provider(
+                                  create: (context) => fourthToggle,
+                                  child: ToggleSwitch(
+                                    handlerWidth: 40,
+                                    handlerHeight: 12,
+                                    tickerSize: 21,
+                                    colorCircle: Colors.green[600],
+                                    colorContainer: Colors.grey[300],
+                                    onButton: () {
+                                      print(
+                                          "Соглашаюсь на обработку персональных данных");
+                                    },
+                                  ),
                                 ),
                               ],
                             ),
@@ -349,8 +365,7 @@ class _FullRegistrState extends State<FullRegistr> {
                                   color: Colors.grey.withOpacity(0.5),
                                   spreadRadius: 5,
                                   blurRadius: 7,
-                                  offset: const Offset(
-                                      0, 15), // changes position of shadow
+                                  offset: const Offset(0, 15),
                                 ),
                               ],
                             ),
@@ -417,16 +432,36 @@ class _FullRegistrState extends State<FullRegistr> {
     );
   }
 
-  getMal(var ism, var fam, var email, var tel, var date, var nazvaniya,
-      var dolj, var gorod, var adres) {
-    log(ism.toString());
-    log(fam.toString());
+  getMal(var lastname, var firstname, var email, var tel, var bornedAt,
+      var nazvaniya, var dolj, var gorod, var adres) {
+    log(lastname.toString());
+    log(firstname.toString());
     log(email.toString());
     log(tel.toString());
-    log(date.toString());
+    log(bornedAt.toString().split("T")[0]);
     log(nazvaniya.toString());
     log(dolj.toString());
     log(gorod.toString());
     log(adres.toString());
+    log(firstToggle.text);
+    log(secondToggle.text);
+    log(thirdToggle.text);
+    log(fourthToggle.text);
+    BlocSignUp().signUp(
+      lastname,
+      firstname,
+      email,
+      bornedAt,
+      dolj,
+      "",
+      "",
+      adres,
+      tel,
+      "1",
+      gorod,
+      secondToggle.text,
+      thirdToggle.text,
+      fourthToggle.text,
+    );
   }
 }
