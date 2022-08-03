@@ -15,7 +15,7 @@ class ReadStatiBLoC {
   Future<ReadStatiModel> getReadStati(token, url) async {
     var headers = {'token': token.toString()};
     var request = http.Request(
-        'GET', Uri.parse("https://hansa-lab.ru/" + url.toString()));
+        'GET', Uri.parse("https://hansa-lab.ru/$url"));
     request.headers.addAll(headers);
     http.StreamedResponse response = await request.send();
     Map<String, dynamic>? map;

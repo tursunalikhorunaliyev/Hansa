@@ -78,7 +78,7 @@ class _EmptyScreenState extends State<EmptyScreen>
           isDownloaded?const Text("Downloaded"):const Text("Click start button to download file"),
           MaterialButton(onPressed: ()async{
             downloadFile();
-          }, child: Text("Start"),)
+          }, child: const Text("Start"),)
         ],
       ),
     ));

@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:hansa_app/api_models.dart/prezintatsi_model.dart';
-import 'package:hansa_app/apis/api_headers.dart';
 import 'package:http/http.dart' as http;
 
 enum PrezintatsiaAction { show }

@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hansa_app/blocs/bloc_play_video.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/extra/glavniy_menyu.dart';
+import 'package:hansa_app/extra/hamburger.dart';
 import 'package:hansa_app/extra/top_video_widget.dart';
 import 'package:hansa_app/extra/ui_changer.dart';
 import 'package:provider/provider.dart';
@@ -113,21 +114,21 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             onPressed: () {
                               scaffoldKey.currentState!.openDrawer();
                             },
-                            icon: Icon(
-                              Icons.menu,
-                              color: const Color(0xff444444),
-                              size: isTablet ? 13.sp : 21.sp,
+                            icon: 
+                     const 
+                               HamburgerIcon()
+                           
+                            )
+                          ,
+                          InkWell(
+                            onTap: () {
+                              menuProvider.eventSink.add(MenuActions.welcome);
+                            },
+                            child: Image.asset(
+                              'assets/tepaLogo.png',
+                              height: 25.h,
+                              width: 214.w,
                             ),
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                'assets/tepaLogo.png',
-                                height: 25.h,
-                                width: 214.w,
-                              ),
-                            ],
                           ),
                           Icon(
                             CupertinoIcons.search,
