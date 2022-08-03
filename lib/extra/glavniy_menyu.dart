@@ -9,7 +9,6 @@ import 'package:hansa_app/drawer_widgets/izbrannoe.dart';
 import 'package:hansa_app/drawer_widgets/nastroyka_widget.dart';
 import 'package:hansa_app/drawer_widgets/personalniy_daniy.dart';
 import 'package:hansa_app/drawer_widgets/referal_silka.dart';
-import 'package:hansa_app/drawer_widgets/rekvizit.dart';
 import 'package:hansa_app/drawer_widgets/text_icon.dart';
 import 'package:hansa_app/drawer_widgets/text_icon_card.dart';
 import 'package:provider/provider.dart';
@@ -247,9 +246,7 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                   stream: blocChangeProfileProvider.dataStream,
                   builder: (context, snapshot) {
                     return Visibility(
-                      visible: snapshot.data == ActionChange.rekvizit
-                          ? true
-                          : snapshot.data == ActionChange.personal
+                      visible:  snapshot.data == ActionChange.personal
                               ? true
                               : snapshot.data == ActionChange.izboreny
                                   ? true
@@ -272,10 +269,6 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                   .add(ActionChange.textIconCard);
                             }
                             if (snapshot.data == ActionChange.personal) {
-                              blocChangeProfileProvider.dataSink
-                                  .add(ActionChange.personRekvizit);
-                            }
-                            if (snapshot.data == ActionChange.rekvizit) {
                               blocChangeProfileProvider.dataSink
                                   .add(ActionChange.personRekvizit);
                             }
@@ -338,18 +331,13 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                                       ? 3000
                                                       : 530
                                                   : snapshot.data ==
-                                                          ActionChange.rekvizit
-                                                      ? 780
-                                                      : snapshot.data ==
                                                               ActionChange
                                                                   .nastroyka
                                                           ? 550
                                                           : 528,
                           child: Container(
                             padding: EdgeInsets.only(
-                              top: snapshot.data == ActionChange.rekvizit
-                                  ? 0
-                                  : snapshot.data == ActionChange.izboreny
+                              top:  snapshot.data == ActionChange.izboreny
                                       ? 0
                                       : snapshot.data == ActionChange.statistik
                                           ? 0
@@ -384,16 +372,7 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                                       ReferalSilka(),
                                                     ],
                                                   )
-                                                : snapshot.data ==
-                                                        ActionChange.rekvizit
-                                                    ? Wrap(children: const [
-                                                        Rekvizit(),
-                                                        SizedBox(
-                                                          height: 509,
-                                                        ),
-                                                        ReferalSilka()
-                                                      ])
-                                                    : snapshot.data ==
+                                                :  snapshot.data ==
                                                             ActionChange
                                                                 .statistik
                                                         ? Wrap(children: const [
