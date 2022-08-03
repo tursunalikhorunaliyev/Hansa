@@ -63,7 +63,6 @@ class _ModalForFullRegState extends State<ModalForFullReg> {
                     if (snapshot1.hasData && snapshot.hasData) {
                       return GestureDetector(
                         onTap: () {
-                          print(snapshot1.hasData ? "borrrr" : "yoqqqq");
                           if (widget.regEnum == FullRegEnum.dataRojdeniya) {
                             final dateRangeController =
                                 Provider.of<DateRangePickerController>(context,
@@ -145,8 +144,10 @@ class _ModalForFullRegState extends State<ModalForFullReg> {
                                       .contains(query.toLowerCase());
                                 },
                                 onApplyButtonClick: (list1) {
-                                  doljnost.text = list1!.first;
-                                  bloc.ak.add(doljnost.text);
+                                  doljnost.text =
+                                      listLKeys[listValues.indexOf(list1![0])]
+                                          .toString();
+                                  bloc.ak.add(list1.first);
                                   Navigator.pop(context);
                                 });
                           } else if (widget.regEnum ==
@@ -178,8 +179,10 @@ class _ModalForFullRegState extends State<ModalForFullReg> {
                                       .contains(query.toLowerCase());
                                 },
                                 onApplyButtonClick: (list1) {
-                                  gorod.text = list1!.first;
-                                  bloc.bk.add(gorod.text);
+                                  gorod.text =
+                                      listLKeys1[listValues1.indexOf(list1![0])]
+                                          .toString();
+                                  bloc.bk.add(list1.first);
                                   Navigator.pop(context);
                                 });
                           } else if (widget.regEnum ==
@@ -240,7 +243,35 @@ class _ModalForFullRegState extends State<ModalForFullReg> {
                         ),
                       );
                     } else {
-                      return const SizedBox();
+                      return Stack(
+                        children: [
+                          Container(
+                            height: widget.height,
+                            width: widget.width,
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFffffff),
+                              borderRadius: BorderRadius.circular(54),
+                              border: Border.all(width: 0.1),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 13, top: 13),
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: RichText(
+                                text: TextSpan(children: [
+                                  TextSpan(
+                                      text: "Загрузка...",
+                                      style: GoogleFonts.montserrat(
+                                          fontWeight: widget.fontWeight,
+                                          fontSize: widget.size,
+                                          color: const Color(0xFF444444))),
+                                ]),
+                              ),
+                            ),
+                          )
+                        ],
+                      );
                     }
                   });
             }));

@@ -16,6 +16,7 @@ class NazvaniyaWidget extends StatefulWidget {
 
 class _NazvaniyaWidgetState extends State<NazvaniyaWidget> {
   final bloc = StoreData();
+  final TextEditingController tt = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -33,7 +34,7 @@ class _NazvaniyaWidgetState extends State<NazvaniyaWidget> {
         child: Column(
           children: [
             TextField(
-              controller: widget.text,
+              controller: tt,
               decoration: InputDecoration(
                 focusedBorder: OutlineInputBorder(
                   borderSide: const BorderSide(width: 0.9, color: Colors.grey),
@@ -54,16 +55,21 @@ class _NazvaniyaWidgetState extends State<NazvaniyaWidget> {
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       return ListView.builder(
-                        itemCount: 15,
+                        itemCount: snapshot.data!.data.list.length,
                         itemBuilder: (context, index) {
                           return Column(
                             children: [
                               InkWell(
                                   onTap: () {
-                                    widget.text.text =
-                                        snapshot.data!.data.list[index].name;
+                                    widget.text.text = snapshot
+                                        .data!.data.list[index].id
+                                        .toString();
+                                    tt.text = snapshot
+                                        .data!.data.list[index].name
+                                        .toString();
                                     baloc.ck.add(
                                         snapshot.data!.data.list[index].name);
+                                    setState(() {});
                                   },
                                   child: Text(
                                       snapshot.data!.data.list[index].name)),
