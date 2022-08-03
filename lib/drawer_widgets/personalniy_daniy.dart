@@ -153,8 +153,8 @@ class _PersonalniyDaniyState extends State<PersonalniyDaniy> {
               );
             } else {
               return const Center(
-                child: SpinKitWanderingCubes(
-                  color: Colors.red,
+                child: SpinKitPulse(
+                  color: Colors.white,
                 ),
               );
             }
