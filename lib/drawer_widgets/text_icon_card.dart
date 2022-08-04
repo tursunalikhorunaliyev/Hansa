@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/drawer_widgets/text_icon.dart';
@@ -30,8 +28,8 @@ class TextIconCard extends StatelessWidget {
             child: Row(
               children: [
                
-                 Icon(CupertinoIcons.home, color: Color.fromARGB(255, 221, 221, 221),),
-             SizedBox(width: 20,),
+                 const Icon(CupertinoIcons.home, color: Color.fromARGB(255, 221, 221, 221),),
+             const SizedBox(width: 20,),
               Text("Home",style: GoogleFonts.montserrat(fontSize: isTablet ? 20  : 13, color: Colors.white),),
               ],
             ),

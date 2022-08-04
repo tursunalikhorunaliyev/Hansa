@@ -318,7 +318,7 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                           height:  snapshot.data == ActionChange.textIconCard
                                   ? isTablet ? 820  : 500
                                   : snapshot.data == ActionChange.personal
-                                      ? isTablet ? 800  : 750
+                                      ? isTablet ? 800  : 800
                                       : snapshot.data == ActionChange.izboreny
                                           ? 780
                                           : snapshot.data ==

@@ -1,11 +1,7 @@
-import 'package:flip_card/flip_card.dart';
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hansa_app/extra/full_registr.dart';
-import 'package:hansa_app/extra/regis_widget.dart';
-import 'package:provider/provider.dart';
 
 class SozdatAccaunt extends StatefulWidget {
   const SozdatAccaunt({Key? key}) : super(key: key);

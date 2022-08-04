@@ -90,10 +90,8 @@ class _ModalForFullRegState extends State<ModalForFullReg> {
                                                       .toString()
                                                       .length ==
                                                   1
-                                              ? "0" +
-                                                  dateRangeController
-                                                      .selectedDate!.day
-                                                      .toString()
+                                              ? "0${dateRangeController
+                                                      .selectedDate!.day}"
                                               : dateRangeController
                                                   .selectedDate!.day
                                                   .toString();
@@ -102,10 +100,8 @@ class _ModalForFullRegState extends State<ModalForFullReg> {
                                                       .toString()
                                                       .length ==
                                                   1
-                                              ? "0" +
-                                                  dateRangeController
-                                                      .selectedDate!.month
-                                                      .toString()
+                                              ? "0${dateRangeController
+                                                      .selectedDate!.month}"
                                               : dateRangeController
                                                   .selectedDate!.month
                                                   .toString();
@@ -114,7 +110,7 @@ class _ModalForFullRegState extends State<ModalForFullReg> {
                                               .toString();
                                           setState(() {
                                             dataRojdeniya =
-                                                day + "." + month + "." + year;
+                                                "$day.$month.$year";
                                           });
                                           Navigator.pop(context);
                                         },

@@ -1,15 +1,11 @@
-import 'dart:ffi';
 
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/blocs/bloc_play_video.dart';
 import 'package:hansa_app/extra/black_custom_title.dart';
 import 'package:hansa_app/extra/custom_black_appbar.dart';
-import 'package:hansa_app/extra/custom_title.dart';
 import 'package:hansa_app/training_section/custom_treningi_video.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';

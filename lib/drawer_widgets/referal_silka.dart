@@ -19,7 +19,7 @@ class ReferalSilka extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: isTablet ? 30 : 0,
+          height: isTablet ? 30 : 10,
         ),
         Divider(
           color: const Color(0xFF444444),

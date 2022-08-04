@@ -37,7 +37,7 @@ class UIChanger extends StatelessWidget {
         } else if (snapshot.data == MenuActions.katalog) {
           return const Katalogi();
         } else if (snapshot.data == MenuActions.video) {
-          return Video();
+          return const Video();
         } else if (snapshot.data == MenuActions.oProyekt) {
           return const Okompaniya();
         } else if (snapshot.data == MenuActions.presentAndArchive) {

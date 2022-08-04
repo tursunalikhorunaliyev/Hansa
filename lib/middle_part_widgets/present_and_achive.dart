@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/prezintatsi_model.dart';
-import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/blocs/prezintatsia_bloc.dart';
 import 'package:hansa_app/extra/archive_card.dart';
 import 'package:provider/provider.dart';

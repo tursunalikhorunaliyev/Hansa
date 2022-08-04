@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:http/http.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ArchiveCard extends StatefulWidget {
@@ -70,7 +69,7 @@ class _ArchiveCardState extends State<ArchiveCard> {
                                 setState(() async {
                                   
                                   launched = _launchInBrowser(
-                                      Uri.parse("http://" + widget.linkPDF));
+                                      Uri.parse("http://${widget.linkPDF}"));
                                 });
                               },
                               child: Container(
@@ -96,7 +95,7 @@ class _ArchiveCardState extends State<ArchiveCard> {
                               onTap: () {
                                 setState(() {
                                   launched = _launchInBrowser(
-                                      Uri.parse("http://" + widget.linkPDF));
+                                      Uri.parse("http://${widget.linkPDF}"));
                                 });
                               },
                               child: Container(
