@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 
 
 class ReadStatiBLoC {
-  final controller = StreamController<ReadStatiModel>.broadcast();
+  final controller = StreamController<ReadStatiModel>();
 
   Stream<ReadStatiModel> get stream => controller.stream;
   StreamSink<ReadStatiModel> get sink => controller.sink; 
