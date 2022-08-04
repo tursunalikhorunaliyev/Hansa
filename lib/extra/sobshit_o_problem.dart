@@ -51,7 +51,7 @@ class SobshitOProblem extends StatelessWidget {
                               height: 45,
                             ),
                             Text(
-                              "Сообщить о проблеме",
+                              "Задать вопрос",
                               style: GoogleFonts.montserrat(
                                   color: const Color(0xff444444), fontSize: 24),
                             ),
