@@ -124,7 +124,7 @@ class ObucheniyaWidget extends StatelessWidget {
                                         EventCards(
                                           isFavourite: snapshot.data!.data
                                               .listGuides.list[index].isFavourite,
-                                          buttonColor: Color(0xffff163e),
+                                          buttonColor: const Color(0xffff163e),
                                           buttonText: 'smoterer',
                                           day: 'asdasd',
                                           month: '2',
@@ -243,7 +243,7 @@ class ObucheniyaWidget extends StatelessWidget {
                         ],
                       );
                     } else {
-                      return SpinKitWanderingCubes(
+                      return const SpinKitWanderingCubes(
                         color: Colors.red,
                       );
                     }

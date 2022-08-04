@@ -179,13 +179,21 @@ class _LoginCardState extends State<LoginCard> {
                             Padding(
                                 padding: EdgeInsets.only(
                                     left: isTablet ? 25.w : 70.w),
-                                child: ToggleSwitch(
-                                  colorContainer: Colors.grey[300],
-                                  colorCircle: Colors.green[600],
-                                  tickerSize: isTablet ? 15.sp : 21.sp,
-                                  handlerWidth: isTablet ? 30.w : 40.w,
-                                  handlerHeight: isTablet ? 12.h : 12.h,
-                                  onButton: () {},
+                                child: MultiProvider(
+                                  providers: [
+                                    Provider(create: (context) => ""),
+                                    Provider(
+                                        create: (context) =>
+                                            TextEditingController()),
+                                  ],
+                                  child: ToggleSwitch(
+                                    colorContainer: Colors.grey[300],
+                                    colorCircle: Colors.green[600],
+                                    tickerSize: isTablet ? 15.sp : 21.sp,
+                                    handlerWidth: isTablet ? 30.w : 40.w,
+                                    handlerHeight: isTablet ? 12.h : 12.h,
+                                    onButton: () {},
+                                  ),
                                 ))
                           ],
                         ),

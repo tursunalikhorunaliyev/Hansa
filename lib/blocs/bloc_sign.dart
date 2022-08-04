@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 import 'package:http/http.dart' as http;
 
 class BlocSignUp {
@@ -38,6 +39,8 @@ class BlocSignUp {
       Uri.parse("http://hansa-lab.ru/api/auth/signup"),
       body: body,
     );
-    print(response.statusCode);
+    log("=======================================");
+    log("================ ${jsonDecode(response.body)}================");
+    log("=======================================");
   }
 }

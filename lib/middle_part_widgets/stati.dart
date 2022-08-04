@@ -1,14 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:hansa_app/api_models.dart/read_stati_model.dart';
+import 'package:hansa_app/api_models.dart/stati_model.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
+import 'package:hansa_app/blocs/read_stati_bloc.dart';
+import 'package:hansa_app/blocs/stati_bloc.dart';
 import 'package:hansa_app/extra/custom_clip_item.dart';
 import 'package:hansa_app/extra/custom_title.dart';
 import 'package:provider/provider.dart';
 
-class Stati extends StatelessWidget {
+class Stati extends StatefulWidget {
   const Stati({Key? key}) : super(key: key);
 
   @override
+  State<Stati> createState() => _StatiState();
+}
+
+class _StatiState extends State<Stati> {
+  @override
   Widget build(BuildContext context) {
+    final readStatiBloCProvider = Provider.of<ReadStatiBLoC>(context);
+    final token = Provider.of<String>(context);
+    final bloc = StatiBLoC(token);
+    
     final statiBloCProvider = Provider.of<MenuEventsBloC>(context);
     return Expanded(
       child: Column(
@@ -20,24 +33,35 @@ class Stati extends StatelessWidget {
           Expanded(
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
-              child: Column(
-                children: List.generate(
-                  15,
-                  (index) => CustomClipItem(
-                    backgroundColor: const Color(0xffffffff),
-                    buttonTextColor: const Color(0xffffffff),
-                    buttonColor: const Color(0xffe21a37),
-                    titleColor: const Color(0xff272624),
-                    title: !(index % 2 == 0)
-                        ? "5 новинок из линейки\nстиральных машин Ultimate"
-                        : "Обучающий материал для\nсотрудников Леруа Мерлен",
-                    buttonText: "Читать",
-                    onTap: () {
-                      statiBloCProvider.eventSink.add(MenuActions.chitatStati);
-                    },
-                  ),
-                ),
-              ),
+              child: StreamBuilder<StatiModel>(
+                  stream: bloc.stream,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return Column(
+                        children: List.generate(
+                          snapshot.data!.list.list.length,
+                          (index) => CustomClipItem(
+                            backgroundColor: const Color(0xffffffff),
+                            buttonTextColor: const Color(0xffffffff),
+                            buttonColor: const Color(0xffe21a37),
+                            titleColor: const Color(0xff272624),
+                            title: snapshot.data!.list.list[index].title,
+                            buttonText: "Читать",
+                            onTap: ()async {
+                             
+                              statiBloCProvider.eventSink
+                                  .add(MenuActions.chitatStati);
+                           ReadStatiModel statiMOdel =   await  readStatiBloCProvider.getReadStati(token, snapshot.data!.list.list[index].link);
+                                readStatiBloCProvider.sink.add(statiMOdel);
+                            },
+                          ),
+                        ),
+                      );
+                    } else {
+                      bloc.eventSink.add(StatiAction.show);
+                      return const Center(child: CircularProgressIndicator());
+                    }
+                  }),
             ),
           )
         ],

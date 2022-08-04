@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/drawer_widgets/text_icon.dart';
 import 'package:provider/provider.dart';
@@ -16,6 +15,26 @@ class TextIconCard extends StatelessWidget {
     final isTablet = Provider.of<bool>(context);
     return Column(
       children: [
+        InkWell(
+          onTap: () {
+            munuchangerProvider.eventSink.add(MenuActions.obuchayushieMaterial);
+            scafforlKeyProvider.currentState!.closeDrawer();
+          },
+          child: InkWell(
+            onTap: () {
+               munuchangerProvider.eventSink.add(MenuActions.welcome);
+            scafforlKeyProvider.currentState!.closeDrawer();
+            },
+            child: Row(
+              children: [
+               
+                 const Icon(CupertinoIcons.home, color: Color.fromARGB(255, 221, 221, 221),),
+             const SizedBox(width: 20,),
+              Text("Home",style: GoogleFonts.montserrat(fontSize: isTablet ? 20  : 13, color: Colors.white),),
+              ],
+            ),
+          )
+        ),
         const SizedBox(
           height: 15,
         ),

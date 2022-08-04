@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -5,8 +6,6 @@ import 'package:hansa_app/blocs/bloc_play_video.dart';
 import 'package:hansa_app/video/bloc_video_api.dart';
 import 'package:hansa_app/video/model_video.dart';
 import 'package:provider/provider.dart';
-import 'package:video_player/video_player.dart';
-
 class CustomVideoListItem extends StatefulWidget {
   final int index;
   final int indexMain;
@@ -44,8 +43,8 @@ class _CustomVideoListItemState extends State<CustomVideoListItem> {
                       if (snapshot.hasData) {
                         return Stack(
                           children: [
-                            Image.network(
-                              snapshot
+                           CachedNetworkImage(
+                             imageUrl:  snapshot
                                   .data!
                                   .videoListData
                                   .list[widget.indexMain]
@@ -57,10 +56,15 @@ class _CustomVideoListItemState extends State<CustomVideoListItem> {
                               fit: BoxFit.cover,
                             ),
                             InkWell(
-                              onTap: (){
-                              final VideoDetails  video =  snapshot.data!.videoListData.list[widget.indexMain].data.list[widget.index];
-                                playProvider.sink.add([true, video.videoLink,video.title]);
-                                print("Hello");
+                              onTap: () {
+                                final VideoDetails video = snapshot
+                                    .data!
+                                    .videoListData
+                                    .list[widget.indexMain]
+                                    .data
+                                    .list[widget.index];
+                                playProvider.sink
+                                    .add([true, video.videoLink, video.title]);
                               },
                               child: Container(
                                 height: 130,
@@ -80,7 +84,7 @@ class _CustomVideoListItemState extends State<CustomVideoListItem> {
                           ],
                         );
                       } else {
-                        return const  SizedBox();
+                        return const SizedBox();
                       }
                     }),
               ),

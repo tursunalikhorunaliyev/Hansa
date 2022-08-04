@@ -1,6 +1,4 @@
-import 'dart:convert';
 
-import 'package:hansa_app/api_models.dart/country_type_model.dart';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class CountryModel {

@@ -1,15 +1,14 @@
-import 'dart:async';
-import 'dart:developer';
-
 import 'package:filter_list/filter_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/country_model.dart';
 import 'package:hansa_app/api_models.dart/job_model.dart';
-import 'package:hansa_app/api_services/hansa_country_api.dart';
-import 'package:hansa_app/api_services/hansa_job_api.dart';
+import 'package:hansa_app/blocs/bloc_full_register.dart';
+import 'package:hansa_app/blocs/hansa_country_api.dart';
+import 'package:hansa_app/blocs/hansa_job_api.dart';
 import 'package:hansa_app/enums/full_reg_enum.dart';
+import 'package:hansa_app/extra/nazvaniya.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
@@ -36,16 +35,13 @@ class ModalForFullReg extends StatefulWidget {
 }
 
 class _ModalForFullRegState extends State<ModalForFullReg> {
-  final dateRangeController = DateRangePickerController();
-
   String dataRojdeniya = "";
   String selectedText = "Salom";
 
   final blocJob = BlocJob();
-  final blocCity = HansaCountryAPI(1);
+  final blocCity = HansaCountryBloC(1);
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     blocJob.eventSink.add(JobEnum.job);
     blocCity.eventSink.add(CityEnum.city);
@@ -67,8 +63,10 @@ class _ModalForFullRegState extends State<ModalForFullReg> {
                     if (snapshot1.hasData && snapshot.hasData) {
                       return GestureDetector(
                         onTap: () {
-                          print(snapshot1.hasData ? "borrrr" : "yoqqqq");
                           if (widget.regEnum == FullRegEnum.dataRojdeniya) {
+                            final dateRangeController =
+                                Provider.of<DateRangePickerController>(context,
+                                    listen: false);
                             showCupertinoModalPopup(
                                 context: context,
                                 builder: (context) {
@@ -89,10 +87,8 @@ class _ModalForFullRegState extends State<ModalForFullReg> {
                                                       .toString()
                                                       .length ==
                                                   1
-                                              ? "0" +
-                                                  dateRangeController
-                                                      .selectedDate!.day
-                                                      .toString()
+                                              ? "0${dateRangeController
+                                                      .selectedDate!.day}"
                                               : dateRangeController
                                                   .selectedDate!.day
                                                   .toString();
@@ -101,10 +97,8 @@ class _ModalForFullRegState extends State<ModalForFullReg> {
                                                       .toString()
                                                       .length ==
                                                   1
-                                              ? "0" +
-                                                  dateRangeController
-                                                      .selectedDate!.month
-                                                      .toString()
+                                              ? "0${dateRangeController
+                                                      .selectedDate!.month}"
                                               : dateRangeController
                                                   .selectedDate!.month
                                                   .toString();
@@ -113,13 +107,18 @@ class _ModalForFullRegState extends State<ModalForFullReg> {
                                               .toString();
                                           setState(() {
                                             dataRojdeniya =
-                                                day + "." + month + "." + year;
+                                                "$day.$month.$year";
                                           });
                                           Navigator.pop(context);
                                         },
                                       ));
                                 });
                           } else if (widget.regEnum == FullRegEnum.doljnost) {
+                            final doljnost = Provider.of<TextEditingController>(
+                                context,
+                                listen: false);
+                            final bloc = Provider.of<BlocFullRegister>(context,
+                                listen: false);
                             List<String> listValues = [];
                             List<int> listLKeys = [];
                             for (var element
@@ -140,11 +139,20 @@ class _ModalForFullRegState extends State<ModalForFullReg> {
                                       .toLowerCase()
                                       .contains(query.toLowerCase());
                                 },
-                                onApplyButtonClick: (list) {
+                                onApplyButtonClick: (list1) {
+                                  doljnost.text =
+                                      listLKeys[listValues.indexOf(list1![0])]
+                                          .toString();
+                                  bloc.ak.add(list1.first);
                                   Navigator.pop(context);
                                 });
                           } else if (widget.regEnum ==
                               FullRegEnum.vibiriteGorod) {
+                            final gorod = Provider.of<TextEditingController>(
+                                context,
+                                listen: false);
+                            final bloc = Provider.of<BlocFullRegister>(context,
+                                listen: false);
                             List<String> listValues1 = [];
                             List<int> listLKeys1 = [];
                             for (dynamic element in snapshot1.hasData
@@ -166,8 +174,35 @@ class _ModalForFullRegState extends State<ModalForFullReg> {
                                       .toLowerCase()
                                       .contains(query.toLowerCase());
                                 },
-                                onApplyButtonClick: (list) {
+                                onApplyButtonClick: (list1) {
+                                  gorod.text =
+                                      listLKeys1[listValues1.indexOf(list1![0])]
+                                          .toString();
+                                  bloc.bk.add(list1.first);
                                   Navigator.pop(context);
+                                });
+                          } else if (widget.regEnum ==
+                              FullRegEnum.nazvaniyaSeti) {
+                            final nazvaniya =
+                                Provider.of<TextEditingController>(context,
+                                    listen: false);
+                            final bloc = Provider.of<BlocFullRegister>(context,
+                                listen: false);
+                            showCupertinoModalPopup(
+                                context: context,
+                                builder: (context) {
+                                  return Container(
+                                      decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                      child: Material(
+                                          child: Provider(
+                                        create: (context) => bloc,
+                                        child: NazvaniyaWidget(
+                                          text: nazvaniya,
+                                        ),
+                                      )));
                                 });
                           }
                         },
@@ -204,7 +239,35 @@ class _ModalForFullRegState extends State<ModalForFullReg> {
                         ),
                       );
                     } else {
-                      return const SizedBox();
+                      return Stack(
+                        children: [
+                          Container(
+                            height: widget.height,
+                            width: widget.width,
+                            decoration: BoxDecoration(
+                              color: const Color(0xFFffffff),
+                              borderRadius: BorderRadius.circular(54),
+                              border: Border.all(width: 0.1),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 13, top: 13),
+                            child: Align(
+                              alignment: Alignment.centerLeft,
+                              child: RichText(
+                                text: TextSpan(children: [
+                                  TextSpan(
+                                      text: "Загрузка...",
+                                      style: GoogleFonts.montserrat(
+                                          fontWeight: widget.fontWeight,
+                                          fontSize: widget.size,
+                                          color: const Color(0xFF444444))),
+                                ]),
+                              ),
+                            ),
+                          )
+                        ],
+                      );
                     }
                   });
             }));

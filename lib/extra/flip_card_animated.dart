@@ -1,7 +1,5 @@
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class FlipCardAnimated extends StatefulWidget {
   const FlipCardAnimated({Key? key}) : super(key: key);
@@ -21,10 +19,10 @@ GlobalKey<FlipCardState> cardKey = GlobalKey<FlipCardState>();
     flipOnTouch: false,
     front:  RaisedButton(
       onPressed: () => cardKey.currentState!.toggleCard(),
-      child: Text('Toggle'),
+      child: const Text('Toggle'),
     ),
     back: Container(
-      child: Text('Back'),
+      child: const Text('Back'),
     ),
   ),
     );

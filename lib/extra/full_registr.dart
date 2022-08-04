@@ -1,42 +1,51 @@
+import 'dart:developer';
+
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/blocs/bloc_flip_login.dart';
+import 'package:hansa_app/blocs/bloc_full_register.dart';
+import 'package:hansa_app/blocs/bloc_sign.dart';
 import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
- import 'package:hansa_app/enums/full_reg_enum.dart';
- import 'package:hansa_app/extra/modal_sheet_for_full_reg.dart';
- import 'package:hansa_app/extra/text_field_for_full_reg.dart';
- import 'package:hansa_app/providers/full_registr_provider.dart';
- import 'package:provider/provider.dart';
- import 'package:syncfusion_flutter_datepicker/datepicker.dart';
- 
- class FullRegistr extends StatefulWidget {
+import 'package:hansa_app/enums/full_reg_enum.dart';
+import 'package:hansa_app/extra/modal_sheet_for_full_reg.dart';
+import 'package:hansa_app/extra/text_field_for_full_reg.dart';
+import 'package:hansa_app/providers/full_registr_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
+
+class FullRegistr extends StatefulWidget {
   const FullRegistr({Key? key}) : super(key: key);
   @override
   State<FullRegistr> createState() => _FullRegistrState();
 }
 
- class _FullRegistrState extends State<FullRegistr> {
-   String selectedValue2 = "Должность";
-   String selectedValue3 = "Город*";
-   final dateRangeController = DateRangePickerController();
-   final imyaTextEditingController = TextEditingController();
-   final familiyaTextEditingController = TextEditingController();
-   final emailTextFielController = TextEditingController();
-   final phoneTextFieldController = TextEditingController();
-   final adresTorgoviySetTextFielController = TextEditingController();
+class _FullRegistrState extends State<FullRegistr> {
+  final blocFullRegister = BlocFullRegister();
+  final dateRangeController = DateRangePickerController();
+  final imyaTextEditingController = TextEditingController();
+  final familiyaTextEditingController = TextEditingController();
+  final emailTextFielController = TextEditingController();
+  final phoneTextFieldController = TextEditingController();
+  final adresTorgoviySetTextFielController = TextEditingController();
+  final nazvaniyaTextFieldController = TextEditingController();
+  final doljnostTextFieldController = TextEditingController();
+  final gorodTextFieldController = TextEditingController();
+  final firstToggle = TextEditingController(text: "0");
+  final secondToggle = TextEditingController(text: "0");
+  final thirdToggle = TextEditingController(text: "0");
+  final fourthToggle = TextEditingController(text: "0");
+  @override
+  Widget build(BuildContext context) {
+    final fullRegDataProvider = Provider.of<FullRegisterDataProvider>(context);
+    final isTablet = Provider.of<bool>(context);
+    final providerFlip = Provider.of<Map<String, FlipCardController>>(context);
+    final providerFlipLogin = Provider.of<BlocFlipLogin>(context);
 
-
-   @override
-   Widget build(BuildContext context) {
-     final fullRegDataProvider = Provider.of<FullRegisterDataProvider>(context);
-     final isTablet = Provider.of<bool>(context);
-     final providerFlip = Provider.of<Map<String, FlipCardController>>(context);
-     final providerFlipLogin = Provider.of<BlocFlipLogin>(context);
     return SingleChildScrollView(
       child: Center(
         child: GestureDetector(
-          onTap: (){
+          onTap: () {
             FocusManager.instance.primaryFocus?.unfocus();
           },
           child: Stack(
@@ -81,98 +90,141 @@ import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
                         ),
                       ),
                       const SizedBox(
-                         height: 18,
-                       ),
-                       TextFieldForFullRegister(
-                         textEditingController: imyaTextEditingController,
-                           text: "Имя",
-                           height: isTablet ? 45 : 38,
-                           size: isTablet ? 13 : 10,
-                          weight: isTablet ? FontWeight.w600 : FontWeight.normal),
-                      const SizedBox(
-                         height: 4,
-                       ),
-                       TextFieldForFullRegister(
-                         textEditingController: familiyaTextEditingController,
-                           text: "Фамилия",
-                           height: isTablet ? 45 : 38,
-                           size: isTablet ? 13 : 10,
-                          weight: isTablet ? FontWeight.w600 : FontWeight.normal),
-                      const SizedBox(
-                         height: 5,
-                       ),
-                       TextFieldForFullRegister(
-                         textEditingController: emailTextFielController,
-                           text: "Email",
-                           height: isTablet ? 45 : 38,
-                           size: isTablet ? 13 : 10,
-                          weight: isTablet ? FontWeight.w600 : FontWeight.normal),
-                      const SizedBox(
-                         height: 4,
-                       ),
-                       TextFieldForFullRegister(
-                         textEditingController: phoneTextFieldController,
-                           text: "Контактный тефон",
-                           height: isTablet ? 45 : 38,
-                           size: isTablet ? 15 : 10,
-                          weight: isTablet ? FontWeight.w600 : FontWeight.normal),
+                        height: 18,
+                      ),
+                      TextFieldForFullRegister(
+                          textEditingController: imyaTextEditingController,
+                          text: "Имя",
+                          height: isTablet ? 45 : 38,
+                          size: isTablet ? 13 : 10,
+                          weight:
+                              isTablet ? FontWeight.w600 : FontWeight.normal),
                       const SizedBox(
                         height: 4,
                       ),
-                      ModalForFullReg(
-                        regEnum: FullRegEnum.dataRojdeniya,
-                        text: "Дата рождения",
-                        width: isTablet ? 538 : 325,
-                        size: isTablet ? 15 : 10,
-                        height: isTablet ? 43 : 38,
-                        fontWeight:
-                            isTablet ? FontWeight.w600 : FontWeight.normal,
+                      TextFieldForFullRegister(
+                          textEditingController: familiyaTextEditingController,
+                          text: "Фамилия",
+                          height: isTablet ? 45 : 38,
+                          size: isTablet ? 13 : 10,
+                          weight:
+                              isTablet ? FontWeight.w600 : FontWeight.normal),
+                      const SizedBox(
+                        height: 5,
                       ),
+                      TextFieldForFullRegister(
+                          textEditingController: emailTextFielController,
+                          text: "Email",
+                          height: isTablet ? 45 : 38,
+                          size: isTablet ? 13 : 10,
+                          weight:
+                              isTablet ? FontWeight.w600 : FontWeight.normal),
                       const SizedBox(
                         height: 4,
                       ),
-                      ModalForFullReg(
-                        regEnum: FullRegEnum.nazvaniyaSeti,
-                        text: "Название сети",
-                        width: isTablet ? 538 : 325,
-                        size: isTablet ? 15 : 10,
-                        height: isTablet ? 43 : 38,
-                        fontWeight:
-                            isTablet ? FontWeight.w600 : FontWeight.normal,
+                      TextFieldForFullRegister(
+                          textEditingController: phoneTextFieldController,
+                          text: "Контактный тефон",
+                          height: isTablet ? 45 : 38,
+                          size: isTablet ? 15 : 10,
+                          weight:
+                              isTablet ? FontWeight.w600 : FontWeight.normal),
+                      const SizedBox(
+                        height: 4,
+                      ),
+                      Provider(
+                        create: (context) => dateRangeController,
+                        child: ModalForFullReg(
+                          regEnum: FullRegEnum.dataRojdeniya,
+                          text: "Дата рождения",
+                          width: isTablet ? 538 : 325,
+                          size: isTablet ? 15 : 10,
+                          height: isTablet ? 43 : 38,
+                          fontWeight:
+                              isTablet ? FontWeight.w600 : FontWeight.normal,
+                        ),
                       ),
                       const SizedBox(
                         height: 4,
                       ),
-                      ModalForFullReg(
-                        regEnum: FullRegEnum.doljnost,
-                        text: "Должность",
-                        width: isTablet ? 538 : 325,
-                        size: isTablet ? 15 : 10,
-                        height: isTablet ? 43 : 38,
-                        fontWeight:
-                            isTablet ? FontWeight.w600 : FontWeight.normal,
+                      MultiProvider(
+                        providers: [
+                          Provider(
+                              create: (context) =>
+                                  nazvaniyaTextFieldController),
+                          Provider(create: (context) => blocFullRegister),
+                        ],
+                        child: StreamBuilder<String>(
+                          initialData: "Названия сети",
+                          stream: blocFullRegister.cm,
+                          builder: (context, snapshot) => ModalForFullReg(
+                            regEnum: FullRegEnum.nazvaniyaSeti,
+                            text: snapshot.data!,
+                            width: isTablet ? 538 : 325,
+                            size: isTablet ? 15 : 10,
+                            height: isTablet ? 43 : 38,
+                            fontWeight:
+                                isTablet ? FontWeight.w600 : FontWeight.normal,
+                          ),
+                        ),
                       ),
                       const SizedBox(
                         height: 4,
                       ),
-                      ModalForFullReg(
-                        regEnum: FullRegEnum.vibiriteGorod,
-                        text: "Город",
-                        width: isTablet ? 538 : 325,
-                        size: isTablet ? 15 : 10,
-                        height: isTablet ? 43 : 38,
-                        fontWeight:
-                            isTablet ? FontWeight.w600 : FontWeight.normal,
+                      MultiProvider(
+                        providers: [
+                          Provider(
+                              create: (context) => doljnostTextFieldController),
+                          Provider(create: (context) => blocFullRegister),
+                        ],
+                        child: StreamBuilder<String>(
+                          initialData: "Должность",
+                          stream: blocFullRegister.am,
+                          builder: (context, snapshot) => ModalForFullReg(
+                            regEnum: FullRegEnum.doljnost,
+                            text: snapshot.data!,
+                            width: isTablet ? 538 : 325,
+                            size: isTablet ? 15 : 10,
+                            height: isTablet ? 43 : 38,
+                            fontWeight:
+                                isTablet ? FontWeight.w600 : FontWeight.normal,
+                          ),
+                        ),
                       ),
                       const SizedBox(
-                         height: 4,
-                       ),
-                       TextFieldForFullRegister(
-                         textEditingController: adresTorgoviySetTextFielController,
-                           text: "Адрес торговой сети",
-                           height: isTablet ? 45 : 38,
-                           size: isTablet ? 13 : 10,
-                          weight: isTablet ? FontWeight.w600 : FontWeight.normal),
+                        height: 4,
+                      ),
+                      MultiProvider(
+                        providers: [
+                          Provider(
+                              create: (context) => gorodTextFieldController),
+                          Provider(create: (context) => blocFullRegister),
+                        ],
+                        child: StreamBuilder<String>(
+                          initialData: "Город",
+                          stream: blocFullRegister.bm,
+                          builder: (context, snapshot) => ModalForFullReg(
+                            regEnum: FullRegEnum.vibiriteGorod,
+                            text: snapshot.data!,
+                            width: isTablet ? 538 : 325,
+                            size: isTablet ? 15 : 10,
+                            height: isTablet ? 43 : 38,
+                            fontWeight:
+                                isTablet ? FontWeight.w600 : FontWeight.normal,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 4,
+                      ),
+                      TextFieldForFullRegister(
+                          textEditingController:
+                              adresTorgoviySetTextFielController,
+                          text: "Адрес торговой сети",
+                          height: isTablet ? 45 : 38,
+                          size: isTablet ? 13 : 10,
+                          weight:
+                              isTablet ? FontWeight.w600 : FontWeight.normal),
                       const SizedBox(
                         height: 10,
                       ),
@@ -188,15 +240,18 @@ import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
                               children: [
                                 textSwitch("Не выходить из приложения",
                                     isTablet ? 16 : 11),
-                                ToggleSwitch(
-                                  handlerWidth: 40,
-                                  handlerHeight: 12,
-                                  tickerSize: 21,
-                                  colorCircle: Colors.green[600],
-                                  colorContainer: Colors.grey[300],
-                                  onButton: () {
-                                    print("Не выходить из приложения");
-                                  },
+                                Provider(
+                                  create: (context) => firstToggle,
+                                  child: ToggleSwitch(
+                                    handlerWidth: 40,
+                                    handlerHeight: 12,
+                                    tickerSize: 21,
+                                    colorCircle: Colors.green[600],
+                                    colorContainer: Colors.grey[300],
+                                    onButton: () {
+                                      print("Не выходить из приложения");
+                                    },
+                                  ),
                                 ),
                               ],
                             ),
@@ -208,15 +263,18 @@ import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
                               children: [
                                 textSwitch("Согласен на СМС и Email рассылку",
                                     isTablet ? 16 : 11),
-                                ToggleSwitch(
-                                  handlerWidth: 40,
-                                  handlerHeight: 12,
-                                  tickerSize: 21,
-                                  colorCircle: Colors.green[600],
-                                  colorContainer: Colors.grey[300],
-                                  onButton: () {
-                                    print("Согласен на СМС и Email рассылку");
-                                  },
+                                Provider(
+                                  create: (context) => secondToggle,
+                                  child: ToggleSwitch(
+                                    handlerWidth: 40,
+                                    handlerHeight: 12,
+                                    tickerSize: 21,
+                                    colorCircle: Colors.green[600],
+                                    colorContainer: Colors.grey[300],
+                                    onButton: () {
+                                      print("Согласен на СМС и Email рассылку");
+                                    },
+                                  ),
                                 ),
                               ],
                             ),
@@ -228,15 +286,18 @@ import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
                               children: [
                                 textSwitch("Подтверждаю подлиность данных",
                                     isTablet ? 16 : 11),
-                                ToggleSwitch(
-                                  handlerWidth: 40,
-                                  handlerHeight: 12,
-                                  tickerSize: 21,
-                                  colorCircle: Colors.green[600],
-                                  colorContainer: Colors.grey[300],
-                                  onButton: () {
-                                    print("Подтверждаю подлиность данных");
-                                  },
+                                Provider(
+                                  create: (context) => thirdToggle,
+                                  child: ToggleSwitch(
+                                    handlerWidth: 40,
+                                    handlerHeight: 12,
+                                    tickerSize: 21,
+                                    colorCircle: Colors.green[600],
+                                    colorContainer: Colors.grey[300],
+                                    onButton: () {
+                                      print("Подтверждаю подлиность данных");
+                                    },
+                                  ),
                                 ),
                               ],
                             ),
@@ -251,16 +312,19 @@ import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
                                 const SizedBox(
                                   width: 75,
                                 ),
-                                ToggleSwitch(
-                                  handlerWidth: 40,
-                                  handlerHeight: 12,
-                                  tickerSize: 21,
-                                  colorCircle: Colors.green[600],
-                                  colorContainer: Colors.grey[300],
-                                  onButton: () {
-                                    print(
-                                        "Соглашаюсь на обработку персональных данных");
-                                  },
+                                Provider(
+                                  create: (context) => fourthToggle,
+                                  child: ToggleSwitch(
+                                    handlerWidth: 40,
+                                    handlerHeight: 12,
+                                    tickerSize: 21,
+                                    colorCircle: Colors.green[600],
+                                    colorContainer: Colors.grey[300],
+                                    onButton: () {
+                                      print(
+                                          "Соглашаюсь на обработку персональных данных");
+                                    },
+                                  ),
                                 ),
                               ],
                             ),
@@ -271,23 +335,27 @@ import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
                         padding: EdgeInsets.only(
                           left: 11,
                           right: 9,
-                           top: isTablet ? 30 : 25,
-                         ),
-                         child: GestureDetector(
-                           
-                           onTap: (){
-                             FocusManager.instance.primaryFocus?.unfocus();
-                             providerFlip['signin']!.toggleCard();
-                             print(imyaTextEditingController.text);
-                             print(familiyaTextEditingController.text);
-                             print(emailTextFielController.text);
-                             print(phoneTextFieldController.text);
-                             print(adresTorgoviySetTextFielController.text);
-                             print(fullRegDataProvider.dataRojdeniya);
-                           },
-                           child: Container(
-                             alignment: Alignment.center,
-                             height: isTablet ? 60 : 46,
+                          top: isTablet ? 30 : 25,
+                        ),
+                        child: GestureDetector(
+                          onTap: () {
+                            FocusManager.instance.primaryFocus?.unfocus();
+                            providerFlip['signin']!.toggleCard();
+                            getMal(
+                                imyaTextEditingController.text,
+                                familiyaTextEditingController.text,
+                                emailTextFielController.text,
+                                phoneTextFieldController.text,
+                                dateRangeController.displayDate!
+                                    .toIso8601String(),
+                                nazvaniyaTextFieldController.text,
+                                doljnostTextFieldController.text,
+                                gorodTextFieldController.text,
+                                adresTorgoviySetTextFielController.text);
+                          },
+                          child: Container(
+                            alignment: Alignment.center,
+                            height: isTablet ? 60 : 46,
                             width: isTablet ? 525 : 325,
                             decoration: BoxDecoration(
                               color: const Color(0xFF25b049),
@@ -297,8 +365,7 @@ import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
                                   color: Colors.grey.withOpacity(0.5),
                                   spreadRadius: 5,
                                   blurRadius: 7,
-                                  offset: const Offset(
-                                      0, 15), // changes position of shadow
+                                  offset: const Offset(0, 15),
                                 ),
                               ],
                             ),
@@ -354,6 +421,7 @@ import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
       ),
     );
   }
+
   Widget textSwitch(String text, double size) {
     return Text(
       text,
@@ -361,6 +429,39 @@ import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
           fontSize: size,
           color: const Color(0xFFa1b7c2),
           fontWeight: FontWeight.w500),
+    );
+  }
+
+  getMal(var lastname, var firstname, var email, var tel, var bornedAt,
+      var nazvaniya, var dolj, var gorod, var adres) {
+    log(lastname.toString());
+    log(firstname.toString());
+    log(email.toString());
+    log(tel.toString());
+    log(bornedAt.toString().split("T")[0]);
+    log(nazvaniya.toString());
+    log(dolj.toString());
+    log(gorod.toString());
+    log(adres.toString());
+    log(firstToggle.text);
+    log(secondToggle.text);
+    log(thirdToggle.text);
+    log(fourthToggle.text);
+    BlocSignUp().signUp(
+      lastname,
+      firstname,
+      email,
+      bornedAt,
+      dolj,
+      "",
+      "",
+      adres,
+      tel,
+      "1",
+      gorod,
+      secondToggle.text,
+      thirdToggle.text,
+      fourthToggle.text,
     );
   }
 }

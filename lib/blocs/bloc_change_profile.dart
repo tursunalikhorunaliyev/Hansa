@@ -6,7 +6,6 @@ enum ActionChange {
   personal,
   izboreny,
   statistik,
-  rekvizit,
   nastroyka,
 }
 

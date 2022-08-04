@@ -1,12 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
 import 'package:hansa_app/api_models.dart/country_model.dart';
 import 'package:http/http.dart';
 
 enum CityEnum { city }
 
-class HansaCountryAPI {
+class HansaCountryBloC {
   final streamController = StreamController<CountryModel>.broadcast();
   final eventController = StreamController<CityEnum>.broadcast();
 
@@ -16,7 +15,7 @@ class HansaCountryAPI {
   Stream<CityEnum> get eventStrem => eventController.stream;
   StreamSink<CityEnum> get eventSink => eventController.sink;
 
-  HansaCountryAPI(id) {
+  HansaCountryBloC(id) {
     eventStrem.listen((event) async {
       if (event == CityEnum.city) {
         sink.add(await getCountries(id));
@@ -27,7 +26,6 @@ class HansaCountryAPI {
   Future<CountryModel> getCountries(id) async {
     Response response =
         await get(Uri.parse("http://hansa-lab.ru/api/dictionary/city?id=$id"));
-    log(response.statusCode.toString() + "kooooooooooooood");
     return CountryModel.fromMap(jsonDecode(response.body));
   }
 }

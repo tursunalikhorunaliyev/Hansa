@@ -9,18 +9,14 @@ import 'package:hansa_app/video_section/custom_video_subitem.dart';
 import 'package:provider/provider.dart';
 
 class Video extends StatelessWidget {
-  Video({Key? key}) : super(key: key);
-  final List<String> titles = [
-    "О компании",
-    "Обучающие",
-    "Варочные поверхности",
-    "Духовые шкафы"
-  ];
+  const Video({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final menuEventsBloCProvider = Provider.of<MenuEventsBloC>(context);
     final blocChangeTitleProvider = Provider.of<BlocChangeTitle>(context);
+    final blocChangeTitleIndexProvider =
+        Provider.of<BlocChangeTitleIndex>(context);
     final token = Provider.of<String>(context);
     final blocVideoApi = BlocVideoApi(token);
     blocVideoApi.eventSink.add(ActionVideo.view);
@@ -49,17 +45,22 @@ class Video extends StatelessWidget {
                         children: [
                           CustomVideoSubItem(
                               onTap: () {
-                                blocChangeTitleProvider.titleSink
-                                    .add(titles[index]);
+                                blocChangeTitleProvider.titleSink.add(snapshot
+                                    .data!.videoListData.list[index].title);
                                 menuEventsBloCProvider.eventSink
                                     .add(MenuActions.oKompanii);
+                                blocChangeTitleIndexProvider.titleSink
+                                    .add(index);
                               },
                               title: snapshot
                                   .data!.videoListData.list[index].title),
                           listView(
-                              (snapshot.data!.videoListData.list[index].data.list
-                                  .length < 5)?snapshot.data!.videoListData.list[index].data.list
-                                  .length:5,
+                              (snapshot.data!.videoListData.list[index].data
+                                          .list.length <
+                                      5)
+                                  ? snapshot.data!.videoListData.list[index]
+                                      .data.list.length
+                                  : 5,
                               index)
                         ],
                       );
@@ -97,11 +98,3 @@ class Video extends StatelessWidget {
         ));
   }
 }
-/* ListView.builder(
-      
-        itemCount: itemCount,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return 
-        },
-      ), */

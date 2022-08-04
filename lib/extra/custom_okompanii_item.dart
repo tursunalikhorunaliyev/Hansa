@@ -6,16 +6,20 @@ class CustomOKompaniiItem extends StatelessWidget {
     Key? key,
     required this.imageUrl,
     required this.title,
+    required this.onTap,
+    required this.onDownload,
   }) : super(key: key);
   final String imageUrl;
   final String title;
+  final VoidCallback onTap;
+  final VoidCallback onDownload;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(8),
-          child: Image.asset(
+          child: Image.network(
             imageUrl,
             height: 165,
             width: 325,
@@ -35,11 +39,15 @@ class CustomOKompaniiItem extends StatelessWidget {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(left: 18),
-                  child: Text(
-                    title,
-                    style: GoogleFonts.montserrat(
-                      color: const Color(0xff272624),
-                      fontWeight: FontWeight.bold,
+                  child: SizedBox(
+                    width: 200,
+                    child: Text(
+                      title,
+                      overflow: TextOverflow.clip,
+                      style: GoogleFonts.montserrat(
+                        color: const Color(0xff272624),
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ),
@@ -58,7 +66,7 @@ class CustomOKompaniiItem extends StatelessWidget {
                         borderRadius: BorderRadius.circular(64),
                         elevation: 5,
                         child: GestureDetector(
-                          onTap: () {},
+                          onTap: onTap,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(64),
                             child: Container(
@@ -87,7 +95,7 @@ class CustomOKompaniiItem extends StatelessWidget {
                         borderRadius: BorderRadius.circular(64),
                         elevation: 5,
                         child: GestureDetector(
-                          onTap: () {},
+                          onTap: onDownload,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(64),
                             child: Container(
