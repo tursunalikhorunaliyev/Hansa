@@ -19,6 +19,7 @@ void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   Provider.debugCheckInvalidValueType = null;
   await Hive.initFlutter();
+  await Hive.openBox("cache");
   await Hive.openBox("savedUser");
   runApp(const MyApp());
 }
@@ -61,7 +62,6 @@ class MyApp extends StatelessWidget {
             create: (context) => LoginClickedBloc(),
           ),
           Provider(create: (context) => BlocFlipLogin()),
-      
         ],
         child: const MaterialApp(
           debugShowCheckedModeBanner: false,
