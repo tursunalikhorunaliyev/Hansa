@@ -3,9 +3,12 @@ import 'dart:developer';
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hansa_app/api_models.dart/country_model.dart';
 import 'package:hansa_app/blocs/bloc_flip_login.dart';
 import 'package:hansa_app/blocs/bloc_full_register.dart';
+import 'package:hansa_app/blocs/bloc_local_cities.dart';
 import 'package:hansa_app/blocs/bloc_sign.dart';
+import 'package:hansa_app/blocs/hansa_country_api.dart';
 import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
 import 'package:hansa_app/enums/full_reg_enum.dart';
 import 'package:hansa_app/extra/modal_sheet_for_full_reg.dart';
@@ -41,7 +44,9 @@ class _FullRegistrState extends State<FullRegistr> {
     final isTablet = Provider.of<bool>(context);
     final providerFlip = Provider.of<Map<String, FlipCardController>>(context);
     final providerFlipLogin = Provider.of<BlocFlipLogin>(context);
-
+    log("SignUp build");
+    final blocCity = HansaCountryBloC(1);
+    blocCity.eventSink.add(CityEnum.city);
     return SingleChildScrollView(
       child: Center(
         child: GestureDetector(
@@ -337,45 +342,61 @@ class _FullRegistrState extends State<FullRegistr> {
                           right: 9,
                           top: isTablet ? 30 : 25,
                         ),
-                        child: GestureDetector(
-                          onTap: () {
-                            FocusManager.instance.primaryFocus?.unfocus();
-                            providerFlip['signin']!.toggleCard();
-                            getMal(
-                                imyaTextEditingController.text,
-                                familiyaTextEditingController.text,
-                                emailTextFielController.text,
-                                phoneTextFieldController.text,
-                                dateRangeController.displayDate!
-                                    .toIso8601String(),
-                                nazvaniyaTextFieldController.text,
-                                doljnostTextFieldController.text,
-                                gorodTextFieldController.text,
-                                adresTorgoviySetTextFielController.text);
-                          },
-                          child: Container(
-                            alignment: Alignment.center,
-                            height: isTablet ? 60 : 46,
-                            width: isTablet ? 525 : 325,
-                            decoration: BoxDecoration(
-                              color: const Color(0xFF25b049),
-                              borderRadius: BorderRadius.circular(70),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  spreadRadius: 5,
-                                  blurRadius: 7,
-                                  offset: const Offset(0, 15),
+                        child: StreamBuilder<String>(
+                          stream: blocFullRegister.dm,
+                          initialData: "",
+                          builder: (context, snapshot) {
+                            return GestureDetector(
+                              onTap: () {
+                                FocusManager.instance.primaryFocus?.unfocus();
+                                providerFlip['signin']!.toggleCard();
+                                List<String> date = dateRangeController
+                                    .displayDate!
+                                    .toIso8601String()
+                                    .split("T")[0]
+                                    .split("-");
+                                toSignUp(
+                                  firstname: imyaTextEditingController.text,
+                                  lastname: familiyaTextEditingController.text,
+                                  email: emailTextFielController.text,
+                                  phone: phoneTextFieldController.text,
+                                  bornedAt: "${date[2]}.${date[1]}.${date[0]}",
+                                  nazvaniya: nazvaniyaTextFieldController.text,
+                                  dolj: doljnostTextFieldController.text,
+                                  gorod: gorodTextFieldController.text,
+                                  shopadress:
+                                      adresTorgoviySetTextFielController.text,
+                                  shopnet: snapshot.data!,
+                                  smsemail: secondToggle.text,
+                                  lichnostdannix: thirdToggle.text,
+                                  personalnixdannix: fourthToggle.text,
+                                );
+                              },
+                              child: Container(
+                                alignment: Alignment.center,
+                                height: isTablet ? 60 : 46,
+                                width: isTablet ? 525 : 325,
+                                decoration: BoxDecoration(
+                                  color: const Color(0xFF25b049),
+                                  borderRadius: BorderRadius.circular(70),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 5,
+                                      blurRadius: 7,
+                                      offset: const Offset(0, 15),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                            child: Text(
-                              "Зарегистрироваться",
-                              style: GoogleFonts.montserrat(
-                                  fontSize: isTablet ? 18 : 12,
-                                  color: const Color(0xFFffffff)),
-                            ),
-                          ),
+                                child: Text(
+                                  "Зарегистрироваться",
+                                  style: GoogleFonts.montserrat(
+                                      fontSize: isTablet ? 18 : 12,
+                                      color: const Color(0xFFffffff)),
+                                ),
+                              ),
+                            );
+                          },
                         ),
                       ),
                     ],
@@ -432,31 +453,44 @@ class _FullRegistrState extends State<FullRegistr> {
     );
   }
 
-  getMal(var lastname, var firstname, var email, var tel, var bornedAt,
-      var nazvaniya, var dolj, var gorod, var adres) {
+  toSignUp(
+      {required String lastname,
+      required String firstname,
+      required String email,
+      required String phone,
+      required String bornedAt,
+      required String nazvaniya,
+      required String dolj,
+      required String gorod,
+      required String shopadress,
+      required String shopnet,
+      required String smsemail,
+      required String lichnostdannix,
+      required String personalnixdannix}) {
     log(lastname.toString());
     log(firstname.toString());
     log(email.toString());
-    log(tel.toString());
-    log(bornedAt.toString().split("T")[0]);
+    log(phone.toString());
+    log(bornedAt);
     log(nazvaniya.toString());
     log(dolj.toString());
+    log(shopnet);
     log(gorod.toString());
-    log(adres.toString());
+    log(shopadress.toString());
     log(firstToggle.text);
-    log(secondToggle.text);
-    log(thirdToggle.text);
-    log(fourthToggle.text);
+    log(smsemail);
+    log(lichnostdannix);
+    log(personalnixdannix);
     BlocSignUp().signUp(
       lastname,
       firstname,
       email,
       bornedAt,
       dolj,
-      "",
-      "",
-      adres,
-      tel,
+      nazvaniya,
+      shopnet,
+      shopadress,
+      phone,
       "1",
       gorod,
       secondToggle.text,

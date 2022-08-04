@@ -10,4 +10,7 @@ class BlocFullRegister {
   final c = StreamController<String>.broadcast();
   StreamSink<String> get ck => c.sink;
   Stream<String> get cm => c.stream;
+  final d = StreamController<String>.broadcast();
+  StreamSink<String> get dk => d.sink;
+  Stream<String> get dm => d.stream;
 }
