@@ -25,7 +25,6 @@ class CustomClipItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isTablet = Provider.of<bool>(context);
     return Padding(
       padding: EdgeInsets.only(left: 25.w, right: 25.w, top: 11.h, bottom: 5.h),
       child: SizedBox(
@@ -57,13 +56,13 @@ class CustomClipItem extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(left: 18.w, top: 5, bottom: 5),
                   child: SizedBox(
-                    width: isTablet ? 400 : 200,
+                    width: 200,
                     child: Text(
                       title,
                       overflow: TextOverflow.visible,
                       style: GoogleFonts.montserrat(
                         color: titleColor,
-                        fontSize: isTablet ? 10.sp : 13.sp,
+                        fontSize: 13.sp,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
