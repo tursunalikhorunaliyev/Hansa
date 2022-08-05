@@ -27,6 +27,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return Provider(
         create: (context) => scaffoldKey,
         child: Scaffold(
+          drawerEnableOpenDragGesture: false,
           resizeToAvoidBottomInset: false,
           drawer: const GlavniyMenyu(),
           key: scaffoldKey,
@@ -62,6 +63,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                               ),
                               InkWell(
                                 onTap: () {
+                                  menuProvider.eventSink
+                                      .add(MenuActions.welcome);
+                                },
+                                child: Icon(
+                                  CupertinoIcons.home,
+                                  size: isTablet ? 13.sp : 25.sp,
+                                  color: const Color(0xffa5a5ae),
+                                ),
+                              ),
+                              InkWell(
+                                onTap: () {
                                   scaffoldKey.currentState!.openDrawer();
                                 },
                                 child: Icon(
@@ -80,17 +92,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                   color: const Color(0xffa5a5ae),
                                 ),
                               ),
-                              InkWell(
-                                onTap: () {
-                                  menuProvider.eventSink
-                                      .add(MenuActions.welcome);
-                                },
-                                child: Icon(
-                                  CupertinoIcons.home,
-                                  size: isTablet ? 13.sp : 25.sp,
-                                  color: const Color(0xffa5a5ae),
-                                ),
-                              ),
+                              
                             ],
                           ),
                         ),
@@ -112,15 +114,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           IconButton(
-                            onPressed: () {
-                              scaffoldKey.currentState!.openDrawer();
-                            },
-                            icon: 
-                     const 
-                               HamburgerIcon()
-                           
-                            )
-                          ,
+                              onPressed: () {
+                                scaffoldKey.currentState!.openDrawer();
+                              },
+                              icon: const HamburgerIcon()),
                           InkWell(
                             onTap: () {
                               menuProvider.eventSink.add(MenuActions.welcome);

@@ -31,7 +31,8 @@ class _CustomVideoListItemState extends State<CustomVideoListItem> {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8),
         child: Container(
-          width: 155,
+          height: 190,
+          width: 220,
           color: Colors.white,
           child: Column(
             children: [
@@ -52,7 +53,7 @@ class _CustomVideoListItemState extends State<CustomVideoListItem> {
                                   .list[widget.index]
                                   .pictureLink,
                               height: 130,
-                              width: 155,
+                              width: 220,
                               fit: BoxFit.cover,
                             ),
                             InkWell(
@@ -66,17 +67,19 @@ class _CustomVideoListItemState extends State<CustomVideoListItem> {
                                 playProvider.sink
                                     .add([true, video.videoLink, video.title]);
                               },
-                              child: Container(
-                                height: 130,
-                                width: 155,
-                                color: Colors.transparent,
-                                alignment: Alignment.center,
-                                child: const Opacity(
-                                  opacity: .5,
-                                  child: Icon(
-                                    CupertinoIcons.play_circle_fill,
-                                    size: 25,
-                                    color: Colors.white,
+                              child: Center(
+                                child: Container(
+                                  height: 130,
+                                  width: 155,
+                                  color: Colors.transparent,
+                                  alignment: Alignment.center,
+                                  child: const Opacity(
+                                    opacity: .5,
+                                    child: Icon(
+                                      CupertinoIcons.play_circle_fill,
+                                      size: 25,
+                                      color: Colors.white,
+                                    ),
                                   ),
                                 ),
                               ),

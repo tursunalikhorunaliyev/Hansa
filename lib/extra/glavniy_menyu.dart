@@ -385,7 +385,7 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                   .add(ActionChange.statistik);
                             },
                             child: TextIcon(
-                              text: "Статистика",
+                              text: "Рейтинг",
                               iconUrl: "assets/free-icon-rating-4569150.png",
                             ),
                           ),

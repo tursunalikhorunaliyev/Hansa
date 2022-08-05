@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hansa_app/blocs/bloc_change_title.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/extra/custom_title.dart';
@@ -35,7 +36,7 @@ class Video extends StatelessWidget {
                   builder: (context, snapshot) {
                     if (snapshot.data == null) {
                       return const Center(
-                        child: CircularProgressIndicator(),
+                        child: SpinKitWanderingCubes(color: Colors.red,),
                       );
                     }
                     return Column(

@@ -1,7 +1,8 @@
-import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 class EmptyScreen extends StatefulWidget {
   const EmptyScreen({Key? key}) : super(key: key);
@@ -29,9 +30,10 @@ class _EmptyScreenState extends State<EmptyScreen>
       onReceiveProgress: (recieved, total) {
         print(((recieved / total) * 100).toStringAsFixed(0));
         setState(() {
-          progress = double.parse(((recieved / total) * 100).toStringAsFixed(0));
+          progress =
+              double.parse(((recieved / total) * 100).toStringAsFixed(0));
         });
-        if (progress == "100") {
+        if (progress == 100) {
           setState(() {
             isDownloaded = true;
           });
@@ -40,7 +42,7 @@ class _EmptyScreenState extends State<EmptyScreen>
       deleteOnError: true,
     ).then((value) {
       setState(() {
-        if (progress == "100") {
+        if (progress == 100) {
           isDownloaded = true;
         }
         downloading = false;
@@ -56,40 +58,46 @@ class _EmptyScreenState extends State<EmptyScreen>
   }
 
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            height: 50,
-          ),
-          Align(
-            alignment: Alignment.centerLeft,
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 100),
-              width: progress,
-              height: 10,
-              color: Colors.green,
+        body: SafeArea(
+          child: Center(
+              child: AlertDialog(
+                content: Padding(
+                  padding: const EdgeInsets.only(top: 5 ,),
+                  child: LinearPercentIndicator(
+                    barRadius: Radius.circular(5),
+                 
+                  lineHeight: 15,
+                  
+                  percent: progress/100,
+                  center: Text("$progress%" , style: GoogleFonts.montserrat(
+                    color: Colors.black,
+
+                  ),),
+                  backgroundColor: Colors.transparent,
+                  progressColor: Colors.green,
+                  ),
+                ),
+                actions: [
+
+                  MaterialButton(
+                    
+                    onPressed: (){
+                    Navigator.of(context).pop();
+                  } , child: Text("Cancel" , style: GoogleFonts.montserrat(
+                    color: Colors.black , fontSize: 12 , 
+                  ),)),
+                  MaterialButton(
+                    
+                    onPressed: (){
+                    downloadFile();
+                  } , child: Text("Download" , style: GoogleFonts.montserrat(
+                    color: Colors.black , fontSize: 12 , 
+                  ),)),
+                ],
+              )
             ),
-          ),
-          SizedBox(
-            height: 50,
-          ),
-          InkWell(
-              onTap: () {
-                downloadFile();
-                print("Salom");
-              },
-              child: const Text("Start"))
-        ],
-      ),
-    ));
+        ));
   }
 }
