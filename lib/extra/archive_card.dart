@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ArchiveCard extends StatefulWidget {
@@ -33,15 +34,16 @@ class _ArchiveCardState extends State<ArchiveCard> {
   Future<void>? launched;
   @override
   Widget build(BuildContext context) {
+    final isTablet = Provider.of<bool>(context);
     return Padding(
       padding: EdgeInsets.only(top: 15.h),
       child: Stack(
         children: [
           Padding(
-            padding: EdgeInsets.only(top: 167.h),
+            padding: EdgeInsets.only(top: isTablet ? 180 : 167),
             child: Container(
-              width: 325.w,
-              height: 93.h,
+              width: isTablet ? 390 : 325,
+              height: isTablet ? 75.h : 93.h,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.r),
                   color: const Color(0xffffffff)),
@@ -55,7 +57,8 @@ class _ArchiveCardState extends State<ArchiveCard> {
                         widget.title,
                         overflow: TextOverflow.fade,
                         style: GoogleFonts.montserrat(
-                            fontSize: 12.sp, fontWeight: FontWeight.bold),
+                            fontSize: isTablet ? 14 : 12,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                     Padding(
@@ -63,26 +66,26 @@ class _ArchiveCardState extends State<ArchiveCard> {
                       child: Column(
                         children: [
                           Padding(
-                            padding: EdgeInsets.only(top: 27.h),
+                            padding:
+                                EdgeInsets.only(top: isTablet ? 22.h : 27.h),
                             child: InkWell(
                               onTap: () {
                                 setState(() async {
-                                  
                                   launched = _launchInBrowser(
                                       Uri.parse("http://${widget.linkPDF}"));
                                 });
                               },
                               child: Container(
                                 alignment: Alignment.center,
-                                width: 94.w,
-                                height: 25.h,
+                                width: isTablet ? 100 : 94,
+                                height: isTablet ? 28 : 25,
                                 decoration: BoxDecoration(
                                     color: const Color(0xff31353b),
                                     borderRadius: BorderRadius.circular(13.r)),
                                 child: Text(
                                   widget.topButtonText,
                                   style: GoogleFonts.montserrat(
-                                      fontSize: 10.sp,
+                                      fontSize: isTablet ? 12 : 10,
                                       color: const Color(0xffffffff),
                                       fontWeight: FontWeight.w500),
                                 ),
@@ -100,15 +103,15 @@ class _ArchiveCardState extends State<ArchiveCard> {
                               },
                               child: Container(
                                 alignment: Alignment.center,
-                                width: 94.w,
-                                height: 25.h,
+                                width: isTablet ? 100 : 94,
+                                height: isTablet ? 28 : 25,
                                 decoration: BoxDecoration(
                                     color: widget.buttonColor,
                                     borderRadius: BorderRadius.circular(13.r)),
                                 child: Text(
                                   widget.bottomButtonText,
                                   style: GoogleFonts.montserrat(
-                                      fontSize: 10.sp,
+                                      fontSize: isTablet ? 12 : 10,
                                       color: const Color(0xffffffff),
                                       fontWeight: FontWeight.w500),
                                 ),
@@ -124,8 +127,8 @@ class _ArchiveCardState extends State<ArchiveCard> {
             ),
           ),
           SizedBox(
-              width: 326.w,
-              height: 156.h,
+              width: isTablet ? 388 : 326,
+              height: isTablet ? 170 : 156,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(5.r),
                 child: Image.network(
@@ -134,11 +137,12 @@ class _ArchiveCardState extends State<ArchiveCard> {
                 ),
               )),
           Padding(
-            padding: EdgeInsets.only(top: 131.h, left: 247.w),
+            padding: EdgeInsets.only(
+                top: isTablet ? 150 : 131, left: isTablet ? 305 : 247),
             child: Container(
               alignment: Alignment.center,
-              height: 55.h,
-              width: 55.w,
+              height: isTablet ? 45 : 55,
+              width: isTablet ? 45 : 55,
               decoration: BoxDecoration(
                   color: const Color(0xfff1f1f1),
                   borderRadius: BorderRadius.circular(90.w)),
