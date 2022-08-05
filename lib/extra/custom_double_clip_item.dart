@@ -25,7 +25,7 @@ class CustomDoubleClipItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding:  EdgeInsets.only(left: 25.w, right: 25.w, top: 11.h, bottom: 5.h),
+      padding: EdgeInsets.only(left: 25.w, right: 25.w, top: 11.h, bottom: 5.h),
       child: SizedBox(
         width: 325.w,
         child: Stack(
@@ -51,12 +51,16 @@ class CustomDoubleClipItem extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
-                    padding:  EdgeInsets.only(left: 18.w),
-                    child: Text(
-                      title,
-                      style: GoogleFonts.montserrat(
-                        color: titleColor,
-                        fontWeight: FontWeight.bold,
+                    padding: EdgeInsets.only(left: 18.w),
+                    child: SizedBox(
+                      width: 200,
+                      child: Text(
+                        title,
+                        overflow: TextOverflow.clip,
+                        style: GoogleFonts.montserrat(
+                          color: titleColor,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
@@ -73,7 +77,7 @@ class CustomDoubleClipItem extends StatelessWidget {
                             borderRadius: BorderRadius.circular(64.r),
                             child: Container(
                               padding: const EdgeInsets.all(7),
-                              constraints:  BoxConstraints(
+                              constraints: BoxConstraints(
                                 minWidth: 90.w,
                               ),
                               color: buttonColor,

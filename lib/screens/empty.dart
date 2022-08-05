@@ -13,10 +13,9 @@ class EmptyScreen extends StatefulWidget {
 class _EmptyScreenState extends State<EmptyScreen>
     with SingleTickerProviderStateMixin {
   bool downloading = false;
-  String progress = "0";
+  double progress = 0;
   bool isDownloaded = false;
-  String uri =
-      "http://research.nhm.org/pdfs/10840/10840-001.pdf";
+  String uri = "https://hansa-lab.ru/storage/upload/guide/m9.pdf";
   String fileName = "test.pdf";
   Future<void> downloadFile() async {
     setState(() {
@@ -28,25 +27,20 @@ class _EmptyScreenState extends State<EmptyScreen>
       uri,
       savePath,
       onReceiveProgress: (recieved, total) {
-        print(((recieved/total)*100).toStringAsFixed(0));
+        print(((recieved / total) * 100).toStringAsFixed(0));
         setState(() {
-          progress = ((recieved/total)*100).toStringAsFixed(0);
+          progress = double.parse(((recieved / total) * 100).toStringAsFixed(0));
         });
-        if(progress=="100"){
-
+        if (progress == "100") {
           setState(() {
             isDownloaded = true;
           });
-        }
-        else if(double.parse(progress)<100){
-
-        }
+        } else if (progress < 100) {}
       },
       deleteOnError: true,
-
     ).then((value) {
       setState(() {
-        if(progress == "100"){
+        if (progress == "100") {
           isDownloaded = true;
         }
         downloading = false;
@@ -56,8 +50,8 @@ class _EmptyScreenState extends State<EmptyScreen>
 
   Future<String> getFilePath(uniqueFileName) async {
     String path = "";
-    Directory dir = await getApplicationDocumentsDirectory();
-    path = "${dir.path}/$uniqueFileName.pdf";
+    String dir = "/storage/emulated/0/Download/";
+    path = "$dir/$uniqueFileName.pdf";
     return path;
   }
 
@@ -68,17 +62,32 @@ class _EmptyScreenState extends State<EmptyScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Center(
+    return Scaffold(
+        body: Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        
         children: [
-          Text("$progress%"),
-       
-          isDownloaded?const Text("Downloaded"):const Text("Click start button to download file"),
-          MaterialButton(onPressed: ()async{
-            downloadFile();
-          }, child: const Text("Start"),)
+          SizedBox(
+            height: 50,
+          ),
+          Align(
+            alignment: Alignment.centerLeft,
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 100),
+              width: progress,
+              height: 10,
+              color: Colors.green,
+            ),
+          ),
+          SizedBox(
+            height: 50,
+          ),
+          InkWell(
+              onTap: () {
+                downloadFile();
+                print("Salom");
+              },
+              child: const Text("Start"))
         ],
       ),
     ));

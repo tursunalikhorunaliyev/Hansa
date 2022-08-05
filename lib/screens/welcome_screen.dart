@@ -106,8 +106,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     width: 395.w,
                     height: 100.h,
                     child: Padding(
-                      padding: EdgeInsets.only(top: 20.h),
+                      padding: EdgeInsets.only(top: 25.h),
                       child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           IconButton(

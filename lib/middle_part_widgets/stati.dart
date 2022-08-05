@@ -16,9 +16,18 @@ class Stati extends StatefulWidget {
 }
 
 class _StatiState extends State<Stati> {
+  ReadStatiBLoC readStati = ReadStatiBLoC();
+  @override
+  void dispose() {
+    readStati.controller.close();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     final readStatiBloCProvider = Provider.of<ReadStatiBLoC>(context);
+    setState(() {
+      
+    });
     final token = Provider.of<String>(context);
     final bloc = StatiBLoC(token);
     

@@ -5,6 +5,7 @@ import 'package:hansa_app/api_models.dart/welcome_model.dart';
 import 'package:hansa_app/api_services/welcome_api.dart';
 import 'package:hansa_app/extra/event_cards.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WelcomeWidget extends StatefulWidget {
   const WelcomeWidget({Key? key}) : super(key: key);
@@ -28,7 +29,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
           children: [
             Padding(
               padding: EdgeInsets.only(
-                  top: isTablet ? 20 : 9, bottom: isTablet ? 20 : 9),
+                  top: isTablet ? 20 : 9, bottom: isTablet ? 20 : 0),
               child: Text(
                 'Добро пожаловать',
                 style: GoogleFonts.montserrat(
@@ -43,7 +44,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                   if (snapshot.hasData) {
                     final data = snapshot.requireData;
                     return SizedBox(
-                      height: isTablet ? 877 : 566,
+                      height: isTablet ? 877 : 583,
                       width: isTablet ? 800 : 330,
                       child: isTablet
                           ? NotificationListener(

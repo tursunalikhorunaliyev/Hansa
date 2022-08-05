@@ -100,54 +100,27 @@ class _TreningiState extends State<Treningi> {
                           );
                         } else {
                           return Column(
-                            children: [
-                              Column(
-                                children: List.generate(
-                                  data.videos.list.length,
-                                  (index) {
-                                    return CustomClipItem(
-                                      backgroundColor:
-                                          const Color(0xff000004),
-                                      buttonColor:
-                                          const Color(0xffe21a37),
-                                      buttonTextColor:
-                                          const Color(0xffffffff),
-                                      titleColor: const Color(0xffffffff),
-                                      buttonText: "Смотреть",
-                                      title:
-                                          data.videos.list[index].title,
-                                      onTap: () {
-                                        menuBloCProvider.eventSink.add(
-                                            MenuActions.trainingVideo);
-                                      },
-                                    );
+                            children: List.generate(
+                              data.eventReports.list.length,
+                              (index) {
+                                return CustomClipItem(
+                                  backgroundColor:
+                                      const Color(0xff000004),
+                                  buttonColor:
+                                      const Color(0xffe21a37),
+                                  buttonTextColor:
+                                      const Color(0xffffffff),
+                                  titleColor: const Color(0xffffffff),
+                                  buttonText: "Смотреть",
+                                  title: data
+                                      .eventReports.list[index].title,
+                                  onTap: () {
+                                    menuBloCProvider.eventSink.add(
+                                        MenuActions.trainingVideo);
                                   },
-                                ),
-                              ),
-                              Column(
-                                children: List.generate(
-                                  data.eventReports.list.length,
-                                  (index) {
-                                    return CustomClipItem(
-                                      backgroundColor:
-                                          const Color(0xff000004),
-                                      buttonColor:
-                                          const Color(0xffe21a37),
-                                      buttonTextColor:
-                                          const Color(0xffffffff),
-                                      titleColor: const Color(0xffffffff),
-                                      buttonText: "Смотреть",
-                                      title: data
-                                          .eventReports.list[index].title,
-                                      onTap: () {
-                                        menuBloCProvider.eventSink.add(
-                                            MenuActions.trainingVideo);
-                                      },
-                                    );
-                                  },
-                                ),
-                              ),
-                            ],
+                                );
+                              },
+                            ),
                           );
                         }
                       }),
