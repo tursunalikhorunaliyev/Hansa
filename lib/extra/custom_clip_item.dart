@@ -25,7 +25,6 @@ class CustomClipItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isTablet = Provider.of<bool>(context);
     return Padding(
       padding: EdgeInsets.only(left: 25.w, right: 25.w, top: 11.h, bottom: 5.h),
       child: SizedBox(
@@ -40,7 +39,11 @@ class CustomClipItem extends StatelessWidget {
                   child: ClipPath(
                     clipper: CustomPaintClipper(),
                     child: Container(
-                      constraints: BoxConstraints( minHeight: 71, minWidth: 300.w , maxHeight: 101.h , maxWidth: 300.w),
+                      constraints: BoxConstraints(
+                          minHeight: 71,
+                          minWidth: 300.w,
+                          maxHeight: 101.h,
+                          maxWidth: 300.w),
                       color: backgroundColor,
                     ),
                   ),
@@ -51,7 +54,7 @@ class CustomClipItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: 18.w , top: 5 , bottom: 5),
+                  padding: EdgeInsets.only(left: 18.w, top: 5, bottom: 5),
                   child: SizedBox(
                     width: 200,
                     child: Text(

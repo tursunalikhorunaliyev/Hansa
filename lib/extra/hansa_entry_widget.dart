@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/extra/spin_kit_fading_four.dart';
 import 'package:hansa_app/extra/voyti_ili_sozdat_accaunt.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class HansaEntry extends StatefulWidget {
@@ -91,10 +92,10 @@ class _HansaEntryState extends State<HansaEntry> {
           ),
           pos == 420
               ? Positioned(
-                  top: 180.h,
+                  top: 240.h,
                   left: 27.w,
                   right: 27.w,
-                  child: const SpinKitFadingFourWidget())
+                  child: Lottie.asset("assets/pre.json", width: 120, height: 120))
               : const SizedBox(),
           Positioned(
             top: -58.h,

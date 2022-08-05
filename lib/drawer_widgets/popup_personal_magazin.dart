@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hansa_app/api_models.dart/model_doljnost.dart';
 import 'package:hansa_app/api_models.dart/model_magazin.dart';
-import 'package:hansa_app/blocs/bloc_doljnost.dart';
 import 'package:hansa_app/blocs/bloc_magazin.dart';
 import 'package:hansa_app/blocs/bloc_popup_drawer.dart';
 import 'package:hansa_app/enums/enum_action_view.dart';
 import 'package:provider/provider.dart';
 
 class PopupPersonalMagazin extends StatefulWidget {
-  TextEditingController controller = TextEditingController();
-  PopupPersonalMagazin({Key? key, required this.controller}) : super(key: key);
+  final TextEditingController controller;
+ const PopupPersonalMagazin({Key? key, required this.controller}) : super(key: key);
 
   @override
   State<PopupPersonalMagazin> createState() => _PopupPersonalMagazinState();

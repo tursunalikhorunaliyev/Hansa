@@ -61,15 +61,17 @@ class ObucheniyaWidget extends StatelessWidget {
                                   children: [
                                     Container(
                                       alignment: Alignment.center,
-                                      width: 70.w,
-                                      height: 42.h,
-                                      decoration: const BoxDecoration(
+                                      width: isTablet ? 55.w : 70.w,
+                                      height: isTablet ? 46.h : 42.h,
+                                      decoration: BoxDecoration(
                                           color: Color(0XFFff163e),
                                           borderRadius: BorderRadius.only(
-                                              topRight: Radius.circular(21),
-                                              bottomRight: Radius.circular(21))),
+                                              topRight: Radius.circular(
+                                                  isTablet ? 45.r : 21.r),
+                                              bottomRight: Radius.circular(
+                                                  isTablet ? 45.r : 21.r))),
                                       child: Image.asset(
-                                        'assets/Обучение.png',
+                                        'assets/free-icon-academic-2599288.png',
                                         height: 30.h,
                                         width: 30.w,
                                       ),
@@ -78,7 +80,7 @@ class ObucheniyaWidget extends StatelessWidget {
                                       padding: EdgeInsets.only(left: 10.w),
                                       child: Text('#',
                                           style: GoogleFonts.montserrat(
-                                            fontSize: 14.sp,
+                                            fontSize: isTablet ? 10.sp : 14.sp,
                                             fontWeight: FontWeight.w500,
                                             color: const Color(0xffff163e),
                                           )),
@@ -86,7 +88,7 @@ class ObucheniyaWidget extends StatelessWidget {
                                     Text(
                                       'Обучающие материалы ',
                                       style: GoogleFonts.montserrat(
-                                          fontSize: 20.sp,
+                                          fontSize: isTablet ? 12.sp : 20.sp,
                                           fontWeight: FontWeight.bold,
                                           color: const Color(0xff272624)),
                                     ),
@@ -122,8 +124,12 @@ class ObucheniyaWidget extends StatelessWidget {
                                       Row(),
                                       Column(children: [
                                         EventCards(
-                                          isFavourite: snapshot.data!.data
-                                              .listGuides.list[index].isFavourite,
+                                          isFavourite: snapshot
+                                              .data!
+                                              .data
+                                              .listGuides
+                                              .list[index]
+                                              .isFavourite,
                                           buttonColor: const Color(0xffff163e),
                                           buttonText: 'smoterer',
                                           day: 'asdasd',
@@ -147,14 +153,15 @@ class ObucheniyaWidget extends StatelessWidget {
                                   children: [
                                     Container(
                                       alignment: Alignment.center,
-                                      width: 70.w,
-                                      height: 42.h,
+                                      width: isTablet ? 55.w : 70.w,
+                                      height: isTablet ? 46.h : 42.h,
                                       decoration: BoxDecoration(
                                           color: const Color(0XFFff163e),
                                           borderRadius: BorderRadius.only(
-                                              topRight: Radius.circular(21.sp),
-                                              bottomRight:
-                                                  Radius.circular(21.sp))),
+                                              topRight: Radius.circular(
+                                                  isTablet ? 45.r : 21.r),
+                                              bottomRight: Radius.circular(
+                                                  isTablet ? 45.r : 21.r))),
                                       child: Image.asset(
                                         'assets/Архив.png',
                                         height: 30.h,
@@ -166,7 +173,7 @@ class ObucheniyaWidget extends StatelessWidget {
                                       child: Text(
                                         '#',
                                         style: GoogleFonts.montserrat(
-                                            fontSize: 14.sp,
+                                            fontSize: isTablet ? 10.sp : 14.sp,
                                             fontWeight: FontWeight.w500,
                                             color: const Color(0xffff163e)),
                                       ),
@@ -174,7 +181,7 @@ class ObucheniyaWidget extends StatelessWidget {
                                     Text(
                                       'Архив',
                                       style: GoogleFonts.montserrat(
-                                          fontSize: 20.sp,
+                                          fontSize: isTablet ? 12.sp : 20.sp,
                                           fontWeight: FontWeight.bold,
                                           color: const Color(0xff272624)),
                                     )
@@ -217,7 +224,8 @@ class ObucheniyaWidget extends StatelessWidget {
                                                 .listArchiveGuides
                                                 .list[index]
                                                 .isFavourite,
-                                            buttonColor: const Color(0xffff163e),
+                                            buttonColor:
+                                                const Color(0xffff163e),
                                             buttonText: 'smoterer',
                                             day: 'asdasd',
                                             month: '2',

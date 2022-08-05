@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/extra/custom_paint_clipper.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 class CustomDoubleClipItem extends StatelessWidget {
   const CustomDoubleClipItem({
@@ -24,6 +25,7 @@ class CustomDoubleClipItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isTablet = Provider.of<bool>(context);
     return Padding(
       padding: EdgeInsets.only(left: 25.w, right: 25.w, top: 11.h, bottom: 5.h),
       child: SizedBox(
@@ -53,13 +55,14 @@ class CustomDoubleClipItem extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.only(left: 18.w),
                     child: SizedBox(
-                      width: 200,
+                      width: isTablet ? 400 : 200,
                       child: Text(
                         title,
                         overflow: TextOverflow.clip,
                         style: GoogleFonts.montserrat(
                           color: titleColor,
                           fontWeight: FontWeight.bold,
+                          fontSize: isTablet ? 10.sp : 13.sp,
                         ),
                       ),
                     ),
@@ -108,8 +111,8 @@ class CustomDoubleClipItem extends StatelessWidget {
                             borderRadius: BorderRadius.circular(64),
                             child: Container(
                               padding: const EdgeInsets.all(7),
-                              constraints: const BoxConstraints(
-                                minWidth: 90,
+                              constraints: BoxConstraints(
+                                minWidth: 90.w,
                               ),
                               color: buttonColor,
                               child: Center(
@@ -117,7 +120,7 @@ class CustomDoubleClipItem extends StatelessWidget {
                                   ndbuttonText,
                                   style: GoogleFonts.montserrat(
                                     color: buttonTextColor,
-                                    fontSize: 10,
+                                    fontSize: 10.sp,
                                   ),
                                 ),
                               ),

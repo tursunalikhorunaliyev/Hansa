@@ -13,9 +13,9 @@
     </intent>
   </queries>
    <application
-        android:label="hansa_app"
+        android:label="Hansa-LAB"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/launcher_icon"
         
         android:usesCleartextTraffic="true">
         
