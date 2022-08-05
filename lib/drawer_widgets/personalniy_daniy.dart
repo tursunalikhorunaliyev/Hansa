@@ -2,9 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hansa_app/api_models.dart/model_doljnost.dart';
 import 'package:hansa_app/api_models.dart/model_personal.dart';
+import 'package:hansa_app/blocs/bloc_doljnost.dart';
 import 'package:hansa_app/blocs/bloc_personal.dart';
-import 'package:hansa_app/drawer_widgets/popup_personal.dart';
+import 'package:hansa_app/drawer_widgets/popup_personal_doljnost.dart';
+import 'package:hansa_app/drawer_widgets/popup_personal_gorod.dart';
+import 'package:hansa_app/drawer_widgets/popup_personal_magazin.dart';
 import 'package:hansa_app/drawer_widgets/referal_silka.dart';
 import 'package:hansa_app/drawer_widgets/text_field_for_personal.dart';
 import 'package:hansa_app/enums/enum_action_view.dart';
@@ -32,8 +36,11 @@ class _PersonalniyDaniyState extends State<PersonalniyDaniy> {
   Widget build(BuildContext context) {
     final isTablet = Provider.of<bool>(context);
     final providerToken = Provider.of<String>(context);
+
     final blocPersonal = BlocPersonal(providerToken);
+
     blocPersonal.eventSink.add(EnumActionView.view);
+
     return Center(
       child: StreamBuilder<ModelPersonalMain>(
           stream: blocPersonal.dataStream,
@@ -93,46 +100,24 @@ class _PersonalniyDaniyState extends State<PersonalniyDaniy> {
                   SizedBox(
                     height: isTablet ? 15 : 8,
                   ),
-                  InkWell(
-                      onTap: () {
-                        showCupertinoModalPopup(
-                          context: context,
-                          builder: (context) {
-                            return Container(
-                              width: 360,
-                              height: 400,
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: const Text("123"),
-                            );
-                          },
-                        );
-                      },
-                      child: PopupPersonal(
-                          controller: TextEditingController(
-                              text:
-                                  snapshot.data!.modelPersonal1.shopAddress))),
+                  PopupPersonalMagazin(
+                    controller: TextEditingController(
+                        text: snapshot.data!.modelPersonal1.shopAddress),
+                  ),
                   SizedBox(
                     height: isTablet ? 15 : 8,
                   ),
-                  /* TextFieldForPersonal(
-                      text: "Должность",
-                      controller: TextEditingController(
-                          text:
-                              snapshot.data!.modelPersonal1.jobId.toString())), */
-                  PopupPersonal(
-                      controller: TextEditingController(
-                          text:
-                              snapshot.data!.modelPersonal1.jobId.toString())),
+                  PopupPersonalDoljnost(
+                    controller: TextEditingController(
+                        text: snapshot.data!.modelPersonal1.jobId.toString()),
+                  ),
                   SizedBox(
                     height: isTablet ? 15 : 8,
                   ),
-                  TextFieldForPersonal(
-                      text: "Город",
-                      controller: TextEditingController(
-                          text:
-                              snapshot.data!.modelPersonal1.cityId.toString())),
+                  PopupPersonalGorod(
+                    controller: TextEditingController(
+                        text: snapshot.data!.modelPersonal1.jobId.toString()),
+                  ),
                   SizedBox(
                     height: isTablet ? 15 : 8,
                   ),
