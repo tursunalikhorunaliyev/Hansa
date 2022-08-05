@@ -12,6 +12,9 @@ import 'package:hansa_app/blocs/hansa_country_api.dart';
 import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
 import 'package:hansa_app/enums/full_reg_enum.dart';
 import 'package:hansa_app/extra/modal_sheet_for_full_reg.dart';
+import 'package:hansa_app/extra/popup_full_registr_doljnost.dart';
+import 'package:hansa_app/extra/popup_full_registr_gorod.dart';
+import 'package:hansa_app/extra/popup_full_registr_nazvaniy_seti.dart';
 import 'package:hansa_app/extra/text_field_for_full_reg.dart';
 import 'package:hansa_app/providers/full_registr_provider.dart';
 import 'package:provider/provider.dart';
@@ -59,7 +62,7 @@ class _FullRegistrState extends State<FullRegistr> {
               Padding(
                 padding: EdgeInsets.only(top: isTablet ? 446 : 274, bottom: 84),
                 child: Container(
-                  height: isTablet ? 1020 : 890,
+                  //   height: isTablet ? 1020 : 890,
                   width: isTablet ? 556 : 346,
                   decoration: BoxDecoration(
                       color: const Color(0xFFf2f2f2),
@@ -152,73 +155,15 @@ class _FullRegistrState extends State<FullRegistr> {
                       const SizedBox(
                         height: 4,
                       ),
-                      MultiProvider(
-                        providers: [
-                          Provider(
-                              create: (context) =>
-                                  nazvaniyaTextFieldController),
-                          Provider(create: (context) => blocFullRegister),
-                        ],
-                        child: StreamBuilder<String>(
-                          initialData: "Названия сети",
-                          stream: blocFullRegister.cm,
-                          builder: (context, snapshot) => ModalForFullReg(
-                            regEnum: FullRegEnum.nazvaniyaSeti,
-                            text: snapshot.data!,
-                            width: isTablet ? 538 : 325,
-                            size: isTablet ? 15 : 10,
-                            height: isTablet ? 43 : 38,
-                            fontWeight:
-                                isTablet ? FontWeight.w600 : FontWeight.normal,
-                          ),
-                        ),
-                      ),
+                      PopupFullRegistrNazvaniySeti(),
                       const SizedBox(
                         height: 4,
                       ),
-                      MultiProvider(
-                        providers: [
-                          Provider(
-                              create: (context) => doljnostTextFieldController),
-                          Provider(create: (context) => blocFullRegister),
-                        ],
-                        child: StreamBuilder<String>(
-                          initialData: "Должность",
-                          stream: blocFullRegister.am,
-                          builder: (context, snapshot) => ModalForFullReg(
-                            regEnum: FullRegEnum.doljnost,
-                            text: snapshot.data!,
-                            width: isTablet ? 538 : 325,
-                            size: isTablet ? 15 : 10,
-                            height: isTablet ? 43 : 38,
-                            fontWeight:
-                                isTablet ? FontWeight.w600 : FontWeight.normal,
-                          ),
-                        ),
-                      ),
+                      PopupFullRegistrDoljnost(),
                       const SizedBox(
                         height: 4,
                       ),
-                      MultiProvider(
-                        providers: [
-                          Provider(
-                              create: (context) => gorodTextFieldController),
-                          Provider(create: (context) => blocFullRegister),
-                        ],
-                        child: StreamBuilder<String>(
-                          initialData: "Город",
-                          stream: blocFullRegister.bm,
-                          builder: (context, snapshot) => ModalForFullReg(
-                            regEnum: FullRegEnum.vibiriteGorod,
-                            text: snapshot.data!,
-                            width: isTablet ? 538 : 325,
-                            size: isTablet ? 15 : 10,
-                            height: isTablet ? 43 : 38,
-                            fontWeight:
-                                isTablet ? FontWeight.w600 : FontWeight.normal,
-                          ),
-                        ),
-                      ),
+                      PopupFullRegistrGorod(),
                       const SizedBox(
                         height: 4,
                       ),
@@ -399,6 +344,9 @@ class _FullRegistrState extends State<FullRegistr> {
                           },
                         ),
                       ),
+                      const SizedBox(
+                        height: 60,
+                      )
                     ],
                   ),
                 ),
@@ -414,8 +362,10 @@ class _FullRegistrState extends State<FullRegistr> {
                         width: 133,
                       ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 1180, left: 95),
+              Positioned(
+                bottom: 10,
+                left: 40,
+                right: 40,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -433,6 +383,9 @@ class _FullRegistrState extends State<FullRegistr> {
                           color: const Color(0xFF989a9d),
                           fontWeight: FontWeight.w700),
                     ),
+                    const SizedBox(
+                      height: 20,
+                    )
                   ],
                 ),
               ),

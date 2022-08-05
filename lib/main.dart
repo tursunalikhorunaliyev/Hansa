@@ -6,6 +6,7 @@ import 'package:hansa_app/blocs/bloc_change_profile.dart';
 import 'package:hansa_app/blocs/bloc_change_title.dart';
 import 'package:hansa_app/blocs/bloc_flip_login.dart';
 import 'package:hansa_app/blocs/bloc_play_video.dart';
+import 'package:hansa_app/blocs/bloc_popup_drawer.dart';
 import 'package:hansa_app/blocs/login_clicked_bloc.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/blocs/read_stati_bloc.dart';
@@ -20,7 +21,6 @@ void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   Provider.debugCheckInvalidValueType = null;
   await Hive.initFlutter();
-  await Hive.openBox("cache");
   await Hive.openBox("savedUser");
   runApp(const MyApp());
 }
@@ -64,6 +64,8 @@ class MyApp extends StatelessWidget {
             create: (context) => LoginClickedBloc(),
           ),
           Provider(create: (context) => BlocFlipLogin()),
+       
+      
         ],
         child: const MaterialApp(
           debugShowCheckedModeBanner: false,
