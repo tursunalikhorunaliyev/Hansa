@@ -5,6 +5,7 @@ import 'package:hansa_app/api_models.dart/welcome_model.dart';
 import 'package:hansa_app/api_services/welcome_api.dart';
 import 'package:hansa_app/extra/event_cards.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WelcomeWidget extends StatefulWidget {
   const WelcomeWidget({Key? key}) : super(key: key);
@@ -28,7 +29,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
           children: [
             Padding(
               padding: EdgeInsets.only(
-                  top: isTablet ? 20 : 9, bottom: isTablet ? 20 : 9),
+                  top: isTablet ? 20 : 9,bottom: isTablet ? 20 : 0),
               child: Text(
                 'Добро пожаловать',
                 style: GoogleFonts.montserrat(
@@ -43,7 +44,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                   if (snapshot.hasData) {
                     final data = snapshot.requireData;
                     return SizedBox(
-                      height: isTablet ? 877 : 566,
+                      height: isTablet ? 877 : 583,
                       width: isTablet ? 800 : 330,
                       child: isTablet
                           ? NotificationListener(
@@ -87,29 +88,26 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                 }
                                 return false;
                               },
-                              child: Expanded(
-                                child: SingleChildScrollView(
-                                  controller: scroll,
-                                  physics: const BouncingScrollPhysics(),
-                                  child: Column(
-                                    children: List.generate(
-                                      data.length,
-                                      (index) => Padding(
-                                        padding:
-                                            const EdgeInsets.only(top: 5.0),
-                                        child: EventCards(
-                                          buttonColor: const Color(0xffff163e),
-                                          buttonText: 'Смотреть',
-                                          isDate: true,
-                                          month: toDateString(snapshot
-                                              .data![index].date
-                                              .substring(5, 7)),
-                                          day: snapshot.data![index].date
-                                              .substring(8, 10),
-                                          title: data[index].title,
-                                          url: data[index].pictureLink,
-                                          isFavourite: data[index].isFavorite,
-                                        ),
+                              child: SingleChildScrollView(
+                                controller: scroll,
+                                physics: const BouncingScrollPhysics(),
+                                child: Column(
+                                  children: List.generate(
+                                    data.length,
+                                    (index) => Padding(
+                                      padding: const EdgeInsets.only(top: 5.0),
+                                      child: EventCards(
+                                        buttonColor: const Color(0xffff163e),
+                                        buttonText: 'Смотреть',
+                                        isDate: true,
+                                        month: toDateString(snapshot
+                                            .data![index].date
+                                            .substring(5, 7)),
+                                        day: snapshot.data![index].date
+                                            .substring(8, 10),
+                                        title: data[index].title,
+                                        url: data[index].pictureLink,
+                                        isFavourite: data[index].isFavorite,
                                       ),
                                     ),
                                   ),
@@ -119,10 +117,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                     );
                   } else {
                     welcomeApi.eventSink.add(WelcomeApiAction.fetch);
-                    return const Center(
-                        child: SpinKitWanderingCubes(
-                      color: Colors.red,
-                    ));
+                    return const  Center(child: SpinKitWanderingCubes(color: Colors.red,));
                   }
                 }),
           ],
