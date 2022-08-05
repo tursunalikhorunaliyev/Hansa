@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 class CustomVideoSubItem extends StatelessWidget {
   const CustomVideoSubItem({Key? key, required this.title, required this.onTap})
@@ -9,58 +11,64 @@ class CustomVideoSubItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 325,
-      child: Row(
-        children: [
-          Container(
-            height: 10,
-            width: 10,
-            decoration: const BoxDecoration(
-              color: Color(0xffff163e),
-              shape: BoxShape.circle,
+    final isTablet = Provider.of<bool>(context);
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Container(
+        padding: const EdgeInsets.only(left: 30, right: 30),
+        width: isTablet ? double.infinity : 325,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+              height: 10,
+              width: 10,
+              decoration: const BoxDecoration(
+                color: Color(0xffff163e),
+                shape: BoxShape.circle,
+              ),
             ),
-          ),
-          const SizedBox(
-            width: 8,
-          ),
-          Text(
-            title,
-            style: GoogleFonts.montserrat(
-              color: const Color(0xff33383f),
-              fontWeight: FontWeight.w600,
+            const SizedBox(
+              width: 8,
             ),
-          ),
-          const Spacer(),
-          PhysicalModel(
-            shadowColor: Colors.grey.withOpacity(.5),
-            color: Colors.transparent,
-            borderRadius: BorderRadius.circular(64),
-            elevation: 5,
-            child: GestureDetector(
-              onTap: onTap,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(64),
-                child: Container(
-                  padding: const EdgeInsets.all(7),
-                  constraints: const BoxConstraints(
-                    minWidth: 90,
-                  ),
-                  color: const Color(0xffff163e),
-                  child: Center(
-                    child: Text(
-                      "Открыть раздел",
-                      style: GoogleFonts.montserrat(
-                        color: const Color(0xffffffff),
-                        fontSize: 10,
+            Text(
+              title,
+              style: GoogleFonts.montserrat(
+                  color: const Color(0xff33383f),
+                  fontWeight: FontWeight.w600,
+                  fontSize: isTablet ? 9.sp : 10.sp),
+            ),
+            const Spacer(),
+            PhysicalModel(
+              shadowColor: Colors.grey.withOpacity(.5),
+              color: Colors.transparent,
+              borderRadius: BorderRadius.circular(64),
+              elevation: 5,
+              child: GestureDetector(
+                onTap: onTap,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(64),
+                  child: Container(
+                    padding: const EdgeInsets.all(7),
+                    constraints: BoxConstraints(
+                      minWidth: 90.w,
+                    ),
+                    color: const Color(0xffff163e),
+                    child: Center(
+                      child: Text(
+                        "Открыть раздел",
+                        style: GoogleFonts.montserrat(
+                          color: const Color(0xffffffff),
+                          fontSize: isTablet ? 9.sp : 10.sp,
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
