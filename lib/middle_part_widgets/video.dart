@@ -7,6 +7,7 @@ import 'package:hansa_app/video/model_video.dart';
 import 'package:hansa_app/video_section/custom_video_item.dart';
 import 'package:hansa_app/video_section/custom_video_subitem.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Video extends StatelessWidget {
   const Video({Key? key}) : super(key: key);
@@ -75,26 +76,27 @@ class Video extends StatelessWidget {
 
   Widget listView(int itemCount, int indexMain) {
     return SizedBox(
-        height: 235,
-        child: Align(
-          alignment: Alignment.centerLeft,
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            scrollDirection: Axis.horizontal,
-            child: Row(
-              children: List.generate(
-                  itemCount,
-                  (index) => Padding(
-                        padding: EdgeInsets.only(left: (index == 0) ? 30 : 0),
-                        child: GestureDetector(
-                            onTap: () {},
-                            child: CustomVideoListItem(
-                              index: index,
-                              indexMain: indexMain,
-                            )),
-                      )),
-            ),
+      height: 230.h,
+      child: Align(
+        alignment: Alignment.centerLeft,
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: List.generate(
+                itemCount,
+                (index) => Padding(
+                      padding: EdgeInsets.only(left: (index == 0) ? 30 : 0),
+                      child: GestureDetector(
+                          onTap: () {},
+                          child: CustomVideoListItem(
+                            index: index,
+                            indexMain: indexMain,
+                          )),
+                    )),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

@@ -40,7 +40,11 @@ class CustomClipItem extends StatelessWidget {
                   child: ClipPath(
                     clipper: CustomPaintClipper(),
                     child: Container(
-                      constraints: BoxConstraints( minHeight: 71, minWidth: 300.w , maxHeight: 101.h , maxWidth: 300.w),
+                      constraints: BoxConstraints(
+                          minHeight: 71,
+                          minWidth: 300.w,
+                          maxHeight: 101.h,
+                          maxWidth: 300.w),
                       color: backgroundColor,
                     ),
                   ),
@@ -51,15 +55,15 @@ class CustomClipItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: 18.w , top: 5 , bottom: 5),
+                  padding: EdgeInsets.only(left: 18.w, top: 5, bottom: 5),
                   child: SizedBox(
-                    width: 200,
+                    width: isTablet ? 400 : 200,
                     child: Text(
                       title,
                       overflow: TextOverflow.visible,
                       style: GoogleFonts.montserrat(
                         color: titleColor,
-                        fontSize: 13.sp,
+                        fontSize: isTablet ? 10.sp : 13.sp,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

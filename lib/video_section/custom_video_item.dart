@@ -6,6 +6,8 @@ import 'package:hansa_app/blocs/bloc_play_video.dart';
 import 'package:hansa_app/video/bloc_video_api.dart';
 import 'package:hansa_app/video/model_video.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class CustomVideoListItem extends StatefulWidget {
   final int index;
   final int indexMain;
@@ -21,17 +23,17 @@ class CustomVideoListItem extends StatefulWidget {
 class _CustomVideoListItemState extends State<CustomVideoListItem> {
   @override
   Widget build(BuildContext context) {
+    final isTablet = Provider.of<bool>(context);
     final playProvider = Provider.of<BlocPlayVideo>(context);
     final token = Provider.of<String>(context);
     final blocVideoApi = BlocVideoApi(token);
     blocVideoApi.eventSink.add(ActionVideo.view);
-
     return Padding(
       padding: const EdgeInsets.only(top: 15, bottom: 12, right: 10),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8),
         child: Container(
-          width: 155,
+          width: isTablet ? 135.w : 155.w,
           color: Colors.white,
           child: Column(
             children: [
@@ -43,16 +45,16 @@ class _CustomVideoListItemState extends State<CustomVideoListItem> {
                       if (snapshot.hasData) {
                         return Stack(
                           children: [
-                           CachedNetworkImage(
-                             imageUrl:  snapshot
+                            CachedNetworkImage(
+                              imageUrl: snapshot
                                   .data!
                                   .videoListData
                                   .list[widget.indexMain]
                                   .data
                                   .list[widget.index]
                                   .pictureLink,
-                              height: 130,
-                              width: 155,
+                              height: isTablet ? 150.h : 130.h,
+                              width: isTablet ? 135.w : 155.w,
                               fit: BoxFit.cover,
                             ),
                             InkWell(
@@ -67,15 +69,15 @@ class _CustomVideoListItemState extends State<CustomVideoListItem> {
                                     .add([true, video.videoLink, video.title]);
                               },
                               child: Container(
-                                height: 130,
-                                width: 155,
+                                height: isTablet ? 150.h : 130.h,
+                                width: isTablet ? 135.w : 155.w,
                                 color: Colors.transparent,
                                 alignment: Alignment.center,
-                                child: const Opacity(
+                                child: Opacity(
                                   opacity: .5,
                                   child: Icon(
                                     CupertinoIcons.play_circle_fill,
-                                    size: 25,
+                                    size: isTablet ? 35 : 25,
                                     color: Colors.white,
                                   ),
                                 ),
@@ -102,7 +104,7 @@ class _CustomVideoListItemState extends State<CustomVideoListItem> {
                               .data.list[widget.index].title,
                           maxLines: 3,
                           style: GoogleFonts.montserrat(
-                              fontSize: 10,
+                              fontSize: isTablet ? 16 : 12,
                               color: const Color(0xff4e5258),
                               fontWeight: FontWeight.w600),
                         ),
