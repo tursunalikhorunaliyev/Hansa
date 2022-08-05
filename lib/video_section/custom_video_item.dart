@@ -106,8 +106,10 @@ class _CustomVideoListItemState extends State<CustomVideoListItem> {
                           snapshot.data!.videoListData.list[widget.indexMain]
                               .data.list[widget.index].title,
                           maxLines: 3,
+                          
                           style: GoogleFonts.montserrat(
-                              fontSize: isTablet ? 16 : 12,
+                          
+                              fontSize: isTablet ? 16 : 10,
                               color: const Color(0xff4e5258),
                               fontWeight: FontWeight.w600),
                         ),
