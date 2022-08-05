@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -51,7 +50,7 @@ class SobshitOProblem extends StatelessWidget {
                               height: 45,
                             ),
                             Text(
-                              "Сообщить о проблеме",
+                              "Задать вопрос",
                               style: GoogleFonts.montserrat(
                                   color: const Color(0xff444444), fontSize: 24),
                             ),

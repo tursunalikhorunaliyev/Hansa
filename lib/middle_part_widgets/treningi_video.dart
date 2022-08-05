@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/extra/custom_clip_item.dart';
 import 'package:hansa_app/extra/custom_title.dart';
-import 'package:hansa_app/training_section/custom_treningi_video.dart';
 import 'package:hansa_app/training_video_section/custom_tablet_photos.dart';
 import 'package:hansa_app/training_video_section/custom_treningi_photos.dart';
 import 'package:provider/provider.dart';

@@ -28,7 +28,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
           children: [
             Padding(
               padding: EdgeInsets.only(
-                  top: isTablet ? 20 : 9,bottom: isTablet ? 20 : 9),
+                  top: isTablet ? 20 : 9, bottom: isTablet ? 20 : 9),
               child: Text(
                 'Добро пожаловать',
                 style: GoogleFonts.montserrat(
@@ -87,26 +87,29 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                 }
                                 return false;
                               },
-                              child: SingleChildScrollView(
-                                controller: scroll,
-                                physics: const BouncingScrollPhysics(),
-                                child: Column(
-                                  children: List.generate(
-                                    data.length,
-                                    (index) => Padding(
-                                      padding: const EdgeInsets.only(top: 5.0),
-                                      child: EventCards(
-                                        buttonColor: const Color(0xffff163e),
-                                        buttonText: 'Смотреть',
-                                        isDate: true,
-                                        month: toDateString(snapshot
-                                            .data![index].date
-                                            .substring(5, 7)),
-                                        day: snapshot.data![index].date
-                                            .substring(8, 10),
-                                        title: data[index].title,
-                                        url: data[index].pictureLink,
-                                        isFavourite: data[index].isFavorite,
+                              child: Expanded(
+                                child: SingleChildScrollView(
+                                  controller: scroll,
+                                  physics: const BouncingScrollPhysics(),
+                                  child: Column(
+                                    children: List.generate(
+                                      data.length,
+                                      (index) => Padding(
+                                        padding:
+                                            const EdgeInsets.only(top: 5.0),
+                                        child: EventCards(
+                                          buttonColor: const Color(0xffff163e),
+                                          buttonText: 'Смотреть',
+                                          isDate: true,
+                                          month: toDateString(snapshot
+                                              .data![index].date
+                                              .substring(5, 7)),
+                                          day: snapshot.data![index].date
+                                              .substring(8, 10),
+                                          title: data[index].title,
+                                          url: data[index].pictureLink,
+                                          isFavourite: data[index].isFavorite,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -116,7 +119,10 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                     );
                   } else {
                     welcomeApi.eventSink.add(WelcomeApiAction.fetch);
-                    return const  Center(child: SpinKitWanderingCubes(color: Colors.red,));
+                    return const Center(
+                        child: SpinKitWanderingCubes(
+                      color: Colors.red,
+                    ));
                   }
                 }),
           ],

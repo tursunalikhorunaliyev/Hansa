@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hansa_app/extra/custom_double_clip_item.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class CustomKatalogItemDouble extends StatelessWidget {
   const CustomKatalogItemDouble({
     Key? key,
@@ -28,10 +29,11 @@ class CustomKatalogItemDouble extends StatelessWidget {
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(6.r),
-          child: Image.asset(
+          child: Image.network(
             imageUrl,
             width: 325.w,
             height: 157.h,
+            fit: BoxFit.cover,
           ),
         ),
         CustomDoubleClipItem(

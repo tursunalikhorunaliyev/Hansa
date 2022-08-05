@@ -1,6 +1,5 @@
 // ignore_for_file: must_be_immutable
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -9,7 +8,6 @@ import 'package:hansa_app/api_models.dart/read_stati_model.dart';
 import 'package:hansa_app/blocs/read_stati_bloc.dart';
 import 'package:hansa_app/read_statie_section/part_indicator.dart';
 import 'package:hansa_app/read_statie_section/stati_comment.dart';
-import 'package:hansa_app/read_statie_section/top_widget_stati.dart';
 import 'package:provider/provider.dart';
 
 class ReadStati extends StatelessWidget {
@@ -34,7 +32,6 @@ class ReadStati extends StatelessWidget {
     return StreamBuilder<ReadStatiModel>(
       stream: readStatiModelProvider.stream,
       builder: (context, snapshot) {
-       
           if (snapshot.hasData) {
             return Expanded(
           child: Stack(

@@ -1,11 +1,9 @@
-import 'package:flip_card/flip_card.dart';
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/blocs/bloc_flip_login.dart';
 import 'package:hansa_app/blocs/login_clicked_bloc.dart';
-import 'package:hansa_app/screens/sozdat_accaunt.dart';
 import 'package:provider/provider.dart';
 
 class VoytiIliSozdatAccaunt extends StatelessWidget {

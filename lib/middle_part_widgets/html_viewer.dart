@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 
-void main() => runApp(new MyApp());
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -12,13 +12,13 @@ class MyApp extends StatelessWidget {
       theme:  ThemeData(
         primarySwatch: Colors.deepPurple,
       ),
-      home:  MyHomePage(title: 'flutter_html Example'),
+      home:  const MyHomePage(title: 'flutter_html Example'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
 
   final String title;
 
