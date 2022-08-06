@@ -7,6 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 class ArchiveCard extends StatefulWidget {
   const ArchiveCard(
       {Key? key,
+      
       required this.buttonColor,
       required this.topButtonText,
       required this.skachat,
@@ -16,6 +17,7 @@ class ArchiveCard extends StatefulWidget {
       required this.isFavourite,
       required this.linkPDF})
       : super(key: key);
+  
   final String url;
   final Color buttonColor;
   final String topButtonText;

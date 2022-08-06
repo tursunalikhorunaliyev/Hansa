@@ -15,7 +15,6 @@ import 'package:hansa_app/providers/full_registr_provider.dart';
 import 'package:hansa_app/providers/provider_for_flipping/flip_login_provider.dart';
 import 'package:hansa_app/providers/provider_for_flipping/login_clicked_provider.dart';
 import 'package:hansa_app/providers/provider_for_flipping/provider_for_flipping.dart';
-import 'package:hansa_app/providers/providers_for_full_reg/nazvanie_provider.dart';
 import 'package:hansa_app/screens/hansa_zagruzka.dart';
 import 'package:hansa_app/blocs/toggle_switcher_bloc.dart';
 import 'package:hansa_app/screens/splash_screen.dart';
