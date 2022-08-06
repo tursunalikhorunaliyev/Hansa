@@ -6,15 +6,17 @@ import 'package:hansa_app/blocs/bloc_change_profile.dart';
 import 'package:hansa_app/blocs/bloc_change_title.dart';
 import 'package:hansa_app/blocs/bloc_flip_login.dart';
 import 'package:hansa_app/blocs/bloc_play_video.dart';
-import 'package:hansa_app/blocs/bloc_popup_drawer.dart';
 import 'package:hansa_app/blocs/login_clicked_bloc.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/blocs/read_stati_bloc.dart';
 import 'package:hansa_app/blocs/voyti_ili_sozdata_bloc.dart';
 import 'package:hansa_app/providers/full_registr_provider.dart';
-import 'package:hansa_app/screens/empty.dart';
+import 'package:hansa_app/providers/provider_for_flipping/flip_login_provider.dart';
+import 'package:hansa_app/providers/provider_for_flipping/login_clicked_provider.dart';
+import 'package:hansa_app/providers/provider_for_flipping/provider_for_flipping.dart';
 import 'package:hansa_app/screens/hansa_zagruzka.dart';
 import 'package:hansa_app/blocs/toggle_switcher_bloc.dart';
+import 'package:hansa_app/screens/splash_screen.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 
@@ -41,6 +43,15 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 812),
       builder: (context, child) => MultiProvider(
         providers: [
+          ChangeNotifierProvider(create: (context) => FlipProvider(),),
+          ChangeNotifierProvider(create: (context) => LoginClickedProvider(),),
+ ChangeNotifierProvider(create: (context) => FlipLoginProvider(),),
+
+
+
+
+
+/////////////////////////////////////////
           ChangeNotifierProvider(
             create: (context) => FullRegisterDataProvider(),
           ),

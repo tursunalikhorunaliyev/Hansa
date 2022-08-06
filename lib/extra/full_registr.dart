@@ -17,6 +17,7 @@ import 'package:hansa_app/extra/popup_full_registr_gorod.dart';
 import 'package:hansa_app/extra/popup_full_registr_nazvaniy_seti.dart';
 import 'package:hansa_app/extra/text_field_for_full_reg.dart';
 import 'package:hansa_app/providers/full_registr_provider.dart';
+import 'package:hansa_app/providers/provider_for_flipping/flip_login_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
@@ -43,10 +44,9 @@ class _FullRegistrState extends State<FullRegistr> {
   final fourthToggle = TextEditingController(text: "0");
   @override
   Widget build(BuildContext context) {
-    final fullRegDataProvider = Provider.of<FullRegisterDataProvider>(context);
+    final flipLoginProvider = Provider.of<FlipLoginProvider>(context);
     final isTablet = Provider.of<bool>(context);
     final providerFlip = Provider.of<Map<String, FlipCardController>>(context);
-    final providerFlipLogin = Provider.of<BlocFlipLogin>(context);
     log("SignUp build");
     final blocCity = HansaCountryBloC(1);
     blocCity.eventSink.add(CityEnum.city);
@@ -76,7 +76,8 @@ class _FullRegistrState extends State<FullRegistr> {
                           children: [
                             InkWell(
                               onTap: () {
-                                providerFlipLogin.sink.add(false);
+                                
+                               flipLoginProvider.changeIsClosed(false);
                                 providerFlip['login']!.toggleCard();
                               },
                               child: const Icon(
