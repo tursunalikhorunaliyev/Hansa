@@ -33,8 +33,7 @@ class _CustomVideoListItemState extends State<CustomVideoListItem> {
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8),
         child: Container(
-          height: 190.h,
-          width: isTablet ? 135.w : 220.w,
+          width: isTablet ? 420 : 220,
           color: Colors.white,
           child: Column(
             children: [
@@ -54,8 +53,8 @@ class _CustomVideoListItemState extends State<CustomVideoListItem> {
                                   .data
                                   .list[widget.index]
                                   .pictureLink,
-                              height: isTablet ? 150.h : 130.h,
-                              width: isTablet ? 135.w : 220.w,
+                              height: isTablet ? 240 : 130,
+                              width: isTablet ? 420 : 220,
                               fit: BoxFit.cover,
                             ),
                             InkWell(
@@ -71,15 +70,15 @@ class _CustomVideoListItemState extends State<CustomVideoListItem> {
                               },
                               child: Center(
                                 child: Container(
-                                  height: isTablet ? 150.h : 130.h,
-                                  width: isTablet ? 135.w : 155.w,
+                                  height: isTablet ? 240 : 130,
+                                  width: isTablet ? 420 : 220,
                                   color: Colors.transparent,
                                   alignment: Alignment.center,
                                   child: Opacity(
                                     opacity: .5,
                                     child: Icon(
                                       CupertinoIcons.play_circle_fill,
-                                      size: isTablet ? 35 : 25,
+                                      size: isTablet ? 45 : 25,
                                       color: Colors.white,
                                     ),
                                   ),
@@ -106,9 +105,7 @@ class _CustomVideoListItemState extends State<CustomVideoListItem> {
                           snapshot.data!.videoListData.list[widget.indexMain]
                               .data.list[widget.index].title,
                           maxLines: 3,
-                          
                           style: GoogleFonts.montserrat(
-                          
                               fontSize: isTablet ? 16 : 10,
                               color: const Color(0xff4e5258),
                               fontWeight: FontWeight.w600),

@@ -22,6 +22,7 @@ class Video extends StatelessWidget {
     final token = Provider.of<String>(context);
     final blocVideoApi = BlocVideoApi(token);
     blocVideoApi.eventSink.add(ActionVideo.view);
+    final isTablet = Provider.of<bool>(context);
     return Expanded(
       child: Column(
         children: [
@@ -37,7 +38,9 @@ class Video extends StatelessWidget {
                   builder: (context, snapshot) {
                     if (snapshot.data == null) {
                       return const Center(
-                        child: SpinKitWanderingCubes(color: Colors.red,),
+                        child: SpinKitWanderingCubes(
+                          color: Colors.red,
+                        ),
                       );
                     }
                     return Column(
@@ -57,13 +60,15 @@ class Video extends StatelessWidget {
                               title: snapshot
                                   .data!.videoListData.list[index].title),
                           listView(
-                              (snapshot.data!.videoListData.list[index].data
-                                          .list.length <
-                                      5)
-                                  ? snapshot.data!.videoListData.list[index]
-                                      .data.list.length
-                                  : 5,
-                              index)
+                            (snapshot.data!.videoListData.list[index].data.list
+                                        .length <
+                                    5)
+                                ? snapshot.data!.videoListData.list[index].data
+                                    .list.length
+                                : 5,
+                            index,
+                            isTablet,
+                          )
                         ],
                       );
                     }));
@@ -75,9 +80,9 @@ class Video extends StatelessWidget {
     );
   }
 
-  Widget listView(int itemCount, int indexMain) {
+  Widget listView(int itemCount, int indexMain, bool isTablet) {
     return SizedBox(
-      height: 230.h,
+      height: isTablet ? 360 : 220,
       child: Align(
         alignment: Alignment.centerLeft,
         child: SingleChildScrollView(
@@ -85,16 +90,18 @@ class Video extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           child: Row(
             children: List.generate(
-                itemCount,
-                (index) => Padding(
-                      padding: EdgeInsets.only(left: (index == 0) ? 30 : 0),
-                      child: GestureDetector(
-                          onTap: () {},
-                          child: CustomVideoListItem(
-                            index: index,
-                            indexMain: indexMain,
-                          )),
-                    )),
+              itemCount,
+              (index) => Padding(
+                padding: EdgeInsets.only(left: (index == 0) ? 30 : 0),
+                child: GestureDetector(
+                  onTap: () {},
+                  child: CustomVideoListItem(
+                    index: index,
+                    indexMain: indexMain,
+                  ),
+                ),
+              ),
+            ),
           ),
         ),
       ),

@@ -92,7 +92,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                                   color: const Color(0xffa5a5ae),
                                 ),
                               ),
-                              
                             ],
                           ),
                         ),

@@ -1,16 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hansa_app/api_models.dart/country_model.dart';
-import 'package:hansa_app/api_models.dart/model_doljnost.dart';
 import 'package:hansa_app/api_models.dart/store_model.dart';
 import 'package:hansa_app/api_services/store_service.dart';
-import 'package:hansa_app/blocs/bloc_doljnost.dart';
 import 'package:hansa_app/blocs/bloc_popup_drawer.dart';
-import 'package:hansa_app/blocs/hansa_country_api.dart';
-import 'package:hansa_app/enums/enum_action_view.dart';
 import 'package:provider/provider.dart';
 
 class PopupFullRegistrNazvaniySeti extends StatefulWidget {
@@ -61,12 +53,15 @@ class _PopupFullRegistrNazvaniySetiState
                   child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(right: 290),
-                        child: Text(
-                          text,
-                          style: GoogleFonts.montserrat(
-                              fontSize: isTablet ? 13 : 10,
-                              color: const Color(0xFF444444)),
+                        padding: const EdgeInsets.only(left: 5),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            text,
+                            style: GoogleFonts.montserrat(
+                                fontSize: isTablet ? 13 : 10,
+                                color: const Color(0xFF444444)),
+                          ),
                         ),
                       ),
                       StreamBuilder<StoreModel>(
@@ -86,7 +81,7 @@ class _PopupFullRegistrNazvaniySetiState
                                           decoration: InputDecoration(
                                               contentPadding:
                                                   const EdgeInsets.all(5),
-                                              hintText: "Diyor.Wtf",
+                                              hintText: "Новый",
                                               hintStyle:
                                                   const TextStyle(fontSize: 13),
                                               border: OutlineInputBorder(
@@ -120,7 +115,7 @@ class _PopupFullRegistrNazvaniySetiState
                                                 radius = radius == 54 ? 10 : 54;
                                               },
                                               child: Align(
-                                                alignment: Alignment.center,
+                                                alignment: Alignment.centerLeft,
                                                 child: Text(
                                                   snapshotStore.data!.data
                                                       .list[index].name,
