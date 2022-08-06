@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hansa_app/blocs/bloc_play_video.dart';
+import 'package:hansa_app/blocs/bloc_video_controll.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/middle_part_widgets/welcome_widget.dart';
 import 'package:hansa_app/middle_part_widgets/katalogi.dart';
@@ -19,11 +21,16 @@ class UIChanger extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<MenuEventsBloC>(context);
-
+    final videoControlProvider = Provider.of<BlocVideoControll>(context);
+    final playProvider = Provider.of<BlocPlayVideo>(context);
     return StreamBuilder<MenuActions>(
       stream: provider.eventStream,
       initialData: MenuActions.welcome,
       builder: (context, snapshot) {
+        if (snapshot.data != MenuActions.video) {
+          videoControlProvider.sink.add(false);
+          playProvider.sink.add([false, "", ""]);
+        }
         if (snapshot.data == MenuActions.welcome) {
           return const WelcomeWidget();
         } else if (snapshot.data == MenuActions.obuchayushieMaterial) {
