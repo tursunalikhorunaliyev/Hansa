@@ -15,14 +15,11 @@ class CustomVideoSubItem extends StatelessWidget {
     return Align(
       alignment: Alignment.centerLeft,
       child: Container(
-        //padding: const EdgeInsets.only(left: 30, right: 30),
-        // width: isTablet ? double.infinity ,
         child: Padding(
           padding: const EdgeInsets.only(left: 40, right: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-            
               Row(
                 children: [
                   Container(
