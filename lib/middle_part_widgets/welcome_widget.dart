@@ -5,7 +5,6 @@ import 'package:hansa_app/api_models.dart/welcome_model.dart';
 import 'package:hansa_app/api_services/welcome_api.dart';
 import 'package:hansa_app/extra/event_cards.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WelcomeWidget extends StatefulWidget {
   const WelcomeWidget({Key? key}) : super(key: key);

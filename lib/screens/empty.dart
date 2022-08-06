@@ -16,8 +16,8 @@ class _EmptyScreenState extends State<EmptyScreen>
   bool downloading = false;
   double progress = 0;
   bool isDownloaded = false;
-  String uri = "https://hansa-lab.ru/storage/upload/guide/m9.pdf";
-  String fileName = "test.pdf";
+  String uri = "https://hansa-lab.ru/storage/upload/videos/SPuO_h3vtouX.mp4";
+  String fileName = "video.mp4";
   Future<void> downloadFile() async {
     setState(() {
       downloading = true;
@@ -53,7 +53,7 @@ class _EmptyScreenState extends State<EmptyScreen>
   Future<String> getFilePath(uniqueFileName) async {
     String path = "";
     String dir = "/storage/emulated/0/Download/";
-    path = "$dir/$uniqueFileName.pdf";
+    path = "$dir/$uniqueFileName.mp4";
     return path;
   }
 
