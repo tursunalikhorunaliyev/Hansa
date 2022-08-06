@@ -258,7 +258,7 @@ class _FullRegistrState extends State<FullRegistr> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 textSwitch("""Соглашаюсь на обработку 
-        персональных данных""", isTablet ? 16 : 11),
+персональных данных""", isTablet ? 16 : 11),
                                 const SizedBox(
                                   width: 75,
                                 ),

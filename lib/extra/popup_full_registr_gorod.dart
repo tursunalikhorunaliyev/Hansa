@@ -56,12 +56,15 @@ class _PopupFullRegistrGorodState extends State<PopupFullRegistrGorod> {
                   child: Column(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(right: 277),
-                        child: Text(
-                          text,
-                          style: GoogleFonts.montserrat(
-                              fontSize: isTablet ? 13 : 10,
-                              color: const Color(0xFF444444)),
+                        padding: const EdgeInsets.only(left: 5),
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            text,
+                            style: GoogleFonts.montserrat(
+                                fontSize: isTablet ? 13 : 10,
+                                color: const Color(0xFF444444)),
+                          ),
                         ),
                       ),
                       StreamBuilder<CountryModel>(
