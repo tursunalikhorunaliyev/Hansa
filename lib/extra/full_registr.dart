@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:flip_card/flip_card_controller.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/country_model.dart';
@@ -11,7 +12,6 @@ import 'package:hansa_app/blocs/bloc_sign.dart';
 import 'package:hansa_app/blocs/hansa_country_api.dart';
 import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
 import 'package:hansa_app/enums/full_reg_enum.dart';
-import 'package:hansa_app/extra/modal_sheet_for_full_reg.dart';
 import 'package:hansa_app/extra/popup_full_registr_doljnost.dart';
 import 'package:hansa_app/extra/popup_full_registr_gorod.dart';
 import 'package:hansa_app/extra/popup_full_registr_nazvaniy_seti.dart';
@@ -28,7 +28,6 @@ class FullRegistr extends StatefulWidget {
 }
 
 class _FullRegistrState extends State<FullRegistr> {
-  final blocFullRegister = BlocFullRegister();
   final dateRangeController = DateRangePickerController();
   final imyaTextEditingController = TextEditingController();
   final familiyaTextEditingController = TextEditingController();
@@ -76,8 +75,7 @@ class _FullRegistrState extends State<FullRegistr> {
                           children: [
                             InkWell(
                               onTap: () {
-                                
-                               flipLoginProvider.changeIsClosed(false);
+                                flipLoginProvider.changeIsClosed(false);
                                 providerFlip['login']!.toggleCard();
                               },
                               child: const Icon(
@@ -141,16 +139,67 @@ class _FullRegistrState extends State<FullRegistr> {
                       const SizedBox(
                         height: 4,
                       ),
-                      Provider(
-                        create: (context) => dateRangeController,
-                        child: ModalForFullReg(
-                          regEnum: FullRegEnum.dataRojdeniya,
-                          text: "Дата рождения",
+                      InkWell(
+                        onTap: () {
+                          showCupertinoModalPopup(
+                              context: context,
+                              builder: (context) {
+                                return Container(
+                                    width: 360,
+                                    height: 400,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    child: SfDateRangePicker(
+                                      controller: dateRangeController,
+                                      selectionColor: Colors.pink[600],
+                                      todayHighlightColor: Colors.pink[600],
+                                      onSelectionChanged: (a) {
+                                        String day = dateRangeController
+                                                    .selectedDate!.day
+                                                    .toString()
+                                                    .length ==
+                                                1
+                                            ? "0${dateRangeController.selectedDate!.day}"
+                                            : dateRangeController
+                                                .selectedDate!.day
+                                                .toString();
+                                        String month = dateRangeController
+                                                    .selectedDate!.month
+                                                    .toString()
+                                                    .length ==
+                                                1
+                                            ? "0${dateRangeController.selectedDate!.month}"
+                                            : dateRangeController
+                                                .selectedDate!.month
+                                                .toString();
+                                        String year = dateRangeController
+                                            .selectedDate!.year
+                                            .toString();
+
+                                        Navigator.pop(context);
+                                      },
+                                    ));
+                              });
+                        },
+                        child: Container(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 14),
+                            child: Text(
+                              "Дата рождения",
+                              style: GoogleFonts.montserrat(
+                                  fontSize: 10, color: const Color(0xFF444444)),
+                            ),
+                          ),
                           width: isTablet ? 538 : 325,
-                          size: isTablet ? 15 : 10,
                           height: isTablet ? 43 : 38,
-                          fontWeight:
-                              isTablet ? FontWeight.w600 : FontWeight.normal,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFffffff),
+                            borderRadius: BorderRadius.circular(54),
+                            border: Border.all(width: 0.1),
+                          ),
                         ),
                       ),
                       const SizedBox(
@@ -283,68 +332,61 @@ class _FullRegistrState extends State<FullRegistr> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(
-                          left: 11,
-                          right: 9,
-                          top: isTablet ? 30 : 25,
-                        ),
-                        child: StreamBuilder<String>(
-                          stream: blocFullRegister.dm,
-                          initialData: "",
-                          builder: (context, snapshot) {
-                            return GestureDetector(
-                              onTap: () {
-                                FocusManager.instance.primaryFocus?.unfocus();
-                                providerFlip['signin']!.toggleCard();
-                                List<String> date = dateRangeController
-                                    .displayDate!
-                                    .toIso8601String()
-                                    .split("T")[0]
-                                    .split("-");
-                                toSignUp(
-                                  firstname: imyaTextEditingController.text,
-                                  lastname: familiyaTextEditingController.text,
-                                  email: emailTextFielController.text,
-                                  phone: phoneTextFieldController.text,
-                                  bornedAt: "${date[2]}.${date[1]}.${date[0]}",
-                                  nazvaniya: nazvaniyaTextFieldController.text,
-                                  dolj: doljnostTextFieldController.text,
-                                  gorod: gorodTextFieldController.text,
-                                  shopadress:
-                                      adresTorgoviySetTextFielController.text,
-                                  shopnet: snapshot.data!,
-                                  smsemail: secondToggle.text,
-                                  lichnostdannix: thirdToggle.text,
-                                  personalnixdannix: fourthToggle.text,
-                                );
-                              },
-                              child: Container(
-                                alignment: Alignment.center,
-                                height: isTablet ? 60 : 46,
-                                width: isTablet ? 525 : 325,
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFF25b049),
-                                  borderRadius: BorderRadius.circular(70),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.5),
-                                      spreadRadius: 5,
-                                      blurRadius: 7,
-                                      offset: const Offset(0, 15),
-                                    ),
-                                  ],
-                                ),
-                                child: Text(
-                                  "Зарегистрироваться",
-                                  style: GoogleFonts.montserrat(
-                                      fontSize: isTablet ? 18 : 12,
-                                      color: const Color(0xFFffffff)),
-                                ),
+                          padding: EdgeInsets.only(
+                            left: 11,
+                            right: 9,
+                            top: isTablet ? 30 : 25,
+                          ),
+                          child: GestureDetector(
+                            onTap: () {
+                              FocusManager.instance.primaryFocus?.unfocus();
+                              providerFlip['signin']!.toggleCard();
+                              List<String> date = dateRangeController
+                                  .displayDate!
+                                  .toIso8601String()
+                                  .split("T")[0]
+                                  .split("-");
+                              toSignUp(
+                                firstname: imyaTextEditingController.text,
+                                lastname: familiyaTextEditingController.text,
+                                email: emailTextFielController.text,
+                                phone: phoneTextFieldController.text,
+                                bornedAt: "${date[2]}.${date[1]}.${date[0]}",
+                                nazvaniya: nazvaniyaTextFieldController.text,
+                                dolj: doljnostTextFieldController.text,
+                                gorod: gorodTextFieldController.text,
+                                shopadress:
+                                    adresTorgoviySetTextFielController.text,
+                                shopnet: "",
+                                smsemail: secondToggle.text,
+                                lichnostdannix: thirdToggle.text,
+                                personalnixdannix: fourthToggle.text,
+                              );
+                            },
+                            child: Container(
+                              alignment: Alignment.center,
+                              height: isTablet ? 60 : 46,
+                              width: isTablet ? 525 : 325,
+                              decoration: BoxDecoration(
+                                color: const Color(0xFF25b049),
+                                borderRadius: BorderRadius.circular(70),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.grey.withOpacity(0.5),
+                                    spreadRadius: 5,
+                                    blurRadius: 7,
+                                    offset: const Offset(0, 15),
+                                  ),
+                                ],
                               ),
-                            );
-                          },
-                        ),
-                      ),
+                              child: Text(
+                                "Зарегистрироваться",
+                                style: GoogleFonts.montserrat(
+                                    fontSize: isTablet ? 18 : 12,
+                                    color: const Color(0xFFffffff)),
+                              ),
+                            ),
+                          )),
                       const SizedBox(
                         height: 60,
                       )
