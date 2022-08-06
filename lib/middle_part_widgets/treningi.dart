@@ -1,7 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:hansa_app/api_models.dart/training_model.dart';
 import 'package:hansa_app/api_services/training_api_bloc.dart';
+import 'package:hansa_app/api_services/welcome_api.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/extra/custom_tablet_item.dart';
 import 'package:hansa_app/extra/custom_treningi_ipad_container.dart';
@@ -26,6 +26,10 @@ class _TreningiState extends State<Treningi> {
     final token = Provider.of<String>(context);
     final trainingBloc = TrainingAPIBloc(token);
     trainingBloc.eventSink.add(TrainingAPIEvent.fetch);
+
+    final scroll = ScrollController();
+    final welcomeApi = WelcomeApi(token);
+    welcomeApi.eventSink.add(WelcomeApiAction.fetch);
     return Expanded(
       child: StreamBuilder<TrainingModel>(
           stream: trainingBloc.dataStream,
@@ -49,11 +53,9 @@ class _TreningiState extends State<Treningi> {
                           isTablet
                               ? const IpadContainer()
                               : CustomClipItem(
-                                  backgroundColor:
-                                      const Color(0xffff163e),
+                                  backgroundColor: const Color(0xffff163e),
                                   buttonColor: const Color(0xff232323),
-                                  buttonTextColor:
-                                      const Color(0xffffffff),
+                                  buttonTextColor: const Color(0xffffffff),
                                   titleColor: const Color(0xffffffff),
                                   buttonText: "Записаться",
                                   title:
@@ -70,53 +72,62 @@ class _TreningiState extends State<Treningi> {
                       ),
                       content: Builder(builder: (context) {
                         if (isTablet) {
-                          return Row(
-                            children: [
-                              TabletItemTreningi(
-                                backgroundColor: const Color(0xff000004),
-                                buttonColor: const Color(0xffe21a37),
-                                buttonTextColor: const Color(0xffffffff),
-                                titleColor: const Color(0xffffffff),
-                                buttonText: "Смотреть",
-                                title: data.futureEvents.list[0].title,
-                                onTap: () {
-                                  menuBloCProvider.eventSink
-                                      .add(MenuActions.trainingVideo);
-                                },
-                              ),
-                              TabletItemTreningi(
-                                backgroundColor: const Color(0xff000004),
-                                buttonColor: const Color(0xffe21a37),
-                                buttonTextColor: const Color(0xffffffff),
-                                titleColor: const Color(0xffffffff),
-                                buttonText: "Смотреть",
-                                title: data.futureEvents.list[0].title,
-                                onTap: () {
-                                  menuBloCProvider.eventSink
-                                      .add(MenuActions.trainingVideo);
-                                },
-                              ),
-                            ],
-                          );
+                          return NotificationListener(
+                              onNotification: (value) {
+                                welcomeApi.eventSink
+                                    .add(WelcomeApiAction.fetch);
+                                return false;
+                              },
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 35),
+                                child: GridView(
+                                  controller: scroll,
+                                  physics: BouncingScrollPhysics(),
+                                  shrinkWrap: true,
+                                  gridDelegate:
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 2,
+                                          crossAxisSpacing: 30,
+                                          childAspectRatio: 1.130),
+                                  children: List.generate(
+                                      snapshot.data!.data.eventReports.list
+                                          .length, (index) {
+                                    return Padding(
+                                      padding: const EdgeInsets.only(top: 5.0),
+                                      child: TabletItemTreningi(
+                                        backgroundColor:
+                                            const Color(0xff000004),
+                                        buttonColor: const Color(0xffe21a37),
+                                        buttonTextColor:
+                                            const Color(0xffffffff),
+                                        titleColor: const Color(0xffffffff),
+                                        buttonText: "Смотреть",
+                                        title: data.futureEvents.list[0].title,
+                                        onTap: () {
+                                          menuBloCProvider.eventSink
+                                              .add(MenuActions.trainingVideo);
+                                        },
+                                      ),
+                                    );
+                                  }),
+                                ),
+                              ));
                         } else {
                           return Column(
                             children: List.generate(
                               data.eventReports.list.length,
                               (index) {
                                 return CustomClipItem(
-                                  backgroundColor:
-                                      const Color(0xff000004),
-                                  buttonColor:
-                                      const Color(0xffe21a37),
-                                  buttonTextColor:
-                                      const Color(0xffffffff),
+                                  backgroundColor: const Color(0xff000004),
+                                  buttonColor: const Color(0xffe21a37),
+                                  buttonTextColor: const Color(0xffffffff),
                                   titleColor: const Color(0xffffffff),
                                   buttonText: "Смотреть",
-                                  title: data
-                                      .eventReports.list[index].title,
+                                  title: data.eventReports.list[index].title,
                                   onTap: () {
-                                    menuBloCProvider.eventSink.add(
-                                        MenuActions.trainingVideo);
+                                    menuBloCProvider.eventSink
+                                        .add(MenuActions.trainingVideo);
                                   },
                                 );
                               },
@@ -129,10 +140,9 @@ class _TreningiState extends State<Treningi> {
                 ),
               );
             } else {
-              return const Center(child:  CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             }
           }),
     );
-  
   }
 }
