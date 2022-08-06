@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -5,9 +7,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_services/login_api.dart';
 import 'package:hansa_app/blocs/bloc.dart';
-import 'package:hansa_app/blocs/bloc_flip_login.dart';
 import 'package:hansa_app/blocs/navigator_bloc.dart';
 import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
+import 'package:hansa_app/providers/provider_for_flipping/flip_login_provider.dart';
+import 'package:hansa_app/providers/providers_for_login/password_visibility_provider.dart';
 import 'package:hansa_app/screens/welcome_screen.dart';
 import 'package:hansa_app/blocs/toggle_switcher_bloc.dart';
 import 'package:provider/provider.dart';
@@ -21,10 +24,10 @@ class LoginCard extends StatefulWidget {
 
 class _LoginCardState extends State<LoginCard> {
   final usernameController =
-      TextEditingController(text: "baxtiyorjonabduqahhorov2004@gmail.com");
+      TextEditingController(text: "umarnematovv98@gmail.com");
 
-  final passwordController = TextEditingController(text: "691105");
-
+  final passwordController = TextEditingController(text: "981755");
+  final switchTextEditingController = TextEditingController(text: "0");
   final pagerBloc = NavigatorBloC();
   @override
   void initState() {
@@ -42,10 +45,9 @@ class _LoginCardState extends State<LoginCard> {
 
   @override
   Widget build(BuildContext context) {
+    final flipLoginProvider = Provider.of<FlipLoginProvider>(context);
     final isTablet = Provider.of<bool>(context);
     final flip = Provider.of<Map<String, FlipCardController>>(context);
-    final bloc = BlocAnim();
-    final provider = Provider.of<BlocFlipLogin>(context);
     final providerSwitcher = Provider.of<ToggleSwitcherBloc>(context);
     return ScreenUtilInit(
       designSize: const Size(375, 812),
@@ -76,7 +78,8 @@ class _LoginCardState extends State<LoginCard> {
                             child: InkWell(
                               onTap: () {
                                 FocusManager.instance.primaryFocus?.unfocus();
-                                provider.sink.add(false);
+                               flipLoginProvider.changeIsClosed(false);
+                               log(flipLoginProvider.getIsClosed.toString());
                                 flip['login']!.toggleCard();
                               },
                               child: Icon(
@@ -123,44 +126,35 @@ class _LoginCardState extends State<LoginCard> {
                             right: isTablet ? 16.w : 24.w,
                             left: isTablet ? 16.w : 24.w,
                             top: isTablet ? 20.h : 15.h),
-                        child: StreamBuilder<bool>(
-                            stream: bloc.stream,
-                            builder: (context, snapshot) {
-                              if (snapshot.hasData) {
-                                return TextField(
-                                  controller: passwordController,
-                                  obscureText: (snapshot.data!),
-                                  decoration: InputDecoration(
-                                      hintText: 'Ваш пароль',
-                                      hintStyle: GoogleFonts.montserrat(
-                                        color: const Color(0xffa1b7c2),
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                      suffixIcon: GestureDetector(
-                                        onTap: () {
-                                          if (snapshot.data!) {
-                                            bloc.sink.add(false);
-                                          } else {
-                                            bloc.sink.add(true);
-                                          }
-                                        },
-                                        child: Icon(
-                                          snapshot.data!
-                                              ? Icons.visibility
-                                              : Icons.visibility_off,
+                        child: Consumer<PasswordVisibilityProvider>(
+                          builder: (context, value, child) {
+                            return TextField(
+                                    controller: passwordController,
+                                    obscureText: (!value.getVisibility),
+                                    decoration: InputDecoration(
+                                        hintText: 'Ваш пароль',
+                                        hintStyle: GoogleFonts.montserrat(
                                           color: const Color(0xffa1b7c2),
+                                          fontWeight: FontWeight.w500,
                                         ),
-                                      ),
-                                      prefixIcon: const Icon(
-                                        Icons.key,
-                                        color: Color(0xffa2b8c3),
-                                      )),
-                                );
-                              } else {
-                                bloc.sink.add(true);
-                                return const SizedBox();
-                              }
-                            }),
+                                        suffixIcon: GestureDetector(
+                                          onTap: () {
+                                           value.changeVisibility();
+                                          },
+                                          child: Icon(
+                                            !value.getVisibility
+                                                ? Icons.visibility
+                                                : Icons.visibility_off,
+                                            color: const Color(0xffa1b7c2),
+                                          ),
+                                        ),
+                                        prefixIcon: const Icon(
+                                          Icons.key,
+                                          color: Color(0xffa2b8c3),
+                                        )),
+                                  );
+                                } 
+                        ),
                       ),
                       Expanded(
                         child: Row(
@@ -184,7 +178,7 @@ class _LoginCardState extends State<LoginCard> {
                                     Provider(create: (context) => ""),
                                     Provider(
                                         create: (context) =>
-                                            TextEditingController()),
+                                            switchTextEditingController),
                                   ],
                                   child: ToggleSwitch(
                                     colorContainer: Colors.grey[300],
@@ -202,20 +196,15 @@ class _LoginCardState extends State<LoginCard> {
                         padding: EdgeInsets.only(
                           bottom: isTablet ? 35.h : 23.h,
                         ),
-                        child: StreamBuilder<bool>(
-                            initialData: false,
-                            stream: providerSwitcher.dataStream,
-                            builder: (context, snapshot) {
-                              print(snapshot.data);
-                              return GestureDetector(
+                        child: GestureDetector(
                                 onTap: () async {
                                   FocusManager.instance.primaryFocus?.unfocus();
                                   List isCorrectList = await LoginAction(
                                           username: usernameController.text,
                                           password: passwordController.text,
-                                          isSaved: snapshot.data!)
+                                          isSaved: switchTextEditingController.text=="1")
                                       .sendRequest();
-
+                                      log(switchTextEditingController.text);
                                   pagerBloc.sink.add(isCorrectList);
                                 },
                                 child: Container(
@@ -243,8 +232,7 @@ class _LoginCardState extends State<LoginCard> {
                                         fontSize: isTablet ? 10.sp : 12.sp),
                                   ),
                                 ),
-                              );
-                            }),
+                        )
                       ),
                       Padding(
                         padding: EdgeInsets.only(bottom: 36.h),

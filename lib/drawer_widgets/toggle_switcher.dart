@@ -30,7 +30,7 @@ class _ToggleSwitchState extends State<ToggleSwitch> {
 
   @override
   Widget build(BuildContext context) {
-    final providerBloc = Provider.of<ToggleSwitcherBloc>(context);
+    
     final switcher = Provider.of<TextEditingController>(context);
     return Center(
       child: SizedBox(
@@ -44,11 +44,11 @@ class _ToggleSwitchState extends State<ToggleSwitch> {
                   : Alignment.centerRight;
             });
             if (align == Alignment.centerRight) {
-              providerBloc.dataSink.add(true);
+              
               switcher.text = "1";
             } else {
-              providerBloc.dataSink.add(false);
-              switcher.text = "1";
+            
+              switcher.text = "0";
             }
             widget.onButton();
           },
