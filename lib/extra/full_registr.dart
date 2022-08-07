@@ -9,6 +9,7 @@ import 'package:hansa_app/blocs/bloc_flip_login.dart';
 import 'package:hansa_app/blocs/bloc_full_register.dart';
 import 'package:hansa_app/blocs/bloc_local_cities.dart';
 import 'package:hansa_app/blocs/bloc_sign.dart';
+import 'package:hansa_app/blocs/data_burn_text_changer_bloc.dart';
 import 'package:hansa_app/blocs/hansa_country_api.dart';
 import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
 import 'package:hansa_app/enums/full_reg_enum.dart';
@@ -41,6 +42,7 @@ class _FullRegistrState extends State<FullRegistr> {
   final secondToggle = TextEditingController(text: "0");
   final thirdToggle = TextEditingController(text: "0");
   final fourthToggle = TextEditingController(text: "0");
+  final dateBurnBloC = DateBornTextBloC();
   @override
   Widget build(BuildContext context) {
     final flipLoginProvider = Provider.of<FlipLoginProvider>(context);
@@ -177,7 +179,7 @@ class _FullRegistrState extends State<FullRegistr> {
                                         String year = dateRangeController
                                             .selectedDate!.year
                                             .toString();
-
+                                            dateBurnBloC.streamSink.add(day+"."+month+"."+year);
                                         Navigator.pop(context);
                                       },
                                     ));
@@ -187,10 +189,19 @@ class _FullRegistrState extends State<FullRegistr> {
                           alignment: Alignment.centerLeft,
                           child: Padding(
                             padding: const EdgeInsets.only(left: 14),
-                            child: Text(
-                              "Дата рождения",
-                              style: GoogleFonts.montserrat(
-                                  fontSize: 10, color: const Color(0xFF444444)),
+                            child: StreamBuilder<String>(
+                              initialData: "Дата рождения",
+                              stream: dateBurnBloC.stream,
+                              builder: (context, snapshot) {
+                                return Text(
+                                  snapshot.data!,
+                                  style: snapshot.data=="Дата рождения"?  GoogleFonts.montserrat(
+                                      fontSize: 10, color: const Color(0xFF444444)):GoogleFonts.montserrat(
+                                fontSize: isTablet ? 13 : 10,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black),
+                                );
+                              }
                             ),
                           ),
                           width: isTablet ? 538 : 325,
@@ -342,10 +353,22 @@ class _FullRegistrState extends State<FullRegistr> {
                               FocusManager.instance.primaryFocus?.unfocus();
                               providerFlip['signin']!.toggleCard();
                               List<String> date = dateRangeController
-                                  .displayDate!
+                                  .selectedDate!
                                   .toIso8601String()
                                   .split("T")[0]
                                   .split("-");
+                                  log(imyaTextEditingController.text);
+                                  log(familiyaTextEditingController.text);
+                                  log(emailTextFielController.text);
+                                  log(phoneTextFieldController.text);
+                                  log("${date[2]}.${date[1]}.${date[0]}");
+                                  log(nazvaniyaTextFieldController.text);
+                                  log(doljnostTextFieldController.text);
+                                  log(gorodTextFieldController.text);
+                                  log(adresTorgoviySetTextFielController.text);
+                                  log(secondToggle.text);
+                                  log(thirdToggle.text);
+                                  log(fourthToggle.text);
                               toSignUp(
                                 firstname: imyaTextEditingController.text,
                                 lastname: familiyaTextEditingController.text,
@@ -463,7 +486,7 @@ class _FullRegistrState extends State<FullRegistr> {
       required String smsemail,
       required String lichnostdannix,
       required String personalnixdannix}) {
-    log(lastname.toString());
+    /* log(lastname.toString());
     log(firstname.toString());
     log(email.toString());
     log(phone.toString());
@@ -476,7 +499,7 @@ class _FullRegistrState extends State<FullRegistr> {
     log(firstToggle.text);
     log(smsemail);
     log(lichnostdannix);
-    log(personalnixdannix);
+    log(personalnixdannix); */
     BlocSignUp().signUp(
       lastname,
       firstname,

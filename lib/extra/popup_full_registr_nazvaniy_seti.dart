@@ -58,9 +58,12 @@ class _PopupFullRegistrNazvaniySetiState
                           alignment: Alignment.centerLeft,
                           child: Text(
                             text,
-                            style: GoogleFonts.montserrat(
+                            style: text=="Названия сети" ?GoogleFonts.montserrat(
                                 fontSize: isTablet ? 13 : 10,
-                                color: const Color(0xFF444444)),
+                                color: const Color(0xFF444444)):GoogleFonts.montserrat(
+                                fontSize: isTablet ? 13 : 10,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black),
                           ),
                         ),
                       ),

@@ -61,10 +61,13 @@ class _PopupFullRegistrGorodState extends State<PopupFullRegistrGorod> {
                           alignment: Alignment.centerLeft,
                           child: Text(
                             text,
-                            style: GoogleFonts.montserrat(
+                            style: text=="Город" ?GoogleFonts.montserrat(
                                 fontSize: isTablet ? 13 : 10,
-                                color: const Color(0xFF444444)),
-                          ),
+                                color: const Color(0xFF444444)):GoogleFonts.montserrat(
+                                fontSize: isTablet ? 13 : 10,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black),
+                          )
                         ),
                       ),
                       StreamBuilder<CountryModel>(

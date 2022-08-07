@@ -65,10 +65,13 @@ class _PopupFullRegistrDoljnostState extends State<PopupFullRegistrDoljnost> {
                           alignment: Alignment.centerLeft,
                           child: Text(
                             text,
-                            style: GoogleFonts.montserrat(
+                            style: text=="Должность" ?GoogleFonts.montserrat(
                                 fontSize: isTablet ? 13 : 10,
-                                color: const Color(0xFF444444)),
-                          ),
+                                color: const Color(0xFF444444)):GoogleFonts.montserrat(
+                                fontSize: isTablet ? 13 : 10,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black),
+                          )
                         ),
                       ),
                       StreamBuilder<JobModel>(
@@ -87,6 +90,7 @@ class _PopupFullRegistrDoljnostState extends State<PopupFullRegistrDoljnost> {
                                         onPressed: () {
                                           text = snapshotJob.data!.data
                                               .jobModelData[index].name;
+                                              
                                           blocPopupDrawer.dataSink.add(
                                               snapshotJob.data! == 38
                                                   ? 200
