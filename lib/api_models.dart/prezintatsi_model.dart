@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 class PrezintatsiaModel {
   bool status;
   PrezintatsiaModelData data;
@@ -11,28 +14,43 @@ class PrezintatsiaModel {
 }
 
 class PrezintatsiaModelData {
-  PrezintatsiaModelGuidesList data;
-  PrezintatsiaModelData({required this.data});
+  PrezintatsiaModelGuidesList guides;
+  PrezintatsiaModelGuidesArchiveList guidesArchive;
+
+  PrezintatsiaModelData({required this.guides, required this.guidesArchive});
   factory PrezintatsiaModelData.fromMap(Map<String, dynamic> map) {
     return PrezintatsiaModelData(
-        data: PrezintatsiaModelGuidesList.fromMap(map["guides"]));
+      guides: PrezintatsiaModelGuidesList.fromMap(map["guides"]),
+      guidesArchive:
+          PrezintatsiaModelGuidesArchiveList.fromMap(map["guidesArchive"]),
+    );
+  }
+}
+
+class PrezintatsiaModelGuidesArchiveList {
+  List<PrezintatsiaModelGuidesArchiveItem> dataGuidesArchive;
+  PrezintatsiaModelGuidesArchiveList({
+    required this.dataGuidesArchive,
+  });
+
+  factory PrezintatsiaModelGuidesArchiveList.fromMap(List<dynamic> map) {
+    return PrezintatsiaModelGuidesArchiveList(
+        dataGuidesArchive: map
+            .map((e) => PrezintatsiaModelGuidesArchiveItem.fromMap(e))
+            .toList());
   }
 }
 
 class PrezintatsiaModelGuidesList {
   List<PrezintatsiaModelGuidesItem> dataGuides;
-  List<PrezintatsiaModelGuidesArchiveItem> dataGuidesArchive;
 
-  PrezintatsiaModelGuidesList(
-      {required this.dataGuides, required this.dataGuidesArchive});
+  PrezintatsiaModelGuidesList({required this.dataGuides});
 
   factory PrezintatsiaModelGuidesList.fromMap(List<dynamic> map) {
     return PrezintatsiaModelGuidesList(
-        dataGuides:
-            map.map((e) => PrezintatsiaModelGuidesItem.fromMap(e)).toList(),
-        dataGuidesArchive: map
-            .map((e) => PrezintatsiaModelGuidesArchiveItem.fromMap(e))
-            .toList());
+      dataGuides:
+          map.map((e) => PrezintatsiaModelGuidesItem.fromMap(e)).toList(),
+    );
   }
 }
 

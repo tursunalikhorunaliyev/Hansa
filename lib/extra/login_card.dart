@@ -24,9 +24,9 @@ class LoginCard extends StatefulWidget {
 
 class _LoginCardState extends State<LoginCard> {
   final usernameController =
-      TextEditingController(text: "baxtiyorjonabduqahhorov2004@gmail.com");
+      TextEditingController(text: "umarnematovv98@gmail.com");
 
-  final passwordController = TextEditingController(text: "691105");
+  final passwordController = TextEditingController(text: "981755");
 
   final pagerBloc = NavigatorBloC();
   @override
@@ -49,6 +49,7 @@ class _LoginCardState extends State<LoginCard> {
     final isTablet = Provider.of<bool>(context);
     final flip = Provider.of<Map<String, FlipCardController>>(context);
     final providerSwitcher = Provider.of<ToggleSwitcherBloc>(context);
+    final switchTextEditingController = TextEditingController();
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       builder: (context, child) => GestureDetector(
@@ -205,7 +206,7 @@ class _LoginCardState extends State<LoginCard> {
                                           switchTextEditingController.text ==
                                               "1")
                                   .sendRequest();
-                              log(switchTextEditingController.text);
+
                               pagerBloc.sink.add(isCorrectList);
                             },
                             child: Container(

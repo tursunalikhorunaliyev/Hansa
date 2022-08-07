@@ -101,7 +101,7 @@ class CustomTreningiReg extends StatelessWidget {
             ],
           ),
         ),
-        const CustomDoubleClipItem(
+        CustomDoubleClipItem(
           backgroundColor: Color(0xffff163e),
           buttonTextColor: Color(0xffffffff),
           buttonColor: Color(0xff232323),
@@ -109,6 +109,9 @@ class CustomTreningiReg extends StatelessWidget {
           stbuttonText: "Задать вопрос ведущему",
           ndbuttonText: "Пройти тестирование",
           title: "Вебинар начнется: \nЧерез 1 неделю \nНачало: 7 Июля 2022",
+          //////////////////////////// nnnnnn
+          linkPDF: "",
+          linkPDFSkachat: "",
         ),
         Padding(
           padding: const EdgeInsets.only(top: 8, bottom: 25),

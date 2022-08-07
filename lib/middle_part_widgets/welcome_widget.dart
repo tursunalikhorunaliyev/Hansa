@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/welcome_model.dart';
 import 'package:hansa_app/api_services/welcome_api.dart';
 import 'package:hansa_app/extra/event_cards.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class WelcomeWidget extends StatefulWidget {
@@ -80,11 +81,15 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                   );
                                 }),
                               ))
-                          : NotificationListener(
+                          : NotificationListener<ScrollEndNotification>(
                               onNotification: (value) {
-                                if (value is ScrollEndNotification) {
-                                  welcomeApi.eventSink
-                                      .add(WelcomeApiAction.fetch);
+                                final metrics = value.metrics;
+                                if (metrics.atEdge) {
+                                  if (metrics.maxScrollExtent - 1000 <
+                                      metrics.pixels) {
+                                    welcomeApi.eventSink
+                                        .add(WelcomeApiAction.fetch);
+                                  }
                                 }
                                 return false;
                               },
@@ -117,9 +122,14 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                     );
                   } else {
                     welcomeApi.eventSink.add(WelcomeApiAction.fetch);
-                    return const Center(
-                        child: SpinKitWanderingCubes(
-                      color: Colors.red,
+                    return Center(
+                        child: Padding(
+                      padding: EdgeInsets.symmetric(vertical: 240),
+                      child: Lottie.asset(
+                        'assets/pre.json',
+                        height: 70,
+                        width: 70,
+                      ),
                     ));
                   }
                 }),

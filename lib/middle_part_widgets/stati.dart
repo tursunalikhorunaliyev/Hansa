@@ -7,6 +7,7 @@ import 'package:hansa_app/blocs/stati_bloc.dart';
 import 'package:hansa_app/extra/custom_clip_item.dart';
 import 'package:hansa_app/extra/custom_tablet_stati_item.dart';
 import 'package:hansa_app/extra/custom_title.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -111,7 +112,14 @@ class _StatiState extends State<Stati> {
                             );
                     } else {
                       bloc.eventSink.add(StatiAction.show);
-                      return const Center(child: CircularProgressIndicator());
+                      return Padding(
+                        padding: EdgeInsets.symmetric(vertical: 270),
+                        child: Lottie.asset(
+                          'assets/pre.json',
+                          height: 70,
+                          width: 70,
+                        ),
+                      );
                     }
                   }),
             ),
