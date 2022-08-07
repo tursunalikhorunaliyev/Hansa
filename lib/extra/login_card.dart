@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_services/login_api.dart';
-import 'package:hansa_app/blocs/bloc.dart';
 import 'package:hansa_app/blocs/navigator_bloc.dart';
 import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
 import 'package:hansa_app/providers/provider_for_flipping/flip_login_provider.dart';
@@ -23,12 +22,19 @@ class LoginCard extends StatefulWidget {
 }
 
 class _LoginCardState extends State<LoginCard> {
+<<<<<<< HEAD
   final usernameController =
       TextEditingController(text: "baxtiyorjonabduqahhorov2004@gmail.com");
 
   final passwordController = TextEditingController(text: "691105");
   final switchTextEditingController = TextEditingController(text: "0");
+=======
+  final usernameController = 
+      TextEditingController(text: "umarnematovv98@gmail.com");
+>>>>>>> eb4b8f5c28b48c057345ec0214adfecb7d8c35a8
 
+  final passwordController = TextEditingController(text: "981755");
+  final switchTextEditingController = TextEditingController();
   final pagerBloc = NavigatorBloC();
   @override
   void initState() {
