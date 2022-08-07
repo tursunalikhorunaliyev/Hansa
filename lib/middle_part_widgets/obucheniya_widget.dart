@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/obucheniya_model_api.dart';
+import 'package:hansa_app/api_services/welcome_api.dart';
 import 'package:hansa_app/blocs/bloc_obucheniya.dart';
+import 'package:hansa_app/extra/archive_card.dart';
+import 'package:hansa_app/extra/custom_obucheniya_card.dart';
 import 'package:hansa_app/extra/event_cards.dart';
 import 'package:provider/provider.dart';
 import 'package:sticky_headers/sticky_headers.dart';
@@ -18,6 +21,10 @@ class ObucheniyaWidget extends StatelessWidget {
     final token = Provider.of<String>(context);
     final bloc = BlocObucheniya(token);
     bloc.eventSink.add(ObucheniyaEnum.obucheniya);
+    final welcomeApi = WelcomeApi(token);
+    welcomeApi.eventSink.add(WelcomeApiAction.fetch);
+
+    final scroll = ScrollController();
     List<Widget> data() {
       List<Widget> list = [];
       for (int i = 0; i < 5; i++) {
@@ -97,49 +104,79 @@ class ObucheniyaWidget extends StatelessWidget {
                               ),
                             ),
                             content: isTablet
-                                ? Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Column(
-                                        children: [
-                                          Row(),
-                                          Column(
-                                            children: data(),
-                                          ),
-                                        ],
+                                ? NotificationListener(
+                                    onNotification: (value) {
+                                      welcomeApi.eventSink
+                                          .add(WelcomeApiAction.fetch);
+                                      return false;
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 35),
+                                      child: GridView(
+                                        controller: scroll,
+                                        shrinkWrap: true,
+                                        gridDelegate:
+                                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                                crossAxisCount: 2,
+                                                crossAxisSpacing: 30,
+                                                childAspectRatio: 10 / 8),
+                                        children: List.generate(
+                                            snapshot.data!.data.listGuides.list
+                                                .length, (index) {
+                                          return Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 5.0),
+                                              child: ObucheniyaCard(
+                                                  buttonColor:
+                                                      Color(0xffff163e),
+                                                  bottomButtonText: 'скачать ',
+                                                  title: snapshot
+                                                      .data!
+                                                      .data
+                                                      .listGuides
+                                                      .list[index]
+                                                      .title,
+                                                  url: snapshot
+                                                      .data!
+                                                      .data
+                                                      .listGuides
+                                                      .list[index]
+                                                      .pictureLink,
+                                                  isFavourite: snapshot
+                                                      .data!
+                                                      .data
+                                                      .listGuides
+                                                      .list[index]
+                                                      .isFavourite,
+                                                  linkPDF: snapshot
+                                                      .data!
+                                                      .data
+                                                      .listGuides
+                                                      .list[index]
+                                                      .pdfUrl));
+                                        }),
                                       ),
-                                      Column(
-                                        children: [
-                                          Row(),
-                                          Column(
-                                            children: data(),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
-                                  )
+                                    ))
                                 : Column(
                                     children: [
                                       Row(),
                                       Column(children: [
-                                        EventCards(
-                                          isFavourite: snapshot
-                                              .data!
-                                              .data
-                                              .listGuides
-                                              .list[index]
-                                              .isFavourite,
-                                          buttonColor: const Color(0xffff163e),
-                                          buttonText: 'smoterer',
-                                          day: 'asdasd',
-                                          month: '2',
-                                          isDate: false,
-                                          title: snapshot.data!.data.listGuides
-                                              .list[index].title,
-                                          url: snapshot.data!.data.listGuides
-                                              .list[index].pictureLink,
-                                        )
+                                        ObucheniyaCard(
+                                            buttonColor: Color(0xffff163e),
+                                            bottomButtonText: 'скачать ',
+                                            title: snapshot.data!.data
+                                                .listGuides.list[index].title,
+                                            url: snapshot.data!.data.listGuides
+                                                .list[index].pictureLink,
+                                            isFavourite: snapshot
+                                                .data!
+                                                .data
+                                                .listGuides
+                                                .list[index]
+                                                .isFavourite,
+                                            linkPDF: snapshot.data!.data
+                                                .listGuides.list[index].pdfUrl)
                                       ]),
                                     ],
                                   ),
@@ -190,59 +227,96 @@ class ObucheniyaWidget extends StatelessWidget {
                               ),
                             ),
                             content: isTablet
-                                ? Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Column(
-                                        children: [
-                                          Row(),
-                                          Column(
-                                            children: data(),
-                                          )
-                                        ],
+                                ? NotificationListener(
+                                    onNotification: (value) {
+                                      welcomeApi.eventSink
+                                          .add(WelcomeApiAction.fetch);
+                                      return false;
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 35),
+                                      child: GridView(
+                                        controller: scroll,
+                                        shrinkWrap: true,
+                                        gridDelegate:
+                                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                                crossAxisCount: 2,
+                                                crossAxisSpacing: 30,
+                                                childAspectRatio: 10 / 8),
+                                        children: List.generate(
+                                            snapshot
+                                                .data!
+                                                .data
+                                                .listArchiveGuides
+                                                .list
+                                                .length, (index) {
+                                          return Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 5.0),
+                                              child: ObucheniyaCard(
+                                                  buttonColor:
+                                                      Color(0xffff163e),
+                                                  bottomButtonText: 'скачать ',
+                                                  title: snapshot
+                                                      .data!
+                                                      .data
+                                                      .listArchiveGuides
+                                                      .list[index]
+                                                      .title,
+                                                  url: snapshot
+                                                      .data!
+                                                      .data
+                                                      .listArchiveGuides
+                                                      .list[index]
+                                                      .pictureLink,
+                                                  isFavourite: snapshot
+                                                      .data!
+                                                      .data
+                                                      .listArchiveGuides
+                                                      .list[index]
+                                                      .isFavourite,
+                                                  linkPDF: snapshot
+                                                      .data!
+                                                      .data
+                                                      .listArchiveGuides
+                                                      .list[index]
+                                                      .pdfUrl));
+                                        }),
                                       ),
-                                      Column(
-                                        children: [
-                                          Row(),
-                                          Column(
-                                            children: data(),
-                                          )
-                                        ],
-                                      ),
-                                    ],
-                                  )
+                                    ))
                                 : Column(
                                     children: [
                                       Row(),
                                       Column(
                                         children: [
-                                          EventCards(
-                                            isFavourite: snapshot
-                                                .data!
-                                                .data
-                                                .listArchiveGuides
-                                                .list[index]
-                                                .isFavourite,
-                                            buttonColor:
-                                                const Color(0xffff163e),
-                                            buttonText: 'smoterer',
-                                            day: 'asdasd',
-                                            month: '2',
-                                            isDate: false,
-                                            title: snapshot
-                                                .data!
-                                                .data
-                                                .listArchiveGuides
-                                                .list[index]
-                                                .title,
-                                            url: snapshot
-                                                .data!
-                                                .data
-                                                .listArchiveGuides
-                                                .list[index]
-                                                .pictureLink,
-                                          )
+                                          ObucheniyaCard(
+                                              buttonColor: Color(0xffff163e),
+                                              bottomButtonText: 'скачать ',
+                                              title: snapshot
+                                                  .data!
+                                                  .data
+                                                  .listArchiveGuides
+                                                  .list[index]
+                                                  .title,
+                                              url: snapshot
+                                                  .data!
+                                                  .data
+                                                  .listArchiveGuides
+                                                  .list[index]
+                                                  .pictureLink,
+                                              isFavourite: snapshot
+                                                  .data!
+                                                  .data
+                                                  .listArchiveGuides
+                                                  .list[index]
+                                                  .isFavourite,
+                                              linkPDF: snapshot
+                                                  .data!
+                                                  .data
+                                                  .listArchiveGuides
+                                                  .list[index]
+                                                  .pdfUrl)
                                         ],
                                       )
                                     ],

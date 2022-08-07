@@ -1,27 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/extra/sobshit_o_problem.dart';
+import 'package:provider/provider.dart';
 
 class Okompaniya extends StatelessWidget {
   const Okompaniya({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final isTablet = Provider.of<bool>(context);
     return Expanded(
       child: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         child: Column(
           children: [
             Container(
-              height: 67,
+              height: isTablet ? 95 : 67,
               decoration: const BoxDecoration(color: Color(0xFFf1f1f1)),
               child: Row(
                 children: [
                   Container(
-                    padding: const EdgeInsets.only(
-                        top: 16, left: 14, right: 13, bottom: 16),
-                    height: 42,
-                    width: 70,
+                    padding: EdgeInsets.only(
+                        top: isTablet ? 22 : 16,
+                        left: isTablet ? 25 : 14,
+                        right: isTablet ? 15 : 13,
+                        bottom: isTablet ? 25 : 16),
+                    height: isTablet ? 63 : 42,
+                    width: isTablet ? 120 : 70,
                     decoration: const BoxDecoration(
                         color: Color(0xFFff163e),
                         borderRadius: BorderRadius.only(
@@ -34,33 +39,57 @@ class Okompaniya extends StatelessWidget {
                   const SizedBox(
                     width: 9,
                   ),
-                  const Text(
+                  Text(
                     "#",
-                    style: TextStyle(color: Color(0xFFff163e), fontSize: 16),
+                    style: TextStyle(
+                        color: Color(0xFFff163e),
+                        fontWeight: FontWeight.bold,
+                        fontSize: isTablet ? 20 : 16),
                   ),
                   Text(
                     "О компании ",
-                    style: GoogleFonts.montserrat(fontSize: 20),
+                    style: GoogleFonts.montserrat(
+                        fontWeight: FontWeight.bold,
+                        fontSize: isTablet ? 25 : 20),
                   )
                 ],
               ),
             ),
             Stack(
               children: [
-                Container(
-                  height: 217,
-                  width: 375,
-                  decoration: const BoxDecoration(color: Color(0xFFf8f8f8)),
-                ),
-                Image.asset("assets/1649660637Аракелян Ася.jpg.png"),
+                isTablet
+                    ? SizedBox()
+                    : Container(
+                        height: 217,
+                        width: 375,
+                        decoration:
+                            const BoxDecoration(color: Color(0xFFf8f8f8)),
+                      ),
+                isTablet
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(25),
+                            child: Image.asset(
+                              "assets/o_kompaniya_image.png",
+                              fit: BoxFit.fitWidth,
+                              height: 425,
+                              width: 850,
+                            ),
+                          ),
+                        ],
+                      )
+                    : Image.asset(
+                        "assets/1649660637╨É╤Ç╨░╨║╨╡╨╗╤Å╨╜ ╨É╤ü╤Å.jpg.png"),
                 Center(
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 174),
+                    padding: EdgeInsets.only(top: isTablet ? 391 : 174),
                     child: Opacity(
                       opacity: 0.8,
                       child: Container(
-                        height: 423,
-                        width: 323,
+                        height: isTablet ? 633 : 423,
+                        width: isTablet ? 770 : 323,
                         decoration: BoxDecoration(
                             color: const Color(0xFFffffff),
                             borderRadius: BorderRadius.circular(5)),
@@ -70,12 +99,12 @@ class Okompaniya extends StatelessWidget {
                 ),
                 Center(
                   child: Padding(
-                    padding: const EdgeInsets.only(
-                      top: 184,
+                    padding: EdgeInsets.only(
+                      top: isTablet ? 405 : 184,
                     ),
                     child: Container(
-                      height: 481,
-                      width: 342,
+                      height: isTablet ? 621 : 481,
+                      width: isTablet ? 800 : 342,
                       decoration: BoxDecoration(
                           color: const Color(0xFFff163e),
                           borderRadius: BorderRadius.circular(16)),
@@ -88,40 +117,46 @@ class Okompaniya extends StatelessWidget {
                             "    Дорогой коллега,\n добро пожаловать на\n         Hansa - LAB.",
                             overflow: TextOverflow.fade,
                             style: GoogleFonts.montserrat(
-                              fontSize: 16,
+                              fontSize: isTablet ? 26 : 16,
                               color: const Color(0xFFffffff),
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          const Padding(
-                            padding:
-                                EdgeInsets.only(left: 10, top: 35, right: 10),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left: isTablet ? 20 : 10,
+                                top: 35,
+                                right: isTablet ? 20 : 10),
                             child: Text(
                               "Мы рады приветствовать тебя на портале Hansa LAB.Ты, наверное, подумал, что это очередной обучающий портал? Ты что, серьезно? Конечно, нет. Всё намного масштабнее.",
                               style: TextStyle(
-                                fontSize: 11,
+                                fontSize: isTablet ? 21 : 11,
                                 color: Color(0xFFffffff),
                               ),
                             ),
                           ),
-                          const Padding(
-                            padding:
-                                EdgeInsets.only(left: 10, top: 20, right: 10),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left: isTablet ? 20 : 10,
+                                top: 20,
+                                right: isTablet ? 20 : 10),
                             child: Text(
                               "Это и социальная сеть, и место выкладки видеоматериала, и площадка для премирования лучших менеджеров по продажам, и средство коммуникации, и обучающий портал. Hansa LAB постоянно делится только самым интересным материалом, на основании которого проводятся конкурсы, тесты, вебинары.",
                               style: TextStyle(
-                                fontSize: 11,
+                                fontSize: isTablet ? 21 : 11,
                                 color: Color(0xFFffffff),
                               ),
                             ),
                           ),
-                          const Padding(
-                            padding:
-                                EdgeInsets.only(left: 10, top: 20, right: 10),
+                          Padding(
+                            padding: EdgeInsets.only(
+                                left: isTablet ? 20 : 10,
+                                top: 20,
+                                right: isTablet ? 20 : 10),
                             child: Text(
                               "Данный проект призван объединить менеджеров по продажам КБТ со всей страны в одно единое целое ядро",
                               style: TextStyle(
-                                fontSize: 11,
+                                fontSize: isTablet ? 21 : 11,
                                 color: Color(0xFFffffff),
                               ),
                             ),
@@ -133,8 +168,8 @@ class Okompaniya extends StatelessWidget {
                 ),
                 Center(
                   child: Padding(
-                    padding: const EdgeInsets.only(
-                      top: 593,
+                    padding: EdgeInsets.only(
+                      top: isTablet ? 900 : 593,
                     ),
                     child: GestureDetector(
                       onTap: () {
@@ -145,8 +180,8 @@ class Okompaniya extends StatelessWidget {
                       },
                       child: Container(
                         alignment: Alignment.center,
-                        height: 31,
-                        width: 213,
+                        height: isTablet ? 65 : 31,
+                        width: isTablet ? 540 : 213,
                         decoration: BoxDecoration(
                           color: const Color(0xFF25b049),
                           borderRadius: BorderRadius.circular(70),
@@ -163,7 +198,8 @@ class Okompaniya extends StatelessWidget {
                         child: Text(
                           "Написать разработчику",
                           style: GoogleFonts.montserrat(
-                              fontSize: 12, color: const Color(0xFFffffff)),
+                              fontSize: isTablet ? 19 : 12,
+                              color: const Color(0xFFffffff)),
                         ),
                       ),
                     ),

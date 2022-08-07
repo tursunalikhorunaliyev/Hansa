@@ -6,6 +6,7 @@ import 'package:hansa_app/blocs/prezintatsia_bloc.dart';
 import 'package:hansa_app/extra/archive_card.dart';
 import 'package:provider/provider.dart';
 import 'package:sticky_headers/sticky_headers.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PresentArchive extends StatefulWidget {
   const PresentArchive({Key? key}) : super(key: key);
@@ -46,17 +47,19 @@ class _PresentArchiveState extends State<PresentArchive> {
                             children: [
                               Container(
                                 alignment: Alignment.center,
-                                width: isTablet ? 90 : 70,
-                                height: isTablet ? 50 : 42,
-                                decoration: const BoxDecoration(
+                                width: isTablet ? 55.w : 70.w,
+                                height: isTablet ? 46.h : 42.h,
+                                decoration: BoxDecoration(
                                     color: Color(0XFFff163e),
                                     borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(21),
-                                        bottomRight: Radius.circular(21))),
+                                        topRight: Radius.circular(
+                                            isTablet ? 45.r : 21.r),
+                                        bottomRight: Radius.circular(
+                                            isTablet ? 45.r : 21.r))),
                                 child: Image.asset(
                                   'assets/free-icon-presentation-582644.png',
-                                  height: 30,
-                                  width: 30,
+                                  height: isTablet ? 30.h : 30,
+                                  width: isTablet ? 30.w : 30,
                                 ),
                               ),
                               Padding(
@@ -188,17 +191,19 @@ class _PresentArchiveState extends State<PresentArchive> {
                             children: [
                               Container(
                                 alignment: Alignment.center,
-                                width: isTablet ? 90 : 70,
-                                height: isTablet ? 50 : 42,
-                                decoration: const BoxDecoration(
+                                width: isTablet ? 55.w : 70.w,
+                                height: isTablet ? 46.h : 42.h,
+                                decoration: BoxDecoration(
                                     color: Color(0XFFff163e),
                                     borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(21),
-                                        bottomRight: Radius.circular(21))),
+                                        topRight: Radius.circular(
+                                            isTablet ? 45.r : 21.r),
+                                        bottomRight: Radius.circular(
+                                            isTablet ? 45.r : 21.r))),
                                 child: Image.asset(
                                   'assets/Архив.png',
-                                  height: 30,
-                                  width: 30,
+                                  height: isTablet ? 30.h : 30,
+                                  width: isTablet ? 30.w : 30,
                                 ),
                               ),
                               Padding(

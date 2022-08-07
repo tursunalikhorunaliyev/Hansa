@@ -24,10 +24,10 @@ class LoginCard extends StatefulWidget {
 
 class _LoginCardState extends State<LoginCard> {
   final usernameController =
-      TextEditingController(text: "umarnematovv98@gmail.com");
+      TextEditingController(text: "baxtiyorjonabduqahhorov2004@gmail.com");
 
-  final passwordController = TextEditingController(text: "981755");
-  final switchTextEditingController = TextEditingController(text: "0");
+  final passwordController = TextEditingController(text: "691105");
+
   final pagerBloc = NavigatorBloC();
   @override
   void initState() {
@@ -78,8 +78,8 @@ class _LoginCardState extends State<LoginCard> {
                             child: InkWell(
                               onTap: () {
                                 FocusManager.instance.primaryFocus?.unfocus();
-                               flipLoginProvider.changeIsClosed(false);
-                               log(flipLoginProvider.getIsClosed.toString());
+                                flipLoginProvider.changeIsClosed(false);
+                                log(flipLoginProvider.getIsClosed.toString());
                                 flip['login']!.toggleCard();
                               },
                               child: Icon(
@@ -127,34 +127,33 @@ class _LoginCardState extends State<LoginCard> {
                             left: isTablet ? 16.w : 24.w,
                             top: isTablet ? 20.h : 15.h),
                         child: Consumer<PasswordVisibilityProvider>(
-                          builder: (context, value, child) {
-                            return TextField(
-                                    controller: passwordController,
-                                    obscureText: (!value.getVisibility),
-                                    decoration: InputDecoration(
-                                        hintText: 'Ваш пароль',
-                                        hintStyle: GoogleFonts.montserrat(
-                                          color: const Color(0xffa1b7c2),
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                        suffixIcon: GestureDetector(
-                                          onTap: () {
-                                           value.changeVisibility();
-                                          },
-                                          child: Icon(
-                                            !value.getVisibility
-                                                ? Icons.visibility
-                                                : Icons.visibility_off,
-                                            color: const Color(0xffa1b7c2),
-                                          ),
-                                        ),
-                                        prefixIcon: const Icon(
-                                          Icons.key,
-                                          color: Color(0xffa2b8c3),
-                                        )),
-                                  );
-                                } 
-                        ),
+                            builder: (context, value, child) {
+                          return TextField(
+                            controller: passwordController,
+                            obscureText: (!value.getVisibility),
+                            decoration: InputDecoration(
+                                hintText: 'Ваш пароль',
+                                hintStyle: GoogleFonts.montserrat(
+                                  color: const Color(0xffa1b7c2),
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                suffixIcon: GestureDetector(
+                                  onTap: () {
+                                    value.changeVisibility();
+                                  },
+                                  child: Icon(
+                                    !value.getVisibility
+                                        ? Icons.visibility
+                                        : Icons.visibility_off,
+                                    color: const Color(0xffa1b7c2),
+                                  ),
+                                ),
+                                prefixIcon: const Icon(
+                                  Icons.key,
+                                  color: Color(0xffa2b8c3),
+                                )),
+                          );
+                        }),
                       ),
                       Expanded(
                         child: Row(
@@ -193,47 +192,47 @@ class _LoginCardState extends State<LoginCard> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(
-                          bottom: isTablet ? 35.h : 23.h,
-                        ),
-                        child: GestureDetector(
-                                onTap: () async {
-                                  FocusManager.instance.primaryFocus?.unfocus();
-                                  List isCorrectList = await LoginAction(
-                                          username: usernameController.text,
-                                          password: passwordController.text,
-                                          isSaved: switchTextEditingController.text=="1")
-                                      .sendRequest();
-                                      log(switchTextEditingController.text);
-                                  pagerBloc.sink.add(isCorrectList);
-                                },
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  width: isTablet ? 210.w : 318.w,
-                                  height: isTablet ? 48.h : 46.h,
-                                  decoration: BoxDecoration(
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: Colors.grey.withOpacity(0.5),
-                                          spreadRadius: 5.r,
-                                          blurRadius: 7.r,
-                                          offset: Offset(0.w,
-                                              15.h), // changes position of shadow
-                                        ),
-                                      ],
-                                      color: const Color(0xffe21a37),
-                                      borderRadius:
-                                          BorderRadius.circular(23.r)),
-                                  child: Text(
-                                    'Войти',
-                                    style: GoogleFonts.montserrat(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w500,
-                                        fontSize: isTablet ? 10.sp : 12.sp),
-                                  ),
-                                ),
-                        )
-                      ),
+                          padding: EdgeInsets.only(
+                            bottom: isTablet ? 35.h : 23.h,
+                          ),
+                          child: GestureDetector(
+                            onTap: () async {
+                              FocusManager.instance.primaryFocus?.unfocus();
+                              List isCorrectList = await LoginAction(
+                                      username: usernameController.text,
+                                      password: passwordController.text,
+                                      isSaved:
+                                          switchTextEditingController.text ==
+                                              "1")
+                                  .sendRequest();
+                              log(switchTextEditingController.text);
+                              pagerBloc.sink.add(isCorrectList);
+                            },
+                            child: Container(
+                              alignment: Alignment.center,
+                              width: isTablet ? 210.w : 318.w,
+                              height: isTablet ? 48.h : 46.h,
+                              decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 5.r,
+                                      blurRadius: 7.r,
+                                      offset: Offset(0.w,
+                                          15.h), // changes position of shadow
+                                    ),
+                                  ],
+                                  color: const Color(0xffe21a37),
+                                  borderRadius: BorderRadius.circular(23.r)),
+                              child: Text(
+                                'Войти',
+                                style: GoogleFonts.montserrat(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: isTablet ? 10.sp : 12.sp),
+                              ),
+                            ),
+                          )),
                       Padding(
                         padding: EdgeInsets.only(bottom: 36.h),
                         child: Text(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hansa_app/api_models.dart/store_model.dart';
 import 'package:hansa_app/api_services/country_type_service.dart';
 import 'package:hansa_app/blocs/bloc_change_profile.dart';
 import 'package:hansa_app/blocs/bloc_change_title.dart';
@@ -16,10 +15,8 @@ import 'package:hansa_app/providers/full_registr_provider.dart';
 import 'package:hansa_app/providers/provider_for_flipping/flip_login_provider.dart';
 import 'package:hansa_app/providers/provider_for_flipping/login_clicked_provider.dart';
 import 'package:hansa_app/providers/provider_for_flipping/provider_for_flipping.dart';
-import 'package:hansa_app/screens/empty.dart';
-import 'package:hansa_app/screens/hansa_zagruzka.dart';
 import 'package:hansa_app/blocs/toggle_switcher_bloc.dart';
-import 'package:hansa_app/screens/splash_screen.dart';
+import 'package:hansa_app/screens/hansa_zagruzka.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 
@@ -87,7 +84,7 @@ class MyApp extends StatelessWidget {
         ],
         child: const MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: EmptyScreen(),
+          home: HansaZagruzka(),
         ),
       ),
     );
