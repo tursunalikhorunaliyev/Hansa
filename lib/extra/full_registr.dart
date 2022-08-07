@@ -216,15 +216,21 @@ class _FullRegistrState extends State<FullRegistr> {
                       const SizedBox(
                         height: 4,
                       ),
-                      PopupFullRegistrNazvaniySeti(),
+                      Provider(
+                        create: (context) => nazvaniyaTextFieldController,
+                        child: PopupFullRegistrNazvaniySeti()),
                       const SizedBox(
                         height: 4,
                       ),
-                      PopupFullRegistrDoljnost(),
+                      Provider(
+                        create: (context) => doljnostTextFieldController,
+                        child: PopupFullRegistrDoljnost()),
                       const SizedBox(
                         height: 4,
                       ),
-                      PopupFullRegistrGorod(),
+                      Provider(
+                        create: (context) => gorodTextFieldController,
+                        child: PopupFullRegistrGorod()),
                       const SizedBox(
                         height: 4,
                       ),

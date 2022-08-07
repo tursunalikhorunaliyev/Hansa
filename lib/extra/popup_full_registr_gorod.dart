@@ -29,6 +29,7 @@ class _PopupFullRegistrGorodState extends State<PopupFullRegistrGorod> {
     final blocHansaCountry = HansaCountryBloC(1);
 
     blocHansaCountry.eventSink.add(CityEnum.city);
+    final gorodTextEditingContyroller = Provider.of<TextEditingController>(context);
 
     return StreamBuilder<double>(
         initialData: 38,
@@ -84,6 +85,8 @@ class _PopupFullRegistrGorodState extends State<PopupFullRegistrGorod> {
                                     itemBuilder: (context, index) {
                                       return TextButton(
                                         onPressed: () {
+                                          gorodTextEditingContyroller.text = snapshotCountry
+                                              .data!.data.list[index].name;
                                           text = snapshotCountry
                                               .data!.data.list[index].name;
                                           blocPopupDrawer.dataSink.add(

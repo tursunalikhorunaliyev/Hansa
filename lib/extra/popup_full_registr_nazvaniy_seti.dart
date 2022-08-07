@@ -26,6 +26,7 @@ class _PopupFullRegistrNazvaniySetiState
     final blocStoreData = StoreData();
 
     blocStoreData.eventSink.add(StoreEnum.store);
+    final nazvanieTextEditingController = Provider.of<TextEditingController>(context);
 
     return StreamBuilder<double>(
         initialData: 38,
@@ -109,6 +110,8 @@ class _PopupFullRegistrNazvaniySetiState
                                           itemBuilder: (context, index) {
                                             return TextButton(
                                               onPressed: () {
+                                                nazvanieTextEditingController.text = snapshotStore.data!.data
+                                                    .list[index].name;
                                                 text = snapshotStore.data!.data
                                                     .list[index].name;
                                                 blocPopupDrawer.dataSink.add(

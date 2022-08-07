@@ -33,6 +33,7 @@ class _PopupFullRegistrDoljnostState extends State<PopupFullRegistrDoljnost> {
     final blocJob = BlocJob();
 
     blocJob.eventSink.add(JobEnum.job);
+    final doljnostTextEdtingContoller = Provider.of<TextEditingController>(context);
 
     return StreamBuilder<double>(
         initialData: 38,
@@ -88,9 +89,11 @@ class _PopupFullRegistrDoljnostState extends State<PopupFullRegistrDoljnost> {
                                     itemBuilder: (context, index) {
                                       return TextButton(
                                         onPressed: () {
+                                          doljnostTextEdtingContoller.text = snapshotJob.data!.data
+                                              .jobModelData[index].name;
                                           text = snapshotJob.data!.data
                                               .jobModelData[index].name;
-                                              
+
                                           blocPopupDrawer.dataSink.add(
                                               snapshotJob.data! == 38
                                                   ? 200
