@@ -57,6 +57,7 @@ dependencies:
   rename: ^2.0.1
   percent_indicator: ^4.2.2
   lottie: ^1.4.1
+  pull_to_refresh: ^2.0.0
   
 
 dev_dependencies:
