@@ -27,6 +27,7 @@ class _LoginCardState extends State<LoginCard> {
       TextEditingController(text: "baxtiyorjonabduqahhorov2004@gmail.com");
 
   final passwordController = TextEditingController(text: "691105");
+  final switchTextEditingController = TextEditingController(text: "0");
 
   final pagerBloc = NavigatorBloC();
   @override
