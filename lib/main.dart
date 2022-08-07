@@ -52,8 +52,6 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(
             create: (context) => FlipLoginProvider(),
           ),
-
-/////////////////////////////////////////
           Provider(
             create: (context) => BlocVideoControll(),
           ),
