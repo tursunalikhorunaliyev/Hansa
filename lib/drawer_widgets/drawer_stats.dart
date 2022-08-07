@@ -34,14 +34,14 @@ class DrawerStats extends StatelessWidget {
                     horizontalMargin: 1,
                     columns: [
                       DataColumn(
-                        label: Text(
-                          "Место",
-                          style: GoogleFonts.montserrat(
-                            fontSize: 8,
-                            fontWeight: FontWeight.bold,
+                          label: Text(
+                            "Место",
+                            style: GoogleFonts.montserrat(
+                              fontSize: 8,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                      ),
+                          numeric: false),
                       DataColumn(
                         label: Text(
                           "Сеть",
@@ -151,28 +151,9 @@ class DrawerStats extends StatelessWidget {
                   )),
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 40, bottom: 20),
-            child: GestureDetector(
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(64),
-                child: Container(
-                  width: 160,
-                  height: 30,
-                  color: const Color(0xffe21a37),
-                  child: Center(
-                    child: Text(
-                      "Весь рейтинг",
-                      style: GoogleFonts.montserrat(
-                        fontSize: 11.5,
-                        color: const Color(0xffffffff),
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
-          ),
+          SizedBox(
+            height: 10,
+          )
         ],
       ),
     );
