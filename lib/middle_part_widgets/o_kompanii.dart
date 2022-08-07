@@ -28,7 +28,7 @@ class _OKompaniiState extends State<OKompanii> {
   bool downloading = false;
   double progress = 0;
   bool isDownloaded = false;
- 
+
   Future<void> downloadFile(String url, String fileName) async {
     progress = 0;
     setState(() {
@@ -70,7 +70,6 @@ class _OKompaniiState extends State<OKompanii> {
 
   @override
   void initState() {
-    
     super.initState();
   }
 
@@ -118,19 +117,21 @@ class _OKompaniiState extends State<OKompanii> {
                                   title: snapshot.data!.videoListData
                                       .list[i.data!].data.list[index].title,
                                   onDownload: () {
-                                    downloadFile(snapshot
-                                        .data!
-                                        .videoListData
-                                        .list[i.data!]
-                                        .data
-                                        .list[index]
-                                        .videoLink, snapshot
-                                        .data!
-                                        .videoListData
-                                        .list[i.data!]
-                                        .data
-                                        .list[index]
-                                        .title);
+                                    downloadFile(
+                                        snapshot
+                                            .data!
+                                            .videoListData
+                                            .list[i.data!]
+                                            .data
+                                            .list[index]
+                                            .videoLink,
+                                        snapshot
+                                            .data!
+                                            .videoListData
+                                            .list[i.data!]
+                                            .data
+                                            .list[index]
+                                            .title);
 
                                     showDialog(
                                         context: context,
@@ -192,7 +193,7 @@ class _OKompaniiState extends State<OKompanii> {
                                                             "${snapshotDouble.data}%",
                                                             style: GoogleFonts
                                                                 .montserrat(
-                                                                  fontSize: 10,
+                                                              fontSize: 10,
                                                               color:
                                                                   Colors.black,
                                                             ),
@@ -239,8 +240,12 @@ class _OKompaniiState extends State<OKompanii> {
                                         .list[i.data!]
                                         .data
                                         .list[index];
-                                    playProvider.sink.add(
-                                        [true, video.videoLink, video.title]);
+                                    playProvider.sink.add([
+                                      true,
+                                      video.videoLink,
+                                      video.title,
+                                      false
+                                    ]);
                                   },
                                 ),
                               ),

@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_services/login_api.dart';
-import 'package:hansa_app/blocs/bloc.dart';
 import 'package:hansa_app/blocs/navigator_bloc.dart';
 import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
 import 'package:hansa_app/providers/provider_for_flipping/flip_login_provider.dart';
@@ -27,7 +26,7 @@ class _LoginCardState extends State<LoginCard> {
       TextEditingController(text: "umarnematovv98@gmail.com");
 
   final passwordController = TextEditingController(text: "981755");
-
+  final switchTextEditingController = TextEditingController();
   final pagerBloc = NavigatorBloC();
   @override
   void initState() {
@@ -48,8 +47,6 @@ class _LoginCardState extends State<LoginCard> {
     final flipLoginProvider = Provider.of<FlipLoginProvider>(context);
     final isTablet = Provider.of<bool>(context);
     final flip = Provider.of<Map<String, FlipCardController>>(context);
-    final providerSwitcher = Provider.of<ToggleSwitcherBloc>(context);
-    final switchTextEditingController = TextEditingController();
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       builder: (context, child) => GestureDetector(

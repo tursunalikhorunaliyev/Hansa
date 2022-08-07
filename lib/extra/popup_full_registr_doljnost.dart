@@ -33,6 +33,7 @@ class _PopupFullRegistrDoljnostState extends State<PopupFullRegistrDoljnost> {
     final blocJob = BlocJob();
 
     blocJob.eventSink.add(JobEnum.job);
+    final doljnostTextEdtingContoller = Provider.of<TextEditingController>(context);
 
     return StreamBuilder<double>(
         initialData: 38,
@@ -65,10 +66,13 @@ class _PopupFullRegistrDoljnostState extends State<PopupFullRegistrDoljnost> {
                           alignment: Alignment.centerLeft,
                           child: Text(
                             text,
-                            style: GoogleFonts.montserrat(
+                            style: text=="Должность" ?GoogleFonts.montserrat(
                                 fontSize: isTablet ? 13 : 10,
-                                color: const Color(0xFF444444)),
-                          ),
+                                color: const Color(0xFF444444)):GoogleFonts.montserrat(
+                                fontSize: isTablet ? 13 : 10,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black),
+                          )
                         ),
                       ),
                       StreamBuilder<JobModel>(
@@ -85,8 +89,11 @@ class _PopupFullRegistrDoljnostState extends State<PopupFullRegistrDoljnost> {
                                     itemBuilder: (context, index) {
                                       return TextButton(
                                         onPressed: () {
+                                          doljnostTextEdtingContoller.text = snapshotJob.data!.data
+                                              .jobModelData[index].name;
                                           text = snapshotJob.data!.data
                                               .jobModelData[index].name;
+
                                           blocPopupDrawer.dataSink.add(
                                               snapshotJob.data! == 38
                                                   ? 200

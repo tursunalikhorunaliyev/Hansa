@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class TextFieldForFullRegister extends StatefulWidget {
   final String text;
@@ -23,9 +24,11 @@ class TextFieldForFullRegister extends StatefulWidget {
 class _TextFieldForFullRegisterState extends State<TextFieldForFullRegister> {
   bool isHint = true;
   final focusNode = FocusNode();
+  
 
   @override
   Widget build(BuildContext context) {
+    final isTablet = Provider.of<bool>(context);
     return Padding(
       padding: const EdgeInsets.only(left: 11, right: 9),
       child: SizedBox(
@@ -49,8 +52,11 @@ class _TextFieldForFullRegisterState extends State<TextFieldForFullRegister> {
                     setState(() {});
                   }
                 },
-                cursorHeight: 20,
-                style: GoogleFonts.montserrat(fontSize: 10),
+                cursorHeight: 15,
+                style: GoogleFonts.montserrat(
+                                fontSize: isTablet ? 13 : 10,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black),
                 decoration: InputDecoration(
                   focusedBorder: OutlineInputBorder(
                     borderSide:
