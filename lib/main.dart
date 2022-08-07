@@ -75,13 +75,13 @@ class MyApp extends StatelessWidget {
           Provider(
             create: ((context) => BlocChangeProfile()),
           ),
-          Provider(
+          Provider( 
             create: (context) => LoginClickedBloc(),
           ),
           Provider(create: (context) => BlocFlipLogin()),
         ],
         child: const MaterialApp(
-          debugShowCheckedModeBanner: false,
+          debugShowCheckedModeBanner: false,     
           home: HansaZagruzka(),
         ),
       ),
