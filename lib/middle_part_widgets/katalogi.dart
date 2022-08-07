@@ -6,6 +6,7 @@ import 'package:hansa_app/api_services/welcome_api.dart';
 import 'package:hansa_app/extra/custom_katalog_item_double.dart';
 import 'package:hansa_app/extra/custom_tablet_katalog_item.dart';
 import 'package:hansa_app/extra/custom_title.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -101,6 +102,10 @@ class _KatalogiState extends State<Katalogi> {
                                     children: List.generate(
                                         data.guides.list.length, (index) {
                                       return CustomKatalogItemDouble(
+                                        linkPDFSkachat: snapshot
+                                            .data!.data.guides.list[index].link,
+                                        linkPDF: snapshot.data!.data.guides
+                                            .list[index].pdfUrl,
                                         imageUrl:
                                             data.guides.list[index].pictureLink,
                                         backgroundColor:
@@ -169,6 +174,10 @@ class _KatalogiState extends State<Katalogi> {
                                         data.guidesArchive.list.length,
                                         (index) {
                                       return CustomKatalogItemDouble(
+                                        linkPDFSkachat: snapshot.data!.data
+                                            .guidesArchive.list[index].link,
+                                        linkPDF: snapshot.data!.data
+                                            .guidesArchive.list[index].pdfUrl,
                                         imageUrl: data.guidesArchive.list[index]
                                             .pictureLink,
                                         backgroundColor:
@@ -190,7 +199,14 @@ class _KatalogiState extends State<Katalogi> {
                     ),
                   );
                 } else {
-                  return const Center(child: CircularProgressIndicator());
+                  return Padding(
+                    padding: EdgeInsets.symmetric(vertical: 270),
+                    child: Lottie.asset(
+                      'assets/pre.json',
+                      height: 70,
+                      width: 70,
+                    ),
+                  );
                 }
               })
         ],

@@ -47,7 +47,6 @@ class _LoginCardState extends State<LoginCard> {
     final flipLoginProvider = Provider.of<FlipLoginProvider>(context);
     final isTablet = Provider.of<bool>(context);
     final flip = Provider.of<Map<String, FlipCardController>>(context);
-    final providerSwitcher = Provider.of<ToggleSwitcherBloc>(context);
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       builder: (context, child) => GestureDetector(
@@ -204,7 +203,7 @@ class _LoginCardState extends State<LoginCard> {
                                           switchTextEditingController.text ==
                                               "1")
                                   .sendRequest();
-                              log(switchTextEditingController.text);
+
                               pagerBloc.sink.add(isCorrectList);
                             },
                             child: Container(

@@ -7,6 +7,7 @@ import 'package:hansa_app/video/bloc_video_api.dart';
 import 'package:hansa_app/video/model_video.dart';
 import 'package:hansa_app/video_section/custom_video_item.dart';
 import 'package:hansa_app/video_section/custom_video_subitem.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -37,11 +38,15 @@ class Video extends StatelessWidget {
                   stream: blocVideoApi.dataStream,
                   builder: (context, snapshot) {
                     if (snapshot.data == null) {
-                      return const Center(
-                        child: SpinKitWanderingCubes(
-                          color: Colors.red,
+                      return Center(
+                          child: Padding(
+                        padding: EdgeInsets.symmetric(vertical: 220),
+                        child: Lottie.asset(
+                          'assets/pre.json',
+                          height: 70,
+                          width: 70,
                         ),
-                      );
+                      ));
                     }
                     return Column(
                         children: List.generate(

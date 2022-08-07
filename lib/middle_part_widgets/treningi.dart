@@ -8,6 +8,7 @@ import 'package:hansa_app/extra/custom_treningi_ipad_container.dart';
 import 'package:hansa_app/training_section/custom_calendar.dart';
 import 'package:hansa_app/extra/custom_clip_item.dart';
 import 'package:hansa_app/extra/custom_title.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 
@@ -140,7 +141,14 @@ class _TreningiState extends State<Treningi> {
                 ),
               );
             } else {
-              return const Center(child: CircularProgressIndicator());
+              return Padding(
+                padding: EdgeInsets.symmetric(vertical: 270),
+                child: Lottie.asset(
+                  'assets/pre.json',
+                  height: 70,
+                  width: 70,
+                ),
+              );
             }
           }),
     );

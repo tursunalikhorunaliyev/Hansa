@@ -7,7 +7,6 @@ import 'package:url_launcher/url_launcher.dart';
 class ArchiveCard extends StatefulWidget {
   const ArchiveCard(
       {Key? key,
-      
       required this.buttonColor,
       required this.topButtonText,
       required this.skachat,
@@ -15,9 +14,10 @@ class ArchiveCard extends StatefulWidget {
       required this.title,
       required this.url,
       required this.isFavourite,
-      required this.linkPDF})
+      required this.linkPDF,
+      required this.linkPDFSkachat})
       : super(key: key);
-  
+
   final String url;
   final Color buttonColor;
   final String topButtonText;
@@ -26,6 +26,7 @@ class ArchiveCard extends StatefulWidget {
   final Widget? skachat;
   final bool isFavourite;
   final String linkPDF;
+  final String linkPDFSkachat;
 
   @override
   State<ArchiveCard> createState() => _ArchiveCardState();
@@ -72,9 +73,9 @@ class _ArchiveCardState extends State<ArchiveCard> {
                                 EdgeInsets.only(top: isTablet ? 22.h : 27.h),
                             child: InkWell(
                               onTap: () {
-                                setState(() async {
-                                  launched = _launchInBrowser(
-                                      Uri.parse("http://${widget.linkPDF}"));
+                                setState(() {
+                                  launched = _launchInBrowser(Uri.parse(
+                                      "http://${widget.linkPDFSkachat}"));
                                 });
                               },
                               child: Container(
@@ -164,7 +165,7 @@ class _ArchiveCardState extends State<ArchiveCard> {
     );
   }
 
-  Future<void> _launchInBrowser(Uri url) async {
+  _launchInBrowser(Uri url) async {
     if (!await launchUrl(
       url,
       mode: LaunchMode.externalApplication,

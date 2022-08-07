@@ -7,6 +7,7 @@ import 'package:hansa_app/blocs/bloc_obucheniya.dart';
 import 'package:hansa_app/extra/archive_card.dart';
 import 'package:hansa_app/extra/custom_obucheniya_card.dart';
 import 'package:hansa_app/extra/event_cards.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,25 +26,6 @@ class ObucheniyaWidget extends StatelessWidget {
     welcomeApi.eventSink.add(WelcomeApiAction.fetch);
 
     final scroll = ScrollController();
-    List<Widget> data() {
-      List<Widget> list = [];
-      for (int i = 0; i < 5; i++) {
-        list.add(
-          const EventCards(
-            buttonColor: Color(0xffff163e),
-            buttonText: 'smoterer',
-            day: 'asdasd',
-            month: '2',
-            isDate: false,
-            isFavourite: false,
-            title: 'Обучающий материал для сотрудников Леруа Мерлен',
-            url:
-                'https://thumbs.dreamstime.com/b/happy-family-having-roast-chicken-dinner-table-18044089.jpg',
-          ),
-        ); //add any Widget in place of Text("Index $i")
-      }
-      return list; // all widget added now retrun the list here
-    }
 
     return Expanded(
       child: SingleChildScrollView(
@@ -325,8 +307,13 @@ class ObucheniyaWidget extends StatelessWidget {
                         ],
                       );
                     } else {
-                      return const SpinKitWanderingCubes(
-                        color: Colors.red,
+                      return Padding(
+                        padding: EdgeInsets.symmetric(vertical: 270),
+                        child: Lottie.asset(
+                          'assets/pre.json',
+                          height: 70,
+                          width: 70,
+                        ),
                       );
                     }
                   });

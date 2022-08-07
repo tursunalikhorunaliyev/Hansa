@@ -4,6 +4,7 @@ import 'package:hansa_app/api_models.dart/prezintatsi_model.dart';
 import 'package:hansa_app/api_services/welcome_api.dart';
 import 'package:hansa_app/blocs/prezintatsia_bloc.dart';
 import 'package:hansa_app/extra/archive_card.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -102,17 +103,19 @@ class _PresentArchiveState extends State<PresentArchive> {
                                           crossAxisSpacing: 30,
                                           childAspectRatio: 10 / 8),
                                   children: List.generate(
-                                      snapshot.data!.data.data.dataGuides
+                                      snapshot.data!.data.guides.dataGuides
                                           .length, (index) {
                                     return Padding(
                                       padding: const EdgeInsets.only(top: 5.0),
                                       child: ArchiveCard(
-                                        linkPDF: snapshot.data!.data.data
-                                            .dataGuides[index].pdfUrl,
+                                        linkPDFSkachat: snapshot.data!.data
+                                            .guides.dataGuides[index].pdfUrl,
+                                        linkPDF: snapshot.data!.data.guides
+                                            .dataGuides[index].link,
                                         buttonColor: const Color(0xffff163e),
                                         topButtonText: 'Скачать',
                                         bottomButtonText: 'Читать',
-                                        isFavourite: snapshot.data!.data.data
+                                        isFavourite: snapshot.data!.data.guides
                                             .dataGuides[index].isFavourite,
                                         skachat: Container(
                                           alignment: Alignment.center,
@@ -130,9 +133,9 @@ class _PresentArchiveState extends State<PresentArchive> {
                                                 fontWeight: FontWeight.w500),
                                           ),
                                         ),
-                                        title: snapshot.data!.data.data
+                                        title: snapshot.data!.data.guides
                                             .dataGuides[index].title,
-                                        url: snapshot.data!.data.data
+                                        url: snapshot.data!.data.guides
                                             .dataGuides[index].picture_link,
                                       ),
                                     );
@@ -141,19 +144,21 @@ class _PresentArchiveState extends State<PresentArchive> {
                               ))
                           : Column(
                               children: List.generate(
-                              snapshot.data!.data.data.dataGuides.length,
+                              snapshot.data!.data.guides.dataGuides.length,
                               (index) {
                                 return Column(
                                   children: [
                                     Row(),
                                     Column(children: [
                                       ArchiveCard(
-                                        linkPDF: snapshot.data!.data.data
-                                            .dataGuides[index].pdfUrl,
+                                        linkPDFSkachat: snapshot.data!.data
+                                            .guides.dataGuides[index].pdfUrl,
+                                        linkPDF: snapshot.data!.data.guides
+                                            .dataGuides[index].link,
                                         buttonColor: const Color(0xffff163e),
                                         topButtonText: 'Скачать',
                                         bottomButtonText: 'Читать',
-                                        isFavourite: snapshot.data!.data.data
+                                        isFavourite: snapshot.data!.data.guides
                                             .dataGuides[index].isFavourite,
                                         skachat: Container(
                                           alignment: Alignment.center,
@@ -171,9 +176,9 @@ class _PresentArchiveState extends State<PresentArchive> {
                                                 fontWeight: FontWeight.w500),
                                           ),
                                         ),
-                                        title: snapshot.data!.data.data
+                                        title: snapshot.data!.data.guides
                                             .dataGuides[index].title,
-                                        url: snapshot.data!.data.data
+                                        url: snapshot.data!.data.guides
                                             .dataGuides[index].picture_link,
                                       ),
                                     ])
@@ -251,20 +256,30 @@ class _PresentArchiveState extends State<PresentArchive> {
                                           crossAxisSpacing: 30,
                                           childAspectRatio: 10 / 8),
                                   children: List.generate(
-                                      snapshot.data!.data.data.dataGuidesArchive
-                                          .length, (index) {
+                                      snapshot.data!.data.guidesArchive
+                                          .dataGuidesArchive.length, (index) {
                                     return Padding(
                                       padding: const EdgeInsets.only(top: 5.0),
                                       child: ArchiveCard(
-                                        linkPDF: snapshot.data!.data.data
-                                            .dataGuidesArchive[index].pdfUrl,
+                                        linkPDFSkachat: snapshot
+                                            .data!
+                                            .data
+                                            .guidesArchive
+                                            .dataGuidesArchive[index]
+                                            .pdfUrl,
+                                        linkPDF: snapshot
+                                            .data!
+                                            .data
+                                            .guidesArchive
+                                            .dataGuidesArchive[index]
+                                            .link,
                                         buttonColor: const Color(0xffff163e),
                                         topButtonText: 'Скачать',
                                         bottomButtonText: 'Читать',
                                         isFavourite: snapshot
                                             .data!
                                             .data
-                                            .data
+                                            .guidesArchive
                                             .dataGuidesArchive[index]
                                             .isFavourite,
                                         skachat: Container(
@@ -283,12 +298,12 @@ class _PresentArchiveState extends State<PresentArchive> {
                                                 fontWeight: FontWeight.w500),
                                           ),
                                         ),
-                                        title: snapshot.data!.data.data
+                                        title: snapshot.data!.data.guidesArchive
                                             .dataGuidesArchive[index].title,
                                         url: snapshot
                                             .data!
                                             .data
-                                            .data
+                                            .guidesArchive
                                             .dataGuidesArchive[index]
                                             .picture_link,
                                       ),
@@ -299,14 +314,21 @@ class _PresentArchiveState extends State<PresentArchive> {
                           : Expanded(
                               child: Column(
                                   children: List.generate(
-                                      snapshot.data!.data.data.dataGuidesArchive
-                                          .length,
+                                      snapshot.data!.data.guidesArchive
+                                          .dataGuidesArchive.length,
                                       (index) => Column(
                                             children: [
                                               Row(),
                                               Column(
                                                 children: [
                                                   ArchiveCard(
+                                                    linkPDFSkachat: snapshot
+                                                        .data!
+                                                        .data
+                                                        .guidesArchive
+                                                        .dataGuidesArchive[
+                                                            index]
+                                                        .pdfUrl,
                                                     buttonColor:
                                                         const Color(0xffff163e),
                                                     topButtonText: 'Скачать',
@@ -314,14 +336,14 @@ class _PresentArchiveState extends State<PresentArchive> {
                                                     linkPDF: snapshot
                                                         .data!
                                                         .data
-                                                        .data
+                                                        .guidesArchive
                                                         .dataGuidesArchive[
                                                             index]
-                                                        .pdfUrl,
+                                                        .link,
                                                     isFavourite: snapshot
                                                         .data!
                                                         .data
-                                                        .data
+                                                        .guidesArchive
                                                         .dataGuidesArchive[
                                                             index]
                                                         .isFavourite,
@@ -352,14 +374,14 @@ class _PresentArchiveState extends State<PresentArchive> {
                                                     title: snapshot
                                                         .data!
                                                         .data
-                                                        .data
+                                                        .guidesArchive
                                                         .dataGuidesArchive[
                                                             index]
                                                         .title,
                                                     url: snapshot
                                                         .data!
                                                         .data
-                                                        .data
+                                                        .guidesArchive
                                                         .dataGuidesArchive[
                                                             index]
                                                         .picture_link,
@@ -371,8 +393,13 @@ class _PresentArchiveState extends State<PresentArchive> {
                             ))
                 ]);
               } else {
-                return const Center(
-                  child: CircularProgressIndicator(),
+                return Padding(
+                  padding: EdgeInsets.symmetric(vertical: 270),
+                  child: Lottie.asset(
+                    'assets/pre.json',
+                    height: 70,
+                    width: 70,
+                  ),
                 );
               }
             }),

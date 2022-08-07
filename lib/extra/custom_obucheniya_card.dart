@@ -60,30 +60,28 @@ class _ObucheniyaCardState extends State<ObucheniyaCard> {
                     Padding(
                       padding: EdgeInsets.only(left: 23.w),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Padding(
-                            padding: EdgeInsets.only(top: 4.h),
-                            child: InkWell(
-                              onTap: () {
-                                setState(() {
-                                  launched = _launchInBrowser(
-                                      Uri.parse("http://${widget.linkPDF}"));
-                                });
-                              },
-                              child: Container(
-                                alignment: Alignment.center,
-                                width: isTablet ? 100 : 94,
-                                height: isTablet ? 28 : 25,
-                                decoration: BoxDecoration(
-                                    color: widget.buttonColor,
-                                    borderRadius: BorderRadius.circular(13.r)),
-                                child: Text(
-                                  widget.bottomButtonText,
-                                  style: GoogleFonts.montserrat(
-                                      fontSize: isTablet ? 12 : 10,
-                                      color: const Color(0xffffffff),
-                                      fontWeight: FontWeight.w500),
-                                ),
+                          InkWell(
+                            onTap: () {
+                              setState(() {
+                                launched = _launchInBrowser(
+                                    Uri.parse("http://${widget.linkPDF}"));
+                              });
+                            },
+                            child: Container(
+                              alignment: Alignment.center,
+                              width: isTablet ? 100 : 94,
+                              height: isTablet ? 28 : 25,
+                              decoration: BoxDecoration(
+                                  color: widget.buttonColor,
+                                  borderRadius: BorderRadius.circular(13.r)),
+                              child: Text(
+                                widget.bottomButtonText,
+                                style: GoogleFonts.montserrat(
+                                    fontSize: isTablet ? 12 : 10,
+                                    color: const Color(0xffffffff),
+                                    fontWeight: FontWeight.w500),
                               ),
                             ),
                           ),
