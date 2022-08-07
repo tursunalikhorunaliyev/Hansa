@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hansa_app/api_models.dart/model_glavniy_menu_user_info.dart';
+import 'package:hansa_app/blocs/bloc_glavniy_menu_user_info.dart';
+import 'package:hansa_app/enums/enum_action_view.dart';
 import 'package:provider/provider.dart';
 
 class ReferalSilka extends StatelessWidget {
@@ -8,6 +11,11 @@ class ReferalSilka extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isTablet = Provider.of<bool>(context);
+    final providerToken = Provider.of<String>(context);
+
+    final blocGlavniyMenuUserInfo = BlocGlavniyMenuUserInfo(providerToken);
+
+    blocGlavniyMenuUserInfo.eventSink.add(EnumActionView.view);
     return Wrap(
       children: [
         Padding(
@@ -36,12 +44,24 @@ class ReferalSilka extends StatelessWidget {
           children: [
             Padding(
               padding: EdgeInsets.only(left: isTablet ? 30 : 82),
-              child: Text(
-                "http://hansa-lab.ru/?ref=68",
-                style: GoogleFonts.montserrat(
-                    fontSize: isTablet ? 17 : 10,
-                    color: const Color(0xFFffffff)),
-              ),
+              child: StreamBuilder<ModelGlavniyMenuUserInfoMain>(
+                  stream: blocGlavniyMenuUserInfo.dataStream,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return Text(
+                        snapshot.data!.data.ref_link,
+                        style: GoogleFonts.montserrat(
+                            fontSize: isTablet ? 17 : 10,
+                            color: const Color(0xFFffffff)),
+                      );
+                    } else {
+                      return Text(
+                        "Загрузка..",
+                        style: TextStyle(
+                            fontSize: isTablet ? 17 : 10, color: const Color(0xFFffffff)),
+                      );
+                    }
+                  }),
             ),
             const SizedBox(
               width: 30,
