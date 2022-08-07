@@ -7,6 +7,7 @@ import 'package:hansa_app/api_services/welcome_api.dart';
 import 'package:hansa_app/extra/event_cards.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:video_player/video_player.dart';
 
 class WelcomeWidget extends StatefulWidget {
@@ -17,6 +18,8 @@ class WelcomeWidget extends StatefulWidget {
 }
 
 class _WelcomeWidgetState extends State<WelcomeWidget> {
+  RefreshController refreshController =
+      RefreshController(initialRefresh: false);
   @override
   Widget build(BuildContext context) {
     final scroll = ScrollController();
@@ -46,7 +49,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                   if (snapshot.hasData) {
                     final data = snapshot.requireData;
                     return SizedBox(
-                      height: isTablet ? 877 : 583,
+                      height: isTablet ? 877 : 600,
                       width: isTablet ? 800 : 330,
                       child: isTablet
                           ? Expanded(
@@ -113,17 +116,47 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                     ),
                                   )),
                             )
-                          : NotificationListener<ScrollEndNotification>(
-                              onNotification: (value) {
-                                final metrics = value.metrics;
-                                if (metrics.atEdge) {
-                                  if (metrics.maxScrollExtent - 1000 <
-                                      metrics.pixels) {
-                                    welcomeApi.eventSink
-                                        .add(WelcomeApiAction.fetch);
-                                  }
-                                }
-                                return false;
+                          : SmartRefresher(
+                              physics: BouncingScrollPhysics(),
+                              controller: refreshController,
+                              enablePullDown: false,
+                              enablePullUp: true,
+                              footer: CustomFooter(
+                                builder: (context, mode) {
+                                  return SizedBox(
+                                    height: 50,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Icon(
+                                              Icons.arrow_upward,
+                                              color: const Color(0xffff163e),
+                                            ),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            Text(
+                                              "Показать еще",
+                                              style: GoogleFonts.montserrat(
+                                                  color:
+                                                      const Color(0xff272624)),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              ),
+                              onLoading: () {
+                                welcomeApi.eventSink
+                                    .add(WelcomeApiAction.fetch);
+                                refreshController.loadComplete();
                               },
                               child: SingleChildScrollView(
                                 controller: scroll,
