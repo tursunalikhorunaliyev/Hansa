@@ -61,10 +61,17 @@ class _IzbrannoeState extends State<Izbrannoe> {
             const SizedBox(
               height: 15.66666666666667,
             ),
-            topContainer(),
-            topContainer(),
-            topContainer(),
-            topContainer(),
+            Expanded(
+              child: ListView(
+                physics: BouncingScrollPhysics(),
+                children: [
+                  topContainer(),
+                  topContainer(),
+                  topContainer(),
+                  topContainer(),
+                ],
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.only(
                   left: 84.33333333333333,
