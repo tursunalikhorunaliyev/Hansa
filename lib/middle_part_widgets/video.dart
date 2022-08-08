@@ -54,28 +54,27 @@ class Video extends StatelessWidget {
                     }
                     return Column(
                         children: List.generate(
-                            snapshot.data!.videoListData.list.length, (index) {
+                            snapshot.data!.videoListData.list.length, (i) {
                       return Column(
                         children: [
                           CustomVideoSubItem(
                               onTap: () {
-                                title.changeTitle(snapshot
-                                    .data!.videoListData.list[index].title);
+                                title.changeTitle(
+                                    snapshot.data!.videoListData.list[i].title);
                                 menuEventsBloCProvider.eventSink
                                     .add(MenuActions.oKompanii);
-                                blocChangeTitleIndexProvider.titleSink
-                                    .add(index);
+                                index.changeIndex(i);
                               },
-                              title: snapshot
-                                  .data!.videoListData.list[index].title),
+                              title:
+                                  snapshot.data!.videoListData.list[i].title),
                           listView(
-                            (snapshot.data!.videoListData.list[index].data.list
+                            (snapshot.data!.videoListData.list[i].data.list
                                         .length <
                                     5)
-                                ? snapshot.data!.videoListData.list[index].data
-                                    .list.length
+                                ? snapshot.data!.videoListData.list[i].data.list
+                                    .length
                                 : 5,
-                            index,
+                            i,
                             isTablet,
                           )
                         ],
