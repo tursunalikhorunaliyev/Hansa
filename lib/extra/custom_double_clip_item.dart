@@ -37,7 +37,7 @@ class _CustomDoubleClipItemState extends State<CustomDoubleClipItem> {
     Future<void>? launched;
     final isTablet = Provider.of<bool>(context);
     return Padding(
-      padding: EdgeInsets.only(left: 25.w, right: 25.w, top: 11.h, bottom: 5.h),
+      padding: EdgeInsets.only(left: 0.w, right: 0.w, top: 11.h, bottom: 5.h),
       child: SizedBox(
         width: double.infinity,
         child: Stack(
@@ -49,7 +49,7 @@ class _CustomDoubleClipItemState extends State<CustomDoubleClipItem> {
                   child: ClipPath(
                     clipper: CustomPaintClipper(),
                     child: Container(
-                      width: double.infinity,
+                      width: 305.w,
                       height: 75.h,
                       color: widget.backgroundColor,
                     ),
