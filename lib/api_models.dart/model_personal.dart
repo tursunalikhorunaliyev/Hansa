@@ -1,3 +1,4 @@
+import 'dart:convert';
 
 class ModelPersonalMain {
   bool status;
@@ -22,12 +23,11 @@ class ModelPersonal1 {
   String bornedAt;
   String email;
   String phone;
-  int countryType;
-  int cityId;
-  int jobId;
-  int storeId;
+  CountryType countryType;
+  CityId cityId;
+  Job job;
+  Store store;
   String shopAddress;
-
   ModelPersonal1({
     required this.firstname,
     required this.lastname,
@@ -36,8 +36,8 @@ class ModelPersonal1 {
     required this.phone,
     required this.countryType,
     required this.cityId,
-    required this.jobId,
-    required this.storeId,
+    required this.job,
+    required this.store,
     required this.shopAddress,
   });
 
@@ -48,11 +48,75 @@ class ModelPersonal1 {
       bornedAt: map['borned_at'],
       email: map['email'],
       phone: map['phone'],
-      countryType: map['country_type'],
-      cityId: map['city_id'],
-      jobId: map['job_id'],
-      storeId: map['store_id'],
+      countryType: CountryType.fromMap(map['country_type']),
+      cityId: CityId.fromMap(map['city_id']),
+      job: Job.fromMap(map['job']),
+      store: Store.fromMap(map['store']),
       shopAddress: map['shop_address'],
+    );
+  }
+}
+
+class CountryType {
+  int id;
+  String name;
+  CountryType({
+    required this.id,
+    required this.name,
+  });
+
+  factory CountryType.fromMap(Map<String, dynamic> map) {
+    return CountryType(
+      id: map['id'],
+      name: map['name'],
+    );
+  }
+}
+
+class CityId {
+  int id;
+  String name;
+  CityId({
+    required this.id,
+    required this.name,
+  });
+
+  factory CityId.fromMap(Map<String, dynamic> map) {
+    return CityId(
+      id: map['id'],
+      name: map['name'],
+    );
+  }
+}
+
+class Job {
+  int id;
+  String name;
+  Job({
+    required this.id,
+    required this.name,
+  });
+
+  factory Job.fromMap(Map<String, dynamic> map) {
+    return Job(
+      id: map['id'],
+      name: map['name'],
+    );
+  }
+}
+
+class Store {
+  int id;
+  String name;
+  Store({
+    required this.id,
+    required this.name,
+  });
+
+  factory Store.fromMap(Map<String, dynamic> map) {
+    return Store(
+      id: map['id'],
+      name: map['name'],
     );
   }
 }
