@@ -29,7 +29,6 @@ class _StatiState extends State<Stati> {
   @override
   Widget build(BuildContext context) {
     final readStatiBloCProvider = Provider.of<ReadStatiBLoC>(context);
-    setState(() {});
     final token = Provider.of<String>(context);
     final bloc = StatiBLoC(token);
 
@@ -37,21 +36,21 @@ class _StatiState extends State<Stati> {
 
     final statiBloCProvider = Provider.of<MenuEventsBloC>(context);
     return Expanded(
-      child: Column(
-        children: [
-          const CustomTitle(
-            imagePath: "assets/stati_title.png",
-            title: "Статьи",
-          ),
-          Expanded(
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: StreamBuilder<StatiModel>(
-                  stream: bloc.stream,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return isTablet
-                          ? Padding(
+      child: Expanded(
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: StreamBuilder<StatiModel>(
+              stream: bloc.stream,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return isTablet
+                      ? Column(
+                          children: [
+                            const CustomTitle(
+                              imagePath: "assets/stati_title.png",
+                              title: "Статьи",
+                            ),
+                            Padding(
                               padding: EdgeInsets.symmetric(horizontal: 11.w),
                               child: GridView(
                                 physics: const BouncingScrollPhysics(),
@@ -85,8 +84,16 @@ class _StatiState extends State<Stati> {
                                   ),
                                 ),
                               ),
-                            )
-                          : Column(
+                            ),
+                          ],
+                        )
+                      : Column(
+                          children: [
+                            const CustomTitle(
+                              imagePath: "assets/stati_title.png",
+                              title: "Статьи",
+                            ),
+                            Column(
                               children: List.generate(
                                 snapshot.data!.list.list.length,
                                 (index) => CustomClipItem(
@@ -109,25 +116,24 @@ class _StatiState extends State<Stati> {
                                   },
                                 ),
                               ),
-                            );
-                    } else {
-                      bloc.eventSink.add(StatiAction.show);
-                      return Center(
-                          child: Padding(
-                        padding: EdgeInsets.only(
-                            top:
-                                (MediaQuery.of(context).size.height / 2) - 150),
-                        child: Lottie.asset(
-                          'assets/pre.json',
-                          height: 70,
-                          width: 70,
-                        ),
-                      ));
-                    }
-                  }),
-            ),
-          )
-        ],
+                            ),
+                          ],
+                        );
+                } else {
+                  bloc.eventSink.add(StatiAction.show);
+                  return Center(
+                      child: Padding(
+                    padding: EdgeInsets.only(
+                        top: (MediaQuery.of(context).size.height / 2) - 135),
+                    child: Lottie.asset(
+                      'assets/pre.json',
+                      height: 70,
+                      width: 70,
+                    ),
+                  ));
+                }
+              }),
+        ),
       ),
     );
   }

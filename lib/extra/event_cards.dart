@@ -32,7 +32,7 @@ class EventCards extends StatelessWidget {
       child: Stack(
         children: [
           Padding(
-            padding: EdgeInsets.only(top: isTablet ? 180 : 167),
+            padding: EdgeInsets.only(top: isTablet ? 180 : 217),
             child: Container(
               width: isTablet ? 390 : double.infinity,
               height: 93,
@@ -86,7 +86,7 @@ class EventCards extends StatelessWidget {
           ),
           SizedBox(
               width: isTablet ? 388 : double.infinity,
-              height: isTablet ? 170 : 156,
+              height: isTablet ? 170 : 206,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(5),
                 child: CachedNetworkImage(
@@ -96,35 +96,41 @@ class EventCards extends StatelessWidget {
               )),
           isDate
               ? Padding(
-                  padding: EdgeInsets.only(top: 50, left: isTablet ? 150 : 136),
-                  child: Container(
-                    padding: const EdgeInsets.all(12),
-                    height: isTablet ? 65 : 65,
-                    width: isTablet ? 65 : 65,
-                    decoration: const BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.white,
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Text(
-                          day,
-                          style: TextStyle(fontSize: isTablet ? 14 : 11),
+                  padding: EdgeInsets.only(top: 80, left: isTablet ? 150 : 0),
+                  child: Row(
+                    children: [
+                      Spacer(),
+                      Container(
+                        padding: const EdgeInsets.all(12),
+                        height: isTablet ? 65 : 65,
+                        width: isTablet ? 65 : 65,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Colors.white,
                         ),
-                        Text(
-                          month,
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: isTablet ? 9 : 9),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              day,
+                              style: TextStyle(fontSize: isTablet ? 14 : 11),
+                            ),
+                            Text(
+                              month,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: isTablet ? 9 : 9),
+                            ),
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                      Spacer()
+                    ],
                   ),
                 )
               : const SizedBox(),
           Padding(
             padding: EdgeInsets.only(
-                top: isTablet ? 150 : 131, left: isTablet ? 305 : 0),
+                top: isTablet ? 150 : 181, left: isTablet ? 305 : 0),
             child: Row(
               children: [
                 Spacer(
