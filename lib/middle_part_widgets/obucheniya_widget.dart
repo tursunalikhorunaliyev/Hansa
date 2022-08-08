@@ -86,60 +86,54 @@ class ObucheniyaWidget extends StatelessWidget {
                               ),
                             ),
                             content: isTablet
-                                ? NotificationListener(
-                                    onNotification: (value) {
-                                      welcomeApi.eventSink
-                                          .add(WelcomeApiAction.fetch);
-                                      return false;
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 35),
-                                      child: GridView(
-                                        controller: scroll,
-                                        shrinkWrap: true,
-                                        gridDelegate:
-                                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                                crossAxisCount: 2,
-                                                crossAxisSpacing: 30,
-                                                childAspectRatio: 10 / 8),
-                                        children: List.generate(
-                                            snapshot.data!.data.listGuides.list
-                                                .length, (index) {
-                                          return Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 5.0),
-                                              child: ObucheniyaCard(
-                                                  buttonColor:
-                                                      Color(0xffff163e),
-                                                  bottomButtonText: 'скачать ',
-                                                  title: snapshot
-                                                      .data!
-                                                      .data
-                                                      .listGuides
-                                                      .list[index]
-                                                      .title,
-                                                  url: snapshot
-                                                      .data!
-                                                      .data
-                                                      .listGuides
-                                                      .list[index]
-                                                      .pictureLink,
-                                                  isFavourite: snapshot
-                                                      .data!
-                                                      .data
-                                                      .listGuides
-                                                      .list[index]
-                                                      .isFavourite,
-                                                  linkPDF: snapshot
-                                                      .data!
-                                                      .data
-                                                      .listGuides
-                                                      .list[index]
-                                                      .pdfUrl));
-                                        }),
-                                      ),
-                                    ))
+                                ? Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 35),
+                                  child: GridView(
+                                    controller: scroll,
+                                    shrinkWrap: true,
+                                    gridDelegate:
+                                        const SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: 2,
+                                            crossAxisSpacing: 30,
+                                            childAspectRatio: 10 / 8),
+                                    children: List.generate(
+                                        snapshot.data!.data.listGuides.list
+                                            .length, (index) {
+                                      return Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 5.0),
+                                          child: ObucheniyaCard(
+                                              buttonColor:
+                                                  Color(0xffff163e),
+                                              bottomButtonText: 'скачать ',
+                                              title: snapshot
+                                                  .data!
+                                                  .data
+                                                  .listGuides
+                                                  .list[index]
+                                                  .title,
+                                              url: snapshot
+                                                  .data!
+                                                  .data
+                                                  .listGuides
+                                                  .list[index]
+                                                  .pictureLink,
+                                              isFavourite: snapshot
+                                                  .data!
+                                                  .data
+                                                  .listGuides
+                                                  .list[index]
+                                                  .isFavourite,
+                                              linkPDF: snapshot
+                                                  .data!
+                                                  .data
+                                                  .listGuides
+                                                  .list[index]
+                                                  .pdfUrl));
+                                    }),
+                                  ),
+                                )
                                 : Column(
                                     children: [
                                       Row(),
@@ -209,64 +203,53 @@ class ObucheniyaWidget extends StatelessWidget {
                               ),
                             ),
                             content: isTablet
-                                ? NotificationListener(
-                                    onNotification: (value) {
-                                      welcomeApi.eventSink
-                                          .add(WelcomeApiAction.fetch);
-                                      return false;
-                                    },
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 35),
-                                      child: GridView(
-                                        controller: scroll,
-                                        shrinkWrap: true,
-                                        gridDelegate:
-                                            const SliverGridDelegateWithFixedCrossAxisCount(
-                                                crossAxisCount: 2,
-                                                crossAxisSpacing: 30,
-                                                childAspectRatio: 10 / 8),
-                                        children: List.generate(
-                                            snapshot
-                                                .data!
-                                                .data
-                                                .listArchiveGuides
-                                                .list
-                                                .length, (index) {
-                                          return Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 5.0),
-                                              child: ObucheniyaCard(
-                                                  buttonColor:
-                                                      Color(0xffff163e),
-                                                  bottomButtonText: 'скачать ',
-                                                  title: snapshot
-                                                      .data!
-                                                      .data
-                                                      .listArchiveGuides
-                                                      .list[index]
-                                                      .title,
-                                                  url: snapshot
-                                                      .data!
-                                                      .data
-                                                      .listArchiveGuides
-                                                      .list[index]
-                                                      .pictureLink,
-                                                  isFavourite: snapshot
-                                                      .data!
-                                                      .data
-                                                      .listArchiveGuides
-                                                      .list[index]
-                                                      .isFavourite,
-                                                  linkPDF: snapshot
-                                                      .data!
-                                                      .data
-                                                      .listArchiveGuides
-                                                      .list[index]
-                                                      .pdfUrl));
-                                        }),
-                                      ),
-                                    ))
+                                ? Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 35),
+                                    child: GridView(
+                                      controller: scroll,
+                                      shrinkWrap: true,
+                                      gridDelegate:
+                                          const SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 2,
+                                              crossAxisSpacing: 30,
+                                              childAspectRatio: 10 / 8),
+                                      children: List.generate(
+                                          snapshot.data!.data.listArchiveGuides
+                                              .list.length, (index) {
+                                        return Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 5.0),
+                                            child: ObucheniyaCard(
+                                                buttonColor: Color(0xffff163e),
+                                                bottomButtonText: 'скачать ',
+                                                title: snapshot
+                                                    .data!
+                                                    .data
+                                                    .listArchiveGuides
+                                                    .list[index]
+                                                    .title,
+                                                url: snapshot
+                                                    .data!
+                                                    .data
+                                                    .listArchiveGuides
+                                                    .list[index]
+                                                    .pictureLink,
+                                                isFavourite: snapshot
+                                                    .data!
+                                                    .data
+                                                    .listArchiveGuides
+                                                    .list[index]
+                                                    .isFavourite,
+                                                linkPDF: snapshot
+                                                    .data!
+                                                    .data
+                                                    .listArchiveGuides
+                                                    .list[index]
+                                                    .pdfUrl));
+                                      }),
+                                    ),
+                                  )
                                 : Column(
                                     children: [
                                       Row(),

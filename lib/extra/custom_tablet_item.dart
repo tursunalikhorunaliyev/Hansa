@@ -28,93 +28,92 @@ class TabletItemTreningi extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: EdgeInsets.only(
-            bottom: 10.w,
-            top: 11.h,
-          ),
-          child: SizedBox(
-            width: 200.w,
-            child: Stack(
-              children: [
-                Row(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(5.r),
-                      child: ClipPath(
-                        clipper: CustomPaintClipper(),
-                        child: Container(
-                          width: 150.w,
-                          height: 71.h,
-                          color: backgroundColor,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(6.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+    return Expanded(
+      child: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(),
+            child: SizedBox(
+              width: 200.w,
+              child: Stack(
+                children: [
+                  Row(
                     children: [
-                      Padding(
-                        padding: EdgeInsets.only(left: 7.w),
-                        child: Container(
-                          width: 100.w,
-                          height: 65.h,
-                          alignment: Alignment.center,
-                          child: Text(
-                            title,
-                            overflow: TextOverflow.fade,
-                            style: GoogleFonts.montserrat(
-                              color: titleColor,
-                              fontSize: 7.sp,
-                              fontWeight: FontWeight.bold,
-                            ),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(5.r),
+                        child: ClipPath(
+                          clipper: CustomPaintClipper(),
+                          child: Container(
+                            width: 150.w,
+                            height: 71.h,
+                            color: backgroundColor,
                           ),
                         ),
                       ),
-                      Row(
-                        children: [
-                          PhysicalModel(
-                            shadowColor: Colors.grey.withOpacity(.5),
-                            color: Colors.transparent,
-                            borderRadius: BorderRadius.circular(64.r),
-                            elevation: 5.sp,
-                            child: GestureDetector(
-                              onTap: onTap,
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(64.r),
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  width: 50.w,
-                                  height: 20.h,
-                                  color: buttonColor,
-                                  child: Center(
-                                    child: Text(
-                                      buttonText,
-                                      style: GoogleFonts.montserrat(
-                                        color: buttonTextColor,
-                                        fontSize: 7.sp,
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.only(left: 7.w),
+                          child: Container(
+                            width: 100.w,
+                            height: 65.h,
+                            alignment: Alignment.center,
+                            child: Text(
+                              title,
+                              overflow: TextOverflow.fade,
+                              style: GoogleFonts.montserrat(
+                                color: titleColor,
+                                fontSize: 7.sp,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            PhysicalModel(
+                              shadowColor: Colors.grey.withOpacity(.5),
+                              color: Colors.transparent,
+                              borderRadius: BorderRadius.circular(64.r),
+                              elevation: 5.sp,
+                              child: GestureDetector(
+                                onTap: onTap,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(64.r),
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    width: 50.w,
+                                    height: 20.h,
+                                    color: buttonColor,
+                                    child: Center(
+                                      child: Text(
+                                        buttonText,
+                                        style: GoogleFonts.montserrat(
+                                          color: buttonTextColor,
+                                          fontSize: 7.sp,
+                                        ),
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
