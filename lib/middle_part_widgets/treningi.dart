@@ -32,14 +32,13 @@ class _TreningiState extends State<Treningi> {
     final welcomeApi = WelcomeApi(token);
     welcomeApi.eventSink.add(WelcomeApiAction.fetch);
     return Expanded(
-      child: StreamBuilder<TrainingModel>(
-          stream: trainingBloc.dataStream,
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              final data = snapshot.data!.data;
-              return SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                child: Column(
+      child: SingleChildScrollView(
+        child: StreamBuilder<TrainingModel>(
+            stream: trainingBloc.dataStream,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                final data = snapshot.data!.data;
+                return Column(
                   children: [
                     StickyHeader(
                       header: const CustomTitle(
@@ -138,19 +137,22 @@ class _TreningiState extends State<Treningi> {
                       }),
                     ),
                   ],
-                ),
-              );
-            } else {
-              return Positioned(
-                top: -25,
-                child: Lottie.asset(
-                  'assets/pre.json',
-                  height: 70,
-                  width: 70,
-                ),
-              );
-            }
-          }),
+                );
+              } else {
+                return Padding(
+                  padding: EdgeInsets.only(
+                      top: (MediaQuery.of(context).size.height / 2) - 135),
+                  child: Center(
+                    child: Lottie.asset(
+                      'assets/pre.json',
+                      height: 70,
+                      width: 70,
+                    ),
+                  ),
+                );
+              }
+            }),
+      ),
     );
   }
 }
