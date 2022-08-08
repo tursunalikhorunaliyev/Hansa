@@ -4,21 +4,16 @@ import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hansa_app/api_models.dart/country_model.dart';
-import 'package:hansa_app/blocs/bloc_flip_login.dart';
-import 'package:hansa_app/blocs/bloc_full_register.dart';
-import 'package:hansa_app/blocs/bloc_local_cities.dart';
-import 'package:hansa_app/blocs/bloc_sign.dart';
 import 'package:hansa_app/blocs/data_burn_text_changer_bloc.dart';
 import 'package:hansa_app/blocs/hansa_country_api.dart';
 import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
-import 'package:hansa_app/enums/full_reg_enum.dart';
 import 'package:hansa_app/extra/popup_full_registr_doljnost.dart';
 import 'package:hansa_app/extra/popup_full_registr_gorod.dart';
 import 'package:hansa_app/extra/popup_full_registr_nazvaniy_seti.dart';
 import 'package:hansa_app/extra/text_field_for_full_reg.dart';
-import 'package:hansa_app/providers/full_registr_provider.dart';
+import 'package:hansa_app/providers/new_shop_provider.dart';
 import 'package:hansa_app/providers/provider_for_flipping/flip_login_provider.dart';
+import 'package:intl_phone_number_input/intl_phone_number_input.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
@@ -46,6 +41,7 @@ class _FullRegistrState extends State<FullRegistr> {
   @override
   Widget build(BuildContext context) {
     final flipLoginProvider = Provider.of<FlipLoginProvider>(context);
+    final newShop = Provider.of<NewShopProvider>(context);
     final isTablet = Provider.of<bool>(context);
     final providerFlip = Provider.of<Map<String, FlipCardController>>(context);
     log("SignUp build");
@@ -131,13 +127,33 @@ class _FullRegistrState extends State<FullRegistr> {
                       const SizedBox(
                         height: 4,
                       ),
-                      TextFieldForFullRegister(
-                          textEditingController: phoneTextFieldController,
-                          text: "Контактный тефон",
-                          height: isTablet ? 45 : 38,
-                          size: isTablet ? 15 : 10,
-                          weight:
-                              isTablet ? FontWeight.w600 : FontWeight.normal),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(54),
+                          child: Container(
+                            color: Colors.white,
+                            height: 38,
+                            child: InternationalPhoneNumberInput(
+                              onInputChanged: (value) {
+                                phoneTextFieldController.text =
+                                    value.phoneNumber!;
+                              },
+                              inputDecoration: inputDecoration(),
+                              keyboardType: TextInputType.phone,
+                              selectorTextStyle: style(FontWeight.w500),
+                              textStyle: style(FontWeight.w500),
+                              selectorConfig: SelectorConfig(
+                                  leadingPadding: 4,
+                                  useEmoji: false,
+                                  showFlags: false,
+                                  setSelectorButtonAsPrefixIcon: true,
+                                  selectorType:
+                                      PhoneInputSelectorType.BOTTOM_SHEET),
+                            ),
+                          ),
+                        ),
+                      ),
                       const SizedBox(
                         height: 4,
                       ),
@@ -179,7 +195,8 @@ class _FullRegistrState extends State<FullRegistr> {
                                         String year = dateRangeController
                                             .selectedDate!.year
                                             .toString();
-                                            dateBurnBloC.streamSink.add(day+"."+month+"."+year);
+                                        dateBurnBloC.streamSink.add(
+                                            day + "." + month + "." + year);
                                         Navigator.pop(context);
                                       },
                                     ));
@@ -190,19 +207,21 @@ class _FullRegistrState extends State<FullRegistr> {
                           child: Padding(
                             padding: const EdgeInsets.only(left: 14),
                             child: StreamBuilder<String>(
-                              initialData: "Дата рождения",
-                              stream: dateBurnBloC.stream,
-                              builder: (context, snapshot) {
-                                return Text(
-                                  snapshot.data!,
-                                  style: snapshot.data=="Дата рождения"?  GoogleFonts.montserrat(
-                                      fontSize: 10, color: const Color(0xFF444444)):GoogleFonts.montserrat(
-                                fontSize: isTablet ? 13 : 10,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black),
-                                );
-                              }
-                            ),
+                                initialData: "Дата рождения",
+                                stream: dateBurnBloC.stream,
+                                builder: (context, snapshot) {
+                                  return Text(
+                                    snapshot.data!,
+                                    style: snapshot.data == "Дата рождения"
+                                        ? GoogleFonts.montserrat(
+                                            fontSize: 10,
+                                            color: const Color(0xFF444444))
+                                        : GoogleFonts.montserrat(
+                                            fontSize: isTablet ? 13 : 10,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.black),
+                                  );
+                                }),
                           ),
                           width: isTablet ? 538 : 325,
                           height: isTablet ? 43 : 38,
@@ -217,20 +236,20 @@ class _FullRegistrState extends State<FullRegistr> {
                         height: 4,
                       ),
                       Provider(
-                        create: (context) => nazvaniyaTextFieldController,
-                        child: PopupFullRegistrNazvaniySeti()),
+                          create: (context) => nazvaniyaTextFieldController,
+                          child: PopupFullRegistrNazvaniySeti()),
                       const SizedBox(
                         height: 4,
                       ),
                       Provider(
-                        create: (context) => doljnostTextFieldController,
-                        child: PopupFullRegistrDoljnost()),
+                          create: (context) => doljnostTextFieldController,
+                          child: PopupFullRegistrDoljnost()),
                       const SizedBox(
                         height: 4,
                       ),
                       Provider(
-                        create: (context) => gorodTextFieldController,
-                        child: PopupFullRegistrGorod()),
+                          create: (context) => gorodTextFieldController,
+                          child: PopupFullRegistrGorod()),
                       const SizedBox(
                         height: 4,
                       ),
@@ -363,18 +382,6 @@ class _FullRegistrState extends State<FullRegistr> {
                                   .toIso8601String()
                                   .split("T")[0]
                                   .split("-");
-                                  log(imyaTextEditingController.text);
-                                  log(familiyaTextEditingController.text);
-                                  log(emailTextFielController.text);
-                                  log(phoneTextFieldController.text);
-                                  log("${date[2]}.${date[1]}.${date[0]}");
-                                  log(nazvaniyaTextFieldController.text);
-                                  log(doljnostTextFieldController.text);
-                                  log(gorodTextFieldController.text);
-                                  log(adresTorgoviySetTextFielController.text);
-                                  log(secondToggle.text);
-                                  log(thirdToggle.text);
-                                  log(fourthToggle.text);
                               toSignUp(
                                 firstname: imyaTextEditingController.text,
                                 lastname: familiyaTextEditingController.text,
@@ -386,7 +393,7 @@ class _FullRegistrState extends State<FullRegistr> {
                                 gorod: gorodTextFieldController.text,
                                 shopadress:
                                     adresTorgoviySetTextFielController.text,
-                                shopnet: "",
+                                shopnet: newShop.getNewShop.toString(),
                                 smsemail: secondToggle.text,
                                 lichnostdannix: thirdToggle.text,
                                 personalnixdannix: fourthToggle.text,
@@ -492,7 +499,7 @@ class _FullRegistrState extends State<FullRegistr> {
       required String smsemail,
       required String lichnostdannix,
       required String personalnixdannix}) {
-    /* log(lastname.toString());
+    log(lastname.toString());
     log(firstname.toString());
     log(email.toString());
     log(phone.toString());
@@ -505,8 +512,8 @@ class _FullRegistrState extends State<FullRegistr> {
     log(firstToggle.text);
     log(smsemail);
     log(lichnostdannix);
-    log(personalnixdannix); */
-    BlocSignUp().signUp(
+    log(personalnixdannix);
+    /*BlocSignUp().signUp(
       lastname,
       firstname,
       email,
@@ -521,6 +528,37 @@ class _FullRegistrState extends State<FullRegistr> {
       secondToggle.text,
       thirdToggle.text,
       fourthToggle.text,
+    );*/
+  }
+
+  InputDecoration inputDecoration() {
+    return InputDecoration(
+      hintText: "(223) 232-13-12",
+      isDense: true,
+      fillColor: Colors.white,
+      focusedBorder: OutlineInputBorder(
+        borderSide: const BorderSide(width: .9, color: Colors.grey),
+        borderRadius: BorderRadius.circular(54),
+      ),
+      focusedErrorBorder: outlineInputBorder(.1),
+      enabledBorder: outlineInputBorder(.2),
+      errorBorder: outlineInputBorder(.1),
+      contentPadding: const EdgeInsets.symmetric(vertical: 2),
+      hintStyle: style(FontWeight.normal),
+    );
+  }
+
+  OutlineInputBorder outlineInputBorder(double width) {
+    return OutlineInputBorder(
+        borderSide: BorderSide(width: width),
+        borderRadius: BorderRadius.circular(54));
+  }
+
+  TextStyle style(FontWeight fontWeight) {
+    return GoogleFonts.montserrat(
+      fontWeight: fontWeight,
+      fontSize: 10,
+      color: const Color(0xFF444444),
     );
   }
 }

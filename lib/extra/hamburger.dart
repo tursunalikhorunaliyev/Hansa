@@ -22,13 +22,13 @@ class HamburgerIcon extends StatelessWidget {
           color: color,
         ),
         Divider(
-          endIndent: 15,
+          endIndent: 8,
           height: 5,
           thickness: 2,
           color: color,
         ),
         Divider(
-          endIndent: 8,
+          endIndent: 15,
           height: 5,
           thickness: 2,
           color: color,

@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/store_model.dart';
 import 'package:hansa_app/api_services/store_service.dart';
 import 'package:hansa_app/blocs/bloc_popup_drawer.dart';
+import 'package:hansa_app/providers/new_shop_provider.dart';
 import 'package:provider/provider.dart';
 
 class PopupFullRegistrNazvaniySeti extends StatefulWidget {
@@ -18,15 +21,16 @@ class _PopupFullRegistrNazvaniySetiState
   final blocPopupDrawer = BlocPopupDrawer();
   double radius = 54;
   String text = "Названия сети";
+  final newShopText = TextEditingController(text: "");
 
   @override
   Widget build(BuildContext context) {
     final isTablet = Provider.of<bool>(context);
-
+    final newShop = Provider.of<NewShopProvider>(context);
     final blocStoreData = StoreData();
-
     blocStoreData.eventSink.add(StoreEnum.store);
-    final nazvanieTextEditingController = Provider.of<TextEditingController>(context);
+    final nazvanieTextEditingController =
+        Provider.of<TextEditingController>(context);
 
     return StreamBuilder<double>(
         initialData: 38,
@@ -59,12 +63,14 @@ class _PopupFullRegistrNazvaniySetiState
                           alignment: Alignment.centerLeft,
                           child: Text(
                             text,
-                            style: text=="Названия сети" ?GoogleFonts.montserrat(
-                                fontSize: isTablet ? 13 : 10,
-                                color: const Color(0xFF444444)):GoogleFonts.montserrat(
-                                fontSize: isTablet ? 13 : 10,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black),
+                            style: text == "Названия сети"
+                                ? GoogleFonts.montserrat(
+                                    fontSize: isTablet ? 13 : 10,
+                                    color: const Color(0xFF444444))
+                                : GoogleFonts.montserrat(
+                                    fontSize: isTablet ? 13 : 10,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black),
                           ),
                         ),
                       ),
@@ -82,6 +88,7 @@ class _PopupFullRegistrNazvaniySetiState
                                         padding: const EdgeInsets.only(
                                             right: 10, top: 5),
                                         child: TextField(
+                                          controller: newShopText,
                                           decoration: InputDecoration(
                                               contentPadding:
                                                   const EdgeInsets.all(5),
@@ -110,10 +117,13 @@ class _PopupFullRegistrNazvaniySetiState
                                           itemBuilder: (context, index) {
                                             return TextButton(
                                               onPressed: () {
-                                                nazvanieTextEditingController.text = snapshotStore.data!.data
-                                                    .list[index].name;
+                                                nazvanieTextEditingController
+                                                        .text =
+                                                    snapshotStore.data!.data
+                                                        .list[index].name;
                                                 text = snapshotStore.data!.data
                                                     .list[index].name;
+                                                newShop.setNewShop("");
                                                 blocPopupDrawer.dataSink.add(
                                                     snapshotStore.data! == 38
                                                         ? 200
@@ -138,7 +148,17 @@ class _PopupFullRegistrNazvaniySetiState
                                     Padding(
                                       padding: const EdgeInsets.only(right: 10),
                                       child: MaterialButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          newShop.setNewShop(newShopText.text);
+                                          text = newShopText.text;
+                                          nazvanieTextEditingController.text =
+                                              "";
+                                          blocPopupDrawer.dataSink.add(
+                                              snapshotStore.data! == 38
+                                                  ? 200
+                                                  : 38);
+                                          radius = radius == 54 ? 10 : 54;
+                                        },
                                         height: 30,
                                         minWidth: 300,
                                         color: const Color(0xFFe21a37),

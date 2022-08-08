@@ -19,6 +19,7 @@ import 'package:hansa_app/providers/provider_for_flipping/provider_for_flipping.
 import 'package:hansa_app/blocs/toggle_switcher_bloc.dart';
 import 'package:hansa_app/providers/providers_for_video_title/video_index_provider.dart';
 import 'package:hansa_app/providers/providers_for_video_title/video_title_provider.dart';
+import 'package:hansa_app/providers/treningi_video_changer_provider.dart';
 import 'package:hansa_app/screens/hansa_zagruzka.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
@@ -46,6 +47,9 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 812),
       builder: (context, child) => MultiProvider(
         providers: [
+          ChangeNotifierProvider(
+            create: (context) => TreningiVideoChangerProvider(),
+          ),
           ChangeNotifierProvider(
             create: (context) => NewShopProvider(),
           ),
