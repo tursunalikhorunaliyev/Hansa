@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +8,7 @@ import 'package:hansa_app/blocs/bloc_play_video.dart';
 import 'package:hansa_app/blocs/download_progress_bloc.dart';
 import 'package:hansa_app/extra/custom_okompanii_item.dart';
 import 'package:hansa_app/extra/custom_title.dart';
+import 'package:hansa_app/providers/providers_for_video_title/video_title_provider.dart';
 import 'package:hansa_app/video/bloc_video_api.dart';
 import 'package:hansa_app/video/model_video.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -76,7 +75,6 @@ class _OKompaniiState extends State<OKompanii> {
   @override
   Widget build(BuildContext context) {
     final playProvider = Provider.of<BlocPlayVideo>(context);
-    final blocChangeTitleProvider = Provider.of<BlocChangeTitle>(context);
     final blocChangeTitleIndexProvider =
         Provider.of<BlocChangeTitleIndex>(context);
     final token = Provider.of<String>(context);
@@ -85,14 +83,12 @@ class _OKompaniiState extends State<OKompanii> {
     return Expanded(
       child: Column(
         children: [
-          FutureBuilder<String>(
-            future: blocChangeTitleProvider.titleStream,
-            initialData: "",
-            builder: (context, snapshot) {
-              return CustomTitle(
-                        imagePath: "assets/Lab.png", title: snapshot.data!);
-            }
-          ),
+          Consumer<VideoTitleProvider>(builder: (context, value, child) {
+            return CustomTitle(
+              imagePath: "assets/Lab.png",
+              title: value.getTitle,
+            );
+          }),
           Expanded(
             child: StreamBuilder<int>(
                 stream: blocChangeTitleIndexProvider.titleStream,

@@ -3,6 +3,8 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hansa_app/blocs/bloc_change_title.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/extra/custom_title.dart';
+import 'package:hansa_app/providers/providers_for_video_title/video_index_provider.dart';
+import 'package:hansa_app/providers/providers_for_video_title/video_title_provider.dart';
 import 'package:hansa_app/video/bloc_video_api.dart';
 import 'package:hansa_app/video/model_video.dart';
 import 'package:hansa_app/video_section/custom_video_item.dart';
@@ -24,6 +26,8 @@ class Video extends StatelessWidget {
     final blocVideoApi = BlocVideoApi(token);
     blocVideoApi.eventSink.add(ActionVideo.view);
     final isTablet = Provider.of<bool>(context);
+    final title = Provider.of<VideoTitleProvider>(context);
+    final index = Provider.of<VideoIndexProvider>(context);
     return Expanded(
       child: Column(
         children: [
@@ -55,7 +59,7 @@ class Video extends StatelessWidget {
                         children: [
                           CustomVideoSubItem(
                               onTap: () {
-                                blocChangeTitleProvider.titleSink.add(snapshot
+                                title.changeTitle(snapshot
                                     .data!.videoListData.list[index].title);
                                 menuEventsBloCProvider.eventSink
                                     .add(MenuActions.oKompanii);

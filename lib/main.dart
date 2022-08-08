@@ -16,7 +16,8 @@ import 'package:hansa_app/providers/provider_for_flipping/flip_login_provider.da
 import 'package:hansa_app/providers/provider_for_flipping/login_clicked_provider.dart';
 import 'package:hansa_app/providers/provider_for_flipping/provider_for_flipping.dart';
 import 'package:hansa_app/blocs/toggle_switcher_bloc.dart';
-import 'package:hansa_app/providers/video_title_provider.dart';
+import 'package:hansa_app/providers/providers_for_video_title/video_index_provider.dart';
+import 'package:hansa_app/providers/providers_for_video_title/video_title_provider.dart';
 import 'package:hansa_app/screens/hansa_zagruzka.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
@@ -58,6 +59,9 @@ class MyApp extends StatelessWidget {
           ),
           ChangeNotifierProvider(
             create: (context) => VideoTitleProvider(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => VideoIndexProvider(),
           ),
           ChangeNotifierProvider(
             create: (context) => FullRegisterDataProvider(),
