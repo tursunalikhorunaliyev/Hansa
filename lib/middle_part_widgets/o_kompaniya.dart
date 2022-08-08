@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hansa_app/api_models.dart/model_o_kompaniya.dart';
+import 'package:hansa_app/blocs/bloc_o_kompaniya.dart';
+import 'package:hansa_app/enums/enum_action_view.dart';
 import 'package:hansa_app/extra/sobshit_o_problem.dart';
 import 'package:provider/provider.dart';
 
@@ -9,6 +12,9 @@ class Okompaniya extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isTablet = Provider.of<bool>(context);
+    final providerToken = Provider.of<String>(context);
+    final blocOKompaniya = BlocOKompaniya(providerToken);
+    blocOKompaniya.eventSink.add(EnumActionView.view);
     return Expanded(
       child: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -80,8 +86,12 @@ class Okompaniya extends StatelessWidget {
                           ),
                         ],
                       )
+<<<<<<< HEAD
+                    : Image.asset("1649660637Аракелян Ася.png"),
+=======
                     : Image.asset(
                         "assets/1649660637.png"),
+>>>>>>> b7990e2bbac0c4405413b50786469e0cfd9b8010
                 Center(
                   child: Padding(
                     padding: EdgeInsets.only(top: isTablet ? 391 : 174),
@@ -113,27 +123,51 @@ class Okompaniya extends StatelessWidget {
                           const SizedBox(
                             height: 10,
                           ),
-                          Text(
-                            "    Дорогой коллега,\n добро пожаловать на\n         Hansa - LAB.",
-                            overflow: TextOverflow.fade,
-                            style: GoogleFonts.montserrat(
-                              fontSize: isTablet ? 26 : 16,
-                              color: const Color(0xFFffffff),
-                              fontWeight: FontWeight.bold,
-                            ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 70),
+                            child: StreamBuilder<ModelOKompaniyaMain>(
+                                stream: blocOKompaniya.dataStream,
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    return Text(
+                                    
+                                      snapshot.data!.data.title,
+                                      textAlign: TextAlign.center,
+                                      overflow: TextOverflow.fade,
+                                      style: GoogleFonts.montserrat(
+                                      
+                                        fontSize: isTablet ? 26 : 16,
+                                        color: const Color(0xFFffffff),
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    );
+                                  } else {
+                                    return const CircularProgressIndicator();
+                                  }
+                                }),
                           ),
                           Padding(
                             padding: EdgeInsets.only(
                                 left: isTablet ? 20 : 10,
                                 top: 35,
                                 right: isTablet ? 20 : 10),
-                            child: Text(
-                              "Мы рады приветствовать тебя на портале Hansa LAB.Ты, наверное, подумал, что это очередной обучающий портал? Ты что, серьезно? Конечно, нет. Всё намного масштабнее.",
-                              style: TextStyle(
-                                fontSize: isTablet ? 21 : 11,
-                                color: Color(0xFFffffff),
-                              ),
-                            ),
+                            child: StreamBuilder<ModelOKompaniyaMain>(
+                                stream: blocOKompaniya.dataStream,
+                                builder: (context, snapshot) {
+                                  if (snapshot.hasData) {
+                                    return Text(
+                                      snapshot.data!.data.list[0] +
+                                          snapshot.data!.data.list[1] +
+                                          snapshot.data!.data.list[2],
+                                      style: TextStyle(
+                                        fontSize: isTablet ? 21 : 11,
+                                        color: Color(0xFFffffff),
+                                      ),
+                                    );
+                                  } else {
+                                    return const CircularProgressIndicator();
+                                  }
+                                }),
                           ),
                           Padding(
                             padding: EdgeInsets.only(
