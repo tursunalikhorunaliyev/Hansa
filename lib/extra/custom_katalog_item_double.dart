@@ -28,29 +28,32 @@ class CustomKatalogItemDouble extends StatelessWidget {
   final String linkPDFSkachat;
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(6.r),
-          child: Image.network(
-            imageUrl,
-            width: 325.w,
-            height: 157.h,
-            fit: BoxFit.cover,
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 18.w),
+      child: Column(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(6.r),
+            child: Image.network(
+              imageUrl,
+              width: double.infinity,
+              height: 206.h,
+              fit: BoxFit.cover,
+            ),
           ),
-        ),
-        CustomDoubleClipItem(
-          linkPDFSkachat: linkPDFSkachat,
-          linkPDF: linkPDF,
-          backgroundColor: backgroundColor,
-          buttonTextColor: buttonTextColor,
-          buttonColor: buttonColor,
-          titleColor: titleColor,
-          stbuttonText: stbuttonText,
-          ndbuttonText: ndbuttonText,
-          title: title,
-        ),
-      ],
+          CustomDoubleClipItem(
+            linkPDFSkachat: linkPDFSkachat,
+            linkPDF: linkPDF,
+            backgroundColor: backgroundColor,
+            buttonTextColor: buttonTextColor,
+            buttonColor: buttonColor,
+            titleColor: titleColor,
+            stbuttonText: stbuttonText,
+            ndbuttonText: ndbuttonText,
+            title: title,
+          ),
+        ],
+      ),
     );
   }
 }
