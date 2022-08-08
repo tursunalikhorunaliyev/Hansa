@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hansa_app/blocs/bloc_o_kompaniya_napisat.dart';
+import 'package:hansa_app/enums/enum_action_view.dart';
+import 'package:provider/provider.dart';
 
 class SobshitOProblem extends StatelessWidget {
   const SobshitOProblem({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final providerToken = Provider.of<String>(context);
+    final blocOKompaniyaNapisat = BlocOKompaniyaNapisat(providerToken);
+    final textFieldController = TextEditingController();
+
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: SingleChildScrollView(
@@ -61,6 +68,7 @@ class SobshitOProblem extends StatelessWidget {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 24),
                               child: TextField(
+                                controller: textFieldController,
                                 maxLines: 5,
                                 cursorColor: const Color(0xffa1b7c2),
                                 decoration: InputDecoration(
@@ -95,15 +103,32 @@ class SobshitOProblem extends StatelessWidget {
                                   const EdgeInsets.symmetric(horizontal: 15),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(64),
-                                child: Container(
-                                  height: 47,
-                                  color: const Color(0xff25b049),
-                                  child: Center(
-                                    child: Text(
-                                      "Отправить сообщение",
-                                      style: GoogleFonts.montserrat(
-                                        fontSize: 13,
-                                        color: const Color(0xffffffff),
+                                child: LayoutBuilder(
+                                  builder: (contextShowD, constraints) =>
+                                      GestureDetector(
+                                    onTap: () {
+                                      if (textFieldController.text.isNotEmpty) {
+                                        blocOKompaniyaNapisat
+                                            .setText(textFieldController.text);
+                                        blocOKompaniyaNapisat.eventSink
+                                            .add(EnumActionView.view);
+                                      } else {
+                                        ScaffoldMessenger.of(contextShowD)
+                                            .showSnackBar(SnackBar(
+                                                content: Text("Пустое поле")));
+                                      }
+                                    },
+                                    child: Container(
+                                      height: 47,
+                                      color: const Color(0xff25b049),
+                                      child: Center(
+                                        child: Text(
+                                          "Отправить сообщение",
+                                          style: GoogleFonts.montserrat(
+                                            fontSize: 13,
+                                            color: const Color(0xffffffff),
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
