@@ -28,7 +28,7 @@ class EventCards extends StatelessWidget {
   Widget build(BuildContext context) {
     final isTablet = Provider.of<bool>(context);
     return Padding(
-      padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
+      padding: const EdgeInsets.only(bottom: 10, left: 20, right: 20),
       child: Stack(
         children: [
           Padding(
