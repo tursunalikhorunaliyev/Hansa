@@ -44,7 +44,9 @@ class Video extends StatelessWidget {
                     if (snapshot.data == null) {
                       return Center(
                           child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 220),
+                        padding: EdgeInsets.only(
+                            top:
+                                (MediaQuery.of(context).size.height / 2) - 150),
                         child: Lottie.asset(
                           'assets/pre.json',
                           height: 70,

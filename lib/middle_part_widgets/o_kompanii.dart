@@ -12,6 +12,7 @@ import 'package:hansa_app/providers/providers_for_video_title/video_index_provid
 import 'package:hansa_app/providers/providers_for_video_title/video_title_provider.dart';
 import 'package:hansa_app/video/bloc_video_api.dart';
 import 'package:hansa_app/video/model_video.dart';
+import 'package:lottie/lottie.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 
@@ -242,9 +243,16 @@ class _OKompaniiState extends State<OKompanii> {
                           ),
                         );
                       } else {
-                        return const Center(
-                            child: SpinKitWanderingCubes(
-                          color: Colors.red,
+                        return Center(
+                            child: Padding(
+                          padding: EdgeInsets.only(
+                              top: (MediaQuery.of(context).size.height / 2) -
+                                  150),
+                          child: Lottie.asset(
+                            'assets/pre.json',
+                            height: 70,
+                            width: 70,
+                          ),
                         ));
                       }
                     }),

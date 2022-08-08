@@ -61,8 +61,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                   child: GridView(
                                     shrinkWrap: true,
                                     controller: scroll,
-                                    physics:
-                                        const BouncingScrollPhysics(),
+                                    physics: const BouncingScrollPhysics(),
                                     gridDelegate:
                                         const SliverGridDelegateWithFixedCrossAxisCount(
                                             crossAxisCount: 2,
@@ -71,11 +70,10 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                     children: List.generate(
                                         snapshot.data!.length, (index) {
                                       return Padding(
-                                        padding: const EdgeInsets.only(
-                                            top: 5.0),
+                                        padding:
+                                            const EdgeInsets.only(top: 5.0),
                                         child: EventCards(
-                                          buttonColor:
-                                              const Color(0xffff163e),
+                                          buttonColor: const Color(0xffff163e),
                                           buttonText: 'Смотреть',
                                           isDate: true,
                                           month: toDateString(snapshot
@@ -85,8 +83,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                               .substring(8, 10),
                                           title: data[index].title,
                                           url: data[index].pictureLink,
-                                          isFavourite:
-                                              data[index].isFavorite,
+                                          isFavourite: data[index].isFavorite,
                                         ),
                                       );
                                     }),
@@ -165,7 +162,8 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                     welcomeApi.eventSink.add(WelcomeApiAction.fetch);
                     return Center(
                         child: Padding(
-                      padding: EdgeInsets.symmetric(vertical: 240),
+                      padding: EdgeInsets.only(
+                          top: (MediaQuery.of(context).size.height / 2) - 150),
                       child: Lottie.asset(
                         'assets/pre.json',
                         height: 70,

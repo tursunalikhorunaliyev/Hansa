@@ -141,14 +141,16 @@ class _TreningiState extends State<Treningi> {
                 ),
               );
             } else {
-              return Padding(
-                padding: EdgeInsets.symmetric(vertical: 270),
+              return Center(
+                  child: Padding(
+                padding: EdgeInsets.only(
+                    top: (MediaQuery.of(context).size.height / 2) - 150),
                 child: Lottie.asset(
                   'assets/pre.json',
                   height: 70,
                   width: 70,
                 ),
-              );
+              ));
             }
           }),
     );
