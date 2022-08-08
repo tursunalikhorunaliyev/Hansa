@@ -102,21 +102,21 @@ class _PersonalniyDaniyState extends State<PersonalniyDaniy> {
                   ),
                   PopupPersonalMagazin(
                     controller: TextEditingController(
-                        text: snapshot.data!.modelPersonal1.shopAddress),
+                        text: snapshot.data!.modelPersonal1.store.name),
                   ),
                   SizedBox(
                     height: isTablet ? 15 : 8,
                   ),
                   PopupPersonalDoljnost(
                     controller: TextEditingController(
-                        text: snapshot.data!.modelPersonal1.jobId.toString()),
+                        text: snapshot.data!.modelPersonal1.job.name),
                   ),
                   SizedBox(
                     height: isTablet ? 15 : 8,
                   ),
                   PopupPersonalGorod(
                     controller: TextEditingController(
-                        text: snapshot.data!.modelPersonal1.jobId.toString()),
+                        text: snapshot.data!.modelPersonal1.cityId.name),
                   ),
                   SizedBox(
                     height: isTablet ? 15 : 8,
@@ -124,7 +124,7 @@ class _PersonalniyDaniyState extends State<PersonalniyDaniy> {
                   TextFieldForPersonal(
                       text: "Адрес",
                       controller: TextEditingController(
-                          text: snapshot.data!.modelPersonal1.countryType
+                          text: snapshot.data!.modelPersonal1.shopAddress
                               .toString())),
                   SizedBox(
                     height: isTablet ? 50 : 10,
