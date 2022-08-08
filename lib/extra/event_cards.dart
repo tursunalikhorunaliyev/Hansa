@@ -126,22 +126,21 @@ class EventCards extends StatelessWidget {
             padding: EdgeInsets.only(
                 top: isTablet ? 150 : 131, left: isTablet ? 305 : 247),
             child: Container(
-                alignment: Alignment.center,
-                height: isTablet ? 45 : 55,
-                width: isTablet ? 45 : 55,
-                decoration: const BoxDecoration(
-                    color: Color(0xfff1f1f1), shape: BoxShape.circle),
-                child: isFavourite
-                    ? Icon(
-                        CupertinoIcons.heart_fill,
-                        size: isTablet ? 28 : 28,
-                        color: const Color(0xffed3851),
-                      )
-                    : Icon(
-                        CupertinoIcons.heart,
-                        size: isTablet ? 28 : 28,
-                        color: const Color(0xffed3851),
-                      )),
+              alignment: Alignment.center,
+              height: isTablet ? 45 : 55,
+              width: isTablet ? 45 : 55,
+              decoration: const BoxDecoration(
+                  color: Color(0xfff1f1f1), shape: BoxShape.circle),
+              child: isFavourite
+                  ? const Icon(
+                      Icons.favorite,
+                      color: Color(0xffed3851),
+                    )
+                  : const Icon(
+                      Icons.favorite_border_sharp,
+                      color: Color(0xffed3851),
+                    ),
+            ),
           ),
         ],
       ),

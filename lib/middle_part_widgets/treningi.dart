@@ -90,7 +90,7 @@ class _TreningiState extends State<Treningi> {
                                       const SliverGridDelegateWithFixedCrossAxisCount(
                                           crossAxisCount: 2,
                                           crossAxisSpacing: 30,
-                                          childAspectRatio: 1.130),
+                                          childAspectRatio: 3.1),
                                   children: List.generate(
                                       snapshot.data!.data.eventReports.list
                                           .length, (index) {
