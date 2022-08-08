@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +8,8 @@ import 'package:hansa_app/blocs/bloc_play_video.dart';
 import 'package:hansa_app/blocs/download_progress_bloc.dart';
 import 'package:hansa_app/extra/custom_okompanii_item.dart';
 import 'package:hansa_app/extra/custom_title.dart';
+import 'package:hansa_app/providers/providers_for_video_title/video_index_provider.dart';
+import 'package:hansa_app/providers/providers_for_video_title/video_title_provider.dart';
 import 'package:hansa_app/video/bloc_video_api.dart';
 import 'package:hansa_app/video/model_video.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -76,7 +76,6 @@ class _OKompaniiState extends State<OKompanii> {
   @override
   Widget build(BuildContext context) {
     final playProvider = Provider.of<BlocPlayVideo>(context);
-    final blocChangeTitleProvider = Provider.of<BlocChangeTitle>(context);
     final blocChangeTitleIndexProvider =
         Provider.of<BlocChangeTitleIndex>(context);
     final token = Provider.of<String>(context);
@@ -85,181 +84,172 @@ class _OKompaniiState extends State<OKompanii> {
     return Expanded(
       child: Column(
         children: [
-          FutureBuilder<String>(
-            future: blocChangeTitleProvider.titleStream,
-            initialData: "",
-            builder: (context, snapshot) {
-              return CustomTitle(
-                        imagePath: "assets/Lab.png", title: snapshot.data!);
-            }
-          ),
+          Consumer<VideoTitleProvider>(builder: (context, value, child) {
+            return CustomTitle(
+              imagePath: "assets/Lab.png",
+              title: value.getTitle,
+            );
+          }),
           Expanded(
-            child: StreamBuilder<int>(
-                stream: blocChangeTitleIndexProvider.titleStream,
-                builder: (context, i) {
-                  return SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(),
-                    child: StreamBuilder<VideoMainOne>(
-                        stream: blocVideoApi.dataStream,
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData && i.hasData) {
-                            return Column(
-                              children: List.generate(
-                                snapshot.data!.videoListData.list[i.data!].data
-                                    .list.length,
-                                (index) => CustomOKompaniiItem(
-                                  imageUrl: snapshot
-                                      .data!
-                                      .videoListData
-                                      .list[i.data!]
-                                      .data
-                                      .list[index]
-                                      .pictureLink,
-                                  title: snapshot.data!.videoListData
-                                      .list[i.data!].data.list[index].title,
-                                  onDownload: () {
-                                    downloadFile(
-                                        snapshot
-                                            .data!
-                                            .videoListData
-                                            .list[i.data!]
-                                            .data
-                                            .list[index]
-                                            .videoLink,
-                                        snapshot
-                                            .data!
-                                            .videoListData
-                                            .list[i.data!]
-                                            .data
-                                            .list[index]
-                                            .title);
-
-                                    showDialog(
-                                        context: context,
-                                        builder: (context) {
-                                          return AlertDialog(
-                                            actionsPadding: EdgeInsets.only(
-                                                bottom: 20, right: 20),
-                                            alignment: Alignment.center,
-                                            content: StreamBuilder<double>(
-                                                stream: blocDownload.stream,
-                                                initialData: 0,
-                                                builder:
-                                                    (context, snapshotDouble) {
-                                                  return SizedBox(
-                                                    height: 250,
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        ClipRRect(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(8),
-                                                          child:
-                                                              CachedNetworkImage(
-                                                            imageUrl: snapshot
-                                                                .data!
-                                                                .videoListData
-                                                                .list[i.data!]
-                                                                .data
-                                                                .list[index]
-                                                                .pictureLink,
-                                                            height: 165,
-                                                            width: 325,
-                                                            fit: BoxFit.cover,
-                                                          ),
-                                                        ),
-                                                        SizedBox(
-                                                          height: 10,
-                                                        ),
-                                                        LinearPercentIndicator(
-                                                          alignment:
-                                                              MainAxisAlignment
-                                                                  .center,
-                                                          padding:
-                                                              const EdgeInsets
-                                                                  .all(0),
-                                                          barRadius:
-                                                              Radius.circular(
-                                                                  5),
-                                                          lineHeight: 15,
-                                                          //width: 325,
-                                                          percent:
-                                                              snapshotDouble
-                                                                      .data! /
-                                                                  100,
-                                                          center: Text(
-                                                            "${snapshotDouble.data}%",
-                                                            style: GoogleFonts
-                                                                .montserrat(
-                                                              fontSize: 10,
-                                                              color:
-                                                                  Colors.black,
-                                                            ),
-                                                          ),
-
-                                                          backgroundColor:
-                                                              Colors
-                                                                  .transparent,
-                                                          progressColor:
-                                                              Colors.green,
-                                                        ),
-                                                        SizedBox(
-                                                          height: 10,
-                                                        ),
-                                                        Flexible(
-                                                          child: Text(
-                                                            snapshot
-                                                                .data!
-                                                                .videoListData
-                                                                .list[i.data!]
-                                                                .data
-                                                                .list[index]
-                                                                .title
-                                                                .toString(),
-                                                            style: GoogleFonts
-                                                                .montserrat(
-                                                                    color: Colors
-                                                                        .black,
-                                                                    fontSize:
-                                                                        12),
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  );
-                                                }),
-                                          );
-                                        });
-                                  },
-                                  onTap: () {
-                                    final VideoDetails video = snapshot
+            child:
+                Consumer<VideoIndexProvider>(builder: (context, value, child) {
+              return SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: StreamBuilder<VideoMainOne>(
+                    stream: blocVideoApi.dataStream,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return Column(
+                          children: List.generate(
+                            snapshot.data!.videoListData.list[value.getIndex]
+                                .data.list.length,
+                            (index) => CustomOKompaniiItem(
+                              imageUrl: snapshot
+                                  .data!
+                                  .videoListData
+                                  .list[value.getIndex]
+                                  .data
+                                  .list[index]
+                                  .pictureLink,
+                              title: snapshot.data!.videoListData
+                                  .list[value.getIndex].data.list[index].title,
+                              onDownload: () {
+                                downloadFile(
+                                    snapshot
                                         .data!
                                         .videoListData
-                                        .list[i.data!]
+                                        .list[value.getIndex]
                                         .data
-                                        .list[index];
-                                    playProvider.sink.add([
-                                      true,
-                                      video.videoLink,
-                                      video.title,
-                                      false
-                                    ]);
-                                  },
-                                ),
-                              ),
-                            );
-                          } else {
-                            return const Center(
-                                child: SpinKitWanderingCubes(
-                              color: Colors.red,
-                            ));
-                          }
-                        }),
-                  );
-                }),
+                                        .list[index]
+                                        .videoLink,
+                                    snapshot
+                                        .data!
+                                        .videoListData
+                                        .list[value.getIndex]
+                                        .data
+                                        .list[index]
+                                        .title);
+
+                                showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return AlertDialog(
+                                        actionsPadding: EdgeInsets.only(
+                                            bottom: 20, right: 20),
+                                        alignment: Alignment.center,
+                                        content: StreamBuilder<double>(
+                                            stream: blocDownload.stream,
+                                            initialData: 0,
+                                            builder: (context, snapshotDouble) {
+                                              return SizedBox(
+                                                height: 250,
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: [
+                                                    ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                      child: CachedNetworkImage(
+                                                        imageUrl: snapshot
+                                                            .data!
+                                                            .videoListData
+                                                            .list[
+                                                                value.getIndex]
+                                                            .data
+                                                            .list[index]
+                                                            .pictureLink,
+                                                        height: 165,
+                                                        width: 325,
+                                                        fit: BoxFit.cover,
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    LinearPercentIndicator(
+                                                      alignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              0),
+                                                      barRadius:
+                                                          Radius.circular(5),
+                                                      lineHeight: 15,
+                                                      //width: 325,
+                                                      percent:
+                                                          snapshotDouble.data! /
+                                                              100,
+                                                      center: Text(
+                                                        "${snapshotDouble.data}%",
+                                                        style: GoogleFonts
+                                                            .montserrat(
+                                                          fontSize: 10,
+                                                          color: Colors.black,
+                                                        ),
+                                                      ),
+
+                                                      backgroundColor:
+                                                          Colors.transparent,
+                                                      progressColor:
+                                                          Colors.green,
+                                                    ),
+                                                    SizedBox(
+                                                      height: 10,
+                                                    ),
+                                                    Flexible(
+                                                      child: Text(
+                                                        snapshot
+                                                            .data!
+                                                            .videoListData
+                                                            .list[
+                                                                value.getIndex]
+                                                            .data
+                                                            .list[index]
+                                                            .title
+                                                            .toString(),
+                                                        style: GoogleFonts
+                                                            .montserrat(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize: 12),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              );
+                                            }),
+                                      );
+                                    });
+                              },
+                              onTap: () {
+                                final VideoDetails video = snapshot
+                                    .data!
+                                    .videoListData
+                                    .list[value.getIndex]
+                                    .data
+                                    .list[index];
+                                playProvider.sink.add([
+                                  true,
+                                  video.videoLink,
+                                  video.title,
+                                  false
+                                ]);
+                              },
+                            ),
+                          ),
+                        );
+                      } else {
+                        return const Center(
+                            child: SpinKitWanderingCubes(
+                          color: Colors.red,
+                        ));
+                      }
+                    }),
+              );
+            }),
           )
         ],
       ),
