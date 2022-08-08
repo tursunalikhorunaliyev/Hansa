@@ -16,6 +16,7 @@ import 'package:hansa_app/providers/provider_for_flipping/flip_login_provider.da
 import 'package:hansa_app/providers/provider_for_flipping/login_clicked_provider.dart';
 import 'package:hansa_app/providers/provider_for_flipping/provider_for_flipping.dart';
 import 'package:hansa_app/blocs/toggle_switcher_bloc.dart';
+import 'package:hansa_app/providers/video_title_provider.dart';
 import 'package:hansa_app/screens/hansa_zagruzka.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
@@ -56,6 +57,9 @@ class MyApp extends StatelessWidget {
             create: (context) => BlocVideoControll(),
           ),
           ChangeNotifierProvider(
+            create: (context) => VideoTitleProvider(),
+          ),
+          ChangeNotifierProvider(
             create: (context) => FullRegisterDataProvider(),
           ),
           Provider(create: (context) => CountryTypeService().getCountryTypes()),
@@ -75,13 +79,13 @@ class MyApp extends StatelessWidget {
           Provider(
             create: ((context) => BlocChangeProfile()),
           ),
-          Provider( 
+          Provider(
             create: (context) => LoginClickedBloc(),
           ),
           Provider(create: (context) => BlocFlipLogin()),
         ],
         child: const MaterialApp(
-          debugShowCheckedModeBanner: false,     
+          debugShowCheckedModeBanner: false,
           home: HansaZagruzka(),
         ),
       ),
