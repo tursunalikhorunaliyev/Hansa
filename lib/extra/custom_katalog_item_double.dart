@@ -37,7 +37,7 @@ class CustomKatalogItemDouble extends StatelessWidget {
             child: Image.network(
               imageUrl,
               width: double.infinity,
-              height: 157.h,
+              height: 206.h,
               fit: BoxFit.cover,
             ),
           ),
