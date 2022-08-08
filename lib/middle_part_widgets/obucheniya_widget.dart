@@ -87,53 +87,52 @@ class ObucheniyaWidget extends StatelessWidget {
                             ),
                             content: isTablet
                                 ? Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 35),
-                                  child: GridView(
-                                    controller: scroll,
-                                    shrinkWrap: true,
-                                    gridDelegate:
-                                        const SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 2,
-                                            crossAxisSpacing: 30,
-                                            childAspectRatio: 10 / 8),
-                                    children: List.generate(
-                                        snapshot.data!.data.listGuides.list
-                                            .length, (index) {
-                                      return Padding(
-                                          padding: const EdgeInsets.only(
-                                              top: 5.0),
-                                          child: ObucheniyaCard(
-                                              buttonColor:
-                                                  Color(0xffff163e),
-                                              bottomButtonText: 'скачать ',
-                                              title: snapshot
-                                                  .data!
-                                                  .data
-                                                  .listGuides
-                                                  .list[index]
-                                                  .title,
-                                              url: snapshot
-                                                  .data!
-                                                  .data
-                                                  .listGuides
-                                                  .list[index]
-                                                  .pictureLink,
-                                              isFavourite: snapshot
-                                                  .data!
-                                                  .data
-                                                  .listGuides
-                                                  .list[index]
-                                                  .isFavourite,
-                                              linkPDF: snapshot
-                                                  .data!
-                                                  .data
-                                                  .listGuides
-                                                  .list[index]
-                                                  .pdfUrl));
-                                    }),
-                                  ),
-                                )
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 35),
+                                    child: GridView(
+                                      controller: scroll,
+                                      shrinkWrap: true,
+                                      gridDelegate:
+                                          const SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 2,
+                                              crossAxisSpacing: 30,
+                                              childAspectRatio: 10 / 8),
+                                      children: List.generate(
+                                          snapshot.data!.data.listGuides.list
+                                              .length, (index) {
+                                        return Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 5.0),
+                                            child: ObucheniyaCard(
+                                                buttonColor: Color(0xffff163e),
+                                                bottomButtonText: 'скачать ',
+                                                title: snapshot
+                                                    .data!
+                                                    .data
+                                                    .listGuides
+                                                    .list[index]
+                                                    .title,
+                                                url: snapshot
+                                                    .data!
+                                                    .data
+                                                    .listGuides
+                                                    .list[index]
+                                                    .pictureLink,
+                                                isFavourite: snapshot
+                                                    .data!
+                                                    .data
+                                                    .listGuides
+                                                    .list[index]
+                                                    .isFavourite,
+                                                linkPDF: snapshot
+                                                    .data!
+                                                    .data
+                                                    .listGuides
+                                                    .list[index]
+                                                    .pdfUrl));
+                                      }),
+                                    ),
+                                  )
                                 : Column(
                                     children: [
                                       Row(),
@@ -290,14 +289,17 @@ class ObucheniyaWidget extends StatelessWidget {
                         ],
                       );
                     } else {
-                      return Padding(
-                        padding: EdgeInsets.symmetric(vertical: 270),
+                      return Center(
+                          child: Padding(
+                        padding: EdgeInsets.only(
+                            top:
+                                (MediaQuery.of(context).size.height / 2) - 150),
                         child: Lottie.asset(
                           'assets/pre.json',
                           height: 70,
                           width: 70,
                         ),
-                      );
+                      ));
                     }
                   });
             },
