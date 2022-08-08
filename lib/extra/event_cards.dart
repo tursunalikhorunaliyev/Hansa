@@ -28,13 +28,13 @@ class EventCards extends StatelessWidget {
   Widget build(BuildContext context) {
     final isTablet = Provider.of<bool>(context);
     return Padding(
-      padding: const EdgeInsets.only(top: 10),
+      padding: const EdgeInsets.only(top: 10, left: 20, right: 20),
       child: Stack(
         children: [
           Padding(
             padding: EdgeInsets.only(top: isTablet ? 180 : 167),
             child: Container(
-              width: isTablet ? 390 : 325,
+              width: isTablet ? 390 : double.infinity,
               height: 93,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
@@ -85,7 +85,7 @@ class EventCards extends StatelessWidget {
             ),
           ),
           SizedBox(
-              width: isTablet ? 388 : 326,
+              width: isTablet ? 388 : double.infinity,
               height: isTablet ? 170 : 156,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(5),
@@ -124,22 +124,32 @@ class EventCards extends StatelessWidget {
               : const SizedBox(),
           Padding(
             padding: EdgeInsets.only(
-                top: isTablet ? 150 : 131, left: isTablet ? 305 : 247),
-            child: Container(
-              alignment: Alignment.center,
-              height: isTablet ? 45 : 55,
-              width: isTablet ? 45 : 55,
-              decoration: const BoxDecoration(
-                  color: Color(0xfff1f1f1), shape: BoxShape.circle),
-              child: isFavourite
-                  ? const Icon(
-                      Icons.favorite,
-                      color: Color(0xffed3851),
-                    )
-                  : const Icon(
-                      Icons.favorite_border_sharp,
-                      color: Color(0xffed3851),
-                    ),
+                top: isTablet ? 150 : 131, left: isTablet ? 305 : 0),
+            child: Row(
+              children: [
+                Spacer(
+                  flex: 9,
+                ),
+                Container(
+                  alignment: Alignment.center,
+                  height: isTablet ? 45 : 55,
+                  width: isTablet ? 45 : 55,
+                  decoration: const BoxDecoration(
+                      color: Color(0xfff1f1f1), shape: BoxShape.circle),
+                  child: isFavourite
+                      ? const Icon(
+                          Icons.favorite,
+                          color: Color(0xffed3851),
+                        )
+                      : const Icon(
+                          Icons.favorite_border_sharp,
+                          color: Color(0xffed3851),
+                        ),
+                ),
+                Spacer(
+                  flex: 1,
+                )
+              ],
             ),
           ),
         ],
