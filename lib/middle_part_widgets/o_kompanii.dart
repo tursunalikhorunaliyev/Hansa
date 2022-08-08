@@ -85,13 +85,14 @@ class _OKompaniiState extends State<OKompanii> {
     return Expanded(
       child: Column(
         children: [
-          StreamBuilder<dynamic>(
-              stream: blocChangeTitleProvider.titleStream,
-              initialData: "",
-              builder: (context, snapshot) {
-                return CustomTitle(
-                    imagePath: "assets/Lab.png", title: snapshot.data!);
-              }),
+          FutureBuilder<String>(
+            future: blocChangeTitleProvider.titleStream,
+            initialData: "",
+            builder: (context, snapshot) {
+              return CustomTitle(
+                        imagePath: "assets/Lab.png", title: snapshot.data!);
+            }
+          ),
           Expanded(
             child: StreamBuilder<int>(
                 stream: blocChangeTitleIndexProvider.titleStream,

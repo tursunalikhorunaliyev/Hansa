@@ -348,6 +348,7 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                 child: Container(
                   decoration: const BoxDecoration(color: Color(0xFF2c2c2c)),
                   child: ListView(
+                    physics: BouncingScrollPhysics(),
                     padding: EdgeInsets.only(top: 30, bottom: 20),
                     children: List.generate(
                       1,

@@ -1,6 +1,5 @@
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/welcome_model.dart';
 import 'package:hansa_app/api_services/welcome_api.dart';
@@ -49,7 +48,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                   if (snapshot.hasData) {
                     final data = snapshot.requireData;
                     return SizedBox(
-                      height: isTablet ? 877 : 600,
+                      height: isTablet ? 877 : 590,
                       width: isTablet ? 800 : 330,
                       child: isTablet
                           ? Expanded(
@@ -59,61 +58,38 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                         .add(WelcomeApiAction.fetch);
                                     return false;
                                   },
-                                  child: SingleChildScrollView(
-                                    child: Column(
-                                      children: [
-                                        SizedBox(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width -
-                                              50,
-                                          height: 460,
-                                          child: Chewie(
-                                            controller: ChewieController(
-                                              autoPlay: true,
-                                              showControls: false,
-                                              looping: false,
-                                              videoPlayerController:
-                                                  VideoPlayerController.network(
-                                                      "https://www.hansa-lab.ru/video/videoplayback_full1.webm"),
-                                            ),
-                                          ),
+                                  child: GridView(
+                                    shrinkWrap: true,
+                                    controller: scroll,
+                                    physics:
+                                        const BouncingScrollPhysics(),
+                                    gridDelegate:
+                                        const SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: 2,
+                                            crossAxisSpacing: 30,
+                                            childAspectRatio: 10 / 8),
+                                    children: List.generate(
+                                        snapshot.data!.length, (index) {
+                                      return Padding(
+                                        padding: const EdgeInsets.only(
+                                            top: 5.0),
+                                        child: EventCards(
+                                          buttonColor:
+                                              const Color(0xffff163e),
+                                          buttonText: 'Смотреть',
+                                          isDate: true,
+                                          month: toDateString(snapshot
+                                              .data![index].date
+                                              .substring(5, 7)),
+                                          day: snapshot.data![index].date
+                                              .substring(8, 10),
+                                          title: data[index].title,
+                                          url: data[index].pictureLink,
+                                          isFavourite:
+                                              data[index].isFavorite,
                                         ),
-                                        GridView(
-                                          shrinkWrap: true,
-                                          controller: scroll,
-                                          physics:
-                                              const BouncingScrollPhysics(),
-                                          gridDelegate:
-                                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                                  crossAxisCount: 2,
-                                                  crossAxisSpacing: 30,
-                                                  childAspectRatio: 10 / 8),
-                                          children: List.generate(
-                                              snapshot.data!.length, (index) {
-                                            return Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 5.0),
-                                              child: EventCards(
-                                                buttonColor:
-                                                    const Color(0xffff163e),
-                                                buttonText: 'Смотреть',
-                                                isDate: true,
-                                                month: toDateString(snapshot
-                                                    .data![index].date
-                                                    .substring(5, 7)),
-                                                day: snapshot.data![index].date
-                                                    .substring(8, 10),
-                                                title: data[index].title,
-                                                url: data[index].pictureLink,
-                                                isFavourite:
-                                                    data[index].isFavorite,
-                                              ),
-                                            );
-                                          }),
-                                        ),
-                                      ],
-                                    ),
+                                      );
+                                    }),
                                   )),
                             )
                           : SmartRefresher(
