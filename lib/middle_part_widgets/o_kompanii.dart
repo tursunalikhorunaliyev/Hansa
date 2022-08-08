@@ -247,7 +247,7 @@ class _OKompaniiState extends State<OKompanii> {
                             child: Padding(
                           padding: EdgeInsets.only(
                               top: (MediaQuery.of(context).size.height / 2) -
-                                  150),
+                                  170),
                           child: Lottie.asset(
                             'assets/pre.json',
                             height: 70,
