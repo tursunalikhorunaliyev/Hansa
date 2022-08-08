@@ -396,7 +396,7 @@ class _PresentArchiveState extends State<PresentArchive> {
                 return Center(
                     child: Padding(
                   padding: EdgeInsets.only(
-                      top: (MediaQuery.of(context).size.height / 2) - 150),
+                      top: (MediaQuery.of(context).size.height / 2) - 135),
                   child: Lottie.asset(
                     'assets/pre.json',
                     height: 70,

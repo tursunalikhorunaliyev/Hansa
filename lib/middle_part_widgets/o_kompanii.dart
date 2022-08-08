@@ -83,24 +83,24 @@ class _OKompaniiState extends State<OKompanii> {
     final blocVideoApi = BlocVideoApi(token);
     blocVideoApi.eventSink.add(ActionVideo.view);
     return Expanded(
-      child: Column(
-        children: [
-          Consumer<VideoTitleProvider>(builder: (context, value, child) {
-            return CustomTitle(
-              imagePath: "assets/Lab.png",
-              title: value.getTitle,
-            );
-          }),
-          Expanded(
-            child:
-                Consumer<VideoIndexProvider>(builder: (context, value, child) {
-              return SingleChildScrollView(
-                physics: const BouncingScrollPhysics(),
-                child: StreamBuilder<VideoMainOne>(
-                    stream: blocVideoApi.dataStream,
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        return Column(
+      child: Expanded(
+        child: Consumer<VideoIndexProvider>(builder: (context, value, child) {
+          return SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: StreamBuilder<VideoMainOne>(
+                stream: blocVideoApi.dataStream,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return Column(
+                      children: [
+                        Consumer<VideoTitleProvider>(
+                            builder: (context, value, child) {
+                          return CustomTitle(
+                            imagePath: "assets/Lab.png",
+                            title: value.getTitle,
+                          );
+                        }),
+                        Column(
                           children: List.generate(
                             snapshot.data!.videoListData.list[value.getIndex]
                                 .data.list.length,
@@ -241,25 +241,24 @@ class _OKompaniiState extends State<OKompanii> {
                               },
                             ),
                           ),
-                        );
-                      } else {
-                        return Center(
-                            child: Padding(
-                          padding: EdgeInsets.only(
-                              top: (MediaQuery.of(context).size.height / 2) -
-                                  150),
-                          child: Lottie.asset(
-                            'assets/pre.json',
-                            height: 70,
-                            width: 70,
-                          ),
-                        ));
-                      }
-                    }),
-              );
-            }),
-          )
-        ],
+                        ),
+                      ],
+                    );
+                  } else {
+                    return Center(
+                        child: Padding(
+                      padding: EdgeInsets.only(
+                          top: (MediaQuery.of(context).size.height / 2) - 135),
+                      child: Lottie.asset(
+                        'assets/pre.json',
+                        height: 70,
+                        width: 70,
+                      ),
+                    ));
+                  }
+                }),
+          );
+        }),
       ),
     );
   }

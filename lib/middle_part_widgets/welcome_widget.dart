@@ -49,7 +49,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                     final data = snapshot.requireData;
                     return SizedBox(
                       height: isTablet ? 877 : 590,
-                    //  width: isTablet ? 800 : 380,
+                      width: isTablet ? 800 : null,
                       child: isTablet
                           ? Expanded(
                               child: NotificationListener(
@@ -163,7 +163,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                     return Center(
                         child: Padding(
                       padding: EdgeInsets.only(
-                          top: (MediaQuery.of(context).size.height / 2) - 150),
+                          top: MediaQuery.of(context).size.height / 2 - 170),
                       child: Lottie.asset(
                         'assets/pre.json',
                         height: 70,
