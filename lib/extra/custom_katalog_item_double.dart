@@ -34,7 +34,7 @@ class CustomKatalogItemDouble extends StatelessWidget {
           borderRadius: BorderRadius.circular(6.r),
           child: Image.network(
             imageUrl,
-            width: 325.w,
+            width: double.infinity,
             height: 157.h,
             fit: BoxFit.cover,
           ),

@@ -39,7 +39,7 @@ class _CustomDoubleClipItemState extends State<CustomDoubleClipItem> {
     return Padding(
       padding: EdgeInsets.only(left: 25.w, right: 25.w, top: 11.h, bottom: 5.h),
       child: SizedBox(
-        width: 325.w,
+        width: double.infinity,
         child: Stack(
           children: [
             Row(
@@ -49,7 +49,7 @@ class _CustomDoubleClipItemState extends State<CustomDoubleClipItem> {
                   child: ClipPath(
                     clipper: CustomPaintClipper(),
                     child: Container(
-                      width: 300.w,
+                      width: double.infinity,
                       height: 75.h,
                       color: widget.backgroundColor,
                     ),
