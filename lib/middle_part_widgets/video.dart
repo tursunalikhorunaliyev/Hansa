@@ -19,9 +19,6 @@ class Video extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final menuEventsBloCProvider = Provider.of<MenuEventsBloC>(context);
-    final blocChangeTitleProvider = Provider.of<BlocChangeTitle>(context);
-    final blocChangeTitleIndexProvider =
-        Provider.of<BlocChangeTitleIndex>(context);
     final token = Provider.of<String>(context);
     final blocVideoApi = BlocVideoApi(token);
     blocVideoApi.eventSink.add(ActionVideo.view);
@@ -29,32 +26,31 @@ class Video extends StatelessWidget {
     final title = Provider.of<VideoTitleProvider>(context);
     final index = Provider.of<VideoIndexProvider>(context);
     return Expanded(
-      child: Column(
-        children: [
-          const CustomTitle(
-            imagePath: "assets/video_title.png",
-            title: "Видео",
-          ),
-          Expanded(
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
-              child: StreamBuilder<VideoMainOne>(
-                  stream: blocVideoApi.dataStream,
-                  builder: (context, snapshot) {
-                    if (snapshot.data == null) {
-                      return Center(
-                          child: Padding(
-                        padding: EdgeInsets.only(
-                            top:
-                                (MediaQuery.of(context).size.height / 2) - 170),
-                        child: Lottie.asset(
-                          'assets/pre.json',
-                          height: 70,
-                          width: 70,
-                        ),
-                      ));
-                    }
-                    return Column(
+      child: Expanded(
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: StreamBuilder<VideoMainOne>(
+              stream: blocVideoApi.dataStream,
+              builder: (context, snapshot) {
+                if (snapshot.data == null) {
+                  return Center(
+                      child: Padding(
+                    padding: EdgeInsets.only(
+                        top: (MediaQuery.of(context).size.height / 2) - 135),
+                    child: Lottie.asset(
+                      'assets/pre.json',
+                      height: 70,
+                      width: 70,
+                    ),
+                  ));
+                }
+                return Column(
+                  children: [
+                    const CustomTitle(
+                      imagePath: "assets/video_title.png",
+                      title: "Видео",
+                    ),
+                    Column(
                         children: List.generate(
                             snapshot.data!.videoListData.list.length, (i) {
                       return Column(
@@ -81,11 +77,11 @@ class Video extends StatelessWidget {
                           )
                         ],
                       );
-                    }));
-                  }),
-            ),
-          ),
-        ],
+                    })),
+                  ],
+                );
+              }),
+        ),
       ),
     );
   }

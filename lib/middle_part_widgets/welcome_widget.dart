@@ -163,7 +163,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                     return Center(
                         child: Padding(
                       padding: EdgeInsets.only(
-                          top: (MediaQuery.of(context).size.height / 2) - 170),
+                          top: MediaQuery.of(context).size.height / 2 - 170),
                       child: Lottie.asset(
                         'assets/pre.json',
                         height: 70,

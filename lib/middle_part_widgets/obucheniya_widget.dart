@@ -289,17 +289,18 @@ class ObucheniyaWidget extends StatelessWidget {
                         ],
                       );
                     } else {
-                      return Center(
-                          child: Padding(
+                      return Padding(
                         padding: EdgeInsets.only(
                             top:
-                                (MediaQuery.of(context).size.height / 2) - 170),
-                        child: Lottie.asset(
-                          'assets/pre.json',
-                          height: 70,
-                          width: 70,
+                                (MediaQuery.of(context).size.height / 2) - 135),
+                        child: Center(
+                          child: Lottie.asset(
+                            'assets/pre.json',
+                            height: 70,
+                            width: 70,
+                          ),
                         ),
-                      ));
+                      );
                     }
                   });
             },
