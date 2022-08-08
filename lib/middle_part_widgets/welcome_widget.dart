@@ -49,7 +49,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                     final data = snapshot.requireData;
                     return SizedBox(
                       height: isTablet ? 877 : 590,
-                      width: isTablet ? 800 : 0,
+                      width: isTablet ? 800 : null,
                       child: isTablet
                           ? Expanded(
                               child: NotificationListener(
