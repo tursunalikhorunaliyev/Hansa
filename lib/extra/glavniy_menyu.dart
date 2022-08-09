@@ -495,7 +495,7 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                     ),
                                   ),
                                 ),
-                          TextIcon(text: "Задать вопрос", iconUrl: "assets/")   ,   
+                          TextIcon(text: "Задать вопрос", iconUrl: "assets/question.png")   ,   
                           SizedBox(
                             height: isTablet ? 40 : 20,
                           ),
