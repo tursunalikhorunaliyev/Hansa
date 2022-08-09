@@ -87,14 +87,14 @@ class Okompaniya extends StatelessWidget {
                           ),
                         ],
                       )
-                    : Image.asset("1649660637Аракелян Ася.png"),
+                    : Image.asset("assets/1649660637Аракелян Ася.png"),
                 Center(
                   child: Padding(
                     padding: EdgeInsets.only(top: isTablet ? 391 : 174),
                     child: Opacity(
                       opacity: 0.8,
                       child: Container(
-                        height: isTablet ? 633 : 423,
+                        height: isTablet ? 633 : 360,
                         width: isTablet ? 770 : 323,
                         decoration: BoxDecoration(
                             color: const Color(0xFFffffff),
@@ -109,101 +109,93 @@ class Okompaniya extends StatelessWidget {
                       top: isTablet ? 405 : 184,
                     ),
                     child: Container(
-                      height: isTablet ? 621 : 481,
+                      height: isTablet ? 621 : 360,
                       width: isTablet ? 800 : 342,
                       decoration: BoxDecoration(
                           color: const Color(0xFFff163e),
                           borderRadius: BorderRadius.circular(16)),
-                      child: Column(
-                        children: [
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 70),
-                            child: StreamBuilder<ModelOKompaniyaMain>(
-                                stream: blocOKompaniya.dataStream,
-                                builder: (context, snapshot) {
-                                  if (snapshot.hasData) {
-                                    return Text(
-                                      snapshot.data!.data.title,
-                                      textAlign: TextAlign.center,
-                                      overflow: TextOverflow.fade,
-                                      style: GoogleFonts.montserrat(
-                                        fontSize: isTablet ? 26 : 16,
-                                        color: const Color(0xFFffffff),
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    );
-                                  } else {
-                                    return const CircularProgressIndicator();
-                                  }
-                                }),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                                left: isTablet ? 20 : 10,
-                                top: 20,
-                                right: isTablet ? 20 : 10),
-                            child: StreamBuilder<ModelOKompaniyaMain>(
-                                stream: blocOKompaniya.dataStream,
-                                builder: (context, snapshot) {
-                                  if (snapshot.hasData) {
-                                    return Text(
-                                      snapshot.data!.data.list[0] +
-                                          snapshot.data!.data.list[1] +
-                                          snapshot.data!.data.list[2],
-                                      style: GoogleFonts.montserrat(
+                      child: StreamBuilder<ModelOKompaniyaMain>(
+                          stream: blocOKompaniya.dataStream,
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              return Column(
+                                children: [
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 70),
+                                      child: Text(
+                                        snapshot.data!.data.title,
+                                        textAlign: TextAlign.center,
+                                        overflow: TextOverflow.fade,
+                                        style: GoogleFonts.montserrat(
+                                          fontSize: isTablet ? 26 : 16,
+                                          color: const Color(0xFFffffff),
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      )),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        left: isTablet ? 20 : 10,
+                                        top: 20,
+                                        right: isTablet ? 20 : 10),
+                                    child: Text(
+                                      snapshot.data!.data.list[0],
+                                      style: TextStyle(
                                         fontSize: isTablet ? 21 : 11,
                                         color: Color(0xFFffffff),
                                       ),
-                                    );
-                                  } else {
-                                    return SpinKitPulse();
-                                  }
-                                }),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                                left: isTablet ? 20 : 10,
-                                top: 20,
-                                right: isTablet ? 20 : 10),
-                            child: Text(
-                              "Это и социальная сеть, и место выкладки видеоматериала, и площадка для премирования лучших менеджеров по продажам, и средство коммуникации, и обучающий портал. Hansa LAB постоянно делится только самым интересным материалом, на основании которого проводятся конкурсы, тесты, вебинары.",
-                              style: TextStyle(
-                                fontSize: isTablet ? 21 : 11,
-                                color: Color(0xFFffffff),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(
-                                left: isTablet ? 20 : 10,
-                                top: 20,
-                                right: isTablet ? 20 : 10),
-                            child: Text(
-                              "Данный проект призван объединить менеджеров по продажам КБТ со всей страны в одно единое целое ядро",
-                              style: TextStyle(
-                                fontSize: isTablet ? 21 : 11,
-                                color: Color(0xFFffffff),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        left: isTablet ? 20 : 10,
+                                        top: 20,
+                                        right: isTablet ? 20 : 10),
+                                    child: Text(
+                                      snapshot.data!.data.list[1],
+                                      style: TextStyle(
+                                        fontSize: isTablet ? 21 : 11,
+                                        color: Color(0xFFffffff),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                        left: isTablet ? 20 : 10,
+                                        top: 20,
+                                        right: isTablet ? 20 : 10),
+                                    child: Text(
+                                      snapshot.data!.data.list[2],
+                                      style: TextStyle(
+                                        fontSize: isTablet ? 21 : 11,
+                                        color: Color(0xFFffffff),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              );
+                            } else {
+                              return const CircularProgressIndicator();
+                            }
+                          }),
                     ),
                   ),
                 ),
                 Center(
                   child: Padding(
                     padding: EdgeInsets.only(
-                      top: isTablet ? 900 : 593,
+                      top: isTablet ? 900 : 480,
                     ),
                     child: GestureDetector(
                       onTap: () {
                         showDialog(
                           context: context,
-                          builder: (context) => const SobshitOProblem(),
+                          builder: (context) => Provider<String>.value(
+                            value: providerToken.toString(),
+                            child: const SobshitOProblem()),
                         );
                       },
                       child: Container(
@@ -226,7 +218,7 @@ class Okompaniya extends StatelessWidget {
                         child: Text(
                           "Написать разработчику",
                           style: GoogleFonts.montserrat(
-                              fontSize: isTablet ? 19 : 12,
+                              fontSize: isTablet ? 19 : 10,
                               color: const Color(0xFFffffff)),
                         ),
                       ),
