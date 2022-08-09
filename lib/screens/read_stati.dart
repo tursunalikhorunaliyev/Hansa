@@ -6,6 +6,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/read_stati_model.dart';
 import 'package:hansa_app/blocs/read_stati_bloc.dart';
+import 'package:hansa_app/extra/custom_title.dart';
 import 'package:hansa_app/read_statie_section/part_indicator.dart';
 import 'package:hansa_app/read_statie_section/stati_comment.dart';
 import 'package:provider/provider.dart';
@@ -22,81 +23,79 @@ class ReadStati extends StatelessWidget {
     height: 30.33333333333333,
   );
 
-
-
   double positionDouble = 300.6666666666667;
 
   @override
   Widget build(BuildContext context) {
+    final isTablet = Provider.of<bool>(context);
     final readStatiModelProvider = Provider.of<ReadStatiBLoC>(context);
     return StreamBuilder<ReadStatiModel>(
-      stream: readStatiModelProvider.stream,
-      builder: (context, snapshot) {
+        stream: readStatiModelProvider.stream,
+        builder: (context, snapshot) {
           if (snapshot.hasData) {
             return Expanded(
-          child: Stack(
-            children: [
-              Column(
+              child: Stack(
                 children: [
-                  PartIndicator(icon: iconImage),
-                  ClipRRect(
-                      borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(5.333333333333333),
-                          topRight: Radius.circular(5.333333333333333)),
-                      child: 
-                           CachedNetworkImage( imageUrl:
-                            snapshot.data!.article.read.pictureLink
-                          )
-                         ),
-                ],
-              ),
-              SingleChildScrollView(
-                controller: listViewController,
-                physics: const BouncingScrollPhysics(),
-                padding: const EdgeInsets.only(
-                  left: 12.33333333333333,
-                  right: 12.33333333333333,
-                ),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: positionDouble,
-                      width: double.infinity,
-                    ),
-                    Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 12),
-                      decoration: BoxDecoration(
+                  Column(
+                    children: [
+                      CustomTitle(
+                          imagePath: "assets/iconStati.png", title: "Статьи"),
+                      ClipRRect(
                           borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(3),
-                              topRight: Radius.circular(3)),
-                          color: const Color(0xFFe9e9e9).withOpacity(.9)),
-                      height: 7,
-                      width: double.infinity,
+                              topLeft: Radius.circular(5.333333333333333),
+                              topRight: Radius.circular(5.333333333333333)),
+                          child: CachedNetworkImage(
+                              imageUrl:
+                                  snapshot.data!.article.read.pictureLink)),
+                    ],
+                  ),
+                  SingleChildScrollView(
+                    controller: listViewController,
+                    physics: const BouncingScrollPhysics(),
+                    padding: const EdgeInsets.only(
+                      left: 12.33333333333333,
+                      right: 12.33333333333333,
                     ),
-                    Container(
-                        width: double.infinity,
-                        decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(5.333333333333333),
-                                topRight: Radius.circular(5.333333333333333)),
-                            color: Color(0xFFffffff)),
-                        child:  Wrap(
-                          children: [Html(
-                                          data: snapshot.data!.article.read.body,),
-                                           Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: positionDouble,
+                          width: double.infinity,
+                        ),
+                        Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 12),
+                          decoration: BoxDecoration(
+                              borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(3),
+                                  topRight: Radius.circular(3)),
+                              color: const Color(0xFFe9e9e9).withOpacity(.9)),
+                          height: 7,
+                          width: double.infinity,
+                        ),
+                        Container(
+                          width: double.infinity,
+                          decoration: const BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(5.333333333333333),
+                                  topRight: Radius.circular(5.333333333333333)),
+                              color: Color(0xFFffffff)),
+                          child: Wrap(children: [
+                            Html(
+                              data: snapshot.data!.article.read.body,
+                            ),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10.0),
                               child: Flex(
                                   direction: Axis.vertical,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                   
                                     const SizedBox(
                                       height: 10,
                                     ),
                                     Flex(
                                       direction: Axis.vertical,
                                       children: [
-                                       
                                         Container(
                                           height: 54.66666666666667,
                                           width: double.infinity,
@@ -112,9 +111,13 @@ class ReadStati extends StatelessWidget {
                                                     offset: const Offset(3, 7))
                                               ]),
                                           child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
+                                            mainAxisAlignment: isTablet
+                                                ? MainAxisAlignment.spaceEvenly
+                                                : MainAxisAlignment.spaceAround,
                                             children: [
+                                              SizedBox(
+                                                width: isTablet ? 20 : 0,
+                                              ),
                                               Container(
                                                 height: 32.22333333333333,
                                                 width: 82.40333333333333,
@@ -122,14 +125,19 @@ class ReadStati extends StatelessWidget {
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             11.66666666666667),
-                                                    color: const Color(0xFFe21a37)),
+                                                    color: const Color(
+                                                        0xFFe21a37)),
                                                 child: Row(
                                                   mainAxisAlignment:
-                                                      MainAxisAlignment.spaceEvenly,
+                                                      MainAxisAlignment
+                                                          .spaceEvenly,
                                                   children: [
                                                     Text(
-                                                     snapshot.data!.article.read.rating.toString(),
-                                                      style: GoogleFonts.montserrat(
+                                                      snapshot.data!.article
+                                                          .read.rating
+                                                          .toString(),
+                                                      style: GoogleFonts
+                                                          .montserrat(
                                                         color: Colors.white,
                                                       ),
                                                     ),
@@ -141,13 +149,18 @@ class ReadStati extends StatelessWidget {
                                                   ],
                                                 ),
                                               ),
+                                              SizedBox(
+                                                width: isTablet ? 15 : 0,
+                                              ),
                                               Text(
                                                 "Коментариев  929       |",
                                                 style: GoogleFonts.montserrat(
-                                                  color: const Color(0xFF777777),
+                                                  color:
+                                                      const Color(0xFF777777),
                                                   fontSize: 13.81,
                                                 ),
                                               ),
+                                              isTablet ? Spacer() : SizedBox(),
                                               SizedBox(
                                                 height: 46.03666666666667,
                                                 width: 46.03666666666667,
@@ -156,17 +169,26 @@ class ReadStati extends StatelessWidget {
                                                   fit: BoxFit.cover,
                                                 ),
                                               ),
+                                              SizedBox(
+                                                width: isTablet ? 20 : 0,
+                                              )
                                             ],
                                           ),
                                         ),
                                         const SizedBox(
                                           height: 19.33333333333333,
                                         ),
-                                         StatiComment(rating: snapshot.data!.article.read.rating.toString()),
+                                        StatiComment(
+                                            rating: snapshot
+                                                .data!.article.read.rating
+                                                .toString()),
                                         const SizedBox(
                                           height: 19.33333333333333,
                                         ),
-                                         StatiComment(rating: snapshot.data!.article.read.rating.toString()),
+                                        StatiComment(
+                                            rating: snapshot
+                                                .data!.article.read.rating
+                                                .toString()),
                                         const SizedBox(
                                           height: 10,
                                         ),
@@ -215,10 +237,12 @@ class ReadStati extends StatelessWidget {
                                                   border: InputBorder.none,
                                                   hintText:
                                                       "Интересно а почему именн...",
-                                                  hintStyle: GoogleFonts.montserrat(
-                                                      fontSize: 12.66666666666667,
-                                                      color:
-                                                          const Color(0xFF919191))),
+                                                  hintStyle:
+                                                      GoogleFonts.montserrat(
+                                                          fontSize:
+                                                              12.66666666666667,
+                                                          color: const Color(
+                                                              0xFF919191))),
                                             ),
                                           ),
                                         ),
@@ -228,25 +252,21 @@ class ReadStati extends StatelessWidget {
                                       ],
                                     ),
                                   ]),
-                            ), 
-                                          
-                                          ]
+                            ),
+                          ]),
                         ),
-                                  
-                            
-                           
-                         ),
-                  ],
-                ),
-              )
-            ],
-          ),
-        );
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            );
           } else {
-            return const Center(child: SpinKitWanderingCubes(color: Colors.red,));
+            return const Center(
+                child: SpinKitWanderingCubes(
+              color: Colors.red,
+            ));
           }
-        
-      }
-    );
+        });
   }
 }
