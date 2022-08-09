@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/model_o_kompaniya_napisat.dart';
+import 'package:hansa_app/blocs/bloc_empty_sobshit.dart';
 import 'package:hansa_app/enums/enum_action_view.dart';
 import 'package:hansa_app/extra/sobshit_o_problem_success.dart';
 import 'package:provider/provider.dart';
@@ -21,9 +22,10 @@ class SobshitOProblem extends StatefulWidget {
 }
 
 class _SobshitOProblemState extends State<SobshitOProblem> {
-  bool empty = false;
   final textFieldController = TextEditingController();
+  final blocEmptySobshit = BlocEmptySobshit();
   GlobalKey<FlipCardState> cardKey = GlobalKey<FlipCardState>();
+
   @override
   Widget build(BuildContext context) {
     final providerToken = Provider.of<String>(context);
@@ -88,43 +90,67 @@ class _SobshitOProblemState extends State<SobshitOProblem> {
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 24),
-                                    child: TextField(
-                                      controller: textFieldController,
-                                      maxLines: 5,
-                                      cursorColor: const Color(0xffa1b7c2),
-                                      decoration: InputDecoration(
-                                        prefixIcon: Padding(
-                                          padding: const EdgeInsets.only(
-                                              bottom: 100),
-                                          child: Image.asset(
-                                            "assets/free-icon-maps-and-flags-446099.png",
-                                            scale: 3,
-                                            color: empty
-                                                ? const Color(0xFFff163e)
-                                                : const Color(0xffa1b7c2),
-                                          ),
-                                        ),
-                                        hintText: "Текст вашего сообщения",
-                                        hintStyle: GoogleFonts.montserrat(
-                                            color: empty
-                                                ? const Color(0xFFff163e)
-                                                : const Color(0xffa1b7c2)),
-                                        enabledBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: empty
-                                                ? const Color(0xFFff163e)
-                                                : Color(0xffa1b7c2),
-                                          ),
-                                        ),
-                                        focusedBorder: UnderlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: empty
-                                                ? const Color(0xFFff163e)
-                                                : const Color(0xffa1b7c2),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
+                                    child: StreamBuilder<bool>(
+                                      initialData: false,
+                                        stream: blocEmptySobshit.dataStream,
+                                        builder: (context, snapshot) {
+                                          if (snapshot.hasData) {
+                                            return TextField(
+                                              controller: textFieldController,
+                                              maxLines: 5,
+                                              cursorColor:
+                                                  const Color(0xffa1b7c2),
+                                              decoration: InputDecoration(
+                                                prefixIcon: Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          bottom: 100),
+                                                  child: Image.asset(
+                                                    "assets/free-icon-maps-and-flags-446099.png",
+                                                    scale: 3,
+                                                    color: snapshot.data!
+                                                        ? const Color(
+                                                            0xFFff163e)
+                                                        : const Color(
+                                                            0xffa1b7c2),
+                                                  ),
+                                                ),
+                                                hintText:
+                                                    "Текст вашего сообщения",
+                                                hintStyle:
+                                                    GoogleFonts.montserrat(
+                                                        color: snapshot.data!
+                                                            ? const Color(
+                                                                0xFFff163e)
+                                                            : const Color(
+                                                                0xffa1b7c2)),
+                                                enabledBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: snapshot.data!
+                                                        ? const Color(
+                                                            0xFFff163e)
+                                                        : Color(0xffa1b7c2),
+                                                  ),
+                                                ),
+                                                focusedBorder:
+                                                    UnderlineInputBorder(
+                                                  borderSide: BorderSide(
+                                                    color: snapshot.data!
+                                                        ? const Color(
+                                                            0xFFff163e)
+                                                        : const Color(
+                                                            0xffa1b7c2),
+                                                  ),
+                                                ),
+                                              ),
+                                            );
+                                          } else {
+                                            return Text("Ошибка простояta",
+                                                style: GoogleFonts.montserrat(
+                                                    fontSize: 20));
+                                          }
+                                        }),
                                   ),
                                   const SizedBox(
                                     height: 45,
@@ -134,42 +160,57 @@ class _SobshitOProblemState extends State<SobshitOProblem> {
                                         horizontal: 15),
                                     child: ClipRRect(
                                         borderRadius: BorderRadius.circular(64),
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            if (textFieldController
-                                                .text.isNotEmpty) {
-                                              getData(providerToken,
-                                                      textFieldController.text)
-                                                  .then((value) {
-                                                if (value.status) {
-                                                  cardKey.currentState!
-                                                      .toggleCard();
-                                                }
-                                              });
-                                              setState(() {
-                                                empty = false;
-                                              });
-                                            } else {
-                                              setState(() {
-                                                empty = true;
-                                              });
-                                            }
-                                          },
-                                          child: Container(
-                                            height: 47,
-                                            color: const Color(0xff25b049),
-                                            child: Center(
-                                              child: Text(
-                                                "Отправить сообщение",
-                                                style: GoogleFonts.montserrat(
-                                                  fontSize: 13,
-                                                  color:
-                                                      const Color(0xffffffff),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        )),
+                                        child: StreamBuilder<bool>(
+                                            initialData: false,
+                                            stream: blocEmptySobshit.dataStream,
+                                            builder: (context, snapshot) {
+                                              if (snapshot.hasData) {
+                                                return GestureDetector(
+                                                  onTap: () {
+                                                    if (textFieldController
+                                                        .text.isNotEmpty) {
+                                                      getData(
+                                                              providerToken,
+                                                              textFieldController
+                                                                  .text)
+                                                          .then((value) {
+                                                        if (value.status) {
+                                                          cardKey.currentState!
+                                                              .toggleCard();
+                                                        }
+                                                      });
+
+                                                      blocEmptySobshit.dataSink
+                                                          .add(false);
+                                                    } else {
+                                                      blocEmptySobshit.dataSink
+                                                          .add(true);
+                                                    }
+                                                  },
+                                                  child: Container(
+                                                    height: 47,
+                                                    color:
+                                                        const Color(0xff25b049),
+                                                    child: Center(
+                                                      child: Text(
+                                                        "Отправить сообщение",
+                                                        style: GoogleFonts
+                                                            .montserrat(
+                                                          fontSize: 13,
+                                                          color: const Color(
+                                                              0xffffffff),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                );
+                                              } else {
+                                                return Text("Ошибка простояta",
+                                                    style:
+                                                        GoogleFonts.montserrat(
+                                                            fontSize: 20));
+                                              }
+                                            })),
                                   ),
                                 ],
                               ),
