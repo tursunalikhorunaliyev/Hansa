@@ -25,7 +25,8 @@ class _PopupFullRegistrDoljnostState extends State<PopupFullRegistrDoljnost> {
     final blocJob = BlocJob();
 
     blocJob.eventSink.add(JobEnum.job);
-    final doljnostTextEdtingContoller = Provider.of<TextEditingController>(context);
+    final doljnostTextEdtingContoller =
+        Provider.of<TextEditingController>(context);
 
     return StreamBuilder<double>(
         initialData: 38,
@@ -42,7 +43,7 @@ class _PopupFullRegistrDoljnostState extends State<PopupFullRegistrDoljnost> {
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 100),
                 height: isTablet ? 43 : snapshotSizeDrawer.data!,
-                width: isTablet ? 350 : 360,
+                width: isTablet ? double.infinity : 360,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(radius),
@@ -55,17 +56,18 @@ class _PopupFullRegistrDoljnostState extends State<PopupFullRegistrDoljnost> {
                       Padding(
                         padding: const EdgeInsets.only(left: 5),
                         child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            text,
-                            style: text=="Должность" ?GoogleFonts.montserrat(
-                                fontSize: isTablet ? 13 : 10,
-                                color: const Color(0xFF444444)):GoogleFonts.montserrat(
-                                fontSize: isTablet ? 13 : 10,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black),
-                          )
-                        ),
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              text,
+                              style: text == "Должность"
+                                  ? GoogleFonts.montserrat(
+                                      fontSize: isTablet ? 13 : 10,
+                                      color: const Color(0xFF444444))
+                                  : GoogleFonts.montserrat(
+                                      fontSize: isTablet ? 13 : 10,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.black),
+                            )),
                       ),
                       StreamBuilder<JobModel>(
                           stream: blocJob.stream,
@@ -81,8 +83,9 @@ class _PopupFullRegistrDoljnostState extends State<PopupFullRegistrDoljnost> {
                                     itemBuilder: (context, index) {
                                       return TextButton(
                                         onPressed: () {
-                                          doljnostTextEdtingContoller.text = snapshotJob.data!.data
-                                              .jobModelData[index].name;
+                                          doljnostTextEdtingContoller.text =
+                                              snapshotJob.data!.data
+                                                  .jobModelData[index].name;
                                           text = snapshotJob.data!.data
                                               .jobModelData[index].name;
 
