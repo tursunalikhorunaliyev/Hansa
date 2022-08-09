@@ -239,8 +239,7 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                   .getFamiliyaController.text);
                               log(providerPersonalDannieTextFilelds
                                   .getDataRojdeniyaController.text);
-                              log(providerPersonalDannieTextFilelds
-                                  .getEmailController.text);
+    
                               log(providerPersonalDannieTextFilelds
                                   .getTelefonController.text);
                               log("1");
@@ -261,8 +260,7 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                       .getFamiliyaController.text,
                                   providerPersonalDannieTextFilelds
                                       .getDataRojdeniyaController.text,
-                                  providerPersonalDannieTextFilelds
-                                      .getEmailController.text,
+                              
                                   providerPersonalDannieTextFilelds
                                       .getTelefonController.text,
                                   "1",
@@ -497,6 +495,7 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                     ),
                                   ),
                                 ),
+                          TextIcon(text: "Задать вопрос", iconUrl: "assets/")   ,   
                           SizedBox(
                             height: isTablet ? 40 : 20,
                           ),
@@ -525,7 +524,6 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
     String firstname,
     String lastname,
     String borned_at,
-    String email,
     String phone,
     String country_type,
     String city_id,
@@ -540,7 +538,6 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
       "firstname": firstname,
       "lastname": lastname,
       "borned_at": borned_at,
-      "email": email,
       "phone": phone,
       "country_type": country_type,
       "city_id": city_id,

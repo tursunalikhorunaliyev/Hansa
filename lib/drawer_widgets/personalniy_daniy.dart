@@ -50,8 +50,6 @@ class _PersonalniyDaniyState extends State<PersonalniyDaniy> {
                   snapshot.data!.modelPersonal1.firstname;
               personalInfoEditTextFieldsProvider.familiyaController.text =
                   snapshot.data!.modelPersonal1.lastname;
-              personalInfoEditTextFieldsProvider.emailController.text =
-                  snapshot.data!.modelPersonal1.email;
               personalInfoEditTextFieldsProvider.dataRojdeniyaController.text =
                   snapshot.data!.modelPersonal1.bornedAt;
               personalInfoEditTextFieldsProvider.gorodController.text =
@@ -118,10 +116,19 @@ class _PersonalniyDaniyState extends State<PersonalniyDaniy> {
                   SizedBox(
                     height: isTablet ? 15 : 8,
                   ),
-                  TextFieldForPersonal(
-                      text: "E-mail",
-                      controller:
-                          personalInfoEditTextFieldsProvider.emailController),
+                  Opacity(
+                    opacity: 0.5,
+                    child: AbsorbPointer(
+                      absorbing: true,
+                      child: (
+                         TextFieldForPersonal(
+                            text: "E-mail",
+                           
+                            controller:
+                                TextEditingController(text: snapshot.data!.modelPersonal1.email))
+                      ),
+                    ),
+                  ),
                   SizedBox(
                     height: isTablet ? 15 : 8,
                   ),
