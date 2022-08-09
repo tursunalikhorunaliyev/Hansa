@@ -495,7 +495,10 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                     ),
                                   ),
                                 ),
-                          TextIcon(text: "Задать вопрос", iconUrl: "assets/question.png")   ,   
+                          Padding(
+                            padding: const EdgeInsets.only(left: 39),
+                            child: TextIcon(text: "Задать вопрос", iconUrl: "assets/question.png"),
+                          )   ,   
                           SizedBox(
                             height: isTablet ? 40 : 20,
                           ),
