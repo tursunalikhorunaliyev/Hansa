@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class CustomOKompaniiItem extends StatelessWidget {
   const CustomOKompaniiItem({
@@ -16,8 +17,11 @@ class CustomOKompaniiItem extends StatelessWidget {
   final VoidCallback onDownload;
   @override
   Widget build(BuildContext context) {
+    final isTablet = Provider.of<bool>(context);
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
+      padding: EdgeInsets.symmetric(
+        horizontal: isTablet ? 5 : 20,
+      ),
       child: Column(
         children: [
           ClipRRect(
@@ -29,8 +33,8 @@ class CustomOKompaniiItem extends StatelessWidget {
               fit: BoxFit.cover,
             ),
           ),
-          const SizedBox(
-            height: 12,
+          SizedBox(
+            height: isTablet ? 0 : 12,
           ),
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
@@ -127,8 +131,8 @@ class CustomOKompaniiItem extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(
-            height: 12,
+          SizedBox(
+            height: isTablet ? 0 : 12,
           ),
         ],
       ),

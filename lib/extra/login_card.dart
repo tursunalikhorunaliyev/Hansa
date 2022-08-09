@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_services/login_api.dart';
 import 'package:hansa_app/blocs/navigator_bloc.dart';
+import 'package:hansa_app/blocs/progress_button_animation_bloc.dart';
 import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
 import 'package:hansa_app/providers/provider_for_flipping/flip_login_provider.dart';
 import 'package:hansa_app/providers/providers_for_login/password_visibility_provider.dart';
@@ -28,6 +29,7 @@ class _LoginCardState extends State<LoginCard> {
   final passwordController = TextEditingController(text: "981755");
   final switchTextEditingController = TextEditingController();
   final pagerBloc = NavigatorBloC();
+  final progressButtonBLoC = ProgressButtonAnmationBLoC();
   @override
   void initState() {
     pagerBloc.stream.listen((event) {
@@ -193,43 +195,66 @@ class _LoginCardState extends State<LoginCard> {
                           padding: EdgeInsets.only(
                             bottom: isTablet ? 35.h : 23.h,
                           ),
-                          child: GestureDetector(
-                            onTap: () async {
-                              FocusManager.instance.primaryFocus?.unfocus();
-                              List isCorrectList = await LoginAction(
-                                      username: usernameController.text,
-                                      password: passwordController.text,
-                                      isSaved:
-                                          switchTextEditingController.text ==
-                                              "1")
-                                  .sendRequest();
+                          child: StreamBuilder<bool>(
+                            stream: progressButtonBLoC.stream,
+                            initialData: false,
+                            builder: (context, snapshot) {
+                              return GestureDetector(
+                                onTap: () async {
+                                  if (snapshot.data!) {
+                                    progressButtonBLoC.sink.add(true);
+                                  } else {
+                                    progressButtonBLoC.sink.add(true);
+                                    FocusManager.instance.primaryFocus
+                                        ?.unfocus();
+                                    List isCorrectList = await LoginAction(
+                                            username: usernameController.text,
+                                            password: passwordController.text,
+                                            isSaved: switchTextEditingController
+                                                    .text ==
+                                                "1")
+                                        .sendRequest();
 
-                              pagerBloc.sink.add(isCorrectList);
+                                    pagerBloc.sink.add(isCorrectList);
+                                  }
+                                },
+                                child: AnimatedContainer(
+                                  duration: Duration(milliseconds: 300),
+                                  alignment: Alignment.center,
+                                  width: isTablet
+                                      ? 210.w
+                                      : snapshot.data!
+                                          ? 46.w
+                                          : 318.w,
+                                  height: isTablet ? 48.h : 46.h,
+                                  decoration: BoxDecoration(
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.grey.withOpacity(0.5),
+                                          spreadRadius: 5.r,
+                                          blurRadius: 7.r,
+                                          offset: Offset(0.w,
+                                              15.h), // changes position of shadow
+                                        ),
+                                      ],
+                                      color: const Color(0xffe21a37),
+                                      borderRadius:
+                                          BorderRadius.circular(23.r)),
+                                  child: snapshot.data!
+                                      ? CircularProgressIndicator(
+                                          color: Colors.white,
+                                        )
+                                      : Text(
+                                          'Войти',
+                                          style: GoogleFonts.montserrat(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.w500,
+                                              fontSize:
+                                                  isTablet ? 10.sp : 12.sp),
+                                        ),
+                                ),
+                              );
                             },
-                            child: Container(
-                              alignment: Alignment.center,
-                              width: isTablet ? 210.w : 318.w,
-                              height: isTablet ? 48.h : 46.h,
-                              decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.5),
-                                      spreadRadius: 5.r,
-                                      blurRadius: 7.r,
-                                      offset: Offset(0.w,
-                                          15.h), // changes position of shadow
-                                    ),
-                                  ],
-                                  color: const Color(0xffe21a37),
-                                  borderRadius: BorderRadius.circular(23.r)),
-                              child: Text(
-                                'Войти',
-                                style: GoogleFonts.montserrat(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: isTablet ? 10.sp : 12.sp),
-                              ),
-                            ),
                           )),
                       Padding(
                         padding: EdgeInsets.only(bottom: 36.h),
