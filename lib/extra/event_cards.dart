@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EventCards extends StatelessWidget {
   const EventCards(
@@ -87,55 +88,64 @@ class EventCards extends StatelessWidget {
           SizedBox(
               width: isTablet ? 388 : double.infinity,
               height: isTablet ? 170 : 206,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(5),
-                child: CachedNetworkImage(
-                  imageUrl: url,
-                  fit: BoxFit.cover,
-                ),
-              )),
-          isDate
-              ? Padding(
-                  padding: EdgeInsets.only(top: 80, left: isTablet ? 150 : 0),
-                  child: Row(
-                    children: [
-                      Spacer(),
-                      Container(
-                        padding: const EdgeInsets.all(12),
-                        height: isTablet ? 65 : 65,
-                        width: isTablet ? 65 : 65,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Colors.white,
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              child: Stack(
+                children: [
+                  SizedBox(
+                    width: isTablet ? 388 : double.infinity,
+                    height: isTablet ? 170 : 206,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(5),
+                      child: CachedNetworkImage(
+                        imageUrl: url,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  isDate
+                      ? Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              day,
-                              style: TextStyle(fontSize: isTablet ? 14 : 11),
-                            ),
-                            Text(
-                              month,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: isTablet ? 9 : 9),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.all(12),
+                                  height: isTablet ? 65 : 65,
+                                  width: isTablet ? 65 : 65,
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: Colors.white,
+                                  ),
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Text(
+                                        day,
+                                        style: TextStyle(
+                                            fontSize: isTablet ? 14 : 11),
+                                      ),
+                                      Text(
+                                        month,
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                            fontSize: isTablet ? 9 : 9),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
                           ],
-                        ),
-                      ),
-                      Spacer()
-                    ],
-                  ),
-                )
-              : const SizedBox(),
-          Padding(
-            padding: EdgeInsets.only(
-                top: isTablet ? 150 : 181, left: isTablet ? 305 : 0),
+                        )
+                      : const SizedBox(),
+                ],
+              )),
+          Positioned(
+            top: isTablet ? 150 : 181,
+            right: 23.w,
             child: Row(
               children: [
-                Spacer(
-                  flex: 9,
-                ),
                 Container(
                   alignment: Alignment.center,
                   height: isTablet ? 45 : 55,
@@ -152,9 +162,6 @@ class EventCards extends StatelessWidget {
                           color: Color(0xffed3851),
                         ),
                 ),
-                Spacer(
-                  flex: 1,
-                )
               ],
             ),
           ),
