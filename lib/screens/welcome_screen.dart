@@ -132,13 +132,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             },
                             child: Image.asset(
                               'assets/tepaLogo.png',
-                              height: 25.h,
-                              width: 214.w,
+                              height: isTablet ? 30.h : 25.h,
+                              width: isTablet ? 230.w : 214.w,
                             ),
                           ),
                           Icon(
                             CupertinoIcons.search,
-                            size: isTablet ? 13.sp : 21.sp,
+                            size: isTablet ? 19.sp : 21.sp,
                           ),
                         ],
                       ),
