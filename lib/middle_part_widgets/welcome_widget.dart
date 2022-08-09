@@ -72,12 +72,13 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                               data.length,
                               (index) => EventCards(
                                 onTap: () async{
+                                  
                                   menuProvider.eventSink
                                       .add(MenuActions.article);
-                                  ArticleModel statiMOdel =
+                                  ArticleModel statiModel =
                                       await articleBLoC.getArticle(
                                           token, snapshot.data![index].link);
-                                  articleBLoC.sink.add(statiMOdel);
+                                  articleBLoC.sink.add(statiModel);
                                 },
                                 buttonColor: const Color(0xffff163e),
                                 buttonText: 'Смотреть',
@@ -103,7 +104,14 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                     log(index.toString() + " data index");
 
                                     return EventCards(
-                                      onTap: (){},
+                                      onTap: ()async{
+                                         menuProvider.eventSink
+                                      .add(MenuActions.article);
+                                  ArticleModel statiModel =
+                                      await articleBLoC.getArticle(
+                                          token, snapshot.data![index].link);
+                                  articleBLoC.sink.add(statiModel);
+                                      },
                                       buttonColor: const Color(0xffff163e),
                                       buttonText: 'Смотреть',
                                       isDate: true,

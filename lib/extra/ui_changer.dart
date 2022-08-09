@@ -34,7 +34,9 @@ class UIChanger extends StatelessWidget {
           playProvider.sink.add([false, "", ""]);
         }
         if (snapshot.data == MenuActions.article) {
-          return ArticleScreen();
+          return Provider(
+            create: (context) => ArticleBLoC(),
+            child: ArticleScreen());
         } else if (snapshot.data == MenuActions.welcome) {
           return Provider(
             create: (context) => ArticleBLoC(),
