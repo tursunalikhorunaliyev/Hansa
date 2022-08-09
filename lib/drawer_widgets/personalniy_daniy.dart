@@ -1,10 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hansa_app/api_models.dart/model_doljnost.dart';
 import 'package:hansa_app/api_models.dart/model_personal.dart';
-import 'package:hansa_app/blocs/bloc_doljnost.dart';
 import 'package:hansa_app/blocs/bloc_personal.dart';
 import 'package:hansa_app/drawer_widgets/popup_personal_doljnost.dart';
 import 'package:hansa_app/drawer_widgets/popup_personal_gorod.dart';
@@ -57,7 +54,6 @@ class _PersonalniyDaniyState extends State<PersonalniyDaniy> {
             personalInfoEditTextFieldsProvider.addressController.text = snapshot.data!.modelPersonal1.shopAddress;
             personalInfoEditTextFieldsProvider.doljnostController.text = snapshot.data!.modelPersonal1.job.name;
             personalInfoEditTextFieldsProvider.telefonController.text = snapshot.data!.modelPersonal1.phone;
-            
             personalInfoEditTextFieldsProvider.magazinController.text = snapshot.data!.modelPersonal1.shopAddress;
 
               return Column(
