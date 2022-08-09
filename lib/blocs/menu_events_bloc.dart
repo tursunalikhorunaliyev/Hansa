@@ -12,7 +12,8 @@ enum MenuActions {
   presentAndArchive,
   chitatStati,
   trainingVideo,
-  oKompanii
+  oKompanii,
+  article
 }
 
 class MenuEventsBloC {

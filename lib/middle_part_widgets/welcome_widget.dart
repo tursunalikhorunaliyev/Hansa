@@ -1,17 +1,15 @@
 import 'dart:developer';
-
-import 'package:chewie/chewie.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hansa_app/api_models.dart/article_model.dart';
 import 'package:hansa_app/api_models.dart/welcome_model.dart';
 import 'package:hansa_app/api_services/welcome_api.dart';
+import 'package:hansa_app/blocs/article_bloc.dart';
+import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/extra/event_cards.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:sticky_headers/sticky_headers/widget.dart';
-import 'package:video_player/video_player.dart';
 
 class WelcomeWidget extends StatefulWidget {
   const WelcomeWidget({Key? key}) : super(key: key);
@@ -25,9 +23,11 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
       RefreshController(initialRefresh: false);
   @override
   Widget build(BuildContext context) {
+    final articleBLoC = Provider.of<ArticleBLoC>(context);
     final scroll = ScrollController();
     final isTablet = Provider.of<bool>(context);
     final token = Provider.of<String>(context);
+    final menuProvider = Provider.of<MenuEventsBloC>(context);
     final welcomeApi = WelcomeApi(token);
     welcomeApi.eventSink.add(WelcomeApiAction.fetch);
     return Expanded(
@@ -59,21 +59,26 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                   if (snapshot.hasData) {
                     final data = snapshot.requireData;
 
-                    log(data.length.toString() +
-                        "                     sd d d d d dddd");
                     return SingleChildScrollView(
                       controller: scroll,
                       child: Column(
                         children: [
                           Column(
                             children: List.generate(data.length, (index) {
-                              log(data.length.toString() + " Data length");
-                              log(index.toString() + " data index");
+                              log(data[index].link);
 
                               return EventCards(
                                 buttonColor: const Color(0xffff163e),
                                 buttonText: 'Смотреть',
                                 isDate: true,
+                                onTab: () async {
+                                  menuProvider.eventSink
+                                      .add(MenuActions.article);
+                                  ArticleModel article =
+                                      await articleBLoC.getArticle(
+                                          token, snapshot.data![index].link);
+                                  articleBLoC.sink.add(article);
+                                },
                                 month: toDateString(
                                     snapshot.data![index].date.substring(5, 7)),
                                 day:
@@ -123,10 +128,10 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                     welcomeApi.eventSink.add(WelcomeApiAction.fetch);
                     return Center(
                         child: Lottie.asset(
-                          'assets/pre.json',
-                          height: 70,
-                          width: 70,
-                        ));
+                      'assets/pre.json',
+                      height: 70,
+                      width: 70,
+                    ));
                   }
                 }),
           ),

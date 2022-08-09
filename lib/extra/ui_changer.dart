@@ -12,6 +12,7 @@ import 'package:hansa_app/middle_part_widgets/stati.dart';
 import 'package:hansa_app/middle_part_widgets/treningi.dart';
 import 'package:hansa_app/middle_part_widgets/treningi_video.dart';
 import 'package:hansa_app/middle_part_widgets/video.dart';
+import 'package:hansa_app/screens/article_screen.dart';
 import 'package:hansa_app/screens/read_stati.dart';
 import 'package:provider/provider.dart';
 
@@ -31,7 +32,9 @@ class UIChanger extends StatelessWidget {
           videoControlProvider.sink.add(false);
           playProvider.sink.add([false, "", ""]);
         }
-        if (snapshot.data == MenuActions.welcome) {
+        if (snapshot.data == MenuActions.article) {
+          return ArticleScreen();
+        } else if (snapshot.data == MenuActions.welcome) {
           return const WelcomeWidget();
         } else if (snapshot.data == MenuActions.obuchayushieMaterial) {
           return const ObucheniyaWidget();
