@@ -15,7 +15,7 @@ class EventCards extends StatelessWidget {
       required this.day,
       required this.url,
       required this.isFavourite,
-      required this.onTab})
+      required this.onTap})
       : super(key: key);
   final String url;
   final Color buttonColor;
@@ -25,7 +25,7 @@ class EventCards extends StatelessWidget {
   final String title;
   final bool isDate;
   final bool isFavourite;
-  final VoidCallback onTab;
+  final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
     final isTablet = Provider.of<bool>(context);
@@ -58,7 +58,7 @@ class EventCards extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 23),
                       child: GestureDetector(
-                        onTap: onTab,
+                        onTap: onTap,
                         child: Container(
                           alignment: Alignment.center,
                           width: isTablet ? 100 : 94,
