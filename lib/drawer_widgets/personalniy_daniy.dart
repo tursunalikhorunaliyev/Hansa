@@ -41,24 +41,45 @@ class _PersonalniyDaniyState extends State<PersonalniyDaniy> {
     final blocPersonal = BlocPersonal(providerToken);
 
     blocPersonal.eventSink.add(EnumActionView.view);
-    final personalInfoEditTextFieldsProvider = Provider.of<ProviderPersonalTextFields>(context);
+    final personalInfoEditTextFieldsProvider =
+        Provider.of<ProviderPersonalTextFields>(context);
 
     return Center(
       child: StreamBuilder<ModelPersonalMain>(
           stream: blocPersonal.dataStream,
           builder: (context, snapshot) {
-            
             if (snapshot.hasData) {
-              personalInfoEditTextFieldsProvider.imyaController.text = snapshot.data!.modelPersonal1.firstname;
-            personalInfoEditTextFieldsProvider.familiyaController.text = snapshot.data!.modelPersonal1.lastname;
-            personalInfoEditTextFieldsProvider.emailController.text = snapshot.data!.modelPersonal1.email;
-            personalInfoEditTextFieldsProvider.dataRojdeniyaController.text = snapshot.data!.modelPersonal1.bornedAt;
-            personalInfoEditTextFieldsProvider.gorodController.text = snapshot.data!.modelPersonal1.cityId.name;
-            personalInfoEditTextFieldsProvider.addressController.text = snapshot.data!.modelPersonal1.shopAddress;
-            personalInfoEditTextFieldsProvider.doljnostController.text = snapshot.data!.modelPersonal1.job.name;
-            personalInfoEditTextFieldsProvider.telefonController.text = snapshot.data!.modelPersonal1.phone;
-            
-            personalInfoEditTextFieldsProvider.magazinController.text = snapshot.data!.modelPersonal1.shopAddress;
+              personalInfoEditTextFieldsProvider.imyaController.text =
+                  snapshot.data!.modelPersonal1.firstname;
+              personalInfoEditTextFieldsProvider.familiyaController.text =
+                  snapshot.data!.modelPersonal1.lastname;
+              personalInfoEditTextFieldsProvider.emailController.text =
+                  snapshot.data!.modelPersonal1.email;
+              personalInfoEditTextFieldsProvider.dataRojdeniyaController.text =
+                  snapshot.data!.modelPersonal1.bornedAt;
+              personalInfoEditTextFieldsProvider.gorodController.text =
+                  snapshot.data!.modelPersonal1.cityId.name;
+              personalInfoEditTextFieldsProvider.addressController.text =
+                  snapshot.data!.modelPersonal1.shopAddress;
+              personalInfoEditTextFieldsProvider.doljnostController.text =
+                  snapshot.data!.modelPersonal1.job.name;
+              personalInfoEditTextFieldsProvider.telefonController.text =
+                  snapshot.data!.modelPersonal1.phone;
+                  personalInfoEditTextFieldsProvider.storeName.text =
+                  snapshot.data!.modelPersonal1.store.name;
+
+
+              personalInfoEditTextFieldsProvider.country_typeId =
+                  snapshot.data!.modelPersonal1.countryType.id.toString();
+
+              personalInfoEditTextFieldsProvider.cityId =
+                  snapshot.data!.modelPersonal1.cityId.id.toString();
+
+              personalInfoEditTextFieldsProvider.jobId =
+                  snapshot.data!.modelPersonal1.job.id.toString();
+
+              personalInfoEditTextFieldsProvider.storeId =
+                  snapshot.data!.modelPersonal1.store.id.toString();
 
               return Column(
                 children: [
@@ -80,57 +101,64 @@ class _PersonalniyDaniyState extends State<PersonalniyDaniy> {
                     height: isTablet ? 40 : 25,
                   ),
                   TextFieldForPersonal(
-                      
                       text: "Имя",
-                      controller: personalInfoEditTextFieldsProvider.imyaController),
+                      controller:
+                          personalInfoEditTextFieldsProvider.imyaController),
                   SizedBox(
                     height: isTablet ? 15 : 8,
                   ),
                   TextFieldForPersonal(
                       text: "Фамилия",
-                      controller: personalInfoEditTextFieldsProvider.familiyaController),
+                      controller: personalInfoEditTextFieldsProvider
+                          .familiyaController),
                   SizedBox(
                     height: isTablet ? 15 : 8,
                   ),
                   TextFieldForPersonal(
                       text: "Дата рождения",
-                      controller: personalInfoEditTextFieldsProvider.dataRojdeniyaController),
+                      controller: personalInfoEditTextFieldsProvider
+                          .dataRojdeniyaController),
                   SizedBox(
                     height: isTablet ? 15 : 8,
                   ),
                   TextFieldForPersonal(
                       text: "E-mail",
-                      controller: personalInfoEditTextFieldsProvider.emailController),
+                      controller:
+                          personalInfoEditTextFieldsProvider.emailController),
                   SizedBox(
                     height: isTablet ? 15 : 8,
                   ),
                   TextFieldForPersonal(
                       text: "Телефон",
-                      controller: personalInfoEditTextFieldsProvider.telefonController),
+                      controller:
+                          personalInfoEditTextFieldsProvider.telefonController),
                   SizedBox(
                     height: isTablet ? 15 : 8,
                   ),
                   PopupPersonalMagazin(
-                    controller: personalInfoEditTextFieldsProvider.magazinController,
+                    controller:
+                        personalInfoEditTextFieldsProvider.storeName,
                   ),
                   SizedBox(
                     height: isTablet ? 15 : 8,
                   ),
                   PopupPersonalDoljnost(
-                    controller: personalInfoEditTextFieldsProvider.doljnostController,
+                    controller:
+                        personalInfoEditTextFieldsProvider.doljnostController,
                   ),
                   SizedBox(
                     height: isTablet ? 15 : 8,
                   ),
                   PopupPersonalGorod(
-                    controller: personalInfoEditTextFieldsProvider.gorodController
-                  ),
+                      controller:
+                          personalInfoEditTextFieldsProvider.gorodController),
                   SizedBox(
                     height: isTablet ? 15 : 8,
                   ),
                   TextFieldForPersonal(
                       text: "Адрес",
-                      controller: personalInfoEditTextFieldsProvider.addressController),
+                      controller:
+                          personalInfoEditTextFieldsProvider.addressController),
                   SizedBox(
                     height: isTablet ? 50 : 10,
                   ),
