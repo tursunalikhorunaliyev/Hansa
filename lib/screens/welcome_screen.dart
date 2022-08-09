@@ -7,6 +7,7 @@ import 'package:hansa_app/extra/glavniy_menyu.dart';
 import 'package:hansa_app/extra/hamburger.dart';
 import 'package:hansa_app/extra/top_video_widget.dart';
 import 'package:hansa_app/extra/ui_changer.dart';
+import 'package:hansa_app/providers/provider_personal_textFields.dart';
 import 'package:provider/provider.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -38,7 +39,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         child: Scaffold(
           drawerEnableOpenDragGesture: false,
           resizeToAvoidBottomInset: false,
-          drawer: const GlavniyMenyu(),
+          drawer: Provider(
+            create:(context) => ProviderPersonalTextFields(),
+            child: const GlavniyMenyu()),
           key: scaffoldKey,
           bottomNavigationBar: StreamBuilder<MenuActions>(
               initialData: MenuActions.welcome,

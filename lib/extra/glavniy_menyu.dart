@@ -1,13 +1,12 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/model_glavniy_menu_user_info.dart';
-import 'package:hansa_app/api_models.dart/model_personal.dart';
 import 'package:hansa_app/blocs/bloc_change_profile.dart';
 import 'package:hansa_app/blocs/bloc_glavniy_menu_user_info.dart';
-import 'package:hansa_app/blocs/bloc_personal.dart';
 import 'package:hansa_app/drawer_widgets/change_profile.dart';
 import 'package:hansa_app/drawer_widgets/drawer_stats.dart';
 import 'package:hansa_app/drawer_widgets/izbrannoe.dart';
@@ -17,7 +16,9 @@ import 'package:hansa_app/drawer_widgets/referal_silka.dart';
 import 'package:hansa_app/drawer_widgets/text_icon.dart';
 import 'package:hansa_app/drawer_widgets/text_icon_card.dart';
 import 'package:hansa_app/enums/enum_action_view.dart';
+import 'package:hansa_app/providers/provider_personal_textFields.dart';
 import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 
 class GlavniyMenyu extends StatefulWidget {
   const GlavniyMenyu({Key? key}) : super(key: key);
@@ -34,6 +35,8 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
     final blocChangeProfileProvider = Provider.of<BlocChangeProfile>(context);
     final isTablet = Provider.of<bool>(context);
     final providerToken = Provider.of<String>(context);
+    final providerPersonalDannieTextFilelds =
+        Provider.of<ProviderPersonalTextFields>(context);
 
     final blocGlavniyMenuUserInfo = BlocGlavniyMenuUserInfo(providerToken);
 
@@ -185,17 +188,23 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(
-                      top: isTablet ? 245 : 165, left: isTablet ? 185 : 146),
+                    top: isTablet ? 245 : 165,
+                  ),
                   child: StreamBuilder<ModelGlavniyMenuUserInfoMain>(
                       stream: blocGlavniyMenuUserInfo.dataStream,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          return Text(
-                            snapshot.data!.data.score.toString(),
-                            style: GoogleFonts.montserrat(
-                                fontSize: isTablet ? 30 : 23,
-                                color: const Color(0xFFff0025),
-                                fontWeight: FontWeight.bold),
+                          return Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                snapshot.data!.data.score.toString(),
+                                style: GoogleFonts.montserrat(
+                                    fontSize: isTablet ? 30 : 23,
+                                    color: const Color(0xFFff0025),
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ],
                           );
                         } else {
                           return SizedBox();
@@ -223,6 +232,51 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                         log(snapshot.data!.name);
                         return GestureDetector(
                           onTap: () {
+                            if (snapshot.data == ActionChange.personal) {
+                              log(providerPersonalDannieTextFilelds
+                                  .getImyaController.text);
+                              log(providerPersonalDannieTextFilelds
+                                  .getFamiliyaController.text);
+                              log(providerPersonalDannieTextFilelds
+                                  .getDataRojdeniyaController.text);
+                              log(providerPersonalDannieTextFilelds
+                                  .getEmailController.text);
+                              log(providerPersonalDannieTextFilelds
+                                  .getTelefonController.text);
+                              log("1");
+                              log(providerPersonalDannieTextFilelds.cityId
+                                  .toString());
+                              log(providerPersonalDannieTextFilelds.getJobId
+                                  .toString());
+                              log(providerPersonalDannieTextFilelds.getStoreId
+                                  .toString());
+                              log(providerPersonalDannieTextFilelds
+                                  .getAddressController.text);
+
+                              getData(
+                                  providerToken,
+                                  providerPersonalDannieTextFilelds
+                                      .getImyaController.text,
+                                  providerPersonalDannieTextFilelds
+                                      .getFamiliyaController.text,
+                                  providerPersonalDannieTextFilelds
+                                      .getDataRojdeniyaController.text,
+                                  providerPersonalDannieTextFilelds
+                                      .getEmailController.text,
+                                  providerPersonalDannieTextFilelds
+                                      .getTelefonController.text,
+                                  "1",
+                                  providerPersonalDannieTextFilelds.getCityId,
+                                  providerPersonalDannieTextFilelds.getJobId,
+                                  providerPersonalDannieTextFilelds.getStoreId
+                                      .toString(),
+                                  providerPersonalDannieTextFilelds
+                                      .getAddressController.text);
+
+                              blocGlavniyMenuUserInfo.eventSink
+                                  .add(EnumActionView.view);
+                            }
+
                             snapshot.data == ActionChange.personRekvizit
                                 ? blocChangeProfileProvider.dataSink
                                     .add(ActionChange.textIconCard)
@@ -464,5 +518,40 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
         ],
       ),
     );
+  }
+
+  Future<Map<String, dynamic>> getData(
+    String token,
+    String firstname,
+    String lastname,
+    String borned_at,
+    String email,
+    String phone,
+    String country_type,
+    String city_id,
+    String job_id,
+    String store_id,
+    String shop_address,
+  ) async {
+    http.Response response = await http
+        .post(Uri.parse("http://hansa-lab.ru/api/site/account"), headers: {
+      "token": token
+    }, body: {
+      "firstname": firstname,
+      "lastname": lastname,
+      "borned_at": borned_at,
+      "email": email,
+      "phone": phone,
+      "country_type": country_type,
+      "city_id": city_id,
+      "job_id": job_id,
+      "store_id": store_id,
+      "shop_address": shop_address,
+    });
+    print(response.statusCode);
+    print(response.body);
+    print("Bloc Glavniy Menu Edit Napisat ----------------------------------");
+
+    return jsonDecode(response.body);
   }
 }

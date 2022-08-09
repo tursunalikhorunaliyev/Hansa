@@ -8,8 +8,8 @@ import 'package:http/http.dart' as http;
 
 
 class BlocDoljnost {
-  final dataController = StreamController<ModelDoljnostMain>();
-  final eventController = StreamController<EnumActionView>();
+  final dataController = StreamController<ModelDoljnostMain>.broadcast();
+  final eventController = StreamController<EnumActionView>.broadcast();
 
   StreamSink<ModelDoljnostMain> get dataSink => dataController.sink;
   Stream<ModelDoljnostMain> get dataStream => dataController.stream;

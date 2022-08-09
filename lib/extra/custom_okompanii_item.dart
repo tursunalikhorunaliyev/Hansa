@@ -20,7 +20,7 @@ class CustomOKompaniiItem extends StatelessWidget {
     final isTablet = Provider.of<bool>(context);
     return Padding(
       padding: EdgeInsets.symmetric(
-        horizontal: isTablet ? 10 : 20,
+        horizontal: isTablet ? 5 : 20,
       ),
       child: Column(
         children: [
