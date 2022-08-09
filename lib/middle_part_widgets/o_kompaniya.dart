@@ -87,7 +87,7 @@ class Okompaniya extends StatelessWidget {
                           ),
                         ],
                       )
-                    : Image.asset("assets/1649660637Аракелян Ася.png"),
+                    : Image.asset("assets/1649660637Аракелян Ася.jpg.png"),
                 Center(
                   child: Padding(
                     padding: EdgeInsets.only(top: isTablet ? 391 : 174),

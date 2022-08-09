@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +16,7 @@ import 'package:hansa_app/providers/providers_for_video_title/video_title_provid
 import 'package:hansa_app/video/bloc_video_api.dart';
 import 'package:hansa_app/video/model_video.dart';
 import 'package:lottie/lottie.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 
@@ -65,7 +68,14 @@ class _OKompaniiState extends State<OKompanii> {
 
   Future<String> getFilePath(uniqueFileName) async {
     String path = "";
-    String dir = "/storage/emulated/0/Download/";
+    String dir ="";
+    if(Platform.isIOS){
+      Directory directory = await getApplicationSupportDirectory();
+      dir = directory.path;
+    }
+    else if(Platform.isAndroid){
+      dir = "/storage/emulated/0/Download/";
+    }
     path = "$dir/$uniqueFileName.mp4";
     return path;
   }

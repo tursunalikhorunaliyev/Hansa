@@ -17,6 +17,7 @@ import 'package:hansa_app/drawer_widgets/referal_silka.dart';
 import 'package:hansa_app/drawer_widgets/text_icon.dart';
 import 'package:hansa_app/drawer_widgets/text_icon_card.dart';
 import 'package:hansa_app/enums/enum_action_view.dart';
+import 'package:hansa_app/providers/provider_personal_textFields.dart';
 import 'package:provider/provider.dart';
 
 class GlavniyMenyu extends StatefulWidget {
@@ -34,6 +35,7 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
     final blocChangeProfileProvider = Provider.of<BlocChangeProfile>(context);
     final isTablet = Provider.of<bool>(context);
     final providerToken = Provider.of<String>(context);
+    final providerPersonalDannieTextFilelds = Provider.of<ProviderPersonalTextFields>(context);
 
     final blocGlavniyMenuUserInfo = BlocGlavniyMenuUserInfo(providerToken);
 
@@ -223,6 +225,18 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                         log(snapshot.data!.name);
                         return GestureDetector(
                           onTap: () {
+                            if(snapshot.data==ActionChange.personal){
+                              log(providerPersonalDannieTextFilelds.getImyaController.text);
+                              log(providerPersonalDannieTextFilelds.getFamiliyaController.text);
+                              log(providerPersonalDannieTextFilelds.getDataRojdeniyaController.text);
+                              log(providerPersonalDannieTextFilelds.getEmailController.text);
+                              log(providerPersonalDannieTextFilelds.getTelefonController.text);
+                              log(providerPersonalDannieTextFilelds.getMagazinController.text);
+                              log(providerPersonalDannieTextFilelds.getDoljnostController.text);
+                              log(providerPersonalDannieTextFilelds.getGorodController.text);
+                              log(providerPersonalDannieTextFilelds.getAddressController.text);
+
+                            }
                             snapshot.data == ActionChange.personRekvizit
                                 ? blocChangeProfileProvider.dataSink
                                     .add(ActionChange.textIconCard)

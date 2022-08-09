@@ -12,6 +12,7 @@ import 'package:hansa_app/drawer_widgets/popup_personal_magazin.dart';
 import 'package:hansa_app/drawer_widgets/referal_silka.dart';
 import 'package:hansa_app/drawer_widgets/text_field_for_personal.dart';
 import 'package:hansa_app/enums/enum_action_view.dart';
+import 'package:hansa_app/providers/provider_personal_textFields.dart';
 import 'package:provider/provider.dart';
 
 class PersonalniyDaniy extends StatefulWidget {
@@ -40,12 +41,25 @@ class _PersonalniyDaniyState extends State<PersonalniyDaniy> {
     final blocPersonal = BlocPersonal(providerToken);
 
     blocPersonal.eventSink.add(EnumActionView.view);
+    final personalInfoEditTextFieldsProvider = Provider.of<ProviderPersonalTextFields>(context);
 
     return Center(
       child: StreamBuilder<ModelPersonalMain>(
           stream: blocPersonal.dataStream,
           builder: (context, snapshot) {
+            
             if (snapshot.hasData) {
+              personalInfoEditTextFieldsProvider.imyaController.text = snapshot.data!.modelPersonal1.firstname;
+            personalInfoEditTextFieldsProvider.familiyaController.text = snapshot.data!.modelPersonal1.lastname;
+            personalInfoEditTextFieldsProvider.emailController.text = snapshot.data!.modelPersonal1.email;
+            personalInfoEditTextFieldsProvider.dataRojdeniyaController.text = snapshot.data!.modelPersonal1.bornedAt;
+            personalInfoEditTextFieldsProvider.gorodController.text = snapshot.data!.modelPersonal1.cityId.name;
+            personalInfoEditTextFieldsProvider.addressController.text = snapshot.data!.modelPersonal1.shopAddress;
+            personalInfoEditTextFieldsProvider.doljnostController.text = snapshot.data!.modelPersonal1.job.name;
+            personalInfoEditTextFieldsProvider.telefonController.text = snapshot.data!.modelPersonal1.phone;
+            
+            personalInfoEditTextFieldsProvider.magazinController.text = snapshot.data!.modelPersonal1.shopAddress;
+
               return Column(
                 children: [
                   Image.asset(
@@ -66,66 +80,57 @@ class _PersonalniyDaniyState extends State<PersonalniyDaniy> {
                     height: isTablet ? 40 : 25,
                   ),
                   TextFieldForPersonal(
+                      
                       text: "Имя",
-                      controller: TextEditingController(
-                          text: snapshot.data!.modelPersonal1.firstname)),
+                      controller: personalInfoEditTextFieldsProvider.imyaController),
                   SizedBox(
                     height: isTablet ? 15 : 8,
                   ),
                   TextFieldForPersonal(
                       text: "Фамилия",
-                      controller: TextEditingController(
-                          text: snapshot.data!.modelPersonal1.lastname)),
+                      controller: personalInfoEditTextFieldsProvider.familiyaController),
                   SizedBox(
                     height: isTablet ? 15 : 8,
                   ),
                   TextFieldForPersonal(
                       text: "Дата рождения",
-                      controller: TextEditingController(
-                          text: snapshot.data!.modelPersonal1.bornedAt)),
+                      controller: personalInfoEditTextFieldsProvider.dataRojdeniyaController),
                   SizedBox(
                     height: isTablet ? 15 : 8,
                   ),
                   TextFieldForPersonal(
                       text: "E-mail",
-                      controller: TextEditingController(
-                          text: snapshot.data!.modelPersonal1.email)),
+                      controller: personalInfoEditTextFieldsProvider.emailController),
                   SizedBox(
                     height: isTablet ? 15 : 8,
                   ),
                   TextFieldForPersonal(
                       text: "Телефон",
-                      controller: TextEditingController(
-                          text: snapshot.data!.modelPersonal1.phone)),
+                      controller: personalInfoEditTextFieldsProvider.telefonController),
                   SizedBox(
                     height: isTablet ? 15 : 8,
                   ),
                   PopupPersonalMagazin(
-                    controller: TextEditingController(
-                        text: snapshot.data!.modelPersonal1.store.name),
+                    controller: personalInfoEditTextFieldsProvider.magazinController,
                   ),
                   SizedBox(
                     height: isTablet ? 15 : 8,
                   ),
                   PopupPersonalDoljnost(
-                    controller: TextEditingController(
-                        text: snapshot.data!.modelPersonal1.job.name),
+                    controller: personalInfoEditTextFieldsProvider.doljnostController,
                   ),
                   SizedBox(
                     height: isTablet ? 15 : 8,
                   ),
                   PopupPersonalGorod(
-                    controller: TextEditingController(
-                        text: snapshot.data!.modelPersonal1.cityId.name),
+                    controller: personalInfoEditTextFieldsProvider.gorodController
                   ),
                   SizedBox(
                     height: isTablet ? 15 : 8,
                   ),
                   TextFieldForPersonal(
                       text: "Адрес",
-                      controller: TextEditingController(
-                          text: snapshot.data!.modelPersonal1.shopAddress
-                              .toString())),
+                      controller: personalInfoEditTextFieldsProvider.addressController),
                   SizedBox(
                     height: isTablet ? 50 : 10,
                   ),
