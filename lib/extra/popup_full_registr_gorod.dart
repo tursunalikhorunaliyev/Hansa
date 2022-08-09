@@ -29,7 +29,8 @@ class _PopupFullRegistrGorodState extends State<PopupFullRegistrGorod> {
     final blocHansaCountry = HansaCountryBloC(1);
 
     blocHansaCountry.eventSink.add(CityEnum.city);
-    final gorodTextEditingContyroller = Provider.of<TextEditingController>(context);
+    final gorodTextEditingContyroller =
+        Provider.of<TextEditingController>(context);
 
     return StreamBuilder<double>(
         initialData: 38,
@@ -46,7 +47,7 @@ class _PopupFullRegistrGorodState extends State<PopupFullRegistrGorod> {
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 100),
                 height: isTablet ? 43 : snapshotSizeDrawer.data!,
-                width: isTablet ? 350 : 360,
+                width: isTablet ? double.infinity : 360,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(radius),
@@ -59,17 +60,18 @@ class _PopupFullRegistrGorodState extends State<PopupFullRegistrGorod> {
                       Padding(
                         padding: const EdgeInsets.only(left: 5),
                         child: Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text(
-                            text,
-                            style: text=="Город" ?GoogleFonts.montserrat(
-                                fontSize: isTablet ? 13 : 10,
-                                color: const Color(0xFF444444)):GoogleFonts.montserrat(
-                                fontSize: isTablet ? 13 : 10,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black),
-                          )
-                        ),
+                            alignment: Alignment.centerLeft,
+                            child: Text(
+                              text,
+                              style: text == "Город"
+                                  ? GoogleFonts.montserrat(
+                                      fontSize: isTablet ? 13 : 10,
+                                      color: const Color(0xFF444444))
+                                  : GoogleFonts.montserrat(
+                                      fontSize: isTablet ? 13 : 10,
+                                      fontWeight: FontWeight.w500,
+                                      color: Colors.black),
+                            )),
                       ),
                       StreamBuilder<CountryModel>(
                           stream: blocHansaCountry.stream,
@@ -85,8 +87,9 @@ class _PopupFullRegistrGorodState extends State<PopupFullRegistrGorod> {
                                     itemBuilder: (context, index) {
                                       return TextButton(
                                         onPressed: () {
-                                          gorodTextEditingContyroller.text = snapshotCountry
-                                              .data!.data.list[index].name;
+                                          gorodTextEditingContyroller.text =
+                                              snapshotCountry
+                                                  .data!.data.list[index].name;
                                           text = snapshotCountry
                                               .data!.data.list[index].name;
                                           blocPopupDrawer.dataSink.add(

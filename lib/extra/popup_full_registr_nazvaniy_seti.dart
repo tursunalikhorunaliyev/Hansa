@@ -47,7 +47,7 @@ class _PopupFullRegistrNazvaniySetiState
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 100),
                 height: isTablet ? 43 : snapshotSizeDrawer.data!,
-                width: isTablet ? 350 : 360,
+                width: isTablet ? double.infinity : 360,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(radius),
