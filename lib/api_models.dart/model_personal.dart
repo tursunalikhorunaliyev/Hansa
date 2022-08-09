@@ -115,8 +115,8 @@ class Store {
 
   factory Store.fromMap(Map<String, dynamic> map) {
     return Store(
-      id: map['id'],
-      name: map['name'],
+      id: map['id'] ?? 1,
+      name: map['name'] ?? "Пустой",
     );
   }
 }
