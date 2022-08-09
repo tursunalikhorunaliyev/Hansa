@@ -550,7 +550,6 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
     });
     print(response.statusCode);
     print(response.body);
-    print("Bloc Glavniy Menu Edit Napisat ----------------------------------");
 
     return jsonDecode(response.body);
   }
