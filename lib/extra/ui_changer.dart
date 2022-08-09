@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hansa_app/blocs/article_bloc.dart';
 import 'package:hansa_app/blocs/bloc_play_video.dart';
 import 'package:hansa_app/blocs/bloc_video_controll.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
@@ -35,7 +36,9 @@ class UIChanger extends StatelessWidget {
         if (snapshot.data == MenuActions.article) {
           return ArticleScreen();
         } else if (snapshot.data == MenuActions.welcome) {
-          return const WelcomeWidget();
+          return Provider(
+            create: (context) => ArticleBLoC(),
+            child: const WelcomeWidget());
         } else if (snapshot.data == MenuActions.obuchayushieMaterial) {
           return const ObucheniyaWidget();
         } else if (snapshot.data == MenuActions.prezintatsiya) {
