@@ -178,7 +178,9 @@ class Okompaniya extends StatelessWidget {
                                 ],
                               );
                             } else {
-                              return const CircularProgressIndicator();
+                              return SpinKitPulse(
+                                color: const Color(0xFFff163e),
+                              );
                             }
                           }),
                     ),
@@ -193,9 +195,12 @@ class Okompaniya extends StatelessWidget {
                       onTap: () {
                         showDialog(
                           context: context,
-                          builder: (context) => Provider<String>.value(
-                            value: providerToken.toString(),
-                            child: const SobshitOProblem()),
+                          useRootNavigator: false,
+                          builder: (contextDialog) => Provider<String>.value(
+                              value: providerToken.toString(),
+                              child: SobshitOProblem(
+                                contextDialog: contextDialog,
+                              )),
                         );
                       },
                       child: Container(

@@ -49,7 +49,7 @@ class ModelPersonal1 {
       email: map['email'],
       phone: map['phone'],
       countryType: CountryType.fromMap(map['country_type']),
-      cityId: CityId.fromMap(map['city_id']),
+      cityId: CityId.fromMap(map['city']),
       job: Job.fromMap(map['job']),
       store: Store.fromMap(map['store']),
       shopAddress: map['shop_address'],
