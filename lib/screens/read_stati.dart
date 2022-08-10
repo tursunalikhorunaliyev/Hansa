@@ -9,6 +9,7 @@ import 'package:hansa_app/blocs/read_stati_bloc.dart';
 import 'package:hansa_app/extra/custom_title.dart';
 import 'package:hansa_app/read_statie_section/part_indicator.dart';
 import 'package:hansa_app/read_statie_section/stati_comment.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
 class ReadStati extends StatelessWidget {
@@ -262,10 +263,17 @@ class ReadStati extends StatelessWidget {
               ),
             );
           } else {
-            return const Center(
-                child: SpinKitWanderingCubes(
-              color: Colors.red,
-            ));
+            return Padding(
+              padding:
+                  EdgeInsets.only(top: MediaQuery.of(context).size.width / 2),
+              child: Center(
+                child: Lottie.asset(
+                  'assets/pre.json',
+                  height: 70,
+                  width: 70,
+                ),
+              ),
+            );
           }
         });
   }
