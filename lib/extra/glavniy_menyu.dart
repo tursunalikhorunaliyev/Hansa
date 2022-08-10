@@ -78,10 +78,10 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(
-                      top: isTablet ? 60 : 39, left: isTablet ? 120 : 120),
+                      top: isTablet ? 60 : 39, left: isTablet ? 160 : 120),
                   child: SizedBox(
-                    height: isTablet ? 180 : 80,
-                    width: isTablet ? 180 : 80,
+                    height: isTablet ? 100 : 80,
+                    width: isTablet ? 100 : 80,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(80),
                       child: StreamBuilder<ModelGlavniyMenuUserInfoMain>(
@@ -400,7 +400,7 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                   decoration: const BoxDecoration(color: Color(0xFF2c2c2c)),
                   child: ListView(
                     physics: BouncingScrollPhysics(),
-                    padding: EdgeInsets.only(top: 30, bottom: 20),
+                    padding: EdgeInsets.only(top: snapshot.data == ActionChange.izboreny ? 0  : 30, bottom: 20),
                     children: List.generate(
                       1,
                       (index) => Column(
@@ -409,10 +409,10 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                               ? const ChangeProfile()
                               : snapshot.data == ActionChange.izboreny
                                   ? Wrap(
-                                      children: const [
+                                      children:  [
                                         Izbrannoe(),
                                         SizedBox(
-                                          height: 509,
+                                          height: isTablet ? 700  : 509,
                                         ),
                                         ReferalSilka(),
                                       ],
@@ -424,7 +424,7 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                               children: const [
                                                 DrawerStats(),
                                                 SizedBox(
-                                                  height: 509,
+                                                  height: 700,
                                                 ),
                                                 ReferalSilka(),
                                               ],
@@ -452,10 +452,10 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                 )
                               : snapshot.data == ActionChange.personal
                                   ? SizedBox(
-                                      height: isTablet ? 407 : 69,
+                                      height: isTablet ? 50 : 69,
                                     )
                                   : SizedBox(
-                                      height: isTablet ? 200 : 69,
+                                      height: isTablet ? 140 : 69,
                                     ),
                           Padding(
                             padding: const EdgeInsets.only(

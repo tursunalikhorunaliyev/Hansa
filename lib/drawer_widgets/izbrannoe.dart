@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class Izbrannoe extends StatefulWidget {
   const Izbrannoe({Key? key}) : super(key: key);
@@ -11,10 +12,12 @@ class Izbrannoe extends StatefulWidget {
 class _IzbrannoeState extends State<Izbrannoe> {
   @override
   Widget build(BuildContext context) {
+    final isTablet = Provider.of<bool>(context);
+
     return Center(
       child: Container(
-        height: 485.6666666666667,
-        width: 323.6666666666667,
+        height: isTablet ? 650 : 485.6666666666667,
+        width: isTablet ? 500 : 323.6666666666667,
         color: const Color(0xFFffffff),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -24,6 +27,7 @@ class _IzbrannoeState extends State<Izbrannoe> {
               child: Row(
                 children: [
                   Container(
+                   
                     decoration: const BoxDecoration(
                         color: Color(0XFFff163e),
                         borderRadius: BorderRadius.only(
@@ -48,12 +52,12 @@ class _IzbrannoeState extends State<Izbrannoe> {
                   Text("#",
                       style: GoogleFonts.montserrat(
                           color: const Color(0xFFff163e),
-                          fontSize: 13.66666666666667)),
+                          fontSize: isTablet ? 18  : 13.66666666666667)),
                   Text("Избранное",
                       style: GoogleFonts.montserrat(
                           fontWeight: FontWeight.bold,
                           color: const Color(0xFF272624),
-                          fontSize: 19.66666666666667)),
+                          fontSize: isTablet ? 24 : 19.66666666666667)),
                   //#Избранное
                 ],
               ),
@@ -65,34 +69,48 @@ class _IzbrannoeState extends State<Izbrannoe> {
               child: ListView(
                 physics: BouncingScrollPhysics(),
                 children: [
-                  topContainer(),
-                  topContainer(),
-                  topContainer(),
-                  topContainer(),
+                  topContainer(isTablet),
+                  topContainer(isTablet),
+                  topContainer(isTablet),
+                  topContainer(isTablet),
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(
-                  left: 84.33333333333333,
-                  right: 84.33333333333333,
-                  top: 20,
-                  bottom: 20),
-              child: Container(
-                alignment: Alignment.center,
-                height: 30.66666666666667,
-                width: 157.6666666666667,
-                decoration: BoxDecoration(
-                    color: const Color(0xFFe21a37),
-                    borderRadius: BorderRadius.circular(15.33333333333333)),
-                child: Text(
-                  "Показать еще",
-                  style: GoogleFonts.montserrat(
-                    fontSize: 11.33333333333333,
-                    color: const Color(0xFFFFFFFF),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                      left: 84.33333333333333,
+                      right: 84.33333333333333,
+                      top: 20,
+                      bottom: 20),
+                  child: Container(
+                    alignment: Alignment.center,
+                    height: isTablet  ? 30 : 30.66666666666667,
+                    width: isTablet ?  170 : 157.6666666666667,
+                    decoration: BoxDecoration(
+                        color: const Color(0xFFe21a37),
+                        borderRadius: BorderRadius.circular(15.33333333333333),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Color(0XFFDBDBDB),
+                            blurRadius: 5,
+                            spreadRadius: 4,
+                            offset: Offset(0, 6)
+                          )
+                        ]
+                        ),
+                    child: Text(
+                      "Показать еще",
+                      style: GoogleFonts.montserrat(
+                        fontSize: 11.33333333333333,
+                        color: const Color(0xFFFFFFFF),
+                      ),
+                    ),
                   ),
                 ),
-              ),
+              ],
             )
           ],
         ),
@@ -101,7 +119,7 @@ class _IzbrannoeState extends State<Izbrannoe> {
   }
 }
 
-Widget topContainer() {
+Widget topContainer(bool isTablet) {
   return Padding(
     padding: const EdgeInsets.symmetric(horizontal: 28.33333333333333),
     child: Column(
@@ -110,8 +128,8 @@ Widget topContainer() {
           children: [
             Image.asset(
               "assets/Rectangle 763 izbrannoe.png",
-              height: 66.66666666666667,
-              width: 101.6666666666667,
+              height: isTablet ? 110 : 66.66666666666667,
+              width: isTablet ? 150 : 101.6666666666667,
             ),
             const SizedBox(
               width: 11,
@@ -123,18 +141,18 @@ Widget topContainer() {
                   """Обучающий материал \nдля сотрудников  \nЛеруа Мерлен""",
                   style: GoogleFonts.montserrat(
                       color: const Color(0xFF272624),
-                      fontSize: 9.666666666666667,
+                      fontSize: isTablet ? 14  : 9.666666666666667,
                       fontWeight: FontWeight.bold),
                 ),
                 Row(
                   children: [
-                    const SizedBox(
-                      width: 90,
+                     SizedBox(
+                      width: isTablet ? 140  : 90,
                     ),
                     Container(
                       alignment: Alignment.center,
-                      height: 21,
-                      width: 63,
+                      height: isTablet ?  22 : 21,
+                      width: isTablet ? 74  : 63,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.5),
                         color: const Color(0xFF313131),
