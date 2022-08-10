@@ -77,109 +77,112 @@ class _IzbrannoeState extends State<Izbrannoe> {
                   stream: izbrannoeBLoC.dataStream,
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
-                      return ListView.builder(
-                        itemCount: snapshot.data!.data.list.length,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 20),
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(5),
-                                      child: Container(
-                                        height: 50,
-                                        width: 100,
-                                        child: CachedNetworkImage(
-                                          fit: BoxFit.cover,
-                                          imageUrl: snapshot.data!.data
-                                              .list[index].pictureLink,
-                                          height: isTablet
-                                              ? 110
-                                              : 66.66666666666667,
-                                          width: isTablet
-                                              ? 150
-                                              : 101.6666666666667,
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 11,
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        SizedBox(
-                                          width: 150,
-                                          child: Text(
-                                            snapshot
-                                                .data!.data.list[index].title,
-                                            softWrap: true,
-                                            overflow: TextOverflow.fade,
-                                            style: GoogleFonts.montserrat(
-                                                color: const Color(0xFF272624),
-                                                fontSize: isTablet
-                                                    ? 14
-                                                    : 9.666666666666667,
-                                                fontWeight: FontWeight.bold),
+                      return SingleChildScrollView(
+                        child: Column(
+                          children: List.generate(
+                            snapshot.data!.data.list.length,
+                            (index) => Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(5),
+                                        child: Container(
+                                          height: 50,
+                                          width: 100,
+                                          child: CachedNetworkImage(
+                                            fit: BoxFit.cover,
+                                            imageUrl: snapshot.data!.data
+                                                .list[index].pictureLink,
+                                            height: isTablet
+                                                ? 110
+                                                : 66.66666666666667,
+                                            width: isTablet
+                                                ? 150
+                                                : 101.6666666666667,
                                           ),
                                         ),
-                                        SizedBox(
-                                          height: 5,
-                                        ),
-                                        Row(
-                                          children: [
-                                            SizedBox(
-                                              width: isTablet ? 140 : 90,
-                                            ),
-                                            InkWell(
-                                              onTap: () {
-                                                launched = _launchInBrowser(
-                                                    Uri.parse("https://" +
-                                                        snapshot
-                                                            .data!
-                                                            .data
-                                                            .list[index]
-                                                            .pdfUrl));
-                                              },
-                                              child: Container(
-                                                alignment: Alignment.center,
-                                                height: isTablet ? 22 : 21,
-                                                width: isTablet ? 74 : 63,
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10.5),
+                                      ),
+                                      const SizedBox(
+                                        width: 11,
+                                      ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          SizedBox(
+                                            width: 150,
+                                            child: Text(
+                                              snapshot
+                                                  .data!.data.list[index].title,
+                                              softWrap: true,
+                                              overflow: TextOverflow.fade,
+                                              style: GoogleFonts.montserrat(
                                                   color:
-                                                      const Color(0xFF313131),
-                                                ),
-                                                child: Text(
-                                                  "Скачать",
-                                                  style: GoogleFonts.montserrat(
-                                                      color: const Color(
-                                                          0xFFFFFFFF),
-                                                      fontSize: 10),
+                                                      const Color(0xFF272624),
+                                                  fontSize: isTablet
+                                                      ? 14
+                                                      : 9.666666666666667,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          Row(
+                                            children: [
+                                              SizedBox(
+                                                width: isTablet ? 140 : 90,
+                                              ),
+                                              InkWell(
+                                                onTap: () {
+                                                  launched = _launchInBrowser(
+                                                      Uri.parse("https://" +
+                                                          snapshot
+                                                              .data!
+                                                              .data
+                                                              .list[index]
+                                                              .pdfUrl));
+                                                },
+                                                child: Container(
+                                                  alignment: Alignment.center,
+                                                  height: isTablet ? 22 : 21,
+                                                  width: isTablet ? 74 : 63,
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10.5),
+                                                    color:
+                                                        const Color(0xFF313131),
+                                                  ),
+                                                  child: Text(
+                                                    "Скачать",
+                                                    style:
+                                                        GoogleFonts.montserrat(
+                                                            color: const Color(
+                                                                0xFFFFFFFF),
+                                                            fontSize: 10),
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    )
-                                  ],
-                                ),
-                                const Divider(
-                                  color: Color(0xFF8c8c8b),
-                                  thickness: 1,
-                                )
-                              ],
+                                            ],
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                  const Divider(
+                                    color: Color(0xFF8c8c8b),
+                                    thickness: 1,
+                                  )
+                                ],
+                              ),
                             ),
-                          );
-                        },
-                        padding: EdgeInsets.all(0),
-                        physics: BouncingScrollPhysics(),
+                          ),
+                        ),
                       );
                     } else {
                       izbrannoeBLoC.eventSink.add(IzbrannoeAction.show);
