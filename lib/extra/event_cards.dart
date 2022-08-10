@@ -156,11 +156,15 @@ class EventCards extends StatelessWidget {
                       : const SizedBox(),
                 ],
               )),
-          Positioned(
-            top: isTablet ? 150 : 181,
-            right: 23.w,
+          Padding(
+            padding: EdgeInsets.only(
+              top: isTablet ? 150 : 181,
+            ),
             child: Row(
               children: [
+                Spacer(
+                  flex: isTablet ? 15 : 9,
+                ),
                 StreamBuilder<bool>(
                     initialData: false,
                     stream: isFavouriteBLoC.stream,
@@ -189,6 +193,9 @@ class EventCards extends StatelessWidget {
                         ),
                       );
                     }),
+                Spacer(
+                  flex: isTablet ? 2 : 1,
+                ),
               ],
             ),
           ),

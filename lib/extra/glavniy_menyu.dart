@@ -16,6 +16,7 @@ import 'package:hansa_app/drawer_widgets/referal_silka.dart';
 import 'package:hansa_app/drawer_widgets/text_icon.dart';
 import 'package:hansa_app/drawer_widgets/text_icon_card.dart';
 import 'package:hansa_app/enums/enum_action_view.dart';
+import 'package:hansa_app/extra/sobshit_o_problem.dart';
 import 'package:hansa_app/providers/provider_personal_textFields.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
@@ -400,7 +401,9 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                   decoration: const BoxDecoration(color: Color(0xFF2c2c2c)),
                   child: ListView(
                     physics: BouncingScrollPhysics(),
-                    padding: EdgeInsets.only(top: snapshot.data == ActionChange.izboreny ? 0  : 30, bottom: 20),
+                    padding: EdgeInsets.only(
+                        top: snapshot.data == ActionChange.izboreny ? 0 : 30,
+                        bottom: 20),
                     children: List.generate(
                       1,
                       (index) => Column(
@@ -409,10 +412,10 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                               ? const ChangeProfile()
                               : snapshot.data == ActionChange.izboreny
                                   ? Wrap(
-                                      children:  [
+                                      children: [
                                         Izbrannoe(),
                                         SizedBox(
-                                          height: isTablet ? 700  : 509,
+                                          height: isTablet ? 700 : 509,
                                         ),
                                         ReferalSilka(),
                                       ],
@@ -476,7 +479,7 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                               ? const SizedBox(
                                   height: 0,
                                 )
-                              : SizedBox(height: isTablet ? 40 : 20),
+                              : SizedBox(height: isTablet ? 30 : 20),
                           snapshot.data == ActionChange.nastroyka
                               ? const SizedBox(
                                   height: 0,
@@ -495,19 +498,31 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                   ),
                                 ),
                           SizedBox(
-                            height: isTablet ? 40 : 20,
+                            height: isTablet ? 30 : 20,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 33),
-                            child: TextIcon(
-                              text: "Задать вопрос",
-                              iconUrl: "assets/question.png",
-                              size: 30,
-                              widthSize: 18,
+                          InkWell(
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                useRootNavigator: false,
+                                builder: (contextDialog) =>
+                                    Provider<String>.value(
+                                        value: providerToken.toString(),
+                                        child: SobshitOProblem()),
+                              );
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 33),
+                              child: TextIcon(
+                                text: "Задать вопрос",
+                                iconUrl: "assets/question.png",
+                                size: 30,
+                                widthSize: 18,
+                              ),
                             ),
                           ),
                           SizedBox(
-                            height: isTablet ? 40 : 20,
+                            height: isTablet ? 30 : 20,
                           ),
                           Padding(
                             padding: const EdgeInsets.only(left: 39),

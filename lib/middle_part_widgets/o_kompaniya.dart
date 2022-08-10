@@ -189,7 +189,7 @@ class Okompaniya extends StatelessWidget {
                 Center(
                   child: Padding(
                     padding: EdgeInsets.only(
-                      top: isTablet ? 900 : 480,
+                      top: isTablet ? 900 : 490,
                     ),
                     child: GestureDetector(
                       onTap: () {
@@ -199,7 +199,7 @@ class Okompaniya extends StatelessWidget {
                           builder: (contextDialog) => Provider<String>.value(
                               value: providerToken.toString(),
                               child: SobshitOProblem(
-                                contextDialog: contextDialog,
+                              
                               )),
                         );
                       },

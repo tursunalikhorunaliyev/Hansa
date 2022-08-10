@@ -1,34 +1,25 @@
 import 'dart:convert';
-import 'dart:ui';
 
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter/src/foundation/key.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/model_o_kompaniya_napisat.dart';
 import 'package:hansa_app/blocs/bloc_empty_sobshit.dart';
-import 'package:hansa_app/enums/enum_action_view.dart';
 import 'package:hansa_app/extra/sobshit_o_problem_success.dart';
-import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 
-class SobshitOProblem extends StatefulWidget {
-  final BuildContext contextDialog;
-  const SobshitOProblem({Key? key, required this.contextDialog})
-      : super(key: key);
-
-  @override
-  State<SobshitOProblem> createState() => _SobshitOProblemState();
-}
-
-class _SobshitOProblemState extends State<SobshitOProblem> {
-  final textFieldController = TextEditingController();
-  final blocEmptySobshit = BlocEmptySobshit();
-  GlobalKey<FlipCardState> cardKey = GlobalKey<FlipCardState>();
+class SobshitOProblem extends StatelessWidget {
+  const SobshitOProblem({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final providerToken = Provider.of<String>(context);
+    final textFieldController = TextEditingController();
+  final blocEmptySobshit = BlocEmptySobshit();
+  GlobalKey<FlipCardState> cardKey = GlobalKey<FlipCardState>();
 
     return FlipCard(
       key: cardKey,
@@ -87,15 +78,14 @@ class _SobshitOProblemState extends State<SobshitOProblem> {
                                   const SizedBox(
                                     height: 40,
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 24),
-                                    child: StreamBuilder<bool>(
+                                  StreamBuilder<bool>(
                                       initialData: false,
-                                        stream: blocEmptySobshit.dataStream,
-                                        builder: (context, snapshot) {
-                                          if (snapshot.hasData) {
-                                            return TextField(
+                                      stream: blocEmptySobshit.dataStream,
+                                      builder: (context, snapshot) {
+                                        return Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 24),
+                                            child: TextField(
                                               controller: textFieldController,
                                               maxLines: 5,
                                               cursorColor:
@@ -144,14 +134,8 @@ class _SobshitOProblemState extends State<SobshitOProblem> {
                                                   ),
                                                 ),
                                               ),
-                                            );
-                                          } else {
-                                            return Text("Ошибка простояta",
-                                                style: GoogleFonts.montserrat(
-                                                    fontSize: 20));
-                                          }
-                                        }),
-                                  ),
+                                            ));
+                                      }),
                                   const SizedBox(
                                     height: 45,
                                   ),
@@ -242,9 +226,12 @@ class _SobshitOProblemState extends State<SobshitOProblem> {
       ),
       back: SobshitOProblemSuccess(),
     );
+
+
   }
 
-  Future<ModelOKompaniyaNapisatMain> getData(String token, String text) async {
+
+   Future<ModelOKompaniyaNapisatMain> getData(String token, String text) async {
     http.Response response = await http.post(
         Uri.parse("http://hansa-lab.ru/api/site/add-problem"),
         headers: {"token": token},
@@ -255,4 +242,5 @@ class _SobshitOProblemState extends State<SobshitOProblem> {
 
     return ModelOKompaniyaNapisatMain.fromMap(jsonDecode(response.body));
   }
+
 }
