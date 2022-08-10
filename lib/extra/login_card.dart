@@ -105,7 +105,9 @@ class _LoginCardState extends State<LoginCard> {
                             top: isTablet ? 25.h : 30.h),
                         child: TextField(
                           controller: usernameController,
+                          style: TextStyle(fontSize: isTablet ? 18  : null),
                           decoration: InputDecoration(
+                            
                               hintText: 'Ваш e-mail',
                               hintStyle: GoogleFonts.montserrat(
                                 fontWeight: FontWeight.w500,
@@ -130,6 +132,7 @@ class _LoginCardState extends State<LoginCard> {
                             builder: (context, value, child) {
                           return TextField(
                             controller: passwordController,
+                            style: TextStyle(fontSize: isTablet ? 18  : null),
                             obscureText: (!value.getVisibility),
                             decoration: InputDecoration(
                                 hintText: 'Ваш пароль',

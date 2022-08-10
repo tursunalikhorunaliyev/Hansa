@@ -48,7 +48,7 @@ class VoytiIliSozdatAccaunt extends StatelessWidget {
                     color: Colors.transparent,
                     borderRadius: BorderRadius.circular(23.33333333333333.r),
                     border:
-                        Border.all(color: const Color(0xFFa1b7c2), width: 2.w)),
+                        Border.all(color: const Color(0xFFa1b7c2), width: isTablet ? 1.w  :  2.w)),
                 child: Center(
                   child: Text(
                     "Создать аккаунт",
