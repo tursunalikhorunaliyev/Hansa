@@ -79,7 +79,7 @@ class Okompaniya extends StatelessWidget {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(25),
                             child: Image.asset(
-                              "assets/o_kompaniya_image.png",
+                              "assets/1649660637Аракелян Ася.jpg.png",
                               fit: BoxFit.fitWidth,
                               height: 425,
                               width: 850,

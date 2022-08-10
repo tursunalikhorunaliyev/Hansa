@@ -18,6 +18,7 @@ class DrawerStats extends StatelessWidget {
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
       child: Container(
+        height: isTablet ? 650 : null,
         color: const Color(0xFFffffff),
         child: Column(
           children: [
@@ -25,9 +26,10 @@ class DrawerStats extends StatelessWidget {
               imagePath: "assets/free-icon-rating-4569150.png",
               title: "Статистика",
             ),
-            SizedBox(
-              child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
+            Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                child: SizedBox(
+                  height: isTablet ? 500 : null,
                   child: DataTable(
                     headingRowHeight: 20,
                     columnSpacing: 10,
@@ -38,7 +40,7 @@ class DrawerStats extends StatelessWidget {
                           label: Text(
                             "Место",
                             style: GoogleFonts.montserrat(
-                              fontSize: 8,
+                              fontSize: isTablet ? 14 : 8,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -47,7 +49,7 @@ class DrawerStats extends StatelessWidget {
                         label: Text(
                           "Сеть",
                           style: GoogleFonts.montserrat(
-                            fontSize: 8,
+                            fontSize: isTablet ? 14 : 8,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -56,7 +58,7 @@ class DrawerStats extends StatelessWidget {
                         label: Text(
                           "Участник",
                           style: GoogleFonts.montserrat(
-                            fontSize: 8,
+                            fontSize: isTablet ? 14 : 8,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -65,7 +67,7 @@ class DrawerStats extends StatelessWidget {
                         label: Text(
                           "Баллы",
                           style: GoogleFonts.montserrat(
-                            fontSize: 8,
+                            fontSize: isTablet ? 14 : 8,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -82,7 +84,7 @@ class DrawerStats extends StatelessWidget {
                             Text(
                               "${index + 1}",
                               style: GoogleFonts.montserrat(
-                                  fontSize: 8,
+                                  fontSize: isTablet ? 13 : 8,
                                   fontWeight: FontWeight.normal,
                                   color: (index == 9)
                                       ? const Color(0xffffffff)
@@ -97,7 +99,7 @@ class DrawerStats extends StatelessWidget {
                                     return Text(
                                       snapshot.data!.data.list[index].shop_net,
                                       style: GoogleFonts.montserrat(
-                                          fontSize: 8,
+                                          fontSize: isTablet ? 12 : 8,
                                           fontWeight: FontWeight.normal,
                                           color: (index == 9)
                                               ? const Color(0xffffffff)
@@ -149,26 +151,24 @@ class DrawerStats extends StatelessWidget {
                         ],
                       ),
                     ),
-                  )),
-            ),
+                  ),
+                )),
             Padding(
               padding: const EdgeInsets.all(10.0),
               child: Container(
                 alignment: Alignment.center,
-                height: isTablet ? 40 : 30,
+                height: isTablet ? 34 : 30,
                 width: isTablet ? 200 : 140,
                 decoration: BoxDecoration(
                   color: const Color(0xFF25b049),
                   borderRadius: BorderRadius.circular(70),
                   boxShadow: [
                     BoxShadow(
-                      color: isTablet
-                          ? const Color(0xFF2c2c2c)
-                          : const Color(0xFF333333).withOpacity(0.3),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: const Offset(0, 3), // changes position of shadow
-                    ),
+                        color: Color(0XFFDBDBDB),
+                        blurRadius: 5,
+                        spreadRadius: 4,
+                        offset: Offset(0, 6) // changes position of shadow
+                        ),
                   ],
                 ),
                 child: Text(
