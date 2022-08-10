@@ -50,7 +50,7 @@ class _PopupPersonalDoljnostState extends State<PopupPersonalDoljnost> {
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.all(14),
+                    padding: EdgeInsets.all(isTablet ? 14  : 11),
                     child: Padding(
                       padding: const EdgeInsets.only(right: 10),
                       child: Row(
