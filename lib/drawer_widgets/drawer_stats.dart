@@ -13,18 +13,19 @@ class DrawerStats extends StatelessWidget {
   Widget build(BuildContext context) {
     final prov = Provider.of<String>(context);
     final bloc = BlocRating(prov);
+    final isTablet = Provider.of<bool>(context);
     bloc.eventSink.add(RatingEnum.rating);
-    return Container(
-      color: const Color(0xFFffffff),
-      child: Column(
-        children: [
-          const DrawerStatTitle(
-            imagePath: "assets/free-icon-rating-4569150.png",
-            title: "Статистика",
-          ),
-          SizedBox(
-            child: SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
+    return SingleChildScrollView(
+      physics: BouncingScrollPhysics(),
+      child: Container(
+        color: const Color(0xFFffffff),
+        child: Column(
+          children: [
+            const DrawerStatTitle(
+              imagePath: "assets/free-icon-rating-4569150.png",
+              title: "Статистика",
+            ),
+            SizedBox(
               child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 15),
                   child: DataTable(
@@ -150,11 +151,37 @@ class DrawerStats extends StatelessWidget {
                     ),
                   )),
             ),
-          ),
-          SizedBox(
-            height: 10,
-          )
-        ],
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Container(
+                alignment: Alignment.center,
+                height: isTablet ? 40 : 30,
+                width: isTablet ? 200 : 140,
+                decoration: BoxDecoration(
+                  color: const Color(0xFF25b049),
+                  borderRadius: BorderRadius.circular(70),
+                  boxShadow: [
+                    BoxShadow(
+                      color: isTablet
+                          ? const Color(0xFF2c2c2c)
+                          : const Color(0xFF333333).withOpacity(0.3),
+                      spreadRadius: 5,
+                      blurRadius: 7,
+                      offset: const Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                ),
+                child: Text(
+                  "показать ещё",
+                  style: GoogleFonts.montserrat(
+                      fontSize: isTablet ? 16 : 12,
+                      fontWeight: FontWeight.w500,
+                      color: const Color(0xFFffffff)),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
