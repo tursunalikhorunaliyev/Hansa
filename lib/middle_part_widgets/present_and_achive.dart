@@ -109,6 +109,12 @@ class _PresentArchiveState extends State<PresentArchive> {
                                     return Padding(
                                       padding: const EdgeInsets.only(top: 5.0),
                                       child: ArchiveCard(
+                                        isFavouriteURL: snapshot
+                                            .data!
+                                            .data
+                                            .guides
+                                            .dataGuides[index]
+                                            .favourite_link,
                                         linkPDFSkachat: snapshot.data!.data
                                             .guides.dataGuides[index].pdfUrl,
                                         linkPDF: snapshot.data!.data.guides
@@ -152,6 +158,12 @@ class _PresentArchiveState extends State<PresentArchive> {
                                     Row(),
                                     Column(children: [
                                       ArchiveCard(
+                                        isFavouriteURL: snapshot
+                                            .data!
+                                            .data
+                                            .guides
+                                            .dataGuides[index]
+                                            .favourite_link,
                                         linkPDFSkachat: snapshot.data!.data
                                             .guides.dataGuides[index].pdfUrl,
                                         linkPDF: snapshot.data!.data.guides
@@ -262,6 +274,12 @@ class _PresentArchiveState extends State<PresentArchive> {
                                     return Padding(
                                       padding: const EdgeInsets.only(top: 5.0),
                                       child: ArchiveCard(
+                                        isFavouriteURL: snapshot
+                                            .data!
+                                            .data
+                                            .guidesArchive
+                                            .dataGuidesArchive[index]
+                                            .favourite_link,
                                         linkPDFSkachat: snapshot
                                             .data!
                                             .data
@@ -323,6 +341,13 @@ class _PresentArchiveState extends State<PresentArchive> {
                                               Column(
                                                 children: [
                                                   ArchiveCard(
+                                                    isFavouriteURL: snapshot
+                                                        .data!
+                                                        .data
+                                                        .guidesArchive
+                                                        .dataGuidesArchive[
+                                                            index]
+                                                        .favourite_link,
                                                     linkPDFSkachat: snapshot
                                                         .data!
                                                         .data
