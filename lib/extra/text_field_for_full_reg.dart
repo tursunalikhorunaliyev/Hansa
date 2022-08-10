@@ -41,6 +41,7 @@ class _TextFieldForFullRegisterState extends State<TextFieldForFullRegister> {
                 borderRadius: BorderRadius.circular(54),
               ),
               child: TextField(
+                
                 focusNode: focusNode,
                 controller: widget.textEditingController,
                 onChanged: (value) {
@@ -52,7 +53,7 @@ class _TextFieldForFullRegisterState extends State<TextFieldForFullRegister> {
                     setState(() {});
                   }
                 },
-                cursorHeight: 15,
+                cursorHeight: 18,
                 style: GoogleFonts.montserrat(
                                 fontSize: isTablet ? 13 : 10,
                                 fontWeight: FontWeight.w500,

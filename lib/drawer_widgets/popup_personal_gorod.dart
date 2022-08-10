@@ -47,7 +47,7 @@ class _PopupPersonalGorodState extends State<PopupPersonalGorod> {
                   color: const Color(0xFF000000),
                   borderRadius: BorderRadius.circular(radius)),
               child: Padding(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(14),
                 child: Column(
                   children: [
                     Padding(

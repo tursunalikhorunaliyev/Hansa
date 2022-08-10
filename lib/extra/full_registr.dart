@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/style.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/blocs/data_burn_text_changer_bloc.dart';
 import 'package:hansa_app/blocs/hansa_country_api.dart';
@@ -59,7 +60,6 @@ class _FullRegistrState extends State<FullRegistr> {
               Padding(
                 padding: EdgeInsets.only(top: isTablet ? 446 : 274, bottom: 84),
                 child: Container(
-                  //   height: isTablet ? 1020 : 890,
                   width: isTablet ? 556 : 346,
                   decoration: BoxDecoration(
                       color: const Color(0xFFf2f2f2),
@@ -103,7 +103,7 @@ class _FullRegistrState extends State<FullRegistr> {
                           height: isTablet ? 45 : 38,
                           size: isTablet ? 13 : 10,
                           weight:
-                              isTablet ? FontWeight.w600 : FontWeight.normal),
+                              isTablet ? FontWeight.normal : FontWeight.normal),
                       const SizedBox(
                         height: 4,
                       ),
@@ -113,7 +113,7 @@ class _FullRegistrState extends State<FullRegistr> {
                           height: isTablet ? 45 : 38,
                           size: isTablet ? 13 : 10,
                           weight:
-                              isTablet ? FontWeight.w600 : FontWeight.normal),
+                              isTablet  ? FontWeight.normal :  FontWeight.normal),
                       const SizedBox(
                         height: 5,
                       ),
@@ -123,7 +123,7 @@ class _FullRegistrState extends State<FullRegistr> {
                           height: isTablet ? 45 : 38,
                           size: isTablet ? 13 : 10,
                           weight:
-                              isTablet ? FontWeight.w600 : FontWeight.normal),
+                              isTablet ? FontWeight.normal : FontWeight.normal),
                       const SizedBox(
                         height: 4,
                       ),
@@ -139,12 +139,13 @@ class _FullRegistrState extends State<FullRegistr> {
                                 phoneTextFieldController.text =
                                     value.phoneNumber!;
                               },
-                              inputDecoration: inputDecoration(),
+                              inputDecoration: inputDecoration(isTablet),
                               keyboardType: TextInputType.phone,
-                              selectorTextStyle: style(FontWeight.w500),
-                              textStyle: style(FontWeight.w500),
+                              selectorTextStyle: style(FontWeight.w500, isTablet),
+                              textStyle: style(FontWeight.w500, isTablet),
                               selectorConfig: SelectorConfig(
-                                  leadingPadding: 4,
+                                  leadingPadding: 0,
+                                  
                                   useEmoji: false,
                                   showFlags: false,
                                   setSelectorButtonAsPrefixIcon: true,
@@ -214,8 +215,8 @@ class _FullRegistrState extends State<FullRegistr> {
                                     snapshot.data!,
                                     style: snapshot.data == "Дата рождения"
                                         ? GoogleFonts.montserrat(
-                                            fontSize: 10,
-                                            color: const Color(0xFF444444))
+                                    fontSize: isTablet ? 13 : 10,
+                                    color: const Color(0xFF444444))
                                         : GoogleFonts.montserrat(
                                             fontSize: isTablet ? 13 : 10,
                                             fontWeight: FontWeight.w500,
@@ -260,7 +261,7 @@ class _FullRegistrState extends State<FullRegistr> {
                           height: isTablet ? 45 : 38,
                           size: isTablet ? 13 : 10,
                           weight:
-                              isTablet ? FontWeight.w600 : FontWeight.normal),
+                              isTablet  ? FontWeight.normal :  FontWeight.normal),
                       const SizedBox(
                         height: 10,
                       ),
@@ -531,7 +532,7 @@ class _FullRegistrState extends State<FullRegistr> {
     );*/
   }
 
-  InputDecoration inputDecoration() {
+  InputDecoration inputDecoration(bool isTablet) {
     return InputDecoration(
       hintText: "(223) 232-13-12",
       isDense: true,
@@ -544,7 +545,7 @@ class _FullRegistrState extends State<FullRegistr> {
       enabledBorder: outlineInputBorder(.2),
       errorBorder: outlineInputBorder(.1),
       contentPadding: const EdgeInsets.symmetric(vertical: 2),
-      hintStyle: style(FontWeight.normal),
+      hintStyle: style(FontWeight.normal, isTablet),
     );
   }
 
@@ -554,10 +555,10 @@ class _FullRegistrState extends State<FullRegistr> {
         borderRadius: BorderRadius.circular(54));
   }
 
-  TextStyle style(FontWeight fontWeight) {
+  TextStyle style(FontWeight fontWeight, bool isTablet) {
     return GoogleFonts.montserrat(
       fontWeight: fontWeight,
-      fontSize: 10,
+      fontSize: isTablet ? 13 : 10,
       color: const Color(0xFF444444),
     );
   }

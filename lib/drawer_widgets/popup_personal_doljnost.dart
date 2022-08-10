@@ -47,11 +47,11 @@ class _PopupPersonalDoljnostState extends State<PopupPersonalDoljnost> {
               decoration: BoxDecoration(
                   color: const Color(0xFF000000),
                   borderRadius: BorderRadius.circular(radius)),
-              child: Padding(
-                padding: const EdgeInsets.all(10),
-                child: Column(
-                  children: [
-                    Padding(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(14),
+                    child: Padding(
                       padding: const EdgeInsets.only(right: 10),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -70,48 +70,48 @@ class _PopupPersonalDoljnostState extends State<PopupPersonalDoljnost> {
                         ],
                       ),
                     ),
-                    StreamBuilder<ModelDoljnostMain>(
-                        stream: blocDoljnost.dataStream,
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            return Expanded(
-                              child: Visibility(
-                                visible: radius == 54 ? false : true,
-                                child: ListView.builder(
-                                  itemCount:
-                                      snapshot.data!.modelDoljnost2.list.length,
-                                  itemBuilder: (context, index) {
-                                    return MaterialButton(
-                                      onPressed: () {
-                                        widget.controller.text = snapshot.data!
-                                            .modelDoljnost2.list[index].name;
-                                        blocPopupDrawer.dataSink.add(
-                                            snapshot.data! == 36 ? 200 : 36);
-                                        radius = radius == 54 ? 10 : 54;
-                                      },
-                                      height: 30,
-                                      minWidth: 10,
-                                      child: Align(
-                                        alignment: Alignment.centerRight,
-                                        child: Text(
-                                          snapshot.data!.modelDoljnost2
-                                              .list[index].name,
-                                          style: const TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 10),
-                                        ),
+                  ),
+                  StreamBuilder<ModelDoljnostMain>(
+                      stream: blocDoljnost.dataStream,
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Expanded(
+                            child: Visibility(
+                              visible: radius == 54 ? false : true,
+                              child: ListView.builder(
+                                itemCount:
+                                    snapshot.data!.modelDoljnost2.list.length,
+                                itemBuilder: (context, index) {
+                                  return MaterialButton(
+                                    onPressed: () {
+                                      widget.controller.text = snapshot.data!
+                                          .modelDoljnost2.list[index].name;
+                                      blocPopupDrawer.dataSink.add(
+                                          snapshot.data! == 36 ? 200 : 36);
+                                      radius = radius == 54 ? 10 : 54;
+                                    },
+                                    height: 30,
+                                    minWidth: 10,
+                                    child: Align(
+                                      alignment: Alignment.centerRight,
+                                      child: Text(
+                                        snapshot.data!.modelDoljnost2
+                                            .list[index].name,
+                                        style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 10),
                                       ),
-                                    );
-                                  },
-                                ),
+                                    ),
+                                  );
+                                },
                               ),
-                            );
-                          } else {
-                            return const SizedBox();
-                          }
-                        })
-                  ],
-                ),
+                            ),
+                          );
+                        } else {
+                          return const SizedBox();
+                        }
+                      })
+                ],
               ),
             ),
           );

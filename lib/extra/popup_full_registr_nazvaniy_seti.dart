@@ -46,7 +46,7 @@ class _PopupFullRegistrNazvaniySetiState
               padding: const EdgeInsets.only(left: 11, right: 9),
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 100),
-                height: isTablet ? 43 : snapshotSizeDrawer.data!,
+                height: isTablet ? snapshotSizeDrawer.data! : snapshotSizeDrawer.data!,
                 width: isTablet ? double.infinity : 360,
                 decoration: BoxDecoration(
                   color: Colors.white,
