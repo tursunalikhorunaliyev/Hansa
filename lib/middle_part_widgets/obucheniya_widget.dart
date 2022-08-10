@@ -104,6 +104,12 @@ class ObucheniyaWidget extends StatelessWidget {
                                             padding:
                                                 const EdgeInsets.only(top: 5.0),
                                             child: ObucheniyaCard(
+                                                isFavouriteURL: snapshot
+                                                    .data!
+                                                    .data
+                                                    .listGuides
+                                                    .list[index]
+                                                    .favouriteLink,
                                                 buttonColor: Color(0xffff163e),
                                                 bottomButtonText: 'скачать ',
                                                 title: snapshot
@@ -138,6 +144,12 @@ class ObucheniyaWidget extends StatelessWidget {
                                       Row(),
                                       Column(children: [
                                         ObucheniyaCard(
+                                            isFavouriteURL: snapshot
+                                                .data!
+                                                .data
+                                                .listGuides
+                                                .list[index]
+                                                .favouriteLink,
                                             buttonColor: Color(0xffff163e),
                                             bottomButtonText: 'скачать ',
                                             title: snapshot.data!.data
@@ -220,6 +232,12 @@ class ObucheniyaWidget extends StatelessWidget {
                                             padding:
                                                 const EdgeInsets.only(top: 5.0),
                                             child: ObucheniyaCard(
+                                                isFavouriteURL: snapshot
+                                                    .data!
+                                                    .data
+                                                    .listArchiveGuides
+                                                    .list[index]
+                                                    .favouriteLink,
                                                 buttonColor: Color(0xffff163e),
                                                 bottomButtonText: 'скачать ',
                                                 title: snapshot
@@ -255,6 +273,12 @@ class ObucheniyaWidget extends StatelessWidget {
                                       Column(
                                         children: [
                                           ObucheniyaCard(
+                                              isFavouriteURL: snapshot
+                                                  .data!
+                                                  .data
+                                                  .listArchiveGuides
+                                                  .list[index]
+                                                  .favouriteLink,
                                               buttonColor: Color(0xffff163e),
                                               bottomButtonText: 'скачать ',
                                               title: snapshot
