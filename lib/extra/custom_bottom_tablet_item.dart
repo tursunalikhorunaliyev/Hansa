@@ -5,18 +5,21 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/extra/custom_paint_clipper.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class TabletKatalogBottomItem extends StatelessWidget {
-  const TabletKatalogBottomItem({
-    Key? key,
-    required this.backgroundColor,
-    required this.buttonTextColor,
-    required this.buttonColor,
-    required this.titleColor,
-    required this.stbuttonText,
-    required this.ndbuttonText,
-    required this.title,
-  }) : super(key: key);
+class TabletKatalogBottomItem extends StatefulWidget {
+  const TabletKatalogBottomItem(
+      {Key? key,
+      required this.backgroundColor,
+      required this.buttonTextColor,
+      required this.buttonColor,
+      required this.titleColor,
+      required this.stbuttonText,
+      required this.ndbuttonText,
+      required this.title,
+      required this.linkPDF,
+      required this.linkPDFSkachat})
+      : super(key: key);
 
   final Color backgroundColor;
   final Color buttonTextColor;
@@ -25,8 +28,18 @@ class TabletKatalogBottomItem extends StatelessWidget {
   final String stbuttonText;
   final String ndbuttonText;
   final String title;
+  final String linkPDF;
+  final String linkPDFSkachat;
+
+  @override
+  State<TabletKatalogBottomItem> createState() =>
+      _TabletKatalogBottomItemState();
+}
+
+class _TabletKatalogBottomItemState extends State<TabletKatalogBottomItem> {
   @override
   Widget build(BuildContext context) {
+    Future<void>? launched;
     return Padding(
       padding: EdgeInsets.only(
         top: 11.h,
@@ -44,7 +57,7 @@ class TabletKatalogBottomItem extends StatelessWidget {
                     child: Container(
                       width: 150.w,
                       height: 65.h,
-                      color: backgroundColor,
+                      color: widget.backgroundColor,
                     ),
                   ),
                 ),
@@ -62,10 +75,10 @@ class TabletKatalogBottomItem extends StatelessWidget {
                       width: 100.w,
                       height: 60.h,
                       child: Text(
-                        title,
+                        widget.title,
                         overflow: TextOverflow.fade,
                         style: GoogleFonts.montserrat(
-                          color: titleColor,
+                          color: widget.titleColor,
                           fontWeight: FontWeight.bold,
                           fontSize: 7.sp,
                         ),
@@ -80,19 +93,24 @@ class TabletKatalogBottomItem extends StatelessWidget {
                         borderRadius: BorderRadius.circular(64.r),
                         elevation: 5.sp,
                         child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            setState(() {
+                              launched = _launchInBrowser(Uri.parse(
+                                  "https://${widget.linkPDFSkachat}"));
+                            });
+                          },
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(64.r),
                             child: Container(
                               padding: const EdgeInsets.all(7),
                               width: 50.w,
                               height: 20.h,
-                              color: buttonColor,
+                              color: widget.buttonColor,
                               child: Center(
                                 child: Text(
-                                  stbuttonText,
+                                  widget.stbuttonText,
                                   style: GoogleFonts.montserrat(
-                                    color: buttonTextColor,
+                                    color: widget.buttonTextColor,
                                     fontSize: 6.sp,
                                   ),
                                 ),
@@ -110,19 +128,24 @@ class TabletKatalogBottomItem extends StatelessWidget {
                         borderRadius: BorderRadius.circular(64),
                         elevation: 5,
                         child: GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            setState(() {
+                              launched = _launchInBrowser(
+                                  Uri.parse("http://${widget.linkPDF}"));
+                            });
+                          },
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(64),
                             child: Container(
                               padding: const EdgeInsets.all(7),
                               width: 50.w,
                               height: 20.h,
-                              color: buttonColor,
+                              color: widget.buttonColor,
                               child: Center(
                                 child: Text(
-                                  ndbuttonText,
+                                  widget.ndbuttonText,
                                   style: GoogleFonts.montserrat(
-                                    color: buttonTextColor,
+                                    color: widget.buttonTextColor,
                                     fontSize: 6.sp,
                                   ),
                                 ),
@@ -140,5 +163,14 @@ class TabletKatalogBottomItem extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  _launchInBrowser(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw 'Could not launch $url';
+    }
   }
 }

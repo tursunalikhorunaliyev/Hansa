@@ -80,6 +80,10 @@ class _KatalogiState extends State<Katalogi> {
                                           padding:
                                               const EdgeInsets.only(top: 5.0),
                                           child: TabletKatalogItem(
+                                            linkPDFSkachat: snapshot.data!.data
+                                                .guides.list[index].link,
+                                            linkPDF: snapshot.data!.data.guides
+                                                .list[index].pdfUrl,
                                             imageUrl: data
                                                 .guides.list[index].pictureLink,
                                             backgroundColor:
@@ -148,6 +152,14 @@ class _KatalogiState extends State<Katalogi> {
                                           padding:
                                               const EdgeInsets.only(top: 5.0),
                                           child: TabletKatalogItem(
+                                            linkPDFSkachat: snapshot.data!.data
+                                                .guidesArchive.list[index].link,
+                                            linkPDF: snapshot
+                                                .data!
+                                                .data
+                                                .guidesArchive
+                                                .list[index]
+                                                .pdfUrl,
                                             imageUrl: data.guidesArchive
                                                 .list[index].pictureLink,
                                             backgroundColor:

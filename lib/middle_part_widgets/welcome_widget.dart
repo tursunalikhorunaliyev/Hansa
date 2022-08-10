@@ -30,7 +30,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
     welcomeApi.eventSink.add(WelcomeApiAction.fetch);
     final articleBLoC = Provider.of<ArticleBLoC>(context);
     final menuProvider = Provider.of<MenuEventsBloC>(context);
-   
+
     return Expanded(
       child: Column(
         children: [
@@ -64,6 +64,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                         "                     sd d d d d dddd");
                     return isTablet
                         ? GridView(
+                            physics: BouncingScrollPhysics(),
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: 2,
@@ -71,8 +72,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                             children: List.generate(
                               data.length,
                               (index) => EventCards(
-                                onTap: () async{
-                                  
+                                onTap: () async {
                                   menuProvider.eventSink
                                       .add(MenuActions.article);
                                   ArticleModel statiModel =
@@ -94,6 +94,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                             ),
                           )
                         : SingleChildScrollView(
+                            physics: BouncingScrollPhysics(),
                             controller: scroll,
                             child: Column(
                               children: [
@@ -104,13 +105,13 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                     log(index.toString() + " data index");
 
                                     return EventCards(
-                                      onTap: ()async{
-                                         menuProvider.eventSink
-                                      .add(MenuActions.article);
-                                  ArticleModel statiModel =
-                                      await articleBLoC.getArticle(
-                                          token, snapshot.data![index].link);
-                                  articleBLoC.sink.add(statiModel);
+                                      onTap: () async {
+                                        menuProvider.eventSink
+                                            .add(MenuActions.article);
+                                        ArticleModel statiModel =
+                                            await articleBLoC.getArticle(token,
+                                                snapshot.data![index].link);
+                                        articleBLoC.sink.add(statiModel);
                                       },
                                       buttonColor: const Color(0xffff163e),
                                       buttonText: 'Смотреть',

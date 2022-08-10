@@ -33,6 +33,7 @@ class _TreningiState extends State<Treningi> {
     welcomeApi.eventSink.add(WelcomeApiAction.fetch);
     return Expanded(
       child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
         child: StreamBuilder<TrainingModel>(
             stream: trainingBloc.dataStream,
             builder: (context, snapshot) {
