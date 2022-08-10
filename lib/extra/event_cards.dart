@@ -1,6 +1,10 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hansa_app/api_models.dart/favourite_model.dart';
+import 'package:hansa_app/blocs/favourite_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -14,10 +18,12 @@ class EventCards extends StatelessWidget {
       required this.isDate,
       required this.day,
       required this.url,
+      required this.isFavouriteURL,
       required this.isFavourite,
       required this.onTap})
       : super(key: key);
   final String url;
+  final String isFavouriteURL;
   final Color buttonColor;
   final String month;
   final String day;
@@ -26,9 +32,14 @@ class EventCards extends StatelessWidget {
   final bool isDate;
   final bool isFavourite;
   final VoidCallback onTap;
+
   @override
   Widget build(BuildContext context) {
+    final isFavouriteBLoC = FavouriteBLoC();
+    final token = Provider.of<String>(context);
     final isTablet = Provider.of<bool>(context);
+    final favouriteModel = FavouriteModel(status: true, data: true);
+    bool fav = isFavourite;
     return Padding(
       padding: const EdgeInsets.only(bottom: 10, left: 20, right: 20),
       child: Stack(
@@ -150,22 +161,34 @@ class EventCards extends StatelessWidget {
             right: 23.w,
             child: Row(
               children: [
-                Container(
-                  alignment: Alignment.center,
-                  height: isTablet ? 45 : 55,
-                  width: isTablet ? 45 : 55,
-                  decoration: const BoxDecoration(
-                      color: Color(0xfff1f1f1), shape: BoxShape.circle),
-                  child: isFavourite
-                      ? const Icon(
-                          Icons.favorite,
-                          color: Color(0xffed3851),
-                        )
-                      : const Icon(
-                          Icons.favorite_border_sharp,
-                          color: Color(0xffed3851),
+                StreamBuilder<bool>(
+                    initialData: false,
+                    stream: isFavouriteBLoC.stream,
+                    builder: (context, snapshot) {
+                      return InkWell(
+                        onTap: () {
+                          fav = !fav;
+                          isFavouriteBLoC.sink.add(fav);
+                          isFavouriteBLoC.getFavourite(token, isFavouriteURL);
+                        },
+                        child: Container(
+                          alignment: Alignment.center,
+                          height: isTablet ? 45 : 55,
+                          width: isTablet ? 45 : 55,
+                          decoration: const BoxDecoration(
+                              color: Color(0xfff1f1f1), shape: BoxShape.circle),
+                          child: (fav)
+                              ? const Icon(
+                                  Icons.favorite,
+                                  color: Color(0xffed3851),
+                                )
+                              : const Icon(
+                                  Icons.favorite_border_sharp,
+                                  color: Color(0xffed3851),
+                                ),
                         ),
-                ),
+                      );
+                    }),
               ],
             ),
           ),
