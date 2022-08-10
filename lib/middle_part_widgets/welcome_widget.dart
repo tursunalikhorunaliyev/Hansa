@@ -63,33 +63,36 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                     log(data.length.toString() +
                         "                     sd d d d d dddd");
                     return isTablet
-                        ? GridView(
-                            physics: BouncingScrollPhysics(),
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: 2,
-                                    childAspectRatio: 5 / 3.1),
-                            children: List.generate(
-                              data.length,
-                              (index) => EventCards(
-                                onTap: () async {
-                                  menuProvider.eventSink
-                                      .add(MenuActions.article);
-                                  ArticleModel statiModel =
-                                      await articleBLoC.getArticle(
-                                          token, snapshot.data![index].link);
-                                  articleBLoC.sink.add(statiModel);
-                                },
-                                buttonColor: const Color(0xffff163e),
-                                buttonText: 'Смотреть',
-                                isDate: true,
-                                month: toDateString(
-                                    snapshot.data![index].date.substring(5, 7)),
-                                day:
-                                    snapshot.data![index].date.substring(8, 10),
-                                title: data[index].title,
-                                url: data[index].pictureLink,
-                                isFavourite: data[index].isFavorite,
+                        ? Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 25),
+                            child: GridView(
+                              physics: BouncingScrollPhysics(),
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      childAspectRatio: 5 / 3.1),
+                              children: List.generate(
+                                data.length,
+                                (index) => EventCards(
+                                  onTap: () async {
+                                    menuProvider.eventSink
+                                        .add(MenuActions.article);
+                                    ArticleModel statiModel =
+                                        await articleBLoC.getArticle(
+                                            token, snapshot.data![index].link);
+                                    articleBLoC.sink.add(statiModel);
+                                  },
+                                  buttonColor: const Color(0xffff163e),
+                                  buttonText: 'Смотреть',
+                                  isDate: true,
+                                  month: toDateString(snapshot.data![index].date
+                                      .substring(5, 7)),
+                                  day: snapshot.data![index].date
+                                      .substring(8, 10),
+                                  title: data[index].title,
+                                  url: data[index].pictureLink,
+                                  isFavourite: data[index].isFavorite,
+                                ),
                               ),
                             ),
                           )
