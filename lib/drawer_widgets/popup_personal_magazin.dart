@@ -44,7 +44,7 @@ class _PopupPersonalMagazinState extends State<PopupPersonalMagazin> {
                   color: const Color(0xFF000000),
                   borderRadius: BorderRadius.circular(radius)),
               child: Padding(
-                padding: const EdgeInsets.all(10),
+                padding: const EdgeInsets.all(14),
                 child: Column(
                   children: [
                     Padding(

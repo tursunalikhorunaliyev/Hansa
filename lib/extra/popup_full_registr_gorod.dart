@@ -46,7 +46,9 @@ class _PopupFullRegistrGorodState extends State<PopupFullRegistrGorod> {
               padding: const EdgeInsets.only(left: 11, right: 9),
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 100),
-                height: isTablet ? 43 : snapshotSizeDrawer.data!,
+                height: isTablet
+                    ? snapshotSizeDrawer.data!
+                    : snapshotSizeDrawer.data!,
                 width: isTablet ? double.infinity : 360,
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -65,8 +67,8 @@ class _PopupFullRegistrGorodState extends State<PopupFullRegistrGorod> {
                               text,
                               style: text == "Город"
                                   ? GoogleFonts.montserrat(
-                                      fontSize: isTablet ? 13 : 10,
-                                      color: const Color(0xFF444444))
+                                    fontSize: isTablet ? 13 : 10,
+                                    color: const Color(0xFF444444))
                                   : GoogleFonts.montserrat(
                                       fontSize: isTablet ? 13 : 10,
                                       fontWeight: FontWeight.w500,
