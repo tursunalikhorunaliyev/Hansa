@@ -1,18 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-//Sahar 9 da
 class TextIcon extends StatefulWidget {
   String? text;
   String? iconUrl;
   Color rang;
   Color colorIcon;
+  double size;
+  double widthSize;
 
   TextIcon(
       {Key? key,
       required this.text,
       required this.iconUrl,
-      this.rang = const Color(0xFFffffff), this.colorIcon = const Color(0xFFffffff)})
+      this.rang = const Color(0xFFffffff), this.colorIcon = const Color(0xFFffffff), this.size = 20, this.widthSize = 22})
       : super(key: key);
 
   @override
@@ -27,12 +28,13 @@ class _TextIconState extends State<TextIcon> {
       children: [
         Image.asset(
           widget.iconUrl.toString(),
-          height: 20,
-          width: 20,
+          height: widget.size,
+          width:  widget.size,
           color: widget.colorIcon,
+        
         ),
-        const SizedBox(
-          width: 22,
+         SizedBox(
+          width: widget.widthSize,
         ),
         Text(
           widget.text.toString(),

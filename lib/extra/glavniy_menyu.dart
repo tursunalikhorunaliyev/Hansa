@@ -239,7 +239,7 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                   .getFamiliyaController.text);
                               log(providerPersonalDannieTextFilelds
                                   .getDataRojdeniyaController.text);
-    
+
                               log(providerPersonalDannieTextFilelds
                                   .getTelefonController.text);
                               log("1");
@@ -260,7 +260,6 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                       .getFamiliyaController.text,
                                   providerPersonalDannieTextFilelds
                                       .getDataRojdeniyaController.text,
-                              
                                   providerPersonalDannieTextFilelds
                                       .getTelefonController.text,
                                   "1",
@@ -495,10 +494,18 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                     ),
                                   ),
                                 ),
+                          SizedBox(
+                            height: isTablet ? 40 : 20,
+                          ),
                           Padding(
-                            padding: const EdgeInsets.only(left: 39),
-                            child: TextIcon(text: "Задать вопрос", iconUrl: "assets/question.png"),
-                          )   ,   
+                            padding: const EdgeInsets.only(left: 33),
+                            child: TextIcon(
+                              text: "Задать вопрос",
+                              iconUrl: "assets/question.png",
+                              size: 30,
+                              widthSize: 18,
+                            ),
+                          ),
                           SizedBox(
                             height: isTablet ? 40 : 20,
                           ),
@@ -550,7 +557,6 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
     });
     print(response.statusCode);
     print(response.body);
-    print("Bloc Glavniy Menu Edit Napisat ----------------------------------");
 
     return jsonDecode(response.body);
   }
