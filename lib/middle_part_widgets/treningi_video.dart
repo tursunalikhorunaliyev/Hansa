@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hansa_app/extra/custom_clip_item.dart';
+import 'package:hansa_app/extra/custom_tablet_stati_item.dart';
 import 'package:hansa_app/extra/custom_title.dart';
 import 'package:hansa_app/training_video_section/custom_tablet_photos.dart';
 import 'package:hansa_app/training_video_section/custom_treningi_photos.dart';
 import 'package:provider/provider.dart';
 import 'package:sticky_headers/sticky_headers/widget.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class TreningiVideo extends StatelessWidget {
   const TreningiVideo({Key? key}) : super(key: key);
@@ -38,26 +40,53 @@ class TreningiVideo extends StatelessWidget {
                 imagePath: "assets/kak_title.png",
                 title: "Похожие мероприятия",
               ),
-              content: Column(
-                children: List.generate(
-                  15,
-                  (index) => Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CustomClipItem(
-                        onTap: () {},
-                        backgroundColor: const Color(0xff000004),
-                        buttonColor: const Color(0xffe21a37),
-                        buttonTextColor: const Color(0xffffffff),
-                        titleColor: const Color(0xffffffff),
-                        buttonText: "Смотреть",
-                        title:
-                            "Иммерсивное шоу \"Увидимся\nна кухне\" г. Санкт-Петербург:\n06/06/2",
+              content: isTablet
+                  ? Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 11.w),
+                          child: GridView(
+                            physics: const BouncingScrollPhysics(),
+                            shrinkWrap: true,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    childAspectRatio: 10 / 3),
+                            children: List.generate(
+                              30,
+                              (index) => CustomStatiTabletItem(
+                                  onTap: () {},
+                                  backgroundColor: const Color(0xff000004),
+                                  buttonColor: const Color(0xffe21a37),
+                                  buttonTextColor: const Color(0xffffffff),
+                                  titleColor: const Color(0xffffffff),
+                                  buttonText: "Смотреть",
+                                  title:
+                                      "Иммерсивное шоу \"Увидимся\nна кухне\" г. Санкт-Петербург:\n06/06/2"),
+                            ),
+                          ),
+                        ),
+                      ],
+                    )
+                  : Column(
+                      children: List.generate(
+                        15,
+                        (index) => Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CustomClipItem(
+                                onTap: () {},
+                                backgroundColor: const Color(0xff000004),
+                                buttonColor: const Color(0xffe21a37),
+                                buttonTextColor: const Color(0xffffffff),
+                                titleColor: const Color(0xffffffff),
+                                buttonText: "Смотреть",
+                                title:
+                                    "Иммерсивное шоу \"Увидимся\nна кухне\" г. Санкт-Петербург:\n06/06/2"),
+                          ],
+                        ),
                       ),
-                    ],
-                  ),
-                ),
-              ),
+                    ),
             ),
           ],
         ),
