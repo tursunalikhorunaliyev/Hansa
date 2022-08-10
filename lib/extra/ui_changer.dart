@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
@@ -73,6 +74,7 @@ class _UIChangerState extends State<UIChanger> {
             stream: provider.eventStream,
             initialData: MenuActions.welcome,
             builder: (context, snapshot) {
+      
               if (snapshot.data != MenuActions.video) {
                 videoControlProvider.sink.add(false);
                 playProvider.sink.add([false, "", ""]);

@@ -4,6 +4,7 @@ import 'package:hansa_app/api_models.dart/model_glavniy_menu_user_info.dart';
 import 'package:hansa_app/blocs/bloc_glavniy_menu_user_info.dart';
 import 'package:hansa_app/enums/enum_action_view.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 
 class ReferalSilka extends StatelessWidget {
   const ReferalSilka({Key? key}) : super(key: key);
@@ -66,10 +67,16 @@ class ReferalSilka extends StatelessWidget {
             const SizedBox(
               width: 30,
             ),
-            Image.asset(
-              "assets/free-icon-sharethis-1532422.png",
-              height: isTablet ? 30 : 20,
-              width: isTablet ? 30 : 20,
+            InkWell(
+              onTap: () {
+                Share.share("https://pub.dev/packages/share_plus");
+                
+              },
+              child: Image.asset(
+                "assets/free-icon-sharethis-1532422.png",
+                height: isTablet ? 30 : 20,
+                width: isTablet ? 30 : 20,
+              ),
             ),
             SizedBox(
               height: isTablet ? 60 : 0,
