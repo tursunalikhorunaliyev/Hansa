@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -34,10 +35,22 @@ class _CustomCalendarState extends State<CustomCalendar> {
       padding:
           EdgeInsets.only(left: 25.w, right: 25.w, top: isTablet ? 12.h : 0.h),
       child: SfDateRangePicker(
+        monthViewSettings: DateRangePickerMonthViewSettings(
+         viewHeaderStyle: DateRangePickerViewHeaderStyle(
+           
+           textStyle: TextStyle(color: Colors.white)
+         )
+        ),
         
         selectionColor: Colors.red,
+        
+        selectionShape: DateRangePickerSelectionShape.rectangle,
+        
+       
         backgroundColor: const Color(0xFF232323),
+
         headerStyle: const DateRangePickerHeaderStyle(
+          
             textStyle: TextStyle(color: Colors.white)),
         onSelectionChanged: (date) {
           List<DateTime> list1 = date.value as List<DateTime>;
@@ -45,10 +58,19 @@ class _CustomCalendarState extends State<CustomCalendar> {
              
           }
         },
-        monthCellStyle: const DateRangePickerMonthCellStyle(
-         
+        
+        
+      
+        monthCellStyle:  DateRangePickerMonthCellStyle(
+        
+          cellDecoration: BoxDecoration(
+            color: Color(0xFFFFFFFF),
+            borderRadius: BorderRadius.circular(0)
+          ),
+        
           disabledDatesDecoration: BoxDecoration(
-            color: Colors.amber
+            color: Color(0xFF232323),
+             borderRadius: BorderRadius.circular(0)
           ),
           disabledDatesTextStyle: TextStyle(color: Colors.white),
           textStyle: TextStyle(color: Colors.white),

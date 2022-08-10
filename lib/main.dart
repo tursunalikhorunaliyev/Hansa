@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card_controller.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hansa_app/api_services/country_type_service.dart';
 import 'package:hansa_app/blocs/article_bloc.dart';
@@ -99,6 +100,16 @@ class MyApp extends StatelessWidget {
           Provider(create: (context) => BlocFlipLogin()),
         ],
         child: const MaterialApp(
+          localizationsDelegates: [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate
+          ],
+          supportedLocales: [
+            const Locale("en"),
+            const Locale("ru"),
+            const Locale("ar")
+          ],
+         locale: Locale("ru"),
           debugShowCheckedModeBanner: false,
           home: HansaZagruzka(),
         ),
