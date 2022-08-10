@@ -105,11 +105,12 @@ class _ObucheniyaCardState extends State<ObucheniyaCard> {
               )),
           Padding(
             padding: EdgeInsets.only(
-                top: isTablet ? 150 : 181, left: isTablet ? 305 : 0),
+              top: isTablet ? 150 : 181,
+            ),
             child: Row(
               children: [
                 Spacer(
-                  flex: 9,
+                  flex: isTablet ? 13 : 9,
                 ),
                 Container(
                   alignment: Alignment.center,
@@ -129,7 +130,7 @@ class _ObucheniyaCardState extends State<ObucheniyaCard> {
                         ),
                 ),
                 Spacer(
-                  flex: 1,
+                  flex: isTablet ? 2 : 1,
                 )
               ],
             ),
