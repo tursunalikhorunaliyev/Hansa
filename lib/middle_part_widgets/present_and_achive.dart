@@ -97,6 +97,7 @@ class _PresentArchiveState extends State<PresentArchive> {
                                 child: GridView(
                                   controller: scroll,
                                   shrinkWrap: true,
+                                  physics: BouncingScrollPhysics(),
                                   gridDelegate:
                                       const SliverGridDelegateWithFixedCrossAxisCount(
                                           crossAxisCount: 2,
