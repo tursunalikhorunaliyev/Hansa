@@ -87,7 +87,7 @@ class Okompaniya extends StatelessWidget {
                           ),
                         ],
                       )
-                    : Image.asset("assets/1649660637Аракелян Ася.jpg.png"),
+                    : Image.asset("assets/1649660637Аракелян Ася.png"),
                 Center(
                   child: Padding(
                     padding: EdgeInsets.only(top: isTablet ? 391 : 174),
@@ -196,7 +196,7 @@ class Okompaniya extends StatelessWidget {
                         showDialog(
                           context: context,
                           useRootNavigator: false,
-                          builder: (contextDialog) => Provider<String>.value(
+                          builder: (context) => Provider<String>.value(
                               value: providerToken.toString(),
                               child: SobshitOProblem()),
                         );

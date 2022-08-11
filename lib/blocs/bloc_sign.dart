@@ -4,7 +4,7 @@ import 'dart:developer';
 import 'package:http/http.dart' as http;
 
 class BlocSignUp {
-  Future signUp(
+  Future<Map<String, dynamic>> signUp(
       lastname,
       firstname,
       email,
@@ -42,5 +42,6 @@ class BlocSignUp {
     log("=======================================");
     log("================ ${jsonDecode(response.body)}================");
     log("=======================================");
+    return jsonDecode(response.body);
   }
 }

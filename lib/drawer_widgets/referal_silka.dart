@@ -8,7 +8,6 @@ import 'package:share_plus/share_plus.dart';
 
 class ReferalSilka extends StatelessWidget {
   const ReferalSilka({Key? key}) : super(key: key);
-//7667
   @override
   Widget build(BuildContext context) {
     final isTablet = Provider.of<bool>(context);
@@ -58,7 +57,7 @@ class ReferalSilka extends StatelessWidget {
                     } else {
                       return Text(
                         "Загрузка..",
-                        style: TextStyle(
+                        style: GoogleFonts.montserrat(
                             fontSize: isTablet ? 17 : 10, color: const Color(0xFFffffff)),
                       );
                     }
@@ -67,16 +66,28 @@ class ReferalSilka extends StatelessWidget {
             const SizedBox(
               width: 30,
             ),
-            InkWell(
-              onTap: () {
-                Share.share("https://pub.dev/packages/share_plus");
+            StreamBuilder<ModelGlavniyMenuUserInfoMain>(
+              stream: blocGlavniyMenuUserInfo.dataStream,
+              builder: (context, snapshot) {
+                if(snapshot.hasData){
+                  return InkWell(
+                  onTap: () {
+                    Share.share(snapshot.data!.data.ref_link);
+                    
+                  },
+                  child: Image.asset(
+                    "assets/free-icon-sharethis-1532422.png",
+                    height: isTablet ? 30 : 20,
+                    width: isTablet ? 30 : 20,
+                  ),
+                );
+
+                }
+                else{
+                  return SizedBox();
+                }
                 
-              },
-              child: Image.asset(
-                "assets/free-icon-sharethis-1532422.png",
-                height: isTablet ? 30 : 20,
-                width: isTablet ? 30 : 20,
-              ),
+              }
             ),
             SizedBox(
               height: isTablet ? 60 : 0,

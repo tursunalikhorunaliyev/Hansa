@@ -181,15 +181,9 @@ class _FullRegistrState extends State<FullRegistr> {
                                   selectorTextStyle: style(
                                       FontWeight.w500,
                                       isTablet,
-                                      phoneIsEmpty
-                                          ? Colors.red
-                                          : Colors.black),
-                                  textStyle: style(
-                                      FontWeight.w500,
-                                      isTablet,
-                                      phoneIsEmpty
-                                          ? Colors.red
-                                          : Colors.black),
+                                      phoneIsEmpty ? Colors.red : Colors.black),
+                                  textStyle: style(FontWeight.w500, isTablet,
+                                      phoneIsEmpty ? Colors.red : Colors.black),
                                   selectorConfig: SelectorConfig(
                                       leadingPadding: 0,
                                       useEmoji: false,
@@ -599,43 +593,54 @@ class _FullRegistrState extends State<FullRegistr> {
     if (lastname.isEmpty) setState(() => lastnameIsEmpty = true);
     if (email.isEmpty) setState(() => emailIsEmpty = true);
     if (shopadress.isEmpty) setState(() => adressIsEmpty = true);
-    if (phone.length < 6) setState(() => phoneIsEmpty = true);
-    if (bornedAt == '..') setState(() => dateIsEmpty = true);
-    if (nazvaniya.isEmpty) setState(() => nazvaniyaIsEmpty = true);
+    if (phone.length < 5) setState(() => phoneIsEmpty = true);
+    if (bornedAt.length < 3) setState(() => dateIsEmpty = true);
+    if (nazvaniya.isEmpty && shopnet.isEmpty)
+      setState(() => nazvaniyaIsEmpty = true);
     if (dolj.isEmpty) setState(() => doljnostIsEmpty = true);
     if (gorod.isEmpty) setState(() => gorodIsEmpty = true);
     if (firstname.isNotEmpty &&
         lastname.isNotEmpty &&
         email.isNotEmpty &&
-        phone.isNotEmpty &&
-        bornedAt == '..' &&
+        phone.length > 5 &&
+        bornedAt.length > 3 &&
         (nazvaniya.isNotEmpty || shopnet.isNotEmpty) &&
         dolj.isNotEmpty &&
         gorod.isNotEmpty &&
         shopadress.isNotEmpty) {
-      providerFlip['signin']!.toggleCard();
+      BlocSignUp()
+          .signUp(
+        lastname,
+        firstname,
+        email,
+        bornedAt,
+        dolj,
+        nazvaniya,
+        shopnet,
+        shopadress,
+        phone,
+        "1",
+        gorod,
+        secondToggle.text,
+        thirdToggle.text,
+        fourthToggle.text,
+      )
+          .then((value) {
+        if (value['status'] as bool == false) {
+          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            content: Text("Проверьте корректность заполненных данных"),
+            backgroundColor: Colors.red,
+          ));
+        } else {
+          providerFlip['signin']!.toggleCard();
+        }
+      });
     } else {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text("Заполните пустые поля"),
         backgroundColor: Colors.red,
       ));
     }
-    BlocSignUp().signUp(
-      lastname,
-      firstname,
-      email,
-      bornedAt,
-      dolj,
-      nazvaniya,
-      shopnet,
-      shopadress,
-      phone,
-      "1",
-      gorod,
-      secondToggle.text,
-      thirdToggle.text,
-      fourthToggle.text,
-    );
   }
 
   InputDecoration inputDecoration(bool isTablet, Color color, var hintColor) {

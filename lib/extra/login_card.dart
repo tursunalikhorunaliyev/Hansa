@@ -260,12 +260,17 @@ class _LoginCardState extends State<LoginCard> {
                           )),
                       Padding(
                         padding: EdgeInsets.only(bottom: 36.h),
-                        child: Text(
-                          'Забыли пароль?',
-                          style: GoogleFonts.montserrat(
-                              fontSize: isTablet ? 10.sp : 12.sp,
-                              fontWeight: FontWeight.w500,
-                              color: const Color(0xffa1b7c2)),
+                        child: InkWell(
+                          onTap: () {
+                            
+                          },
+                          child: Text(
+                            'Забыли пароль?',
+                            style: GoogleFonts.montserrat(
+                                fontSize: isTablet ? 10.sp : 12.sp,
+                                fontWeight: FontWeight.w500,
+                                color: const Color(0xffa1b7c2)),
+                          ),
                         ),
                       )
                     ],

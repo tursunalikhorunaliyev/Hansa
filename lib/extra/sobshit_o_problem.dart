@@ -9,15 +9,21 @@ import 'package:hansa_app/extra/sobshit_o_problem_success.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
-class SobshitOProblem extends StatelessWidget {
+class SobshitOProblem extends StatefulWidget {
   const SobshitOProblem({Key? key}) : super(key: key);
+
+  @override
+  State<SobshitOProblem> createState() => _SobshitOProblemState();
+}
+
+class _SobshitOProblemState extends State<SobshitOProblem> {
+  GlobalKey<FlipCardState> cardKey = GlobalKey<FlipCardState>();
+  final textFieldController = TextEditingController();
+  final blocEmptySobshit = BlocEmptySobshit();
 
   @override
   Widget build(BuildContext context) {
     final providerToken = Provider.of<String>(context);
-    final textFieldController = TextEditingController();
-  final blocEmptySobshit = BlocEmptySobshit();
-  GlobalKey<FlipCardState> cardKey = GlobalKey<FlipCardState>();
 
     return FlipCard(
       key: cardKey,
@@ -85,6 +91,9 @@ class SobshitOProblem extends StatelessWidget {
                                                 horizontal: 24),
                                             child: TextField(
                                               controller: textFieldController,
+                                              onChanged: (value) {
+                                                blocEmptySobshit.dataSink.add(false);
+                                              },
                                               maxLines: 5,
                                               cursorColor:
                                                   const Color(0xffa1b7c2),
@@ -224,12 +233,9 @@ class SobshitOProblem extends StatelessWidget {
       ),
       back: SobshitOProblemSuccess(),
     );
-
-
   }
 
-
-   Future<ModelOKompaniyaNapisatMain> getData(String token, String text) async {
+  Future<ModelOKompaniyaNapisatMain> getData(String token, String text) async {
     http.Response response = await http.post(
         Uri.parse("http://hansa-lab.ru/api/site/add-problem"),
         headers: {"token": token},
@@ -240,5 +246,4 @@ class SobshitOProblem extends StatelessWidget {
 
     return ModelOKompaniyaNapisatMain.fromMap(jsonDecode(response.body));
   }
-
 }
