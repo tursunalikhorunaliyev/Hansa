@@ -129,11 +129,13 @@ class DrawerStats extends StatelessWidget {
                             ),
                           );
                         } else {
-                          return SpinKitPulse(
-                            color: Color(0xffe21a37),
+                          return SizedBox(
+                            height: 330,
+                            child: SpinKitPulse(
+                              color: Color(0xffe21a37),
+                            ),
                           );
                         }
-                        
                       }),
                 )),
             Padding(
