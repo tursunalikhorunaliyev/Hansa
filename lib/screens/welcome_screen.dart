@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hansa_app/blocs/bloc_change_profile.dart';
 import 'package:hansa_app/blocs/bloc_play_video.dart';
+
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/classes/izbrannoe_view.dart';
 import 'package:hansa_app/extra/glavniy_menyu.dart';
@@ -23,11 +24,11 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     final playProvider = Provider.of<BlocPlayVideo>(context);
-    GlobalKey<ScaffoldState> scaffoldKey = GlobalKey();
+    GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     final isTablet = Provider.of<bool>(context);
-    final isFavourite = IzbrannoeView();
+    
     final menuProvider = Provider.of<MenuEventsBloC>(context);
-    final blocChangeProfileProvider = Provider.of<BlocChangeProfile>(context);
+    
     return WillPopScope(
       onWillPop: () async {
         if (menuProvider.list.length > 1) {
@@ -43,14 +44,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         child: Scaffold(
           drawerEnableOpenDragGesture: false,
           resizeToAvoidBottomInset: false,
-          drawer: MultiProvider(providers: [
-            ChangeNotifierProvider(
-              create: (context) => isFavourite,
-            ),
-            Provider(
+          drawer:  Provider(
               create: (context) => ProviderPersonalTextFields(),
-            )
-          ], child: const GlavniyMenyu()),
+              child: const GlavniyMenyu(),
+            ),
           key: scaffoldKey,
           bottomNavigationBar: StreamBuilder<MenuActions>(
               initialData: MenuActions.welcome,
@@ -90,9 +87,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         ),
                         InkWell(
                           onTap: () {
-                            isFavourite.setFavourite(true);
+                            
+                           
+                           scaffoldKey.currentState!.openDrawer();
+                           
+                            
 
-                            scaffoldKey.currentState!.openDrawer();
+                            
                           },
                           child: Icon(
                             CupertinoIcons.heart,
