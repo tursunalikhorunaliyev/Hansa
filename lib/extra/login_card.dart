@@ -12,7 +12,6 @@ import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
 import 'package:hansa_app/providers/provider_for_flipping/flip_login_provider.dart';
 import 'package:hansa_app/providers/providers_for_login/password_visibility_provider.dart';
 import 'package:hansa_app/screens/welcome_screen.dart';
-import 'package:hansa_app/blocs/toggle_switcher_bloc.dart';
 import 'package:provider/provider.dart';
 
 class LoginCard extends StatefulWidget {
@@ -105,7 +104,9 @@ class _LoginCardState extends State<LoginCard> {
                             top: isTablet ? 25.h : 30.h),
                         child: TextField(
                           controller: usernameController,
+                          style: TextStyle(fontSize: isTablet ? 18  : null),
                           decoration: InputDecoration(
+                            
                               hintText: 'Ваш e-mail',
                               hintStyle: GoogleFonts.montserrat(
                                 fontWeight: FontWeight.w500,
@@ -130,6 +131,7 @@ class _LoginCardState extends State<LoginCard> {
                             builder: (context, value, child) {
                           return TextField(
                             controller: passwordController,
+                            style: TextStyle(fontSize: isTablet ? 18  : null),
                             obscureText: (!value.getVisibility),
                             decoration: InputDecoration(
                                 hintText: 'Ваш пароль',

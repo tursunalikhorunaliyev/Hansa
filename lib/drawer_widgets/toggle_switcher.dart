@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hansa_app/blocs/toggle_switcher_bloc.dart';
 import 'package:provider/provider.dart';
 
 class ToggleSwitch extends StatefulWidget {

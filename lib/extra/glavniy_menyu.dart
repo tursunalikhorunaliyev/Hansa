@@ -70,10 +70,15 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                       ],
                       shape: BoxShape.circle,
                     ),
-                    child: Image.asset(
-                      "assets/192.png",
-                      height: isTablet ? 60 : 46,
-                      width: isTablet ? 60 : 46,
+                    child: GestureDetector(
+                      onTap: () {
+                        
+                      },
+                      child: Image.asset(
+                        "assets/192.png",
+                        height: isTablet ? 60 : 46,
+                        width: isTablet ? 60 : 46,
+                      ),
                     ),
                   ),
                 ),

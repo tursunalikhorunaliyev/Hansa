@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hansa_app/extra/spin_kit_fading_four.dart';
 import 'package:hansa_app/extra/voyti_ili_sozdat_accaunt.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';

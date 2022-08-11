@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hansa_app/extra/custom_bottom_tablet_item.dart';
-import 'package:hansa_app/extra/custom_double_clip_item.dart';
 
 class TabletKatalogItem extends StatelessWidget {
   const TabletKatalogItem(

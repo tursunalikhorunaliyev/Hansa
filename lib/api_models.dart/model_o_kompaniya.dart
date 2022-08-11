@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 class ModelOKompaniyaMain {
   bool status;

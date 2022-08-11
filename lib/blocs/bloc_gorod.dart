@@ -1,9 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:hansa_app/api_models.dart/model_doljnost.dart';
 import 'package:hansa_app/api_models.dart/model_gorod.dart';
-import 'package:hansa_app/blocs/bloc_magazin.dart';
 import 'package:hansa_app/enums/enum_action_view.dart';
 import 'package:http/http.dart' as http;
 

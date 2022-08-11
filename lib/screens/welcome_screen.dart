@@ -154,7 +154,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 stream: playProvider.stream,
                 initialData: const [false, "", "", false],
                 builder: (context, snapshot) {
-                  print(snapshot.data!);
                   if (snapshot.data![1].toString().isEmpty) {
                     return const SizedBox();
                   } else {
