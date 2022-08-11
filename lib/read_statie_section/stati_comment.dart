@@ -2,8 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class StatiComment extends StatefulWidget {
-   StatiComment({Key? key , required this.rating}) : super(key: key);
-String rating;
+  const StatiComment(
+      {Key? key,
+      required this.rating,
+      required this.name,
+      required this.comment,
+      required this.imageURl})
+      : super(key: key);
+  final String rating;
+  final String name;
+  final String comment;
+  final String imageURl;
   @override
   State<StatiComment> createState() => _StatiCommentState();
 }
@@ -16,12 +25,11 @@ class _StatiCommentState extends State<StatiComment> {
         Row(
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.circular(90),
-                
-                child: Image.asset(
+                borderRadius: BorderRadius.circular(90),
+                child: Image.network(
                   height: 48.66666666666667,
-                width: 49,
-                  "assets/Gary White.png",
+                  width: 49,
+                  widget.imageURl,
                   fit: BoxFit.cover,
                 )),
             const SizedBox(
@@ -51,7 +59,7 @@ class _StatiCommentState extends State<StatiComment> {
                   height: 7,
                 ),
                 Text(
-                  "Сергей Антонов",
+                  widget.name,
                   style: GoogleFonts.montserrat(
                     color: const Color(0xFF474747),
                     fontSize: 15.65333333333333,
@@ -67,7 +75,7 @@ class _StatiCommentState extends State<StatiComment> {
         Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              "Отличный материал, мне понравился.",
+              widget.comment,
               style: GoogleFonts.montserrat(),
             )),
         const SizedBox(

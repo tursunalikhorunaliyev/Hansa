@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hansa_app/api_services/country_type_service.dart';
 import 'package:hansa_app/blocs/bloc_change_profile.dart';
 import 'package:hansa_app/blocs/bloc_change_title.dart';
+import 'package:hansa_app/blocs/bloc_comment_stati.dart';
 import 'package:hansa_app/blocs/bloc_flip_login.dart';
 import 'package:hansa_app/blocs/bloc_play_video.dart';
 import 'package:hansa_app/blocs/bloc_video_controll.dart';
@@ -22,6 +23,7 @@ import 'package:hansa_app/providers/provider_for_flipping/provider_for_flipping.
 import 'package:hansa_app/blocs/toggle_switcher_bloc.dart';
 import 'package:hansa_app/providers/providers_for_video_title/video_index_provider.dart';
 import 'package:hansa_app/providers/providers_for_video_title/video_title_provider.dart';
+import 'package:hansa_app/providers/stati_id_provider.dart';
 import 'package:hansa_app/providers/treningi_video_changer_provider.dart';
 import 'package:hansa_app/screens/hansa_zagruzka.dart';
 import 'package:hansa_app/screens/splash_screen.dart';
@@ -51,7 +53,7 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 812),
       builder: (context, child) => MultiProvider(
         providers: [
-         
+          ChangeNotifierProvider(create: (context) => StatiIdProvider()),
           ChangeNotifierProvider(
             create: (context) => TreningiVideoChangerProvider(),
           ),
