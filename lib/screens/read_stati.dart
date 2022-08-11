@@ -262,15 +262,17 @@ class ReadStati extends StatelessWidget {
               ),
             );
           } else {
-            return Padding(
-              padding:
-                  EdgeInsets.only(top: MediaQuery.of(context).size.width / 2),
-              child: Center(
-                child: Lottie.asset(
-                  'assets/pre.json',
-                  height: 70,
-                  width: 70,
-                ),
+            return Expanded(
+              child: Column(
+                children: [
+                  Spacer(),
+                  Lottie.asset(
+                    'assets/pre.json',
+                    height: 70,
+                    width: 70,
+                  ),
+                  Spacer()
+                ],
               ),
             );
           }
