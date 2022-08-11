@@ -48,7 +48,9 @@ class _TextFieldForFullRegisterState extends State<TextFieldForFullRegister> {
               child: TextField(
                 focusNode: focusNode,
                 controller: widget.textEditingController,
-                onTap: widget.onTap,
+                onTap: () {
+                  widget.onTap();
+                },
                 onChanged: (value) {
                   if (value.isEmpty) {
                     isHint = true;

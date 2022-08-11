@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/country_model.dart';
 import 'package:hansa_app/blocs/bloc_popup_drawer.dart';
@@ -6,7 +7,15 @@ import 'package:hansa_app/blocs/hansa_country_api.dart';
 import 'package:provider/provider.dart';
 
 class PopupFullRegistrGorod extends StatefulWidget {
-  PopupFullRegistrGorod({Key? key}) : super(key: key);
+  final Color borderColor;
+  final Color hintColor;
+  final VoidCallback onTap;
+  PopupFullRegistrGorod(
+      {Key? key,
+      required this.borderColor,
+      required this.hintColor,
+      required this.onTap})
+      : super(key: key);
 
   @override
   State<PopupFullRegistrGorod> createState() => _PopupFullRegistrGorodState();
@@ -32,6 +41,7 @@ class _PopupFullRegistrGorodState extends State<PopupFullRegistrGorod> {
         builder: (context, snapshotSizeDrawer) {
           return InkWell(
             onTap: () {
+              widget.onTap();
               blocPopupDrawer.dataSink
                   .add(snapshotSizeDrawer.data! == 38 ? 200 : 38);
               radius = radius == 54 ? 10 : 54;
@@ -47,7 +57,9 @@ class _PopupFullRegistrGorodState extends State<PopupFullRegistrGorod> {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(radius),
-                  border: Border.all(width: 0.1),
+                  border: Border.all(
+                      width: widget.borderColor == Colors.red ? 0.9 : 0.1,
+                      color: widget.borderColor),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.only(left: 10, top: 12),
@@ -61,8 +73,8 @@ class _PopupFullRegistrGorodState extends State<PopupFullRegistrGorod> {
                               text,
                               style: text == "Город"
                                   ? GoogleFonts.montserrat(
-                                    fontSize: isTablet ? 13 : 10,
-                                    color: const Color(0xFF444444))
+                                      fontSize: isTablet ? 13 : 10,
+                                      color: widget.hintColor)
                                   : GoogleFonts.montserrat(
                                       fontSize: isTablet ? 13 : 10,
                                       fontWeight: FontWeight.w500,

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/store_model.dart';
@@ -8,7 +7,15 @@ import 'package:hansa_app/providers/new_shop_provider.dart';
 import 'package:provider/provider.dart';
 
 class PopupFullRegistrNazvaniySeti extends StatefulWidget {
-  PopupFullRegistrNazvaniySeti({Key? key}) : super(key: key);
+  final Color borderColor;
+  final Color hintColor;
+  final VoidCallback onTap;
+  PopupFullRegistrNazvaniySeti(
+      {Key? key,
+      required this.borderColor,
+      required this.hintColor,
+      required this.onTap})
+      : super(key: key);
 
   @override
   State<PopupFullRegistrNazvaniySeti> createState() =>
@@ -37,6 +44,7 @@ class _PopupFullRegistrNazvaniySetiState
         builder: (context, snapshotSizeDrawer) {
           return InkWell(
             onTap: () {
+              widget.onTap();
               blocPopupDrawer.dataSink
                   .add(snapshotSizeDrawer.data! == 38 ? 250 : 38);
               radius = radius == 54 ? 10 : 54;
@@ -45,12 +53,16 @@ class _PopupFullRegistrNazvaniySetiState
               padding: const EdgeInsets.only(left: 11, right: 9),
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 100),
-                height: isTablet ? snapshotSizeDrawer.data! : snapshotSizeDrawer.data!,
+                height: isTablet
+                    ? snapshotSizeDrawer.data!
+                    : snapshotSizeDrawer.data!,
                 width: isTablet ? double.infinity : 360,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(radius),
-                  border: Border.all(width: 0.1),
+                  border: Border.all(
+                      width: widget.borderColor == Colors.red ? 0.9 : 0.1,
+                      color: widget.borderColor),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.only(left: 10, top: 12),
@@ -65,7 +77,7 @@ class _PopupFullRegistrNazvaniySetiState
                             style: text == "Названия сети"
                                 ? GoogleFonts.montserrat(
                                     fontSize: isTablet ? 13 : 10,
-                                    color: const Color(0xFF444444))
+                                    color: widget.hintColor)
                                 : GoogleFonts.montserrat(
                                     fontSize: isTablet ? 13 : 10,
                                     fontWeight: FontWeight.w500,
