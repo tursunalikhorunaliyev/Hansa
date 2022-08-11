@@ -6,7 +6,15 @@ import 'package:hansa_app/blocs/hansa_job_api.dart';
 import 'package:provider/provider.dart';
 
 class PopupFullRegistrDoljnost extends StatefulWidget {
-  PopupFullRegistrDoljnost({Key? key}) : super(key: key);
+  final Color borderColor;
+  final Color hintColor;
+  final VoidCallback onTap;
+  PopupFullRegistrDoljnost(
+      {Key? key,
+      required this.borderColor,
+      required this.hintColor,
+      required this.onTap})
+      : super(key: key);
 
   @override
   State<PopupFullRegistrDoljnost> createState() =>
@@ -34,6 +42,7 @@ class _PopupFullRegistrDoljnostState extends State<PopupFullRegistrDoljnost> {
         builder: (context, snapshotSizeDrawer) {
           return InkWell(
             onTap: () {
+              widget.onTap();
               blocPopupDrawer.dataSink
                   .add(snapshotSizeDrawer.data! == 38 ? 200 : 38);
               radius = radius == 54 ? 10 : 54;
@@ -49,7 +58,9 @@ class _PopupFullRegistrDoljnostState extends State<PopupFullRegistrDoljnost> {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(radius),
-                  border: Border.all(width: 0.1),
+                  border: Border.all(
+                      width: widget.borderColor == Colors.red ? 0.9 : 0.1,
+                      color: widget.borderColor),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.only(left: 10, top: 12),
@@ -64,7 +75,7 @@ class _PopupFullRegistrDoljnostState extends State<PopupFullRegistrDoljnost> {
                               style: text == "Должность"
                                   ? GoogleFonts.montserrat(
                                       fontSize: isTablet ? 13 : 10,
-                                      color: const Color(0xFF444444))
+                                      color: widget.hintColor)
                                   : GoogleFonts.montserrat(
                                       fontSize: isTablet ? 13 : 10,
                                       fontWeight: FontWeight.w500,

@@ -29,7 +29,6 @@ class _ToggleSwitchState extends State<ToggleSwitch> {
 
   @override
   Widget build(BuildContext context) {
-    
     final switcher = Provider.of<TextEditingController>(context);
     return Center(
       child: SizedBox(
@@ -43,10 +42,8 @@ class _ToggleSwitchState extends State<ToggleSwitch> {
                   : Alignment.centerRight;
             });
             if (align == Alignment.centerRight) {
-              
               switcher.text = "1";
             } else {
-            
               switcher.text = "0";
             }
             widget.onButton();
@@ -66,17 +63,6 @@ class _ToggleSwitchState extends State<ToggleSwitch> {
                 child: Container(
                   width: widget.tickerSize,
                   decoration: BoxDecoration(
-                      boxShadow: [
-                        widget.boxShadow == true
-                            ? BoxShadow(
-                                color: const Color.fromARGB(255, 184, 184, 184),
-                                blurRadius:
-                                    align == Alignment.centerLeft ? 0 : 10,
-                                offset: align == Alignment.centerLeft
-                                    ? const Offset(0, 0)
-                                    : const Offset(0, 5))
-                            : const BoxShadow()
-                      ],
                       color: align == Alignment.centerRight
                           ? widget.colorCircle
                           : Colors.grey[350],
