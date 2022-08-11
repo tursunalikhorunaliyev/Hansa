@@ -28,6 +28,7 @@ class ReadStati extends StatelessWidget {
   Widget build(BuildContext context) {
     final isTablet = Provider.of<bool>(context);
     final readStatiModelProvider = Provider.of<ReadStatiBLoC>(context);
+    positionDouble = isTablet?600:300;
     return StreamBuilder<ReadStatiModel>(
         stream: readStatiModelProvider.stream,
         builder: (context, snapshot) {
