@@ -47,9 +47,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               initialData: MenuActions.welcome,
               stream: menuProvider.eventStream,
               builder: (context, snapshot) {
-                return (snapshot.data! == MenuActions.chitatStati)
-                    ? const SizedBox()
-                    : SizedBox(
+                return  SizedBox(
                         height: 70.h,
                         child: Container(
                           color: const Color(0xffffffff),

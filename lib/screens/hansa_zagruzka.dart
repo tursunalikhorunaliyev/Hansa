@@ -27,9 +27,6 @@ class HansaZagruzka extends StatelessWidget {
     final flipLoginProvider = Provider.of<FlipLoginProvider>(context);
     return MultiProvider(
       providers: [
-       
-       
-       
         Provider<LoginAnimBloc>(
           create: (context) => loginAnimBloc,
         ),
@@ -82,10 +79,7 @@ class HansaZagruzka extends StatelessWidget {
                   ),
                 ),
                 back: Consumer<LoginClickedProvider>(
-
                   builder: (context, value, child) {
-                    
-                  
                       return Center(
                         child: value.getAction == LoginAction.login
                             ? SingleChildScrollView(

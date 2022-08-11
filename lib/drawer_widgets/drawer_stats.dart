@@ -18,7 +18,7 @@ class DrawerStats extends StatelessWidget {
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
       child: Container(
-        height: isTablet ? 650 : null,
+       // height: isTablet ? 650 : null,
         color: const Color(0xFFffffff),
         child: Column(
           children: [
@@ -37,7 +37,7 @@ class DrawerStats extends StatelessWidget {
                           return DataTable(
                             headingRowHeight: 20,
                             columnSpacing: 10,
-                            dataRowHeight: 31,
+                            dataRowHeight: isTablet ? 45  : 10,
                             horizontalMargin: 1,
                             columns: [
                               DataColumn(
@@ -129,11 +129,13 @@ class DrawerStats extends StatelessWidget {
                             ),
                           );
                         } else {
-                          return SpinKitPulse(
-                            color: Color(0xffe21a37),
+                          return SizedBox(
+                            height: 330,
+                            child: SpinKitPulse(
+                              color: Color(0xffe21a37),
+                            ),
                           );
                         }
-                        
                       }),
                 )),
             Padding(
