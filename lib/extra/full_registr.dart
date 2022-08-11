@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/blocs/data_burn_text_changer_bloc.dart';
 import 'package:hansa_app/blocs/hansa_country_api.dart';
@@ -27,9 +28,12 @@ class _FullRegistrState extends State<FullRegistr> {
   bool nameIsEmpty = false;
   bool lastnameIsEmpty = false;
   bool emailIsEmpty = false;
-  bool adressIsEmpty = false;
   bool phoneIsEmpty = false;
   bool dateIsEmpty = false;
+  bool nazvaniyaIsEmpty = false;
+  bool doljnostIsEmpty = false;
+  bool gorodIsEmpty = false;
+  bool adressIsEmpty = false;
 
   final dateRangeController = DateRangePickerController();
   final imyaTextEditingController = TextEditingController();
@@ -45,6 +49,7 @@ class _FullRegistrState extends State<FullRegistr> {
   final thirdToggle = TextEditingController(text: "0");
   final fourthToggle = TextEditingController(text: "0");
   final dateBurnBloC = DateBornTextBloC();
+  FocusNode node = FocusNode();
   @override
   Widget build(BuildContext context) {
     final flipLoginProvider = Provider.of<FlipLoginProvider>(context);
@@ -112,7 +117,7 @@ class _FullRegistrState extends State<FullRegistr> {
                             isTablet ? FontWeight.normal : FontWeight.normal,
                         borderColor:
                             nameIsEmpty ? Colors.red : const Color(0xFF000000),
-                        hintColor: nameIsEmpty ? Colors.red : Colors.black,
+                        hintColor: nameIsEmpty ? Colors.red : Color(0xFF444444),
                         onTap: () => setState(() => nameIsEmpty = false),
                       ),
                       const SizedBox(
@@ -128,7 +133,9 @@ class _FullRegistrState extends State<FullRegistr> {
                         borderColor: lastnameIsEmpty
                             ? Colors.red
                             : const Color(0xFF000000),
-                        hintColor: lastnameIsEmpty ? Colors.red : Colors.black,
+                        hintColor: lastnameIsEmpty
+                            ? Colors.red
+                            : const Color(0xFF444444),
                         onTap: () => setState(() => lastnameIsEmpty = false),
                       ),
                       const SizedBox(
@@ -143,7 +150,8 @@ class _FullRegistrState extends State<FullRegistr> {
                             isTablet ? FontWeight.normal : FontWeight.normal,
                         borderColor:
                             emailIsEmpty ? Colors.red : const Color(0xFF000000),
-                        hintColor: emailIsEmpty ? Colors.red : Colors.black,
+                        hintColor:
+                            emailIsEmpty ? Colors.red : const Color(0xFF444444),
                         onTap: () => setState(() => emailIsEmpty = false),
                       ),
                       const SizedBox(
@@ -156,29 +164,45 @@ class _FullRegistrState extends State<FullRegistr> {
                           child: Container(
                             color: Colors.white,
                             height: 38,
-                            child: InternationalPhoneNumberInput(
-                              onInputChanged: (value) {
-                                phoneTextFieldController.text =
-                                    value.phoneNumber!;
-                              },
-                              inputDecoration: inputDecoration(
-                                  isTablet,
-                                  phoneIsEmpty ? Colors.red : Colors.black,
-                                  phoneIsEmpty ? Colors.red : Colors.black),
-                              keyboardType: TextInputType.phone,
-                              selectorTextStyle: style(
-                                  FontWeight.w500,
-                                  isTablet,
-                                  phoneIsEmpty ? Colors.red : Colors.black),
-                              textStyle: style(FontWeight.w500, isTablet,
-                                  phoneIsEmpty ? Colors.red : Colors.black),
-                              selectorConfig: SelectorConfig(
-                                  leadingPadding: 0,
-                                  useEmoji: false,
-                                  showFlags: false,
-                                  setSelectorButtonAsPrefixIcon: true,
-                                  selectorType:
-                                      PhoneInputSelectorType.BOTTOM_SHEET),
+                            child: Stack(
+                              children: [
+                                InternationalPhoneNumberInput(
+                                  focusNode: node,
+                                  onInputChanged: (value) {
+                                    phoneTextFieldController.text =
+                                        value.phoneNumber!;
+                                  },
+                                  inputDecoration: inputDecoration(
+                                    isTablet,
+                                    phoneIsEmpty ? Colors.red : Colors.black,
+                                    phoneIsEmpty ? Colors.red : null,
+                                  ),
+                                  keyboardType: TextInputType.phone,
+                                  selectorTextStyle: style(
+                                      FontWeight.normal,
+                                      isTablet,
+                                      phoneIsEmpty
+                                          ? Colors.red
+                                          : Color(0xff444444)),
+                                  textStyle: style(
+                                      FontWeight.normal,
+                                      isTablet,
+                                      phoneIsEmpty
+                                          ? Colors.red
+                                          : Color(0xff444444)),
+                                  selectorConfig: SelectorConfig(
+                                      leadingPadding: 0,
+                                      useEmoji: false,
+                                      showFlags: false,
+                                      setSelectorButtonAsPrefixIcon: true,
+                                      selectorType:
+                                          PhoneInputSelectorType.BOTTOM_SHEET),
+                                ),
+                                GestureDetector(onTap: () {
+                                  setState(() => phoneIsEmpty = false);
+                                  node.requestFocus();
+                                }),
+                              ],
                             ),
                           ),
                         ),
@@ -188,6 +212,7 @@ class _FullRegistrState extends State<FullRegistr> {
                       ),
                       InkWell(
                         onTap: () {
+                          setState(() => dateIsEmpty = false);
                           showCupertinoModalPopup(
                               context: context,
                               builder: (context) {
@@ -262,7 +287,7 @@ class _FullRegistrState extends State<FullRegistr> {
                             color: const Color(0xFFffffff),
                             borderRadius: BorderRadius.circular(54),
                             border: Border.all(
-                                width: 0.1,
+                                width: dateIsEmpty ? 0.9 : 0.1,
                                 color: dateIsEmpty ? Colors.red : Colors.black),
                           ),
                         ),
@@ -272,19 +297,41 @@ class _FullRegistrState extends State<FullRegistr> {
                       ),
                       Provider(
                           create: (context) => nazvaniyaTextFieldController,
-                          child: PopupFullRegistrNazvaniySeti()),
+                          child: PopupFullRegistrNazvaniySeti(
+                            borderColor:
+                                nazvaniyaIsEmpty ? Colors.red : Colors.black,
+                            hintColor: nazvaniyaIsEmpty
+                                ? Colors.red
+                                : Color(0xff444444),
+                            onTap: () =>
+                                setState(() => nazvaniyaIsEmpty = false),
+                          )),
                       const SizedBox(
                         height: 4,
                       ),
                       Provider(
                           create: (context) => doljnostTextFieldController,
-                          child: PopupFullRegistrDoljnost()),
+                          child: PopupFullRegistrDoljnost(
+                            borderColor:
+                                doljnostIsEmpty ? Colors.red : Colors.black,
+                            hintColor: doljnostIsEmpty
+                                ? Colors.red
+                                : Color(0xff444444),
+                            onTap: () =>
+                                setState(() => doljnostIsEmpty = false),
+                          )),
                       const SizedBox(
                         height: 4,
                       ),
                       Provider(
                           create: (context) => gorodTextFieldController,
-                          child: PopupFullRegistrGorod()),
+                          child: PopupFullRegistrGorod(
+                            borderColor:
+                                gorodIsEmpty ? Colors.red : Colors.black,
+                            hintColor:
+                                gorodIsEmpty ? Colors.red : Color(0xff444444),
+                            onTap: () => setState(() => gorodIsEmpty = false),
+                          )),
                       const SizedBox(
                         height: 4,
                       ),
@@ -299,7 +346,9 @@ class _FullRegistrState extends State<FullRegistr> {
                         borderColor: adressIsEmpty
                             ? Colors.red
                             : const Color(0xFF000000),
-                        hintColor: adressIsEmpty ? Colors.red : Colors.black,
+                        hintColor: adressIsEmpty
+                            ? Colors.red
+                            : const Color(0xFF444444),
                         onTap: () => setState(() => adressIsEmpty = false),
                       ),
                       const SizedBox(
@@ -547,13 +596,16 @@ class _FullRegistrState extends State<FullRegistr> {
     if (lastname.isEmpty) setState(() => lastnameIsEmpty = true);
     if (email.isEmpty) setState(() => emailIsEmpty = true);
     if (shopadress.isEmpty) setState(() => adressIsEmpty = true);
-    if (phone.isEmpty) setState(() => phoneIsEmpty = true);
-    if (bornedAt == '...') setState(() => dateIsEmpty = true);
+    if (phone.length < 6) setState(() => phoneIsEmpty = true);
+    if (bornedAt == '..') setState(() => dateIsEmpty = true);
+    if (nazvaniya.isEmpty) setState(() => nazvaniyaIsEmpty = true);
+    if (dolj.isEmpty) setState(() => doljnostIsEmpty = true);
+    if (gorod.isEmpty) setState(() => gorodIsEmpty = true);
     if (firstname.isNotEmpty &&
         lastname.isNotEmpty &&
         email.isNotEmpty &&
         phone.isNotEmpty &&
-        bornedAt == '...' &&
+        bornedAt == '..' &&
         (nazvaniya.isNotEmpty || shopnet.isNotEmpty) &&
         dolj.isNotEmpty &&
         gorod.isNotEmpty &&
@@ -583,19 +635,22 @@ class _FullRegistrState extends State<FullRegistr> {
     );*/
   }
 
-  InputDecoration inputDecoration(bool isTablet, Color color, Color textColor) {
+  InputDecoration inputDecoration(bool isTablet, Color color, var hintColor) {
     return InputDecoration(
       hintText: "(223) 232-13-12",
-      isDense: true,
+      // isDense: true,
       focusedBorder: OutlineInputBorder(
-        borderSide: const BorderSide(width: .9, color: Colors.grey),
+        borderSide: BorderSide(width: .9, color: color),
         borderRadius: BorderRadius.circular(54),
       ),
-      focusedErrorBorder: outlineInputBorder(.1, color),
+      focusedErrorBorder: outlineInputBorder(
+        color == Colors.red ? 0.9 : .1,
+        Colors.black,
+      ),
       enabledBorder: outlineInputBorder(color == Colors.red ? 0.9 : 0.2, color),
-      errorBorder: outlineInputBorder(.1, color),
+      errorBorder: outlineInputBorder(color == Colors.red ? 0.9 : .1, color),
       contentPadding: const EdgeInsets.symmetric(vertical: 2),
-      hintStyle: style(FontWeight.normal, isTablet, textColor),
+      hintStyle: TextStyle(color: hintColor),
     );
   }
 
