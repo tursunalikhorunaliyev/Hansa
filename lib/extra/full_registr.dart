@@ -25,6 +25,13 @@ class FullRegistr extends StatefulWidget {
 }
 
 class _FullRegistrState extends State<FullRegistr> {
+  bool nameIsEmpty = false;
+  bool lastnameIsEmpty = false;
+  bool emailIsEmpty = false;
+  bool adressIsEmpty = false;
+  bool phoneIsEmpty = false;
+  bool dateIsEmpty = false;
+
   final dateRangeController = DateRangePickerController();
   final imyaTextEditingController = TextEditingController();
   final familiyaTextEditingController = TextEditingController();
@@ -98,32 +105,48 @@ class _FullRegistrState extends State<FullRegistr> {
                         height: 18,
                       ),
                       TextFieldForFullRegister(
-                          textEditingController: imyaTextEditingController,
-                          text: "Имя",
-                          height: isTablet ? 45 : 38,
-                          size: isTablet ? 13 : 10,
-                          weight:
-                              isTablet ? FontWeight.normal : FontWeight.normal),
+                        textEditingController: imyaTextEditingController,
+                        text: "Имя",
+                        height: isTablet ? 45 : 38,
+                        size: isTablet ? 13 : 10,
+                        weight:
+                            isTablet ? FontWeight.normal : FontWeight.normal,
+                        borderColor:
+                            nameIsEmpty ? Colors.red : const Color(0xFF000000),
+                        hintColor: nameIsEmpty ? Colors.red : Colors.black,
+                        onTap: () => setState(() => nameIsEmpty = false),
+                      ),
                       const SizedBox(
                         height: 4,
                       ),
                       TextFieldForFullRegister(
-                          textEditingController: familiyaTextEditingController,
-                          text: "Фамилия",
-                          height: isTablet ? 45 : 38,
-                          size: isTablet ? 13 : 10,
-                          weight:
-                              isTablet  ? FontWeight.normal :  FontWeight.normal),
+                        textEditingController: familiyaTextEditingController,
+                        text: "Фамилия",
+                        height: isTablet ? 45 : 38,
+                        size: isTablet ? 13 : 10,
+                        weight:
+                            isTablet ? FontWeight.normal : FontWeight.normal,
+                        borderColor: lastnameIsEmpty
+                            ? Colors.red
+                            : const Color(0xFF000000),
+                        hintColor: lastnameIsEmpty ? Colors.red : Colors.black,
+                        onTap: () => setState(() => lastnameIsEmpty = false),
+                      ),
                       const SizedBox(
                         height: 5,
                       ),
                       TextFieldForFullRegister(
-                          textEditingController: emailTextFielController,
-                          text: "Email",
-                          height: isTablet ? 45 : 38,
-                          size: isTablet ? 13 : 10,
-                          weight:
-                              isTablet ? FontWeight.normal : FontWeight.normal),
+                        textEditingController: emailTextFielController,
+                        text: "Email",
+                        height: isTablet ? 45 : 38,
+                        size: isTablet ? 13 : 10,
+                        weight:
+                            isTablet ? FontWeight.normal : FontWeight.normal,
+                        borderColor:
+                            emailIsEmpty ? Colors.red : const Color(0xFF000000),
+                        hintColor: emailIsEmpty ? Colors.red : Colors.black,
+                        onTap: () => setState(() => emailIsEmpty = false),
+                      ),
                       const SizedBox(
                         height: 4,
                       ),
@@ -139,13 +162,19 @@ class _FullRegistrState extends State<FullRegistr> {
                                 phoneTextFieldController.text =
                                     value.phoneNumber!;
                               },
-                              inputDecoration: inputDecoration(isTablet),
+                              inputDecoration: inputDecoration(
+                                  isTablet,
+                                  phoneIsEmpty ? Colors.red : Colors.black,
+                                  phoneIsEmpty ? Colors.red : Colors.black),
                               keyboardType: TextInputType.phone,
-                              selectorTextStyle: style(FontWeight.w500, isTablet),
-                              textStyle: style(FontWeight.w500, isTablet),
+                              selectorTextStyle: style(
+                                  FontWeight.w500,
+                                  isTablet,
+                                  phoneIsEmpty ? Colors.red : Colors.black),
+                              textStyle: style(FontWeight.w500, isTablet,
+                                  phoneIsEmpty ? Colors.red : Colors.black),
                               selectorConfig: SelectorConfig(
                                   leadingPadding: 0,
-                                  
                                   useEmoji: false,
                                   showFlags: false,
                                   setSelectorButtonAsPrefixIcon: true,
@@ -215,12 +244,16 @@ class _FullRegistrState extends State<FullRegistr> {
                                     snapshot.data!,
                                     style: snapshot.data == "Дата рождения"
                                         ? GoogleFonts.montserrat(
-                                    fontSize: isTablet ? 13 : 10,
-                                    color: const Color(0xFF444444))
+                                            fontSize: isTablet ? 13 : 10,
+                                            color: dateIsEmpty
+                                                ? Colors.red
+                                                : const Color(0xFF444444))
                                         : GoogleFonts.montserrat(
                                             fontSize: isTablet ? 13 : 10,
                                             fontWeight: FontWeight.w500,
-                                            color: Colors.black),
+                                            color: dateIsEmpty
+                                                ? Colors.red
+                                                : Colors.black),
                                   );
                                 }),
                           ),
@@ -229,7 +262,9 @@ class _FullRegistrState extends State<FullRegistr> {
                           decoration: BoxDecoration(
                             color: const Color(0xFFffffff),
                             borderRadius: BorderRadius.circular(54),
-                            border: Border.all(width: 0.1),
+                            border: Border.all(
+                                width: 0.1,
+                                color: dateIsEmpty ? Colors.red : Colors.black),
                           ),
                         ),
                       ),
@@ -255,13 +290,19 @@ class _FullRegistrState extends State<FullRegistr> {
                         height: 4,
                       ),
                       TextFieldForFullRegister(
-                          textEditingController:
-                              adresTorgoviySetTextFielController,
-                          text: "Адрес торговой сети",
-                          height: isTablet ? 45 : 38,
-                          size: isTablet ? 13 : 10,
-                          weight:
-                              isTablet  ? FontWeight.normal :  FontWeight.normal),
+                        textEditingController:
+                            adresTorgoviySetTextFielController,
+                        text: "Адрес торговой сети",
+                        height: isTablet ? 45 : 38,
+                        size: isTablet ? 13 : 10,
+                        weight:
+                            isTablet ? FontWeight.normal : FontWeight.normal,
+                        borderColor: adressIsEmpty
+                            ? Colors.red
+                            : const Color(0xFF000000),
+                        hintColor: adressIsEmpty ? Colors.red : Colors.black,
+                        onTap: () => setState(() => adressIsEmpty = false),
+                      ),
                       const SizedBox(
                         height: 10,
                       ),
@@ -377,12 +418,13 @@ class _FullRegistrState extends State<FullRegistr> {
                           child: GestureDetector(
                             onTap: () {
                               FocusManager.instance.primaryFocus?.unfocus();
-                              providerFlip['signin']!.toggleCard();
-                              List<String> date = dateRangeController
-                                  .selectedDate!
-                                  .toIso8601String()
-                                  .split("T")[0]
-                                  .split("-");
+                              List<String> date =
+                                  dateRangeController.selectedDate != null
+                                      ? dateRangeController.selectedDate!
+                                          .toIso8601String()
+                                          .split("T")[0]
+                                          .split("-")
+                                      : ["", "", ""];
                               toSignUp(
                                 firstname: imyaTextEditingController.text,
                                 lastname: familiyaTextEditingController.text,
@@ -398,6 +440,7 @@ class _FullRegistrState extends State<FullRegistr> {
                                 smsemail: secondToggle.text,
                                 lichnostdannix: thirdToggle.text,
                                 personalnixdannix: fourthToggle.text,
+                                providerFlip: providerFlip,
                               );
                             },
                             child: Container(
@@ -499,21 +542,30 @@ class _FullRegistrState extends State<FullRegistr> {
       required String shopnet,
       required String smsemail,
       required String lichnostdannix,
-      required String personalnixdannix}) {
-    log(lastname.toString());
-    log(firstname.toString());
-    log(email.toString());
-    log(phone.toString());
-    log(bornedAt);
-    log(nazvaniya.toString());
-    log(dolj.toString());
-    log(shopnet);
-    log(gorod.toString());
-    log(shopadress.toString());
-    log(firstToggle.text);
-    log(smsemail);
-    log(lichnostdannix);
-    log(personalnixdannix);
+      required String personalnixdannix,
+      required dynamic providerFlip}) {
+    if (firstname.isEmpty) setState(() => nameIsEmpty = true);
+    if (lastname.isEmpty) setState(() => lastnameIsEmpty = true);
+    if (email.isEmpty) setState(() => emailIsEmpty = true);
+    if (shopadress.isEmpty) setState(() => adressIsEmpty = true);
+    if (phone.isEmpty) setState(() => phoneIsEmpty = true);
+    if (bornedAt == '...') setState(() => dateIsEmpty = true);
+    if (firstname.isNotEmpty &&
+        lastname.isNotEmpty &&
+        email.isNotEmpty &&
+        phone.isNotEmpty &&
+        bornedAt == '...' &&
+        (nazvaniya.isNotEmpty || shopnet.isNotEmpty) &&
+        dolj.isNotEmpty &&
+        gorod.isNotEmpty &&
+        shopadress.isNotEmpty) {
+      providerFlip['signin']!.toggleCard();
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text("Заполните пустые поля"),
+        backgroundColor: Colors.red,
+      ));
+    }
     /*BlocSignUp().signUp(
       lastname,
       firstname,
@@ -532,34 +584,33 @@ class _FullRegistrState extends State<FullRegistr> {
     );*/
   }
 
-  InputDecoration inputDecoration(bool isTablet) {
+  InputDecoration inputDecoration(bool isTablet, Color color, Color textColor) {
     return InputDecoration(
       hintText: "(223) 232-13-12",
       isDense: true,
-      fillColor: Colors.white,
       focusedBorder: OutlineInputBorder(
         borderSide: const BorderSide(width: .9, color: Colors.grey),
         borderRadius: BorderRadius.circular(54),
       ),
-      focusedErrorBorder: outlineInputBorder(.1),
-      enabledBorder: outlineInputBorder(.2),
-      errorBorder: outlineInputBorder(.1),
+      focusedErrorBorder: outlineInputBorder(.1, color),
+      enabledBorder: outlineInputBorder(color == Colors.red ? 0.9 : 0.2, color),
+      errorBorder: outlineInputBorder(.1, color),
       contentPadding: const EdgeInsets.symmetric(vertical: 2),
-      hintStyle: style(FontWeight.normal, isTablet),
+      hintStyle: style(FontWeight.normal, isTablet, textColor),
     );
   }
 
-  OutlineInputBorder outlineInputBorder(double width) {
+  OutlineInputBorder outlineInputBorder(double width, Color color) {
     return OutlineInputBorder(
-        borderSide: BorderSide(width: width),
+        borderSide: BorderSide(width: width, color: color),
         borderRadius: BorderRadius.circular(54));
   }
 
-  TextStyle style(FontWeight fontWeight, bool isTablet) {
+  TextStyle style(FontWeight fontWeight, bool isTablet, Color color) {
     return GoogleFonts.montserrat(
       fontWeight: fontWeight,
       fontSize: isTablet ? 13 : 10,
-      color: const Color(0xFF444444),
+      color: color,
     );
   }
 }

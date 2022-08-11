@@ -7,15 +7,21 @@ class TextFieldForFullRegister extends StatefulWidget {
   final double height;
   final double size;
   final FontWeight weight;
+  final Color hintColor;
+  final Color borderColor;
   final TextEditingController textEditingController;
-  const TextFieldForFullRegister(
-      {Key? key,
-      required this.text,
-      required this.height,
-      required this.size,
-      required this.weight,
-      required this.textEditingController})
-      : super(key: key);
+  final VoidCallback onTap;
+  const TextFieldForFullRegister({
+    Key? key,
+    required this.text,
+    required this.height,
+    required this.size,
+    required this.weight,
+    required this.textEditingController,
+    required this.borderColor,
+    required this.hintColor,
+    required this.onTap,
+  }) : super(key: key);
   @override
   State<TextFieldForFullRegister> createState() =>
       _TextFieldForFullRegisterState();
@@ -24,7 +30,6 @@ class TextFieldForFullRegister extends StatefulWidget {
 class _TextFieldForFullRegisterState extends State<TextFieldForFullRegister> {
   bool isHint = true;
   final focusNode = FocusNode();
-  
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +46,9 @@ class _TextFieldForFullRegisterState extends State<TextFieldForFullRegister> {
                 borderRadius: BorderRadius.circular(54),
               ),
               child: TextField(
-                
                 focusNode: focusNode,
                 controller: widget.textEditingController,
+                onTap: widget.onTap,
                 onChanged: (value) {
                   if (value.isEmpty) {
                     isHint = true;
@@ -55,17 +60,19 @@ class _TextFieldForFullRegisterState extends State<TextFieldForFullRegister> {
                 },
                 cursorHeight: 18,
                 style: GoogleFonts.montserrat(
-                                fontSize: isTablet ? 13 : 10,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.black),
+                    fontSize: isTablet ? 13 : 10,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.black),
                 decoration: InputDecoration(
                   focusedBorder: OutlineInputBorder(
                     borderSide:
-                        const BorderSide(width: 0.9, color: Colors.grey),
+                        BorderSide(width: 0.9, color: widget.borderColor),
                     borderRadius: BorderRadius.circular(54),
                   ),
                   enabledBorder: OutlineInputBorder(
-                      borderSide: const BorderSide(width: 0.1),
+                      borderSide: BorderSide(
+                          width: widget.borderColor == Colors.red ? 0.9 : 0.1,
+                          color: widget.borderColor),
                       borderRadius: BorderRadius.circular(54)),
                   contentPadding:
                       const EdgeInsets.symmetric(vertical: 2, horizontal: 13),
@@ -90,7 +97,7 @@ class _TextFieldForFullRegisterState extends State<TextFieldForFullRegister> {
                               style: GoogleFonts.montserrat(
                                   fontWeight: widget.weight,
                                   fontSize: widget.size,
-                                  color: const Color(0xFF444444))),
+                                  color: widget.hintColor)),
                           TextSpan(
                               text: "*",
                               style: GoogleFonts.montserrat(
