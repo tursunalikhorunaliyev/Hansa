@@ -2,7 +2,6 @@ import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hansa_app/blocs/bloc_flip_login.dart';
 import 'package:hansa_app/blocs/login_clicked_bloc.dart';
 import 'package:hansa_app/providers/provider_for_flipping/flip_login_provider.dart';
 import 'package:hansa_app/providers/provider_for_flipping/login_clicked_provider.dart';
@@ -21,7 +20,7 @@ class VoytiIliSozdatAccaunt extends StatelessWidget {
     final isTablet = Provider.of<bool>(context);
     final providerFlip = Provider.of<Map<String, FlipCardController>>(context);
     final flipLoginProvider = Provider.of<FlipLoginProvider>(context);
-    final providerClicked = Provider.of<LoginClickedBloc>(context);
+    
     final loginActionProvider = Provider.of<LoginClickedProvider>(context);
 
     return ScreenUtilInit(

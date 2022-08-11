@@ -1,7 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/model_gorod.dart';
 import 'package:hansa_app/blocs/bloc_gorod.dart';
@@ -10,7 +7,7 @@ import 'package:hansa_app/enums/enum_action_view.dart';
 import 'package:provider/provider.dart';
 
 class PopupPersonalGorod extends StatefulWidget {
-  TextEditingController controller = TextEditingController();
+  final TextEditingController controller;
 
   PopupPersonalGorod({Key? key, required this.controller}) : super(key: key);
 

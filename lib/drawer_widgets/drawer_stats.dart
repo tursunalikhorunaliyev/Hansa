@@ -133,7 +133,7 @@ class DrawerStats extends StatelessWidget {
                             color: Color(0xffe21a37),
                           );
                         }
-                        ;
+                        
                       }),
                 )),
             Padding(
