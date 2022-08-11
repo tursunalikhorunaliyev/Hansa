@@ -7,6 +7,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/model_glavniy_menu_user_info.dart';
 import 'package:hansa_app/blocs/bloc_change_profile.dart';
 import 'package:hansa_app/blocs/bloc_glavniy_menu_user_info.dart';
+import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/drawer_widgets/change_profile.dart';
 import 'package:hansa_app/drawer_widgets/drawer_stats.dart';
 import 'package:hansa_app/drawer_widgets/izbrannoe.dart';
@@ -39,10 +40,12 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
     final providerPersonalDannieTextFilelds =
         Provider.of<ProviderPersonalTextFields>(context);
 
+    final menuProvider = Provider.of<MenuEventsBloC>(context);
+
     final blocGlavniyMenuUserInfo = BlocGlavniyMenuUserInfo(providerToken);
 
     blocGlavniyMenuUserInfo.eventSink.add(EnumActionView.view);
-
+    final scafforlKeyProvider = Provider.of<GlobalKey<ScaffoldState>>(context);
     return Drawer(
       backgroundColor: const Color(0xFF333333),
       width: isTablet ? 435 : 326,
@@ -72,7 +75,8 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                     ),
                     child: GestureDetector(
                       onTap: () {
-                        
+                        menuProvider.eventSink.add(MenuActions.welcome);
+                        scafforlKeyProvider.currentState!.closeDrawer();
                       },
                       child: Image.asset(
                         "assets/192.png",
