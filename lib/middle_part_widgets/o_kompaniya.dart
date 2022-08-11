@@ -198,9 +198,7 @@ class Okompaniya extends StatelessWidget {
                           useRootNavigator: false,
                           builder: (contextDialog) => Provider<String>.value(
                               value: providerToken.toString(),
-                              child: SobshitOProblem(
-                              
-                              )),
+                              child: SobshitOProblem()),
                         );
                       },
                       child: Container(
