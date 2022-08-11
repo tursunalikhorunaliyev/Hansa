@@ -8,6 +8,7 @@ import 'package:hansa_app/api_models.dart/model_glavniy_menu_user_info.dart';
 import 'package:hansa_app/blocs/bloc_change_profile.dart';
 import 'package:hansa_app/blocs/bloc_glavniy_menu_user_info.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
+import 'package:hansa_app/classes/izbrannoe_view.dart';
 import 'package:hansa_app/drawer_widgets/change_profile.dart';
 import 'package:hansa_app/drawer_widgets/drawer_stats.dart';
 import 'package:hansa_app/drawer_widgets/izbrannoe.dart';
@@ -31,6 +32,12 @@ class GlavniyMenyu extends StatefulWidget {
 
 class _GlavniyMenyuState extends State<GlavniyMenyu> {
   GlobalKey<ScaffoldState> keyScaffold = GlobalKey();
+  bool isFavourite = false;
+  setFavourite(favourite) {
+    setState(() {
+      isFavourite = favourite;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +53,8 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
 
     blocGlavniyMenuUserInfo.eventSink.add(EnumActionView.view);
     final scafforlKeyProvider = Provider.of<GlobalKey<ScaffoldState>>(context);
+    final favourite = Provider.of<IzbrannoeView>(context);
+
     return Drawer(
       backgroundColor: const Color(0xFF333333),
       width: isTablet ? 435 : 326,
@@ -402,7 +411,9 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
             ),
           ),
           StreamBuilder<ActionChange>(
-            initialData: ActionChange.textIconCard,
+            initialData: favourite.isFavourite
+                ? ActionChange.izboreny
+                : ActionChange.textIconCard,
             stream: blocChangeProfileProvider.dataStream,
             builder: (context, snapshot) {
               return Expanded(
