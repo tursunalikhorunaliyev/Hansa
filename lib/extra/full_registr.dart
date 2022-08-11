@@ -3,8 +3,8 @@ import 'dart:developer';
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hansa_app/blocs/bloc_sign.dart';
 import 'package:hansa_app/blocs/data_burn_text_changer_bloc.dart';
 import 'package:hansa_app/blocs/hansa_country_api.dart';
 import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
@@ -179,17 +179,17 @@ class _FullRegistrState extends State<FullRegistr> {
                                   ),
                                   keyboardType: TextInputType.phone,
                                   selectorTextStyle: style(
-                                      FontWeight.normal,
+                                      FontWeight.w500,
                                       isTablet,
                                       phoneIsEmpty
                                           ? Colors.red
-                                          : Color(0xff444444)),
+                                          : Colors.black),
                                   textStyle: style(
-                                      FontWeight.normal,
+                                      FontWeight.w500,
                                       isTablet,
                                       phoneIsEmpty
                                           ? Colors.red
-                                          : Color(0xff444444)),
+                                          : Colors.black),
                                   selectorConfig: SelectorConfig(
                                       leadingPadding: 0,
                                       useEmoji: false,
@@ -198,10 +198,13 @@ class _FullRegistrState extends State<FullRegistr> {
                                       selectorType:
                                           PhoneInputSelectorType.BOTTOM_SHEET),
                                 ),
-                                GestureDetector(onTap: () {
-                                  setState(() => phoneIsEmpty = false);
-                                  node.requestFocus();
-                                }),
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 35),
+                                  child: GestureDetector(onTap: () {
+                                    setState(() => phoneIsEmpty = false);
+                                    node.requestFocus();
+                                  }),
+                                ),
                               ],
                             ),
                           ),
@@ -617,7 +620,7 @@ class _FullRegistrState extends State<FullRegistr> {
         backgroundColor: Colors.red,
       ));
     }
-    /*BlocSignUp().signUp(
+    BlocSignUp().signUp(
       lastname,
       firstname,
       email,
@@ -632,7 +635,7 @@ class _FullRegistrState extends State<FullRegistr> {
       secondToggle.text,
       thirdToggle.text,
       fourthToggle.text,
-    );*/
+    );
   }
 
   InputDecoration inputDecoration(bool isTablet, Color color, var hintColor) {
