@@ -2,15 +2,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/article_model.dart';
-import 'package:hansa_app/api_models.dart/read_stati_model.dart';
 import 'package:hansa_app/blocs/article_bloc.dart';
-import 'package:hansa_app/blocs/read_stati_bloc.dart';
-import 'package:hansa_app/extra/custom_title.dart';
-import 'package:hansa_app/read_statie_section/part_indicator.dart';
-import 'package:hansa_app/read_statie_section/stati_comment.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
@@ -24,8 +18,6 @@ class ArticleScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final articleBLoC = Provider.of<ArticleBLoC>(context);
-    final token = Provider.of<String>(context);
     final articleBloc = Provider.of<ArticleBLoC>(context);
     return StreamBuilder<ArticleModel>(
         stream: articleBloc.stream,

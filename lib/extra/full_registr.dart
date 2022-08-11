@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/style.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/blocs/data_burn_text_changer_bloc.dart';
 import 'package:hansa_app/blocs/hansa_country_api.dart';
