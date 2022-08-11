@@ -22,6 +22,7 @@ import 'package:hansa_app/providers/providers_for_video_title/video_index_provid
 import 'package:hansa_app/providers/providers_for_video_title/video_title_provider.dart';
 import 'package:hansa_app/providers/treningi_video_changer_provider.dart';
 import 'package:hansa_app/screens/hansa_zagruzka.dart';
+import 'package:hansa_app/screens/splash_screen.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 
@@ -48,7 +49,6 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 812),
       builder: (context, child) => MultiProvider(
         providers: [
-        
           ChangeNotifierProvider(
             create: (context) => TreningiVideoChangerProvider(),
           ),
@@ -108,9 +108,9 @@ class MyApp extends StatelessWidget {
             const Locale("ru"),
             const Locale("ar")
           ],
-         locale: Locale("ru"),
+          locale: Locale("ru"),
           debugShowCheckedModeBanner: false,
-          home: HansaZagruzka(),
+          home: SplashScreen(),
         ),
       ),
     );
