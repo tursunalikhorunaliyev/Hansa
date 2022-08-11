@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 class TextIcon extends StatefulWidget {
-  String? text;
-  String? iconUrl;
-  Color rang;
-  Color colorIcon;
-  double size;
-  double widthSize;
+ final String? text;
+ final String? iconUrl;
+ final Color rang;
+ final Color colorIcon;
+ final double size;
+  final double widthSize;
 
   TextIcon(
       {Key? key,

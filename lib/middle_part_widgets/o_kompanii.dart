@@ -3,10 +3,8 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_services/welcome_api.dart';
-import 'package:hansa_app/blocs/bloc_change_title.dart';
 import 'package:hansa_app/blocs/bloc_play_video.dart';
 import 'package:hansa_app/blocs/download_progress_bloc.dart';
 import 'package:hansa_app/extra/custom_okompanii_item.dart';
@@ -89,8 +87,6 @@ class _OKompaniiState extends State<OKompanii> {
   Widget build(BuildContext context) {
     final isTablet = Provider.of<bool>(context);
     final playProvider = Provider.of<BlocPlayVideo>(context);
-    final blocChangeTitleIndexProvider =
-        Provider.of<BlocChangeTitleIndex>(context);
 
     final token = Provider.of<String>(context);
 

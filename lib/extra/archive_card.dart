@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hansa_app/api_models.dart/favourite_model.dart';
 import 'package:hansa_app/blocs/favourite_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -44,7 +43,6 @@ class _ArchiveCardState extends State<ArchiveCard> {
     final isTablet = Provider.of<bool>(context);
     final isFavouriteBLoC = FavouriteBLoC();
     final token = Provider.of<String>(context);
-    final favouriteModel = FavouriteModel(status: true, data: true);
     bool fav = widget.isFavourite;
     return Padding(
       padding: EdgeInsets.only(top: 15.h, left: 20, right: 20),

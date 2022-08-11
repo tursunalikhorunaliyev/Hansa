@@ -1,14 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/country_model.dart';
-import 'package:hansa_app/api_models.dart/model_doljnost.dart';
-import 'package:hansa_app/blocs/bloc_doljnost.dart';
 import 'package:hansa_app/blocs/bloc_popup_drawer.dart';
 import 'package:hansa_app/blocs/hansa_country_api.dart';
-import 'package:hansa_app/enums/enum_action_view.dart';
 import 'package:provider/provider.dart';
 
 class PopupFullRegistrGorod extends StatefulWidget {

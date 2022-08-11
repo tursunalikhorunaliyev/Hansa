@@ -12,7 +12,6 @@ import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
 import 'package:hansa_app/providers/provider_for_flipping/flip_login_provider.dart';
 import 'package:hansa_app/providers/providers_for_login/password_visibility_provider.dart';
 import 'package:hansa_app/screens/welcome_screen.dart';
-import 'package:hansa_app/blocs/toggle_switcher_bloc.dart';
 import 'package:provider/provider.dart';
 
 class LoginCard extends StatefulWidget {

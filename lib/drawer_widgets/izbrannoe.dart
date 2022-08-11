@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/izbrannoe_model.dart';
 import 'package:hansa_app/blocs/izbrannoe_bloc.dart';
-import 'package:hansa_app/enums/enum_action_view.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class Izbrannoe extends StatefulWidget {
   const Izbrannoe({Key? key}) : super(key: key);
@@ -21,7 +19,6 @@ class _IzbrannoeState extends State<Izbrannoe> {
     final isTablet = Provider.of<bool>(context);
     final token = Provider.of<String>(context);
     final izbrannoeBLoC = IzbrannoeBLoC(token);
-    Future<void>? launched;
     return Center(
       child: Container(
         height: isTablet ? 650 : 460,
@@ -139,13 +136,6 @@ class _IzbrannoeState extends State<Izbrannoe> {
                                               ),
                                               InkWell(
                                                 onTap: () {
-                                                  launched = _launchInBrowser(
-                                                      Uri.parse("https://" +
-                                                          snapshot
-                                                              .data!
-                                                              .data
-                                                              .list[index]
-                                                              .pdfUrl));
                                                 },
                                                 child: Container(
                                                   alignment: Alignment.center,
@@ -210,11 +200,5 @@ class _IzbrannoeState extends State<Izbrannoe> {
   }
 }
 
-_launchInBrowser(Uri url) async {
-  if (!await launchUrl(
-    url,
-    mode: LaunchMode.externalApplication,
-  )) {
-    throw 'Could not launch $url';
-  }
-}
+
+

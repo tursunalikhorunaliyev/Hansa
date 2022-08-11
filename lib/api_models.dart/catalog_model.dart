@@ -1,6 +1,4 @@
-import 'dart:convert';
 
-import 'package:hansa_app/api_models.dart/obucheniya_model_api.dart';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class CatalogModel {

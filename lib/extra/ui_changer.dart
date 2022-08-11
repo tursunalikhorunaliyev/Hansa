@@ -1,9 +1,7 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:hansa_app/blocs/article_bloc.dart';
 import 'package:hansa_app/blocs/bloc_play_video.dart';
 import 'package:hansa_app/blocs/bloc_video_controll.dart';
@@ -55,7 +53,7 @@ class _UIChangerState extends State<UIChanger> {
 
   @override
   void initState() {
-    // TODO: implement initState
+    
     checkNet();
     super.initState();
   }

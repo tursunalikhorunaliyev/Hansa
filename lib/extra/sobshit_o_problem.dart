@@ -2,8 +2,6 @@ import 'dart:convert';
 
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/model_o_kompaniya_napisat.dart';
 import 'package:hansa_app/blocs/bloc_empty_sobshit.dart';
