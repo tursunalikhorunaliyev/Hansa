@@ -21,7 +21,7 @@ class _IzbrannoeState extends State<Izbrannoe> {
     final izbrannoeBLoC = IzbrannoeBLoC(token);
     return Center(
       child: Container(
-        height: isTablet ? 650 : 460,
+        height: isTablet ? 650 : 470,
         width: isTablet ? 500 : 323.6666666666667,
         color: const Color(0xFFffffff),
         child: Column(
