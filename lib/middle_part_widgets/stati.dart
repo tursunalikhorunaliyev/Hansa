@@ -1,12 +1,18 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:hansa_app/api_models.dart/read_stati_model.dart';
+import 'package:hansa_app/api_models.dart/stati_comment_model.dart';
 import 'package:hansa_app/api_models.dart/stati_model.dart';
+import 'package:hansa_app/blocs/bloc_comment_stati.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/blocs/read_stati_bloc.dart';
 import 'package:hansa_app/blocs/stati_bloc.dart';
 import 'package:hansa_app/extra/custom_clip_item.dart';
 import 'package:hansa_app/extra/custom_tablet_stati_item.dart';
 import 'package:hansa_app/extra/custom_title.dart';
+import 'package:hansa_app/providers/stati_id_provider.dart';
+import 'package:hansa_app/read_statie_section/stati_comment.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -28,12 +34,11 @@ class _StatiState extends State<Stati> {
 
   @override
   Widget build(BuildContext context) {
-    final readStatiBloCProvider = Provider.of<ReadStatiBLoC>(context);
     final token = Provider.of<String>(context);
+    final readStatiBloCProvider = Provider.of<ReadStatiBLoC>(context);
+    final statiId = Provider.of<StatiIdProvider>(context);
     final bloc = StatiBLoC(token);
-
     final isTablet = Provider.of<bool>(context);
-
     final statiBloCProvider = Provider.of<MenuEventsBloC>(context);
     return Expanded(
       child: Expanded(
@@ -72,12 +77,13 @@ class _StatiState extends State<Stati> {
                                     onTap: () async {
                                       statiBloCProvider.eventSink
                                           .add(MenuActions.chitatStati);
+                                      String link =
+                                          snapshot.data!.list.list[index].link;
                                       ReadStatiModel statiMOdel =
                                           await readStatiBloCProvider
-                                              .getReadStati(
-                                                  token,
-                                                  snapshot.data!.list
-                                                      .list[index].link);
+                                              .getReadStati(token, link);
+                                      statiId
+                                          .changeIndex(link.split('id=').last);
                                       readStatiBloCProvider.sink
                                           .add(statiMOdel);
                                     },
@@ -104,14 +110,14 @@ class _StatiState extends State<Stati> {
                                   title: snapshot.data!.list.list[index].title,
                                   buttonText: "Читать",
                                   onTap: () async {
+                                    String link =
+                                        snapshot.data!.list.list[index].link;
                                     statiBloCProvider.eventSink
                                         .add(MenuActions.chitatStati);
                                     ReadStatiModel statiMOdel =
                                         await readStatiBloCProvider
-                                            .getReadStati(
-                                                token,
-                                                snapshot.data!.list.list[index]
-                                                    .link);
+                                            .getReadStati(token, link);
+                                    statiId.changeIndex(link.split('id=').last);
                                     readStatiBloCProvider.sink.add(statiMOdel);
                                   },
                                 ),
