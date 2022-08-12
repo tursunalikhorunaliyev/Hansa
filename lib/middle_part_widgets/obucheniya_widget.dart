@@ -74,7 +74,7 @@ class ObucheniyaWidget extends StatelessWidget {
                                     Text(
                                       'Обучающие материалы ',
                                       style: GoogleFonts.montserrat(
-                                          fontSize: isTablet ? 12.sp : 20.sp,
+                                          fontSize: isTablet ? 12.sp : 19.sp,
                                           fontWeight: FontWeight.bold,
                                           color: const Color(0xff272624)),
                                     ),

@@ -53,12 +53,15 @@ class CustomClipItem extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: 18.w, top: 5, bottom: 5),
-                  child: SizedBox(
+                  padding: EdgeInsets.only(left: 18.w, top: 7, bottom: 7),
+                  child: Container(
+                    alignment: Alignment.center,
                     width: 200,
                     child: Text(
                       title,
-                      overflow: TextOverflow.visible,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 4,
+                      softWrap: true,
                       style: GoogleFonts.montserrat(
                         color: titleColor,
                         fontSize: 13.sp,
