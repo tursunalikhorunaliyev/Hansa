@@ -13,9 +13,9 @@ import 'package:video_player/video_player.dart';
 class TopVideoWidget extends StatefulWidget {
   final String url;
   final String title;
-  final bool visible;
+  
   const TopVideoWidget(
-      {Key? key, required this.url, required this.title, required this.visible})
+      {Key? key, required this.url, required this.title})
       : super(key: key);
 
   @override
@@ -98,48 +98,42 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
           Column(
             children: [
               const CustomBlackAppBar(),
-              Visibility(
-                visible: widget.visible,
-                child: Row(
-                  children: const [
-                    BlackCustomTitle(
-                      imagePath: "assets/video_title.png",
-                      title: "Видео",
-                    ),
-                  ],
-                ),
+              Row(
+                children: const [
+                  BlackCustomTitle(
+                    imagePath: "assets/video_title.png",
+                    title: "Видео",
+                  ),
+                ],
               ),
-              Visibility(
-                visible: widget.visible,
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(right: 32),
-                          child: PhysicalModel(
-                            shadowColor: Colors.grey.withOpacity(.5),
-                            color: Colors.transparent,
-                            borderRadius: BorderRadius.circular(64),
-                            elevation: 5,
-                            child: GestureDetector(
-                              onTap: () {},
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(64),
-                                child: Container(
-                                  padding: const EdgeInsets.all(7),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 90,
-                                  ),
-                                  color: const Color(0xffff163e),
-                                  child: Center(
-                                    child: Text(
-                                      "Открыть раздел",
-                                      style: GoogleFonts.montserrat(
-                                        color: const Color(0xffffffff),
-                                        fontSize: 10,
-                                      ),
+              Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 32),
+                        child: PhysicalModel(
+                          shadowColor: Colors.grey.withOpacity(.5),
+                          color: Colors.transparent,
+                          borderRadius: BorderRadius.circular(64),
+                          elevation: 5,
+                          child: GestureDetector(
+                            onTap: () {},
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(64),
+                              child: Container(
+                                padding: const EdgeInsets.all(7),
+                                constraints: const BoxConstraints(
+                                  minWidth: 90,
+                                ),
+                                color: const Color(0xffff163e),
+                                child: Center(
+                                  child: Text(
+                                    "Открыть раздел",
+                                    style: GoogleFonts.montserrat(
+                                      color: const Color(0xffffffff),
+                                      fontSize: 10,
                                     ),
                                   ),
                                 ),
@@ -147,10 +141,10 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                  ],
-                ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
               Column(
                 children: [

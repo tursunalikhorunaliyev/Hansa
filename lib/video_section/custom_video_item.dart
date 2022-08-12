@@ -65,7 +65,7 @@ class _CustomVideoListItemState extends State<CustomVideoListItem> {
                                     .data
                                     .list[widget.index];
                                 playProvider.sink.add(
-                                    [true, video.videoLink, video.title, true]);
+                                    [true, video.videoLink, video.title, false]);
                               },
                               child: Center(
                                 child: Container(
