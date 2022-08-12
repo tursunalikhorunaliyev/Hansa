@@ -18,7 +18,7 @@ class DrawerStats extends StatelessWidget {
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
       child: Container(
-       // height: isTablet ? 650 : 400,
+       // height: isTablet ? 650 : null,
         color: const Color(0xFFffffff),
         child: Column(
           children: [
@@ -152,7 +152,7 @@ class DrawerStats extends StatelessWidget {
                         color: Color(0XFFDBDBDB),
                         blurRadius: 5,
                         spreadRadius: 4,
-                        offset: Offset(0, 6) // changes position of shadow
+                        offset: Offset(0, 4) // changes position of shadow
                         ),
                   ],
                 ),
