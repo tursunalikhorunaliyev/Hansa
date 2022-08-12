@@ -72,7 +72,7 @@ class _OKompaniiState extends State<OKompanii> {
   @override
   Widget build(BuildContext context) {
     final isTablet = Provider.of<bool>(context);
-    final playProvider = Provider.of<BlocPlayVideo>(context);
+    
 
     final token = Provider.of<String>(context);
 
@@ -272,12 +272,7 @@ class _OKompaniiState extends State<OKompanii> {
                                               .list[value.getIndex]
                                               .data
                                               .list[index];
-                                          playProvider.sink.add([
-                                            true,
-                                            video.videoLink,
-                                            video.title,
-                                            false
-                                          ]);
+                                          
                                         },
                                       ),
                                     );
@@ -430,8 +425,7 @@ class _OKompaniiState extends State<OKompanii> {
                                     .list[value.getIndex]
                                     .data
                                     .list[index];
-                                playProvider.sink.add(
-                                    [true, video.videoLink, video.title, true]);
+                                
                                   },
                                 ),
                               ),
