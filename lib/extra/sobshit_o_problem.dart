@@ -92,7 +92,8 @@ class _SobshitOProblemState extends State<SobshitOProblem> {
                                             child: TextField(
                                               controller: textFieldController,
                                               onChanged: (value) {
-                                                blocEmptySobshit.dataSink.add(false);
+                                                blocEmptySobshit.dataSink
+                                                    .add(false);
                                               },
                                               maxLines: 5,
                                               cursorColor:
@@ -160,16 +161,13 @@ class _SobshitOProblemState extends State<SobshitOProblem> {
                                                   onTap: () {
                                                     if (textFieldController
                                                         .text.isNotEmpty) {
+                                                      cardKey.currentState!
+                                                          .toggleCard();
                                                       getData(
                                                               providerToken,
                                                               textFieldController
                                                                   .text)
-                                                          .then((value) {
-                                                        if (value.status) {
-                                                          cardKey.currentState!
-                                                              .toggleCard();
-                                                        }
-                                                      });
+                                                          .then((value) {});
 
                                                       blocEmptySobshit.dataSink
                                                           .add(false);
