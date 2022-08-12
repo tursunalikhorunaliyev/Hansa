@@ -37,7 +37,7 @@ class DrawerStats extends StatelessWidget {
                           return DataTable(
                             headingRowHeight: 20,
                             columnSpacing: 10,
-                            dataRowHeight: isTablet ? 45  : 10,
+                            dataRowHeight: isTablet ? 45  : 30,
                             horizontalMargin: 1,
                             columns: [
                               DataColumn(
@@ -152,7 +152,7 @@ class DrawerStats extends StatelessWidget {
                         color: Color(0XFFDBDBDB),
                         blurRadius: 5,
                         spreadRadius: 4,
-                        offset: Offset(0, 6) // changes position of shadow
+                        offset: Offset(0, 4) // changes position of shadow
                         ),
                   ],
                 ),
