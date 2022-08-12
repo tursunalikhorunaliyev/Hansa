@@ -34,9 +34,7 @@ class _OKompaniiState extends State<OKompanii> {
 
   Future<void> downloadFile(String url, String fileName) async {
     progress = 0;
-    setState(() {
-      downloading = true;
-    });
+    
     String savePath = await getFilePath(fileName);
     Dio dio = Dio();
     dio.download(
@@ -44,24 +42,12 @@ class _OKompaniiState extends State<OKompanii> {
       savePath,
       onReceiveProgress: (recieved, total) {
         print(((recieved / total) * 100).toStringAsFixed(0));
-
         progress = double.parse(((recieved / total) * 100).toStringAsFixed(0));
         blocDownload.streamSink.add(progress);
-        if (progress == 100) {
-          setState(() {
-            isDownloaded = true;
-          });
-        } else if (progress < 100) {}
+       
       },
       deleteOnError: true,
-    ).then((value) {
-      setState(() {
-        if (progress == 100) {
-          isDownloaded = true;
-        }
-        downloading = false;
-      });
-    });
+    );
   }
 
   Future<String> getFilePath(uniqueFileName) async {
@@ -438,18 +424,14 @@ class _OKompaniiState extends State<OKompanii> {
                                         });
                                   },
                                   onTap: () {
-                                    final VideoDetails video = snapshot
-                                        .data!
-                                        .videoListData
-                                        .list[value.getIndex]
-                                        .data
-                                        .list[index];
-                                    playProvider.sink.add([
-                                      true,
-                                      video.videoLink,
-                                      video.title,
-                                      false
-                                    ]);
+                                     final VideoDetails video = snapshot
+                                    .data!
+                                    .videoListData
+                                    .list[value.getIndex]
+                                    .data
+                                    .list[index];
+                                playProvider.sink.add(
+                                    [true, video.videoLink, video.title, true]);
                                   },
                                 ),
                               ),

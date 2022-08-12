@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flip_card/flip_card_controller.dart';
@@ -6,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_services/login_api.dart';
+import 'package:hansa_app/blocs/bloc_empty_sobshit.dart';
+import 'package:hansa_app/blocs/bloc_error_text.dart';
 import 'package:hansa_app/blocs/navigator_bloc.dart';
 import 'package:hansa_app/blocs/progress_button_animation_bloc.dart';
 import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
@@ -13,6 +16,7 @@ import 'package:hansa_app/providers/provider_for_flipping/flip_login_provider.da
 import 'package:hansa_app/providers/providers_for_login/password_visibility_provider.dart';
 import 'package:hansa_app/screens/welcome_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 
 class LoginCard extends StatefulWidget {
   const LoginCard({Key? key}) : super(key: key);
@@ -26,9 +30,11 @@ class _LoginCardState extends State<LoginCard> {
       TextEditingController(text: "umarnematovv98@gmail.com");
 
   final passwordController = TextEditingController(text: "981755");
+  final textFieldController = TextEditingController();
   final switchTextEditingController = TextEditingController();
   final pagerBloc = NavigatorBloC();
   final progressButtonBLoC = ProgressButtonAnmationBLoC();
+  final blocText = BlocErrorText();
   @override
   void initState() {
     pagerBloc.stream.listen((event) {
@@ -48,6 +54,7 @@ class _LoginCardState extends State<LoginCard> {
     final flipLoginProvider = Provider.of<FlipLoginProvider>(context);
     final isTablet = Provider.of<bool>(context);
     final flip = Provider.of<Map<String, FlipCardController>>(context);
+    final blocEmptySobshit = BlocEmptySobshit();
     return ScreenUtilInit(
       designSize: const Size(375, 812),
       builder: (context, child) => GestureDetector(
@@ -104,9 +111,8 @@ class _LoginCardState extends State<LoginCard> {
                             top: isTablet ? 25.h : 30.h),
                         child: TextField(
                           controller: usernameController,
-                          style: TextStyle(fontSize: isTablet ? 18  : null),
+                          style: TextStyle(fontSize: isTablet ? 18 : null),
                           decoration: InputDecoration(
-                            
                               hintText: 'Ваш e-mail',
                               hintStyle: GoogleFonts.montserrat(
                                 fontWeight: FontWeight.w500,
@@ -131,7 +137,7 @@ class _LoginCardState extends State<LoginCard> {
                             builder: (context, value, child) {
                           return TextField(
                             controller: passwordController,
-                            style: TextStyle(fontSize: isTablet ? 18  : null),
+                            style: TextStyle(fontSize: isTablet ? 18 : null),
                             obscureText: (!value.getVisibility),
                             decoration: InputDecoration(
                                 hintText: 'Ваш пароль',
@@ -262,7 +268,191 @@ class _LoginCardState extends State<LoginCard> {
                         padding: EdgeInsets.only(bottom: 36.h),
                         child: InkWell(
                           onTap: () {
-                            
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                textFieldController.text = "";
+                                return Padding(
+                                  padding: const EdgeInsets.all(20),
+                                  child: Center(
+                                    child: Container(
+                                      padding: EdgeInsets.all(30),
+                                      height: 330,
+                                      width: 400,
+                                      decoration: BoxDecoration(
+                                          color: Color(0xFFf2f2f2),
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                      child: Column(
+                                        children: [
+                                          Image.asset("assets/tepaLogo.png"),
+                                          SizedBox(
+                                            height: 30,
+                                          ),
+                                          StreamBuilder<bool>(
+                                              initialData: false,
+                                              stream:
+                                                  blocEmptySobshit.dataStream,
+                                              builder: (context, snapshot) {
+                                                if (snapshot.hasData) {
+                                                  return Material(
+                                                    child: SizedBox(
+                                                      height: 40,
+                                                      child: TextField(
+                                                        onChanged: (value) {
+                                                          blocEmptySobshit
+                                                              .dataSink
+                                                              .add(false);
+                                                        },
+                                                        controller:
+                                                            textFieldController,
+                                                        textAlign:
+                                                            TextAlign.left,
+                                                        decoration: InputDecoration(
+                                                            contentPadding:
+                                                                EdgeInsets.all(
+                                                                    4),
+                                                            hintText: "E-mail",
+                                                            hintStyle: TextStyle(
+                                                                color: Color(
+                                                                    0xFFa0a0a0),
+                                                                fontSize: 14),
+                                                            enabledBorder: OutlineInputBorder(
+                                                                borderSide: BorderSide(
+                                                                    color: snapshot.data ==
+                                                                            true
+                                                                        ? Colors
+                                                                            .red
+                                                                        : Colors
+                                                                            .black)),
+                                                            focusedBorder: OutlineInputBorder(
+                                                                borderSide: BorderSide(
+                                                                    color: snapshot.data ==
+                                                                            true
+                                                                        ? Colors
+                                                                            .red
+                                                                        : Colors
+                                                                            .black))),
+                                                      ),
+                                                    ),
+                                                  );
+                                                } else {
+                                                  return SizedBox();
+                                                }
+                                              }),
+                                          SizedBox(
+                                            height: 5,
+                                          ),
+                                          StreamBuilder<String>(
+                                              stream: blocText.dataStream,
+                                              builder: (context, snapshot) {
+                                                if (snapshot.hasData) {
+                                                  return Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Visibility(
+                                                          visible: snapshot
+                                                                  .data!
+                                                                  .contains(
+                                                                      "Письмо")
+                                                              ? true
+                                                              : false,
+                                                          child: Icon(
+                                                            Icons.check,
+                                                            color: Color(
+                                                                0xFF25b049),
+                                                          )),
+                                                      Text(
+                                                        snapshot.data!,
+                                                        style: TextStyle(
+                                                            color: snapshot
+                                                                    .data!
+                                                                    .contains(
+                                                                        "Письмо")
+                                                                ? Color(
+                                                                    0xFF25b049)
+                                                                : Color(
+                                                                    0xFFe21a37)),
+                                                      ),
+                                                    ],
+                                                  );
+                                                } else {
+                                                  return SizedBox();
+                                                }
+                                              }),
+                                          SizedBox(
+                                            height: 20,
+                                          ),
+                                          GestureDetector(
+                                            onTap: () {
+                                              if (textFieldController
+                                                  .text.isNotEmpty) {
+                                                getData(textFieldController
+                                                        .text)
+                                                    .then((value) {
+                                                  if (value["status"] == true) {
+                                                    blocText.dataSink
+                                                        .add(value["data"]);
+                                                    print(value["data"]);
+                                                  }
+                                                  if (value["status"] ==
+                                                      false) {
+                                                    blocText.dataSink.add(
+                                                        value["message"]
+                                                            ["email"][0]);
+                                                    print(value["message"]
+                                                            ["email"][0] +
+                                                        " bazaaaa");
+                                                  }
+                                                });
+                                              }
+                                              if (textFieldController
+                                                  .text.isEmpty) {
+                                                blocEmptySobshit.dataSink
+                                                    .add(true);
+                                              }
+                                            },
+                                            child: Container(
+                                              alignment: Alignment.center,
+                                              height: 40,
+                                              width: 250,
+                                              decoration: BoxDecoration(
+                                                  color: Color(0xFFfb002b),
+                                                  borderRadius:
+                                                      BorderRadius.circular(5)),
+                                              child: Text(
+                                                "Отправить",
+                                                style: TextStyle(
+                                                  color: Color(0xFFf2f2f2),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            height: 30,
+                                          ),
+                                          Text(
+                                            "При возникновении проблем просьба обращаться в службу поддержки. Почта:",
+                                            textAlign: TextAlign.center,
+                                          ),
+                                          Text(
+                                            "support@hansa-lab.ru",
+                                            style: TextStyle(
+                                                color: Color(0xFFfb002b),
+                                                decoration:
+                                                    TextDecoration.underline,
+                                                fontWeight: FontWeight.w500),
+                                            textAlign: TextAlign.center,
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
                           },
                           child: Text(
                             'Забыли пароль?',
@@ -308,5 +498,16 @@ class _LoginCardState extends State<LoginCard> {
             child: const WelcomeScreen()),
       ),
     );
+  }
+
+  Future<Map<String, dynamic>> getData(String text) async {
+    http.Response response = await http.post(
+        Uri.parse("http://hansa-lab.ru/api/auth/reset-password"),
+        body: {"email": text});
+    print(response.statusCode);
+    print(response.body);
+    print("Bloc Zabili Parol Napisat ----------------------------------");
+
+    return jsonDecode(response.body);
   }
 }
