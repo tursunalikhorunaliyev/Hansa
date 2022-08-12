@@ -1,6 +1,6 @@
 class StatiComentModel {
   bool status;
-  Data data;
+  StatiCommentModelData data;
   StatiComentModel({
     required this.status,
     required this.data,
@@ -9,29 +9,30 @@ class StatiComentModel {
   factory StatiComentModel.fromMap(Map<String, dynamic> map) {
     return StatiComentModel(
       status: map['status'],
-      data: Data.fromMap(map['data']),
+      data: StatiCommentModelData.fromMap(map['data']),
     );
   }
 }
 
-class Data {
-  List<Indata> list;
-  Data({
+class StatiCommentModelData {
+  List<StatiCommentModelItems> list;
+  StatiCommentModelData({
     required this.list,
   });
 
-  factory Data.fromMap(List<dynamic> map) {
-    return Data(list: map.map((e) => Indata.fromMap(e)).toList());
+  factory StatiCommentModelData.fromMap(List<dynamic> map) {
+    return StatiCommentModelData(
+        list: map.map((e) => StatiCommentModelItems.fromMap(e)).toList());
   }
 }
 
-class Indata {
+class StatiCommentModelItems {
   String fullname;
   String date;
   String body;
   String picture_link;
   String rang;
-  Indata({
+  StatiCommentModelItems({
     required this.fullname,
     required this.date,
     required this.body,
@@ -39,12 +40,12 @@ class Indata {
     required this.rang,
   });
 
-  factory Indata.fromMap(Map<String, dynamic> map) {
-    return Indata(
-      fullname: map['fullname'] as String,
-      date: map['date'] as String,
-      body: map['body'] as String,
-      picture_link: map['picture_link'] as String,
+  factory StatiCommentModelItems.fromMap(Map<String, dynamic> map) {
+    return StatiCommentModelItems(
+      fullname: map['fullname'],
+      date: map['date'],
+      body: map['body'],
+      picture_link: map['picture_link'],
       rang: map['rang'].toString(),
     );
   }

@@ -159,7 +159,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ),
               StreamBuilder<List>(
                 stream: playProvider.stream,
-                initialData: const [false, "", "", false],
+                initialData: const [false, "", ""],
                 builder: (context, snapshot) {
                   if (snapshot.data![1].toString().isEmpty) {
                     return const SizedBox();
@@ -171,7 +171,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       child: TopVideoWidget(
                         url: snapshot.data![1],
                         title: snapshot.data![2],
-                        visible: snapshot.data!.last,
+                     
                       ),
                     );
                   }
