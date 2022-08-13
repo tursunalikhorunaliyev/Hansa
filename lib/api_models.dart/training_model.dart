@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 class TrainingModel {
   bool status;
   TraningModelData data;
@@ -15,7 +18,7 @@ class TrainingModel {
 }
 
 class TraningModelData {
-  String webinar;
+  Webinar webinar;
   FutureEvents futureEvents;
   Videos videos;
   EventReports eventReports;
@@ -30,11 +33,30 @@ class TraningModelData {
 
   factory TraningModelData.fromMap(Map<String, dynamic> map) {
     return TraningModelData(
-      webinar: map['webinar'] as String,
+      webinar: Webinar.fromMap(map['webinar']),
       futureEvents: FutureEvents.fromMap(map['futureEvents']),
       videos: Videos.fromMap(map['videos']),
       eventReports: EventReports.fromMap(map['eventReports']),
       events: Events.fromMap(map['events']),
+    );
+  }
+}
+
+class Webinar {
+  String name;
+  String date;
+  String link;
+  Webinar({
+    required this.name,
+    required this.date,
+    required this.link,
+  });
+
+  factory Webinar.fromMap(Map<String, dynamic> map) {
+    return Webinar(
+      name: map['name'],
+      date: map['date'],
+      link: map['_link'],
     );
   }
 }
