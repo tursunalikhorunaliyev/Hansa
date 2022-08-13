@@ -1,13 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hansa_app/api_models.dart/article_model.dart';
 import 'package:hansa_app/api_models.dart/izbrannoe_model.dart';
-import 'package:hansa_app/api_models.dart/read_stati_model.dart';
+import 'package:hansa_app/blocs/article_bloc.dart';
 import 'package:hansa_app/blocs/izbrannoe_bloc.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
-import 'package:hansa_app/blocs/read_stati_bloc.dart';
-import 'package:hansa_app/blocs/stati_bloc.dart';
-import 'package:hansa_app/providers/stati_id_provider.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -22,13 +20,11 @@ class Izbrannoe extends StatefulWidget {
 class _IzbrannoeState extends State<Izbrannoe> {
   @override
   Widget build(BuildContext context) {
+    final scafforlKeyProvider = Provider.of<GlobalKey<ScaffoldState>>(context);
     final isTablet = Provider.of<bool>(context);
     final token = Provider.of<String>(context);
-    final readStatiBloCProvider = Provider.of<ReadStatiBLoC>(context);
-    final statiId = Provider.of<StatiIdProvider>(context);
-
-    final statiBloCProvider = Provider.of<MenuEventsBloC>(context);
-
+    final articleBLoC = Provider.of<ArticleBLoC>(context);
+    final menuProvider = Provider.of<MenuEventsBloC>(context);
     final izbrannoeBLoC = IzbrannoeBLoC(token);
     Future<void>? launched;
     return Center(
@@ -152,19 +148,23 @@ class _IzbrannoeState extends State<Izbrannoe> {
                                                   if (snapshot.data!.data
                                                           .list[index].type ==
                                                       1) {
-                                                    String link = snapshot.data!
-                                                        .data.list[index].link;
-                                                    statiBloCProvider.eventSink
-                                                        .add(MenuActions
-                                                            .chitatStati);
-                                                    ReadStatiModel statiMOdel =
-                                                        await readStatiBloCProvider
-                                                            .getReadStati(
-                                                                token, link);
-                                                    statiId.changeIndex(
-                                                        link.split('id=').last);
-                                                    readStatiBloCProvider.sink
-                                                        .add(statiMOdel);
+                                                    scafforlKeyProvider
+                                                        .currentState!
+                                                        .closeDrawer();
+                                                    menuProvider.eventSink.add(
+                                                        MenuActions.article);
+
+                                                    ArticleModel statiModel =
+                                                        await articleBLoC
+                                                            .getArticle(
+                                                                token,
+                                                                snapshot
+                                                                    .data!
+                                                                    .data
+                                                                    .list[index]
+                                                                    .link);
+                                                    articleBLoC.sink
+                                                        .add(statiModel);
                                                   } else {
                                                     setState(() {
                                                       launched = launchInBrowser(
@@ -178,10 +178,30 @@ class _IzbrannoeState extends State<Izbrannoe> {
                                                   height: isTablet ? 22 : 21,
                                                   width: isTablet ? 74 : 63,
                                                   decoration: BoxDecoration(
+                                                    border: snapshot
+                                                                .data!
+                                                                .data
+                                                                .list[index]
+                                                                .type ==
+                                                            2
+                                                        ? Border.all(
+                                                            width: 2,
+                                                            color: Color(
+                                                                0xFF313131))
+                                                        : Border.all(
+                                                            color: Colors
+                                                                .transparent),
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10.5),
-                                                    color: Color(0xFF313131),
+                                                    color: snapshot
+                                                                .data!
+                                                                .data
+                                                                .list[index]
+                                                                .type ==
+                                                            2
+                                                        ? Colors.white
+                                                        : Color(0xFF313131),
                                                   ),
                                                   child: Text(
                                                     snapshot
@@ -192,11 +212,17 @@ class _IzbrannoeState extends State<Izbrannoe> {
                                                             2
                                                         ? "Скачать"
                                                         : "Смотреть",
-                                                    style:
-                                                        GoogleFonts.montserrat(
-                                                            color: const Color(
-                                                                0xFFFFFFFF),
-                                                            fontSize: 10),
+                                                    style: GoogleFonts.montserrat(
+                                                        color: snapshot
+                                                                    .data!
+                                                                    .data
+                                                                    .list[index]
+                                                                    .type ==
+                                                                1
+                                                            ? const Color(
+                                                                0xFFFFFFFF)
+                                                            : Color(0xFF313131),
+                                                        fontSize: 10),
                                                   ),
                                                 ),
                                               ),

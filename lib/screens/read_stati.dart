@@ -32,13 +32,14 @@ class ReadStati extends StatelessWidget {
   Widget build(BuildContext context) {
     final token = Provider.of<String>(context);
     final isTablet = Provider.of<bool>(context);
-    final readStatiModelProvider = Provider.of<ReadStatiBLoC>(context);
-    final statiId = Provider.of<StatiIdProvider>(context);
+    final readStatiModelProvider = Provider.of<ReadStatiBLoC>(
+        context); /* 
+    final statiId = Provider.of<StatiIdProvider>(context);/*  */
     final blocForStatiComment = BlocForStatiComment(statiId.getIndex, token);
-    blocForStatiComment.evsink.add(StatiComentEnum.coment);
+    blocForStatiComment.evsink.add(StatiComentEnum.coment); */
     positionDouble = isTablet ? 600 : 300;
-    log(blocForStatiComment.lenth +
-        '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<');
+    /*  log(blocForStatiComment.lenth +
+        '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'); */
     return Expanded(
       child: SingleChildScrollView(
         child: Column(
@@ -125,7 +126,7 @@ class ReadStati extends StatelessWidget {
                     );
                   }
                 }),
-            StreamBuilder<StatiComentModel>(
+            /*  StreamBuilder<StatiComentModel>(
                 stream: blocForStatiComment.stream,
                 builder: (context, snapshota) {
                   if (snapshota.hasData) {
@@ -303,7 +304,7 @@ class ReadStati extends StatelessWidget {
                       ),
                     );
                   }
-                }),
+                }), */
           ],
         ),
       ),
