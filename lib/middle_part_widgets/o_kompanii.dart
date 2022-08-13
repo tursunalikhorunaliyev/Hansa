@@ -72,7 +72,7 @@ class _OKompaniiState extends State<OKompanii> {
     final isTablet = Provider.of<bool>(context);
     final token = Provider.of<String>(context);
     final scroll = ScrollController();
-    final blocVideoApi = BlocVideoApi(token);
+    final blocVideoApi = BlocVideoApi();
     return Expanded(
       child: Consumer<VideoIndexProvider>(builder: (context, value, child) {
         return SingleChildScrollView(

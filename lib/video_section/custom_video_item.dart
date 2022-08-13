@@ -29,8 +29,7 @@ class _CustomVideoListItemState extends State<CustomVideoListItem> {
   Widget build(BuildContext context) {
     final isTablet = Provider.of<bool>(context);
     final token = Provider.of<String>(context);
-    final blocVideoApi = BlocVideoApi(token);
-    blocVideoApi.eventSink.add(ActionVideo.view);
+    final blocVideoApi = BlocVideoApi();
     return Padding(
       padding: const EdgeInsets.only(top: 15, bottom: 12, right: 10),
       child: ClipRRect(
@@ -42,8 +41,8 @@ class _CustomVideoListItemState extends State<CustomVideoListItem> {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: StreamBuilder<VideoMainOne>(
-                    stream: blocVideoApi.dataStream,
+                child: FutureBuilder<VideoMainOne>(
+                    future: blocVideoApi.getData(token: token),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         return Stack(
@@ -105,8 +104,8 @@ class _CustomVideoListItemState extends State<CustomVideoListItem> {
                       }
                     }),
               ),
-              StreamBuilder<VideoMainOne>(
-                  stream: blocVideoApi.dataStream,
+              FutureBuilder<VideoMainOne>(
+                  future: blocVideoApi.getData(token: token),
                   builder: (context, snapshot) {
                     if (snapshot.data == null) {
                       return const SizedBox();
