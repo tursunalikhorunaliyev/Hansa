@@ -18,7 +18,7 @@ class CustomTreningiVideo extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
             child: Container(
               height: 90,
-              width: 325,
+              width: 355,
               color: const Color(0xffffffff),
               child: Row(
                 children: [
@@ -27,10 +27,10 @@ class CustomTreningiVideo extends StatelessWidget {
                     child: SizedBox(
                       width: 200,
                       child: Text(
-                       title,
-                       overflow: TextOverflow.clip,
-                       softWrap: true,
-                       maxLines: 3,
+                        title,
+                        overflow: TextOverflow.clip,
+                        softWrap: true,
+                        maxLines: 3,
                         style: GoogleFonts.montserrat(
                           fontSize: 13,
                           fontWeight: FontWeight.bold,

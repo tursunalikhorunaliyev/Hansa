@@ -89,13 +89,13 @@ class _TopVideoVidgetState extends State<TopVideoVidget> {
               Column(
                 children: [
                   const SizedBox(
-                    height: 13,
+                    height: 80,
                   ),
                   ClipRRect(
                     borderRadius: BorderRadius.circular(15),
                     child: SizedBox(
-                      width: 325,
-                      height: 185,
+                      width: 355,
+                      height: 200,
                       child: Center(
                         child: Chewie(
                           controller: chewieController,

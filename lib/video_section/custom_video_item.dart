@@ -15,9 +15,15 @@ import 'package:video_player/video_player.dart';
 class CustomVideoListItem extends StatefulWidget {
   final int index;
   final int indexMain;
+  final int selectedIndex;
+  final String selectedTitle;
 
   const CustomVideoListItem(
-      {Key? key, required this.index, required this.indexMain})
+      {Key? key,
+      required this.index,
+      required this.indexMain,
+      required this.selectedIndex,
+      required this.selectedTitle})
       : super(key: key);
 
   @override
@@ -75,6 +81,8 @@ class _CustomVideoListItemState extends State<CustomVideoListItem> {
                                       body: TopVideoWidget(
                                         url: video.videoLink,
                                         title: video.title,
+                                        selectedIndex: widget.selectedIndex,
+                                        selectedTitle: widget.selectedTitle,
                                       ),
                                     );
                                   },

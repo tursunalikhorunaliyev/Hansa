@@ -2,16 +2,27 @@ import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/extra/black_custom_title.dart';
 import 'package:hansa_app/extra/custom_black_appbar.dart';
+import 'package:hansa_app/providers/providers_for_video_title/video_index_provider.dart';
+import 'package:hansa_app/providers/providers_for_video_title/video_title_provider.dart';
 import 'package:hansa_app/training_section/custom_treningi_video.dart';
+import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
 class TopVideoWidget extends StatefulWidget {
   final String url;
   final String title;
+  final int selectedIndex;
+  final String selectedTitle;
 
-  const TopVideoWidget({Key? key, required this.url, required this.title})
+  const TopVideoWidget(
+      {Key? key,
+      required this.url,
+      required this.title,
+      required this.selectedIndex,
+      required this.selectedTitle})
       : super(key: key);
 
   @override
@@ -60,6 +71,9 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final menuEventsBloCProvider = Provider.of<MenuEventsBloC>(context);
+    final title = Provider.of<VideoTitleProvider>(context);
+    final index = Provider.of<VideoIndexProvider>(context);
     return SafeArea(
       child: Stack(
         children: [
@@ -104,13 +118,19 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(right: 32),
+                            padding: const EdgeInsets.only(right: 20),
                             child: PhysicalModel(
                               shadowColor: Colors.grey.withOpacity(.5),
                               color: Colors.transparent,
                               borderRadius: BorderRadius.circular(64),
                               elevation: 5,
                               child: GestureDetector(
+                                onTap: () {
+                                  menuEventsBloCProvider.eventSink
+                                      .add(MenuActions.oKompanii);
+                                  title.changeTitle(widget.selectedTitle);
+                                  index.changeIndex(widget.selectedIndex);
+                                },
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(64),
                                   child: Container(
@@ -147,8 +167,8 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(15),
                     child: SizedBox(
-                      width: 325,
-                      height: 185,
+                      width: 355,
+                      height: 200,
                       child: Center(
                         child: Chewie(
                           controller: chewieController,

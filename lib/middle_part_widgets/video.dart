@@ -71,6 +71,8 @@ class Video extends StatelessWidget {
                                 : 5,
                             i,
                             isTablet,
+                            i,
+                            snapshot.data!.videoListData.list[i].title,
                           )
                         ],
                       );
@@ -83,7 +85,8 @@ class Video extends StatelessWidget {
     );
   }
 
-  Widget listView(int itemCount, int indexMain, bool isTablet) {
+  Widget listView(int itemCount, int indexMain, bool isTablet,
+      int selectedIndex, String selectedTitle) {
     return SizedBox(
       height: isTablet ? 360 : 220,
       child: Align(
@@ -99,6 +102,8 @@ class Video extends StatelessWidget {
                 child: CustomVideoListItem(
                   index: index,
                   indexMain: indexMain,
+                  selectedIndex: selectedIndex,
+                  selectedTitle: selectedTitle,
                 ),
               ),
             ),

@@ -12,6 +12,7 @@ import 'package:hansa_app/blocs/login_clicked_bloc.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/blocs/read_stati_bloc.dart';
 import 'package:hansa_app/blocs/voyti_ili_sozdata_bloc.dart';
+import 'package:hansa_app/providers/dialog_video_provider.dart';
 import 'package:hansa_app/providers/full_registr_provider.dart';
 import 'package:hansa_app/providers/new_shop_provider.dart';
 import 'package:hansa_app/providers/provider_for_flipping/flip_login_provider.dart';
@@ -98,6 +99,7 @@ class MyApp extends StatelessWidget {
             create: (context) => LoginClickedBloc(),
           ),
           Provider(create: (context) => BlocFlipLogin()),
+          ChangeNotifierProvider(create: (context) => DialogVideoProvider()),
         ],
         child: const MaterialApp(
           localizationsDelegates: [
