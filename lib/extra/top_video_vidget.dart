@@ -9,18 +9,18 @@ import 'package:hansa_app/training_section/custom_treningi_video.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
-class TopVideoWidget extends StatefulWidget {
+class TopVideoVidget extends StatefulWidget {
   final String url;
   final String title;
 
-  const TopVideoWidget({Key? key, required this.url, required this.title})
+  const TopVideoVidget({Key? key, required this.url, required this.title})
       : super(key: key);
 
   @override
-  State<TopVideoWidget> createState() => _TopVideoWidgetState();
+  State<TopVideoVidget> createState() => _TopVideoVidgetState();
 }
 
-class _TopVideoWidgetState extends State<TopVideoWidget> {
+class _TopVideoVidgetState extends State<TopVideoVidget> {
   ChewieController chewieController = ChewieController(
       videoPlayerController: VideoPlayerController.network(''));
   initVideo() {
@@ -95,58 +95,7 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
           ),
           Column(
             children: [
-              Column(
-                children: [
-                  const CustomBlackAppBar(),
-                  Row(
-                    children: const [
-                      BlackCustomTitle(
-                        imagePath: "assets/video_title.png",
-                        title: "Видео",
-                      ),
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 32),
-                            child: PhysicalModel(
-                              shadowColor: Colors.grey.withOpacity(.5),
-                              color: Colors.transparent,
-                              borderRadius: BorderRadius.circular(64),
-                              elevation: 5,
-                              child: GestureDetector(
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(64),
-                                  child: Container(
-                                    padding: const EdgeInsets.all(7),
-                                    constraints: const BoxConstraints(
-                                      minWidth: 90,
-                                    ),
-                                    color: const Color(0xffff163e),
-                                    child: Center(
-                                      child: Text(
-                                        "Открыть раздел",
-                                        style: GoogleFonts.montserrat(
-                                          color: const Color(0xffffffff),
-                                          fontSize: 10,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+              const CustomBlackAppBar(),
               Column(
                 children: [
                   const SizedBox(

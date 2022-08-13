@@ -25,17 +25,15 @@ class _TreningiState extends State<Treningi> {
     final menuBloCProvider = Provider.of<MenuEventsBloC>(context);
     final isTablet = Provider.of<bool>(context);
     final token = Provider.of<String>(context);
-    final trainingBloc = TrainingAPIBloc(token);
-    trainingBloc.eventSink.add(TrainingAPIEvent.fetch);
-
+    final trainingBloc = TrainingAPIBloc();
     final scroll = ScrollController();
     final welcomeApi = WelcomeApi(token);
     welcomeApi.eventSink.add(WelcomeApiAction.fetch);
     return Expanded(
       child: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
-        child: StreamBuilder<TrainingModel>(
-            stream: trainingBloc.dataStream,
+        child: FutureBuilder<TrainingModel>(
+            future: trainingBloc.getTrainingData(token),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 final data = snapshot.data!.data;

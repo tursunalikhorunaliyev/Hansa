@@ -1,11 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:chewie/chewie.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/blocs/bloc_play_video.dart';
+import 'package:hansa_app/extra/top_video_widget.dart';
+import 'package:hansa_app/training_section/custom_treningi_video.dart';
 import 'package:hansa_app/video/bloc_video_api.dart';
 import 'package:hansa_app/video/model_video.dart';
 import 'package:provider/provider.dart';
+import 'package:video_player/video_player.dart';
 
 class CustomVideoListItem extends StatefulWidget {
   final int index;
@@ -23,10 +28,8 @@ class _CustomVideoListItemState extends State<CustomVideoListItem> {
   @override
   Widget build(BuildContext context) {
     final isTablet = Provider.of<bool>(context);
-    final playProvider = Provider.of<BlocPlayVideo>(context);
     final token = Provider.of<String>(context);
-    final blocVideoApi = BlocVideoApi(token);
-    blocVideoApi.eventSink.add(ActionVideo.view);
+    final blocVideoApi = BlocVideoApi();
     return Padding(
       padding: const EdgeInsets.only(top: 15, bottom: 12, right: 10),
       child: ClipRRect(
@@ -38,8 +41,8 @@ class _CustomVideoListItemState extends State<CustomVideoListItem> {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: StreamBuilder<VideoMainOne>(
-                    stream: blocVideoApi.dataStream,
+                child: FutureBuilder<VideoMainOne>(
+                    future: blocVideoApi.getData(token: token),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
                         return Stack(
@@ -64,8 +67,18 @@ class _CustomVideoListItemState extends State<CustomVideoListItem> {
                                     .list[widget.indexMain]
                                     .data
                                     .list[widget.index];
-                                playProvider.sink.add(
-                                    [true, video.videoLink, video.title, false]);
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return Scaffold(
+                                      backgroundColor: Colors.transparent,
+                                      body: TopVideoWidget(
+                                        url: video.videoLink,
+                                        title: video.title,
+                                      ),
+                                    );
+                                  },
+                                );
                               },
                               child: Center(
                                 child: Container(
@@ -91,8 +104,8 @@ class _CustomVideoListItemState extends State<CustomVideoListItem> {
                       }
                     }),
               ),
-              StreamBuilder<VideoMainOne>(
-                  stream: blocVideoApi.dataStream,
+              FutureBuilder<VideoMainOne>(
+                  future: blocVideoApi.getData(token: token),
                   builder: (context, snapshot) {
                     if (snapshot.data == null) {
                       return const SizedBox();

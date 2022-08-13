@@ -16,7 +16,7 @@ class CustomVideoSubItem extends StatelessWidget {
       alignment: Alignment.centerLeft,
       child: Container(
         child: Padding(
-          padding: const EdgeInsets.only(left: 40, right: 20),
+          padding: const EdgeInsets.only(left: 40, right: 20, top: 15),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -38,7 +38,7 @@ class CustomVideoSubItem extends StatelessWidget {
                     style: GoogleFonts.montserrat(
                         color: const Color(0xff33383f),
                         fontWeight: FontWeight.w600,
-                        fontSize: isTablet ? 9.sp : 10.sp),
+                        fontSize: isTablet ? 9.sp : 14.sp),
                   ),
                 ],
               ),

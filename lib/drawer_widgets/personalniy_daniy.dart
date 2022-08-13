@@ -35,15 +35,14 @@ class _PersonalniyDaniyState extends State<PersonalniyDaniy> {
     final isTablet = Provider.of<bool>(context);
     final providerToken = Provider.of<String>(context);
 
-    final blocPersonal = BlocPersonal(providerToken);
+    final blocPersonal = BlocPersonal();
 
-    blocPersonal.eventSink.add(EnumActionView.view);
     final personalInfoEditTextFieldsProvider =
         Provider.of<ProviderPersonalTextFields>(context);
 
     return Center(
-      child: StreamBuilder<ModelPersonalMain>(
-          stream: blocPersonal.dataStream,
+      child: FutureBuilder<ModelPersonalMain>(
+          future: blocPersonal.getData(providerToken),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               personalInfoEditTextFieldsProvider.imyaController.text =

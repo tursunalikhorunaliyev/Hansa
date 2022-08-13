@@ -8,7 +8,6 @@ class CustomBlackAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final scaffoldKey = Provider.of<GlobalKey<ScaffoldState>>(context);
     return Container(
       height: 81.h,
       color: const Color(0xff333333),
@@ -16,9 +15,7 @@ class CustomBlackAppBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           IconButton(
-            onPressed: () {
-              scaffoldKey.currentState!.openDrawer();
-            },
+            onPressed: () {},
             icon: HamburgerIcon(
               color: const Color(0xffffffff),
             ),
