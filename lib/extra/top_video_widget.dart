@@ -2,11 +2,9 @@ import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hansa_app/blocs/bloc_video_controll.dart';
 import 'package:hansa_app/extra/black_custom_title.dart';
 import 'package:hansa_app/extra/custom_black_appbar.dart';
 import 'package:hansa_app/training_section/custom_treningi_video.dart';
-import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
 class TopVideoWidget extends StatefulWidget {
@@ -62,15 +60,6 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final videoControlProvider = Provider.of<BlocVideoControll>(context);
-    videoControlProvider.stream.listen((event) {
-      if (event == false) {
-        chewieController.videoPlayerController
-          ..seekTo(const Duration(seconds: 0))
-          ..pause();
-        setState(() {});
-      }
-    });
     return SafeArea(
       child: Stack(
         children: [
@@ -89,7 +78,10 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
           ),
           GestureDetector(
             onTap: () {
-              videoControlProvider.sink.add(false);
+              chewieController.videoPlayerController
+                ..seekTo(const Duration(seconds: 0))
+                ..pause();
+              setState(() {});
               Navigator.pop(context);
             },
           ),
