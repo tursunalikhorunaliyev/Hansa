@@ -17,11 +17,7 @@ class Video extends StatelessWidget {
   Widget build(BuildContext context) {
     final menuEventsBloCProvider = Provider.of<MenuEventsBloC>(context);
     final token = Provider.of<String>(context);
-<<<<<<< HEAD
-    final blocVideoApi = BlocVideoApi(token);
-=======
     final blocVideoApi = BlocVideoApi();
->>>>>>> c5ca2b16f2e17b8ef2760793d2c4205a23d9db78
     final isTablet = Provider.of<bool>(context);
     final title = Provider.of<VideoTitleProvider>(context);
     final index = Provider.of<VideoIndexProvider>(context);
