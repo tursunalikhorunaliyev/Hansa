@@ -2,9 +2,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/izbrannoe_model.dart';
+import 'package:hansa_app/api_models.dart/read_stati_model.dart';
 import 'package:hansa_app/blocs/izbrannoe_bloc.dart';
+import 'package:hansa_app/blocs/menu_events_bloc.dart';
+import 'package:hansa_app/blocs/read_stati_bloc.dart';
+import 'package:hansa_app/blocs/stati_bloc.dart';
+import 'package:hansa_app/providers/stati_id_provider.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Izbrannoe extends StatefulWidget {
   const Izbrannoe({Key? key}) : super(key: key);
@@ -18,7 +24,13 @@ class _IzbrannoeState extends State<Izbrannoe> {
   Widget build(BuildContext context) {
     final isTablet = Provider.of<bool>(context);
     final token = Provider.of<String>(context);
+    final readStatiBloCProvider = Provider.of<ReadStatiBLoC>(context);
+    final statiId = Provider.of<StatiIdProvider>(context);
+
+    final statiBloCProvider = Provider.of<MenuEventsBloC>(context);
+
     final izbrannoeBLoC = IzbrannoeBLoC(token);
+    Future<void>? launched;
     return Center(
       child: Container(
         height: isTablet ? 650 : 470,
@@ -79,17 +91,18 @@ class _IzbrannoeState extends State<Izbrannoe> {
                           children: List.generate(
                             snapshot.data!.data.list.length,
                             (index) => Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 20),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 10, vertical: 10),
                               child: Column(
                                 children: [
                                   Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       ClipRRect(
                                         borderRadius: BorderRadius.circular(5),
                                         child: Container(
-                                          height: 50,
-                                          width: 100,
+                                          height: 65,
+                                          width: 120,
                                           child: CachedNetworkImage(
                                             fit: BoxFit.cover,
                                             imageUrl: snapshot.data!.data
@@ -111,7 +124,7 @@ class _IzbrannoeState extends State<Izbrannoe> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           SizedBox(
-                                            width: 150,
+                                            width: 140,
                                             child: Text(
                                               snapshot
                                                   .data!.data.list[index].title,
@@ -135,7 +148,30 @@ class _IzbrannoeState extends State<Izbrannoe> {
                                                 width: isTablet ? 140 : 90,
                                               ),
                                               InkWell(
-                                                onTap: () {
+                                                onTap: () async {
+                                                  if (snapshot.data!.data
+                                                          .list[index].type ==
+                                                      1) {
+                                                    String link = snapshot.data!
+                                                        .data.list[index].link;
+                                                    statiBloCProvider.eventSink
+                                                        .add(MenuActions
+                                                            .chitatStati);
+                                                    ReadStatiModel statiMOdel =
+                                                        await readStatiBloCProvider
+                                                            .getReadStati(
+                                                                token, link);
+                                                    statiId.changeIndex(
+                                                        link.split('id=').last);
+                                                    readStatiBloCProvider.sink
+                                                        .add(statiMOdel);
+                                                  } else {
+                                                    setState(() {
+                                                      launched = launchInBrowser(
+                                                          Uri.parse(
+                                                              "http://${snapshot.data!.data.list[index].pdfUrl}"));
+                                                    });
+                                                  }
                                                 },
                                                 child: Container(
                                                   alignment: Alignment.center,
@@ -145,11 +181,17 @@ class _IzbrannoeState extends State<Izbrannoe> {
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10.5),
-                                                    color:
-                                                        const Color(0xFF313131),
+                                                    color: Color(0xFF313131),
                                                   ),
                                                   child: Text(
-                                                    "Скачать",
+                                                    snapshot
+                                                                .data!
+                                                                .data
+                                                                .list[index]
+                                                                .type ==
+                                                            2
+                                                        ? "Скачать"
+                                                        : "Смотреть",
                                                     style:
                                                         GoogleFonts.montserrat(
                                                             color: const Color(
@@ -200,5 +242,11 @@ class _IzbrannoeState extends State<Izbrannoe> {
   }
 }
 
-
-
+launchInBrowser(Uri url) async {
+  if (!await launchUrl(
+    url,
+    mode: LaunchMode.externalApplication,
+  )) {
+    throw 'Could not launch $url';
+  }
+}
