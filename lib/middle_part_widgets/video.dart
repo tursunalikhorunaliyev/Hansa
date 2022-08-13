@@ -22,65 +22,62 @@ class Video extends StatelessWidget {
     final title = Provider.of<VideoTitleProvider>(context);
     final index = Provider.of<VideoIndexProvider>(context);
     return Expanded(
-      child: Expanded(
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: FutureBuilder<VideoMainOne>(
-              future: blocVideoApi.getData(token: token),
-              builder: (context, snapshot) {
-                if (snapshot.data == null) {
-                  return Center(
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                          top: (MediaQuery.of(context).size.height / 2) - 135),
-                      child: Lottie.asset(
-                        'assets/pre.json',
-                        height: 70,
-                        width: 70,
-                      ),
+      child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: FutureBuilder<VideoMainOne>(
+            future: blocVideoApi.getData(token: token),
+            builder: (context, snapshot) {
+              if (snapshot.data == null) {
+                return Center(
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        top: (MediaQuery.of(context).size.height / 2) - 135),
+                    child: Lottie.asset(
+                      'assets/pre.json',
+                      height: 70,
+                      width: 70,
                     ),
-                  );
-                }
-                return Column(
-                  children: [
-                    const CustomTitle(
-                      imagePath: "assets/video_title.png",
-                      title: "Видео",
-                    ),
-                    Column(
-                        children: List.generate(
-                            snapshot.data!.videoListData.list.length, (i) {
-                      return Column(
-                        children: [
-                          CustomVideoSubItem(
-                              onTap: () {
-                                title.changeTitle(
-                                    snapshot.data!.videoListData.list[i].title);
-                                menuEventsBloCProvider.eventSink
-                                    .add(MenuActions.oKompanii);
-                                index.changeIndex(i);
-                              },
-                              title:
-                                  snapshot.data!.videoListData.list[i].title),
-                          listView(
-                            (snapshot.data!.videoListData.list[i].data.list
-                                        .length <
-                                    5)
-                                ? snapshot.data!.videoListData.list[i].data.list
-                                    .length
-                                : 5,
-                            i,
-                            isTablet,
-                            i,
-                            snapshot.data!.videoListData.list[i].title,
-                          )
-                        ],
-                      );
-                    })),
-                  ],
+                  ),
                 );
-              }),
-        ),
+              }
+              return Column(
+                children: [
+                  const CustomTitle(
+                    imagePath: "assets/video_title.png",
+                    title: "Видео",
+                  ),
+                  Column(
+                      children: List.generate(
+                          snapshot.data!.videoListData.list.length, (i) {
+                    return Column(
+                      children: [
+                        CustomVideoSubItem(
+                            onTap: () {
+                              title.changeTitle(
+                                  snapshot.data!.videoListData.list[i].title);
+                              menuEventsBloCProvider.eventSink
+                                  .add(MenuActions.oKompanii);
+                              index.changeIndex(i);
+                            },
+                            title: snapshot.data!.videoListData.list[i].title),
+                        listView(
+                          (snapshot.data!.videoListData.list[i].data.list
+                                      .length <
+                                  5)
+                              ? snapshot
+                                  .data!.videoListData.list[i].data.list.length
+                              : 5,
+                          i,
+                          isTablet,
+                          i,
+                          snapshot.data!.videoListData.list[i].title,
+                        )
+                      ],
+                    );
+                  })),
+                ],
+              );
+            }),
       ),
     );
   }
