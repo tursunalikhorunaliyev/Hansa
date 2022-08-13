@@ -17,8 +17,7 @@ class Video extends StatelessWidget {
   Widget build(BuildContext context) {
     final menuEventsBloCProvider = Provider.of<MenuEventsBloC>(context);
     final token = Provider.of<String>(context);
-    final blocVideoApi = BlocVideoApi(token);
-    blocVideoApi.eventSink.add(ActionVideo.view);
+    final blocVideoApi = BlocVideoApi();
     final isTablet = Provider.of<bool>(context);
     final title = Provider.of<VideoTitleProvider>(context);
     final index = Provider.of<VideoIndexProvider>(context);
@@ -26,8 +25,8 @@ class Video extends StatelessWidget {
       child: Expanded(
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
-          child: StreamBuilder<VideoMainOne>(
-              stream: blocVideoApi.dataStream,
+          child: FutureBuilder<VideoMainOne>(
+              future: blocVideoApi.getData(token: token),
               builder: (context, snapshot) {
                 if (snapshot.data == null) {
                   return Center(

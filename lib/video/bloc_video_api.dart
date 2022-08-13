@@ -10,25 +10,6 @@ enum ActionVideo {
 }
 
 class BlocVideoApi {
-  final dataController = StreamController<VideoMainOne>.broadcast();
-  StreamSink<VideoMainOne> get dataSink => dataController.sink;
-  Stream<VideoMainOne> get dataStream => dataController.stream;
-
-  final eventController = StreamController<ActionVideo>.broadcast();
-  StreamSink<ActionVideo> get eventSink => eventController.sink;
-  Stream<ActionVideo> get eventStream => eventController.stream;
-
-  BlocVideoApi(token) {
-    eventStream.listen((event) async {
-      if (event == ActionVideo.view) {
-        dataSink.add(await getData(token: token));
-        dataStream.listen((event) {
-          log(event.status.toString());
-        });
-      }
-    });
-  }
-
   Future<VideoMainOne> getData({
     required String token,
   }) async {
