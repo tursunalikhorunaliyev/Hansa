@@ -6,6 +6,7 @@ import 'package:hansa_app/blocs/bloc_play_video.dart';
 
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/classes/izbrannoe_view.dart';
+import 'package:hansa_app/extra/exit_dialog.dart';
 import 'package:hansa_app/extra/glavniy_menyu.dart';
 import 'package:hansa_app/extra/hamburger.dart';
 import 'package:hansa_app/extra/top_video_widget.dart';
@@ -31,12 +32,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
     return WillPopScope(
       onWillPop: () async {
-        if (menuProvider.list.length > 1) {
-          menuProvider.eventSink
-              .add(menuProvider.list.elementAt(menuProvider.list.length - 2));
-          menuProvider.list.remove(
-              menuProvider.list.elementAt(menuProvider.list.length - 1));
-        }
+        showDialog(
+          context: context,
+          builder: (context) {
+            return ExitDialog();
+          },
+        );
+
         return false;
       },
       child: Scaffold(
