@@ -53,7 +53,6 @@ class _UIChangerState extends State<UIChanger> {
 
   @override
   void initState() {
-    
     checkNet();
     super.initState();
   }
@@ -72,18 +71,14 @@ class _UIChangerState extends State<UIChanger> {
             stream: provider.eventStream,
             initialData: MenuActions.welcome,
             builder: (context, snapshot) {
-      
               if (snapshot.data != MenuActions.video) {
                 videoControlProvider.sink.add(false);
                 playProvider.sink.add([false, "", ""]);
               }
               if (snapshot.data == MenuActions.article) {
-                return Provider(
-                    create: (context) => ArticleBLoC(), child: ArticleScreen());
+                return ArticleScreen();
               } else if (snapshot.data == MenuActions.welcome) {
-                return Provider(
-                    create: (context) => ArticleBLoC(),
-                    child: const WelcomeWidget());
+                return const WelcomeWidget();
               } else if (snapshot.data == MenuActions.obuchayushieMaterial) {
                 return const ObucheniyaWidget();
               } else if (snapshot.data == MenuActions.prezintatsiya) {

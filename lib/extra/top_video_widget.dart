@@ -92,10 +92,7 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
           ),
           GestureDetector(
             onTap: () {
-              chewieController.videoPlayerController
-                ..seekTo(const Duration(seconds: 0))
-                ..pause();
-              setState(() {});
+              reset();
               Navigator.pop(context);
             },
           ),
@@ -114,18 +111,20 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
                   ),
                   Column(
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(right: 20),
-                            child: PhysicalModel(
+                      SizedBox(
+                        width: 355,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            PhysicalModel(
                               shadowColor: Colors.grey.withOpacity(.5),
                               color: Colors.transparent,
                               borderRadius: BorderRadius.circular(64),
                               elevation: 5,
                               child: GestureDetector(
                                 onTap: () {
+                                  Navigator.pop(context);
+                                  reset();
                                   menuEventsBloCProvider.eventSink
                                       .add(MenuActions.oKompanii);
                                   title.changeTitle(widget.selectedTitle);
@@ -152,8 +151,8 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
                                 ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -189,5 +188,12 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
         ],
       ),
     );
+  }
+
+  reset() {
+    chewieController.videoPlayerController
+      ..seekTo(const Duration(seconds: 0))
+      ..pause();
+    setState(() {});
   }
 }

@@ -47,70 +47,74 @@ class _CustomVideoListItemState extends State<CustomVideoListItem> {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: FutureBuilder<VideoMainOne>(
-                    future: blocVideoApi.getData(token: token),
-                    builder: (context, snapshot) {
-                      if (snapshot.hasData) {
-                        return Stack(
-                          children: [
-                            CachedNetworkImage(
-                              imageUrl: snapshot
-                                  .data!
-                                  .videoListData
-                                  .list[widget.indexMain]
-                                  .data
-                                  .list[widget.index]
-                                  .pictureLink,
-                              height: isTablet ? 240 : 130,
-                              width: isTablet ? 420 : 220,
-                              fit: BoxFit.cover,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                final VideoDetails video = snapshot
+                child: SizedBox(
+                  height: isTablet ? 240 : 130,
+                  width: isTablet ? 420 : 220,
+                  child: FutureBuilder<VideoMainOne>(
+                      future: blocVideoApi.getData(token: token),
+                      builder: (context, snapshot) {
+                        if (snapshot.hasData) {
+                          return Stack(
+                            children: [
+                              CachedNetworkImage(
+                                imageUrl: snapshot
                                     .data!
                                     .videoListData
                                     .list[widget.indexMain]
                                     .data
-                                    .list[widget.index];
-                                showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return Scaffold(
-                                      backgroundColor: Colors.transparent,
-                                      body: TopVideoWidget(
-                                        url: video.videoLink,
-                                        title: video.title,
-                                        selectedIndex: widget.selectedIndex,
-                                        selectedTitle: widget.selectedTitle,
+                                    .list[widget.index]
+                                    .pictureLink,
+                                height: isTablet ? 240 : 130,
+                                width: isTablet ? 420 : 220,
+                                fit: BoxFit.cover,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  final VideoDetails video = snapshot
+                                      .data!
+                                      .videoListData
+                                      .list[widget.indexMain]
+                                      .data
+                                      .list[widget.index];
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return Scaffold(
+                                        backgroundColor: Colors.transparent,
+                                        body: TopVideoWidget(
+                                          url: video.videoLink,
+                                          title: video.title,
+                                          selectedIndex: widget.selectedIndex,
+                                          selectedTitle: widget.selectedTitle,
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                                child: Center(
+                                  child: Container(
+                                    height: isTablet ? 240 : 130,
+                                    width: isTablet ? 420 : 220,
+                                    color: Colors.transparent,
+                                    alignment: Alignment.center,
+                                    child: Opacity(
+                                      opacity: .5,
+                                      child: Icon(
+                                        CupertinoIcons.play_circle_fill,
+                                        size: isTablet ? 45 : 25,
+                                        color: Colors.white,
                                       ),
-                                    );
-                                  },
-                                );
-                              },
-                              child: Center(
-                                child: Container(
-                                  height: isTablet ? 240 : 130,
-                                  width: isTablet ? 420 : 220,
-                                  color: Colors.transparent,
-                                  alignment: Alignment.center,
-                                  child: Opacity(
-                                    opacity: .5,
-                                    child: Icon(
-                                      CupertinoIcons.play_circle_fill,
-                                      size: isTablet ? 45 : 25,
-                                      color: Colors.white,
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
-                        );
-                      } else {
-                        return const SizedBox();
-                      }
-                    }),
+                            ],
+                          );
+                        } else {
+                          return const SizedBox();
+                        }
+                      }),
+                ),
               ),
               FutureBuilder<VideoMainOne>(
                   future: blocVideoApi.getData(token: token),
