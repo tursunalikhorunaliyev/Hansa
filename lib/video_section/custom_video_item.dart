@@ -1,11 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:chewie/chewie.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/blocs/bloc_play_video.dart';
+import 'package:hansa_app/extra/top_video_widget.dart';
+import 'package:hansa_app/training_section/custom_treningi_video.dart';
 import 'package:hansa_app/video/bloc_video_api.dart';
 import 'package:hansa_app/video/model_video.dart';
 import 'package:provider/provider.dart';
+import 'package:video_player/video_player.dart';
 
 class CustomVideoListItem extends StatefulWidget {
   final int index;
@@ -23,7 +28,6 @@ class _CustomVideoListItemState extends State<CustomVideoListItem> {
   @override
   Widget build(BuildContext context) {
     final isTablet = Provider.of<bool>(context);
-    final playProvider = Provider.of<BlocPlayVideo>(context);
     final token = Provider.of<String>(context);
     final blocVideoApi = BlocVideoApi(token);
     blocVideoApi.eventSink.add(ActionVideo.view);
@@ -64,8 +68,18 @@ class _CustomVideoListItemState extends State<CustomVideoListItem> {
                                     .list[widget.indexMain]
                                     .data
                                     .list[widget.index];
-                                playProvider.sink.add(
-                                    [true, video.videoLink, video.title, false]);
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return Scaffold(
+                                      backgroundColor: Colors.transparent,
+                                      body: TopVideoWidget(
+                                        url: video.videoLink,
+                                        title: video.title,
+                                      ),
+                                    );
+                                  },
+                                );
                               },
                               child: Center(
                                 child: Container(

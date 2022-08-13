@@ -18,7 +18,6 @@ class Video extends StatelessWidget {
     final menuEventsBloCProvider = Provider.of<MenuEventsBloC>(context);
     final token = Provider.of<String>(context);
     final blocVideoApi = BlocVideoApi(token);
-    blocVideoApi.eventSink.add(ActionVideo.view);
     final isTablet = Provider.of<bool>(context);
     final title = Provider.of<VideoTitleProvider>(context);
     final index = Provider.of<VideoIndexProvider>(context);
@@ -26,20 +25,21 @@ class Video extends StatelessWidget {
       child: Expanded(
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
-          child: StreamBuilder<VideoMainOne>(
-              stream: blocVideoApi.dataStream,
+          child: FutureBuilder<VideoMainOne>(
+              future: blocVideoApi.getData(token: token),
               builder: (context, snapshot) {
                 if (snapshot.data == null) {
                   return Center(
-                      child: Padding(
-                    padding: EdgeInsets.only(
-                        top: (MediaQuery.of(context).size.height / 2) - 135),
-                    child: Lottie.asset(
-                      'assets/pre.json',
-                      height: 70,
-                      width: 70,
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                          top: (MediaQuery.of(context).size.height / 2) - 135),
+                      child: Lottie.asset(
+                        'assets/pre.json',
+                        height: 70,
+                        width: 70,
+                      ),
                     ),
-                  ));
+                  );
                 }
                 return Column(
                   children: [
@@ -96,12 +96,9 @@ class Video extends StatelessWidget {
               itemCount,
               (index) => Padding(
                 padding: EdgeInsets.only(left: (index == 0) ? 30 : 0),
-                child: GestureDetector(
-                  onTap: () {},
-                  child: CustomVideoListItem(
-                    index: index,
-                    indexMain: indexMain,
-                  ),
+                child: CustomVideoListItem(
+                  index: index,
+                  indexMain: indexMain,
                 ),
               ),
             ),
