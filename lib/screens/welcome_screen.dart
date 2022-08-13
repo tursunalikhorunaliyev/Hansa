@@ -149,25 +149,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 const UIChanger(),
               ],
             ),
-            StreamBuilder<List>(
-              stream: playProvider.stream,
-              initialData: const [false, "", ""],
-              builder: (context, snapshot) {
-                if (snapshot.data![1].toString().isEmpty) {
-                  return const SizedBox();
-                } else {
-                  return AnimatedScale(
-                    duration: const Duration(milliseconds: 300),
-                    scale: snapshot.data![0] ? 1 : 0,
-                    curve: Curves.fastLinearToSlowEaseIn,
-                    child: TopVideoWidget(
-                      url: snapshot.data![1],
-                      title: snapshot.data![2],
-                    ),
-                  );
-                }
-              },
-            ),
           ],
         ),
       ),
