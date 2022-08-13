@@ -1,10 +1,6 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:hansa_app/api_models.dart/read_stati_model.dart';
-import 'package:hansa_app/api_models.dart/stati_comment_model.dart';
 import 'package:hansa_app/api_models.dart/stati_model.dart';
-import 'package:hansa_app/blocs/bloc_comment_stati.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/blocs/read_stati_bloc.dart';
 import 'package:hansa_app/blocs/stati_bloc.dart';
@@ -12,7 +8,6 @@ import 'package:hansa_app/extra/custom_clip_item.dart';
 import 'package:hansa_app/extra/custom_tablet_stati_item.dart';
 import 'package:hansa_app/extra/custom_title.dart';
 import 'package:hansa_app/providers/stati_id_provider.dart';
-import 'package:hansa_app/read_statie_section/stati_comment.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,6 +21,7 @@ class Stati extends StatefulWidget {
 
 class _StatiState extends State<Stati> {
   ReadStatiBLoC readStati = ReadStatiBLoC();
+  final bloc = StatiBLoC();
   @override
   void dispose() {
     readStati.controller.close();
@@ -34,75 +30,37 @@ class _StatiState extends State<Stati> {
 
   @override
   Widget build(BuildContext context) {
-    final token = Provider.of<String>(context);
+    final providerToken = Provider.of<String>(context);
     final readStatiBloCProvider = Provider.of<ReadStatiBLoC>(context);
     final statiId = Provider.of<StatiIdProvider>(context);
-    final bloc = StatiBLoC(token);
     final isTablet = Provider.of<bool>(context);
     final statiBloCProvider = Provider.of<MenuEventsBloC>(context);
     return Expanded(
-      child: Expanded(
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: StreamBuilder<StatiModel>(
-              stream: bloc.stream,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  return isTablet
-                      ? Column(
-                          children: [
-                            const CustomTitle(
-                              imagePath: "assets/stati_title.png",
-                              title: "Статьи",
-                            ),
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 11.w),
-                              child: GridView(
-                                physics: const BouncingScrollPhysics(),
-                                shrinkWrap: true,
-                                gridDelegate:
-                                    const SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 2,
-                                        childAspectRatio: 10 / 3),
-                                children: List.generate(
-                                  snapshot.data!.list.list.length,
-                                  (index) => CustomStatiTabletItem(
-                                    backgroundColor: const Color(0xffffffff),
-                                    buttonTextColor: const Color(0xffffffff),
-                                    buttonColor: const Color(0xffe21a37),
-                                    titleColor: const Color(0xff272624),
-                                    title:
-                                        snapshot.data!.list.list[index].title,
-                                    buttonText: "Читать",
-                                    onTap: () async {
-                                      statiBloCProvider.eventSink
-                                          .add(MenuActions.chitatStati);
-                                      String link =
-                                          snapshot.data!.list.list[index].link;
-                                      ReadStatiModel statiMOdel =
-                                          await readStatiBloCProvider
-                                              .getReadStati(token, link);
-                                      statiId
-                                          .changeIndex(link.split('id=').last);
-                                      readStatiBloCProvider.sink
-                                          .add(statiMOdel);
-                                    },
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
-                      : Column(
-                          children: [
-                            const CustomTitle(
-                              imagePath: "assets/stati_title.png",
-                              title: "Статьи",
-                            ),
-                            Column(
+      child: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: FutureBuilder<StatiModel>(
+            future: bloc.getStati(providerToken),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return isTablet
+                    ? Column(
+                        children: [
+                          const CustomTitle(
+                            imagePath: "assets/stati_title.png",
+                            title: "Статьи",
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 11.w),
+                            child: GridView(
+                              physics: const BouncingScrollPhysics(),
+                              shrinkWrap: true,
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      childAspectRatio: 10 / 3),
                               children: List.generate(
                                 snapshot.data!.list.list.length,
-                                (index) => CustomClipItem(
+                                (index) => CustomStatiTabletItem(
                                   backgroundColor: const Color(0xffffffff),
                                   buttonTextColor: const Color(0xffffffff),
                                   buttonColor: const Color(0xffe21a37),
@@ -110,36 +68,67 @@ class _StatiState extends State<Stati> {
                                   title: snapshot.data!.list.list[index].title,
                                   buttonText: "Читать",
                                   onTap: () async {
-                                    String link =
-                                        snapshot.data!.list.list[index].link;
                                     statiBloCProvider.eventSink
                                         .add(MenuActions.chitatStati);
+                                    String link =
+                                        snapshot.data!.list.list[index].link;
                                     ReadStatiModel statiMOdel =
                                         await readStatiBloCProvider
-                                            .getReadStati(token, link);
+                                            .getReadStati(providerToken, link);
                                     statiId.changeIndex(link.split('id=').last);
                                     readStatiBloCProvider.sink.add(statiMOdel);
                                   },
                                 ),
                               ),
                             ),
-                          ],
-                        );
-                } else {
-                  bloc.eventSink.add(StatiAction.show);
-                  return Center(
-                      child: Padding(
-                    padding: EdgeInsets.only(
-                        top: (MediaQuery.of(context).size.height / 2) - 135),
-                    child: Lottie.asset(
-                      'assets/pre.json',
-                      height: 70,
-                      width: 70,
-                    ),
-                  ));
-                }
-              }),
-        ),
+                          ),
+                        ],
+                      )
+                    : Column(
+                        children: [
+                          const CustomTitle(
+                            imagePath: "assets/stati_title.png",
+                            title: "Статьи",
+                          ),
+                          Column(
+                            children: List.generate(
+                              snapshot.data!.list.list.length,
+                              (index) => CustomClipItem(
+                                backgroundColor: const Color(0xffffffff),
+                                buttonTextColor: const Color(0xffffffff),
+                                buttonColor: const Color(0xffe21a37),
+                                titleColor: const Color(0xff272624),
+                                title: snapshot.data!.list.list[index].title,
+                                buttonText: "Читать",
+                                onTap: () async {
+                                  String link =
+                                      snapshot.data!.list.list[index].link;
+                                  statiBloCProvider.eventSink
+                                      .add(MenuActions.chitatStati);
+                                  ReadStatiModel statiMOdel =
+                                      await readStatiBloCProvider.getReadStati(
+                                          providerToken, link);
+                                  statiId.changeIndex(link.split('id=').last);
+                                  readStatiBloCProvider.sink.add(statiMOdel);
+                                },
+                              ),
+                            ),
+                          ),
+                        ],
+                      );
+              } else {
+                return Center(
+                    child: Padding(
+                  padding: EdgeInsets.only(
+                      top: (MediaQuery.of(context).size.height / 2) - 135),
+                  child: Lottie.asset(
+                    'assets/pre.json',
+                    height: 70,
+                    width: 70,
+                  ),
+                ));
+              }
+            }),
       ),
     );
   }

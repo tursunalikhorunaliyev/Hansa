@@ -28,183 +28,166 @@ class _KatalogiState extends State<Katalogi> {
     welcomeApi.eventSink.add(WelcomeApiAction.fetch);
     catalogBloc.eventSink.add(CatalogAction.get);
     return Expanded(
-      child: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: StreamBuilder<CatalogModel>(
-            stream: catalogBloc.dataStream,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                final data = snapshot.data!.data;
-                return Expanded(
-                  child: Column(
-                    children: [
-                      StickyHeader(
-                        header: Expanded(
-                          child: const CustomTitle(
-                            imagePath: "assets/katalogi_title.png",
-                            title: "Каталоги",
-                          ),
-                        ),
-                        content: isTablet
-                            ? NotificationListener(
-                                onNotification: (value) {
-                                  welcomeApi.eventSink
-                                      .add(WelcomeApiAction.fetch);
-                                  return false;
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 35),
-                                  child: GridView(
-                                    controller: scroll,
-                                    physics: BouncingScrollPhysics(),
-                                    shrinkWrap: true,
-                                    gridDelegate:
-                                        const SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 2,
-                                            crossAxisSpacing: 30,
-                                            childAspectRatio: 1.130),
-                                    children: List.generate(
-                                        data.guides.list.length, (index) {
-                                      return Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 5.0),
-                                          child: TabletKatalogItem(
-                                            linkPDFSkachat: snapshot.data!.data
-                                                .guides.list[index].link,
-                                            linkPDF: snapshot.data!.data.guides
-                                                .list[index].pdfUrl,
-                                            imageUrl: data
-                                                .guides.list[index].pictureLink,
-                                            backgroundColor:
-                                                const Color(0xff000004),
-                                            buttonTextColor:
-                                                const Color(0xffffffff),
-                                            buttonColor:
-                                                const Color(0xffff163e),
-                                            titleColor: const Color(0xffffffff),
-                                            title:
-                                                data.guides.list[index].title,
-                                            stbuttonText: "Скачать",
-                                            ndbuttonText: "Читать",
-                                          ));
-                                    }),
-                                  ),
-                                ))
-                            : Column(
-                                children: List.generate(data.guides.list.length,
-                                    (index) {
-                                  return CustomKatalogItemDouble(
-                                    linkPDFSkachat: snapshot
-                                        .data!.data.guides.list[index].link,
-                                    linkPDF: snapshot
-                                        .data!.data.guides.list[index].pdfUrl,
-                                    imageUrl:
-                                        data.guides.list[index].pictureLink,
-                                    backgroundColor: const Color(0xff000004),
-                                    buttonTextColor: const Color(0xffffffff),
-                                    buttonColor: const Color(0xffff163e),
-                                    titleColor: const Color(0xffffffff),
-                                    title: data.guides.list[index].title,
-                                    stbuttonText: "Скачать",
-                                    ndbuttonText: "Читать",
-                                  );
-                                }),
-                              ),
+      child: StreamBuilder<CatalogModel>(
+          stream: catalogBloc.dataStream,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              final data = snapshot.data!.data;
+              return SingleChildScrollView(
+                child: Column(
+                  children: [
+                    StickyHeader(
+                      header: const CustomTitle(
+                        imagePath: "assets/katalogi_title.png",
+                        title: "Каталоги",
                       ),
-                      StickyHeader(
-                        header: const CustomTitle(
-                          imagePath: "assets/katalogi_title.png",
-                          title: "Архив",
-                        ),
-                        content: isTablet
-                            ? NotificationListener(
-                                onNotification: (value) {
-                                  welcomeApi.eventSink
-                                      .add(WelcomeApiAction.fetch);
-                                  return false;
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 35),
-                                  child: GridView(
-                                    controller: scroll,
-                                    shrinkWrap: true,
-                                    gridDelegate:
-                                        const SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 2,
-                                            crossAxisSpacing: 30,
-                                            childAspectRatio: 1.1),
-                                    children: List.generate(
-                                        snapshot.data!.data.guidesArchive.list
-                                            .length, (index) {
-                                      return Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 5.0),
-                                          child: TabletKatalogItem(
-                                            linkPDFSkachat: snapshot.data!.data
-                                                .guidesArchive.list[index].link,
-                                            linkPDF: snapshot
-                                                .data!
-                                                .data
-                                                .guidesArchive
-                                                .list[index]
-                                                .pdfUrl,
-                                            imageUrl: data.guidesArchive
-                                                .list[index].pictureLink,
-                                            backgroundColor:
-                                                const Color(0xff000004),
-                                            buttonTextColor:
-                                                const Color(0xffffffff),
-                                            buttonColor:
-                                                const Color(0xffff163e),
-                                            titleColor: const Color(0xffffffff),
-                                            title: data.guidesArchive
-                                                .list[index].title,
-                                            stbuttonText: "Скачать",
-                                            ndbuttonText: "Читать",
-                                          ));
-                                    }),
-                                  ),
-                                ))
-                            : Column(
-                                children: List.generate(
-                                    data.guidesArchive.list.length, (index) {
-                                  return CustomKatalogItemDouble(
-                                    linkPDFSkachat: snapshot.data!.data
-                                        .guidesArchive.list[index].link,
-                                    linkPDF: snapshot.data!.data.guidesArchive
-                                        .list[index].pdfUrl,
-                                    imageUrl: data
-                                        .guidesArchive.list[index].pictureLink,
-                                    backgroundColor: const Color(0xff000004),
-                                    buttonTextColor: const Color(0xffffffff),
-                                    buttonColor: const Color(0xffff163e),
-                                    titleColor: const Color(0xffffffff),
-                                    title: data.guidesArchive.list[index].title,
-                                    stbuttonText: "Скачать",
-                                    ndbuttonText: "Читать",
-                                  );
-                                }),
-                              ),
+                      content: isTablet
+                          ? NotificationListener(
+                              onNotification: (value) {
+                                welcomeApi.eventSink
+                                    .add(WelcomeApiAction.fetch);
+                                return false;
+                              },
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 35),
+                                child: GridView(
+                                  controller: scroll,
+                                  physics: BouncingScrollPhysics(),
+                                  shrinkWrap: true,
+                                  gridDelegate:
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 2,
+                                          crossAxisSpacing: 30,
+                                          childAspectRatio: 1.130),
+                                  children: List.generate(
+                                      data.guides.list.length, (index) {
+                                    return Padding(
+                                        padding:
+                                            const EdgeInsets.only(top: 5.0),
+                                        child: TabletKatalogItem(
+                                          linkPDFSkachat: snapshot.data!.data
+                                              .guides.list[index].link,
+                                          linkPDF: snapshot.data!.data.guides
+                                              .list[index].pdfUrl,
+                                          imageUrl: data
+                                              .guides.list[index].pictureLink,
+                                          backgroundColor:
+                                              const Color(0xff000004),
+                                          buttonTextColor:
+                                              const Color(0xffffffff),
+                                          buttonColor: const Color(0xffff163e),
+                                          titleColor: const Color(0xffffffff),
+                                          title: data.guides.list[index].title,
+                                          stbuttonText: "Скачать",
+                                          ndbuttonText: "Читать",
+                                        ));
+                                  }),
+                                ),
+                              ))
+                          : Column(
+                              children: List.generate(data.guides.list.length,
+                                  (index) {
+                                return CustomKatalogItemDouble(
+                                  linkPDFSkachat: snapshot
+                                      .data!.data.guides.list[index].link,
+                                  linkPDF: snapshot
+                                      .data!.data.guides.list[index].pdfUrl,
+                                  imageUrl: data.guides.list[index].pictureLink,
+                                  backgroundColor: const Color(0xff000004),
+                                  buttonTextColor: const Color(0xffffffff),
+                                  buttonColor: const Color(0xffff163e),
+                                  titleColor: const Color(0xffffffff),
+                                  title: data.guides.list[index].title,
+                                  stbuttonText: "Скачать",
+                                  ndbuttonText: "Читать",
+                                );
+                              }),
+                            ),
+                    ),
+                    StickyHeader(
+                      header: const CustomTitle(
+                        imagePath: "assets/katalogi_title.png",
+                        title: "Архив",
                       ),
-                    ],
-                  ),
-                );
-              } else {
-                return Center(
-                    child: Padding(
-                  padding: EdgeInsets.only(
-                      top: (MediaQuery.of(context).size.height / 2) - 135),
+                      content: isTablet
+                          ? NotificationListener(
+                              onNotification: (value) {
+                                welcomeApi.eventSink
+                                    .add(WelcomeApiAction.fetch);
+                                return false;
+                              },
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 35),
+                                child: GridView(
+                                  controller: scroll,
+                                  shrinkWrap: true,
+                                  gridDelegate:
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 2,
+                                          crossAxisSpacing: 30,
+                                          childAspectRatio: 1.1),
+                                  children: List.generate(
+                                      snapshot.data!.data.guidesArchive.list
+                                          .length, (index) {
+                                    return Padding(
+                                        padding:
+                                            const EdgeInsets.only(top: 5.0),
+                                        child: TabletKatalogItem(
+                                          linkPDFSkachat: snapshot.data!.data
+                                              .guidesArchive.list[index].link,
+                                          linkPDF: snapshot.data!.data
+                                              .guidesArchive.list[index].pdfUrl,
+                                          imageUrl: data.guidesArchive
+                                              .list[index].pictureLink,
+                                          backgroundColor:
+                                              const Color(0xff000004),
+                                          buttonTextColor:
+                                              const Color(0xffffffff),
+                                          buttonColor: const Color(0xffff163e),
+                                          titleColor: const Color(0xffffffff),
+                                          title: data
+                                              .guidesArchive.list[index].title,
+                                          stbuttonText: "Скачать",
+                                          ndbuttonText: "Читать",
+                                        ));
+                                  }),
+                                ),
+                              ))
+                          : Column(
+                              children: List.generate(
+                                  data.guidesArchive.list.length, (index) {
+                                return CustomKatalogItemDouble(
+                                  linkPDFSkachat: snapshot.data!.data
+                                      .guidesArchive.list[index].link,
+                                  linkPDF: snapshot.data!.data.guidesArchive
+                                      .list[index].pdfUrl,
+                                  imageUrl: data
+                                      .guidesArchive.list[index].pictureLink,
+                                  backgroundColor: const Color(0xff000004),
+                                  buttonTextColor: const Color(0xffffffff),
+                                  buttonColor: const Color(0xffff163e),
+                                  titleColor: const Color(0xffffffff),
+                                  title: data.guidesArchive.list[index].title,
+                                  stbuttonText: "Скачать",
+                                  ndbuttonText: "Читать",
+                                );
+                              }),
+                            ),
+                    ),
+                  ],
+                ),
+              );
+            } else {
+              return Center(
                   child: Lottie.asset(
-                    'assets/pre.json',
-                    height: 70,
-                    width: 70,
-                  ),
-                ));
-              }
-            }),
-      ),
+                'assets/pre.json',
+                height: 70,
+                width: 70,
+              ));
+            }
+          }),
     );
   }
 }

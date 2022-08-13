@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/obucheniya_model_api.dart';
@@ -8,6 +10,7 @@ import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:http/http.dart' as http;
 
 class ObucheniyaWidget extends StatelessWidget {
   const ObucheniyaWidget({Key? key}) : super(key: key);
@@ -32,8 +35,8 @@ class ObucheniyaWidget extends StatelessWidget {
               children: List.generate(
             1,
             (index) {
-              return StreamBuilder<ObucheniyaModel>(
-                  stream: bloc.stream,
+              return FutureBuilder<ObucheniyaModel>(
+                  future: bloc.getObucheniya(token),
                   builder: (context, snapshot) {
                     if (snapshot.data != null) {
                       return Column(

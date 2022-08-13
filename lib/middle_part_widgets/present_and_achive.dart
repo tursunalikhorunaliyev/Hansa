@@ -31,13 +31,12 @@ class _PresentArchiveState extends State<PresentArchive> {
     final isTablet = Provider.of<bool>(context);
 
     return Expanded(
-      child: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: StreamBuilder<PrezintatsiaModel>(
-            stream: bloc.stream,
-            builder: (context, snapshot) {
-              if (snapshot.hasData) {
-                return Column(children: [
+      child: FutureBuilder<PrezintatsiaModel>(
+          future: bloc.getPrezintatsiyaData(token),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return SingleChildScrollView(
+                child: Column(children: [
                   StickyHeader(
                       header: Container(
                         color: const Color(0xffeaeaea),
@@ -156,45 +155,39 @@ class _PresentArchiveState extends State<PresentArchive> {
                                 return Column(
                                   children: [
                                     Row(),
-                                    Column(children: [
-                                      ArchiveCard(
-                                        isFavouriteURL: snapshot
-                                            .data!
-                                            .data
-                                            .guides
-                                            .dataGuides[index]
-                                            .favourite_link,
-                                        linkPDFSkachat: snapshot.data!.data
-                                            .guides.dataGuides[index].pdfUrl,
-                                        linkPDF: snapshot.data!.data.guides
-                                            .dataGuides[index].link,
-                                        buttonColor: const Color(0xffff163e),
-                                        topButtonText: 'Скачать',
-                                        bottomButtonText: 'Читать',
-                                        isFavourite: snapshot.data!.data.guides
-                                            .dataGuides[index].isFavourite,
-                                        skachat: Container(
-                                          alignment: Alignment.center,
-                                          width: 94,
-                                          height: 25,
-                                          decoration: BoxDecoration(
-                                              color: const Color(0xff31353b),
-                                              borderRadius:
-                                                  BorderRadius.circular(13)),
-                                          child: Text(
-                                            'skachat',
-                                            style: GoogleFonts.montserrat(
-                                                fontSize: 10,
-                                                color: const Color(0xffffffff),
-                                                fontWeight: FontWeight.w500),
-                                          ),
+                                    ArchiveCard(
+                                      isFavouriteURL: snapshot.data!.data.guides
+                                          .dataGuides[index].favourite_link,
+                                      linkPDFSkachat: snapshot.data!.data.guides
+                                          .dataGuides[index].pdfUrl,
+                                      linkPDF: snapshot.data!.data.guides
+                                          .dataGuides[index].link,
+                                      buttonColor: const Color(0xffff163e),
+                                      topButtonText: 'Скачать',
+                                      bottomButtonText: 'Читать',
+                                      isFavourite: snapshot.data!.data.guides
+                                          .dataGuides[index].isFavourite,
+                                      skachat: Container(
+                                        alignment: Alignment.center,
+                                        width: 94,
+                                        height: 25,
+                                        decoration: BoxDecoration(
+                                            color: const Color(0xff31353b),
+                                            borderRadius:
+                                                BorderRadius.circular(13)),
+                                        child: Text(
+                                          'skachat',
+                                          style: GoogleFonts.montserrat(
+                                              fontSize: 10,
+                                              color: const Color(0xffffffff),
+                                              fontWeight: FontWeight.w500),
                                         ),
-                                        title: snapshot.data!.data.guides
-                                            .dataGuides[index].title,
-                                        url: snapshot.data!.data.guides
-                                            .dataGuides[index].picture_link,
                                       ),
-                                    ])
+                                      title: snapshot.data!.data.guides
+                                          .dataGuides[index].title,
+                                      url: snapshot.data!.data.guides
+                                          .dataGuides[index].picture_link,
+                                    )
                                   ],
                                 );
                               },
@@ -259,7 +252,7 @@ class _PresentArchiveState extends State<PresentArchive> {
                                 ),
                                 child: GridView(
                                   controller: scroll,
-      
+
                                   shrinkWrap: true,
                                   physics: BouncingScrollPhysics(),
                                   //      physics: const BouncingScrollPhysics(),
@@ -330,108 +323,88 @@ class _PresentArchiveState extends State<PresentArchive> {
                                   }),
                                 ),
                               ))
-                          : Expanded(
-                              child: Column(
-                                  children: List.generate(
-                                      snapshot.data!.data.guidesArchive
-                                          .dataGuidesArchive.length,
-                                      (index) => Column(
-                                            children: [
-                                              Row(),
-                                              Column(
-                                                children: [
-                                                  ArchiveCard(
-                                                    isFavouriteURL: snapshot
-                                                        .data!
-                                                        .data
-                                                        .guidesArchive
-                                                        .dataGuidesArchive[
-                                                            index]
-                                                        .favourite_link,
-                                                    linkPDFSkachat: snapshot
-                                                        .data!
-                                                        .data
-                                                        .guidesArchive
-                                                        .dataGuidesArchive[
-                                                            index]
-                                                        .pdfUrl,
-                                                    buttonColor:
-                                                        const Color(0xffff163e),
-                                                    topButtonText: 'Скачать',
-                                                    bottomButtonText: 'Читать',
-                                                    linkPDF: snapshot
-                                                        .data!
-                                                        .data
-                                                        .guidesArchive
-                                                        .dataGuidesArchive[
-                                                            index]
-                                                        .link,
-                                                    isFavourite: snapshot
-                                                        .data!
-                                                        .data
-                                                        .guidesArchive
-                                                        .dataGuidesArchive[
-                                                            index]
-                                                        .isFavourite,
-                                                    skachat: Container(
-                                                      alignment:
-                                                          Alignment.center,
-                                                      width: 94,
-                                                      height: 25,
-                                                      decoration: BoxDecoration(
-                                                          color: const Color(
-                                                              0xff31353b),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      13)),
-                                                      child: Text(
-                                                        'skachat',
-                                                        style: GoogleFonts
-                                                            .montserrat(
-                                                                fontSize: 10,
-                                                                color: const Color(
-                                                                    0xffffffff),
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w500),
-                                                      ),
-                                                    ),
-                                                    title: snapshot
-                                                        .data!
-                                                        .data
-                                                        .guidesArchive
-                                                        .dataGuidesArchive[
-                                                            index]
-                                                        .title,
-                                                    url: snapshot
-                                                        .data!
-                                                        .data
-                                                        .guidesArchive
-                                                        .dataGuidesArchive[
-                                                            index]
-                                                        .picture_link,
-                                                  ),
-                                                ],
-                                              )
-                                            ],
-                                          ))),
-                            ))
-                ]);
-              } else {
-                return Center(
-                    child: Padding(
-                  padding: EdgeInsets.only(
-                      top: (MediaQuery.of(context).size.height / 2) - 135),
+                          : Column(
+                              children: List.generate(
+                                  snapshot.data!.data.guidesArchive
+                                      .dataGuidesArchive.length,
+                                  (index) => Column(
+                                        children: [
+                                          Row(),
+                                          ArchiveCard(
+                                            isFavouriteURL: snapshot
+                                                .data!
+                                                .data
+                                                .guidesArchive
+                                                .dataGuidesArchive[index]
+                                                .favourite_link,
+                                            linkPDFSkachat: snapshot
+                                                .data!
+                                                .data
+                                                .guidesArchive
+                                                .dataGuidesArchive[index]
+                                                .pdfUrl,
+                                            buttonColor:
+                                                const Color(0xffff163e),
+                                            topButtonText: 'Скачать',
+                                            bottomButtonText: 'Читать',
+                                            linkPDF: snapshot
+                                                .data!
+                                                .data
+                                                .guidesArchive
+                                                .dataGuidesArchive[index]
+                                                .link,
+                                            isFavourite: snapshot
+                                                .data!
+                                                .data
+                                                .guidesArchive
+                                                .dataGuidesArchive[index]
+                                                .isFavourite,
+                                            skachat: Container(
+                                              alignment: Alignment.center,
+                                              width: 94,
+                                              height: 25,
+                                              decoration: BoxDecoration(
+                                                  color:
+                                                      const Color(0xff31353b),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          13)),
+                                              child: Text(
+                                                'skachat',
+                                                style: GoogleFonts.montserrat(
+                                                    fontSize: 10,
+                                                    color:
+                                                        const Color(0xffffffff),
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                              ),
+                                            ),
+                                            title: snapshot
+                                                .data!
+                                                .data
+                                                .guidesArchive
+                                                .dataGuidesArchive[index]
+                                                .title,
+                                            url: snapshot
+                                                .data!
+                                                .data
+                                                .guidesArchive
+                                                .dataGuidesArchive[index]
+                                                .picture_link,
+                                          )
+                                        ],
+                                      ))))
+                ]),
+              );
+            } else {
+              return Center(
                   child: Lottie.asset(
-                    'assets/pre.json',
-                    height: 70,
-                    width: 70,
-                  ),
-                ));
-              }
-            }),
-      ),
+                'assets/pre.json',
+                height: 70,
+                width: 70,
+              ));
+            }
+          }),
     );
   }
 }
