@@ -178,10 +178,30 @@ class _IzbrannoeState extends State<Izbrannoe> {
                                                   height: isTablet ? 22 : 21,
                                                   width: isTablet ? 74 : 63,
                                                   decoration: BoxDecoration(
+                                                    border: snapshot
+                                                                .data!
+                                                                .data
+                                                                .list[index]
+                                                                .type ==
+                                                            2
+                                                        ? Border.all(
+                                                            width: 2,
+                                                            color: Color(
+                                                                0xFF313131))
+                                                        : Border.all(
+                                                            color: Colors
+                                                                .transparent),
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10.5),
-                                                    color: Color(0xFF313131),
+                                                    color: snapshot
+                                                                .data!
+                                                                .data
+                                                                .list[index]
+                                                                .type ==
+                                                            2
+                                                        ? Colors.white
+                                                        : Color(0xFF313131),
                                                   ),
                                                   child: Text(
                                                     snapshot
@@ -192,11 +212,17 @@ class _IzbrannoeState extends State<Izbrannoe> {
                                                             2
                                                         ? "Скачать"
                                                         : "Смотреть",
-                                                    style:
-                                                        GoogleFonts.montserrat(
-                                                            color: const Color(
-                                                                0xFFFFFFFF),
-                                                            fontSize: 10),
+                                                    style: GoogleFonts.montserrat(
+                                                        color: snapshot
+                                                                    .data!
+                                                                    .data
+                                                                    .list[index]
+                                                                    .type ==
+                                                                1
+                                                            ? const Color(
+                                                                0xFFFFFFFF)
+                                                            : Color(0xFF313131),
+                                                        fontSize: 10),
                                                   ),
                                                 ),
                                               ),
