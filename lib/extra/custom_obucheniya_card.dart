@@ -40,7 +40,7 @@ class _ObucheniyaCardState extends State<ObucheniyaCard> {
     final favouriteModel = FavouriteModel(status: true, data: true);
     bool fav = widget.isFavourite;
     return Padding(
-      padding: EdgeInsets.only(top: 15.h, left: 20, right: 20),
+      padding: EdgeInsets.only(top: 15.h, left:isTablet?0: 20, right:isTablet?0: 20),
       child: Stack(
         children: [
           Padding(

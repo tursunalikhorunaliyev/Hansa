@@ -91,17 +91,16 @@ class _PresentArchiveState extends State<PresentArchive> {
                                 return false;
                               },
                               child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 35),
+                                padding: const EdgeInsets.symmetric(horizontal: 25),
                                 child: GridView(
                                   controller: scroll,
                                   shrinkWrap: true,
                                   physics: BouncingScrollPhysics(),
                                   gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                      SliverGridDelegateWithFixedCrossAxisCount(
                                           crossAxisCount: 2,
-                                          crossAxisSpacing: 30,
-                                          childAspectRatio: 10 / 8),
+                                          crossAxisSpacing: 22,
+                                          mainAxisExtent: 325),
                                   children: List.generate(
                                       snapshot.data!.data.guides.dataGuides
                                           .length, (index) {
@@ -246,21 +245,16 @@ class _PresentArchiveState extends State<PresentArchive> {
                                 return false;
                               },
                               child: Padding(
-                                padding: const EdgeInsets.only(
-                                  left: 35,
-                                  right: 35,
-                                ),
+                                padding: const EdgeInsets.symmetric(horizontal: 25),
                                 child: GridView(
                                   controller: scroll,
-
                                   shrinkWrap: true,
                                   physics: BouncingScrollPhysics(),
-                                  //      physics: const BouncingScrollPhysics(),
                                   gridDelegate:
                                       const SliverGridDelegateWithFixedCrossAxisCount(
                                           crossAxisCount: 2,
-                                          crossAxisSpacing: 30,
-                                          childAspectRatio: 10 / 8),
+                                          crossAxisSpacing: 22,
+                                          mainAxisExtent: 325),
                                   children: List.generate(
                                       snapshot.data!.data.guidesArchive
                                           .dataGuidesArchive.length, (index) {
@@ -279,12 +273,8 @@ class _PresentArchiveState extends State<PresentArchive> {
                                             .guidesArchive
                                             .dataGuidesArchive[index]
                                             .pdfUrl,
-                                        linkPDF: snapshot
-                                            .data!
-                                            .data
-                                            .guidesArchive
-                                            .dataGuidesArchive[index]
-                                            .link,
+                                        linkPDF: snapshot.data!.data.guidesArchive
+                                            .dataGuidesArchive[index].link,
                                         buttonColor: const Color(0xffff163e),
                                         topButtonText: 'Скачать',
                                         bottomButtonText: 'Читать',

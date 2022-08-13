@@ -10,6 +10,7 @@ import 'package:hansa_app/extra/my_behavior%20.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class WelcomeWidget extends StatefulWidget {
   const WelcomeWidget({Key? key}) : super(key: key);
@@ -69,12 +70,13 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                   child: Column(
                                     children: [
                                       GridView(
-                                        physics: NeverScrollableScrollPhysics(),
+                                        physics: BouncingScrollPhysics(),
                                         shrinkWrap: true,
                                         gridDelegate:
                                             SliverGridDelegateWithFixedCrossAxisCount(
                                                 crossAxisCount: 2,
-                                                childAspectRatio: 5 / 3.1),
+                                                crossAxisSpacing: 22,
+                                                mainAxisExtent: 300),
                                         children: List.generate(
                                           data.length,
                                           (index) => EventCards(

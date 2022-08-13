@@ -6,6 +6,7 @@ import 'package:hansa_app/blocs/bloc_o_kompaniya.dart';
 import 'package:hansa_app/enums/enum_action_view.dart';
 import 'package:hansa_app/extra/sobshit_o_problem.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class Okompaniya extends StatelessWidget {
   const Okompaniya({Key? key}) : super(key: key);
@@ -79,10 +80,10 @@ class Okompaniya extends StatelessWidget {
                           ClipRRect(
                             borderRadius: BorderRadius.circular(25),
                             child: Image.asset(
-                              "assets/1649660637Аракелян Ася.jpg.png",
+                              "assets/1649660637Аракелян Ася.png",
                               fit: BoxFit.fitWidth,
                               height: 425,
-                              width: 850,
+                              width: 350.w,
                             ),
                           ),
                         ],
