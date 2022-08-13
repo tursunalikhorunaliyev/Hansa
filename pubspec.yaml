@@ -63,6 +63,7 @@ dependencies:
   intl_phone_number_input: ^0.7.0+2
   fluttertoast: ^8.0.9
   share_plus: ^4.0.10+1
+  flutter_local_notifications: ^9.7.0
   
 
 dev_dependencies:

@@ -146,7 +146,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     ),
                   ),
                 ),
-                const UIChanger(),
+                Provider(
+                    create: (context) => scaffoldKey, child: const UIChanger()),
               ],
             ),
           ],
