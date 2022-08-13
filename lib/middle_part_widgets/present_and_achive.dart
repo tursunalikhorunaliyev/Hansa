@@ -31,8 +31,8 @@ class _PresentArchiveState extends State<PresentArchive> {
     final isTablet = Provider.of<bool>(context);
 
     return Expanded(
-      child: StreamBuilder<PrezintatsiaModel>(
-          stream: bloc.stream,
+      child: FutureBuilder<PrezintatsiaModel>(
+          future: bloc.getPrezintatsiyaData(token),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return SingleChildScrollView(
