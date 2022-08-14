@@ -37,7 +37,7 @@ class _CustomDoubleClipItemState extends State<CustomDoubleClipItem> {
     Future<void>? launched;
     final isTablet = Provider.of<bool>(context);
     return Padding(
-      padding: EdgeInsets.only(left: 0.w, right: 0.w, top: 11.h, bottom: 5.h),
+      padding: EdgeInsets.only(top: 6.h, bottom: 5.h),
       child: SizedBox(
         width: double.infinity,
         child: Stack(
