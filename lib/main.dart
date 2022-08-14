@@ -24,6 +24,7 @@ import 'package:hansa_app/blocs/toggle_switcher_bloc.dart';
 import 'package:hansa_app/providers/providers_for_video_title/video_index_provider.dart';
 import 'package:hansa_app/providers/providers_for_video_title/video_title_provider.dart';
 import 'package:hansa_app/providers/stati_id_provider.dart';
+import 'package:hansa_app/providers/treningi_photos_provider.dart';
 import 'package:hansa_app/providers/treningi_video_changer_provider.dart';
 import 'package:hansa_app/stacked_stack.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -76,6 +77,9 @@ class MyApp extends StatelessWidget {
           ),
           ChangeNotifierProvider(
             create: (context) => VideoIndexProvider(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => TreningiPhotosProvider(),
           ),
           ChangeNotifierProvider(
             create: (context) => FullRegisterDataProvider(),

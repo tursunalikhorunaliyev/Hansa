@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
 import 'package:http/http.dart' as http;
 import 'package:hansa_app/api_models.dart/training_model.dart';
 
@@ -10,9 +9,6 @@ class TrainingAPIBloc {
       Uri.parse("https://hansa-lab.ru/api/site/training"),
       headers: {"token": token},
     );
-    log(jsonDecode(response.body).toString() +
-        '    <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<');
-    log("poppopopopopopopopopopopopopopopopopoopopopooppooppopoopopoopooopopopoopo");
     return TrainingModel.fromMap(jsonDecode(response.body));
   }
 }
