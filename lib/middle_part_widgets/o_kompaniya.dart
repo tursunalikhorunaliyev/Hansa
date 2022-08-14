@@ -82,8 +82,8 @@ class Okompaniya extends StatelessWidget {
                             child: Image.asset(
                               "assets/1649660637Аракелян Ася.png",
                               fit: BoxFit.fitWidth,
-                              height: 425,
-                              width: 350.w,
+                              height: 445,
+                              width: 330.w,
                             ),
                           ),
                         ],

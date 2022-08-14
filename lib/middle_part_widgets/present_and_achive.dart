@@ -4,6 +4,7 @@ import 'package:hansa_app/api_models.dart/prezintatsi_model.dart';
 import 'package:hansa_app/api_services/welcome_api.dart';
 import 'package:hansa_app/blocs/prezintatsia_bloc.dart';
 import 'package:hansa_app/extra/archive_card.dart';
+import 'package:hansa_app/extra/prezentatTabCard.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:sticky_headers/sticky_headers.dart';
@@ -106,7 +107,7 @@ class _PresentArchiveState extends State<PresentArchive> {
                                           .length, (index) {
                                     return Padding(
                                       padding: const EdgeInsets.only(top: 5.0),
-                                      child: ArchiveCard(
+                                      child: StackedStackPrezentatsiyaTab(
                                         isFavouriteURL: snapshot
                                             .data!
                                             .data
@@ -251,16 +252,16 @@ class _PresentArchiveState extends State<PresentArchive> {
                                   shrinkWrap: true,
                                   physics: BouncingScrollPhysics(),
                                   gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                       SliverGridDelegateWithFixedCrossAxisCount(
                                           crossAxisCount: 2,
                                           crossAxisSpacing: 22,
-                                          mainAxisExtent: 325),
+                                          mainAxisExtent: 220.h),
                                   children: List.generate(
                                       snapshot.data!.data.guidesArchive
                                           .dataGuidesArchive.length, (index) {
                                     return Padding(
                                       padding: const EdgeInsets.only(top: 5.0),
-                                      child: ArchiveCard(
+                                      child: StackedStackPrezentatsiyaTab(
                                         isFavouriteURL: snapshot
                                             .data!
                                             .data

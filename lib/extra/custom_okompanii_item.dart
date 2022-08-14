@@ -34,7 +34,7 @@ class CustomOKompaniiItem extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: isTablet ? 0 : 12,
+            height: isTablet ? 10 : 12,
           ),
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
