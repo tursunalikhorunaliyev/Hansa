@@ -26,7 +26,6 @@ import 'package:hansa_app/providers/providers_for_video_title/video_title_provid
 import 'package:hansa_app/providers/stati_id_provider.dart';
 import 'package:hansa_app/providers/treningi_photos_provider.dart';
 import 'package:hansa_app/providers/treningi_video_changer_provider.dart';
-import 'package:hansa_app/stacked_stack.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 
