@@ -4,14 +4,14 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:hansa_app/screens/splash_screen.dart';
 import 'package:permission_handler/permission_handler.dart';
 
-class MyWidget extends StatefulWidget {
-  const MyWidget({Key? key}) : super(key: key);
+class PermissionHandlerScreen extends StatefulWidget {
+  const PermissionHandlerScreen({Key? key}) : super(key: key);
 
   @override
-  State<MyWidget> createState() => _MyWidgetState();
+  State<PermissionHandlerScreen> createState() => _PermissionHandlerScreenState();
 }
 
-class _MyWidgetState extends State<MyWidget> {
+class _PermissionHandlerScreenState extends State<PermissionHandlerScreen> {
   @override
   void initState() {
     getPermission().then((value) {
