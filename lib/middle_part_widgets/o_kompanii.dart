@@ -15,6 +15,7 @@ import 'package:hansa_app/video/model_video.dart';
 import 'package:lottie/lottie.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
 class OKompanii extends StatefulWidget {
