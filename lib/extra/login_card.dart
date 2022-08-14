@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -209,9 +211,28 @@ class _LoginCardState extends State<LoginCard> {
                             builder: (context, snapshot) {
                               return GestureDetector(
                                 onTap: () async {
-                                  if (snapshot.data!) {
-                                    progressButtonBLoC.sink.add(true);
-                                  } else {
+                                  bool netCheck = false;
+                                  try {
+                                    final response =
+                                        await InternetAddress.lookup(
+                                            'www.example.com');
+
+                                    if (response.isNotEmpty) {
+                                      setState(() {
+                                        netCheck = true;
+                                      });
+                                    }
+                                  } catch (xatoyuuu) {
+                                    setState(() {
+                                      netCheck = false;
+                                    });
+                                    if (kDebugMode) {
+                                      print(xatoyuuu);
+                                    }
+                                  }
+
+                                  if (netCheck) {
+                                    log("sstatus 200");
                                     progressButtonBLoC.sink.add(true);
                                     FocusManager.instance.primaryFocus
                                         ?.unfocus();
@@ -224,6 +245,16 @@ class _LoginCardState extends State<LoginCard> {
                                         .sendRequest();
 
                                     pagerBloc.sink.add(isCorrectList);
+                                  } else {
+                                    log("status 400");
+                                    const snackBar = SnackBar(
+                                      content: Text('Yay! A SnackBar!'),
+                                      backgroundColor: Colors.red,
+                                    );
+
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(snackBar);
+                                    progressButtonBLoC.sink.add(false);
                                   }
                                 },
                                 child: AnimatedContainer(
