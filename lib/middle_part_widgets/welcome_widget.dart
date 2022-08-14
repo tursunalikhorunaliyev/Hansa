@@ -65,86 +65,80 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                             padding: const EdgeInsets.symmetric(horizontal: 25),
                             child: ScrollConfiguration(
                               behavior: MyBehavior(),
-                              child: Expanded(
-                                child: SingleChildScrollView(
-                                  child: Column(
-                                    children: [
-                                      GridView(
-                                        physics: BouncingScrollPhysics(),
-                                        shrinkWrap: true,
-                                        gridDelegate:
-                                            SliverGridDelegateWithFixedCrossAxisCount(
-                                                crossAxisCount: 2,
-                                                crossAxisSpacing: 22,
-                                                mainAxisExtent: 300),
-                                        children: List.generate(
-                                          data.length,
-                                          (index) => EventCards(
-                                            isFavouriteURL: snapshot
-                                                .data![index].favoriteLink,
-                                            onTap: () async {
-                                              menuProvider.eventSink
-                                                  .add(MenuActions.article);
-                                              ArticleModel statiModel =
-                                                  await articleBLoC.getArticle(
-                                                      token,
-                                                      snapshot
-                                                          .data![index].link);
-                                              articleBLoC.sink.add(statiModel);
-                                            },
-                                            buttonColor:
-                                                const Color(0xffff163e),
-                                            buttonText: 'Смотреть',
-                                            isDate: true,
-                                            month: toDateString(snapshot
-                                                .data![index].date
-                                                .substring(5, 7)),
-                                            day: snapshot.data![index].date
-                                                .substring(8, 10),
-                                            title: data[index].title,
-                                            url: data[index].pictureLink,
-                                            isFavourite: data[index].isFavorite,
-                                          ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(bottom: 10.0),
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            welcomeApi.eventSink
-                                                .add(WelcomeApiAction.fetch);
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    GridView(
+                                      physics: NeverScrollableScrollPhysics(),
+                                      shrinkWrap: true,
+                                      gridDelegate:
+                                          SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 2,
+                                              childAspectRatio: 5 / 3.1),
+                                      children: List.generate(
+                                        data.length,
+                                        (index) => EventCards(
+                                          isFavouriteURL: snapshot
+                                              .data![index].favoriteLink,
+                                          onTap: () async {
+                                            menuProvider.eventSink
+                                                .add(MenuActions.article);
+                                            ArticleModel statiModel =
+                                                await articleBLoC.getArticle(
+                                                    token,
+                                                    snapshot.data![index].link);
+                                            articleBLoC.sink.add(statiModel);
                                           },
-                                          child: Container(
-                                            alignment: Alignment.center,
-                                            width: isTablet ? 100 : 120,
-                                            height: isTablet ? 28 : 30,
-                                            decoration: BoxDecoration(
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                    color: Colors.grey
-                                                        .withOpacity(0.5),
-                                                    spreadRadius: 2,
-                                                    blurRadius: 4,
-                                                    offset: const Offset(0, 3),
-                                                  ),
-                                                ],
-                                                color: Colors.green,
-                                                borderRadius:
-                                                    BorderRadius.circular(13)),
-                                            child: Text(
-                                              "показать ещё",
-                                              style: GoogleFonts.montserrat(
-                                                  fontSize: isTablet ? 12 : 10,
-                                                  color:
-                                                      const Color(0xffffffff),
-                                                  fontWeight: FontWeight.w500),
-                                            ),
+                                          buttonColor: const Color(0xffff163e),
+                                          buttonText: 'Смотреть',
+                                          isDate: true,
+                                          month: toDateString(snapshot
+                                              .data![index].date
+                                              .substring(5, 7)),
+                                          day: snapshot.data![index].date
+                                              .substring(8, 10),
+                                          title: data[index].title,
+                                          url: data[index].pictureLink,
+                                          isFavourite: data[index].isFavorite,
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding:
+                                          const EdgeInsets.only(bottom: 10.0),
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          welcomeApi.eventSink
+                                              .add(WelcomeApiAction.fetch);
+                                        },
+                                        child: Container(
+                                          alignment: Alignment.center,
+                                          width: isTablet ? 100 : 120,
+                                          height: isTablet ? 28 : 30,
+                                          decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.grey
+                                                      .withOpacity(0.5),
+                                                  spreadRadius: 2,
+                                                  blurRadius: 4,
+                                                  offset: const Offset(0, 3),
+                                                ),
+                                              ],
+                                              color: Colors.green,
+                                              borderRadius:
+                                                  BorderRadius.circular(13)),
+                                          child: Text(
+                                            "показать ещё",
+                                            style: GoogleFonts.montserrat(
+                                                fontSize: isTablet ? 12 : 10,
+                                                color: const Color(0xffffffff),
+                                                fontWeight: FontWeight.w500),
                                           ),
                                         ),
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ),

@@ -178,6 +178,9 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
                   Padding(
                     padding: const EdgeInsets.only(top: 13),
                     child: CustomTreningiVideo(
+                      onTap: () {
+                        
+                      },
                       title: widget.title,
                     ),
                   )

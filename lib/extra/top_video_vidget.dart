@@ -1,8 +1,17 @@
+import 'dart:io';
+
 import 'package:chewie/chewie.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hansa_app/blocs/download_progress_bloc.dart';
 import 'package:hansa_app/extra/custom_black_appbar.dart';
+import 'package:hansa_app/providers/providers_for_video_title/video_index_provider.dart';
 import 'package:hansa_app/training_section/custom_treningi_video.dart';
+import 'package:hansa_app/video/bloc_video_api.dart';
+import 'package:hansa_app/video/model_video.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
 class TopVideoVidget extends StatefulWidget {
@@ -56,8 +65,49 @@ class _TopVideoVidgetState extends State<TopVideoVidget> {
     initVideo();
   }
 
+  final blocVideoApi = BlocVideoApi();
+
+  final blocDownload = DownloadProgressFileBloc();
+
+  Future<String> getFilePath(uniqueFileName) async {
+    String path = "";
+    String dir = "";
+    if (Platform.isIOS) {
+      Directory directory = await getApplicationSupportDirectory();
+      dir = directory.path;
+    } else if (Platform.isAndroid) {
+      dir = "/storage/emulated/0/Download/";
+    }
+    path = "$dir/$uniqueFileName.mp4";
+    return path;
+  }
+
+  bool downloading = false;
+  double progress = 0;
+  bool isDownloaded = false;
+
+  Future<void> downloadFile(String url, String fileName) async {
+    progress = 0;
+
+    String savePath = await getFilePath(fileName);
+    Dio dio = Dio();
+    dio.download(
+      url,
+      savePath,
+      onReceiveProgress: (recieved, total) {
+        print(((recieved / total) * 100).toStringAsFixed(0));
+        progress = double.parse(((recieved / total) * 100).toStringAsFixed(0));
+        blocDownload.streamSink.add(progress);
+      },
+      deleteOnError: true,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
+    final token = Provider.of<String>(context);
+    final providerIndex = Provider.of<int>(context);
+
     return SafeArea(
       child: Stack(
         children: [
@@ -103,11 +153,37 @@ class _TopVideoVidgetState extends State<TopVideoVidget> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 13),
-                    child: CustomTreningiVideo(
-                      title: widget.title,
-                    ),
+                  Consumer<VideoIndexProvider>(
+                    builder: (context, value, child) {
+                      return FutureBuilder<VideoMainOne>(
+                        future: blocVideoApi.getData(token: token),
+                        builder: (context, snapshot) {
+                          return Padding(
+                            padding: const EdgeInsets.only(top: 13),
+                            child: CustomTreningiVideo(
+                              onTap: () {
+                                downloadFile(
+                                    snapshot
+                                        .data!
+                                        .videoListData
+                                        .list[value.getIndex]
+                                        .data
+                                        .list[providerIndex]
+                                        .videoLink,
+                                    snapshot
+                                        .data!
+                                        .videoListData
+                                        .list[value.getIndex]
+                                        .data
+                                        .list[providerIndex]
+                                        .title);
+                              },
+                              title: widget.title,
+                            ),
+                          );
+                        },
+                      );
+                    },
                   )
                 ],
               )

@@ -13,6 +13,7 @@ import 'package:hansa_app/blocs/login_clicked_bloc.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/blocs/read_stati_bloc.dart';
 import 'package:hansa_app/blocs/voyti_ili_sozdata_bloc.dart';
+import 'package:hansa_app/middle_part_widgets/permission_handler_screen.dart';
 import 'package:hansa_app/providers/dialog_video_provider.dart';
 import 'package:hansa_app/providers/full_registr_provider.dart';
 import 'package:hansa_app/providers/new_shop_provider.dart';
@@ -117,9 +118,9 @@ class MyApp extends StatelessWidget {
           ],
           locale: Locale("ru"),
           debugShowCheckedModeBanner: false,
-          home: SplashScreen(),
+          home: MyWidget(),
         ),
-      ),
+      ), 
     );
   }
 }

@@ -8,7 +8,6 @@ import 'package:hansa_app/blocs/download_progress_bloc.dart';
 import 'package:hansa_app/extra/custom_okompanii_item.dart';
 import 'package:hansa_app/extra/custom_title.dart';
 import 'package:hansa_app/extra/top_video_vidget.dart';
-import 'package:hansa_app/extra/top_video_widget.dart';
 import 'package:hansa_app/providers/providers_for_video_title/video_index_provider.dart';
 import 'package:hansa_app/providers/providers_for_video_title/video_title_provider.dart';
 import 'package:hansa_app/video/bloc_video_api.dart';
@@ -33,6 +32,7 @@ class _OKompaniiState extends State<OKompanii> {
   bool isDownloaded = false;
 
   Future<void> downloadFile(String url, String fileName) async {
+    await Permission.storage.request();
     progress = 0;
 
     String savePath = await getFilePath(fileName);
@@ -404,9 +404,19 @@ class _OKompaniiState extends State<OKompanii> {
                                       builder: (context) {
                                         return Scaffold(
                                           backgroundColor: Colors.transparent,
-                                          body: TopVideoVidget(
-                                            url: video.videoLink,
-                                            title: video.title,
+                                          body: MultiProvider(
+                                            providers: [
+                                              Provider(
+                                                create: (context) => index,
+                                              ),
+                                              Provider(
+                                                create: (context) => token,
+                                              ),
+                                            ],
+                                            child: TopVideoVidget(
+                                              url: video.videoLink,
+                                              title: video.title,
+                                            ),
                                           ),
                                         );
                                       },
