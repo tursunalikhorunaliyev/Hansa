@@ -5,6 +5,7 @@ import 'package:chewie/chewie.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hansa_app/blocs/bloc_detect_tap.dart';
 import 'package:hansa_app/blocs/download_progress_bloc.dart';
 import 'package:hansa_app/extra/custom_black_appbar.dart';
 import 'package:hansa_app/providers/providers_for_video_title/video_index_provider.dart';
@@ -68,8 +69,6 @@ class _TopVideoVidgetState extends State<TopVideoVidget> {
 
   final blocVideoApi = BlocVideoApi();
 
-  final blocDownload = DownloadProgressFileBloc();
-
   Future<String> getFilePath(uniqueFileName) async {
     String path = "";
     String dir = "";
@@ -87,7 +86,8 @@ class _TopVideoVidgetState extends State<TopVideoVidget> {
   double progress = 0;
   bool isDownloaded = false;
 
-  Future<void> downloadFile(String url, String fileName) async {
+  Future<void> downloadFile(String url, String fileName,
+      DownloadProgressFileBloc downloadProgressFileBloc) async {
     progress = 0;
 
     String savePath = await getFilePath(fileName);
@@ -98,14 +98,17 @@ class _TopVideoVidgetState extends State<TopVideoVidget> {
       onReceiveProgress: (recieved, total) {
         print(((recieved / total) * 100).toStringAsFixed(0));
         progress = double.parse(((recieved / total) * 100).toStringAsFixed(0));
-        blocDownload.streamSink.add(progress);
+        downloadProgressFileBloc.streamSink.add(progress);
       },
       deleteOnError: true,
     );
   }
 
+  final blocDetectTap = BlocDetectTap();
+
   @override
   Widget build(BuildContext context) {
+    final providerBlocProgress = Provider.of<DownloadProgressFileBloc>(context);
     final token = Provider.of<String>(context);
     final providerIndex = Provider.of<int>(context);
 
@@ -162,24 +165,27 @@ class _TopVideoVidgetState extends State<TopVideoVidget> {
                           return Padding(
                             padding: const EdgeInsets.only(top: 13),
                             child: Provider(
-                              create: (context) => blocDownload,
+                              create: (context) => blocDetectTap,
                               child: CustomTreningiVideo(
                                 onTap: () {
+                                  blocDetectTap.dataSink.add(true);
                                   downloadFile(
-                                      snapshot
-                                          .data!
-                                          .videoListData
-                                          .list[value.getIndex]
-                                          .data
-                                          .list[providerIndex]
-                                          .videoLink,
-                                      snapshot
-                                          .data!
-                                          .videoListData
-                                          .list[value.getIndex]
-                                          .data
-                                          .list[providerIndex]
-                                          .title);
+                                    snapshot
+                                        .data!
+                                        .videoListData
+                                        .list[value.getIndex]
+                                        .data
+                                        .list[providerIndex]
+                                        .videoLink,
+                                    snapshot
+                                        .data!
+                                        .videoListData
+                                        .list[value.getIndex]
+                                        .data
+                                        .list[providerIndex]
+                                        .title,
+                                    providerBlocProgress,
+                                  );
                                 },
                                 title: widget.title,
                               ),
