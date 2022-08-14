@@ -3,7 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CustomTreningiVideo extends StatelessWidget {
   final String title;
-  const CustomTreningiVideo({Key? key, required this.title}) : super(key: key);
+  VoidCallback onTap;
+   CustomTreningiVideo({Key? key, required this.title, required this.onTap}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +43,7 @@ class CustomTreningiVideo extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(right: 8),
                     child: GestureDetector(
+                      onTap: onTap,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(64),
                         child: Container(
