@@ -45,14 +45,14 @@ class _ArchiveCardState extends State<ArchiveCard> {
     final token = Provider.of<String>(context);
     bool fav = widget.isFavourite;
     return Padding(
-      padding: EdgeInsets.only(top: 15.h, left: 20, right: 20),
+      padding: EdgeInsets.only(top: 15.h, left:isTablet?0: 20, right:isTablet?0: 20),
       child: Stack(
         children: [
           Padding(
             padding: EdgeInsets.only(top: isTablet ? 180 : 217),
             child: Container(
               width: isTablet ? 390 : double.infinity,
-              height: isTablet ? 75.h : 93.h,
+              height: isTablet ? 85.h : 93.h,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.r),
                   color: const Color(0xffffffff)),
@@ -73,6 +73,7 @@ class _ArchiveCardState extends State<ArchiveCard> {
                     Padding(
                       padding: EdgeInsets.only(left: 23.w),
                       child: Column(
+               
                         children: [
                           Padding(
                             padding:

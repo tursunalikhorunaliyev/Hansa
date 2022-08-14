@@ -31,10 +31,9 @@ class _StatiState extends State<Stati> {
   @override
   Widget build(BuildContext context) {
     final providerToken = Provider.of<String>(context);
-    final readStatiBloCProvider = Provider.of<ReadStatiBLoC>(context);
-    final statiId = Provider.of<StatiIdProvider>(context);
     final isTablet = Provider.of<bool>(context);
     final statiBloCProvider = Provider.of<MenuEventsBloC>(context);
+    final statiIdProvider = Provider.of<StatiIdProvider>(context);
     return Expanded(
       child: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -57,7 +56,7 @@ class _StatiState extends State<Stati> {
                               gridDelegate:
                                   const SliverGridDelegateWithFixedCrossAxisCount(
                                       crossAxisCount: 2,
-                                      childAspectRatio: 10 / 3),
+                                      childAspectRatio: 10 / 3.3),
                               children: List.generate(
                                 snapshot.data!.list.list.length,
                                 (index) => CustomStatiTabletItem(
@@ -72,11 +71,7 @@ class _StatiState extends State<Stati> {
                                         .add(MenuActions.chitatStati);
                                     String link =
                                         snapshot.data!.list.list[index].link;
-                                    ReadStatiModel statiMOdel =
-                                        await readStatiBloCProvider
-                                            .getReadStati(providerToken, link);
-                                    statiId.changeIndex(link.split('id=').last);
-                                    readStatiBloCProvider.sink.add(statiMOdel);
+                                    statiIdProvider.changeUrl(link);
                                   },
                                 ),
                               ),
@@ -101,15 +96,11 @@ class _StatiState extends State<Stati> {
                                 title: snapshot.data!.list.list[index].title,
                                 buttonText: "Читать",
                                 onTap: () async {
-                                  String link =
-                                      snapshot.data!.list.list[index].link;
                                   statiBloCProvider.eventSink
                                       .add(MenuActions.chitatStati);
-                                  ReadStatiModel statiMOdel =
-                                      await readStatiBloCProvider.getReadStati(
-                                          providerToken, link);
-                                  statiId.changeIndex(link.split('id=').last);
-                                  readStatiBloCProvider.sink.add(statiMOdel);
+                                  String link =
+                                      snapshot.data!.list.list[index].link;
+                                  statiIdProvider.changeUrl(link);
                                 },
                               ),
                             ),
