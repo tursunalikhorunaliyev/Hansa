@@ -5,6 +5,7 @@ import 'package:hansa_app/api_services/welcome_api.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/extra/custom_tablet_item.dart';
 import 'package:hansa_app/extra/custom_treningi_ipad_container.dart';
+import 'package:hansa_app/providers/treningi_photos_provider.dart';
 import 'package:hansa_app/training_section/custom_calendar.dart';
 import 'package:hansa_app/extra/custom_clip_item.dart';
 import 'package:hansa_app/extra/custom_title.dart';
@@ -25,10 +26,10 @@ class _TreningiState extends State<Treningi> {
     final menuBloCProvider = Provider.of<MenuEventsBloC>(context);
     final isTablet = Provider.of<bool>(context);
     final token = Provider.of<String>(context);
+    final treningiPhotos = Provider.of<TreningiPhotosProvider>(context);
     final trainingBloc = TrainingAPIBloc();
     final scroll = ScrollController();
     final welcomeApi = WelcomeApi(token);
-    welcomeApi.eventSink.add(WelcomeApiAction.fetch);
     return Expanded(
       child: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -104,6 +105,12 @@ class _TreningiState extends State<Treningi> {
                                         buttonText: "Смотреть",
                                         title: data.futureEvents.list[0].title,
                                         onTap: () {
+                                          treningiPhotos.setUrl(snapshot
+                                              .data!
+                                              .data
+                                              .eventReports
+                                              .list[index]
+                                              .link);
                                           menuBloCProvider.eventSink
                                               .add(MenuActions.trainingVideo);
                                         },
@@ -125,6 +132,8 @@ class _TreningiState extends State<Treningi> {
                                   buttonText: "Смотреть",
                                   title: data.eventReports.list[index].title,
                                   onTap: () {
+                                    treningiPhotos.setUrl(snapshot.data!.data
+                                        .eventReports.list[index].link);
                                     menuBloCProvider.eventSink
                                         .add(MenuActions.trainingVideo);
                                   },
