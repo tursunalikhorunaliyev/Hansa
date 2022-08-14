@@ -75,8 +75,8 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                       gridDelegate:
                                           SliverGridDelegateWithFixedCrossAxisCount(
                                               crossAxisCount: 2,
-                                              crossAxisSpacing: 22,
-                                           mainAxisExtent: 320,
+                                              crossAxisSpacing: 10,
+                                           mainAxisExtent: 375,
                                               ),
                                       children: List.generate(
                                         data.length,

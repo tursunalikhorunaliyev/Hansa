@@ -43,81 +43,84 @@ class _StackedStackObuchState extends State<StackedStackObuch> {
     bool fav = widget.isFavourite;
     return Center(
       child: SizedBox(
-        height: 300,
-        width: 390,
+        height: 360,
+        width: 430,
         child: Stack(
           children: [
-            Column(
-              children: [
-                SizedBox(
-                    width: 388,
-                    height: 170,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(5.r),
-                      child: Image.network(
-                        widget.url,
-                        fit: BoxFit.cover,
-                      ),
-                    )),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  width: 390,
-                  height: 75.h,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5.r),
-                      color: const Color(0xffffffff)),
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 7.w),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            widget.title,
-                            overflow: TextOverflow.fade,
-                            style: GoogleFonts.montserrat(
-                                fontSize: 14, fontWeight: FontWeight.bold),
-                          ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5),
+              child: Column(
+                children: [
+                  SizedBox(
+                      width: 410,
+                      height: 230,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(5.r),
+                        child: Image.network(
+                          widget.url,
+                          fit: BoxFit.cover,
                         ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 23.w),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    launched = _launchInBrowser(
-                                        Uri.parse("http://${widget.linkPDF}"));
-                                  });
-                                },
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  width: 100,
-                                  height: 28,
-                                  decoration: BoxDecoration(
-                                      color: widget.buttonColor,
-                                      borderRadius:
-                                          BorderRadius.circular(13.r)),
-                                  child: Text(
-                                    widget.bottomButtonText,
-                                    style: GoogleFonts.montserrat(
-                                        fontSize: 12,
-                                        color: const Color(0xffffffff),
-                                        fontWeight: FontWeight.w500),
+                      )),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    width: 410,
+                    height: 75.h,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5.r),
+                        color: const Color(0xffffffff)),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 7.w),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              widget.title,
+                              overflow: TextOverflow.fade,
+                              style: GoogleFonts.montserrat(
+                                  fontSize: 14, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(left: 23.w),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      launched = _launchInBrowser(
+                                          Uri.parse("http://${widget.linkPDF}"));
+                                    });
+                                  },
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    width: 100,
+                                    height: 28,
+                                    decoration: BoxDecoration(
+                                        color: widget.buttonColor,
+                                        borderRadius:
+                                            BorderRadius.circular(13.r)),
+                                    child: Text(
+                                      widget.bottomButtonText,
+                                      style: GoogleFonts.montserrat(
+                                          fontSize: 12,
+                                          color: const Color(0xffffffff),
+                                          fontWeight: FontWeight.w500),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             StreamBuilder<bool>(
                 initialData: false,
@@ -126,7 +129,7 @@ class _StackedStackObuchState extends State<StackedStackObuch> {
                   return Align(
                     alignment: Alignment.centerRight,
                     child: Padding(
-                      padding: const EdgeInsets.only(top: 60, right: 38),
+                      padding: const EdgeInsets.only(top: 115, right: 45),
                       child: InkWell(
                         onTap: () {
                           fav = !fav;
@@ -136,8 +139,8 @@ class _StackedStackObuchState extends State<StackedStackObuch> {
                         },
                         child: Container(
                           alignment: Alignment.center,
-                          height: 45,
-                          width: 45,
+                          height: 52,
+                          width: 52,
                           decoration: BoxDecoration(
                               color: const Color(0xfff1f1f1),
                               borderRadius: BorderRadius.circular(90.w)),
@@ -145,10 +148,12 @@ class _StackedStackObuchState extends State<StackedStackObuch> {
                               ? const Icon(
                                   Icons.favorite,
                                   color: Color(0xffed3851),
+                                  size: 30,
                                 )
                               : const Icon(
                                   Icons.favorite_border_sharp,
                                   color: Color(0xffed3851),
+                                  size: 30,
                                 ),
                         ),
                       ),

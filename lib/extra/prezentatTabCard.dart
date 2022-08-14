@@ -44,109 +44,112 @@ class _StackedStackPrezentatsiyaTabState extends State<StackedStackPrezentatsiya
     bool fav = widget.isFavourite;
     return  Center(
         child: SizedBox(
-          height: 300 ,
-          width: 390,
+          height: 360 ,
+          width: 430,
           child: Stack(
             children: [
-              Column(
-                children: [
-                    SizedBox(
-              width: isTablet ? 388 : double.infinity,
-              height: isTablet ? 170 : 206,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(5.r),
-                child: Image.network(
-                  widget.url,
-                  fit: BoxFit.cover,
-                ),
-              )),
-                SizedBox(height: 10,),
-                 Container(
-              width: isTablet ? 390 : double.infinity,
-              height: isTablet ? 77.h : 93.h,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5.r),
-                  color: const Color(0xffffffff)),
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 7.w),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: Column(
                   children: [
-                    Expanded(
-                      child: Text(
-                        widget.title,
-                        overflow: TextOverflow.fade,
-                        style: GoogleFonts.montserrat(
-                            fontSize: isTablet ? 14 : 12,
-                            fontWeight: FontWeight.bold),
+                      SizedBox(
+                width: 410 ,
+                height: 230 ,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(5.r),
+                  child: Image.network(
+                    widget.url,
+                    fit: BoxFit.cover,
+                  ),
+                )),
+                  SizedBox(height: 10,),
+                   Container(
+                width: 410 ,
+                height:  77.h ,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5.r),
+                    color: const Color(0xffffffff)),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 7.w),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          widget.title,
+                          overflow: TextOverflow.fade,
+                          style: GoogleFonts.montserrat(
+                              fontSize: isTablet ? 14 : 12,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 23.w),
-                      child: Column(
-               
-                        children: [
-                          Padding(
-                            padding:
-                                EdgeInsets.only(top: isTablet ? 22.h : 27.h),
-                            child: InkWell(
-                              onTap: () {
-                                setState(() {
-                                  launched = _launchInBrowser(Uri.parse(
-                                      "http://${widget.linkPDFSkachat}"));
-                                });
-                              },
-                              child: Container(
-                                alignment: Alignment.center,
-                                width: isTablet ? 100 : 94,
-                                height: isTablet ? 28 : 25,
-                                decoration: BoxDecoration(
-                                    color: const Color(0xff31353b),
-                                    borderRadius: BorderRadius.circular(13.r)),
-                                child: Text(
-                                  widget.topButtonText,
-                                  style: GoogleFonts.montserrat(
-                                      fontSize: isTablet ? 12 : 10,
-                                      color: const Color(0xffffffff),
-                                      fontWeight: FontWeight.w500),
+                      Padding(
+                        padding: EdgeInsets.only(left: 23.w),
+                        child: Column(
+                 
+                          children: [
+                            Padding(
+                              padding:
+                                  EdgeInsets.only(top: isTablet ? 22.h : 27.h),
+                              child: InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    launched = _launchInBrowser(Uri.parse(
+                                        "http://${widget.linkPDFSkachat}"));
+                                  });
+                                },
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  width: isTablet ? 100 : 94,
+                                  height: isTablet ? 28 : 25,
+                                  decoration: BoxDecoration(
+                                      color: const Color(0xff31353b),
+                                      borderRadius: BorderRadius.circular(13.r)),
+                                  child: Text(
+                                    widget.topButtonText,
+                                    style: GoogleFonts.montserrat(
+                                        fontSize: isTablet ? 12 : 10,
+                                        color: const Color(0xffffffff),
+                                        fontWeight: FontWeight.w500),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.only(top: 4.h),
-                            child: InkWell(
-                              onTap: () {
-                                setState(() {
-                                  launched = _launchInBrowser(
-                                      Uri.parse("http://${widget.linkPDF}"));
-                                });
-                              },
-                              child: Container(
-                                alignment: Alignment.center,
-                                width: isTablet ? 100 : 94,
-                                height: isTablet ? 28 : 25,
-                                decoration: BoxDecoration(
-                                    color: widget.buttonColor,
-                                    borderRadius: BorderRadius.circular(13.r)),
-                                child: Text(
-                                  widget.bottomButtonText,
-                                  style: GoogleFonts.montserrat(
-                                      fontSize: isTablet ? 12 : 10,
-                                      color: const Color(0xffffffff),
-                                      fontWeight: FontWeight.w500),
+                            Padding(
+                              padding: EdgeInsets.only(top: 4.h),
+                              child: InkWell(
+                                onTap: () {
+                                  setState(() {
+                                    launched = _launchInBrowser(
+                                        Uri.parse("http://${widget.linkPDF}"));
+                                  });
+                                },
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  width: isTablet ? 100 : 94,
+                                  height: isTablet ? 28 : 25,
+                                  decoration: BoxDecoration(
+                                      color: widget.buttonColor,
+                                      borderRadius: BorderRadius.circular(13.r)),
+                                  child: Text(
+                                    widget.bottomButtonText,
+                                    style: GoogleFonts.montserrat(
+                                        fontSize: isTablet ? 12 : 10,
+                                        color: const Color(0xffffffff),
+                                        fontWeight: FontWeight.w500),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                    )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+            ),
                   ],
                 ),
-              ),
-            ),
-                ],
               ),
          StreamBuilder<bool>(
                     stream: isFavouriteBLoC.stream,
@@ -156,7 +159,7 @@ class _StackedStackPrezentatsiyaTabState extends State<StackedStackPrezentatsiya
                         
                     alignment: Alignment.centerRight,
                         child: Padding(
-                          padding: const EdgeInsets.only(top: 55, right: 38),
+                          padding: const EdgeInsets.only(top: 115, right: 45),
                           child: InkWell(
                             onTap: () {
                               fav = !fav;
@@ -166,8 +169,8 @@ class _StackedStackPrezentatsiyaTabState extends State<StackedStackPrezentatsiya
                             },
                             child: Container(
                               alignment: Alignment.center,
-                              height: isTablet ? 45 : 55,
-                              width: isTablet ? 45 : 55,
+                              height: 52,
+                              width: 52,
                               decoration: BoxDecoration(
                                   color: const Color(0xfff1f1f1),
                                   borderRadius: BorderRadius.circular(90.w)),
@@ -175,10 +178,12 @@ class _StackedStackPrezentatsiyaTabState extends State<StackedStackPrezentatsiya
                                   ? const Icon(
                                       Icons.favorite,
                                       color: Color(0xffed3851),
+                                      size: 30,
                                     )
                                   : const Icon(
                                       Icons.favorite_border_sharp,
                                       color: Color(0xffed3851),
+                                      size: 30,
                                     ),
                             ),
                           ),

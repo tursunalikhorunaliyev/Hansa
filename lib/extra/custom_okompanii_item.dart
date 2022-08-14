@@ -28,7 +28,7 @@ class CustomOKompaniiItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
             child: CachedNetworkImage(
               imageUrl: imageUrl,
-              height: 206,
+              height: 230,
               width: double.infinity,
               fit: BoxFit.cover,
             ),
@@ -47,7 +47,7 @@ class CustomOKompaniiItem extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(left: 18),
                     child: SizedBox(
-                      width: 200,
+                      width: 230,
                       child: Text(
                         title,
                         overflow: TextOverflow.clip,

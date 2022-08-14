@@ -92,175 +92,171 @@ class _OKompaniiState extends State<OKompanii> {
                         );
                       }),
                       isTablet
-                          ? NotificationListener(
-                              onNotification: (value) {
-                                return false;
-                              },
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 35),
-                                child: GridView(
-                                  controller: scroll,
-                                  shrinkWrap: true,
-                                  gridDelegate:
-                                       SliverGridDelegateWithFixedCrossAxisCount(
-                                          crossAxisCount: 2,
-                                          crossAxisSpacing: 22,
-                                          mainAxisExtent: 220.h),
-                                  children: List.generate(
-                                      snapshot.data!.videoListData.list.length,
-                                      (index) {
-                                    return Padding(
-                                      padding: const EdgeInsets.only(top: 0),
-                                      child: CustomOKompaniiItem(
-                                        imageUrl: snapshot
-                                            .data!
-                                            .videoListData
-                                            .list[value.getIndex]
-                                            .data
-                                            .list[index]
-                                            .pictureLink,
-                                        title: snapshot
-                                            .data!
-                                            .videoListData
-                                            .list[value.getIndex]
-                                            .data
-                                            .list[index]
-                                            .title,
-                                        onTap: () {},
-                                        onDownload: () {
-                                          downloadFile(
-                                              snapshot
-                                                  .data!
-                                                  .videoListData
-                                                  .list[value.getIndex]
-                                                  .data
-                                                  .list[index]
-                                                  .videoLink,
-                                              snapshot
-                                                  .data!
-                                                  .videoListData
-                                                  .list[value.getIndex]
-                                                  .data
-                                                  .list[index]
-                                                  .title);
+                          ? Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 25),
+                            child: GridView(
+                              controller: scroll,
+                              shrinkWrap: true,
+                              physics: BouncingScrollPhysics(),
+                              gridDelegate:
+                                   SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      crossAxisSpacing: 10,
+                                      mainAxisExtent: 240.h),
+                              children: List.generate(
+                                  snapshot.data!.videoListData.list.length,
+                                  (index) {
+                                return Padding(
+                                  padding: const EdgeInsets.only(top: 0),
+                                  child: CustomOKompaniiItem(
+                                    imageUrl: snapshot
+                                        .data!
+                                        .videoListData
+                                        .list[value.getIndex]
+                                        .data
+                                        .list[index]
+                                        .pictureLink,
+                                    title: snapshot
+                                        .data!
+                                        .videoListData
+                                        .list[value.getIndex]
+                                        .data
+                                        .list[index]
+                                        .title,
+                                    onTap: () {},
+                                    onDownload: () {
+                                      downloadFile(
+                                          snapshot
+                                              .data!
+                                              .videoListData
+                                              .list[value.getIndex]
+                                              .data
+                                              .list[index]
+                                              .videoLink,
+                                          snapshot
+                                              .data!
+                                              .videoListData
+                                              .list[value.getIndex]
+                                              .data
+                                              .list[index]
+                                              .title);
 
-                                          showDialog(
-                                              context: context,
-                                              builder: (context) {
-                                                return AlertDialog(
-                                                  actionsPadding:
-                                                      EdgeInsets.only(
-                                                          bottom: 20,
-                                                          right: 20),
-                                                  alignment: Alignment.center,
-                                                  content: StreamBuilder<
-                                                          double>(
-                                                      stream:
-                                                          blocDownload.stream,
-                                                      initialData: 0,
-                                                      builder: (context,
-                                                          snapshotDouble) {
-                                                        return SizedBox(
-                                                          height: 250,
-                                                          child: Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              ClipRRect(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            8),
-                                                                child:
-                                                                    CachedNetworkImage(
-                                                                  imageUrl: snapshot
-                                                                      .data!
-                                                                      .videoListData
-                                                                      .list[value
-                                                                          .getIndex]
-                                                                      .data
-                                                                      .list[
-                                                                          index]
-                                                                      .pictureLink,
-                                                                  height: 165,
-                                                                  width: 325,
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                ),
-                                                              ),
-                                                              SizedBox(
-                                                                height: 10,
-                                                              ),
-                                                              LinearPercentIndicator(
-                                                                alignment:
-                                                                    MainAxisAlignment
-                                                                        .center,
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                        .all(0),
-                                                                barRadius: Radius
+                                      showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return AlertDialog(
+                                              actionsPadding:
+                                                  EdgeInsets.only(
+                                                      bottom: 20,
+                                                      right: 20),
+                                              alignment: Alignment.center,
+                                              content: StreamBuilder<
+                                                      double>(
+                                                  stream:
+                                                      blocDownload.stream,
+                                                  initialData: 0,
+                                                  builder: (context,
+                                                      snapshotDouble) {
+                                                    return SizedBox(
+                                                      height: 250,
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
                                                                     .circular(
-                                                                        5),
-                                                                lineHeight: 15,
-                                                                //width: 325,
-                                                                percent:
-                                                                    snapshotDouble
-                                                                            .data! /
-                                                                        100,
-                                                                center: Text(
-                                                                  "${snapshotDouble.data}%",
-                                                                  style: GoogleFonts
-                                                                      .montserrat(
-                                                                    fontSize:
-                                                                        10,
-                                                                    color: Colors
-                                                                        .black,
-                                                                  ),
-                                                                ),
-
-                                                                backgroundColor:
-                                                                    Colors
-                                                                        .transparent,
-                                                                progressColor:
-                                                                    Colors
-                                                                        .green,
-                                                              ),
-                                                              SizedBox(
-                                                                height: 10,
-                                                              ),
-                                                              Flexible(
-                                                                child: Text(
-                                                                  snapshot
-                                                                      .data!
-                                                                      .videoListData
-                                                                      .list[value
-                                                                          .getIndex]
-                                                                      .data
-                                                                      .list[
-                                                                          index]
-                                                                      .title
-                                                                      .toString(),
-                                                                  style: GoogleFonts.montserrat(
-                                                                      color: Colors
-                                                                          .black,
-                                                                      fontSize:
-                                                                          12),
-                                                                ),
-                                                              )
-                                                            ],
+                                                                        8),
+                                                            child:
+                                                                CachedNetworkImage(
+                                                              imageUrl: snapshot
+                                                                  .data!
+                                                                  .videoListData
+                                                                  .list[value
+                                                                      .getIndex]
+                                                                  .data
+                                                                  .list[
+                                                                      index]
+                                                                  .pictureLink,
+                                                              height: 165,
+                                                              width: 325,
+                                                              fit: BoxFit
+                                                                  .cover,
+                                                            ),
                                                           ),
-                                                        );
-                                                      }),
-                                                );
-                                              });
-                                        },
-                                      ),
-                                    );
-                                  }),
-                                ),
-                              ))
+                                                          SizedBox(
+                                                            height: 10,
+                                                          ),
+                                                          LinearPercentIndicator(
+                                                            alignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(0),
+                                                            barRadius: Radius
+                                                                .circular(
+                                                                    5),
+                                                            lineHeight: 15,
+                                                            //width: 325,
+                                                            percent:
+                                                                snapshotDouble
+                                                                        .data! /
+                                                                    100,
+                                                            center: Text(
+                                                              "${snapshotDouble.data}%",
+                                                              style: GoogleFonts
+                                                                  .montserrat(
+                                                                fontSize:
+                                                                    10,
+                                                                color: Colors
+                                                                    .black,
+                                                              ),
+                                                            ),
+
+                                                            backgroundColor:
+                                                                Colors
+                                                                    .transparent,
+                                                            progressColor:
+                                                                Colors
+                                                                    .green,
+                                                          ),
+                                                          SizedBox(
+                                                            height: 10,
+                                                          ),
+                                                          Flexible(
+                                                            child: Text(
+                                                              snapshot
+                                                            .data!
+                                                            .videoListData
+                                                            .list[
+                                                                value.getIndex]
+                                                            .data
+                                                            .list[index]
+                                                            .title
+                                                            .toString(),
+                                                              style: GoogleFonts.montserrat(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontSize:
+                                                                      12),
+                                                            ),
+                                                          )
+                                                        ],
+                                                      ),
+                                                    );
+                                                  }),
+                                            );
+                                          });
+                                    },
+                                  ),
+                                );
+                              }),
+                            ),
+                          )
                           : Column(
                               children: List.generate(
                                 snapshot.data!.videoListData

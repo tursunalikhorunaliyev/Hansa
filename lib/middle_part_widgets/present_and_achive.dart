@@ -100,8 +100,8 @@ class _PresentArchiveState extends State<PresentArchive> {
                                   gridDelegate:
                                       SliverGridDelegateWithFixedCrossAxisCount(
                                           crossAxisCount: 2,
-                                          crossAxisSpacing: 22,
-                                          mainAxisExtent: 325),
+                                          crossAxisSpacing: 10,
+                                          mainAxisExtent: 375),
                                   children: List.generate(
                                       snapshot.data!.data.guides.dataGuides
                                           .length, (index) {
@@ -254,8 +254,8 @@ class _PresentArchiveState extends State<PresentArchive> {
                                   gridDelegate:
                                        SliverGridDelegateWithFixedCrossAxisCount(
                                           crossAxisCount: 2,
-                                          crossAxisSpacing: 22,
-                                          mainAxisExtent: 220.h),
+                                          crossAxisSpacing: 10,
+                                          mainAxisExtent: 375),
                                   children: List.generate(
                                       snapshot.data!.data.guidesArchive
                                           .dataGuidesArchive.length, (index) {
