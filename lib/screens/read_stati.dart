@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
@@ -17,37 +15,26 @@ import 'package:provider/provider.dart';
 class ReadStati extends StatelessWidget {
   ReadStati({Key? key}) : super(key: key);
 
-  final ScrollController listViewController =
-      ScrollController(keepScrollOffset: true);
-
-  final Image iconImage = Image.asset(
-    "assets/iconStati.png",
-    width: 30.33333333333333,
-    height: 30.33333333333333,
-  );
-
-  double positionDouble = 300.6666666666667;
-
   @override
   Widget build(BuildContext context) {
+    double positionDouble = 300.6666666666667;
+    String link = "";
     final token = Provider.of<String>(context);
     final isTablet = Provider.of<bool>(context);
-    final readStatiModelProvider = Provider.of<ReadStatiBLoC>(
-        context); /* 
-    final statiId = Provider.of<StatiIdProvider>(context);/*  */
-    final blocForStatiComment = BlocForStatiComment(statiId.getIndex, token);
-    blocForStatiComment.evsink.add(StatiComentEnum.coment); */
+    final readStatiModelProvider = Provider.of<ReadStatiBLoC>(context);
+    final blocForStatiComment = BlocForStatiComment();
+    final statiIdProvider = Provider.of<StatiIdProvider>(context);
     positionDouble = isTablet ? 600 : 300;
-    /*  log(blocForStatiComment.lenth +
-        '<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'); */
     return Expanded(
       child: SingleChildScrollView(
         child: Column(
           children: [
-            StreamBuilder<ReadStatiModel>(
-                stream: readStatiModelProvider.stream,
+            FutureBuilder<ReadStatiModel>(
+                future: readStatiModelProvider.getReadStati(
+                    token, statiIdProvider.getUrl),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
+                    link = snapshot.data!.article.read.messages;
                     return Stack(
                       children: [
                         Column(
@@ -65,9 +52,7 @@ class ReadStati extends StatelessWidget {
                                         .data!.article.read.pictureLink)),
                           ],
                         ),
-                        SingleChildScrollView(
-                          controller: listViewController,
-                          physics: const BouncingScrollPhysics(),
+                        Padding(
                           padding: const EdgeInsets.only(
                             left: 12.33333333333333,
                             right: 12.33333333333333,
@@ -99,11 +84,9 @@ class ReadStati extends StatelessWidget {
                                         topRight:
                                             Radius.circular(5.333333333333333)),
                                     color: Color(0xFFffffff)),
-                                child: Wrap(children: [
-                                  Html(
-                                    data: snapshot.data!.article.read.body,
-                                  ),
-                                ]),
+                                child: Html(
+                                  data: snapshot.data!.article.read.body,
+                                ),
                               ),
                             ],
                           ),
@@ -126,8 +109,8 @@ class ReadStati extends StatelessWidget {
                     );
                   }
                 }),
-            /*  StreamBuilder<StatiComentModel>(
-                stream: blocForStatiComment.stream,
+            FutureBuilder<StatiComentModel>(
+                future: blocForStatiComment.getComment(link, token),
                 builder: (context, snapshota) {
                   if (snapshota.hasData) {
                     return Padding(
@@ -288,14 +271,13 @@ class ReadStati extends StatelessWidget {
                               ),
                               const SizedBox(
                                 height: 300,
-                              )
+                              ),
                             ],
                           ),
                         ],
                       ),
                     );
                   } else {
-                    blocForStatiComment.evsink.add(StatiComentEnum.coment);
                     return Center(
                       child: Lottie.asset(
                         'assets/pre.json',
@@ -304,7 +286,7 @@ class ReadStati extends StatelessWidget {
                       ),
                     );
                   }
-                }), */
+                }),
           ],
         ),
       ),
