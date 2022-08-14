@@ -120,8 +120,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           home: MyWidget(),
         ),
-      ), 
+      ),
     );
   }
 }
-///////// Bashara
