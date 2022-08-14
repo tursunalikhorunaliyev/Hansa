@@ -24,8 +24,8 @@ import 'package:hansa_app/blocs/toggle_switcher_bloc.dart';
 import 'package:hansa_app/providers/providers_for_video_title/video_index_provider.dart';
 import 'package:hansa_app/providers/providers_for_video_title/video_title_provider.dart';
 import 'package:hansa_app/providers/stati_id_provider.dart';
+import 'package:hansa_app/providers/treningi_photos_provider.dart';
 import 'package:hansa_app/providers/treningi_video_changer_provider.dart';
-import 'package:hansa_app/screens/splash_screen.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 
@@ -36,7 +36,6 @@ void main(List<String> args) async {
   await Hive.openBox("savedUser");
   runApp(const MyApp());
 }
-
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -66,6 +65,7 @@ class MyApp extends StatelessWidget {
             create: (context) => LoginClickedProvider(),
           ),
           ChangeNotifierProvider(
+
             create: (context) => FlipLoginProvider(),
           ),
           Provider(
@@ -76,6 +76,9 @@ class MyApp extends StatelessWidget {
           ),
           ChangeNotifierProvider(
             create: (context) => VideoIndexProvider(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => TreningiPhotosProvider(),
           ),
           ChangeNotifierProvider(
             create: (context) => FullRegisterDataProvider(),
@@ -118,10 +121,9 @@ class MyApp extends StatelessWidget {
           ],
           locale: Locale("ru"),
           debugShowCheckedModeBanner: false,
-          home: MyWidget(),
+          home: PermissionHandlerScreen(),
         ),
-      ), 
+      ),
     );
   }
 }
-///////// Bashara
