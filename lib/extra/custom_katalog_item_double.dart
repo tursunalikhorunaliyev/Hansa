@@ -29,7 +29,7 @@ class CustomKatalogItemDouble extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 18.w),
+      padding: EdgeInsets.only(right: 18.w,left: 18.w,top: 10.h),
       child: Column(
         children: [
           ClipRRect(
