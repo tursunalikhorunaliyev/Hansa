@@ -9,6 +9,7 @@ import 'package:hansa_app/blocs/bloc_change_title.dart';
 import 'package:hansa_app/blocs/bloc_flip_login.dart';
 import 'package:hansa_app/blocs/bloc_play_video.dart';
 import 'package:hansa_app/blocs/bloc_video_controll.dart';
+import 'package:hansa_app/blocs/download_progress_bloc.dart';
 import 'package:hansa_app/blocs/login_clicked_bloc.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/blocs/read_stati_bloc.dart';
@@ -36,6 +37,7 @@ void main(List<String> args) async {
   await Hive.openBox("savedUser");
   runApp(const MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
@@ -51,6 +53,9 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 812),
       builder: (context, child) => MultiProvider(
         providers: [
+          Provider(
+            create: (context) => DownloadProgressFileBloc(),
+          ),
           ChangeNotifierProvider(create: (context) => StatiIdProvider()),
           ChangeNotifierProvider(
             create: (context) => TreningiVideoChangerProvider(),
@@ -65,7 +70,6 @@ class MyApp extends StatelessWidget {
             create: (context) => LoginClickedProvider(),
           ),
           ChangeNotifierProvider(
-
             create: (context) => FlipLoginProvider(),
           ),
           Provider(

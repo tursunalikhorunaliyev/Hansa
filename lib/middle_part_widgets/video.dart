@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hansa_app/blocs/download_progress_bloc.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/extra/custom_title.dart';
 import 'package:hansa_app/providers/providers_for_video_title/video_index_provider.dart';
@@ -13,8 +14,12 @@ import 'package:provider/provider.dart';
 class Video extends StatelessWidget {
   const Video({Key? key}) : super(key: key);
 
+   
+
+
   @override
   Widget build(BuildContext context) {
+    
     final menuEventsBloCProvider = Provider.of<MenuEventsBloC>(context);
     final token = Provider.of<String>(context);
     final blocVideoApi = BlocVideoApi();
