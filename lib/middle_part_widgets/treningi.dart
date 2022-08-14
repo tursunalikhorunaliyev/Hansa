@@ -80,7 +80,7 @@ class _TreningiState extends State<Treningi> {
                               },
                               child: Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(horizontal: 35),
+                                    const EdgeInsets.symmetric(horizontal: 25),
                                 child: GridView(
                                   controller: scroll,
                                   physics: BouncingScrollPhysics(),
@@ -89,7 +89,7 @@ class _TreningiState extends State<Treningi> {
                                       const SliverGridDelegateWithFixedCrossAxisCount(
                                           crossAxisCount: 2,
                                           crossAxisSpacing: 30,
-                                          childAspectRatio: 3.1),
+                                          childAspectRatio: 3.4),
                                   children: List.generate(
                                       snapshot.data!.data.eventReports.list
                                           .length, (index) {

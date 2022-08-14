@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/favourite_model.dart';
 import 'package:hansa_app/blocs/favourite_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class EventCards extends StatelessWidget {
   const EventCards(
@@ -39,19 +40,19 @@ class EventCards extends StatelessWidget {
     final favouriteModel = FavouriteModel(status: true, data: true);
     bool fav = isFavourite;
     return Padding(
-      padding: const EdgeInsets.only(bottom: 10, left: 20, right: 20),
+      padding: EdgeInsets.only(bottom:isTablet?15.h: 10, left:isTablet?0: 20, right:isTablet?0: 20),
       child: Stack(
         children: [
           Padding(
             padding: EdgeInsets.only(top: isTablet ? 180 : 217),
             child: Container(
               width: isTablet ? 390 : double.infinity,
-              height: 93,
+              height: isTablet ? 75.h : 93.h,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   color: const Color(0xffffffff)),
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 11),
+                padding:  EdgeInsets.symmetric(horizontal:isTablet?7.w: 11),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -65,7 +66,7 @@ class EventCards extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(left: 23),
+                      padding:  EdgeInsets.only(left:isTablet?23.w: 23),
                       child: GestureDetector(
                         onTap: onTap,
                         child: Container(

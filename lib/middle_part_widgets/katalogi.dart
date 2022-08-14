@@ -8,7 +8,7 @@ import 'package:hansa_app/extra/custom_title.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:sticky_headers/sticky_headers.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 class Katalogi extends StatefulWidget {
   const Katalogi({Key? key}) : super(key: key);
 
@@ -50,16 +50,16 @@ class _KatalogiState extends State<Katalogi> {
                               },
                               child: Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(horizontal: 35),
+                                    const EdgeInsets.symmetric(horizontal: 25),
                                 child: GridView(
                                   controller: scroll,
                                   physics: BouncingScrollPhysics(),
                                   shrinkWrap: true,
                                   gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                      SliverGridDelegateWithFixedCrossAxisCount(
                                           crossAxisCount: 2,
-                                          crossAxisSpacing: 30,
-                                          childAspectRatio: 1.130),
+                                          crossAxisSpacing: 22,
+                                          mainAxisExtent: 240.h),
                                   children: List.generate(
                                       data.guides.list.length, (index) {
                                     return Padding(
@@ -119,15 +119,15 @@ class _KatalogiState extends State<Katalogi> {
                               },
                               child: Padding(
                                 padding:
-                                    const EdgeInsets.symmetric(horizontal: 35),
+                                    const EdgeInsets.symmetric(horizontal: 25),
                                 child: GridView(
                                   controller: scroll,
                                   shrinkWrap: true,
                                   gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                       SliverGridDelegateWithFixedCrossAxisCount(
                                           crossAxisCount: 2,
-                                          crossAxisSpacing: 30,
-                                          childAspectRatio: 1.1),
+                                          crossAxisSpacing: 22,
+                                          mainAxisExtent: 240.h),
                                   children: List.generate(
                                       snapshot.data!.data.guidesArchive.list
                                           .length, (index) {

@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:chewie/chewie.dart';
@@ -160,25 +161,28 @@ class _TopVideoVidgetState extends State<TopVideoVidget> {
                         builder: (context, snapshot) {
                           return Padding(
                             padding: const EdgeInsets.only(top: 13),
-                            child: CustomTreningiVideo(
-                              onTap: () {
-                                downloadFile(
-                                    snapshot
-                                        .data!
-                                        .videoListData
-                                        .list[value.getIndex]
-                                        .data
-                                        .list[providerIndex]
-                                        .videoLink,
-                                    snapshot
-                                        .data!
-                                        .videoListData
-                                        .list[value.getIndex]
-                                        .data
-                                        .list[providerIndex]
-                                        .title);
-                              },
-                              title: widget.title,
+                            child: Provider(
+                              create: (context) => blocDownload,
+                              child: CustomTreningiVideo(
+                                onTap: () {
+                                  downloadFile(
+                                      snapshot
+                                          .data!
+                                          .videoListData
+                                          .list[value.getIndex]
+                                          .data
+                                          .list[providerIndex]
+                                          .videoLink,
+                                      snapshot
+                                          .data!
+                                          .videoListData
+                                          .list[value.getIndex]
+                                          .data
+                                          .list[providerIndex]
+                                          .title);
+                                },
+                                title: widget.title,
+                              ),
                             ),
                           );
                         },
