@@ -7,6 +7,7 @@ import 'package:hansa_app/blocs/article_bloc.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/extra/event_cards.dart';
 import 'package:hansa_app/extra/my_behavior%20.dart';
+import 'package:hansa_app/stacked_stack.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -69,16 +70,17 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                 child: Column(
                                   children: [
                                     GridView(
-                                      physics: NeverScrollableScrollPhysics(),
+                                      physics: BouncingScrollPhysics(),
                                       shrinkWrap: true,
                                       gridDelegate:
                                           SliverGridDelegateWithFixedCrossAxisCount(
                                               crossAxisCount: 2,
-                                              childAspectRatio: 5 / 3.1),
+                                              crossAxisSpacing: 22,
+                                           mainAxisExtent: 320,
+                                              ),
                                       children: List.generate(
                                         data.length,
-                                        (index) => EventCards(
-                                          isFavouriteURL: snapshot
+                                        (index) => StackedStack(  isFavouriteURL: snapshot
                                               .data![index].favoriteLink,
                                           onTap: () async {
                                             menuProvider.eventSink
@@ -99,8 +101,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                               .substring(8, 10),
                                           title: data[index].title,
                                           url: data[index].pictureLink,
-                                          isFavourite: data[index].isFavorite,
-                                        ),
+                                          isFavourite: data[index].isFavorite,)
                                       ),
                                     ),
                                     Padding(

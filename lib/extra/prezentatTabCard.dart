@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hansa_app/blocs/favourite_bloc.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-class ArchiveCard extends StatefulWidget {
-  const ArchiveCard(
-      {Key? key,
-      required this.buttonColor,
+class StackedStackPrezentatsiyaTab extends StatefulWidget {
+  const StackedStackPrezentatsiyaTab ({Key? key,required this.buttonColor,
       required this.topButtonText,
       required this.skachat,
       required this.bottomButtonText,
@@ -17,8 +14,7 @@ class ArchiveCard extends StatefulWidget {
       required this.isFavourite,
       required this.linkPDF,
       required this.linkPDFSkachat,
-      required this.isFavouriteURL})
-      : super(key: key);
+      required this.isFavouriteURL}) : super(key: key);
 
   final String url;
   final Color buttonColor;
@@ -32,27 +28,42 @@ class ArchiveCard extends StatefulWidget {
   final String isFavouriteURL;
 
   @override
-  State<ArchiveCard> createState() => _ArchiveCardState();
+  State<StackedStackPrezentatsiyaTab> createState() => _StackedStackPrezentatsiyaTabState();
 }
 
-class _ArchiveCardState extends State<ArchiveCard> {
+class _StackedStackPrezentatsiyaTabState extends State<StackedStackPrezentatsiyaTab> {
+  
   late dynamic response;
   Future<void>? launched;
   @override
   Widget build(BuildContext context) {
+    
     final isTablet = Provider.of<bool>(context);
     final isFavouriteBLoC = FavouriteBLoC();
     final token = Provider.of<String>(context);
     bool fav = widget.isFavourite;
-    return Padding(
-      padding: EdgeInsets.only(top:isTablet?0: 15.h,bottom: isTablet?10:0, left:isTablet?0: 20, right:isTablet?0: 20),
-      child: Stack(
-        children: [
-          Padding(
-            padding: EdgeInsets.only(top: isTablet ? 180 : 217),
-            child: Container(
+    return  Center(
+        child: SizedBox(
+          height: 300 ,
+          width: 390,
+          child: Stack(
+            children: [
+              Column(
+                children: [
+                    SizedBox(
+              width: isTablet ? 388 : double.infinity,
+              height: isTablet ? 170 : 206,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(5.r),
+                child: Image.network(
+                  widget.url,
+                  fit: BoxFit.cover,
+                ),
+              )),
+                SizedBox(height: 10,),
+                 Container(
               width: isTablet ? 390 : double.infinity,
-              height: isTablet ? 85.h : 93.h,
+              height: isTablet ? 77.h : 93.h,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5.r),
                   color: const Color(0xffffffff)),
@@ -135,70 +146,51 @@ class _ArchiveCardState extends State<ArchiveCard> {
                 ),
               ),
             ),
-          ),
-          SizedBox(
-              width: isTablet ? 388 : double.infinity,
-              height: isTablet ? 170 : 206,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(5.r),
-                child: Image.network(
-                  widget.url,
-                  fit: BoxFit.cover,
-                ),
-              )),
-          Padding(
-            padding: EdgeInsets.only(
-              top: isTablet ? 150 : 181,
-             
-            ),
-            child: Row(
-mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Spacer(
-                  flex: isTablet ? 13 : 9,
-                ), 
-                StreamBuilder<bool>(
+                ],
+              ),
+         StreamBuilder<bool>(
                     stream: isFavouriteBLoC.stream,
                     initialData: false,
                     builder: (context, snapshot) {
-                      return InkWell(
-                        onTap: () {
-                          fav = !fav;
-                          isFavouriteBLoC.sink.add(fav);
-                          isFavouriteBLoC.getFavourite(
-                              token, widget.isFavouriteURL);
-                        },
-                        child: Container(
-                          alignment: Alignment.center,
-                          height: isTablet ? 45 : 55,
-                          width: isTablet ? 45 : 55,
-                          decoration: BoxDecoration(
-                              color: const Color(0xfff1f1f1),
-                              borderRadius: BorderRadius.circular(90.w)),
-                          child: fav
-                              ? const Icon(
-                                  Icons.favorite,
-                                  color: Color(0xffed3851),
-                                )
-                              : const Icon(
-                                  Icons.favorite_border_sharp,
-                                  color: Color(0xffed3851),
-                                ),
+                      return Align(
+                        
+                    alignment: Alignment.centerRight,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 55, right: 38),
+                          child: InkWell(
+                            onTap: () {
+                              fav = !fav;
+                              isFavouriteBLoC.sink.add(fav);
+                              isFavouriteBLoC.getFavourite(
+                                  token, widget.isFavouriteURL);
+                            },
+                            child: Container(
+                              alignment: Alignment.center,
+                              height: isTablet ? 45 : 55,
+                              width: isTablet ? 45 : 55,
+                              decoration: BoxDecoration(
+                                  color: const Color(0xfff1f1f1),
+                                  borderRadius: BorderRadius.circular(90.w)),
+                              child: fav
+                                  ? const Icon(
+                                      Icons.favorite,
+                                      color: Color(0xffed3851),
+                                    )
+                                  : const Icon(
+                                      Icons.favorite_border_sharp,
+                                      color: Color(0xffed3851),
+                                    ),
+                            ),
+                          ),
                         ),
                       );
                     }),
-                 Spacer(
-                  flex: isTablet ? 2 : 1,
-                ) 
-              ],
-            ),
+            ],
           ),
-        ],
-      ),
-    );
+        ),
+      );
   }
-
-  _launchInBrowser(Uri url) async {
+   _launchInBrowser(Uri url) async {
     if (!await launchUrl(
       url,
       mode: LaunchMode.externalApplication,

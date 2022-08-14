@@ -15,8 +15,9 @@ import 'package:hansa_app/video/model_video.dart';
 import 'package:lottie/lottie.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 class OKompanii extends StatefulWidget {
   const OKompanii({Key? key}) : super(key: key);
 
@@ -102,10 +103,10 @@ class _OKompaniiState extends State<OKompanii> {
                                   controller: scroll,
                                   shrinkWrap: true,
                                   gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                       SliverGridDelegateWithFixedCrossAxisCount(
                                           crossAxisCount: 2,
-                                          crossAxisSpacing: 30,
-                                          childAspectRatio: 10 / 8.2),
+                                          crossAxisSpacing: 22,
+                                          mainAxisExtent: 220.h),
                                   children: List.generate(
                                       snapshot.data!.videoListData.list.length,
                                       (index) {

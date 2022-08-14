@@ -6,6 +6,7 @@ import 'package:hansa_app/api_models.dart/obucheniya_model_api.dart';
 import 'package:hansa_app/api_services/welcome_api.dart';
 import 'package:hansa_app/blocs/bloc_obucheniya.dart';
 import 'package:hansa_app/extra/custom_obucheniya_card.dart';
+import 'package:hansa_app/obucheniyaTab.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:sticky_headers/sticky_headers.dart';
@@ -92,17 +93,17 @@ class ObucheniyaWidget extends StatelessWidget {
                                     controller: scroll,
                                     shrinkWrap: true,
                                     gridDelegate:
-                                        const SliverGridDelegateWithFixedCrossAxisCount(
+                                         SliverGridDelegateWithFixedCrossAxisCount(
                                             crossAxisCount: 2,
                                             crossAxisSpacing: 22,
-                                            mainAxisSpacing: 300),
+                                            mainAxisExtent: 300),
                                     children: List.generate(
                                         snapshot.data!.data.listGuides.list
                                             .length, (index) {
                                       return Padding(
                                           padding:
                                               const EdgeInsets.only(top: 5.0),
-                                          child: ObucheniyaCard(
+                                          child: StackedStackObuch(
                                               isFavouriteURL: snapshot
                                                   .data!
                                                   .data
@@ -230,7 +231,7 @@ class ObucheniyaWidget extends StatelessWidget {
                                         return Padding(
                                             padding:
                                                 const EdgeInsets.only(top: 5.0),
-                                            child: ObucheniyaCard(
+                                            child: StackedStackObuch(
                                                 isFavouriteURL: snapshot
                                                     .data!
                                                     .data
