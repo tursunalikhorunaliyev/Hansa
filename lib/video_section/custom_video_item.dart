@@ -1,16 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:chewie/chewie.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hansa_app/blocs/bloc_play_video.dart';
 import 'package:hansa_app/extra/top_video_widget.dart';
-import 'package:hansa_app/training_section/custom_treningi_video.dart';
 import 'package:hansa_app/video/bloc_video_api.dart';
 import 'package:hansa_app/video/model_video.dart';
 import 'package:provider/provider.dart';
-import 'package:video_player/video_player.dart';
 
 class CustomVideoListItem extends StatefulWidget {
   final int index;
@@ -81,11 +76,16 @@ class _CustomVideoListItemState extends State<CustomVideoListItem> {
                                     builder: (context) {
                                       return Scaffold(
                                         backgroundColor: Colors.transparent,
-                                        body: TopVideoWidget(
-                                          url: video.videoLink,
-                                          title: video.title,
-                                          selectedIndex: widget.selectedIndex,
-                                          selectedTitle: widget.selectedTitle,
+                                        body: MultiProvider(
+                                          providers: [
+                                            Provider<String>.value(value: token.toString())
+                                          ],
+                                          child: TopVideoWidget(
+                                            url: video.videoLink,
+                                            title: video.title,
+                                            selectedIndex: widget.selectedIndex,
+                                            selectedTitle: widget.selectedTitle,
+                                          ),
                                         ),
                                       );
                                     },
