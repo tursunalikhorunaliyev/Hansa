@@ -1,4 +1,6 @@
+import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:hansa_app/api_models.dart/treningi_photos_model.dart';
 import 'package:hansa_app/api_models.dart/treningi_video_model.dart';
 import 'package:hansa_app/api_services/treningi_photos_api.dart';
@@ -15,6 +17,7 @@ import 'package:hansa_app/training_video_section/custom_treningi_video_play.dart
 import 'package:provider/provider.dart';
 import 'package:sticky_headers/sticky_headers/widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:video_player/video_player.dart';
 
 class TreningiVideo extends StatefulWidget {
   const TreningiVideo({Key? key}) : super(key: key);
@@ -25,6 +28,15 @@ class TreningiVideo extends StatefulWidget {
 
 class _TreningiVideoState extends State<TreningiVideo> {
   final scroll = ScrollController();
+  ChewieController chewieController() {
+    return ChewieController(
+      aspectRatio: 16 / 9,
+      videoPlayerController: VideoPlayerController.network(
+        '',
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final isTablet = Provider.of<bool>(context);
@@ -50,7 +62,11 @@ class _TreningiVideoState extends State<TreningiVideo> {
                       ? isTablet
                           ? const TabletPhotosItem()
                           : const CustomTreningiPhotos()
-                      : SizedBox(height: 350, child: CustomTreningiVideoPlay()),
+                      : SizedBox(
+                          height: 350,
+                          child: CustomTreningiVideoPlay(
+                            chewieController: chewieController(),
+                          )),
                 ],
               ),
             ),
@@ -83,6 +99,9 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                               .data!.data.similar.list.length,
                                           (index) => CustomStatiTabletItem(
                                               onTap: () {
+                                                chewieController()
+                                                  ..seekTo(Duration.zero)
+                                                  ..pause();
                                                 treningiPhotos.setUrl(snapshot
                                                     .data!
                                                     .data
@@ -123,6 +142,9 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                       children: [
                                         CustomClipItem(
                                             onTap: () {
+                                              chewieController()
+                                                ..seekTo(Duration.zero)
+                                                ..pause();
                                               treningiPhotos.setUrl(snapshot
                                                   .data!
                                                   .data
@@ -188,6 +210,9 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                               .data!.data.similar.data.length,
                                           (index) => CustomStatiTabletItem(
                                             onTap: () {
+                                              chewieController()
+                                                ..seekTo(Duration.zero)
+                                                ..pause();
                                               treningiVideos.setUrl(
                                                 snapshot.data!.data.similar
                                                     .data[index].link,
@@ -226,11 +251,15 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                       children: [
                                         CustomClipItem(
                                           onTap: () {
+                                            chewieController()
+                                              ..seekTo(Duration.zero)
+                                              ..pause();
                                             treningiVideos.setUrl(
                                               snapshot.data!.data.similar
                                                   .data[index].link,
                                             );
                                             isVideo.setIsVideo(true);
+
                                             scroll.animateTo(
                                               0,
                                               duration: const Duration(

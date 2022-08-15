@@ -10,14 +10,16 @@ import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
 class CustomTreningiVideoPlay extends StatelessWidget {
-  const CustomTreningiVideoPlay({Key? key}) : super(key: key);
+  final ChewieController chewieController;
+  const CustomTreningiVideoPlay({Key? key, required this.chewieController})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final isTablet = Provider.of<bool>(context);
     final treningiVideos = Provider.of<TreningiVideosProvider>(context);
     final token = Provider.of<String>(context);
-
+    ChewieController ch = chewieController;
     return Padding(
       padding: const EdgeInsets.only(bottom: 11, left: 25, right: 25),
       child: SizedBox(
@@ -27,6 +29,36 @@ class CustomTreningiVideoPlay extends StatelessWidget {
                 TreningiVideoApi.getTreningiVideo(treningiVideos.getUrl, token),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
+                ch = ChewieController(
+                  autoPlay: true,
+                  allowedScreenSleep: false,
+                  aspectRatio: 16 / 9,
+                  autoInitialize: true,
+                  deviceOrientationsOnEnterFullScreen: [
+                    DeviceOrientation.landscapeLeft,
+                    DeviceOrientation.landscapeRight
+                  ],
+                  deviceOrientationsAfterFullScreen: [
+                    DeviceOrientation.portraitDown,
+                    DeviceOrientation.portraitUp
+                  ],
+                  allowMuting: false,
+                  cupertinoProgressColors: ChewieProgressColors(
+                    backgroundColor: const Color(0xff090909),
+                    bufferedColor: const Color(0xff090909),
+                    playedColor: const Color(0xffff0000),
+                    handleColor: const Color(0xffff0000),
+                  ),
+                  materialProgressColors: ChewieProgressColors(
+                    backgroundColor: const Color(0xff090909),
+                    bufferedColor: const Color(0xff090909),
+                    playedColor: const Color(0xffff0000),
+                    handleColor: const Color(0xffff0000),
+                  ),
+                  videoPlayerController: VideoPlayerController.network(
+                    snapshot.data!.data.data.data[0].videoLink,
+                  ),
+                );
                 return Stack(
                   children: [
                     Column(
@@ -37,36 +69,7 @@ class CustomTreningiVideoPlay extends StatelessWidget {
                             height: 220,
                             width: double.infinity,
                             child: Chewie(
-                              controller: ChewieController(
-                                autoPlay: true,
-                                allowedScreenSleep: false,
-                                autoInitialize: true,
-                                deviceOrientationsOnEnterFullScreen: [
-                                  DeviceOrientation.landscapeLeft,
-                                  DeviceOrientation.landscapeRight
-                                ],
-                                deviceOrientationsAfterFullScreen: [
-                                  DeviceOrientation.portraitDown,
-                                  DeviceOrientation.portraitUp
-                                ],
-                                allowMuting: false,
-                                cupertinoProgressColors: ChewieProgressColors(
-                                  backgroundColor: const Color(0xff090909),
-                                  bufferedColor: const Color(0xff090909),
-                                  playedColor: const Color(0xffff0000),
-                                  handleColor: const Color(0xffff0000),
-                                ),
-                                materialProgressColors: ChewieProgressColors(
-                                  backgroundColor: const Color(0xff090909),
-                                  bufferedColor: const Color(0xff090909),
-                                  playedColor: const Color(0xffff0000),
-                                  handleColor: const Color(0xffff0000),
-                                ),
-                                videoPlayerController:
-                                    VideoPlayerController.network(
-                                  snapshot.data!.data.data.data.first.videoLink,
-                                ),
-                              ),
+                              controller: ch,
                             ),
                           ),
                         ),
