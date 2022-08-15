@@ -14,12 +14,8 @@ import 'package:provider/provider.dart';
 class Video extends StatelessWidget {
   const Video({Key? key}) : super(key: key);
 
-   
-
-
   @override
   Widget build(BuildContext context) {
-    
     final menuEventsBloCProvider = Provider.of<MenuEventsBloC>(context);
     final token = Provider.of<String>(context);
     final blocVideoApi = BlocVideoApi();
@@ -74,7 +70,6 @@ class Video extends StatelessWidget {
                               : 5,
                           i,
                           isTablet,
-                          i,
                           snapshot.data!.videoListData.list[i].title,
                         )
                       ],
@@ -87,8 +82,8 @@ class Video extends StatelessWidget {
     );
   }
 
-  Widget listView(int itemCount, int indexMain, bool isTablet,
-      int selectedIndex, String selectedTitle) {
+  Widget listView(
+      int itemCount, int indexMain, bool isTablet, String selectedTitle) {
     return SizedBox(
       height: isTablet ? 360 : 220,
       child: Align(
@@ -104,7 +99,6 @@ class Video extends StatelessWidget {
                 child: CustomVideoListItem(
                   index: index,
                   indexMain: indexMain,
-                  selectedIndex: selectedIndex,
                   selectedTitle: selectedTitle,
                 ),
               ),

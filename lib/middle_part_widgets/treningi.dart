@@ -5,7 +5,9 @@ import 'package:hansa_app/api_services/welcome_api.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/extra/custom_tablet_item.dart';
 import 'package:hansa_app/extra/custom_treningi_ipad_container.dart';
+import 'package:hansa_app/providers/is_video_provider.dart';
 import 'package:hansa_app/providers/treningi_photos_provider.dart';
+import 'package:hansa_app/providers/treningi_videos_provider.dart';
 import 'package:hansa_app/training_section/custom_calendar.dart';
 import 'package:hansa_app/extra/custom_clip_item.dart';
 import 'package:hansa_app/extra/custom_title.dart';
@@ -27,6 +29,8 @@ class _TreningiState extends State<Treningi> {
     final isTablet = Provider.of<bool>(context);
     final token = Provider.of<String>(context);
     final treningiPhotos = Provider.of<TreningiPhotosProvider>(context);
+    final treningiVideos = Provider.of<TreningiVideosProvider>(context);
+    final isVideo = Provider.of<IsVideoprovider>(context);
     final trainingBloc = TrainingAPIBloc();
     final scroll = ScrollController();
     final welcomeApi = WelcomeApi(token);
@@ -111,6 +115,7 @@ class _TreningiState extends State<Treningi> {
                                               .eventReports
                                               .list[index]
                                               .link);
+                                          isVideo.setIsVideo(false);
                                           menuBloCProvider.eventSink
                                               .add(MenuActions.trainingVideo);
                                         },
@@ -121,25 +126,53 @@ class _TreningiState extends State<Treningi> {
                               ));
                         } else {
                           return Column(
-                            children: List.generate(
-                              data.eventReports.list.length,
-                              (index) {
-                                return CustomClipItem(
-                                  backgroundColor: const Color(0xff000004),
-                                  buttonColor: const Color(0xffe21a37),
-                                  buttonTextColor: const Color(0xffffffff),
-                                  titleColor: const Color(0xffffffff),
-                                  buttonText: "Смотреть",
-                                  title: data.eventReports.list[index].title,
-                                  onTap: () {
-                                    treningiPhotos.setUrl(snapshot.data!.data
-                                        .eventReports.list[index].link);
-                                    menuBloCProvider.eventSink
-                                        .add(MenuActions.trainingVideo);
+                            children: [
+                              Column(
+                                children: List.generate(
+                                  data.videos.list.length,
+                                  (index) {
+                                    return CustomClipItem(
+                                      backgroundColor: const Color(0xff000004),
+                                      buttonColor: const Color(0xffe21a37),
+                                      buttonTextColor: const Color(0xffffffff),
+                                      titleColor: const Color(0xffffffff),
+                                      buttonText: "Смотреть",
+                                      title: data.videos.list[index].title,
+                                      onTap: () {
+                                        treningiVideos.setUrl(
+                                            data.videos.list[index].link);
+                                        isVideo.setIsVideo(true);
+                                        menuBloCProvider.eventSink
+                                            .add(MenuActions.trainingVideo);
+                                      },
+                                    );
                                   },
-                                );
-                              },
-                            ),
+                                ),
+                              ),
+                              Column(
+                                children: List.generate(
+                                  data.eventReports.list.length,
+                                  (index) {
+                                    return CustomClipItem(
+                                      backgroundColor: const Color(0xff000004),
+                                      buttonColor: const Color(0xffe21a37),
+                                      buttonTextColor: const Color(0xffffffff),
+                                      titleColor: const Color(0xffffffff),
+                                      buttonText: "Смотреть F",
+                                      title:
+                                          data.eventReports.list[index].title,
+                                      onTap: () {
+                                        treningiPhotos.setUrl(
+                                            data.eventReports.list[index].link);
+                                        isVideo.setIsVideo(false);
+                                        menuBloCProvider.eventSink
+                                            .add(MenuActions.trainingVideo);
+                                      },
+                                    );
+                                  },
+                                ),
+                              ),
+                            ],
                           );
                         }
                       }),
