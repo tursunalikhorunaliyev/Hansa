@@ -10,14 +10,12 @@ import 'package:provider/provider.dart';
 class CustomVideoListItem extends StatefulWidget {
   final int index;
   final int indexMain;
-  final int selectedIndex;
   final String selectedTitle;
 
   const CustomVideoListItem(
       {Key? key,
       required this.index,
       required this.indexMain,
-      required this.selectedIndex,
       required this.selectedTitle})
       : super(key: key);
 
@@ -76,16 +74,11 @@ class _CustomVideoListItemState extends State<CustomVideoListItem> {
                                     builder: (context) {
                                       return Scaffold(
                                         backgroundColor: Colors.transparent,
-                                        body: MultiProvider(
-                                          providers: [
-                                            Provider<String>.value(value: token.toString())
-                                          ],
-                                          child: TopVideoWidget(
-                                            url: video.videoLink,
-                                            title: video.title,
-                                            selectedIndex: widget.selectedIndex,
-                                            selectedTitle: widget.selectedTitle,
-                                          ),
+                                        body: TopVideoWidget(
+                                          url: video.videoLink,
+                                          title: video.title,
+                                          selectedIndex: 0,
+                                          selectedTitle: widget.selectedTitle,
                                         ),
                                       );
                                     },
