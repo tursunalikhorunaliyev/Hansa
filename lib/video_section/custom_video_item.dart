@@ -77,7 +77,7 @@ class _CustomVideoListItemState extends State<CustomVideoListItem> {
                                         body: TopVideoWidget(
                                           url: video.videoLink,
                                           title: video.title,
-                                          selectedIndex: widget.selectedIndex,
+                                          selectedIndex: 0,
                                           selectedTitle: widget.selectedTitle,
                                         ),
                                       );
