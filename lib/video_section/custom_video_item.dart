@@ -6,7 +6,7 @@ import 'package:hansa_app/extra/top_video_widget.dart';
 import 'package:hansa_app/video/bloc_video_api.dart';
 import 'package:hansa_app/video/model_video.dart';
 import 'package:provider/provider.dart';
-
+//salom dunyo
 class CustomVideoListItem extends StatefulWidget {
   final int index;
   final int indexMain;
