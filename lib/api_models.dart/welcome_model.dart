@@ -1,6 +1,8 @@
+import 'dart:convert';
+
 class WelcomeModel {
   bool status;
-  WelcomeModelListData data;
+  WelcomeData data;
   WelcomeModel({
     required this.status,
     required this.data,
@@ -9,9 +11,22 @@ class WelcomeModel {
   factory WelcomeModel.fromMap(Map<String, dynamic> map) {
     return WelcomeModel(
       status: map['status'],
-      data: WelcomeModelListData.fromMap(
+      data: WelcomeData.fromMap(
         map['data'],
       ),
+    );
+  }
+}
+
+class WelcomeData {
+  WelcomeModelListData welcomeModelListData;
+  WelcomeData({
+    required this.welcomeModelListData,
+  });
+
+  factory WelcomeData.fromMap(Map<String, dynamic> map) {
+    return WelcomeData(
+      welcomeModelListData: WelcomeModelListData.fromMap(map['data']),
     );
   }
 }

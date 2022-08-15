@@ -23,7 +23,7 @@ class WelcomeApi {
         if (event == WelcomeApiAction.fetch) {
           i++;
           await getWelcome(token: token, i: i).then((value) {
-            list += value.data.list;
+            list += value.data.welcomeModelListData.list;
             dataSink.add(list);
           });
         }
