@@ -95,8 +95,8 @@ class ObucheniyaWidget extends StatelessWidget {
                                     gridDelegate:
                                          SliverGridDelegateWithFixedCrossAxisCount(
                                             crossAxisCount: 2,
-                                            crossAxisSpacing: 22,
-                                            mainAxisExtent: 300),
+                                            crossAxisSpacing: 10,
+                                            mainAxisExtent: 375),
                                     children: List.generate(
                                         snapshot.data!.data.listGuides.list
                                             .length, (index) {
@@ -223,8 +223,8 @@ class ObucheniyaWidget extends StatelessWidget {
                                       gridDelegate:
                                           const SliverGridDelegateWithFixedCrossAxisCount(
                                               crossAxisCount: 2,
-                                              crossAxisSpacing: 22,
-                                             mainAxisExtent: 300),
+                                              crossAxisSpacing: 10,
+                                             mainAxisExtent: 375),
                                       children: List.generate(
                                           snapshot.data!.data.listArchiveGuides
                                               .list.length, (index) {

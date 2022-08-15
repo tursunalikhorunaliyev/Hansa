@@ -1,8 +1,10 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -35,6 +37,30 @@ class _LoginCardState extends State<LoginCard> {
   final pagerBloc = NavigatorBloC();
   final progressButtonBLoC = ProgressButtonAnmationBLoC();
   final blocText = BlocErrorText();
+  final snackBar = SnackBar(
+    duration: Duration(milliseconds: 1000),
+    content: Text('Интернет-ошибка',
+        style: GoogleFonts.montserrat(color: Colors.white)),
+    backgroundColor: Colors.red,
+  );
+
+  chekNet() async {
+    try {
+      final response = await InternetAddress.lookup('www.example.com');
+
+      if (response.isNotEmpty) {
+        log("sstatus 200");
+        progressButtonBLoC.sink.add(true);
+      }
+    } catch (xatoyuuu) {
+      progressButtonBLoC.sink.add(false);
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      if (kDebugMode) {
+        print(xatoyuuu);
+      }
+    }
+  }
+
   @override
   void initState() {
     pagerBloc.stream.listen((event) {
@@ -209,21 +235,38 @@ class _LoginCardState extends State<LoginCard> {
                             builder: (context, snapshot) {
                               return GestureDetector(
                                 onTap: () async {
-                                  if (snapshot.data!) {
-                                    progressButtonBLoC.sink.add(true);
-                                  } else {
-                                    progressButtonBLoC.sink.add(true);
-                                    FocusManager.instance.primaryFocus
-                                        ?.unfocus();
-                                    List isCorrectList = await LoginAction(
-                                            username: usernameController.text,
-                                            password: passwordController.text,
-                                            isSaved: switchTextEditingController
-                                                    .text ==
-                                                "1")
-                                        .sendRequest();
+                                  try {
+                                    final response =
+                                        await InternetAddress.lookup(
+                                            'www.example.com');
 
-                                    pagerBloc.sink.add(isCorrectList);
+                                    if (response.isNotEmpty) {
+                                      log(snapshot.data!.toString());
+                                      log("sstatus 200");
+                                      progressButtonBLoC.sink.add(true);
+                                      FocusManager.instance.primaryFocus
+                                          ?.unfocus();
+                                      List isCorrectList = await LoginAction(
+                                              username: usernameController.text,
+                                              password: passwordController.text,
+                                              isSaved:
+                                                  switchTextEditingController
+                                                          .text ==
+                                                      "1")
+                                          .sendRequest();
+
+                                      pagerBloc.sink.add(isCorrectList);
+                                      chekNet();
+                                    }
+                                  } catch (xatoyuuu) {
+                                    log("status 400");
+
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(snackBar);
+                                    progressButtonBLoC.sink.add(false);
+                                    if (kDebugMode) {
+                                      print(xatoyuuu);
+                                    }
                                   }
                                 },
                                 child: AnimatedContainer(
