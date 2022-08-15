@@ -25,6 +25,7 @@ class _SobshitOProblemState extends State<SobshitOProblem> {
   Widget build(BuildContext context) {
     final providerToken = Provider.of<String>(context);
 
+    final isTablet = Provider.of<bool>(context);
     return FlipCard(
       key: cardKey,
       flipOnTouch: false,
@@ -46,7 +47,8 @@ class _SobshitOProblemState extends State<SobshitOProblem> {
                         borderRadius: BorderRadius.circular(5),
                         child: Container(
                           color: Colors.white,
-                          width: 350,
+                          width:isTablet?500: 350,
+                        height:isTablet?480: null,
                           child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
@@ -77,7 +79,7 @@ class _SobshitOProblemState extends State<SobshitOProblem> {
                                     "Задать вопрос",
                                     style: GoogleFonts.montserrat(
                                         color: const Color(0xff444444),
-                                        fontSize: 24),
+                                        fontSize:isTablet?32: 24),
                                   ),
                                   const SizedBox(
                                     height: 40,
@@ -90,6 +92,9 @@ class _SobshitOProblemState extends State<SobshitOProblem> {
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 24),
                                             child: TextField(
+                                              style: GoogleFonts.montserrat(fontSize: isTablet?20:null),
+                                               cursorHeight:isTablet? 23:null,
+                                               
                                               controller: textFieldController,
                                               onChanged: (value) {
                                                 blocEmptySobshit.dataSink
@@ -105,7 +110,7 @@ class _SobshitOProblemState extends State<SobshitOProblem> {
                                                           bottom: 100),
                                                   child: Image.asset(
                                                     "assets/free-icon-maps-and-flags-446099.png",
-                                                    scale: 3,
+                                                    scale:isTablet?2: 3,
                                                     color: snapshot.data!
                                                         ? const Color(
                                                             0xFFff163e)
@@ -115,8 +120,11 @@ class _SobshitOProblemState extends State<SobshitOProblem> {
                                                 ),
                                                 hintText:
                                                     "Текст вашего сообщения",
+                                                    
+                                                    
                                                 hintStyle:
                                                     GoogleFonts.montserrat(
+                                                      fontSize: isTablet?23:null,
                                                         color: snapshot.data!
                                                             ? const Color(
                                                                 0xFFff163e)
@@ -131,6 +139,8 @@ class _SobshitOProblemState extends State<SobshitOProblem> {
                                                         : Color(0xffa1b7c2),
                                                   ),
                                                 ),
+                                                
+                                                
                                                 focusedBorder:
                                                     UnderlineInputBorder(
                                                   borderSide: BorderSide(
@@ -144,8 +154,8 @@ class _SobshitOProblemState extends State<SobshitOProblem> {
                                               ),
                                             ));
                                       }),
-                                  const SizedBox(
-                                    height: 45,
+                                   SizedBox(
+                                    height:isTablet?75: 45,
                                   ),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
