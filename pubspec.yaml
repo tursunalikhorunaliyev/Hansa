@@ -65,6 +65,8 @@ dependencies:
   share_plus: ^4.0.10+1
   flutter_local_notifications: ^9.7.0
   permission_handler: ^10.0.0
+  webview_flutter: ^3.0.4
+  flutter_widget_from_html: ^0.8.5
   
 
 dev_dependencies:

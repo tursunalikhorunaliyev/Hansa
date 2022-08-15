@@ -1,13 +1,22 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:chewie/chewie.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hansa_app/blocs/bloc_detect_tap.dart';
+import 'package:hansa_app/blocs/download_progress_bloc.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/extra/black_custom_title.dart';
 import 'package:hansa_app/extra/custom_black_appbar.dart';
 import 'package:hansa_app/providers/providers_for_video_title/video_index_provider.dart';
 import 'package:hansa_app/providers/providers_for_video_title/video_title_provider.dart';
 import 'package:hansa_app/training_section/custom_treningi_video.dart';
+import 'package:hansa_app/video/bloc_video_api.dart';
+import 'package:hansa_app/video/model_video.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
 
@@ -69,11 +78,52 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
     initVideo();
   }
 
+  final blocDetectTap = BlocDetectTap();
+  final blocVideoApi = BlocVideoApi();
+
+  bool downloading = false;
+  double progress = 0;
+  bool isDownloaded = false;
+
+  Future<String> getFilePath(uniqueFileName) async {
+    String path = "";
+    String dir = "";
+    if (Platform.isIOS) {
+      Directory directory = await getApplicationSupportDirectory();
+      dir = directory.path;
+    } else if (Platform.isAndroid) {
+      dir = "/storage/emulated/0/Download/";
+    }
+    path = "$dir/$uniqueFileName.mp4";
+    return path;
+  }
+
+  Future<void> downloadFile(String url, String fileName,
+      DownloadProgressFileBloc downloadProgressFileBloc) async {
+    progress = 0;
+
+    String savePath = await getFilePath(fileName);
+    Dio dio = Dio();
+    dio.download(
+      url,
+      savePath,
+      onReceiveProgress: (recieved, total) {
+        print(((recieved / total) * 100).toStringAsFixed(0));
+        progress = double.parse(((recieved / total) * 100).toStringAsFixed(0));
+        downloadProgressFileBloc.streamSink.add(progress);
+      },
+      deleteOnError: true,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final menuEventsBloCProvider = Provider.of<MenuEventsBloC>(context);
     final title = Provider.of<VideoTitleProvider>(context);
     final index = Provider.of<VideoIndexProvider>(context);
+    final providerBlocProgress = Provider.of<DownloadProgressFileBloc>(context);
+    final token = Provider.of<String>(context);
+
     return SafeArea(
       child: Stack(
         children: [
@@ -177,9 +227,50 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 13),
-                    child: CustomTreningiVideo(
-                      onTap: () {},
-                      title: widget.title,
+                    child: Consumer<VideoIndexProvider>(
+                      builder: (context, value, child) {
+                        return FutureBuilder<VideoMainOne>(
+                          future: blocVideoApi.getData(token: token),
+                          builder: (context, snapshot) {
+                            return Provider(
+                              create: (context) => blocDetectTap,
+                              child: StreamBuilder<double>(
+                                  stream: providerBlocProgress.stream,
+                                  builder: (context, snapshotProgress) {
+                                    return CustomTreningiVideo(
+                                      onTap: () {
+                                        blocDetectTap.dataSink.add(true);
+
+                                        if (snapshotProgress.data == null ||
+                                            snapshotProgress.data == 0) {
+                                          downloadFile(
+                                            snapshot
+                                                .data!
+                                                .videoListData
+                                                .list[value.getIndex]
+                                                .data
+                                                .list[widget.selectedIndex]
+                                                .videoLink,
+                                            snapshot
+                                                .data!
+                                                .videoListData
+                                                .list[value.getIndex]
+                                                .data
+                                                .list[widget.selectedIndex]
+                                                .title,
+                                            providerBlocProgress,
+                                          );
+                                        } else {
+                                          log("asdffffffffffff=----------------------------------------");
+                                        }
+                                      },
+                                      title: widget.title,
+                                    );
+                                  }),
+                            );
+                          },
+                        );
+                      },
                     ),
                   )
                 ],

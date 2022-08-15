@@ -68,6 +68,10 @@ class _TopVideoVidgetState extends State<TopVideoVidget> {
   }
 
   final blocVideoApi = BlocVideoApi();
+  final blocDetectTap = BlocDetectTap();
+  bool downloading = false;
+  double progress = 0;
+  bool isDownloaded = false;
 
   Future<String> getFilePath(uniqueFileName) async {
     String path = "";
@@ -81,10 +85,6 @@ class _TopVideoVidgetState extends State<TopVideoVidget> {
     path = "$dir/$uniqueFileName.mp4";
     return path;
   }
-
-  bool downloading = false;
-  double progress = 0;
-  bool isDownloaded = false;
 
   Future<void> downloadFile(String url, String fileName,
       DownloadProgressFileBloc downloadProgressFileBloc) async {
@@ -103,8 +103,6 @@ class _TopVideoVidgetState extends State<TopVideoVidget> {
       deleteOnError: true,
     );
   }
-
-  final blocDetectTap = BlocDetectTap();
 
   @override
   Widget build(BuildContext context) {
@@ -166,29 +164,44 @@ class _TopVideoVidgetState extends State<TopVideoVidget> {
                             padding: const EdgeInsets.only(top: 13),
                             child: Provider(
                               create: (context) => blocDetectTap,
-                              child: CustomTreningiVideo(
-                                onTap: () {
-                                  blocDetectTap.dataSink.add(true);
-                                  downloadFile(
-                                    snapshot
-                                        .data!
-                                        .videoListData
-                                        .list[value.getIndex]
-                                        .data
-                                        .list[providerIndex]
-                                        .videoLink,
-                                    snapshot
-                                        .data!
-                                        .videoListData
-                                        .list[value.getIndex]
-                                        .data
-                                        .list[providerIndex]
-                                        .title,
-                                    providerBlocProgress,
-                                  );
-                                },
-                                title: widget.title,
-                              ),
+                              child: StreamBuilder<bool>(
+                                  stream: blocDetectTap.dataStream,
+                                  builder: (context, snapshotDetectTap) {
+                                    return StreamBuilder<double>(
+                                        stream: providerBlocProgress.stream,
+                                        builder: (context, snapshotProgress) {
+                                          return CustomTreningiVideo(
+                                            onTap: () {
+                                              blocDetectTap.dataSink.add(true);
+
+                                              if (snapshotProgress.data ==
+                                                      null ||
+                                                  snapshotProgress.data == 0) {
+                                                downloadFile(
+                                                  snapshot
+                                                      .data!
+                                                      .videoListData
+                                                      .list[value.getIndex]
+                                                      .data
+                                                      .list[providerIndex]
+                                                      .videoLink,
+                                                  snapshot
+                                                      .data!
+                                                      .videoListData
+                                                      .list[value.getIndex]
+                                                      .data
+                                                      .list[providerIndex]
+                                                      .title,
+                                                  providerBlocProgress,
+                                                );
+                                              } else {
+                                                log("asdffffffffffff=----------------------------------------");
+                                              }
+                                            },
+                                            title: widget.title,
+                                          );
+                                        });
+                                  }),
                             ),
                           );
                         },

@@ -32,6 +32,7 @@ class _StatiState extends State<Stati> {
   Widget build(BuildContext context) {
     final providerToken = Provider.of<String>(context);
     final isTablet = Provider.of<bool>(context);
+    final providerReadStati = Provider.of<ReadStatiBLoC>(context);
     final statiBloCProvider = Provider.of<MenuEventsBloC>(context);
     final statiIdProvider = Provider.of<StatiIdProvider>(context);
     return Expanded(
@@ -69,9 +70,14 @@ class _StatiState extends State<Stati> {
                                   onTap: () async {
                                     statiBloCProvider.eventSink
                                         .add(MenuActions.chitatStati);
-                                    String link =
-                                        snapshot.data!.list.list[index].link;
-                                    statiIdProvider.changeUrl(link);
+
+                                    ReadStatiModel model =
+                                        await readStati.getReadStati(
+                                            providerToken,
+                                            snapshot
+                                                .data!.list.list[index].link);
+
+                                    providerReadStati.sink.add(model);
                                   },
                                 ),
                               ),
@@ -98,9 +104,12 @@ class _StatiState extends State<Stati> {
                                 onTap: () async {
                                   statiBloCProvider.eventSink
                                       .add(MenuActions.chitatStati);
-                                  String link =
-                                      snapshot.data!.list.list[index].link;
-                                  statiIdProvider.changeUrl(link);
+                                  ReadStatiModel model =
+                                      await readStati.getReadStati(
+                                          providerToken,
+                                          snapshot.data!.list.list[index].link);
+
+                                  providerReadStati.sink.add(model);
                                 },
                               ),
                             ),
