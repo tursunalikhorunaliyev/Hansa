@@ -71,7 +71,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         },
                         child: Icon(
                           CupertinoIcons.chevron_left_circle,
-                          size: isTablet ? 13.sp : 25.sp,
+                          size: isTablet ? 20.sp : 25.sp,
                           color: const Color(0xffa5a5ae),
                         ),
                       ),
@@ -81,7 +81,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         },
                         child: Icon(
                           CupertinoIcons.home,
-                          size: isTablet ? 13.sp : 25.sp,
+                          size: isTablet ? 20.sp : 25.sp,
                           color: const Color(0xffa5a5ae),
                         ),
                       ),
@@ -91,7 +91,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         },
                         child: Icon(
                           CupertinoIcons.heart,
-                          size: isTablet ? 13.sp : 25.sp,
+                          size: isTablet ? 20.sp : 25.sp,
                           color: const Color(0xffa5a5ae),
                         ),
                       ),
@@ -101,7 +101,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         },
                         child: Icon(
                           CupertinoIcons.person,
-                          size: isTablet ? 13.sp : 25.sp,
+                          size: isTablet ? 20.sp : 25.sp,
                           color: const Color(0xffa5a5ae),
                         ),
                       ),
