@@ -45,7 +45,7 @@ class _ArchiveCardState extends State<ArchiveCard> {
     final token = Provider.of<String>(context);
     bool fav = widget.isFavourite;
     return Padding(
-      padding: EdgeInsets.only(top:isTablet?0: 15.h,bottom: isTablet?10:0, left:isTablet?0: 20, right:isTablet?0: 20),
+      padding: EdgeInsets.only(top:isTablet?0: 15.h,bottom: isTablet?10:10, left:isTablet?0: 20, right:isTablet?0: 20),
       child: Stack(
         children: [
           Padding(
