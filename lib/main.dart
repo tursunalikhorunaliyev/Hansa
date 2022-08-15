@@ -76,7 +76,6 @@ class MyApp extends StatelessWidget {
           Provider(
             create: (context) => BlocVideoControll(),
           ),
-          ChangeNotifierProvider(create: (context) => TreningiVideosProvider()),
           ChangeNotifierProvider(
             create: (context) => VideoTitleProvider(),
           ),
