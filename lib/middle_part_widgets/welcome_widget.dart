@@ -25,14 +25,12 @@ class WelcomeWidget extends StatefulWidget {
 class _WelcomeWidgetState extends State<WelcomeWidget> {
   RefreshController refreshController =
       RefreshController(initialRefresh: false);
-      
-      
-  
+
   @override
   void initState() {
-   
-   super.initState();
+    super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     final scroll = ScrollController();
@@ -46,13 +44,10 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
     return Expanded(
       child: Column(
         children: [
-          SizedBox(
-            height: 5,
-          ),
           Container(
             alignment: Alignment.center,
             color: const Color(0xffeaeaea),
-            height: 40,
+            height: 30,
             width: double.infinity,
             child: Text(
               'Добро пожаловать',
@@ -61,9 +56,6 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                   fontWeight: FontWeight.bold,
                   color: const Color(0xff272624)),
             ),
-          ),
-          SizedBox(
-            height: 5,
           ),
           Expanded(
             child: StreamBuilder<List<WelcomeModelData>>(
@@ -80,51 +72,63 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                 child: Column(
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.symmetric(horizontal: 5),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 5),
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(5),
                                         child: SizedBox(
                                           height: 450,
-                                          child: Chewie(controller: ChewieController(videoPlayerController: VideoPlayerController.network("https://hansa-lab.ru/storage/upload/videos/1d-otmvmwUva.mp4"), aspectRatio: 13.6/7.2, autoPlay: true)
-                                            ),
+                                          child: Chewie(
+                                              controller: ChewieController(
+                                                  videoPlayerController:
+                                                      VideoPlayerController.network(
+                                                          "https://hansa-lab.ru/storage/upload/videos/1d-otmvmwUva.mp4"),
+                                                  aspectRatio: 13.6 / 7.2,
+                                                  autoPlay: true)),
                                         ),
                                       ),
                                     ),
-                                      
                                     GridView(
                                       physics: BouncingScrollPhysics(),
                                       shrinkWrap: true,
                                       gridDelegate:
                                           SliverGridDelegateWithFixedCrossAxisCount(
-                                              crossAxisCount: 2,
-                                              crossAxisSpacing: 10,
-                                           mainAxisExtent: 375,
-                                              ),
-                                      children: List.generate(
-                                        data.length,
-                                        (index) => StackedStack(  isFavouriteURL: snapshot
-                                              .data![index].favoriteLink,
-                                          onTap: () async {
-                                            menuProvider.eventSink
-                                                .add(MenuActions.article);
-                                            ArticleModel statiModel =
-                                                await articleBLoC.getArticle(
-                                                    token,
-                                                    snapshot.data![index].link);
-                                            articleBLoC.sink.add(statiModel);
-                                          },
-                                          buttonColor: const Color(0xffff163e),
-                                          buttonText: 'Смотреть',
-                                          isDate: true,
-                                          month: toDateString(snapshot
-                                              .data![index].date
-                                              .substring(5, 7)),
-                                          day: snapshot.data![index].date
-                                              .substring(8, 10),
-                                          title: data[index].title,
-                                          url: data[index].pictureLink,
-                                          isFavourite: data[index].isFavorite,)
+                                        crossAxisCount: 2,
+                                        crossAxisSpacing: 10,
+                                        mainAxisExtent: 375,
                                       ),
+                                      children: List.generate(
+                                          data.length,
+                                          (index) => StackedStack(
+                                                isFavouriteURL: snapshot
+                                                    .data![index].favoriteLink,
+                                                onTap: () async {
+                                                  menuProvider.eventSink
+                                                      .add(MenuActions.article);
+                                                  ArticleModel statiModel =
+                                                      await articleBLoC
+                                                          .getArticle(
+                                                              token,
+                                                              snapshot
+                                                                  .data![index]
+                                                                  .link);
+                                                  articleBLoC.sink
+                                                      .add(statiModel);
+                                                },
+                                                buttonColor:
+                                                    const Color(0xffff163e),
+                                                buttonText: 'Смотреть',
+                                                isDate: true,
+                                                month: toDateString(snapshot
+                                                    .data![index].date
+                                                    .substring(5, 7)),
+                                                day: snapshot.data![index].date
+                                                    .substring(8, 10),
+                                                title: data[index].title,
+                                                url: data[index].pictureLink,
+                                                isFavourite:
+                                                    data[index].isFavorite,
+                                              )),
                                     ),
                                     Padding(
                                       padding:

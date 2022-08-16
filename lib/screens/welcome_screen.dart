@@ -1,16 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hansa_app/blocs/bloc_change_profile.dart';
 import 'package:hansa_app/blocs/bloc_play_video.dart';
-
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/blocs/treningi_video_controller.dart';
-import 'package:hansa_app/classes/izbrannoe_view.dart';
 import 'package:hansa_app/extra/exit_dialog.dart';
 import 'package:hansa_app/extra/glavniy_menyu.dart';
 import 'package:hansa_app/extra/hamburger.dart';
-import 'package:hansa_app/extra/top_video_widget.dart';
 import 'package:hansa_app/extra/ui_changer.dart';
 import 'package:hansa_app/providers/provider_personal_textFields.dart';
 import 'package:provider/provider.dart';
@@ -27,8 +23,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     final videoControll = Provider.of<TreningiVideoControll>(context);
     GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+    final playProvider = Provider.of<BlocPlayVideo>(context);
     final isTablet = Provider.of<bool>(context);
-
+    final providerScaffoldKey = Provider.of<GlobalKey<ScaffoldState>>(context);
     final menuProvider = Provider.of<MenuEventsBloC>(context);
 
     return WillPopScope(
@@ -47,15 +44,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         resizeToAvoidBottomInset: false,
         drawer: MultiProvider(providers: [
           Provider(create: (context) => ProviderPersonalTextFields()),
-          Provider(create: (context) => scaffoldKey)
+          Provider(create: (context) => providerScaffoldKey)
         ], child: const GlavniyMenyu()),
-        key: scaffoldKey,
+        key: providerScaffoldKey,
         bottomNavigationBar: StreamBuilder<MenuActions>(
             initialData: MenuActions.welcome,
             stream: menuProvider.eventStream,
             builder: (context, snapshot) {
               return SizedBox(
-                height: 70.h,
+                height: 58.h,
                 child: Container(
                   color: const Color(0xffffffff),
                   child: Row(
@@ -90,7 +87,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       ),
                       InkWell(
                         onTap: () {
-                          scaffoldKey.currentState!.openDrawer();
+                          providerScaffoldKey.currentState!.openDrawer();
                         },
                         child: Icon(
                           CupertinoIcons.heart,
@@ -100,7 +97,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       ),
                       InkWell(
                         onTap: () {
-                          scaffoldKey.currentState!.openDrawer();
+                          providerScaffoldKey.currentState!.openDrawer();
                         },
                         child: Icon(
                           CupertinoIcons.person,
@@ -130,7 +127,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       children: [
                         IconButton(
                             onPressed: () {
-                              scaffoldKey.currentState!.openDrawer();
+                              providerScaffoldKey.currentState!.openDrawer();
                             },
                             icon: const HamburgerIcon()),
                         InkWell(
@@ -152,7 +149,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ),
                 ),
                 Provider(
-                    create: (context) => scaffoldKey, child: const UIChanger()),
+                    create: (context) => providerScaffoldKey,
+                    child: const UIChanger()),
               ],
             ),
           ],

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -107,8 +109,9 @@ class _ArchiveCardState extends State<ArchiveCard> {
                             child: InkWell(
                               onTap: () {
                                 setState(() {
+                                  log(widget.linkPDF);
                                   launched = _launchInBrowser(
-                                      Uri.parse("http://${widget.linkPDF}"));
+                                      Uri.parse(widget.linkPDF));
                                 });
                               },
                               child: Container(
