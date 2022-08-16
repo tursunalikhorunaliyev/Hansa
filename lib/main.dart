@@ -45,6 +45,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
     Size size = WidgetsBinding.instance.window.physicalSize;
     bool isTablet = (size.width / 3) > 500;
     Map<String, FlipCardController> map = {
@@ -86,6 +88,9 @@ class MyApp extends StatelessWidget {
           Provider(create: (context) => LoginClickedBloc()),
           Provider(create: (context) => BlocFlipLogin()),
           ChangeNotifierProvider(create: (context) => DialogVideoProvider()),
+          Provider(
+            create: (context) => scaffoldKey,
+          )
         ],
         child: const MaterialApp(
           localizationsDelegates: [

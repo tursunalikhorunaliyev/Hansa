@@ -1,3 +1,4 @@
+import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hansa_app/extra/hamburger.dart';
@@ -8,6 +9,10 @@ class CustomBlackAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final providerScaffoldKey = Provider.of<GlobalKey<ScaffoldState>>(context);
+    final providerChewieController = Provider.of<ChewieController>(context);
+
+
     return Container(
       height: 81.h,
       color: const Color(0xff333333),
@@ -15,7 +20,11 @@ class CustomBlackAppBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.pop(context);
+              providerChewieController..seekTo(Duration.zero)..pause();
+              providerScaffoldKey.currentState!.openDrawer();
+            },
             icon: HamburgerIcon(
               color: const Color(0xffffffff),
             ),

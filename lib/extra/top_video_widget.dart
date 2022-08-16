@@ -123,7 +123,6 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
     final index = Provider.of<VideoIndexProvider>(context);
     final providerBlocProgress = Provider.of<DownloadProgressFileBloc>(context);
     final token = Provider.of<String>(context);
-
     return SafeArea(
       child: Stack(
         children: [
@@ -150,7 +149,9 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
             children: [
               Column(
                 children: [
-                  const CustomBlackAppBar(),
+                  Provider<ChewieController>.value(
+                      value: chewieController,
+                      child: const CustomBlackAppBar()),
                   Row(
                     children: const [
                       BlackCustomTitle(
