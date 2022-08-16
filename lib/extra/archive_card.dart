@@ -1,9 +1,11 @@
 import 'dart:developer';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hansa_app/blocs/favourite_bloc.dart';
+import 'package:hansa_app/chached_net_image.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -47,7 +49,11 @@ class _ArchiveCardState extends State<ArchiveCard> {
     final token = Provider.of<String>(context);
     bool fav = widget.isFavourite;
     return Padding(
-      padding: EdgeInsets.only(top:isTablet?0: 15.h,bottom: isTablet?10:0, left:isTablet?0: 20, right:isTablet?0: 20),
+      padding: EdgeInsets.only(
+          top: isTablet ? 0 : 15.h,
+          bottom: isTablet ? 10 : 0,
+          left: isTablet ? 0 : 20,
+          right: isTablet ? 0 : 20),
       child: Stack(
         children: [
           Padding(
@@ -75,7 +81,6 @@ class _ArchiveCardState extends State<ArchiveCard> {
                     Padding(
                       padding: EdgeInsets.only(left: 23.w),
                       child: Column(
-               
                         children: [
                           Padding(
                             padding:
@@ -144,22 +149,21 @@ class _ArchiveCardState extends State<ArchiveCard> {
               height: isTablet ? 170 : 206,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(5.r),
-                child: Image.network(
-                  widget.url,
+                child: CachedNetworkImage(
+                  imageUrl: widget.url,
                   fit: BoxFit.cover,
                 ),
               )),
           Padding(
             padding: EdgeInsets.only(
               top: isTablet ? 150 : 181,
-             
             ),
             child: Row(
-mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Spacer(
                   flex: isTablet ? 13 : 9,
-                ), 
+                ),
                 StreamBuilder<bool>(
                     stream: isFavouriteBLoC.stream,
                     initialData: false,
@@ -190,9 +194,9 @@ mainAxisAlignment: MainAxisAlignment.end,
                         ),
                       );
                     }),
-                 Spacer(
+                Spacer(
                   flex: isTablet ? 2 : 1,
-                ) 
+                )
               ],
             ),
           ),
