@@ -128,7 +128,7 @@ class _TabletKatalogBottomItemState extends State<TabletKatalogBottomItem> {
                           onTap: () {
                             setState(() {
                               launched = _launchInBrowser(
-                                  Uri.parse("http://${widget.linkPDF}"));
+                                  Uri.parse(widget.linkPDF));
                             });
                           },
                           child: ClipRRect(
