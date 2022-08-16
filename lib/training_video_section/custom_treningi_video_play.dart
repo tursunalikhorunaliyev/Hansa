@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/treningi_video_model.dart';
 import 'package:hansa_app/api_services/treningi_video_api.dart';
+import 'package:hansa_app/blocs/treningi_video_controller.dart';
 import 'package:hansa_app/providers/treningi_videos_provider.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +23,15 @@ class CustomTreningiVideoPlay extends StatelessWidget {
     final treningiVideos = Provider.of<TreningiVideosProvider>(context);
     final token = Provider.of<String>(context);
     ChewieController ch = chewieController;
+    final videoControll = Provider.of<TreningiVideoControll>(context);
+    videoControll.stream.listen((event) {
+      log(event.toString());
+      if (event == true) {
+        ch.videoPlayerController
+          ..seekTo(Duration.zero)
+          ..pause();
+      }
+    });
     return Padding(
       padding: const EdgeInsets.only(bottom: 11, left: 25, right: 25),
       child: SizedBox(

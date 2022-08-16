@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hansa_app/blocs/bloc_play_video.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
+import 'package:hansa_app/blocs/treningi_video_controller.dart';
 import 'package:hansa_app/extra/exit_dialog.dart';
 import 'package:hansa_app/extra/glavniy_menyu.dart';
 import 'package:hansa_app/extra/hamburger.dart';
@@ -20,6 +21,8 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
+    final videoControll = Provider.of<TreningiVideoControll>(context);
+    GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     final playProvider = Provider.of<BlocPlayVideo>(context);
     final isTablet = Provider.of<bool>(context);
     final providerScaffoldKey = Provider.of<GlobalKey<ScaffoldState>>(context);
@@ -57,6 +60,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     children: [
                       InkWell(
                         onTap: () {
+                          videoControll.sink.add(false);
+
                           if (menuProvider.list.length > 1) {
                             menuProvider.eventSink.add(menuProvider.list
                                 .elementAt(menuProvider.list.length - 2));
@@ -144,7 +149,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ),
                 ),
                 Provider(
-                    create: (context) => providerScaffoldKey, child: const UIChanger()),
+                    create: (context) => providerScaffoldKey,
+                    child: const UIChanger()),
               ],
             ),
           ],

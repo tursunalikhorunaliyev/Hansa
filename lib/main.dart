@@ -13,6 +13,7 @@ import 'package:hansa_app/blocs/download_progress_bloc.dart';
 import 'package:hansa_app/blocs/login_clicked_bloc.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/blocs/read_stati_bloc.dart';
+import 'package:hansa_app/blocs/treningi_video_controller.dart';
 import 'package:hansa_app/blocs/voyti_ili_sozdata_bloc.dart';
 import 'package:hansa_app/middle_part_widgets/permission_handler_screen.dart';
 import 'package:hansa_app/providers/dialog_video_provider.dart';
@@ -84,9 +85,10 @@ class MyApp extends StatelessWidget {
           Provider(create: (context) => MenuEventsBloC()),
           Provider(create: (context) => ArticleBLoC()),
           Provider(create: (context) => BlocPlayVideo()),
-          Provider(create: ((context) => BlocChangeProfile())),
+          Provider(create: (context) => BlocChangeProfile()),
           Provider(create: (context) => LoginClickedBloc()),
           Provider(create: (context) => BlocFlipLogin()),
+          Provider(create: (context) => TreningiVideoControll()),
           ChangeNotifierProvider(create: (context) => DialogVideoProvider()),
           Provider(
             create: (context) => scaffoldKey,
