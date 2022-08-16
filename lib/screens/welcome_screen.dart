@@ -64,6 +64,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       InkWell(
                         onTap: () {
                           videoControll.sink.add(false);
+
                           if (menuProvider.list.length > 1) {
                             menuProvider.eventSink.add(menuProvider.list
                                 .elementAt(menuProvider.list.length - 2));
