@@ -5,6 +5,7 @@ import 'package:hansa_app/blocs/bloc_change_profile.dart';
 import 'package:hansa_app/blocs/bloc_play_video.dart';
 
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
+import 'package:hansa_app/blocs/treningi_video_controller.dart';
 import 'package:hansa_app/classes/izbrannoe_view.dart';
 import 'package:hansa_app/extra/exit_dialog.dart';
 import 'package:hansa_app/extra/glavniy_menyu.dart';
@@ -24,7 +25,7 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
-    final playProvider = Provider.of<BlocPlayVideo>(context);
+    final videoControll = Provider.of<TreningiVideoControll>(context);
     GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     final isTablet = Provider.of<bool>(context);
 
@@ -62,6 +63,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     children: [
                       InkWell(
                         onTap: () {
+                          videoControll.sink.add(false);
                           if (menuProvider.list.length > 1) {
                             menuProvider.eventSink.add(menuProvider.list
                                 .elementAt(menuProvider.list.length - 2));
