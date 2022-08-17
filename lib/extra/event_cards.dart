@@ -1,4 +1,3 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,7 +18,8 @@ class EventCards extends StatelessWidget {
       required this.url,
       required this.isFavouriteURL,
       required this.isFavourite,
-      required this.onTap})
+      required this.onTap,
+      required this.imageOnTap})
       : super(key: key);
   final String url;
   final String isFavouriteURL;
@@ -31,6 +31,7 @@ class EventCards extends StatelessWidget {
   final bool isDate;
   final bool isFavourite;
   final VoidCallback onTap;
+  final VoidCallback imageOnTap;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,10 @@ class EventCards extends StatelessWidget {
     final favouriteModel = FavouriteModel(status: true, data: true);
     bool fav = isFavourite;
     return Padding(
-      padding: EdgeInsets.only(bottom:isTablet?15.h: 10, left:isTablet?0: 20, right:isTablet?0: 20),
+      padding: EdgeInsets.only(
+          bottom: isTablet ? 15.h : 10,
+          left: isTablet ? 0 : 20,
+          right: isTablet ? 0 : 20),
       child: Stack(
         children: [
           Padding(
@@ -52,7 +56,7 @@ class EventCards extends StatelessWidget {
                   borderRadius: BorderRadius.circular(5),
                   color: const Color(0xffffffff)),
               child: Padding(
-                padding:  EdgeInsets.symmetric(horizontal:isTablet?7.w: 11),
+                padding: EdgeInsets.symmetric(horizontal: isTablet ? 7.w : 11),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -66,7 +70,7 @@ class EventCards extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding:  EdgeInsets.only(left:isTablet?23.w: 23),
+                      padding: EdgeInsets.only(left: isTablet ? 23.w : 23),
                       child: GestureDetector(
                         onTap: onTap,
                         child: Container(
@@ -104,14 +108,17 @@ class EventCards extends StatelessWidget {
               height: isTablet ? 170 : 206,
               child: Stack(
                 children: [
-                  SizedBox(
-                    width: isTablet ? 388 : double.infinity,
-                    height: isTablet ? 170 : 206,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(5),
-                      child: CachedNetworkImage(
-                        imageUrl: url,
-                        fit: BoxFit.cover,
+                  InkWell(
+                    onTap: imageOnTap,
+                    child: SizedBox(
+                      width: isTablet ? 388 : double.infinity,
+                      height: isTablet ? 170 : 206,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(5),
+                        child: CachedNetworkImage(
+                          imageUrl: url,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),

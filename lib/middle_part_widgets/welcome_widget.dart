@@ -42,215 +42,202 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
     final menuProvider = Provider.of<MenuEventsBloC>(context);
 
     return Expanded(
-      child: Column(
-        children: [
-          Container(
-            alignment: Alignment.center,
-            color: const Color(0xffeaeaea),
-            height: 30,
-            width: double.infinity,
-            child: Text(
-              'Добро пожаловать',
-              style: GoogleFonts.montserrat(
-                  fontSize: isTablet ? 30 : 20,
-                  fontWeight: FontWeight.bold,
-                  color: const Color(0xff272624)),
-            ),
-          ),
-          Expanded(
-            child: StreamBuilder<List<WelcomeModelData>>(
-                stream: welcomeApi.dataStream,
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    final data = snapshot.requireData;
-                    return isTablet
-                        ? Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 25),
-                            child: ScrollConfiguration(
-                              behavior: MyBehavior(),
-                              child: SingleChildScrollView(
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 5),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(5),
-                                        child: SizedBox(
-                                          height: 450,
-                                          child: Chewie(
-                                              controller: ChewieController(
-                                                  videoPlayerController:
-                                                      VideoPlayerController.network(
-                                                          "https://hansa-lab.ru/storage/upload/videos/1d-otmvmwUva.mp4"),
-                                                  aspectRatio: 13.6 / 7.2,
-                                                  autoPlay: true)),
-                                        ),
-                                      ),
-                                    ),
-                                    GridView(
-                                      physics: BouncingScrollPhysics(),
-                                      shrinkWrap: true,
-                                      gridDelegate:
-                                          SliverGridDelegateWithFixedCrossAxisCount(
-                                        crossAxisCount: 2,
-                                        crossAxisSpacing: 10,
-                                        mainAxisExtent: 375,
-                                      ),
-                                      children: List.generate(
-                                          data.length,
-                                          (index) => StackedStack(
-                                                isFavouriteURL: snapshot
-                                                    .data![index].favoriteLink,
-                                                onTap: () async {
-                                                  menuProvider.eventSink
-                                                      .add(MenuActions.article);
-                                                  ArticleModel statiModel =
-                                                      await articleBLoC
-                                                          .getArticle(
-                                                              token,
-                                                              snapshot
-                                                                  .data![index]
-                                                                  .link);
-                                                  articleBLoC.sink
-                                                      .add(statiModel);
-                                                },
-                                                buttonColor:
-                                                    const Color(0xffff163e),
-                                                buttonText: 'Смотреть',
-                                                isDate: true,
-                                                month: toDateString(snapshot
-                                                    .data![index].date
-                                                    .substring(5, 7)),
-                                                day: snapshot.data![index].date
-                                                    .substring(8, 10),
-                                                title: data[index].title,
-                                                url: data[index].pictureLink,
-                                                isFavourite:
-                                                    data[index].isFavorite,
-                                              )),
-                                    ),
-                                    Padding(
-                                      padding:
-                                          const EdgeInsets.only(bottom: 10.0),
-                                      child: GestureDetector(
-                                        onTap: () {
-                                          welcomeApi.eventSink
-                                              .add(WelcomeApiAction.fetch);
-                                        },
-                                        child: Container(
-                                          alignment: Alignment.center,
-                                          width: isTablet ? 100 : 120,
-                                          height: isTablet ? 28 : 30,
-                                          decoration: BoxDecoration(
-                                              boxShadow: [
-                                                BoxShadow(
-                                                  color: Colors.grey
-                                                      .withOpacity(0.5),
-                                                  spreadRadius: 2,
-                                                  blurRadius: 4,
-                                                  offset: const Offset(0, 3),
-                                                ),
-                                              ],
-                                              color: Colors.green,
-                                              borderRadius:
-                                                  BorderRadius.circular(13)),
-                                          child: Text(
-                                            "показать ещё",
-                                            style: GoogleFonts.montserrat(
-                                                fontSize: isTablet ? 12 : 10,
-                                                color: const Color(0xffffffff),
-                                                fontWeight: FontWeight.w500),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+      child: StreamBuilder<List<WelcomeModelData>>(
+          stream: welcomeApi.dataStream,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              final data = snapshot.requireData;
+              return isTablet
+                  ? Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 25),
+                      child: ScrollConfiguration(
+                        behavior: MyBehavior(),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 5),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(5),
+                                  child: SizedBox(
+                                    height: 450,
+                                    child: Chewie(
+                                        controller: ChewieController(
+                                            videoPlayerController:
+                                                VideoPlayerController.network(
+                                                    "https://hansa-lab.ru/storage/upload/videos/1d-otmvmwUva.mp4"),
+                                            aspectRatio: 13.6 / 7.2,
+                                            autoPlay: true)),
+                                  ),
                                 ),
                               ),
-                            ),
-                          )
-                        : SingleChildScrollView(
-                            controller: scroll,
-                            child: Column(
-                              children: [
-                                Column(
-                                  children: List.generate(data.length, (index) {
-                                    return EventCards(
-                                      isFavouriteURL:
-                                          snapshot.data![index].favoriteLink,
-                                      onTap: () async {
-                                        menuProvider.eventSink
-                                            .add(MenuActions.article);
-                                        ArticleModel statiModel =
-                                            await articleBLoC.getArticle(token,
-                                                snapshot.data![index].link);
-                                        articleBLoC.sink.add(statiModel);
-                                      },
-                                      buttonColor: const Color(0xffff163e),
-                                      buttonText: 'Смотреть',
-                                      isDate: true,
-                                      month: toDateString(snapshot
-                                          .data![index].date
-                                          .substring(5, 7)),
-                                      day: snapshot.data![index].date
-                                          .substring(8, 10),
-                                      title: data[index].title,
-                                      url: data[index].pictureLink,
-                                      isFavourite: data[index].isFavorite,
-                                    );
-                                  }),
+                              GridView(
+                                physics: BouncingScrollPhysics(),
+                                shrinkWrap: true,
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  crossAxisSpacing: 10,
+                                  mainAxisExtent: 375,
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.only(bottom: 10.0),
-                                  child: GestureDetector(
-                                    onTap: () {
-                                      welcomeApi.eventSink
-                                          .add(WelcomeApiAction.fetch);
-                                    },
-                                    child: Container(
-                                      alignment: Alignment.center,
-                                      width: isTablet ? 100 : 120,
-                                      height: isTablet ? 28 : 30,
-                                      decoration: BoxDecoration(
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color:
-                                                  Colors.grey.withOpacity(0.5),
-                                              spreadRadius: 2,
-                                              blurRadius: 4,
-                                              offset: const Offset(0, 3),
-                                            ),
-                                          ],
-                                          color: Colors.green,
-                                          borderRadius:
-                                              BorderRadius.circular(13)),
-                                      child: Text(
-                                        "показать ещё",
-                                        style: GoogleFonts.montserrat(
-                                            fontSize: isTablet ? 12 : 10,
-                                            color: const Color(0xffffffff),
-                                            fontWeight: FontWeight.w500),
-                                      ),
+                                children: List.generate(
+                                    data.length,
+                                    (index) => StackedStack(
+                                          imageOnTap: () async {
+                                            menuProvider.eventSink
+                                                .add(MenuActions.article);
+                                            ArticleModel statiModel =
+                                                await articleBLoC.getArticle(
+                                                    token,
+                                                    snapshot.data![index].link);
+                                            articleBLoC.sink.add(statiModel);
+                                          },
+                                          isFavouriteURL: snapshot
+                                              .data![index].favoriteLink,
+                                          onTap: () async {
+                                            menuProvider.eventSink
+                                                .add(MenuActions.article);
+                                            ArticleModel statiModel =
+                                                await articleBLoC.getArticle(
+                                                    token,
+                                                    snapshot.data![index].link);
+                                            articleBLoC.sink.add(statiModel);
+                                          },
+                                          buttonColor: const Color(0xffff163e),
+                                          buttonText: 'Смотреть',
+                                          isDate: true,
+                                          month: toDateString(snapshot
+                                              .data![index].date
+                                              .substring(5, 7)),
+                                          day: snapshot.data![index].date
+                                              .substring(8, 10),
+                                          title: data[index].title,
+                                          url: data[index].pictureLink,
+                                          isFavourite: data[index].isFavorite,
+                                        )),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 10.0),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    welcomeApi.eventSink
+                                        .add(WelcomeApiAction.fetch);
+                                  },
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    width: isTablet ? 100 : 120,
+                                    height: isTablet ? 28 : 30,
+                                    decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: Colors.grey.withOpacity(0.5),
+                                            spreadRadius: 2,
+                                            blurRadius: 4,
+                                            offset: const Offset(0, 3),
+                                          ),
+                                        ],
+                                        color: Colors.green,
+                                        borderRadius:
+                                            BorderRadius.circular(13)),
+                                    child: Text(
+                                      "показать ещё",
+                                      style: GoogleFonts.montserrat(
+                                          fontSize: isTablet ? 12 : 10,
+                                          color: const Color(0xffffffff),
+                                          fontWeight: FontWeight.w500),
                                     ),
                                   ),
                                 ),
-                              ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    )
+                  : SingleChildScrollView(
+                      controller: scroll,
+                      child: Column(
+                        children: [
+                          Column(
+                            children: List.generate(data.length, (index) {
+                              return EventCards(
+                                imageOnTap: () async {
+                                  menuProvider.eventSink
+                                      .add(MenuActions.article);
+                                  ArticleModel statiModel =
+                                      await articleBLoC.getArticle(
+                                          token, snapshot.data![index].link);
+                                  articleBLoC.sink.add(statiModel);
+                                },
+                                isFavouriteURL:
+                                    snapshot.data![index].favoriteLink,
+                                onTap: () async {
+                                  menuProvider.eventSink
+                                      .add(MenuActions.article);
+                                  ArticleModel statiModel =
+                                      await articleBLoC.getArticle(
+                                          token, snapshot.data![index].link);
+                                  articleBLoC.sink.add(statiModel);
+                                },
+                                buttonColor: const Color(0xffff163e),
+                                buttonText: 'Смотреть',
+                                isDate: true,
+                                month: toDateString(
+                                    snapshot.data![index].date.substring(5, 7)),
+                                day:
+                                    snapshot.data![index].date.substring(8, 10),
+                                title: data[index].title,
+                                url: data[index].pictureLink,
+                                isFavourite: data[index].isFavorite,
+                              );
+                            }),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 10.0),
+                            child: GestureDetector(
+                              onTap: () {
+                                welcomeApi.eventSink
+                                    .add(WelcomeApiAction.fetch);
+                              },
+                              child: Container(
+                                alignment: Alignment.center,
+                                width: isTablet ? 100 : 120,
+                                height: isTablet ? 28 : 30,
+                                decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.grey.withOpacity(0.5),
+                                        spreadRadius: 2,
+                                        blurRadius: 4,
+                                        offset: const Offset(0, 3),
+                                      ),
+                                    ],
+                                    color: Colors.green,
+                                    borderRadius: BorderRadius.circular(13)),
+                                child: Text(
+                                  "показать ещё",
+                                  style: GoogleFonts.montserrat(
+                                      fontSize: isTablet ? 12 : 10,
+                                      color: const Color(0xffffffff),
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ),
                             ),
-                          );
-                  } else {
-                    welcomeApi.eventSink.add(WelcomeApiAction.fetch);
-                    return Center(
-                        child: Lottie.asset(
-                      'assets/pre.json',
-                      height: 70,
-                      width: 70,
-                    ));
-                  }
-                }),
-          ),
-        ],
-      ),
+                          ),
+                        ],
+                      ),
+                    );
+            } else {
+              welcomeApi.eventSink.add(WelcomeApiAction.fetch);
+              return Center(
+                  child: Lottie.asset(
+                'assets/pre.json',
+                height: 70,
+                width: 70,
+              ));
+            }
+          }),
     );
   }
 

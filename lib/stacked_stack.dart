@@ -18,7 +18,8 @@ class StackedStack extends StatelessWidget {
       required this.url,
       required this.isFavouriteURL,
       required this.isFavourite,
-      required this.onTap})
+      required this.onTap,
+      required this.imageOnTap})
       : super(key: key);
 
   final String url;
@@ -31,6 +32,7 @@ class StackedStack extends StatelessWidget {
   final bool isDate;
   final bool isFavourite;
   final VoidCallback onTap;
+  final VoidCallback imageOnTap;
   @override
   Widget build(BuildContext context) {
     final isFavouriteBLoC = FavouriteBLoC();
@@ -52,14 +54,17 @@ class StackedStack extends StatelessWidget {
                       height: 230,
                       child: Stack(
                         children: [
-                          SizedBox(
-                            width: 410,
-                            height: 230,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(5),
-                              child: CachedNetworkImage(
-                                imageUrl: url,
-                                fit: BoxFit.cover,
+                          InkWell(
+                            onTap: imageOnTap,
+                            child: SizedBox(
+                              width: 410,
+                              height: 230,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(5),
+                                child: CachedNetworkImage(
+                                  imageUrl: url,
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             ),
                           ),
@@ -68,7 +73,8 @@ class StackedStack extends StatelessWidget {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
                                       children: [
                                         Container(
                                           padding: const EdgeInsets.all(12),
