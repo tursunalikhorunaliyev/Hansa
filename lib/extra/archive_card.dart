@@ -144,16 +144,23 @@ class _ArchiveCardState extends State<ArchiveCard> {
               ),
             ),
           ),
-          SizedBox(
-              width: isTablet ? 388 : double.infinity,
-              height: isTablet ? 170 : 206,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(5.r),
-                child: CachedNetworkImage(
-                  imageUrl: widget.url,
-                  fit: BoxFit.cover,
-                ),
-              )),
+          InkWell(
+            onTap: () {
+              setState(() {
+                launched = _launchInBrowser(Uri.parse(widget.linkPDF));
+              });
+            },
+            child: SizedBox(
+                width: isTablet ? 388 : double.infinity,
+                height: isTablet ? 170 : 206,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(5.r),
+                  child: CachedNetworkImage(
+                    imageUrl: widget.url,
+                    fit: BoxFit.cover,
+                  ),
+                )),
+          ),
           Padding(
             padding: EdgeInsets.only(
               top: isTablet ? 150 : 181,

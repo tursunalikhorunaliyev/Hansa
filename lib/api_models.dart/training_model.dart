@@ -18,7 +18,7 @@ class TrainingModel {
 }
 
 class TraningModelData {
-  Webinar webinar;
+  Webinar? webinar;
   FutureEvents futureEvents;
   Videos videos;
   EventReports eventReports;

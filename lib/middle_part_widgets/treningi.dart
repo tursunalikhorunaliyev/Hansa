@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/training_model.dart';
 import 'package:hansa_app/api_services/training_api_bloc.dart';
 import 'package:hansa_app/api_services/welcome_api.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
+import 'package:hansa_app/drawer_widgets/izbrannoe.dart';
 import 'package:hansa_app/extra/custom_tablet_item.dart';
 import 'package:hansa_app/extra/custom_treningi_ipad_container.dart';
 import 'package:hansa_app/providers/is_video_provider.dart';
@@ -52,6 +54,119 @@ class _TreningiState extends State<Treningi> {
                       content: Column(
                         children: [
                           Row(),
+                          (snapshot.data!.data.webinar != null)
+                              ? Container(
+                                  margin: const EdgeInsets.only(
+                                      left: 25, right: 25, bottom: 13),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8),
+                                      image: DecorationImage(
+                                          image: AssetImage(
+                                              'assets/event-default.png'),
+                                          fit: BoxFit.cover)),
+                                  child: Column(
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 14),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
+                                              height: 13,
+                                            ),
+                                            Row(
+                                              children: [
+                                                Text(
+                                                    snapshot.data!.data.webinar!
+                                                        .date
+                                                        .trim()
+                                                        .substring(0, 4),
+                                                    style:
+                                                        GoogleFonts.montserrat(
+                                                            color: Colors.white,
+                                                            fontSize: 20)),
+                                                const Spacer(),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 10),
+                                                  child: GestureDetector(
+                                                    onTap: () {
+                                                      launchInBrowser(Uri.parse(
+                                                          snapshot.data!.data
+                                                              .webinar!.link));
+                                                    },
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              64),
+                                                      child: Container(
+                                                        height: 25,
+                                                        color:
+                                                            Color(0xff25b049),
+                                                        child: Center(
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .symmetric(
+                                                                    horizontal:
+                                                                        15),
+                                                            child: Text(
+                                                              'Зарегистрироваться',
+                                                              style: GoogleFonts.montserrat(
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w700,
+                                                                  fontSize: 8,
+                                                                  color: Colors
+                                                                      .white),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            Text(
+                                              snapshot.data!.data.webinar!.date
+                                                      .trim()
+                                                      .substring(8, 10) +
+                                                  " - " +
+                                                  toDateString(snapshot
+                                                      .data!.data.webinar!.date
+                                                      .trim()
+                                                      .substring(5, 7)),
+                                              style: GoogleFonts.montserrat(
+                                                  color: Colors.white,
+                                                  fontSize: 20),
+                                            ),
+                                            SizedBox(
+                                              height: 20,
+                                            ),
+                                            Text(
+                                                snapshot
+                                                    .data!.data.webinar!.name
+                                                    .trim(),
+                                                softWrap: true,
+                                                overflow: TextOverflow.clip,
+                                                style: GoogleFonts.montserrat(
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.w200,
+                                                    fontSize: 24)),
+                                            SizedBox(
+                                              height: 50,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              : const SizedBox(),
                           CustomCalendar(
                               dates: snapshot.data!.data.events.events),
                           isTablet
@@ -195,5 +310,33 @@ class _TreningiState extends State<Treningi> {
             }),
       ),
     );
+  }
+
+  String toDateString(String m) {
+    if (m == "01") {
+      return "Январь";
+    } else if (m == "02") {
+      return "Февраль";
+    } else if (m == "03") {
+      return "Март";
+    } else if (m == "04") {
+      return "Апрель";
+    } else if (m == "05") {
+      return "Май";
+    } else if (m == "06") {
+      return "Июнь";
+    } else if (m == "07") {
+      return "Июль";
+    } else if (m == "08") {
+      return "Август";
+    } else if (m == "09") {
+      return "Сентябрь";
+    } else if (m == "10") {
+      return "Октябрь";
+    } else if (m == "11") {
+      return "Ноябрь";
+    } else {
+      return "Декабрь";
+    }
   }
 }
