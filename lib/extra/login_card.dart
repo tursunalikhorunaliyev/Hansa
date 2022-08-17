@@ -191,37 +191,31 @@ class _LoginCardState extends State<LoginCard> {
                       ),
                       Expanded(
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
-                            Padding(
-                              padding:
-                                  EdgeInsets.only(left: isTablet ? 20.w : 22.w),
-                              child: Text(
-                                ' Не выходить из приложения',
-                                style: GoogleFonts.montserrat(
-                                    color: const Color(0xffa1b7c2),
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: isTablet ? 9.sp : 12.sp),
-                              ),
+                            Text(
+                              ' Не выходить из приложения',
+                              style: GoogleFonts.montserrat(
+                                  color: const Color(0xffa1b7c2),
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: isTablet ? 9.sp : 12.sp),
                             ),
-                            Padding(
-                                padding: EdgeInsets.only(
-                                    left: isTablet ? 25.w : 70.w),
-                                child: MultiProvider(
-                                  providers: [
-                                    Provider(create: (context) => ""),
-                                    Provider(
-                                        create: (context) =>
-                                            switchTextEditingController),
-                                  ],
-                                  child: ToggleSwitch(
-                                    colorContainer: Colors.grey[300],
-                                    colorCircle: Colors.green[600],
-                                    tickerSize: isTablet ? 15.sp : 21.sp,
-                                    handlerWidth: isTablet ? 30.w : 40.w,
-                                    handlerHeight: isTablet ? 12.h : 12.h,
-                                    onButton: () {},
-                                  ),
-                                ))
+                            MultiProvider(
+                              providers: [
+                                Provider(create: (context) => ""),
+                                Provider(
+                                    create: (context) =>
+                                        switchTextEditingController),
+                              ],
+                              child: ToggleSwitch(
+                                colorContainer: Colors.grey[300],
+                                colorCircle: Colors.green[600],
+                                tickerSize: isTablet ? 15.sp : 21.sp,
+                                handlerWidth: isTablet ? 30.w : 40.w,
+                                handlerHeight: isTablet ? 12.h : 12.h,
+                                onButton: () {},
+                              ),
+                            )
                           ],
                         ),
                       ),
@@ -330,7 +324,7 @@ class _LoginCardState extends State<LoginCard> {
                                         children: [
                                           Image.asset("assets/tepaLogo.png"),
                                           SizedBox(
-                                            height: 30,
+                                            height: 30.h,
                                           ),
                                           StreamBuilder<bool>(
                                               initialData: false,
@@ -340,7 +334,7 @@ class _LoginCardState extends State<LoginCard> {
                                                 if (snapshot.hasData) {
                                                   return Material(
                                                     child: SizedBox(
-                                                      height: 40,
+                                                      height: 40.h,
                                                       child: TextField(
                                                         onChanged: (value) {
                                                           blocEmptySobshit
@@ -354,7 +348,7 @@ class _LoginCardState extends State<LoginCard> {
                                                         decoration: InputDecoration(
                                                             contentPadding:
                                                                 EdgeInsets.all(
-                                                                    4),
+                                                                    4.h),
                                                             hintText: "E-mail",
                                                             hintStyle: TextStyle(
                                                                 color: Color(
@@ -384,7 +378,7 @@ class _LoginCardState extends State<LoginCard> {
                                                 }
                                               }),
                                           SizedBox(
-                                            height: 5,
+                                            height: 5.h,
                                           ),
                                           StreamBuilder<String>(
                                               stream: blocText.dataStream,
@@ -459,12 +453,13 @@ class _LoginCardState extends State<LoginCard> {
                                             },
                                             child: Container(
                                               alignment: Alignment.center,
-                                              height: 40,
-                                              width: 250,
+                                              height: 40.h,
+                                              width: 250.w,
                                               decoration: BoxDecoration(
                                                   color: Color(0xFFfb002b),
                                                   borderRadius:
-                                                      BorderRadius.circular(5)),
+                                                      BorderRadius.circular(
+                                                          5.r)),
                                               child: Text(
                                                 "Отправить",
                                                 style: TextStyle(
@@ -474,7 +469,7 @@ class _LoginCardState extends State<LoginCard> {
                                             ),
                                           ),
                                           SizedBox(
-                                            height: 30,
+                                            height: 30.h,
                                           ),
                                           Text(
                                             "При возникновении проблем просьба обращаться в службу поддержки. Почта:",
@@ -547,9 +542,6 @@ class _LoginCardState extends State<LoginCard> {
     http.Response response = await http.post(
         Uri.parse("http://hansa-lab.ru/api/auth/reset-password"),
         body: {"email": text});
-    print(response.statusCode);
-    print(response.body);
-    print("Bloc Zabili Parol Napisat ----------------------------------");
 
     return jsonDecode(response.body);
   }
