@@ -53,16 +53,24 @@ class _StackedStackObuchState extends State<StackedStackObuch> {
               padding: const EdgeInsets.symmetric(horizontal: 5),
               child: Column(
                 children: [
-                  SizedBox(
-                      width: 410,
-                      height: 230,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(5.r),
-                        child: CachedNetworkImage(
-                          imageUrl: widget.url,
-                          fit: BoxFit.cover,
-                        ),
-                      )),
+                  InkWell(
+                    onTap: () {
+                      setState(() {
+                        launched = _launchInBrowser(
+                            Uri.parse("http://${widget.linkPDF}"));
+                      });
+                    },
+                    child: SizedBox(
+                        width: 410,
+                        height: 230,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(5.r),
+                          child: CachedNetworkImage(
+                            imageUrl: widget.url,
+                            fit: BoxFit.cover,
+                          ),
+                        )),
+                  ),
                   SizedBox(
                     height: 10,
                   ),
