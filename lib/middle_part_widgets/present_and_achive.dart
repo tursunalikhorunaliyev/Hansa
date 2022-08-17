@@ -20,6 +20,7 @@ class PresentArchive extends StatefulWidget {
 class _PresentArchiveState extends State<PresentArchive> {
   @override
   Widget build(BuildContext context) {
+    print("ok qurildi");
     final token = Provider.of<String>(context);
     final bloc = PrezintatsiaBLoC(token);
     bloc.sinkAction.add(PrezintatsiaAction.show);

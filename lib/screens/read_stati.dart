@@ -6,15 +6,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/read_stati_model.dart';
+import 'package:hansa_app/api_services/read_stati_send_comment_service.dart';
+import 'package:hansa_app/api_services/read_stati_service.dart';
 import 'package:hansa_app/blocs/read_stati_bloc.dart';
+import 'package:hansa_app/classes/send_link.dart';
 import 'package:hansa_app/extra/custom_title.dart';
 import 'package:hansa_app/read_statie_section/stati_comment.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 
-class ReadStati extends StatelessWidget {
-  ReadStati({Key? key}) : super(key: key);
+class ReadStati extends StatefulWidget {
+  const ReadStati({Key? key}) : super(key: key);
 
+  @override
+  State<ReadStati> createState() => _ReadStatiState();
+}
+
+class _ReadStatiState extends State<ReadStati> {
+  double positionDouble = 300.6666666666667;
   final ScrollController listViewController =
       ScrollController(keepScrollOffset: true);
 
@@ -23,20 +32,18 @@ class ReadStati extends StatelessWidget {
     width: 30.33333333333333,
     height: 30.33333333333333,
   );
-
-  double positionDouble = 300.6666666666667;
-
   @override
   Widget build(BuildContext context) {
     final isTablet = Provider.of<bool>(context);
-    final readStatiModelProvider = Provider.of<ReadStatiBLoC>(context);
+    final providerToken = Provider.of<String>(context);
+
+    final statieSendLinkProvider = Provider.of<SendLink>(context);
     positionDouble = isTablet ? 600 : 300;
-    return StreamBuilder<ReadStatiModel>(
-        stream: readStatiModelProvider.stream,
+    return FutureBuilder<ReadStatiModel>(
+        future: ReadStatieServices.getData(
+            providerToken, statieSendLinkProvider.getLInk),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            log(snapshot.data!.article.read.body +
-                " ++++++++++++++++++++++++++++++++++++++");
             return Expanded(
               child: Stack(
                 children: [
@@ -254,7 +261,7 @@ class ReadStati extends StatelessWidget {
                                           height: 10.66666666666667,
                                         ),
                                         Container(
-                                          height: 138,
+                                          height: 200,
                                           width: double.infinity,
                                           decoration: BoxDecoration(
                                               color: const Color(0xFFffffff),
@@ -266,20 +273,38 @@ class ReadStati extends StatelessWidget {
                                                     offset: const Offset(0, 8))
                                               ]),
                                           child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 10),
-                                            child: TextField(
-                                              maxLines: 7,
-                                              decoration: InputDecoration(
-                                                  border: InputBorder.none,
-                                                  hintText:
-                                                      "Интересно а почему именн...",
-                                                  hintStyle:
-                                                      GoogleFonts.montserrat(
-                                                          fontSize:
-                                                              12.66666666666667,
-                                                          color: const Color(
-                                                              0xFF919191))),
+                                            padding: const EdgeInsets.only(
+                                                left: 10,
+                                                right: 10,
+                                                bottom: 40),
+                                            child: Wrap(
+                                              children: [
+                                                TextField(
+                                                  maxLines: 7,
+                                                  decoration: InputDecoration(
+                                                      border: InputBorder.none,
+                                                      hintText:
+                                                          "Интересно а почему именн...",
+                                                      hintStyle: GoogleFonts
+                                                          .montserrat(
+                                                              fontSize:
+                                                                  12.66666666666667,
+                                                              color: const Color(
+                                                                  0xFF919191))),
+                                                ),
+                                                Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.end,
+                                                  children: [
+                                                    IconButton(
+                                                      onPressed: () {
+                                                        ReadStatiSendCommentService.getData(providerToken, snapshot.data!.article.read.messages_link);
+                                                      },
+                                                      icon: Icon(Icons.send),
+                                                    )
+                                                  ],
+                                                ),
+                                              ],
                                             ),
                                           ),
                                         ),

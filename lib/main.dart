@@ -15,6 +15,7 @@ import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/blocs/read_stati_bloc.dart';
 import 'package:hansa_app/blocs/treningi_video_controller.dart';
 import 'package:hansa_app/blocs/voyti_ili_sozdata_bloc.dart';
+import 'package:hansa_app/classes/send_link.dart';
 import 'package:hansa_app/middle_part_widgets/permission_handler_screen.dart';
 import 'package:hansa_app/providers/dialog_video_provider.dart';
 import 'package:hansa_app/providers/full_registr_provider.dart';
@@ -30,6 +31,7 @@ import 'package:hansa_app/providers/stati_id_provider.dart';
 import 'package:hansa_app/providers/treningi_photos_provider.dart';
 import 'package:hansa_app/providers/treningi_video_changer_provider.dart';
 import 'package:hansa_app/providers/treningi_videos_provider.dart';
+import 'package:hansa_app/screens/splash_screen.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 
@@ -92,6 +94,9 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (context) => DialogVideoProvider()),
           Provider(
             create: (context) => scaffoldKey,
+          ),
+          ChangeNotifierProvider(
+            create: (context) => SendLink(),
           )
         ],
         child: const MaterialApp(
@@ -106,7 +111,7 @@ class MyApp extends StatelessWidget {
           ],
           locale: Locale("ru"),
           debugShowCheckedModeBanner: false,
-          home: PermissionHandlerScreen(),
+          home: SplashScreen(),
         ),
       ),
     );

@@ -96,7 +96,7 @@ class _UIChangerState extends State<UIChanger> {
               } else if (snapshot.data == MenuActions.presentAndArchive) {
                 return const PresentArchive();
               } else if (snapshot.data == MenuActions.chitatStati) {
-                return ReadStati();
+                return const ReadStati();
               } else if (snapshot.data == MenuActions.trainingVideo) {
                 return const TreningiVideo();
               } else if (snapshot.data == MenuActions.oKompanii) {

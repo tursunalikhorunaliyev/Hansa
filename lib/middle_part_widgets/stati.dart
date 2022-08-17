@@ -4,6 +4,7 @@ import 'package:hansa_app/api_models.dart/stati_model.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/blocs/read_stati_bloc.dart';
 import 'package:hansa_app/blocs/stati_bloc.dart';
+import 'package:hansa_app/classes/send_link.dart';
 import 'package:hansa_app/extra/custom_clip_item.dart';
 import 'package:hansa_app/extra/custom_tablet_stati_item.dart';
 import 'package:hansa_app/extra/custom_title.dart';
@@ -35,6 +36,7 @@ class _StatiState extends State<Stati> {
     final providerReadStati = Provider.of<ReadStatiBLoC>(context);
     final statiBloCProvider = Provider.of<MenuEventsBloC>(context);
     final statiIdProvider = Provider.of<StatiIdProvider>(context);
+    final providerSendLink = Provider.of<SendLink>(context);
     return Expanded(
       child: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -68,16 +70,18 @@ class _StatiState extends State<Stati> {
                                   title: snapshot.data!.list.list[index].title,
                                   buttonText: "Читать",
                                   onTap: () async {
-                                    statiBloCProvider.eventSink
-                                        .add(MenuActions.chitatStati);
+                                    /*       statiBloCProvider.eventSink
+                                        .add(MenuActions.chitatStati); */
+                                    providerSendLink.setLink(
+                                        snapshot.data!.list.list[index].link);
 
-                                    ReadStatiModel model =
+                                    /* ReadStatiModel model =
                                         await readStati.getReadStati(
                                             providerToken,
                                             snapshot
                                                 .data!.list.list[index].link);
-
-                                    providerReadStati.sink.add(model);
+                                
+                                    providerReadStati.sink.add(model); */
                                   },
                                 ),
                               ),
@@ -102,14 +106,18 @@ class _StatiState extends State<Stati> {
                                 title: snapshot.data!.list.list[index].title,
                                 buttonText: "Читать",
                                 onTap: () async {
+                                  providerSendLink.setLink(
+                                      snapshot.data!.list.list[index].link);
                                   statiBloCProvider.eventSink
+                                      .add(MenuActions.chitatStati);
+                                  /* statiBloCProvider.eventSink
                                       .add(MenuActions.chitatStati);
                                   ReadStatiModel model =
                                       await readStati.getReadStati(
                                           providerToken,
                                           snapshot.data!.list.list[index].link);
 
-                                  providerReadStati.sink.add(model);
+                                  providerReadStati.sink.add(model); */
                                 },
                               ),
                             ),

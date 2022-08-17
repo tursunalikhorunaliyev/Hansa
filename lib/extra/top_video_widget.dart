@@ -118,6 +118,8 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
 
   @override
   Widget build(BuildContext context) {
+        final isTablet = Provider.of<bool>(context);
+
     final menuEventsBloCProvider = Provider.of<MenuEventsBloC>(context);
     final title = Provider.of<VideoTitleProvider>(context);
     final index = Provider.of<VideoIndexProvider>(context);
