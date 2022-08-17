@@ -56,8 +56,8 @@ class _SplashScreenState extends State<SplashScreen> {
           children: [
             Image.asset(
               "assets/logoHansa.png",
-              height: 50,
-              width: 300,
+              height: 50.h,
+              width: 280.w,
             ),
             Padding(
               padding: EdgeInsets.only(top: isTablet ? 20.h : 24.h),
