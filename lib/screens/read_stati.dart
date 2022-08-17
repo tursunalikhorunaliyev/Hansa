@@ -10,6 +10,7 @@ import 'package:hansa_app/api_services/read_stati_send_comment_service.dart';
 import 'package:hansa_app/api_services/read_stati_service.dart';
 import 'package:hansa_app/blocs/read_stati_bloc.dart';
 import 'package:hansa_app/classes/send_link.dart';
+import 'package:hansa_app/drawer_widgets/text_icon.dart';
 import 'package:hansa_app/extra/custom_title.dart';
 import 'package:hansa_app/read_statie_section/stati_comment.dart';
 import 'package:lottie/lottie.dart';
@@ -32,6 +33,7 @@ class _ReadStatiState extends State<ReadStati> {
     width: 30.33333333333333,
     height: 30.33333333333333,
   );
+  TextEditingController textFieldController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final isTablet = Provider.of<bool>(context);
@@ -104,214 +106,222 @@ class _ReadStatiState extends State<ReadStati> {
                                     const SizedBox(
                                       height: 10,
                                     ),
-                                    Flex(
-                                      direction: Axis.vertical,
-                                      children: [
-                                        Container(
-                                          height: 54.66666666666667,
-                                          width: double.infinity,
-                                          decoration: BoxDecoration(
-                                              color: const Color(0xFFffffff),
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                    color: Colors.black
-                                                        .withOpacity(.3),
-                                                    blurRadius: 30,
-                                                    offset: const Offset(3, 7))
-                                              ]),
-                                          child: Row(
-                                            mainAxisAlignment: isTablet
-                                                ? MainAxisAlignment.spaceEvenly
-                                                : MainAxisAlignment.spaceAround,
-                                            children: [
-                                              SizedBox(
-                                                width: isTablet ? 20 : 0,
-                                              ),
-                                              Container(
-                                                height: 32.22333333333333,
-                                                width: 82.40333333333333,
-                                                decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            11.66666666666667),
-                                                    color: const Color(
-                                                        0xFFe21a37)),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceEvenly,
-                                                  children: [
-                                                    Text(
-                                                      snapshot.data!.article
-                                                          .read.rating
-                                                          .toString(),
-                                                      style: GoogleFonts
-                                                          .montserrat(
-                                                        color: Colors.white,
-                                                      ),
-                                                    ),
-                                                    const Icon(
-                                                      Icons.star,
-                                                      size: 14,
-                                                      color: Colors.white,
-                                                    )
-                                                  ],
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: isTablet ? 15 : 0,
-                                              ),
-                                              Text(
-                                                "Коментариев " +
-                                                    snapshot
-                                                        .data!
-                                                        .article
-                                                        .read
-                                                        .listMessageComment
-                                                        .list
-                                                        .length
-                                                        .toString(),
-                                                style: GoogleFonts.montserrat(
-                                                  color:
-                                                      const Color(0xFF777777),
-                                                  fontSize: 13.81,
-                                                ),
-                                              ),
-                                              isTablet ? Spacer() : SizedBox(),
-                                              SizedBox(
-                                                height: 46.03666666666667,
-                                                width: 46.03666666666667,
-                                                child: Image.asset(
-                                                  "assets/imageLAB.png",
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: isTablet ? 20 : 0,
-                                              )
-                                            ],
+                                    Container(
+                                      height: 54.66666666666667,
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                          color: const Color(0xFFffffff),
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.black
+                                                    .withOpacity(.3),
+                                                blurRadius: 30,
+                                                offset: const Offset(3, 7))
+                                          ]),
+                                      child: Row(
+                                        mainAxisAlignment: isTablet
+                                            ? MainAxisAlignment.spaceEvenly
+                                            : MainAxisAlignment.spaceAround,
+                                        children: [
+                                          SizedBox(
+                                            width: isTablet ? 20 : 0,
                                           ),
-                                        ),
-                                        const SizedBox(
-                                          height: 19.33333333333333,
-                                        ),
-                                        Column(
-                                          children: List.generate(
-                                            snapshot.data!.article.read
-                                                .listMessageComment.list.length,
-                                            (index) => StatiComment(
-                                                comment: snapshot
-                                                    .data!
-                                                    .article
-                                                    .read
-                                                    .listMessageComment
-                                                    .list[index]
-                                                    .body,
-                                                imageURl: snapshot
-                                                    .data!
-                                                    .article
-                                                    .read
-                                                    .listMessageComment
-                                                    .list[index]
-                                                    .picture_link,
-                                                name: snapshot
-                                                    .data!
-                                                    .article
-                                                    .read
-                                                    .listMessageComment
-                                                    .list[index]
-                                                    .fullname,
-                                                rating: snapshot
-                                                    .data!
-                                                    .article
-                                                    .read
-                                                    .listMessageComment
-                                                    .list[index]
-                                                    .rang
-                                                    .toString()),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          height: 10,
-                                        ),
-                                        Align(
-                                          alignment: Alignment.centerLeft,
-                                          child: Row(
-                                            children: [
-                                              Text(
-                                                "#",
-                                                style: GoogleFonts.montserrat(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.red,
-                                                    fontSize: 15),
-                                              ),
-                                              Text(
-                                                "Написать комментарий",
-                                                style: GoogleFonts.montserrat(
-                                                    fontWeight: FontWeight.bold,
-                                                    color: Colors.black,
-                                                    fontSize: 20),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          height: 10.66666666666667,
-                                        ),
-                                        Container(
-                                          height: 200,
-                                          width: double.infinity,
-                                          decoration: BoxDecoration(
-                                              color: const Color(0xFFffffff),
-                                              boxShadow: [
-                                                BoxShadow(
-                                                    color: Colors.black
-                                                        .withOpacity(.3),
-                                                    blurRadius: 7,
-                                                    offset: const Offset(0, 8))
-                                              ]),
-                                          child: Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 10,
-                                                right: 10,
-                                                bottom: 40),
-                                            child: Wrap(
+                                          Container(
+                                            height: 32.22333333333333,
+                                            width: 82.40333333333333,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        11.66666666666667),
+                                                color: const Color(0xFFe21a37)),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
                                               children: [
-                                                TextField(
-                                                  maxLines: 7,
-                                                  decoration: InputDecoration(
-                                                      border: InputBorder.none,
-                                                      hintText:
-                                                          "Интересно а почему именн...",
-                                                      hintStyle: GoogleFonts
-                                                          .montserrat(
-                                                              fontSize:
-                                                                  12.66666666666667,
-                                                              color: const Color(
-                                                                  0xFF919191))),
+                                                Text(
+                                                  snapshot
+                                                      .data!.article.read.rating
+                                                      .toString(),
+                                                  style: GoogleFonts.montserrat(
+                                                    color: Colors.white,
+                                                  ),
                                                 ),
-                                                Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.end,
-                                                  children: [
-                                                    IconButton(
-                                                      onPressed: () {
-                                                        ReadStatiSendCommentService.getData(providerToken, snapshot.data!.article.read.messages_link);
-                                                      },
-                                                      icon: Icon(Icons.send),
-                                                    )
-                                                  ],
-                                                ),
+                                                const Icon(
+                                                  Icons.star,
+                                                  size: 14,
+                                                  color: Colors.white,
+                                                )
                                               ],
                                             ),
                                           ),
+                                          SizedBox(
+                                            width: isTablet ? 15 : 0,
+                                          ),
+                                          Text(
+                                            "Коментариев " +
+                                                snapshot
+                                                    .data!
+                                                    .article
+                                                    .read
+                                                    .listMessageComment
+                                                    .list
+                                                    .length
+                                                    .toString(),
+                                            style: GoogleFonts.montserrat(
+                                              color: const Color(0xFF777777),
+                                              fontSize: 13.81,
+                                            ),
+                                          ),
+                                          isTablet ? Spacer() : SizedBox(),
+                                          SizedBox(
+                                            height: 46.03666666666667,
+                                            width: 46.03666666666667,
+                                            child: Image.asset(
+                                              "assets/imageLAB.png",
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: isTablet ? 20 : 0,
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 19.33333333333333,
+                                    ),
+                                    Column(
+                                      children: List.generate(
+                                        snapshot.data!.article.read
+                                            .listMessageComment.list.length,
+                                        (index) => StatiComment(
+                                            comment: snapshot
+                                                .data!
+                                                .article
+                                                .read
+                                                .listMessageComment
+                                                .list[index]
+                                                .body,
+                                            imageURl: snapshot
+                                                .data!
+                                                .article
+                                                .read
+                                                .listMessageComment
+                                                .list[index]
+                                                .picture_link,
+                                            name: snapshot
+                                                .data!
+                                                .article
+                                                .read
+                                                .listMessageComment
+                                                .list[index]
+                                                .fullname,
+                                            rating: snapshot
+                                                .data!
+                                                .article
+                                                .read
+                                                .listMessageComment
+                                                .list[index]
+                                                .rang
+                                                .toString()),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            "#",
+                                            style: GoogleFonts.montserrat(
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.red,
+                                                fontSize: 15),
+                                          ),
+                                          Text(
+                                            "Написать комментарий",
+                                            style: GoogleFonts.montserrat(
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black,
+                                                fontSize: 20),
+                                          ),
+                                          SizedBox(
+                                            width: 30,
+                                          ),
+                                          IconButton(
+                                              onPressed: () {
+                                                log("FGFGGFGGFGFGG");
+                                                if (textFieldController
+                                                    .text.isNotEmpty) {
+                                                  ReadStatiSendCommentService
+                                                      .getData(
+                                                          providerToken,
+                                                          snapshot
+                                                              .data!
+                                                              .article
+                                                              .read
+                                                              .messages_link,
+                                                          {
+                                                        "body":
+                                                            textFieldController
+                                                                .text,
+                                                        "id": snapshot.data!
+                                                            .article.read.id
+                                                            .toString()
+                                                      }).then((value) {
+                                                    log(value["status"]
+                                                        .toString());
+                                                    ReadStatieServices.getData(
+                                                        providerToken,
+                                                        statieSendLinkProvider
+                                                            .getLInk);
+                                                  });
+                                                }
+                                              },
+                                              icon: Icon(Icons.send)),
+                                        ],
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 10.66666666666667,
+                                    ),
+                                    Container(
+                                      height: 200,
+                                      width: double.infinity,
+                                      decoration: BoxDecoration(
+                                          color: const Color(0xFFffffff),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                color: Colors.black
+                                                    .withOpacity(.3),
+                                                blurRadius: 7,
+                                                offset: const Offset(0, 8))
+                                          ]),
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(
+                                          left: 10,
+                                          right: 10,
                                         ),
-                                        const SizedBox(
-                                          height: 300,
-                                        )
-                                      ],
+                                        child: TextField(
+                                          controller: textFieldController,
+                                          maxLines: 7,
+                                          decoration: InputDecoration(
+                                              border: InputBorder.none,
+                                              hintText:
+                                                  "Интересно а почему именн...",
+                                              hintStyle: GoogleFonts.montserrat(
+                                                  fontSize: 12.66666666666667,
+                                                  color:
+                                                      const Color(0xFF919191))),
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 300,
                                     ),
                                   ]),
                             ),
@@ -319,7 +329,7 @@ class _ReadStatiState extends State<ReadStati> {
                         ),
                       ],
                     ),
-                  )
+                  ),
                 ],
               ),
             );
