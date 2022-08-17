@@ -7,6 +7,7 @@ import 'package:hansa_app/api_models.dart/treningi_photos_model.dart';
 import 'package:hansa_app/api_models.dart/treningi_video_model.dart';
 import 'package:hansa_app/api_services/treningi_photos_api.dart';
 import 'package:hansa_app/api_services/treningi_video_api.dart';
+import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/blocs/treningi_video_controller.dart';
 import 'package:hansa_app/extra/custom_clip_item.dart';
 import 'package:hansa_app/extra/custom_tablet_stati_item.dart';
@@ -47,6 +48,7 @@ class _TreningiVideoState extends State<TreningiVideo> {
     final treningiPhotos = Provider.of<TreningiPhotosProvider>(context);
     final treningiVideos = Provider.of<TreningiVideosProvider>(context);
     final isVideo = Provider.of<IsVideoprovider>(context);
+    final menuBloCProvider = Provider.of<MenuEventsBloC>(context);
     return Expanded(
       child: SingleChildScrollView(
         controller: scroll,
@@ -255,12 +257,15 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                             );
                                             isVideo.setIsVideo(true);
                                             videoControll.sink.add(false);
+
                                             scroll.animateTo(
                                               0,
                                               duration: const Duration(
                                                   milliseconds: 500),
                                               curve: Curves.ease,
                                             );
+                                            menuBloCProvider.eventSink
+                                                .add(MenuActions.trainingVideo);
                                             setState(() {});
                                           },
                                           backgroundColor:

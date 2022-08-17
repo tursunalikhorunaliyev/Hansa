@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import 'package:hansa_app/api_models.dart/treningi_video_model.dart';
-import 'package:hansa_app/enums/treningi_video_enum.dart';
 
 class TreningiVideoApi {
   static Future<TreningiVideoModel> getTreningiVideo(url, token) async {
