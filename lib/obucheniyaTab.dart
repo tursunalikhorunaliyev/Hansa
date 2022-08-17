@@ -1,7 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/favourite_model.dart';
 import 'package:hansa_app/blocs/favourite_bloc.dart';
+import 'package:hansa_app/chached_net_image.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -56,8 +58,8 @@ class _StackedStackObuchState extends State<StackedStackObuch> {
                       height: 230,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(5.r),
-                        child: Image.network(
-                          widget.url,
+                        child: CachedNetworkImage(
+                          imageUrl: widget.url,
                           fit: BoxFit.cover,
                         ),
                       )),
@@ -91,8 +93,8 @@ class _StackedStackObuchState extends State<StackedStackObuch> {
                                 InkWell(
                                   onTap: () {
                                     setState(() {
-                                      launched = _launchInBrowser(
-                                          Uri.parse("http://${widget.linkPDF}"));
+                                      launched = _launchInBrowser(Uri.parse(
+                                          "http://${widget.linkPDF}"));
                                     });
                                   },
                                   child: Container(

@@ -40,13 +40,14 @@ class CustomTreningiPhotos extends StatelessWidget {
                                     allowImplicitScrolling: true,
                                     physics: const BouncingScrollPhysics(),
                                     controller: page,
-                                    itemCount: snapshot.data!.data.list.length,
+                                    itemCount:
+                                        snapshot.data!.data.data.list.length,
                                     itemBuilder: (context, index) {
                                       return SizedBox(
                                         height: 220,
                                         width: 325,
                                         child: CachedNetworkImage(
-                                          imageUrl: snapshot.data!.data
+                                          imageUrl: snapshot.data!.data.data
                                               .list[index].picture_link,
                                           fit: BoxFit.cover,
                                         ),
@@ -65,7 +66,8 @@ class CustomTreningiPhotos extends StatelessWidget {
                                   onTap: () {
                                     if (page.hasClients &&
                                         page.offset <
-                                            snapshot.data!.data.list.length *
+                                            snapshot.data!.data.data.list
+                                                    .length *
                                                 325) {
                                       page.previousPage(
                                         duration:

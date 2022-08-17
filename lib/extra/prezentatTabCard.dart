@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/blocs/favourite_bloc.dart';
@@ -57,8 +58,8 @@ class _StackedStackPrezentatsiyaTabState extends State<StackedStackPrezentatsiya
                 height: 230 ,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(5.r),
-                  child: Image.network(
-                    widget.url,
+                  child: CachedNetworkImage(
+                imageUrl:     widget.url,
                     fit: BoxFit.cover,
                   ),
                 )),
