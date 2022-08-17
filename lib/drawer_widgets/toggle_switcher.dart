@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ToggleSwitch extends StatefulWidget {
   final double tickerSize;
@@ -66,7 +67,7 @@ class _ToggleSwitchState extends State<ToggleSwitch> {
                       color: align == Alignment.centerRight
                           ? widget.colorCircle
                           : Colors.grey[350],
-                      borderRadius: BorderRadius.circular(25)),
+                      borderRadius: BorderRadius.circular(25.r)),
                 ),
               )
             ],
