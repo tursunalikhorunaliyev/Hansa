@@ -39,7 +39,12 @@ class _TreningiVideoState extends State<TreningiVideo> {
       '',
     ),
   );
-
+  @override
+  void dispose() {
+    chewieController.dispose();
+    chewieController.videoPlayerController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     final videoControll = Provider.of<TreningiVideoControll>(context);

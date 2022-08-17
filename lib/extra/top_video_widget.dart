@@ -77,7 +77,12 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
     super.initState();
     initVideo();
   }
-
+  @override
+  void dispose() {
+    chewieController.dispose();
+    chewieController.videoPlayerController.dispose();
+    super.dispose();
+  }
   final blocDetectTap = BlocDetectTap();
   final blocVideoApi = BlocVideoApi();
 
