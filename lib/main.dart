@@ -112,7 +112,7 @@ class MyApp extends StatelessWidget {
           ],
           locale: Locale("ru"),
           debugShowCheckedModeBanner: false,
-          home: Test(),
+          home: PermissionHandlerScreen(),
         ),
       ),
     );

@@ -196,36 +196,44 @@ class _ReadStatiState extends State<ReadStati> {
                                       children: List.generate(
                                         snapshot.data!.article.read
                                             .listMessageComment.list.length,
-                                        (index) => StatiComment(
+                                        (index) {
+                                          int length = snapshot
+                                                .data!
+                                                .article
+                                                .read
+                                                .listMessageComment
+                                                .list.length;
+                                          return StatiComment(
                                             comment: snapshot
                                                 .data!
                                                 .article
                                                 .read
                                                 .listMessageComment
-                                                .list[index]
+                                                .list[length-index-1]
                                                 .body,
                                             imageURl: snapshot
                                                 .data!
                                                 .article
                                                 .read
                                                 .listMessageComment
-                                                .list[index]
+                                                .list[length-index-1]
                                                 .picture_link,
                                             name: snapshot
                                                 .data!
                                                 .article
                                                 .read
                                                 .listMessageComment
-                                                .list[index]
+                                                .list[length-index-1]
                                                 .fullname,
                                             rating: snapshot
                                                 .data!
                                                 .article
                                                 .read
                                                 .listMessageComment
-                                                .list[index]
+                                                .list[length-index-1]
                                                 .rang
-                                                .toString()),
+                                                .toString());
+                                        }
                                       ),
                                     ),
                                     const SizedBox(
@@ -273,6 +281,12 @@ class _ReadStatiState extends State<ReadStati> {
                                                             .article.read.id
                                                             .toString()
                                                       }).then((value) {
+                                                        if(value["status"]==true){
+                                                          textFieldController.clear();
+                                                          setState(() {
+                                                            
+                                                          });                                                  
+                                                        }
                                                     log(value["status"]
                                                         .toString());
                                                     ReadStatieServices.getData(
