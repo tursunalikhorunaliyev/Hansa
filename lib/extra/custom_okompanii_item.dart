@@ -9,11 +9,13 @@ class CustomOKompaniiItem extends StatelessWidget {
     required this.imageUrl,
     required this.title,
     required this.onTap,
+    required this.onTapImage,
     required this.onDownload,
   }) : super(key: key);
   final String imageUrl;
   final String title;
   final VoidCallback onTap;
+  final VoidCallback onTapImage;
   final VoidCallback onDownload;
   @override
   Widget build(BuildContext context) {
@@ -26,11 +28,14 @@ class CustomOKompaniiItem extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
-            child: CachedNetworkImage(
-              imageUrl: imageUrl,
-              height: 230,
-              width: double.infinity,
-              fit: BoxFit.cover,
+            child: GestureDetector(
+              onTap: onTapImage,
+              child: CachedNetworkImage(
+                imageUrl: imageUrl,
+                height: 230,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           SizedBox(
