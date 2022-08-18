@@ -59,7 +59,7 @@ class _OKompaniiState extends State<OKompanii> {
     } else if (Platform.isAndroid) {
       dir = "/storage/emulated/0/Download/";
     }
-    path = "$dir/$uniqueFileName.mp4";
+    path = "$dir/$uniqueFileName";
     return path;
   }
 

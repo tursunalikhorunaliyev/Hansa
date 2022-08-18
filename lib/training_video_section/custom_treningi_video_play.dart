@@ -24,6 +24,14 @@ class CustomTreningiVideoPlay extends StatefulWidget {
 }
 
 class _CustomTreningiVideoPlayState extends State<CustomTreningiVideoPlay> {
+
+
+  @override
+  void dispose() {
+    widget.chewieController.dispose();
+    widget.chewieController.videoPlayerController.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     final isTablet = Provider.of<bool>(context);

@@ -110,6 +110,8 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                               .data!.data.similar.list.length,
                                           (index) => CustomStatiTabletItem(
                                               onTap: () {
+                                                chewieController.dispose();
+                                                chewieController.videoPlayerController.dispose();
                                                 treningiPhotos.setUrl(snapshot
                                                     .data!
                                                     .data
@@ -123,6 +125,7 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                                       milliseconds: 500),
                                                   curve: Curves.ease,
                                                 );
+                                                
                                                 setState(() {});
                                               },
                                               backgroundColor:
@@ -150,6 +153,8 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                       children: [
                                         CustomClipItem(
                                             onTap: () {
+                                              chewieController.dispose();
+                                                chewieController.videoPlayerController.dispose();
                                               treningiPhotos.setUrl(snapshot
                                                   .data!
                                                   .data
@@ -215,6 +220,8 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                               .data!.data.similar.data.length,
                                           (index) => CustomStatiTabletItem(
                                             onTap: () {
+                                              chewieController.dispose();
+                                                chewieController.videoPlayerController.dispose();
                                               videoControll.sink.add(true);
                                               treningiVideos.setUrl(
                                                 snapshot.data!.data.similar
@@ -255,6 +262,8 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                       children: [
                                         CustomClipItem(
                                           onTap: () {
+                                            chewieController.dispose();
+                                                chewieController.videoPlayerController.dispose();
                                             videoControll.sink.add(true);
                                             treningiVideos.setUrl(
                                               snapshot.data!.data.similar
