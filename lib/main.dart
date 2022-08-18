@@ -16,6 +16,7 @@ import 'package:hansa_app/blocs/read_stati_bloc.dart';
 import 'package:hansa_app/blocs/treningi_video_controller.dart';
 import 'package:hansa_app/blocs/voyti_ili_sozdata_bloc.dart';
 import 'package:hansa_app/classes/send_link.dart';
+import 'package:hansa_app/classes/sned_url_prezent_otkrit.dart';
 import 'package:hansa_app/middle_part_widgets/permission_handler_screen.dart';
 import 'package:hansa_app/providers/dialog_video_provider.dart';
 import 'package:hansa_app/providers/full_registr_provider.dart';
@@ -31,10 +32,10 @@ import 'package:hansa_app/providers/stati_id_provider.dart';
 import 'package:hansa_app/providers/treningi_photos_provider.dart';
 import 'package:hansa_app/providers/treningi_video_changer_provider.dart';
 import 'package:hansa_app/providers/treningi_videos_provider.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:hansa_app/screens/splash_screen.dart';
 import 'package:hansa_app/test.dart';
 import 'package:hansa_app/tursunali.dart';
-import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 
 void main(List<String> args) async {
@@ -51,6 +52,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+    final sendUrlPrezentOtkrit = SendUrlPrezentOtkrit();
 
     Size size = WidgetsBinding.instance.window.physicalSize;
     bool isTablet = (size.width / 3) > 500;
@@ -99,7 +101,10 @@ class MyApp extends StatelessWidget {
           ),
           ChangeNotifierProvider(
             create: (context) => SendLink(),
-          )
+          ),
+          Provider<SendUrlPrezentOtkrit>(
+            create: (context) => sendUrlPrezentOtkrit,
+          ),
         ],
         child: const MaterialApp(
           localizationsDelegates: [

@@ -20,7 +20,8 @@ class ArchiveCard extends StatefulWidget {
       required this.isFavourite,
       required this.linkPDF,
       required this.linkPDFSkachat,
-      required this.isFavouriteURL})
+      required this.isFavouriteURL,
+      required this.downloadButton})
       : super(key: key);
 
   final String url;
@@ -33,6 +34,7 @@ class ArchiveCard extends StatefulWidget {
   final String linkPDF;
   final String linkPDFSkachat;
   final String isFavouriteURL;
+  final Widget downloadButton;
 
   @override
   State<ArchiveCard> createState() => _ArchiveCardState();
@@ -80,34 +82,9 @@ class _ArchiveCardState extends State<ArchiveCard> {
                     Padding(
                       padding: EdgeInsets.only(left: 23.w),
                       child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Padding(
-                            padding:
-                                EdgeInsets.only(top: isTablet ? 22.h : 27.h),
-                            child: InkWell(
-                              onTap: () {
-                                setState(() {
-                                  launched = _launchInBrowser(Uri.parse(
-                                      "http://${widget.linkPDFSkachat}"));
-                                });
-                              },
-                              child: Container(
-                                alignment: Alignment.center,
-                                width: isTablet ? 100 : 94,
-                                height: isTablet ? 28 : 25,
-                                decoration: BoxDecoration(
-                                    color: const Color(0xff31353b),
-                                    borderRadius: BorderRadius.circular(13.r)),
-                                child: Text(
-                                  widget.topButtonText,
-                                  style: GoogleFonts.montserrat(
-                                      fontSize: isTablet ? 12 : 10,
-                                      color: const Color(0xffffffff),
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              ),
-                            ),
-                          ),
+                          widget.downloadButton,
                           Padding(
                             padding: EdgeInsets.only(top: 4.h),
                             child: InkWell(

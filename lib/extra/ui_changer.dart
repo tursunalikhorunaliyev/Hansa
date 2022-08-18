@@ -6,6 +6,7 @@ import 'package:hansa_app/blocs/article_bloc.dart';
 import 'package:hansa_app/blocs/bloc_play_video.dart';
 import 'package:hansa_app/blocs/bloc_video_controll.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
+import 'package:hansa_app/middle_part_widgets/prezent_otkrit.dart';
 import 'package:hansa_app/middle_part_widgets/welcome_widget.dart';
 import 'package:hansa_app/middle_part_widgets/katalogi.dart';
 import 'package:hansa_app/middle_part_widgets/o_kompanii.dart';
@@ -82,7 +83,7 @@ class _UIChangerState extends State<UIChanger> {
               } else if (snapshot.data == MenuActions.obuchayushieMaterial) {
                 return const ObucheniyaWidget();
               } else if (snapshot.data == MenuActions.prezintatsiya) {
-                return const PresentArchive();
+                return const PrezentOtkrit();
               } else if (snapshot.data == MenuActions.trening) {
                 return const Treningi();
               } else if (snapshot.data == MenuActions.stati) {
@@ -101,6 +102,8 @@ class _UIChangerState extends State<UIChanger> {
                 return const TreningiVideo();
               } else if (snapshot.data == MenuActions.oKompanii) {
                 return const OKompanii();
+              } else if (snapshot.data == MenuActions.prezentFav) {
+                return const PresentArchive();
               } else {
                 return const SizedBox();
               }

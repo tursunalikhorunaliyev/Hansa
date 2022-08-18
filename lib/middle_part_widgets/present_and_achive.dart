@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/prezintatsi_model.dart';
 import 'package:hansa_app/api_services/welcome_api.dart';
 import 'package:hansa_app/blocs/prezintatsia_bloc.dart';
+import 'package:hansa_app/classes/sned_url_prezent_otkrit.dart';
 import 'package:hansa_app/extra/archive_card.dart';
 import 'package:hansa_app/extra/prezentatTabCard.dart';
 import 'package:lottie/lottie.dart';
@@ -12,7 +15,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PresentArchive extends StatefulWidget {
-  const PresentArchive({Key? key}) : super(key: key);
+  const PresentArchive({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<PresentArchive> createState() => _PresentArchiveState();
@@ -21,9 +26,12 @@ class PresentArchive extends StatefulWidget {
 class _PresentArchiveState extends State<PresentArchive> {
   @override
   Widget build(BuildContext context) {
-    print("ok qurildi");
     final token = Provider.of<String>(context);
-    final bloc = PrezintatsiaBLoC(token);
+    final providerSendUrlPrezentOtkrit =
+        Provider.of<SendUrlPrezentOtkrit>(context);
+    final bloc = PrezintatsiaBLoC(token, providerSendUrlPrezentOtkrit.getUrl);
+    log(providerSendUrlPrezentOtkrit.getUrl);
+
     bloc.sinkAction.add(PrezintatsiaAction.show);
 
     final scroll = ScrollController();
@@ -37,10 +45,12 @@ class _PresentArchiveState extends State<PresentArchive> {
     Future<void>? launched;
     return Expanded(
       child: FutureBuilder<PrezintatsiaModel>(
-          future: bloc.getPrezintatsiyaData(token),
+          future: bloc.getPrezintatsiyaData(
+              token, providerSendUrlPrezentOtkrit.getUrl),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
                 child: Column(children: [
                   StickyHeader(
                       header: Container(
@@ -258,6 +268,51 @@ class _PresentArchiveState extends State<PresentArchive> {
                                   children: [
                                     Row(),
                                     ArchiveCard(
+                                      downloadButton: snapshot.data!.data.guides
+                                                  .dataGuides[index].pdfUrl ==
+                                              ''
+                                          ? SizedBox()
+                                          : Padding(
+                                              padding: EdgeInsets.only(
+                                                  top: isTablet ? 22.h : 27.h),
+                                              child: InkWell(
+                                                onTap: () {
+                                                  setState(() {
+                                                    launched = _launchInBrowser(
+                                                        Uri.parse(snapshot
+                                                            .data!
+                                                            .data
+                                                            .guides
+                                                            .dataGuides[index]
+                                                            .link));
+                                                  });
+                                                },
+                                                child: Container(
+                                                  alignment: Alignment.center,
+                                                  width: isTablet ? 100 : 94,
+                                                  height: isTablet ? 28 : 25,
+                                                  decoration: BoxDecoration(
+                                                      color: const Color(
+                                                          0xff31353b),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              13.r)),
+                                                  child: Text(
+                                                    'Скачать',
+                                                    style:
+                                                        GoogleFonts.montserrat(
+                                                            fontSize: isTablet
+                                                                ? 12
+                                                                : 10,
+                                                            color: const Color(
+                                                                0xffffffff),
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w500),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
                                       isFavouriteURL: snapshot.data!.data.guides
                                           .dataGuides[index].favourite_link,
                                       linkPDFSkachat: snapshot.data!.data.guides
@@ -295,12 +350,12 @@ class _PresentArchiveState extends State<PresentArchive> {
                               },
                             ))),
                   StickyHeader(
-                      header: Container(
+                      header:snapshot.data!.data.guidesArchive.dataGuidesArchive.isEmpty?SizedBox():  Container(
                         color: const Color(0xffeaeaea),
                         child: Padding(
                           padding: EdgeInsets.only(
                               top: isTablet ? 20 : 9, bottom: isTablet ? 9 : 5),
-                          child: Row(
+                          child:  Row(
                             children: [
                               Container(
                                 alignment: Alignment.center,
@@ -382,7 +437,7 @@ class _PresentArchiveState extends State<PresentArchive> {
                                                     setState(() {
                                                       launched = _launchInBrowser(
                                                           Uri.parse(
-                                                              "http://${snapshot.data!.data.guidesArchive.dataGuidesArchive[index].pdfUrl}"));
+                                                              "http://${snapshot.data!.data.guidesArchive.dataGuidesArchive[index].link}"));
                                                     });
                                                   },
                                                   child: Container(
@@ -476,6 +531,60 @@ class _PresentArchiveState extends State<PresentArchive> {
                                         children: [
                                           Row(),
                                           ArchiveCard(
+                                            downloadButton: snapshot
+                                                        .data!
+                                                        .data
+                                                        .guidesArchive
+                                                        .dataGuidesArchive[
+                                                            index]
+                                                        .pdfUrl ==
+                                                    ''
+                                                ? SizedBox()
+                                                : Padding(
+                                                    padding: EdgeInsets.only(
+                                                        top: isTablet
+                                                            ? 22.h
+                                                            : 27.h),
+                                                    child: InkWell(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          launched =
+                                                              _launchInBrowser(
+                                                                  Uri.parse(
+                                                                      "${snapshot.data!.data.guidesArchive.dataGuidesArchive[index].link}"));
+                                                        });
+                                                      },
+                                                      child: Container(
+                                                        alignment:
+                                                            Alignment.center,
+                                                        width:
+                                                            isTablet ? 100 : 94,
+                                                        height:
+                                                            isTablet ? 28 : 25,
+                                                        decoration: BoxDecoration(
+                                                            color: const Color(
+                                                                0xff31353b),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        13.r)),
+                                                        child: Text(
+                                                          'Скачать',
+                                                          style: GoogleFonts
+                                                              .montserrat(
+                                                                  fontSize:
+                                                                      isTablet
+                                                                          ? 12
+                                                                          : 10,
+                                                                  color: const Color(
+                                                                      0xffffffff),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
                                             isFavouriteURL: snapshot
                                                 .data!
                                                 .data
