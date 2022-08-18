@@ -33,6 +33,7 @@ import 'package:hansa_app/providers/treningi_video_changer_provider.dart';
 import 'package:hansa_app/providers/treningi_videos_provider.dart';
 import 'package:hansa_app/screens/splash_screen.dart';
 import 'package:hansa_app/test.dart';
+import 'package:hansa_app/tursunali.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 

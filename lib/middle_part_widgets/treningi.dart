@@ -254,7 +254,6 @@ class _TreningiState extends State<Treningi> {
                                       buttonText: "Смотреть",
                                       title: data.videos.list[index].title,
                                       onTap: () {
-                                       
                                         treningiVideos.setUrl(
                                             data.videos.list[index].link);
                                         isVideo.setIsVideo(true);
