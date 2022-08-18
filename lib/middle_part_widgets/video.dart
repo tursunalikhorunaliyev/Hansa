@@ -10,7 +10,6 @@ import 'package:hansa_app/video_section/custom_video_item.dart';
 import 'package:hansa_app/video_section/custom_video_subitem.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-//salom dunyo
 class Video extends StatelessWidget {
   const Video({Key? key}) : super(key: key);
 
