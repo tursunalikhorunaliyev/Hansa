@@ -17,7 +17,7 @@ class CustomTitle extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.only(
           top: isTablet ? 7.h : 10.h,
-          bottom: isTablet ? 8 : 15.h,
+          bottom: isTablet ? 8 : 10.h,
         ),
         child: Row(
           children: [
