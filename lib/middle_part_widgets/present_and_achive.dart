@@ -9,6 +9,7 @@ import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PresentArchive extends StatefulWidget {
   const PresentArchive({Key? key}) : super(key: key);
@@ -32,6 +33,8 @@ class _PresentArchiveState extends State<PresentArchive> {
 
     final isTablet = Provider.of<bool>(context);
 
+    late dynamic response;
+    Future<void>? launched;
     return Expanded(
       child: FutureBuilder<PrezintatsiaModel>(
           future: bloc.getPrezintatsiyaData(token),
@@ -93,7 +96,8 @@ class _PresentArchiveState extends State<PresentArchive> {
                                 return false;
                               },
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 25),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 25),
                                 child: GridView(
                                   controller: scroll,
                                   shrinkWrap: true,
@@ -107,8 +111,105 @@ class _PresentArchiveState extends State<PresentArchive> {
                                       snapshot.data!.data.guides.dataGuides
                                           .length, (index) {
                                     return Padding(
-                                      padding: const EdgeInsets.only(top: 5.0),
-                                      child: StackedStackPrezentatsiyaTab(
+                                        padding:
+                                            const EdgeInsets.only(top: 5.0),
+                                        child: StackedStackPrezentatsiyaTab(
+                                          buttonLink:
+                                              snapshot
+                                                          .data!
+                                                          .data
+                                                          .guides
+                                                          .dataGuides[index]
+                                                          .pdfUrl ==
+                                                      ''
+                                                  ? SizedBox()
+                                                  : Padding(
+                                                      padding: EdgeInsets.only(
+                                                          top: isTablet
+                                                              ? 22.h
+                                                              : 27.h),
+                                                      child: InkWell(
+                                                        onTap: () {
+                                                          setState(() {
+                                                            launched =
+                                                                _launchInBrowser(
+                                                                    Uri.parse(
+                                                                        "http://${snapshot.data!.data.guides.dataGuides[index].pdfUrl}"));
+                                                          });
+                                                        },
+                                                        child: Container(
+                                                          alignment:
+                                                              Alignment.center,
+                                                          width: isTablet
+                                                              ? 100
+                                                              : 94,
+                                                          height: isTablet
+                                                              ? 28
+                                                              : 25,
+                                                          decoration: BoxDecoration(
+                                                              color: const Color(
+                                                                  0xff31353b),
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          13.r)),
+                                                          child: Text(
+                                                            'Скачать',
+                                                            style: GoogleFonts.montserrat(
+                                                                fontSize:
+                                                                    isTablet
+                                                                        ? 12
+                                                                        : 10,
+                                                                color: const Color(
+                                                                    0xffffffff),
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                          isFavouriteURL: snapshot
+                                              .data!
+                                              .data
+                                              .guides
+                                              .dataGuides[index]
+                                              .favourite_link,
+                                          linkPDFSkachat: snapshot.data!.data
+                                              .guides.dataGuides[index].pdfUrl,
+                                          linkPDF: snapshot.data!.data.guides
+                                              .dataGuides[index].link,
+                                          buttonColor: const Color(0xffff163e),
+                                          topButtonText: 'Скачать',
+                                          bottomButtonText: 'Читать',
+                                          isFavourite: snapshot
+                                              .data!
+                                              .data
+                                              .guides
+                                              .dataGuides[index]
+                                              .isFavourite,
+                                          skachat: Container(
+                                            alignment: Alignment.center,
+                                            width: 94,
+                                            height: 25,
+                                            decoration: BoxDecoration(
+                                                color: const Color(0xff31353b),
+                                                borderRadius:
+                                                    BorderRadius.circular(13)),
+                                            child: Text(
+                                              'skachat',
+                                              style: GoogleFonts.montserrat(
+                                                  fontSize: 10,
+                                                  color:
+                                                      const Color(0xffffffff),
+                                                  fontWeight: FontWeight.w500),
+                                            ),
+                                          ),
+                                          title: snapshot.data!.data.guides
+                                              .dataGuides[index].title,
+                                          url: snapshot.data!.data.guides
+                                              .dataGuides[index].picture_link,
+                                        ) /* StackedStackPrezentatsiyaTab(
                                         isFavouriteURL: snapshot
                                             .data!
                                             .data
@@ -144,8 +245,8 @@ class _PresentArchiveState extends State<PresentArchive> {
                                             .dataGuides[index].title,
                                         url: snapshot.data!.data.guides
                                             .dataGuides[index].picture_link,
-                                      ),
-                                    );
+                                      ), */
+                                        );
                                   }),
                                 ),
                               ))
@@ -247,13 +348,14 @@ class _PresentArchiveState extends State<PresentArchive> {
                                 return false;
                               },
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 25),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 25),
                                 child: GridView(
                                   controller: scroll,
                                   shrinkWrap: true,
                                   physics: BouncingScrollPhysics(),
                                   gridDelegate:
-                                       SliverGridDelegateWithFixedCrossAxisCount(
+                                      SliverGridDelegateWithFixedCrossAxisCount(
                                           crossAxisCount: 2,
                                           crossAxisSpacing: 10,
                                           mainAxisExtent: 375),
@@ -263,6 +365,53 @@ class _PresentArchiveState extends State<PresentArchive> {
                                     return Padding(
                                       padding: const EdgeInsets.only(top: 5.0),
                                       child: StackedStackPrezentatsiyaTab(
+                                        buttonLink: snapshot
+                                                    .data!
+                                                    .data
+                                                    .guidesArchive
+                                                    .dataGuidesArchive[index]
+                                                    .pdfUrl ==
+                                                ''
+                                            ? SizedBox()
+                                            : Padding(
+                                                padding: EdgeInsets.only(
+                                                    top:
+                                                        isTablet ? 22.h : 27.h),
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    setState(() {
+                                                      launched = _launchInBrowser(
+                                                          Uri.parse(
+                                                              "http://${snapshot.data!.data.guidesArchive.dataGuidesArchive[index].pdfUrl}"));
+                                                    });
+                                                  },
+                                                  child: Container(
+                                                    alignment: Alignment.center,
+                                                    width: isTablet ? 100 : 94,
+                                                    height: isTablet ? 28 : 25,
+                                                    decoration: BoxDecoration(
+                                                        color: const Color(
+                                                            0xff31353b),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                                    13.r)),
+                                                    child: Text(
+                                                      'Скачать',
+                                                      style: GoogleFonts
+                                                          .montserrat(
+                                                              fontSize: isTablet
+                                                                  ? 12
+                                                                  : 10,
+                                                              color: const Color(
+                                                                  0xffffffff),
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
                                         isFavouriteURL: snapshot
                                             .data!
                                             .data
@@ -275,8 +424,12 @@ class _PresentArchiveState extends State<PresentArchive> {
                                             .guidesArchive
                                             .dataGuidesArchive[index]
                                             .pdfUrl,
-                                        linkPDF: snapshot.data!.data.guidesArchive
-                                            .dataGuidesArchive[index].link,
+                                        linkPDF: snapshot
+                                            .data!
+                                            .data
+                                            .guidesArchive
+                                            .dataGuidesArchive[index]
+                                            .link,
                                         buttonColor: const Color(0xffff163e),
                                         topButtonText: 'Скачать',
                                         bottomButtonText: 'Читать',
@@ -398,5 +551,14 @@ class _PresentArchiveState extends State<PresentArchive> {
             }
           }),
     );
+  }
+
+  _launchInBrowser(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw 'Could not launch $url';
+    }
   }
 }
