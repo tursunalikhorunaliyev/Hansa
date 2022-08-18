@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/prezintatsi_model.dart';
 import 'package:hansa_app/api_services/welcome_api.dart';
 import 'package:hansa_app/blocs/prezintatsia_bloc.dart';
+import 'package:hansa_app/classes/sned_url_prezent_otkrit.dart';
 import 'package:hansa_app/extra/archive_card.dart';
 import 'package:hansa_app/extra/prezentatTabCard.dart';
 import 'package:lottie/lottie.dart';
@@ -12,7 +15,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PresentArchive extends StatefulWidget {
-  const PresentArchive({Key? key}) : super(key: key);
+  const PresentArchive({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<PresentArchive> createState() => _PresentArchiveState();
@@ -21,9 +26,12 @@ class PresentArchive extends StatefulWidget {
 class _PresentArchiveState extends State<PresentArchive> {
   @override
   Widget build(BuildContext context) {
-    print("ok qurildi");
     final token = Provider.of<String>(context);
-    final bloc = PrezintatsiaBLoC(token);
+    final providerSendUrlPrezentOtkrit =
+        Provider.of<SendUrlPrezentOtkrit>(context);
+    final bloc = PrezintatsiaBLoC(token, providerSendUrlPrezentOtkrit.getUrl);
+    log(providerSendUrlPrezentOtkrit.getUrl);
+
     bloc.sinkAction.add(PrezintatsiaAction.show);
 
     final scroll = ScrollController();
@@ -37,7 +45,8 @@ class _PresentArchiveState extends State<PresentArchive> {
     Future<void>? launched;
     return Expanded(
       child: FutureBuilder<PrezintatsiaModel>(
-          future: bloc.getPrezintatsiyaData(token),
+          future: bloc.getPrezintatsiyaData(
+              token, providerSendUrlPrezentOtkrit.getUrl),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return SingleChildScrollView(
@@ -340,12 +349,12 @@ class _PresentArchiveState extends State<PresentArchive> {
                               },
                             ))),
                   StickyHeader(
-                      header: Container(
+                      header:snapshot.data!.data.guidesArchive.dataGuidesArchive.isEmpty?SizedBox():  Container(
                         color: const Color(0xffeaeaea),
                         child: Padding(
                           padding: EdgeInsets.only(
                               top: isTablet ? 20 : 9, bottom: isTablet ? 9 : 5),
-                          child: Row(
+                          child:  Row(
                             children: [
                               Container(
                                 alignment: Alignment.center,
