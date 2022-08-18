@@ -39,8 +39,6 @@ class _CustomPrezentCardState extends State<CustomPrezentCard> {
   @override
   Widget build(BuildContext context) {
     final isTablet = Provider.of<bool>(context);
-    final providerSendUrlPrezentOtkrit =
-        Provider.of<SendUrlPrezentOtkrit>(context);
 
     return Padding(
       padding: EdgeInsets.only(right: 18.w, left: 18.w, bottom: 10.h),
@@ -63,6 +61,7 @@ class _CustomPrezentCardState extends State<CustomPrezentCard> {
             child: SizedBox(
               width: double.infinity,
               child: Stack(
+                alignment: Alignment.center,
                 children: [
                   Row(
                     children: [
@@ -71,7 +70,7 @@ class _CustomPrezentCardState extends State<CustomPrezentCard> {
                         child: ClipPath(
                           clipper: CustomPaintClipper(),
                           child: Container(
-                            width: 305.w,
+                            width: 310.w,
                             height: 75.h,
                             color: const Color(0xff000004),
                           ),
@@ -79,56 +78,53 @@ class _CustomPrezentCardState extends State<CustomPrezentCard> {
                       ),
                     ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(left: 18.w),
-                          child: SizedBox(
-                            width: isTablet ? 400 : 200,
-                            child: Text(
-                              widget.title,
-                              overflow: TextOverflow.clip,
-                              style: GoogleFonts.montserrat(
-                                color: const Color(0xffffffff),
-                                fontWeight: FontWeight.bold,
-                                fontSize: isTablet ? 10.sp : 13.sp,
-                              ),
+                  Row(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(left: 18.w),
+                        child: SizedBox(
+                          width: isTablet ? 400 : 200,
+                          child: Text(
+                            widget.title,
+                            overflow: TextOverflow.clip,
+                            style: GoogleFonts.montserrat(
+                              color: const Color(0xffffffff),
+                              fontWeight: FontWeight.bold,
+                              fontSize: isTablet ? 10.sp : 13.sp,
                             ),
                           ),
                         ),
-                        PhysicalModel(
-                          shadowColor: Colors.grey.withOpacity(.5),
-                          color: Colors.transparent,
-                          borderRadius: BorderRadius.circular(64.r),
-                          elevation: 5.sp,
-                          child: GestureDetector(
-                            onTap: widget.onTap,
-                            child: Container(
-                              padding: const EdgeInsets.all(7),
-                              constraints: BoxConstraints(
-                                minWidth: 90.w,
-                              ),
-                              decoration: BoxDecoration(
-                                color: const Color(0xffff163e),
-                                borderRadius: BorderRadius.circular(64.r),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  "Открыть",
-                                  style: GoogleFonts.montserrat(
-                                    color: const Color(0xffffffff),
-                                    fontSize: 10.sp,
-                                  ),
+                      ),
+                      Spacer(),
+                      PhysicalModel(
+                        shadowColor: Colors.grey.withOpacity(.5),
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.circular(64.r),
+                        elevation: 5.sp,
+                        child: GestureDetector(
+                          onTap: widget.onTap,
+                          child: Container(
+                            padding: const EdgeInsets.all(7),
+                            constraints: BoxConstraints(
+                              minWidth: 90.w,
+                            ),
+                            decoration: BoxDecoration(
+                              color: const Color(0xffff163e),
+                              borderRadius: BorderRadius.circular(64.r),
+                            ),
+                            child: Center(
+                              child: Text(
+                                "Открыть",
+                                style: GoogleFonts.montserrat(
+                                  color: const Color(0xffffffff),
+                                  fontSize: 10.sp,
                                 ),
                               ),
                             ),
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -139,12 +135,5 @@ class _CustomPrezentCardState extends State<CustomPrezentCard> {
     );
   }
 
-  _launchInBrowser(Uri url) async {
-    if (!await launchUrl(
-      url,
-      mode: LaunchMode.externalApplication,
-    )) {
-      throw 'Could not launch $url';
-    }
-  }
+
 }
