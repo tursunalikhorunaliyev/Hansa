@@ -38,7 +38,7 @@ class _CustomKatalogItemDoubleState extends State<CustomKatalogItemDouble> {
   Widget build(BuildContext context) {
     Future<void>? launched;
     return Padding(
-      padding: EdgeInsets.only(right: 18.w, left: 18.w, top: 10.h),
+      padding: EdgeInsets.only(right: 18.w, left: 18.w, bottom: 10.h),
       child: Column(
         children: [
           InkWell(

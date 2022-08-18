@@ -9,6 +9,7 @@ import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class Katalogi extends StatefulWidget {
   const Katalogi({Key? key}) : super(key: key);
 
@@ -64,7 +65,7 @@ class _KatalogiState extends State<Katalogi> {
                                       data.guides.list.length, (index) {
                                     return Padding(
                                         padding:
-                                            const EdgeInsets.only(top: 5.0),
+                                            const EdgeInsets.only(bottom: 5.0),
                                         child: TabletKatalogItem(
                                           linkPDFSkachat: snapshot.data!.data
                                               .guides.list[index].link,
@@ -124,7 +125,7 @@ class _KatalogiState extends State<Katalogi> {
                                   controller: scroll,
                                   shrinkWrap: true,
                                   gridDelegate:
-                                       SliverGridDelegateWithFixedCrossAxisCount(
+                                      SliverGridDelegateWithFixedCrossAxisCount(
                                           crossAxisCount: 2,
                                           crossAxisSpacing: 22,
                                           mainAxisExtent: 240.h),
@@ -133,7 +134,7 @@ class _KatalogiState extends State<Katalogi> {
                                           .length, (index) {
                                     return Padding(
                                         padding:
-                                            const EdgeInsets.only(top: 5.0),
+                                            const EdgeInsets.only(bottom: 5.0),
                                         child: TabletKatalogItem(
                                           linkPDFSkachat: snapshot.data!.data
                                               .guidesArchive.list[index].link,
