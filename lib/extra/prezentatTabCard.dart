@@ -19,7 +19,8 @@ class StackedStackPrezentatsiyaTab extends StatefulWidget {
       required this.isFavourite,
       required this.linkPDF,
       required this.linkPDFSkachat,
-      required this.isFavouriteURL})
+      required this.isFavouriteURL,
+      required this.buttonLink})
       : super(key: key);
 
   final String url;
@@ -29,9 +30,10 @@ class StackedStackPrezentatsiyaTab extends StatefulWidget {
   final String title;
   final Widget? skachat;
   final bool isFavourite;
-  final String linkPDF;
+  final String? linkPDF;
   final String linkPDFSkachat;
   final String isFavouriteURL;
+  final Widget? buttonLink;
 
   @override
   State<StackedStackPrezentatsiyaTab> createState() =>
@@ -61,8 +63,7 @@ class _StackedStackPrezentatsiyaTabState
                   InkWell(
                     onTap: () {
                       setState(() {
-                        launched = _launchInBrowser(
-                            Uri.parse("http://${widget.linkPDF}"));
+                        launched = _launchInBrowser(Uri.parse(widget.linkPDF!));
                       });
                     },
                     child: SizedBox(
@@ -102,8 +103,10 @@ class _StackedStackPrezentatsiyaTabState
                           Padding(
                             padding: EdgeInsets.only(left: 23.w),
                             child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Padding(
+                                widget.buttonLink!
+                                /*   Padding(
                                   padding: EdgeInsets.only(
                                       top: isTablet ? 22.h : 27.h),
                                   child: InkWell(
@@ -130,14 +133,15 @@ class _StackedStackPrezentatsiyaTabState
                                       ),
                                     ),
                                   ),
-                                ),
+                                ), */
+                                ,
                                 Padding(
                                   padding: EdgeInsets.only(top: 4.h),
                                   child: InkWell(
                                     onTap: () {
                                       setState(() {
-                                        launched = _launchInBrowser(Uri.parse(
-                                            "http://${widget.linkPDF}"));
+                                        launched = _launchInBrowser(
+                                            Uri.parse(widget.linkPDF!));
                                       });
                                     },
                                     child: Container(
@@ -157,7 +161,7 @@ class _StackedStackPrezentatsiyaTabState
                                       ),
                                     ),
                                   ),
-                                ),
+                                )
                               ],
                             ),
                           )
