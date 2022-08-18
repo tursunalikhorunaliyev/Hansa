@@ -258,6 +258,51 @@ class _PresentArchiveState extends State<PresentArchive> {
                                   children: [
                                     Row(),
                                     ArchiveCard(
+                                      downloadButton: snapshot.data!.data.guides
+                                                  .dataGuides[index].pdfUrl ==
+                                              ''
+                                          ? SizedBox()
+                                          : Padding(
+                                              padding: EdgeInsets.only(
+                                                  top: isTablet ? 22.h : 27.h),
+                                              child: InkWell(
+                                                onTap: () {
+                                                  setState(() {
+                                                    launched = _launchInBrowser(
+                                                        Uri.parse(snapshot
+                                                            .data!
+                                                            .data
+                                                            .guides
+                                                            .dataGuides[index]
+                                                            .link));
+                                                  });
+                                                },
+                                                child: Container(
+                                                  alignment: Alignment.center,
+                                                  width: isTablet ? 100 : 94,
+                                                  height: isTablet ? 28 : 25,
+                                                  decoration: BoxDecoration(
+                                                      color: const Color(
+                                                          0xff31353b),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              13.r)),
+                                                  child: Text(
+                                                    'Скачать',
+                                                    style:
+                                                        GoogleFonts.montserrat(
+                                                            fontSize: isTablet
+                                                                ? 12
+                                                                : 10,
+                                                            color: const Color(
+                                                                0xffffffff),
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w500),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
                                       isFavouriteURL: snapshot.data!.data.guides
                                           .dataGuides[index].favourite_link,
                                       linkPDFSkachat: snapshot.data!.data.guides
@@ -382,7 +427,7 @@ class _PresentArchiveState extends State<PresentArchive> {
                                                     setState(() {
                                                       launched = _launchInBrowser(
                                                           Uri.parse(
-                                                              "http://${snapshot.data!.data.guidesArchive.dataGuidesArchive[index].pdfUrl}"));
+                                                              "http://${snapshot.data!.data.guidesArchive.dataGuidesArchive[index].link}"));
                                                     });
                                                   },
                                                   child: Container(
@@ -476,6 +521,60 @@ class _PresentArchiveState extends State<PresentArchive> {
                                         children: [
                                           Row(),
                                           ArchiveCard(
+                                            downloadButton: snapshot
+                                                        .data!
+                                                        .data
+                                                        .guidesArchive
+                                                        .dataGuidesArchive[
+                                                            index]
+                                                        .pdfUrl ==
+                                                    ''
+                                                ? SizedBox()
+                                                : Padding(
+                                                    padding: EdgeInsets.only(
+                                                        top: isTablet
+                                                            ? 22.h
+                                                            : 27.h),
+                                                    child: InkWell(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          launched =
+                                                              _launchInBrowser(
+                                                                  Uri.parse(
+                                                                      "${snapshot.data!.data.guidesArchive.dataGuidesArchive[index].link}"));
+                                                        });
+                                                      },
+                                                      child: Container(
+                                                        alignment:
+                                                            Alignment.center,
+                                                        width:
+                                                            isTablet ? 100 : 94,
+                                                        height:
+                                                            isTablet ? 28 : 25,
+                                                        decoration: BoxDecoration(
+                                                            color: const Color(
+                                                                0xff31353b),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        13.r)),
+                                                        child: Text(
+                                                          'Скачать',
+                                                          style: GoogleFonts
+                                                              .montserrat(
+                                                                  fontSize:
+                                                                      isTablet
+                                                                          ? 12
+                                                                          : 10,
+                                                                  color: const Color(
+                                                                      0xffffffff),
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
                                             isFavouriteURL: snapshot
                                                 .data!
                                                 .data
