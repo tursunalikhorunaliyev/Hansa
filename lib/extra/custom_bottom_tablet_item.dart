@@ -39,7 +39,7 @@ class _TabletKatalogBottomItemState extends State<TabletKatalogBottomItem> {
     Future<void>? launched;
     return Padding(
       padding: EdgeInsets.only(
-        top: 11.h,
+        bottom: 11.h,
       ),
       child: SizedBox(
         width: 200.w,
