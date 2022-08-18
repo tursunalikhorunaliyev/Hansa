@@ -35,6 +35,7 @@ class _KatalogiState extends State<Katalogi> {
             if (snapshot.hasData) {
               final data = snapshot.data!.data;
               return SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
                 child: Column(
                   children: [
                     StickyHeader(

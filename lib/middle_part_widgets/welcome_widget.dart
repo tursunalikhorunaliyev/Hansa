@@ -53,6 +53,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                       child: ScrollConfiguration(
                         behavior: MyBehavior(),
                         child: SingleChildScrollView(
+                          physics: BouncingScrollPhysics(),
                           child: Column(
                             children: [
                               Padding(
@@ -157,6 +158,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                     )
                   : SingleChildScrollView(
                       controller: scroll,
+                      physics: BouncingScrollPhysics(),
                       child: Column(
                         children: [
                           Column(

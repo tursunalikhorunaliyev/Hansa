@@ -50,6 +50,7 @@ class _PresentArchiveState extends State<PresentArchive> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
                 child: Column(children: [
                   StickyHeader(
                       header: Container(
