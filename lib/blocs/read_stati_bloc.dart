@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:hansa_app/api_models.dart/read_stati_model.dart';
 import 'package:http/http.dart' as http;

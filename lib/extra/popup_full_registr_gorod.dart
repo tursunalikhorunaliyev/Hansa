@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/country_model.dart';
 import 'package:hansa_app/blocs/bloc_popup_drawer.dart';
@@ -10,7 +9,7 @@ class PopupFullRegistrGorod extends StatefulWidget {
   final Color borderColor;
   final Color hintColor;
   final VoidCallback onTap;
-  PopupFullRegistrGorod(
+  const PopupFullRegistrGorod(
       {Key? key,
       required this.borderColor,
       required this.hintColor,

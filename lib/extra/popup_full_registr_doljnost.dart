@@ -9,7 +9,7 @@ class PopupFullRegistrDoljnost extends StatefulWidget {
   final Color borderColor;
   final Color hintColor;
   final VoidCallback onTap;
-  PopupFullRegistrDoljnost(
+  const PopupFullRegistrDoljnost(
       {Key? key,
       required this.borderColor,
       required this.hintColor,

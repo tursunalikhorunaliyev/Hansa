@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 class PopupPersonalGorod extends StatefulWidget {
   final TextEditingController controller;
 
-  PopupPersonalGorod({Key? key, required this.controller}) : super(key: key);
+  const PopupPersonalGorod({Key? key, required this.controller}) : super(key: key);
 
   @override
   State<PopupPersonalGorod> createState() => _PopupPersonalGorodState();

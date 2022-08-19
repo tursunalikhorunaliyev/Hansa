@@ -35,7 +35,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         showDialog(
           context: context,
           builder: (context) {
-            return ExitDialog();
+            return const ExitDialog();
           },
         );
 
@@ -88,8 +88,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       InkWell(
                         onTap: () {
                           providerTapFavorite.setInt(1);
-                          log(providerTapFavorite.getInt.toString() +
-                              " Welcome screen get bool");
+                          log("${providerTapFavorite.getInt} Welcome screen get bool");
                           providerScaffoldKey.currentState!.openDrawer();
                         },
                         child: Icon(

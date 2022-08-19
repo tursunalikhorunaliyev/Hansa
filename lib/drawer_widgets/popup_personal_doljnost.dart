@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 class PopupPersonalDoljnost extends StatefulWidget {
   final TextEditingController controller;
 
-  PopupPersonalDoljnost({Key? key, required this.controller}) : super(key: key);
+  const PopupPersonalDoljnost({Key? key, required this.controller}) : super(key: key);
 
   @override
   State<PopupPersonalDoljnost> createState() => _PopupPersonalDoljnostState();

@@ -279,17 +279,17 @@ class _CustomTreningiPhotosState extends State<CustomTreningiPhotos> {
                                 curve: snapshotDetectTap.data == true
                                     ? Curves.bounceOut
                                     : Curves.bounceOut,
-                                duration: Duration(milliseconds: 500),
+                                duration: const Duration(milliseconds: 500),
                                 width: 300,
                                 height: snapshotDetectTap.data == true ? 20 : 0,
-                                decoration: BoxDecoration(
-                                    color: const Color(0xffffffff),
+                                decoration: const BoxDecoration(
+                                    color: Color(0xffffffff),
                                     borderRadius: BorderRadius.only(
                                       bottomLeft: Radius.circular(10),
                                       bottomRight: Radius.circular(10),
                                     )),
                                 child: AnimatedOpacity(
-                                  duration: Duration(milliseconds: 500),
+                                  duration: const Duration(milliseconds: 500),
                                   opacity:
                                       snapshotDetectTap.data == true ? 1 : 0,
                                   child: Padding(
@@ -306,7 +306,7 @@ class _CustomTreningiPhotosState extends State<CustomTreningiPhotos> {
                                           return LinearPercentIndicator(
                                             alignment: MainAxisAlignment.center,
                                             padding: const EdgeInsets.all(0),
-                                            barRadius: Radius.circular(5),
+                                            barRadius: const Radius.circular(5),
                                             lineHeight: 6,
                                             percent: snapshotDouble.data! / 100,
                                             backgroundColor: Colors.transparent,
@@ -321,7 +321,7 @@ class _CustomTreningiPhotosState extends State<CustomTreningiPhotos> {
                   ],
                 );
               } else {
-                return SizedBox();
+                return const SizedBox();
               }
             }),
       ),

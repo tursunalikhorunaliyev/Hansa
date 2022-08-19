@@ -39,7 +39,7 @@ class _LoginCardState extends State<LoginCard> {
   final progressButtonBLoC = ProgressButtonAnmationBLoC();
   final blocText = BlocErrorText();
   final snackBar = SnackBar(
-    duration: Duration(milliseconds: 1000),
+    duration: const Duration(milliseconds: 1000),
     content: Text('Интернет-ошибка',
         style: GoogleFonts.montserrat(color: Colors.white)),
     backgroundColor: Colors.red,
@@ -265,7 +265,7 @@ class _LoginCardState extends State<LoginCard> {
                                   }
                                 },
                                 child: AnimatedContainer(
-                                  duration: Duration(milliseconds: 300),
+                                  duration: const Duration(milliseconds: 300),
                                   alignment: Alignment.center,
                                   width: isTablet
                                       ? 210.w
@@ -287,7 +287,7 @@ class _LoginCardState extends State<LoginCard> {
                                       borderRadius:
                                           BorderRadius.circular(23.r)),
                                   child: snapshot.data!
-                                      ? CircularProgressIndicator(
+                                      ? const CircularProgressIndicator(
                                           color: Colors.white,
                                         )
                                       : Text(
@@ -314,11 +314,11 @@ class _LoginCardState extends State<LoginCard> {
                                   padding: const EdgeInsets.all(20),
                                   child: Center(
                                     child: Container(
-                                      padding: EdgeInsets.all(30),
+                                      padding: const EdgeInsets.all(30),
                                       height: 330,
                                       width: 400,
                                       decoration: BoxDecoration(
-                                          color: Color(0xFFf2f2f2),
+                                          color: const Color(0xFFf2f2f2),
                                           borderRadius:
                                               BorderRadius.circular(20)),
                                       child: Column(
@@ -351,7 +351,7 @@ class _LoginCardState extends State<LoginCard> {
                                                                 EdgeInsets.all(
                                                                     4.h),
                                                             hintText: "E-mail",
-                                                            hintStyle: TextStyle(
+                                                            hintStyle: const TextStyle(
                                                                 color: Color(
                                                                     0xFFa0a0a0),
                                                                 fontSize: 14),
@@ -375,7 +375,7 @@ class _LoginCardState extends State<LoginCard> {
                                                     ),
                                                   );
                                                 } else {
-                                                  return SizedBox();
+                                                  return const SizedBox();
                                                 }
                                               }),
                                           SizedBox(
@@ -397,7 +397,7 @@ class _LoginCardState extends State<LoginCard> {
                                                                       "Письмо")
                                                               ? true
                                                               : false,
-                                                          child: Icon(
+                                                          child: const Icon(
                                                             Icons.check,
                                                             color: Color(
                                                                 0xFF25b049),
@@ -409,18 +409,18 @@ class _LoginCardState extends State<LoginCard> {
                                                                     .data!
                                                                     .contains(
                                                                         "Письмо")
-                                                                ? Color(
+                                                                ? const Color(
                                                                     0xFF25b049)
-                                                                : Color(
+                                                                : const Color(
                                                                     0xFFe21a37)),
                                                       ),
                                                     ],
                                                   );
                                                 } else {
-                                                  return SizedBox();
+                                                  return const SizedBox();
                                                 }
                                               }),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 20,
                                           ),
                                           GestureDetector(
@@ -457,11 +457,11 @@ class _LoginCardState extends State<LoginCard> {
                                               height: 40.h,
                                               width: 250.w,
                                               decoration: BoxDecoration(
-                                                  color: Color(0xFFfb002b),
+                                                  color: const Color(0xFFfb002b),
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           5.r)),
-                                              child: Text(
+                                              child: const Text(
                                                 "Отправить",
                                                 style: TextStyle(
                                                   color: Color(0xFFf2f2f2),
@@ -472,7 +472,7 @@ class _LoginCardState extends State<LoginCard> {
                                           SizedBox(
                                             height: 30.h,
                                           ),
-                                          Text(
+                                          const Text(
                                             "При возникновении проблем просьба обращаться в службу поддержки. Почта:",
                                             textAlign: TextAlign.center,
                                           ),
@@ -482,7 +482,7 @@ class _LoginCardState extends State<LoginCard> {
                                                 log("SSSSSSSSSALOMMMD");
                                                 _launchUrl(Uri.parse("http://support@hansa-lab.ru"));
                                               },
-                                              child: Text(
+                                              child: const Text(
                                                 "support@hansa-lab.ru",
                                                 style: TextStyle(
                                                     color: Color(0xFFfb002b),

@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,7 +10,6 @@ import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:http/http.dart' as http;
 
 class ObucheniyaWidget extends StatelessWidget {
   const ObucheniyaWidget({Key? key}) : super(key: key);
@@ -54,7 +52,7 @@ class ObucheniyaWidget extends StatelessWidget {
                                       width: isTablet ? 55.w : 70.w,
                                       height: isTablet ? 46.h : 42.h,
                                       decoration: BoxDecoration(
-                                          color: Color(0XFFff163e),
+                                          color: const Color(0XFFff163e),
                                           borderRadius: BorderRadius.only(
                                               topRight: Radius.circular(
                                                   isTablet ? 45.r : 21.r),
@@ -93,7 +91,7 @@ class ObucheniyaWidget extends StatelessWidget {
                                     controller: scroll,
                                     shrinkWrap: true,
                                     gridDelegate:
-                                         SliverGridDelegateWithFixedCrossAxisCount(
+                                         const SliverGridDelegateWithFixedCrossAxisCount(
                                             crossAxisCount: 2,
                                             crossAxisSpacing: 10,
                                             mainAxisExtent: 375),
@@ -110,7 +108,7 @@ class ObucheniyaWidget extends StatelessWidget {
                                                   .listGuides
                                                   .list[index]
                                                   .favouriteLink,
-                                              buttonColor: Color(0xffff163e),
+                                              buttonColor: const Color(0xffff163e),
                                               bottomButtonText: 'скачать ',
                                               title: snapshot
                                                   .data!
@@ -150,7 +148,7 @@ class ObucheniyaWidget extends StatelessWidget {
                                                 .listGuides
                                                 .list[index]
                                                 .favouriteLink,
-                                            buttonColor: Color(0xffff163e),
+                                            buttonColor: const Color(0xffff163e),
                                             bottomButtonText: 'скачать ',
                                             title: snapshot.data!.data
                                                 .listGuides.list[index].title,
@@ -238,7 +236,7 @@ class ObucheniyaWidget extends StatelessWidget {
                                                     .listArchiveGuides
                                                     .list[index]
                                                     .favouriteLink,
-                                                buttonColor: Color(0xffff163e),
+                                                buttonColor: const Color(0xffff163e),
                                                 bottomButtonText: 'скачать ',
                                                 title: snapshot
                                                     .data!
@@ -279,7 +277,7 @@ class ObucheniyaWidget extends StatelessWidget {
                                                   .listArchiveGuides
                                                   .list[index]
                                                   .favouriteLink,
-                                              buttonColor: Color(0xffff163e),
+                                              buttonColor: const Color(0xffff163e),
                                               bottomButtonText: 'скачать ',
                                               title: snapshot
                                                   .data!

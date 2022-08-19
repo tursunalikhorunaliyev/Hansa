@@ -31,7 +31,7 @@ class TabletItemTreningi extends StatelessWidget {
       child: Column(
         children: [
           Padding(
-            padding: EdgeInsets.only(),
+            padding: const EdgeInsets.only(),
             child: SizedBox(
               width: 200.w,
               child: Stack(

@@ -22,7 +22,7 @@ class _StatiCommentState extends State<StatiComment> {
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      duration: Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 500),
       child: Column(
         children: [
           Row(

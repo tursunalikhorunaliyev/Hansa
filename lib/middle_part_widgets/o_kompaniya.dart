@@ -50,7 +50,7 @@ class Okompaniya extends StatelessWidget {
                   Text(
                     "#",
                     style: TextStyle(
-                        color: Color(0xFFff163e),
+                        color: const Color(0xFFff163e),
                         fontWeight: FontWeight.bold,
                         fontSize: isTablet ? 20 : 16),
                   ),
@@ -66,7 +66,7 @@ class Okompaniya extends StatelessWidget {
             Stack(
               children: [
                 isTablet
-                    ? SizedBox()
+                    ? const SizedBox()
                     : Container(
                         height: 217,
                         width: 375,
@@ -126,7 +126,7 @@ class Okompaniya extends StatelessWidget {
                                   ),
                                   Padding(
                                       padding:
-                                          EdgeInsets.symmetric(horizontal: 70),
+                                          const EdgeInsets.symmetric(horizontal: 70),
                                       child: Text(
                                         snapshot.data!.data.title,
                                         textAlign: TextAlign.center,
@@ -146,7 +146,7 @@ class Okompaniya extends StatelessWidget {
                                       snapshot.data!.data.list[0],
                                       style: TextStyle(
                                         fontSize: isTablet ? 21 : 11,
-                                        color: Color(0xFFffffff),
+                                        color: const Color(0xFFffffff),
                                       ),
                                     ),
                                   ),
@@ -159,7 +159,7 @@ class Okompaniya extends StatelessWidget {
                                       snapshot.data!.data.list[1],
                                       style: TextStyle(
                                         fontSize: isTablet ? 21 : 11,
-                                        color: Color(0xFFffffff),
+                                        color: const Color(0xFFffffff),
                                       ),
                                     ),
                                   ),
@@ -172,15 +172,15 @@ class Okompaniya extends StatelessWidget {
                                       snapshot.data!.data.list[2],
                                       style: TextStyle(
                                         fontSize: isTablet ? 21 : 11,
-                                        color: Color(0xFFffffff),
+                                        color: const Color(0xFFffffff),
                                       ),
                                     ),
                                   ),
                                 ],
                               );
                             } else {
-                              return SpinKitPulse(
-                                color: const Color(0xFFff163e),
+                              return const SpinKitPulse(
+                                color: Color(0xFFff163e),
                               );
                             }
                           }),
@@ -199,7 +199,7 @@ class Okompaniya extends StatelessWidget {
                           useRootNavigator: false,
                           builder: (context) => Provider<String>.value(
                               value: providerToken.toString(),
-                              child: SobshitOProblem()),
+                              child: const SobshitOProblem()),
                         );
                       },
                       child: Container(

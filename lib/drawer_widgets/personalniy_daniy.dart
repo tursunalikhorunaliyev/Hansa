@@ -8,7 +8,6 @@ import 'package:hansa_app/drawer_widgets/popup_personal_gorod.dart';
 import 'package:hansa_app/drawer_widgets/popup_personal_magazin.dart';
 import 'package:hansa_app/drawer_widgets/referal_silka.dart';
 import 'package:hansa_app/drawer_widgets/text_field_for_personal.dart';
-import 'package:hansa_app/enums/enum_action_view.dart';
 import 'package:hansa_app/providers/provider_personal_textFields.dart';
 import 'package:provider/provider.dart';
 

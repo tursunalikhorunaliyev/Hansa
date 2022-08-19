@@ -12,8 +12,7 @@ class BlocForStatiComment {
     Map<String, String> headers = {'token': token};
     http.Response response =
         await http.get(Uri.parse('http://hansa-lab.ru/$url'), headers: headers);
-    log(jsonDecode(response.body)['data'].toString() +
-        "    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+    log("${jsonDecode(response.body)['data']}    >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
     return StatiComentModel.fromMap(jsonDecode(response.body));
   }
 }

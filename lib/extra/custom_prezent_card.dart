@@ -1,22 +1,11 @@
-import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_html/flutter_html.dart';
-import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hansa_app/blocs/bloc_prezent_otkrit.dart';
 import 'package:hansa_app/blocs/favourite_bloc.dart';
-import 'package:hansa_app/blocs/menu_events_bloc.dart';
-import 'package:hansa_app/classes/sned_url_prezent_otkrit.dart';
 import 'package:hansa_app/extra/custom_paint_clipper.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hansa_app/middle_part_widgets/present_and_achive.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class CustomPrezentCard extends StatefulWidget {
   CustomPrezentCard({
@@ -101,7 +90,7 @@ class _CustomPrezentCardState extends State<CustomPrezentCard> {
                           ),
                         ),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       PhysicalModel(
                         shadowColor: Colors.grey.withOpacity(.5),
                         color: Colors.transparent,

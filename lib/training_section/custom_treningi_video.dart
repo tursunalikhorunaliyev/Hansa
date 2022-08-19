@@ -1,5 +1,3 @@
-import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -37,7 +35,7 @@ class CustomTreningiVideo extends StatelessWidget {
                       color: const Color(0xffffffff),
                       child: Column(
                         children: [
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                           Row(
@@ -84,7 +82,7 @@ class CustomTreningiVideo extends StatelessWidget {
                               )
                             ],
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 10,
                           ),
                         ],
@@ -99,17 +97,17 @@ class CustomTreningiVideo extends StatelessWidget {
                             curve: snapshotDetectTap.data == true
                                 ? Curves.bounceOut
                                 : Curves.bounceOut,
-                            duration: Duration(milliseconds: 500),
+                            duration: const Duration(milliseconds: 500),
                             width: 355,
                             height: snapshotDetectTap.data == true ? 20 : 0,
-                            decoration: BoxDecoration(
-                                color: const Color(0xffffffff),
+                            decoration: const BoxDecoration(
+                                color: Color(0xffffffff),
                                 borderRadius: BorderRadius.only(
                                   bottomLeft: Radius.circular(10),
                                   bottomRight: Radius.circular(10),
                                 )),
                             child: AnimatedOpacity(
-                              duration: Duration(milliseconds: 500),
+                              duration: const Duration(milliseconds: 500),
                               opacity: snapshotDetectTap.data == true ? 1 : 0,
                               child: Padding(
                                 padding:
@@ -126,7 +124,7 @@ class CustomTreningiVideo extends StatelessWidget {
                                       return LinearPercentIndicator(
                                         alignment: MainAxisAlignment.center,
                                         padding: const EdgeInsets.all(0),
-                                        barRadius: Radius.circular(5),
+                                        barRadius: const Radius.circular(5),
                                         lineHeight: 6,
                                         percent: snapshotDouble.data! / 100,
                                         backgroundColor: Colors.transparent,

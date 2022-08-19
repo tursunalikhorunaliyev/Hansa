@@ -25,8 +25,8 @@ class CustomBlackAppBar extends StatelessWidget {
               providerChewieController..seekTo(Duration.zero)..pause();
               providerScaffoldKey.currentState!.openDrawer();
             },
-            icon: HamburgerIcon(
-              color: const Color(0xffffffff),
+            icon: const HamburgerIcon(
+              color: Color(0xffffffff),
             ),
           ),
           Column(

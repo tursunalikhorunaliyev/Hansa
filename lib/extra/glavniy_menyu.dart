@@ -112,7 +112,7 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                 fit: BoxFit.fill,
                               );
                             } else {
-                              return CircularProgressIndicator(
+                              return const CircularProgressIndicator(
                                 color: Color(0xFFe21a37),
                               );
                             }
@@ -196,7 +196,7 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                   color: const Color(0xFFffffff)),
                             );
                           } else {
-                            return Center(
+                            return const Center(
                               child: Text(
                                 "Загрузка..",
                                 style: TextStyle(
@@ -228,7 +228,7 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                             ],
                           );
                         } else {
-                          return SizedBox();
+                          return const SizedBox();
                         }
                       }),
                 ),
@@ -430,7 +430,7 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                   child: Container(
                     decoration: const BoxDecoration(color: Color(0xFF2c2c2c)),
                     child: SingleChildScrollView(
-                      physics: BouncingScrollPhysics(),
+                      physics: const BouncingScrollPhysics(),
                       padding: EdgeInsets.only(
                           top: snapshot.data == ActionChange.izboreny ||
                                   snapshot.data == ActionChange.statistik
@@ -445,22 +445,22 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                               snapshot.data == ActionChange.izboreny
                                   ? Wrap(
                                       children: [
-                                        Izbrannoe(),
+                                        const Izbrannoe(),
                                         SizedBox(
                                           height: isTablet ? 700 : 509,
                                         ),
-                                        ReferalSilka(),
+                                        const ReferalSilka(),
                                       ],
                                     )
                                   : snapshot.data == ActionChange.personal
                                       ? const PersonalniyDaniy()
                                       : snapshot.data == ActionChange.statistik
                                           ? Wrap(children: [
-                                              DrawerStats(),
+                                              const DrawerStats(),
                                               SizedBox(
                                                 height: isTablet ? 509 : 460,
                                               ),
-                                              ReferalSilka()
+                                              const ReferalSilka()
                                             ])
                                           : snapshot.data ==
                                                   ActionChange.nastroyka
@@ -490,7 +490,7 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                     blocChangeProfileProvider.dataSink
                                         .add(ActionChange.statistik);
                                   },
-                                  child: TextIcon(
+                                  child: const TextIcon(
                                     text: "Рейтинг",
                                     iconUrl:
                                         "assets/free-icon-rating-4569150.png",
@@ -513,7 +513,7 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                           blocChangeProfileProvider.dataSink
                                               .add(ActionChange.nastroyka);
                                         },
-                                        child: TextIcon(
+                                        child: const TextIcon(
                                           text: "Настройки",
                                           iconUrl: "assets/icon.png",
                                         ),
@@ -530,11 +530,11 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                     builder: (contextDialog) =>
                                         Provider<String>.value(
                                             value: providerToken.toString(),
-                                            child: SobshitOProblem()),
+                                            child: const SobshitOProblem()),
                                   );
                                 },
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 33),
+                                child: const Padding(
+                                  padding: EdgeInsets.only(left: 33),
                                   child: TextIcon(
                                     text: "Задать вопрос",
                                     iconUrl: "assets/question.png",
@@ -550,9 +550,9 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                 padding: const EdgeInsets.only(left: 39),
                                 child: GestureDetector(
                                   onTap: () {
-                                    ExitAccountDialog();
+                                    const ExitAccountDialog();
                                   },
-                                  child: TextIcon(
+                                  child: const TextIcon(
                                     text: "Выход из акаунта",
                                     iconUrl: "assets/iconiu.png",
                                   ),
@@ -575,13 +575,13 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
     String token,
     String firstname,
     String lastname,
-    String borned_at,
+    String bornedAt,
     String phone,
-    String country_type,
-    String city_id,
-    String job_id,
-    String store_id,
-    String shop_address,
+    String countryType,
+    String cityId,
+    String jobId,
+    String storeId,
+    String shopAddress,
   ) async {
     http.Response response = await http
         .post(Uri.parse("http://hansa-lab.ru/api/site/account"), headers: {
@@ -589,13 +589,13 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
     }, body: {
       "firstname": firstname,
       "lastname": lastname,
-      "borned_at": borned_at,
+      "borned_at": bornedAt,
       "phone": phone,
-      "country_type": country_type,
-      "city_id": city_id,
-      "job_id": job_id,
-      "store_id": store_id,
-      "shop_address": shop_address,
+      "country_type": countryType,
+      "city_id": cityId,
+      "job_id": jobId,
+      "store_id": storeId,
+      "shop_address": shopAddress,
     });
     print(response.statusCode);
     print(response.body);

@@ -8,9 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/read_stati_model.dart';
 import 'package:hansa_app/api_services/read_stati_send_comment_service.dart';
 import 'package:hansa_app/api_services/read_stati_service.dart';
-import 'package:hansa_app/blocs/read_stati_bloc.dart';
 import 'package:hansa_app/classes/send_link.dart';
-import 'package:hansa_app/drawer_widgets/text_icon.dart';
 import 'package:hansa_app/extra/custom_title.dart';
 import 'package:hansa_app/read_statie_section/stati_comment.dart';
 import 'package:lottie/lottie.dart';
@@ -51,7 +49,7 @@ class _ReadStatiState extends State<ReadStati> {
                 children: [
                   Column(
                     children: [
-                      CustomTitle(
+                      const CustomTitle(
                           imagePath: "assets/iconStati.png", title: "Статьи"),
                       ClipRRect(
                           borderRadius: const BorderRadius.only(
@@ -160,21 +158,19 @@ class _ReadStatiState extends State<ReadStati> {
                                             width: isTablet ? 15 : 0,
                                           ),
                                           Text(
-                                            "Коментариев " +
-                                                snapshot
+                                            "Коментариев ${snapshot
                                                     .data!
                                                     .article
                                                     .read
                                                     .listMessageComment
                                                     .list
-                                                    .length
-                                                    .toString(),
+                                                    .length}",
                                             style: GoogleFonts.montserrat(
                                               color: const Color(0xFF777777),
                                               fontSize: 13.81,
                                             ),
                                           ),
-                                          isTablet ? Spacer() : SizedBox(),
+                                          isTablet ? const Spacer() : const SizedBox(),
                                           SizedBox(
                                             height: 46.03666666666667,
                                             width: 46.03666666666667,
@@ -257,7 +253,7 @@ class _ReadStatiState extends State<ReadStati> {
                                                 color: Colors.black,
                                                 fontSize: 20),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 30,
                                           ),
                                           IconButton(
@@ -296,7 +292,7 @@ class _ReadStatiState extends State<ReadStati> {
                                                   });
                                                 }
                                               },
-                                              icon: Icon(Icons.send)),
+                                              icon: const Icon(Icons.send)),
                                         ],
                                       ),
                                     ),
@@ -351,13 +347,13 @@ class _ReadStatiState extends State<ReadStati> {
             return Expanded(
               child: Column(
                 children: [
-                  Spacer(),
+                  const Spacer(),
                   Lottie.asset(
                     'assets/pre.json',
                     height: 70,
                     width: 70,
                   ),
-                  Spacer()
+                  const Spacer()
                 ],
               ),
             );

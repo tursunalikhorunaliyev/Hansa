@@ -10,7 +10,7 @@ class PopupFullRegistrNazvaniySeti extends StatefulWidget {
   final Color borderColor;
   final Color hintColor;
   final VoidCallback onTap;
-  PopupFullRegistrNazvaniySeti(
+  const PopupFullRegistrNazvaniySeti(
       {Key? key,
       required this.borderColor,
       required this.hintColor,

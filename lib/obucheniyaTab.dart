@@ -8,7 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class StackedStackObuch extends StatefulWidget {
-  StackedStackObuch(
+  const StackedStackObuch(
       {Key? key,
       required this.buttonColor,
       required this.bottomButtonText,
@@ -70,7 +70,7 @@ class _StackedStackObuchState extends State<StackedStackObuch> {
                           ),
                         )),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Container(

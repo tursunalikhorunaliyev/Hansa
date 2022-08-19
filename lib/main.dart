@@ -34,9 +34,6 @@ import 'package:hansa_app/providers/treningi_photos_provider.dart';
 import 'package:hansa_app/providers/treningi_video_changer_provider.dart';
 import 'package:hansa_app/providers/treningi_videos_provider.dart';
 import 'package:hive_flutter/adapters.dart';
-import 'package:hansa_app/screens/splash_screen.dart';
-import 'package:hansa_app/test.dart';
-import 'package:hansa_app/tursunali.dart';
 import 'package:provider/provider.dart';
 
 void main(List<String> args) async {
@@ -110,9 +107,9 @@ class MyApp extends StatelessWidget {
             GlobalWidgetsLocalizations.delegate
           ],
           supportedLocales: [
-            const Locale("en"),
-            const Locale("ru"),
-            const Locale("ar")
+            Locale("en"),
+            Locale("ru"),
+            Locale("ar")
           ],
           locale: Locale("ru"),
           debugShowCheckedModeBanner: false,

@@ -15,7 +15,7 @@ class _SobshitOProblemSuccessState extends State<SobshitOProblemSuccess> {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Padding(
-        padding: EdgeInsets.only(top: 120),
+        padding: const EdgeInsets.only(top: 120),
         child: SingleChildScrollView(
           physics: const BouncingScrollPhysics(),
           child: Padding(
@@ -57,7 +57,7 @@ class _SobshitOProblemSuccessState extends State<SobshitOProblemSuccess> {
                             const SizedBox(
                               height: 45,
                             ),
-                            Icon(
+                            const Icon(
                               Icons.check,
                               color: Color(0xFF25b049),
                             ),

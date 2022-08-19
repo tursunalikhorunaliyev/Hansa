@@ -99,7 +99,7 @@ class _OKompaniiState extends State<OKompanii> {
                               child: GridView(
                                 controller: scroll,
                                 shrinkWrap: true,
-                                physics: BouncingScrollPhysics(),
+                                physics: const BouncingScrollPhysics(),
                                 gridDelegate:
                                     SliverGridDelegateWithFixedCrossAxisCount(
                                         crossAxisCount: 2,
@@ -177,7 +177,7 @@ class _OKompaniiState extends State<OKompanii> {
                                             context: context,
                                             builder: (context) {
                                               return AlertDialog(
-                                                actionsPadding: EdgeInsets.only(
+                                                actionsPadding: const EdgeInsets.only(
                                                     bottom: 20, right: 20),
                                                 alignment: Alignment.center,
                                                 content: StreamBuilder<double>(
@@ -213,7 +213,7 @@ class _OKompaniiState extends State<OKompanii> {
                                                                     .cover,
                                                               ),
                                                             ),
-                                                            SizedBox(
+                                                            const SizedBox(
                                                               height: 10,
                                                             ),
                                                             LinearPercentIndicator(
@@ -223,7 +223,7 @@ class _OKompaniiState extends State<OKompanii> {
                                                               padding:
                                                                   const EdgeInsets
                                                                       .all(0),
-                                                              barRadius: Radius
+                                                              barRadius: const Radius
                                                                   .circular(5),
                                                               lineHeight: 15,
                                                               //width: 325,
@@ -247,7 +247,7 @@ class _OKompaniiState extends State<OKompanii> {
                                                               progressColor:
                                                                   Colors.green,
                                                             ),
-                                                            SizedBox(
+                                                            const SizedBox(
                                                               height: 10,
                                                             ),
                                                             Flexible(
@@ -322,7 +322,7 @@ class _OKompaniiState extends State<OKompanii> {
                                       context: context,
                                       builder: (context) {
                                         return AlertDialog(
-                                          actionsPadding: EdgeInsets.only(
+                                          actionsPadding: const EdgeInsets.only(
                                               bottom: 20, right: 20),
                                           alignment: Alignment.center,
                                           content: StreamBuilder<double>(
@@ -353,7 +353,7 @@ class _OKompaniiState extends State<OKompanii> {
                                                         fit: BoxFit.cover,
                                                       ),
                                                     ),
-                                                    SizedBox(
+                                                    const SizedBox(
                                                       height: 10,
                                                     ),
                                                     LinearPercentIndicator(
@@ -364,7 +364,7 @@ class _OKompaniiState extends State<OKompanii> {
                                                           const EdgeInsets.all(
                                                               0),
                                                       barRadius:
-                                                          Radius.circular(5),
+                                                          const Radius.circular(5),
                                                       lineHeight: 15,
                                                       //width: 325,
                                                       percent:
@@ -384,7 +384,7 @@ class _OKompaniiState extends State<OKompanii> {
                                                       progressColor:
                                                           Colors.green,
                                                     ),
-                                                    SizedBox(
+                                                    const SizedBox(
                                                       height: 10,
                                                     ),
                                                     Flexible(

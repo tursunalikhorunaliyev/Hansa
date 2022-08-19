@@ -9,7 +9,7 @@ class TextIcon extends StatefulWidget {
  final double size;
   final double widthSize;
 
-  TextIcon(
+  const TextIcon(
       {Key? key,
       required this.text,
       required this.iconUrl,

@@ -1,12 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/blocs/favourite_bloc.dart';
 import 'package:hansa_app/extra/custom_paint_clipper.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class PrezentOtkritTabletCard extends StatefulWidget {
   PrezentOtkritTabletCard({

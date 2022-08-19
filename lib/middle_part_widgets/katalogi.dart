@@ -35,7 +35,7 @@ class _KatalogiState extends State<Katalogi> {
             if (snapshot.hasData) {
               final data = snapshot.data!.data;
               return SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 child: Column(
                   children: [
                     StickyHeader(
@@ -55,7 +55,7 @@ class _KatalogiState extends State<Katalogi> {
                                     const EdgeInsets.symmetric(horizontal: 25),
                                 child: GridView(
                                   controller: scroll,
-                                  physics: BouncingScrollPhysics(),
+                                  physics: const BouncingScrollPhysics(),
                                   shrinkWrap: true,
                                   gridDelegate:
                                       SliverGridDelegateWithFixedCrossAxisCount(

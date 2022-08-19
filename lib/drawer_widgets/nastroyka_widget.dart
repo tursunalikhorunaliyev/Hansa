@@ -11,12 +11,12 @@ class NastroykaWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Wrap(
       children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 26),
+        const Padding(
+          padding: EdgeInsets.only(left: 26),
           child: TextIcon(
             text: "Настройки",
             iconUrl: "assets/icon.png",
-            colorIcon: const Color(0xFFaaaaaa),
+            colorIcon: Color(0xFFaaaaaa),
           ),
         ),
         const SizedBox(

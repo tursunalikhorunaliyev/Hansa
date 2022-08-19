@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:hansa_app/screens/splash_screen.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -17,7 +15,7 @@ class _PermissionHandlerScreenState extends State<PermissionHandlerScreen> {
     getPermission().then((value) {
       if (value) {
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => SplashScreen()));
+            context, MaterialPageRoute(builder: (context) => const SplashScreen()));
       }
     });
     super.initState();
@@ -34,7 +32,7 @@ class _PermissionHandlerScreenState extends State<PermissionHandlerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: Colors.white,
     );
   }

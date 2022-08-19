@@ -101,7 +101,7 @@ class CustomTreningiReg extends StatelessWidget {
             ],
           ),
         ),
-        CustomDoubleClipItem(
+        const CustomDoubleClipItem(
           backgroundColor: Color(0xffff163e),
           buttonTextColor: Color(0xffffffff),
           buttonColor: Color(0xff232323),

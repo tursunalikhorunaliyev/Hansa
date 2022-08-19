@@ -22,7 +22,7 @@ class TabletPhotosItem extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
                       child: ConstrainedBox(
-                        constraints: BoxConstraints(
+                        constraints: const BoxConstraints(
                             maxHeight: 520, maxWidth: double.infinity),
                         child: PageView.builder(
                           allowImplicitScrolling: true,
@@ -127,7 +127,7 @@ class TabletPhotosItem extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8),
                 child: Container(
                   height: 150,
-                  padding: EdgeInsets.only(right: 20, left: 20),
+                  padding: const EdgeInsets.only(right: 20, left: 20),
                   width: double.infinity,
                   color: const Color(0xffffffff),
                   child: Row(

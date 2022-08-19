@@ -34,12 +34,12 @@ class _BottomRefreshState extends State<BottomRefresh> {
             if (mode == LoadStatus.loading) {
               return Container(
                 alignment: Alignment.center,
-                child: Text("Loading"),
+                child: const Text("Loading"),
               );
             } else {
               return Container(
                 alignment: Alignment.center,
-                child: Text("Loaded"),
+                child: const Text("Loaded"),
               );
             }
           },

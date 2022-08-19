@@ -117,7 +117,7 @@ class _FullRegistrState extends State<FullRegistr> {
                             isTablet ? FontWeight.normal : FontWeight.normal,
                         borderColor:
                             nameIsEmpty ? Colors.red : const Color(0xFF000000),
-                        hintColor: nameIsEmpty ? Colors.red : Color(0xFF444444),
+                        hintColor: nameIsEmpty ? Colors.red : const Color(0xFF444444),
                         onTap: () => setState(() => nameIsEmpty = false),
                       ),
                       const SizedBox(
@@ -184,7 +184,7 @@ class _FullRegistrState extends State<FullRegistr> {
                                       phoneIsEmpty ? Colors.red : Colors.black),
                                   textStyle: style(FontWeight.w500, isTablet,
                                       phoneIsEmpty ? Colors.red : Colors.black),
-                                  selectorConfig: SelectorConfig(
+                                  selectorConfig: const SelectorConfig(
                                       leadingPadding: 0,
                                       useEmoji: false,
                                       showFlags: false,
@@ -247,7 +247,7 @@ class _FullRegistrState extends State<FullRegistr> {
                                             .selectedDate!.year
                                             .toString();
                                         dateBurnBloC.streamSink.add(
-                                            day + "." + month + "." + year);
+                                            "$day.$month.$year");
                                         Navigator.pop(context);
                                       },
                                     ));
@@ -255,6 +255,15 @@ class _FullRegistrState extends State<FullRegistr> {
                         },
                         child: Container(
                           alignment: Alignment.centerLeft,
+                          width: isTablet ? 538 : 325,
+                          height: isTablet ? 43 : 38,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFffffff),
+                            borderRadius: BorderRadius.circular(54),
+                            border: Border.all(
+                                width: dateIsEmpty ? 0.9 : 0.1,
+                                color: dateIsEmpty ? Colors.red : Colors.black),
+                          ),
                           child: Padding(
                             padding: const EdgeInsets.only(left: 14),
                             child: StreamBuilder<String>(
@@ -278,15 +287,6 @@ class _FullRegistrState extends State<FullRegistr> {
                                   );
                                 }),
                           ),
-                          width: isTablet ? 538 : 325,
-                          height: isTablet ? 43 : 38,
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFffffff),
-                            borderRadius: BorderRadius.circular(54),
-                            border: Border.all(
-                                width: dateIsEmpty ? 0.9 : 0.1,
-                                color: dateIsEmpty ? Colors.red : Colors.black),
-                          ),
                         ),
                       ),
                       const SizedBox(
@@ -299,7 +299,7 @@ class _FullRegistrState extends State<FullRegistr> {
                                 nazvaniyaIsEmpty ? Colors.red : Colors.black,
                             hintColor: nazvaniyaIsEmpty
                                 ? Colors.red
-                                : Color(0xff444444),
+                                : const Color(0xff444444),
                             onTap: () =>
                                 setState(() => nazvaniyaIsEmpty = false),
                           )),
@@ -313,7 +313,7 @@ class _FullRegistrState extends State<FullRegistr> {
                                 doljnostIsEmpty ? Colors.red : Colors.black,
                             hintColor: doljnostIsEmpty
                                 ? Colors.red
-                                : Color(0xff444444),
+                                : const Color(0xff444444),
                             onTap: () =>
                                 setState(() => doljnostIsEmpty = false),
                           )),
@@ -326,7 +326,7 @@ class _FullRegistrState extends State<FullRegistr> {
                             borderColor:
                                 gorodIsEmpty ? Colors.red : Colors.black,
                             hintColor:
-                                gorodIsEmpty ? Colors.red : Color(0xff444444),
+                                gorodIsEmpty ? Colors.red : const Color(0xff444444),
                             onTap: () => setState(() => gorodIsEmpty = false),
                           )),
                       const SizedBox(
@@ -595,8 +595,9 @@ class _FullRegistrState extends State<FullRegistr> {
     if (shopadress.isEmpty) setState(() => adressIsEmpty = true);
     if (phone.length < 5) setState(() => phoneIsEmpty = true);
     if (bornedAt.length < 3) setState(() => dateIsEmpty = true);
-    if (nazvaniya.isEmpty && shopnet.isEmpty)
+    if (nazvaniya.isEmpty && shopnet.isEmpty) {
       setState(() => nazvaniyaIsEmpty = true);
+    }
     if (dolj.isEmpty) setState(() => doljnostIsEmpty = true);
     if (gorod.isEmpty) setState(() => gorodIsEmpty = true);
     if (firstname.isNotEmpty &&

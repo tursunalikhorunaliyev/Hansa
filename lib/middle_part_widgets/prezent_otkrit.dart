@@ -3,21 +3,16 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/model_prezent_otkrit.dart';
-import 'package:hansa_app/api_models.dart/prezintatsi_model.dart';
 import 'package:hansa_app/api_services/welcome_api.dart';
 import 'package:hansa_app/blocs/bloc_prezent_otkrit.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
-import 'package:hansa_app/blocs/prezintatsia_bloc.dart';
 import 'package:hansa_app/classes/sned_url_prezent_otkrit.dart';
-import 'package:hansa_app/extra/archive_card.dart';
 import 'package:hansa_app/extra/custom_prezent_card.dart';
-import 'package:hansa_app/extra/prezentatTabCard.dart';
 import 'package:hansa_app/middle_part_widgets/prezent_otkrit_tablet_card.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class PrezentOtkrit extends StatefulWidget {
   const PrezentOtkrit({Key? key}) : super(key: key);
@@ -66,7 +61,7 @@ class _PrezentOtkritState extends State<PrezentOtkrit> {
                                 width: isTablet ? 55.w : 70.w,
                                 height: isTablet ? 46.h : 42.h,
                                 decoration: BoxDecoration(
-                                    color: Color(0XFFff163e),
+                                    color: const Color(0XFFff163e),
                                     borderRadius: BorderRadius.only(
                                         topRight: Radius.circular(
                                             isTablet ? 45.r : 21.r),
@@ -106,9 +101,9 @@ class _PrezentOtkritState extends State<PrezentOtkrit> {
                             child: GridView(
                               controller: scroll,
                               shrinkWrap: true,
-                              physics: BouncingScrollPhysics(),
+                              physics: const BouncingScrollPhysics(),
                               gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
                                       crossAxisCount: 2,
                                       crossAxisSpacing: 10,
                                       mainAxisExtent: 380),

@@ -63,7 +63,7 @@ class _TreningiState extends State<Treningi> {
                                         decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(8),
-                                            image: DecorationImage(
+                                            image: const DecorationImage(
                                                 image: AssetImage(
                                                     'assets/event-default.png'),
                                                 fit: BoxFit.cover)),
@@ -76,7 +76,7 @@ class _TreningiState extends State<Treningi> {
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
                                                 children: [
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     height: 13,
                                                   ),
                                                   Row(
@@ -122,7 +122,7 @@ class _TreningiState extends State<Treningi> {
                                                                         64),
                                                             child: Container(
                                                               height: 25,
-                                                              color: Color(
+                                                              color: const Color(
                                                                   0xff25b049),
                                                               child: Center(
                                                                 child: Padding(
@@ -150,12 +150,10 @@ class _TreningiState extends State<Treningi> {
                                                     ],
                                                   ),
                                                   Text(
-                                                    snapshot.data!.data.webinar
+                                                    "${snapshot.data!.data.webinar
                                                             .data.first.date
                                                             .trim()
-                                                            .substring(8, 10) +
-                                                        " - " +
-                                                        toDateString(snapshot
+                                                            .substring(8, 10)} - ${toDateString(snapshot
                                                             .data!
                                                             .data
                                                             .webinar
@@ -163,13 +161,13 @@ class _TreningiState extends State<Treningi> {
                                                             .first
                                                             .date
                                                             .trim()
-                                                            .substring(5, 7)),
+                                                            .substring(5, 7))}",
                                                     style:
                                                         GoogleFonts.montserrat(
                                                             color: Colors.white,
                                                             fontSize: 20),
                                                   ),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     height: 20,
                                                   ),
                                                   Text(
@@ -194,7 +192,7 @@ class _TreningiState extends State<Treningi> {
                                                                           .w200,
                                                                   fontSize:
                                                                       24)),
-                                                  SizedBox(
+                                                  const SizedBox(
                                                     height: 50,
                                                   ),
                                                 ],
@@ -248,7 +246,7 @@ class _TreningiState extends State<Treningi> {
                                     const EdgeInsets.symmetric(horizontal: 25),
                                 child: GridView(
                                   controller: scroll,
-                                  physics: BouncingScrollPhysics(),
+                                  physics: const BouncingScrollPhysics(),
                                   shrinkWrap: true,
                                   gridDelegate:
                                       const SliverGridDelegateWithFixedCrossAxisCount(

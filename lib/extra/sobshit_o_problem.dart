@@ -136,7 +136,7 @@ class _SobshitOProblemState extends State<SobshitOProblem> {
                                                     color: snapshot.data!
                                                         ? const Color(
                                                             0xFFff163e)
-                                                        : Color(0xffa1b7c2),
+                                                        : const Color(0xffa1b7c2),
                                                   ),
                                                 ),
                                                 
@@ -239,7 +239,7 @@ class _SobshitOProblemState extends State<SobshitOProblem> {
           ),
         ),
       ),
-      back: SobshitOProblemSuccess(),
+      back: const SobshitOProblemSuccess(),
     );
   }
 

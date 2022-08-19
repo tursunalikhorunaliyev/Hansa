@@ -34,7 +34,7 @@ class _TursunaliState extends State<Tursunali> {
               
                 ),
             ),
-              SizedBox(height: 80,),
+              const SizedBox(height: 80,),
             MaterialButton(onPressed: (){
               chewieController.pause();
               chewieController.videoPlayerController.pause();

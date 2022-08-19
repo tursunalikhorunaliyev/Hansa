@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:chewie/chewie.dart';
@@ -312,7 +311,7 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                                                 true
                                                             ? Curves.bounceOut
                                                             : Curves.bounceOut,
-                                                        duration: Duration(
+                                                        duration: const Duration(
                                                             milliseconds: 500),
                                                         width: 355,
                                                         height:
@@ -322,8 +321,8 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                                                 ? 18
                                                                 : 0,
                                                         decoration:
-                                                            BoxDecoration(
-                                                                color: const Color(
+                                                            const BoxDecoration(
+                                                                color: Color(
                                                                     0xffffffff),
                                                                 borderRadius:
                                                                     BorderRadius
@@ -336,7 +335,7 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                                                           10),
                                                                 )),
                                                         child: AnimatedOpacity(
-                                                          duration: Duration(
+                                                          duration: const Duration(
                                                               milliseconds:
                                                                   500),
                                                           opacity:
@@ -377,7 +376,7 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                                                     padding:
                                                                         const EdgeInsets
                                                                             .all(0),
-                                                                    barRadius: Radius
+                                                                    barRadius: const Radius
                                                                         .circular(
                                                                             5),
                                                                     lineHeight:

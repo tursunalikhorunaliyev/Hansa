@@ -12,7 +12,6 @@ import 'package:hansa_app/stacked_stack.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:video_player/video_player.dart';
 
 class WelcomeWidget extends StatefulWidget {
@@ -53,7 +52,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                       child: ScrollConfiguration(
                         behavior: MyBehavior(),
                         child: SingleChildScrollView(
-                          physics: BouncingScrollPhysics(),
+                          physics: const BouncingScrollPhysics(),
                           child: Column(
                             children: [
                               Padding(
@@ -74,10 +73,10 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                 ),
                               ),
                               GridView(
-                                physics: BouncingScrollPhysics(),
+                                physics: const BouncingScrollPhysics(),
                                 shrinkWrap: true,
                                 gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
                                   crossAxisCount: 2,
                                   crossAxisSpacing: 10,
                                   mainAxisExtent: 375,
@@ -158,7 +157,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                     )
                   : SingleChildScrollView(
                       controller: scroll,
-                      physics: BouncingScrollPhysics(),
+                      physics: const BouncingScrollPhysics(),
                       child: Column(
                         children: [
                           Column(

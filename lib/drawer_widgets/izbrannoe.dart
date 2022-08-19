@@ -96,7 +96,7 @@ class _IzbrannoeState extends State<Izbrannoe> {
                                     children: [
                                       ClipRRect(
                                         borderRadius: BorderRadius.circular(5),
-                                        child: Container(
+                                        child: SizedBox(
                                           height: 65,
                                           width: 120,
                                           child: CachedNetworkImage(
@@ -136,7 +136,7 @@ class _IzbrannoeState extends State<Izbrannoe> {
                                                   fontWeight: FontWeight.bold),
                                             ),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 5,
                                           ),
                                           Row(
@@ -187,7 +187,7 @@ class _IzbrannoeState extends State<Izbrannoe> {
                                                             2
                                                         ? Border.all(
                                                             width: 2,
-                                                            color: Color(
+                                                            color: const Color(
                                                                 0xFF313131))
                                                         : Border.all(
                                                             color: Colors
@@ -202,7 +202,7 @@ class _IzbrannoeState extends State<Izbrannoe> {
                                                                 .type ==
                                                             2
                                                         ? Colors.white
-                                                        : Color(0xFF313131),
+                                                        : const Color(0xFF313131),
                                                   ),
                                                   child: Text(
                                                     snapshot
@@ -222,7 +222,7 @@ class _IzbrannoeState extends State<Izbrannoe> {
                                                                 1
                                                             ? const Color(
                                                                 0xFFFFFFFF)
-                                                            : Color(0xFF313131),
+                                                            : const Color(0xFF313131),
                                                         fontSize: 10),
                                                   ),
                                                 ),
@@ -246,19 +246,19 @@ class _IzbrannoeState extends State<Izbrannoe> {
                     } else {
                       return Column(
                         children: [
-                          Spacer(),
+                          const Spacer(),
                           Lottie.asset(
                             'assets/pre.json',
                             height: 70,
                             width: 70,
                           ),
-                          Spacer()
+                          const Spacer()
                         ],
                       );
                     }
                   }),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
           ],

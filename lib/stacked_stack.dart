@@ -90,12 +90,12 @@ class StackedStack extends StatelessWidget {
                                             children: [
                                               Text(
                                                 day,
-                                                style: TextStyle(fontSize: 11),
+                                                style: const TextStyle(fontSize: 11),
                                               ),
                                               Text(
                                                 month,
                                                 textAlign: TextAlign.center,
-                                                style: TextStyle(fontSize: 9),
+                                                style: const TextStyle(fontSize: 9),
                                               ),
                                             ],
                                           ),
@@ -108,7 +108,7 @@ class StackedStack extends StatelessWidget {
                         ],
                       )),
                   //  Spacer(),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Container(

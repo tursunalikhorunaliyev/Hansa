@@ -26,7 +26,7 @@ class PrezintatsiaBLoC {
 
   Future<PrezintatsiaModel> getPrezintatsiyaData(token, String url) async {
     http.Response response = await http.post(
-      Uri.parse("http://hansa-lab.ru/${url}"),
+      Uri.parse("http://hansa-lab.ru/$url"),
       headers: {"token": token},
     );
 
@@ -34,7 +34,7 @@ class PrezintatsiaBLoC {
     print(response.body);
     print(
         "Status Code==========================================================================================");
-    log("http://hansa-lab.ru/${url} BIZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
+    log("http://hansa-lab.ru/$url BIZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
 
     return PrezintatsiaModel.fromMap(jsonDecode(response.body));
   }

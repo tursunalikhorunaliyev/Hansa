@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hansa_app/api_models.dart/read_stati_model.dart';
 import 'package:hansa_app/api_models.dart/stati_model.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/blocs/read_stati_bloc.dart';

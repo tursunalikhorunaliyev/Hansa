@@ -50,7 +50,7 @@ class _PresentArchiveState extends State<PresentArchive> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return SingleChildScrollView(
-                physics: BouncingScrollPhysics(),
+                physics: const BouncingScrollPhysics(),
                 child: Column(children: [
                   StickyHeader(
                       header: Container(
@@ -65,7 +65,7 @@ class _PresentArchiveState extends State<PresentArchive> {
                                 width: isTablet ? 55.w : 70.w,
                                 height: isTablet ? 46.h : 42.h,
                                 decoration: BoxDecoration(
-                                    color: Color(0XFFff163e),
+                                    color: const Color(0XFFff163e),
                                     borderRadius: BorderRadius.only(
                                         topRight: Radius.circular(
                                             isTablet ? 45.r : 21.r),
@@ -105,9 +105,9 @@ class _PresentArchiveState extends State<PresentArchive> {
                             child: GridView(
                               controller: scroll,
                               shrinkWrap: true,
-                              physics: BouncingScrollPhysics(),
+                              physics: const BouncingScrollPhysics(),
                               gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
                                       crossAxisCount: 2,
                                       crossAxisSpacing: 10,
                                       mainAxisExtent: 375),
@@ -126,7 +126,7 @@ class _PresentArchiveState extends State<PresentArchive> {
                                                       .dataGuides[index]
                                                       .pdfUrl ==
                                                   ''
-                                              ? SizedBox()
+                                              ? const SizedBox()
                                               : Padding(
                                                   padding: EdgeInsets.only(
                                                       top: isTablet
@@ -265,7 +265,7 @@ class _PresentArchiveState extends State<PresentArchive> {
                                       downloadButton: snapshot.data!.data.guides
                                                   .dataGuides[index].pdfUrl ==
                                               ''
-                                          ? SizedBox()
+                                          ? const SizedBox()
                                           : Padding(
                                               padding: EdgeInsets.only(
                                                   top: isTablet ? 22.h : 15.h),
@@ -346,7 +346,7 @@ class _PresentArchiveState extends State<PresentArchive> {
                   StickyHeader(
                       header: snapshot.data!.data.guidesArchive
                               .dataGuidesArchive.isEmpty
-                          ? SizedBox()
+                          ? const SizedBox()
                           : Container(
                               color: const Color(0xffeaeaea),
                               child: Padding(
@@ -360,7 +360,7 @@ class _PresentArchiveState extends State<PresentArchive> {
                                       width: isTablet ? 55.w : 70.w,
                                       height: isTablet ? 46.h : 42.h,
                                       decoration: BoxDecoration(
-                                          color: Color(0XFFff163e),
+                                          color: const Color(0XFFff163e),
                                           borderRadius: BorderRadius.only(
                                               topRight: Radius.circular(
                                                   isTablet ? 45.r : 21.r),
@@ -406,9 +406,9 @@ class _PresentArchiveState extends State<PresentArchive> {
                                 child: GridView(
                                   controller: scroll,
                                   shrinkWrap: true,
-                                  physics: BouncingScrollPhysics(),
+                                  physics: const BouncingScrollPhysics(),
                                   gridDelegate:
-                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
                                           crossAxisCount: 2,
                                           crossAxisSpacing: 10,
                                           mainAxisExtent: 375),
@@ -425,7 +425,7 @@ class _PresentArchiveState extends State<PresentArchive> {
                                                     .dataGuidesArchive[index]
                                                     .pdfUrl ==
                                                 ''
-                                            ? SizedBox()
+                                            ? const SizedBox()
                                             : Padding(
                                                 padding: EdgeInsets.only(
                                                     top:
@@ -537,7 +537,7 @@ class _PresentArchiveState extends State<PresentArchive> {
                                                             index]
                                                         .pdfUrl ==
                                                     ''
-                                                ? SizedBox()
+                                                ? const SizedBox()
                                                 : Padding(
                                                     padding: EdgeInsets.only(
                                                         top: isTablet

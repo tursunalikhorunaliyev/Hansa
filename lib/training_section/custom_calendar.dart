@@ -33,7 +33,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
       padding:
           EdgeInsets.only(left: 25.w, right: 25.w, top: isTablet ? 12.h : 0.h),
       child: SfDateRangePicker(
-        monthViewSettings: DateRangePickerMonthViewSettings(
+        monthViewSettings: const DateRangePickerMonthViewSettings(
          viewHeaderStyle: DateRangePickerViewHeaderStyle(
            
            textStyle: TextStyle(color: Colors.white)
@@ -62,16 +62,16 @@ class _CustomCalendarState extends State<CustomCalendar> {
         monthCellStyle:  DateRangePickerMonthCellStyle(
         
           cellDecoration: BoxDecoration(
-            color: Color(0xFFFFFFFF),
+            color: const Color(0xFFFFFFFF),
             borderRadius: BorderRadius.circular(0)
           ),
         
           disabledDatesDecoration: BoxDecoration(
-            color: Color(0xFF232323),
+            color: const Color(0xFF232323),
              borderRadius: BorderRadius.circular(0)
           ),
-          disabledDatesTextStyle: TextStyle(color: Colors.white),
-          textStyle: TextStyle(color: Colors.white),
+          disabledDatesTextStyle: const TextStyle(color: Colors.white),
+          textStyle: const TextStyle(color: Colors.white),
         ),
         selectionMode: DateRangePickerSelectionMode.multiple,
         initialSelectedDates: listDate,

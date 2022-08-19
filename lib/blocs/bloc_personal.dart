@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:hansa_app/api_models.dart/model_personal.dart';
-import 'package:hansa_app/enums/enum_action_view.dart';
 import 'package:http/http.dart' as http;
 
 class BlocPersonal {
