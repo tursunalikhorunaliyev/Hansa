@@ -69,9 +69,9 @@ class _KatalogiState extends State<Katalogi> {
                                             const EdgeInsets.only(bottom: 5.0),
                                         child: TabletKatalogItem(
                                           linkPDFSkachat: snapshot.data!.data
-                                              .guides.list[index].link,
+                                              .guides.list[index].pdfUrl,
                                           linkPDF: snapshot.data!.data.guides
-                                              .list[index].pdfUrl,
+                                              .list[index].link,
                                           imageUrl: data
                                               .guides.list[index].pictureLink,
                                           backgroundColor:
@@ -92,9 +92,9 @@ class _KatalogiState extends State<Katalogi> {
                                   (index) {
                                 return CustomKatalogItemDouble(
                                   linkPDFSkachat: snapshot
-                                      .data!.data.guides.list[index].link,
-                                  linkPDF: snapshot
                                       .data!.data.guides.list[index].pdfUrl,
+                                  linkPDF: snapshot
+                                      .data!.data.guides.list[index].link,
                                   imageUrl: data.guides.list[index].pictureLink,
                                   backgroundColor: const Color(0xff000004),
                                   buttonTextColor: const Color(0xffffffff),
@@ -138,9 +138,9 @@ class _KatalogiState extends State<Katalogi> {
                                             const EdgeInsets.only(bottom: 5.0),
                                         child: TabletKatalogItem(
                                           linkPDFSkachat: snapshot.data!.data
-                                              .guidesArchive.list[index].link,
-                                          linkPDF: snapshot.data!.data
                                               .guidesArchive.list[index].pdfUrl,
+                                          linkPDF: snapshot.data!.data
+                                              .guidesArchive.list[index].link,
                                           imageUrl: data.guidesArchive
                                               .list[index].pictureLink,
                                           backgroundColor:
@@ -162,9 +162,9 @@ class _KatalogiState extends State<Katalogi> {
                                   data.guidesArchive.list.length, (index) {
                                 return CustomKatalogItemDouble(
                                   linkPDFSkachat: snapshot.data!.data
-                                      .guidesArchive.list[index].link,
+                                      .guidesArchive.list[index].pdfUrl,
                                   linkPDF: snapshot.data!.data.guidesArchive
-                                      .list[index].pdfUrl,
+                                      .list[index].link,
                                   imageUrl: data
                                       .guidesArchive.list[index].pictureLink,
                                   backgroundColor: const Color(0xff000004),

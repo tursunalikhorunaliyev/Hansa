@@ -124,7 +124,7 @@ class _CustomDoubleClipItemState extends State<CustomDoubleClipItem> {
                           onTap: () {
                             setState(() {
                               launched = _launchInBrowser(
-                                  Uri.parse("http://${widget.linkPDF}"));
+                                  Uri.parse(widget.linkPDF));
                             });
                           },
                           child: ClipRRect(
