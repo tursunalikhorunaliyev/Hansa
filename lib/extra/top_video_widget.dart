@@ -77,12 +77,14 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
     super.initState();
     initVideo();
   }
+
   @override
   void dispose() {
     chewieController.dispose();
     chewieController.videoPlayerController.dispose();
     super.dispose();
   }
+
   final blocDetectTap = BlocDetectTap();
   final blocVideoApi = BlocVideoApi();
 
@@ -123,8 +125,7 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
 
   @override
   Widget build(BuildContext context) {
-        final isTablet = Provider.of<bool>(context);
-
+    final isTablet = Provider.of<bool>(context);
     final menuEventsBloCProvider = Provider.of<MenuEventsBloC>(context);
     final title = Provider.of<VideoTitleProvider>(context);
     final index = Provider.of<VideoIndexProvider>(context);
@@ -170,7 +171,7 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
                   Column(
                     children: [
                       SizedBox(
-                        width: 355,
+                        width: isTablet ? 800 : 355,
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
@@ -192,8 +193,8 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
                                   borderRadius: BorderRadius.circular(64),
                                   child: Container(
                                     padding: const EdgeInsets.all(7),
-                                    constraints: const BoxConstraints(
-                                      minWidth: 90,
+                                    constraints: BoxConstraints(
+                                      minWidth: isTablet ? 150 : 90,
                                     ),
                                     color: const Color(0xffff163e),
                                     child: Center(
@@ -201,7 +202,7 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
                                         "Открыть раздел",
                                         style: GoogleFonts.montserrat(
                                           color: const Color(0xffffffff),
-                                          fontSize: 10,
+                                          fontSize: isTablet ? 14 : 10,
                                         ),
                                       ),
                                     ),
@@ -224,8 +225,8 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(15),
                     child: SizedBox(
-                      width: 355,
-                      height: 200,
+                      width: isTablet ? 800 : 355,
+                      height: isTablet ? 450 : 200,
                       child: Center(
                         child: Chewie(
                           controller: chewieController,
@@ -248,7 +249,6 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
                                     return CustomTreningiVideo(
                                       onTap: () {
                                         blocDetectTap.dataSink.add(true);
-
                                         if (snapshotProgress.data == null ||
                                             snapshotProgress.data == 0) {
                                           downloadFile(
