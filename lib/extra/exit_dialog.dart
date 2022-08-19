@@ -36,12 +36,13 @@ class ExitDialog extends StatelessWidget {
               SizedBox(
                 height: 30,
               ),
+              //Salom
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   GestureDetector(
                     onTap: () {
-                      SystemNavigator.pop();
+                      exit(0);
                     },
                     child: Container(
                       alignment: Alignment.center,
