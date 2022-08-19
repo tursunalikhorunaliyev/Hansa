@@ -40,99 +40,91 @@ class _DrawerStatsState extends State<DrawerStats> {
                       stream: bloc.stream,
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
-                          return DataTable(
-                            headingRowHeight: 20,
-                            columnSpacing: 10,
-                            dataRowHeight: isTablet ? 45 : 30,
-                            horizontalMargin: 1,
-                            columns: [
-                              DataColumn(
+                          return SingleChildScrollView(
+                            child: DataTable(
+                              headingRowHeight: 20,
+                              columnSpacing: 10,
+                              dataRowHeight: isTablet ? 45 : 30,
+                              horizontalMargin: 1,
+                              columns: [
+                                DataColumn(
+                                    label: Text(
+                                      "Место",
+                                      style: GoogleFonts.montserrat(
+                                        fontSize: isTablet ? 14 : 8,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    numeric: false),
+                                DataColumn(
                                   label: Text(
-                                    "Место",
+                                    "Сеть",
                                     style: GoogleFonts.montserrat(
                                       fontSize: isTablet ? 14 : 8,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  numeric: false),
-                              DataColumn(
-                                label: Text(
-                                  "Сеть",
-                                  style: GoogleFonts.montserrat(
-                                    fontSize: isTablet ? 14 : 8,
-                                    fontWeight: FontWeight.bold,
-                                  ),
                                 ),
-                              ),
-                              DataColumn(
-                                label: Text(
-                                  "Участник",
-                                  style: GoogleFonts.montserrat(
-                                    fontSize: isTablet ? 14 : 8,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              DataColumn(
-                                label: Text(
-                                  "Баллы",
-                                  style: GoogleFonts.montserrat(
-                                    fontSize: isTablet ? 14 : 8,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ],
-                            rows: List.generate(
-                              isCollapsed
-                                  ? snapshot.data!.data.list.length
-                                  : 10,
-                              (index) => DataRow(
-                                color: MaterialStateProperty.all(
-                                  (index == 9)
-                                      ? const Color(0xffe21a37)
-                                      : Colors.white,
-                                ),
-                                cells: [
-                                  DataCell(
-                                    Text(
-                                      "${index + 1}",
-                                      style: GoogleFonts.montserrat(
-                                          fontSize: isTablet ? 13 : 8,
-                                          fontWeight: FontWeight.normal,
-                                          color: (index == 9)
-                                              ? const Color(0xffffffff)
-                                              : const Color(0xff353433)),
+                                DataColumn(
+                                  label: Text(
+                                    "Участник",
+                                    style: GoogleFonts.montserrat(
+                                      fontSize: isTablet ? 14 : 8,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
-                                  DataCell(Text(
-                                    snapshot.data!.data.list[index].shop_net,
+                                ),
+                                DataColumn(
+                                  label: Text(
+                                    "Баллы",
                                     style: GoogleFonts.montserrat(
-                                        fontSize: isTablet ? 12 : 8,
-                                        fontWeight: FontWeight.normal,
-                                        color: (index == 9)
-                                            ? const Color(0xffffffff)
-                                            : const Color(0xff353433)),
-                                  )),
-                                  DataCell(Text(
-                                    snapshot.data!.data.list[index].name,
-                                    style: GoogleFonts.montserrat(
-                                        fontSize: 8,
-                                        fontWeight: FontWeight.normal,
-                                        color: (index == 9)
-                                            ? const Color(0xffffffff)
-                                            : const Color(0xff353433)),
-                                  )),
-                                  DataCell(Text(
-                                    snapshot.data!.data.list[index].score,
-                                    style: GoogleFonts.montserrat(
-                                        fontSize: 8,
-                                        fontWeight: FontWeight.normal,
-                                        color: (index == 9)
-                                            ? const Color(0xffffffff)
-                                            : const Color(0xff353433)),
-                                  )),
-                                ],
+                                      fontSize: isTablet ? 14 : 8,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                              rows: List.generate(
+                                isCollapsed
+                                    ? snapshot.data!.data.list.length
+                                    : 10,
+                                (index) => DataRow(
+                                  color: MaterialStateProperty.all(
+                                    Colors.white,
+                                  ),
+                                  cells: [
+                                    DataCell(
+                                      Text(
+                                        "${index + 1}",
+                                        style: GoogleFonts.montserrat(
+                                            fontSize: isTablet ? 13 : 8,
+                                            fontWeight: FontWeight.normal,
+                                            color: const Color(0xff353433)),
+                                      ),
+                                    ),
+                                    DataCell(Text(
+                                      snapshot.data!.data.list[index].shop_net,
+                                      style: GoogleFonts.montserrat(
+                                          fontSize: isTablet ? 12 : 8,
+                                          fontWeight: FontWeight.normal,
+                                          color: const Color(0xff353433)),
+                                    )),
+                                    DataCell(Text(
+                                      snapshot.data!.data.list[index].name,
+                                      style: GoogleFonts.montserrat(
+                                          fontSize: 8,
+                                          fontWeight: FontWeight.normal,
+                                          color: const Color(0xff353433)),
+                                    )),
+                                    DataCell(Text(
+                                      snapshot.data!.data.list[index].score,
+                                      style: GoogleFonts.montserrat(
+                                          fontSize: 8,
+                                          fontWeight: FontWeight.normal,
+                                          color: const Color(0xff353433)),
+                                    )),
+                                  ],
+                                ),
                               ),
                             ),
                           );
