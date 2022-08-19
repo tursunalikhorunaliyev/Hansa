@@ -1,5 +1,4 @@
-import 'dart:developer';
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,6 +17,7 @@ class DrawerStats extends StatefulWidget {
 
 class _DrawerStatsState extends State<DrawerStats> {
   bool isCollapsed = false;
+  final scroll = ScrollController();
   @override
   Widget build(BuildContext context) {
     final prov = Provider.of<String>(context);
@@ -25,31 +25,43 @@ class _DrawerStatsState extends State<DrawerStats> {
     final isTablet = Provider.of<bool>(context);
     final fullname = Provider.of<FullnameProvider>(context);
     return SingleChildScrollView(
-      physics: BouncingScrollPhysics(),
+      physics: const BouncingScrollPhysics(),
       child: Container(
         // height: isTablet ? 650 : null,
         color: const Color(0xFFffffff),
         child: Column(
           children: [
-            const DrawerStatTitle(
-              imagePath: "assets/free-icon-rating-4569150.png",
-              title: "Статистика",
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const DrawerStatTitle(
+                  imagePath: "assets/free-icon-rating-4569150.png",
+                  title: "Статистика",
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 15),
+                  child: InkWell(
+                    onTap: () {
+                      scroll.animateTo(0,
+                          duration: const Duration(milliseconds: 400),
+                          curve: Curves.fastLinearToSlowEaseIn);
+                    },
+                    child: const Icon(CupertinoIcons.chevron_up_circle_fill,
+                        color: Color(0xffe21a37), size: 25),
+                  ),
+                ),
+              ],
             ),
             Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 500),
-                  curve: Curves.bounceInOut,
-                  height: isTablet
-                      ? isCollapsed
-                          ? 600
-                          : 500
-                      : null,
+                child: SizedBox(
+                  height: 330,
                   child: FutureBuilder<RatingTopModel>(
                       future: bloc.getStores(prov),
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
                           return SingleChildScrollView(
+                            controller: scroll,
                             child: DataTable(
                               headingRowHeight: 20,
                               columnSpacing: 10,
@@ -94,17 +106,15 @@ class _DrawerStatsState extends State<DrawerStats> {
                                 ),
                               ],
                               rows: List.generate(
-                                  isCollapsed
-                                      ? snapshot.data!.data.list.length
-                                      : 10, (index) {
-                                bool thisUser =
-                                    snapshot.data!.data.list[index].name ==
-                                        fullname.getName.split(' ').last +
-                                            " " +
-                                            fullname.getName.split(' ').first;
+                                  snapshot.data!.data.list.length, (index) {
+                                bool thisUser = snapshot
+                                        .data!.data.list[index].name ==
+                                    "${fullname.getName.split(' ').last} ${fullname.getName.split(' ').first}";
                                 return DataRow(
                                   color: MaterialStateProperty.all(
-                                    thisUser ? Color(0xffe21a37) : Colors.white,
+                                    thisUser
+                                        ? const Color(0xffe21a37)
+                                        : Colors.white,
                                   ),
                                   cells: [
                                     DataCell(
@@ -151,7 +161,7 @@ class _DrawerStatsState extends State<DrawerStats> {
                             ),
                           );
                         } else {
-                          return SizedBox(
+                          return const SizedBox(
                             height: 330,
                             child: SpinKitPulse(
                               color: Color(0xffe21a37),
@@ -160,7 +170,7 @@ class _DrawerStatsState extends State<DrawerStats> {
                         }
                       }),
                 )),
-            Padding(
+            /* Padding(
               padding: const EdgeInsets.all(10.0),
               child: GestureDetector(
                 onTap: () {
@@ -174,7 +184,7 @@ class _DrawerStatsState extends State<DrawerStats> {
                   decoration: BoxDecoration(
                     color: const Color(0xffe21a37),
                     borderRadius: BorderRadius.circular(70),
-                    boxShadow: [
+                    boxShadow: const [
                       BoxShadow(
                           color: Color(0XFFDBDBDB),
                           blurRadius: 5,
@@ -184,7 +194,7 @@ class _DrawerStatsState extends State<DrawerStats> {
                     ],
                   ),
                   child: Text(
-                    isCollapsed ? "Топ 10" : "Весь рейтинг",
+                    isCollapsed ? "Только топ 10" : "Весь рейтинг",
                     style: GoogleFonts.montserrat(
                         fontSize: isTablet ? 16 : 9,
                         fontWeight: FontWeight.w500,
@@ -192,7 +202,7 @@ class _DrawerStatsState extends State<DrawerStats> {
                   ),
                 ),
               ),
-            ),
+            ), */
           ],
         ),
       ),
