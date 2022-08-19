@@ -137,7 +137,7 @@ class _PresentArchiveState extends State<PresentArchive> {
                                                       padding: EdgeInsets.only(
                                                           top: isTablet
                                                               ? 22.h
-                                                              : 27.h),
+                                                              : 15.h),
                                                       child: InkWell(
                                                         onTap: () {
                                                           setState(() {
@@ -274,7 +274,7 @@ class _PresentArchiveState extends State<PresentArchive> {
                                           ? SizedBox()
                                           : Padding(
                                               padding: EdgeInsets.only(
-                                                  top: isTablet ? 22.h : 27.h),
+                                                  top: isTablet ? 22.h : 15.h),
                                               child: InkWell(
                                                 onTap: () {
                                                   setState(() {
@@ -350,51 +350,55 @@ class _PresentArchiveState extends State<PresentArchive> {
                               },
                             ))),
                   StickyHeader(
-                      header:snapshot.data!.data.guidesArchive.dataGuidesArchive.isEmpty?SizedBox():  Container(
-                        color: const Color(0xffeaeaea),
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                              top: isTablet ? 20 : 9, bottom: isTablet ? 9 : 5),
-                          child:  Row(
-                            children: [
-                              Container(
-                                alignment: Alignment.center,
-                                width: isTablet ? 55.w : 70.w,
-                                height: isTablet ? 46.h : 42.h,
-                                decoration: BoxDecoration(
-                                    color: Color(0XFFff163e),
-                                    borderRadius: BorderRadius.only(
-                                        topRight: Radius.circular(
-                                            isTablet ? 45.r : 21.r),
-                                        bottomRight: Radius.circular(
-                                            isTablet ? 45.r : 21.r))),
-                                child: Image.asset(
-                                  'assets/Архив.png',
-                                  height: isTablet ? 30.h : 30,
-                                  width: isTablet ? 30.w : 30,
+                      header: snapshot.data!.data.guidesArchive
+                              .dataGuidesArchive.isEmpty
+                          ? SizedBox()
+                          : Container(
+                              color: const Color(0xffeaeaea),
+                              child: Padding(
+                                padding: EdgeInsets.only(
+                                    top: isTablet ? 20 : 9,
+                                    bottom: isTablet ? 9 : 5),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.center,
+                                      width: isTablet ? 55.w : 70.w,
+                                      height: isTablet ? 46.h : 42.h,
+                                      decoration: BoxDecoration(
+                                          color: Color(0XFFff163e),
+                                          borderRadius: BorderRadius.only(
+                                              topRight: Radius.circular(
+                                                  isTablet ? 45.r : 21.r),
+                                              bottomRight: Radius.circular(
+                                                  isTablet ? 45.r : 21.r))),
+                                      child: Image.asset(
+                                        'assets/Архив.png',
+                                        height: isTablet ? 30.h : 30,
+                                        width: isTablet ? 30.w : 30,
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: Text(
+                                        '#',
+                                        style: GoogleFonts.montserrat(
+                                            fontSize: isTablet ? 22 : 20,
+                                            fontWeight: FontWeight.w500,
+                                            color: const Color(0xffff163e)),
+                                      ),
+                                    ),
+                                    Text(
+                                      'Архив',
+                                      style: GoogleFonts.montserrat(
+                                          fontSize: isTablet ? 25 : 20,
+                                          fontWeight: FontWeight.bold,
+                                          color: const Color(0xff272624)),
+                                    )
+                                  ],
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(left: 10),
-                                child: Text(
-                                  '#',
-                                  style: GoogleFonts.montserrat(
-                                      fontSize: isTablet ? 22 : 20,
-                                      fontWeight: FontWeight.w500,
-                                      color: const Color(0xffff163e)),
-                                ),
-                              ),
-                              Text(
-                                'Архив',
-                                style: GoogleFonts.montserrat(
-                                    fontSize: isTablet ? 25 : 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: const Color(0xff272624)),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
+                            ),
                       content: isTablet
                           ? NotificationListener(
                               onNotification: (value) {
@@ -431,7 +435,7 @@ class _PresentArchiveState extends State<PresentArchive> {
                                             : Padding(
                                                 padding: EdgeInsets.only(
                                                     top:
-                                                        isTablet ? 22.h : 27.h),
+                                                        isTablet ? 22.h : 15.h),
                                                 child: InkWell(
                                                   onTap: () {
                                                     setState(() {
@@ -544,7 +548,7 @@ class _PresentArchiveState extends State<PresentArchive> {
                                                     padding: EdgeInsets.only(
                                                         top: isTablet
                                                             ? 22.h
-                                                            : 27.h),
+                                                            : 15.h),
                                                     child: InkWell(
                                                       onTap: () {
                                                         setState(() {
