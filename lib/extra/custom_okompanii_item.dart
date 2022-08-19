@@ -48,6 +48,7 @@ class CustomOKompaniiItem extends StatelessWidget {
               width: double.infinity,
               color: const Color(0xffffffff),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 18),
@@ -63,7 +64,7 @@ class CustomOKompaniiItem extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Spacer(),
+                  
                   Padding(
                     padding: const EdgeInsets.only(
                       right: 8,
