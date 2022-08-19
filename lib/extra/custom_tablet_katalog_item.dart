@@ -38,14 +38,14 @@ class _TabletKatalogItemState extends State<TabletKatalogItem> {
   Widget build(BuildContext context) {
     Future<void>? launched;
     return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         InkWell(
           onTap: () {
-              setState(() {
-                launched =
-                    _launchInBrowser(Uri.parse(widget.linkPDF));
-              });
-            },
+            setState(() {
+              launched = _launchInBrowser(Uri.parse(widget.linkPDF));
+            });
+          },
           child: ClipRRect(
             borderRadius: BorderRadius.circular(6.r),
             child: Image.network(
@@ -71,7 +71,7 @@ class _TabletKatalogItemState extends State<TabletKatalogItem> {
     );
   }
 
-   _launchInBrowser(Uri url) async {
+  _launchInBrowser(Uri url) async {
     if (!await launchUrl(
       url,
       mode: LaunchMode.externalApplication,
