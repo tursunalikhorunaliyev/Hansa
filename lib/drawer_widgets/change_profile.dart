@@ -19,7 +19,7 @@ class _ChangeProfileState extends State<ChangeProfile> {
     return Wrap(
       children: [
         StreamBuilder<ActionChange>(
-          initialData: ActionChange.personRekvizit,
+          //initialData: ActionChange.personRekvizit,
           stream: blocChangeProfileProvider.dataStream,
           builder: (context, snapshot) {
             return Padding(
