@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/treningi_video_model.dart';
 import 'package:hansa_app/api_services/treningi_video_api.dart';
-import 'package:hansa_app/blocs/treningi_video_controller.dart';
+
 import 'package:hansa_app/providers/treningi_videos_provider.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -38,7 +38,7 @@ class _CustomTreningiVideoPlayState extends State<CustomTreningiVideoPlay> {
     final treningiVideos = Provider.of<TreningiVideosProvider>(context);
     final token = Provider.of<String>(context);
     ChewieController ch = widget.chewieController;
-    final videoControll = Provider.of<TreningiVideoControll>(context);
+    
     setState(() {});
     return Padding(
       padding: const EdgeInsets.only(bottom: 11, left: 25, right: 25),
@@ -49,15 +49,7 @@ class _CustomTreningiVideoPlayState extends State<CustomTreningiVideoPlay> {
               TreningiVideoApi.getTreningiVideo(treningiVideos.getUrl, token),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              videoControll.stream.listen((event) {
-                log('aonwioefn  ' + event.toString());
-                if (event == true) {
-                  ch.videoPlayerController
-                    ..seekTo(Duration.zero)
-                    ..pause()
-                    ..dispose();
-                }
-              });
+             
               ch = ChewieController(
                 autoPlay: true,
                 allowedScreenSleep: false,

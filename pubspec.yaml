@@ -66,7 +66,6 @@ dependencies:
   flutter_local_notifications: ^9.7.0
   permission_handler: ^10.0.0
   flutter_widget_from_html: ^0.8.5
-  
 
 dev_dependencies:
   flutter_test:

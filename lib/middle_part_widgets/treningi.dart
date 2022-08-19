@@ -54,7 +54,7 @@ class _TreningiState extends State<Treningi> {
                       content: Column(
                         children: [
                           Row(),
-                          (snapshot.data!.data.webinar != null)
+                         /*  (snapshot.data!.data.webinar != null)
                               ? Container(
                                   margin: const EdgeInsets.only(
                                       left: 25, right: 25, bottom: 13),
@@ -166,9 +166,9 @@ class _TreningiState extends State<Treningi> {
                                     ],
                                   ),
                                 )
-                              : const SizedBox(),
+                              :  *//* const SizedBox(),
                           CustomCalendar(
-                              dates: snapshot.data!.data.events.events),
+                              dates: snapshot.data!.data.events.events), */
                           isTablet
                               ? const IpadContainer()
                               : CustomClipItem(
@@ -222,7 +222,7 @@ class _TreningiState extends State<Treningi> {
                                             const Color(0xffffffff),
                                         titleColor: const Color(0xffffffff),
                                         buttonText: "Смотреть",
-                                        title: data.futureEvents.list[0].title,
+                                        title: "data.futureEvents.list[0].title",
                                         onTap: () {
                                           treningiPhotos.setUrl(snapshot
                                               .data!

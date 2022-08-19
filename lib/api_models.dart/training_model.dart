@@ -18,26 +18,26 @@ class TrainingModel {
 }
 
 class TraningModelData {
-  Webinar? webinar;
-  FutureEvents futureEvents;
+//  Webinar? webinar;
+ // FutureEvents futureEvents;
   Videos videos;
   EventReports eventReports;
-  Events events;
+  //Events events;
   TraningModelData({
-    required this.webinar,
-    required this.futureEvents,
+    //required this.webinar,
+    //required this.futureEvents,
     required this.videos,
     required this.eventReports,
-    required this.events,
+    //required this.events,
   });
 
   factory TraningModelData.fromMap(Map<String, dynamic> map) {
     return TraningModelData(
-      webinar: Webinar.fromMap(map['webinar']),
-      futureEvents: FutureEvents.fromMap(map['futureEvents']),
+      //webinar: Webinar.fromMap(map['webinar']),
+      //futureEvents: FutureEvents.fromMap(map['futureEvents']),
       videos: Videos.fromMap(map['videos']),
       eventReports: EventReports.fromMap(map['eventReports']),
-      events: Events.fromMap(map['events']),
+      // events: Events.fromMap(map['events']),
     );
   }
 }

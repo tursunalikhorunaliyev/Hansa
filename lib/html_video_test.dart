@@ -15,28 +15,13 @@ class _HtmlVideoPLayerTestState extends State<HtmlVideoPLayerTest> {
   String videoTags = '''<video preload="metadata" controls
       loop
       autoplay src="https://hansa-lab.ru/storage/upload/videos/ZnaJMRQsLcXP.mp4"></video>''';
+  List<Widget> barchasi = [];
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              width: 300,
-              height: 250,
-              child: Html(data: videoTags)),
-              SizedBox(height: 80,),
-              MaterialButton(onPressed: (){
-                setState(() {
-                  videoTags = "";
-                });
-                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => PermissionHandlerScreen()))
-;              },
-              color: Colors.red,
-              )
-          ],
-        ),
+       
       ),
     );   
   }
