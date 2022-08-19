@@ -20,6 +20,7 @@ import 'package:hansa_app/classes/tap_favorite.dart';
 import 'package:hansa_app/middle_part_widgets/permission_handler_screen.dart';
 import 'package:hansa_app/providers/dialog_video_provider.dart';
 import 'package:hansa_app/providers/full_registr_provider.dart';
+import 'package:hansa_app/providers/fullname_provider.dart';
 import 'package:hansa_app/providers/is_video_provider.dart';
 import 'package:hansa_app/providers/new_shop_provider.dart';
 import 'package:hansa_app/providers/provider_for_flipping/flip_login_provider.dart';
@@ -96,18 +97,12 @@ class MyApp extends StatelessWidget {
           Provider(create: (context) => LoginClickedBloc()),
           Provider(create: (context) => BlocFlipLogin()),
           ChangeNotifierProvider(create: (context) => DialogVideoProvider()),
-          Provider(
-            create: (context) => scaffoldKey,
-          ),
-          ChangeNotifierProvider(
-            create: (context) => SendLink(),
-          ),
+          Provider(create: (context) => scaffoldKey),
+          Provider(create: (context) => FullnameProvider()),
+          ChangeNotifierProvider(create: (context) => SendLink()),
           Provider<SendUrlPrezentOtkrit>(
-            create: (context) => sendUrlPrezentOtkrit,
-          ),
-          Provider<TapFavorite>(
-            create: (context) => tapFavorite,
-          )
+              create: (context) => sendUrlPrezentOtkrit),
+          Provider<TapFavorite>(create: (context) => tapFavorite)
         ],
         child: const MaterialApp(
           localizationsDelegates: [

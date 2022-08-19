@@ -25,7 +25,7 @@ class _IzbrannoeState extends State<Izbrannoe> {
     final token = Provider.of<String>(context);
     final articleBLoC = Provider.of<ArticleBLoC>(context);
     final menuProvider = Provider.of<MenuEventsBloC>(context);
-    final izbrannoeBLoC = IzbrannoeBLoC(token);
+    final izbrannoeBLoC = IzbrannoeBLoC();
     Future<void>? launched;
     return Center(
       child: Container(
@@ -78,8 +78,8 @@ class _IzbrannoeState extends State<Izbrannoe> {
             ),
             Expanded(
               //height: 370,
-              child: StreamBuilder<IzbrannoeModel>(
-                  stream: izbrannoeBLoC.dataStream,
+              child: FutureBuilder<IzbrannoeModel>(
+                  future: izbrannoeBLoC.getData(token),
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       return SingleChildScrollView(
@@ -125,7 +125,8 @@ class _IzbrannoeState extends State<Izbrannoe> {
                                               snapshot
                                                   .data!.data.list[index].title,
                                               softWrap: true,
-                                              overflow: TextOverflow.fade,
+                                              maxLines: 3,
+                                              overflow: TextOverflow.ellipsis,
                                               style: GoogleFonts.montserrat(
                                                   color:
                                                       const Color(0xFF272624),
@@ -243,7 +244,6 @@ class _IzbrannoeState extends State<Izbrannoe> {
                         ),
                       );
                     } else {
-                      izbrannoeBLoC.eventSink.add(IzbrannoeAction.show);
                       return Column(
                         children: [
                           Spacer(),

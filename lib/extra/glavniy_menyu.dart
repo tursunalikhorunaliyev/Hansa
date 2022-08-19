@@ -18,6 +18,7 @@ import 'package:hansa_app/drawer_widgets/text_icon.dart';
 import 'package:hansa_app/drawer_widgets/text_icon_card.dart';
 import 'package:hansa_app/enums/enum_action_view.dart';
 import 'package:hansa_app/extra/sobshit_o_problem.dart';
+import 'package:hansa_app/providers/fullname_provider.dart';
 import 'package:hansa_app/providers/provider_personal_textFields.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
@@ -48,7 +49,7 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
 
     final menuProvider = Provider.of<MenuEventsBloC>(context);
     final providerTapFavorite = Provider.of<TapFavorite>(context);
-
+    final fullname = Provider.of<FullnameProvider>(context);
     final blocGlavniyMenuUserInfo = BlocGlavniyMenuUserInfo(providerToken);
 
     blocGlavniyMenuUserInfo.eventSink.add(EnumActionView.view);
@@ -185,7 +186,9 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                     child: StreamBuilder<ModelGlavniyMenuUserInfoMain>(
                         stream: blocGlavniyMenuUserInfo.dataStream,
                         builder: (context, snapshot) {
+                          
                           if (snapshot.hasData) {
+                            fullname.setName(snapshot.data!.data.fullname);
                             return Text(
                               snapshot.data!.data.fullname,
                               style: TextStyle(

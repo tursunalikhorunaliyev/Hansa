@@ -70,18 +70,18 @@ class _StatiState extends State<Stati> {
                                   title: snapshot.data!.list.list[index].title,
                                   buttonText: "Читать",
                                   onTap: () async {
-                                    /*       statiBloCProvider.eventSink
-                                        .add(MenuActions.chitatStati); */
                                     providerSendLink.setLink(
                                         snapshot.data!.list.list[index].link);
+                                    statiBloCProvider.eventSink
+                                        .add(MenuActions.chitatStati);
+                                    /* statiBloCProvider.eventSink
+                                      .add(MenuActions.chitatStati);
+                                  ReadStatiModel model =
+                                      await readStati.getReadStati(
+                                          providerToken,
+                                          snapshot.data!.list.list[index].link);
 
-                                    /* ReadStatiModel model =
-                                        await readStati.getReadStati(
-                                            providerToken,
-                                            snapshot
-                                                .data!.list.list[index].link);
-                                
-                                    providerReadStati.sink.add(model); */
+                                  providerReadStati.sink.add(model); */
                                   },
                                 ),
                               ),
