@@ -44,11 +44,14 @@ class _PrezentOtkritTabletCardState extends State<PrezentOtkritTabletCard> {
                 SizedBox(
                     width: 410,
                     height: 230,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(5.r),
-                      child: CachedNetworkImage(
-                        imageUrl: widget.url,
-                        fit: BoxFit.cover,
+                    child: GestureDetector(
+                      onTap: widget.onTap,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(5.r),
+                        child: CachedNetworkImage(
+                          imageUrl: widget.url,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     )),
               ],
@@ -63,14 +66,17 @@ class _PrezentOtkritTabletCardState extends State<PrezentOtkritTabletCard> {
                 children: [
                   Row(
                     children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(5.r),
-                        child: ClipPath(
-                          clipper: CustomPaintClipper(),
-                          child: Container(
-                            width: 150.w,
-                            height: 75.h,
-                            color: const Color(0xff000004),
+                      GestureDetector(
+                        onTap: widget.onTap,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(5.r),
+                          child: ClipPath(
+                            clipper: CustomPaintClipper(),
+                            child: Container(
+                              width: 150.w,
+                              height: 75.h,
+                              color: const Color(0xff000004),
+                            ),
                           ),
                         ),
                       ),

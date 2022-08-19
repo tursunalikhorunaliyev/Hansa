@@ -89,7 +89,7 @@ class _PrezentOtkritState extends State<PrezentOtkrit> {
                                 ),
                               ),
                               Text(
-                                'Презентации ',
+                                'Презентации',
                                 style: GoogleFonts.montserrat(
                                     fontSize: isTablet ? 25 : 20,
                                     fontWeight: FontWeight.bold,

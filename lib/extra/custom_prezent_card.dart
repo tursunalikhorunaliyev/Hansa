@@ -46,13 +46,16 @@ class _CustomPrezentCardState extends State<CustomPrezentCard> {
         children: [
           InkWell(
             onTap: () {},
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(6.r),
-              child: CachedNetworkImage(
-                imageUrl: widget.imageUrl,
-                width: double.infinity,
-                height: 206.h,
-                fit: BoxFit.cover,
+            child: GestureDetector(
+              onTap: widget.onTap,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(6.r),
+                child: CachedNetworkImage(
+                  imageUrl: widget.imageUrl,
+                  width: double.infinity,
+                  height: 206.h,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
@@ -65,14 +68,17 @@ class _CustomPrezentCardState extends State<CustomPrezentCard> {
                 children: [
                   Row(
                     children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(5.r),
-                        child: ClipPath(
-                          clipper: CustomPaintClipper(),
-                          child: Container(
-                            width: 310.w,
-                            height: 75.h,
-                            color: const Color(0xff000004),
+                      GestureDetector(
+                        onTap: widget.onTap,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(5.r),
+                          child: ClipPath(
+                            clipper: CustomPaintClipper(),
+                            child: Container(
+                              width: 310.w,
+                              height: 75.h,
+                              color: const Color(0xff000004),
+                            ),
                           ),
                         ),
                       ),
