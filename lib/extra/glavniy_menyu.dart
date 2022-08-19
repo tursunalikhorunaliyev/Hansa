@@ -232,13 +232,18 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(
-                      top: isTablet ? 280 : 190, left: isTablet ? 175 : 131),
-                  child: Text(
-                    "баллов",
-                    style: GoogleFonts.montserrat(
-                        fontSize: isTablet ? 20 : 16,
-                        color: const Color(0xFFffffff),
-                        fontWeight: FontWeight.w500),
+                      top: isTablet ? 280 : 190),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: 
+                      [Text(
+                        "баллов",
+                        style: GoogleFonts.montserrat(
+                            fontSize: isTablet ? 20 : 16,
+                            color: const Color(0xFFffffff),
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ],
                   ),
                 ),
                 Padding(
