@@ -69,14 +69,14 @@ class _DrawerStatsState extends State<DrawerStats> {
                               horizontalMargin: 1,
                               columns: [
                                 DataColumn(
-                                    label: Text(
-                                      "Место",
-                                      style: GoogleFonts.montserrat(
-                                        fontSize: isTablet ? 14 : 8,
-                                        fontWeight: FontWeight.bold,
-                                      ),
+                                  label: Text(
+                                    "Место",
+                                    style: GoogleFonts.montserrat(
+                                      fontSize: isTablet ? 14 : 8,
+                                      fontWeight: FontWeight.bold,
                                     ),
-                                    numeric: false),
+                                  ),
+                                ),
                                 DataColumn(
                                   label: Text(
                                     "Сеть",
@@ -118,14 +118,17 @@ class _DrawerStatsState extends State<DrawerStats> {
                                   ),
                                   cells: [
                                     DataCell(
-                                      Text(
-                                        "${index + 1}",
-                                        style: GoogleFonts.montserrat(
-                                            fontSize: isTablet ? 13 : 8,
-                                            fontWeight: FontWeight.normal,
-                                            color: thisUser
-                                                ? Colors.white
-                                                : const Color(0xff353433)),
+                                      Align(
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          "${index + 1}",
+                                          style: GoogleFonts.montserrat(
+                                              fontSize: isTablet ? 13 : 8,
+                                              fontWeight: FontWeight.normal,
+                                              color: thisUser
+                                                  ? Colors.white
+                                                  : const Color(0xff353433)),
+                                        ),
                                       ),
                                     ),
                                     DataCell(Text(
@@ -146,14 +149,17 @@ class _DrawerStatsState extends State<DrawerStats> {
                                               ? Colors.white
                                               : const Color(0xff353433)),
                                     )),
-                                    DataCell(Text(
-                                      snapshot.data!.data.list[index].score,
-                                      style: GoogleFonts.montserrat(
-                                          fontSize: 8,
-                                          fontWeight: FontWeight.normal,
-                                          color: thisUser
-                                              ? Colors.white
-                                              : const Color(0xff353433)),
+                                    DataCell(Align(
+                                      alignment: Alignment.center,
+                                      child: Text(
+                                        snapshot.data!.data.list[index].score,
+                                        style: GoogleFonts.montserrat(
+                                            fontSize: 8,
+                                            fontWeight: FontWeight.normal,
+                                            color: thisUser
+                                                ? Colors.white
+                                                : const Color(0xff353433)),
+                                      ),
                                     )),
                                   ],
                                 );
