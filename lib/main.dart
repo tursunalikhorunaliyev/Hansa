@@ -17,6 +17,7 @@ import 'package:hansa_app/blocs/treningi_video_controller.dart';
 import 'package:hansa_app/blocs/voyti_ili_sozdata_bloc.dart';
 import 'package:hansa_app/classes/send_link.dart';
 import 'package:hansa_app/classes/sned_url_prezent_otkrit.dart';
+import 'package:hansa_app/html_video_test.dart';
 import 'package:hansa_app/middle_part_widgets/permission_handler_screen.dart';
 import 'package:hansa_app/providers/dialog_video_provider.dart';
 import 'package:hansa_app/providers/full_registr_provider.dart';

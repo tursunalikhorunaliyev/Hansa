@@ -39,6 +39,7 @@ class _TreningiVideoState extends State<TreningiVideo> {
     aspectRatio: 16 / 9,
     videoPlayerController: VideoPlayerController.network(
       '',
+       videoPlayerOptions: VideoPlayerOptions(mixWithOthers: false)
     ),
   );
   @override
