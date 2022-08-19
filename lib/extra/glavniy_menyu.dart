@@ -148,11 +148,13 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                       builder: (context, snapshot) {
                         return GestureDetector(
                           onTap: () {
-                            snapshot.data == ActionChange.izboreny
+                            snapshot.data == ActionChange.izboreny ||
+                                    providerTapFavorite.getInt == 1
                                 ? blocChangeProfileProvider.dataSink
                                     .add(ActionChange.textIconCard)
                                 : blocChangeProfileProvider.dataSink
                                     .add(ActionChange.izboreny);
+                                    providerTapFavorite.setInt(0);
                           },
                           child: Container(
                             height: isTablet ? 60 : 46,
@@ -231,12 +233,11 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                       }),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(
-                      top: isTablet ? 280 : 190),
+                  padding: EdgeInsets.only(top: isTablet ? 280 : 190),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: 
-                      [Text(
+                    children: [
+                      Text(
                         "баллов",
                         style: GoogleFonts.montserrat(
                             fontSize: isTablet ? 20 : 16,
