@@ -125,7 +125,37 @@ class _OKompaniiState extends State<OKompanii> {
                                           .data
                                           .list[index]
                                           .title,
-                                      onTap: () {},
+                                      onTap: () {
+                                        final VideoDetails video = snapshot
+                                            .data!
+                                            .videoListData
+                                            .list[value.getIndex]
+                                            .data
+                                            .list[index];
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return Scaffold(
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              body: MultiProvider(
+                                                providers: [
+                                                  Provider(
+                                                    create: (context) => index,
+                                                  ),
+                                                  Provider(
+                                                    create: (context) => token,
+                                                  ),
+                                                ],
+                                                child: TopVideoVidget(
+                                                  url: video.videoLink,
+                                                  title: video.title,
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        );
+                                      },
                                       onDownload: () {
                                         downloadFile(
                                             snapshot

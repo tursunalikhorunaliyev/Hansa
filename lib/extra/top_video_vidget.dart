@@ -66,12 +66,14 @@ class _TopVideoVidgetState extends State<TopVideoVidget> {
     super.initState();
     initVideo();
   }
+
   @override
   void dispose() {
     chewieController.dispose();
     chewieController.videoPlayerController.dispose();
     super.dispose();
   }
+
   final blocVideoApi = BlocVideoApi();
   final blocDetectTap = BlocDetectTap();
   bool downloading = false;
@@ -94,7 +96,6 @@ class _TopVideoVidgetState extends State<TopVideoVidget> {
   Future<void> downloadFile(String url, String fileName,
       DownloadProgressFileBloc downloadProgressFileBloc) async {
     progress = 0;
-
     String savePath = await getFilePath(fileName);
     Dio dio = Dio();
     dio.download(
@@ -114,13 +115,13 @@ class _TopVideoVidgetState extends State<TopVideoVidget> {
     final providerBlocProgress = Provider.of<DownloadProgressFileBloc>(context);
     final token = Provider.of<String>(context);
     final providerIndex = Provider.of<int>(context);
-
+    final isTablet = Provider.of<bool>(context);
     return WillPopScope(
       onWillPop: () async {
         chewieController
           ..seekTo(Duration.zero)
           ..pause();
-          Navigator.pop(context);
+        Navigator.pop(context);
         return false;
       },
       child: SafeArea(
@@ -160,8 +161,8 @@ class _TopVideoVidgetState extends State<TopVideoVidget> {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(15),
                       child: SizedBox(
-                        width: 355,
-                        height: 200,
+                        width: isTablet ? 800 : 355,
+                        height: isTablet ? 450 : 200,
                         child: Center(
                           child: Chewie(
                             controller: chewieController,
