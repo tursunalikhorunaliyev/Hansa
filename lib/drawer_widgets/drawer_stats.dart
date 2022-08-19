@@ -169,10 +169,10 @@ class _DrawerStatsState extends State<DrawerStats> {
                 },
                 child: Container(
                   alignment: Alignment.center,
-                  height: isTablet ? 34 : 30,
-                  width: isTablet ? 200 : 140,
+                  height: isTablet ? 34 : 20,
+                  width: isTablet ? 200 : 100,
                   decoration: BoxDecoration(
-                    color: const Color(0xFF25b049),
+                    color: const Color(0xffe21a37),
                     borderRadius: BorderRadius.circular(70),
                     boxShadow: [
                       BoxShadow(
@@ -184,9 +184,9 @@ class _DrawerStatsState extends State<DrawerStats> {
                     ],
                   ),
                   child: Text(
-                    isCollapsed ? "показать меньше" : "показать ещё",
+                    isCollapsed ? "Топ 10" : "Весь рейтинг",
                     style: GoogleFonts.montserrat(
-                        fontSize: isTablet ? 16 : 12,
+                        fontSize: isTablet ? 16 : 9,
                         fontWeight: FontWeight.w500,
                         color: const Color(0xFFffffff)),
                   ),

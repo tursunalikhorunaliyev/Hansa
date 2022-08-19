@@ -89,7 +89,7 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                     chewieController = ChewieController(
                                       autoPlay: true,
                                       allowedScreenSleep: false,
-                                      aspectRatio: 16 / 9,
+                                      aspectRatio: 16 / 10.9,
                                       autoInitialize: true,
                                       deviceOrientationsOnEnterFullScreen: [
                                         DeviceOrientation.landscapeLeft,
@@ -131,7 +131,7 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                               borderRadius:
                                                   BorderRadius.circular(5),
                                               child: SizedBox(
-                                                height: 220,
+                                                height: 235,
                                                 width: double.infinity,
                                                 child: Chewie(
                                                   controller: chewieController,
