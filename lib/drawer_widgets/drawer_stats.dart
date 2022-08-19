@@ -6,9 +6,15 @@ import 'package:hansa_app/api_services/rating_top_api.dart';
 import 'package:hansa_app/drawer_widgets/drawer_stat_title.dart';
 import 'package:provider/provider.dart';
 
-class DrawerStats extends StatelessWidget {
+class DrawerStats extends StatefulWidget {
   const DrawerStats({Key? key}) : super(key: key);
 
+  @override
+  State<DrawerStats> createState() => _DrawerStatsState();
+}
+
+class _DrawerStatsState extends State<DrawerStats> {
+  bool isCollapsed = false;
   @override
   Widget build(BuildContext context) {
     final prov = Provider.of<String>(context);
@@ -18,7 +24,7 @@ class DrawerStats extends StatelessWidget {
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
       child: Container(
-       // height: isTablet ? 650 : null,
+        // height: isTablet ? 650 : null,
         color: const Color(0xFFffffff),
         child: Column(
           children: [
@@ -37,7 +43,7 @@ class DrawerStats extends StatelessWidget {
                           return DataTable(
                             headingRowHeight: 20,
                             columnSpacing: 10,
-                            dataRowHeight: isTablet ? 45  : 30,
+                            dataRowHeight: isTablet ? 45 : 30,
                             horizontalMargin: 1,
                             columns: [
                               DataColumn(
@@ -78,7 +84,9 @@ class DrawerStats extends StatelessWidget {
                               ),
                             ],
                             rows: List.generate(
-                              10,
+                              isCollapsed
+                                  ? snapshot.data!.data.list.length
+                                  : 10,
                               (index) => DataRow(
                                 color: MaterialStateProperty.all(
                                   (index == 9)
@@ -140,28 +148,34 @@ class DrawerStats extends StatelessWidget {
                 )),
             Padding(
               padding: const EdgeInsets.all(10.0),
-              child: Container(
-                alignment: Alignment.center,
-                height: isTablet ? 34 : 30,
-                width: isTablet ? 200 : 140,
-                decoration: BoxDecoration(
-                  color: const Color(0xFF25b049),
-                  borderRadius: BorderRadius.circular(70),
-                  boxShadow: [
-                    BoxShadow(
-                        color: Color(0XFFDBDBDB),
-                        blurRadius: 5,
-                        spreadRadius: 4,
-                        offset: Offset(0, 4) // changes position of shadow
-                        ),
-                  ],
-                ),
-                child: Text(
-                  "показать ещё",
-                  style: GoogleFonts.montserrat(
-                      fontSize: isTablet ? 16 : 12,
-                      fontWeight: FontWeight.w500,
-                      color: const Color(0xFFffffff)),
+              child: GestureDetector(
+                onTap: () {
+                  isCollapsed = true;
+                  setState(() {});
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  height: isTablet ? 34 : 30,
+                  width: isTablet ? 200 : 140,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF25b049),
+                    borderRadius: BorderRadius.circular(70),
+                    boxShadow: [
+                      BoxShadow(
+                          color: Color(0XFFDBDBDB),
+                          blurRadius: 5,
+                          spreadRadius: 4,
+                          offset: Offset(0, 4) // changes position of shadow
+                          ),
+                    ],
+                  ),
+                  child: Text(
+                    "показать ещё",
+                    style: GoogleFonts.montserrat(
+                        fontSize: isTablet ? 16 : 12,
+                        fontWeight: FontWeight.w500,
+                        color: const Color(0xFFffffff)),
+                  ),
                 ),
               ),
             ),
