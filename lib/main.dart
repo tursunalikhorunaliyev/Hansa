@@ -13,11 +13,9 @@ import 'package:hansa_app/blocs/download_progress_bloc.dart';
 import 'package:hansa_app/blocs/login_clicked_bloc.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/blocs/read_stati_bloc.dart';
-
 import 'package:hansa_app/blocs/voyti_ili_sozdata_bloc.dart';
 import 'package:hansa_app/classes/send_link.dart';
 import 'package:hansa_app/classes/sned_url_prezent_otkrit.dart';
-import 'package:hansa_app/html_video_test.dart';
 import 'package:hansa_app/middle_part_widgets/permission_handler_screen.dart';
 import 'package:hansa_app/providers/dialog_video_provider.dart';
 import 'package:hansa_app/providers/full_registr_provider.dart';
@@ -95,7 +93,6 @@ class MyApp extends StatelessWidget {
           Provider(create: (context) => BlocChangeProfile()),
           Provider(create: (context) => LoginClickedBloc()),
           Provider(create: (context) => BlocFlipLogin()),
-          
           ChangeNotifierProvider(create: (context) => DialogVideoProvider()),
           Provider(
             create: (context) => scaffoldKey,
