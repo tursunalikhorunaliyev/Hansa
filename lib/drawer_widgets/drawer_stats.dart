@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/rating_top_model.dart';
 import 'package:hansa_app/api_services/rating_top_api.dart';
 import 'package:hansa_app/drawer_widgets/drawer_stat_title.dart';
+import 'package:hansa_app/providers/fullname_provider.dart';
 import 'package:provider/provider.dart';
 
 class DrawerStats extends StatefulWidget {
@@ -21,6 +24,7 @@ class _DrawerStatsState extends State<DrawerStats> {
     final bloc = BlocRating(prov);
     final isTablet = Provider.of<bool>(context);
     bloc.eventSink.add(RatingEnum.rating);
+    final fullname = Provider.of<FullnameProvider>(context);
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
       child: Container(
@@ -85,12 +89,18 @@ class _DrawerStatsState extends State<DrawerStats> {
                                 ),
                               ],
                               rows: List.generate(
-                                isCollapsed
-                                    ? snapshot.data!.data.list.length
-                                    : 10,
-                                (index) => DataRow(
+                                  isCollapsed
+                                      ? snapshot.data!.data.list.length
+                                      : 10, (index) {
+                                bool thisUser =
+                                    snapshot.data!.data.list[index].name ==
+                                        fullname.getName.split(' ').last +
+                                            " " +
+                                            fullname.getName.split(' ').first;
+                                log(snapshot.data!.data.list[index].name);
+                                return DataRow(
                                   color: MaterialStateProperty.all(
-                                    Colors.white,
+                                    thisUser ? Color(0xffe21a37) : Colors.white,
                                   ),
                                   cells: [
                                     DataCell(
@@ -99,7 +109,9 @@ class _DrawerStatsState extends State<DrawerStats> {
                                         style: GoogleFonts.montserrat(
                                             fontSize: isTablet ? 13 : 8,
                                             fontWeight: FontWeight.normal,
-                                            color: const Color(0xff353433)),
+                                            color: thisUser
+                                                ? Colors.white
+                                                : const Color(0xff353433)),
                                       ),
                                     ),
                                     DataCell(Text(
@@ -107,25 +119,31 @@ class _DrawerStatsState extends State<DrawerStats> {
                                       style: GoogleFonts.montserrat(
                                           fontSize: isTablet ? 12 : 8,
                                           fontWeight: FontWeight.normal,
-                                          color: const Color(0xff353433)),
+                                          color: thisUser
+                                              ? Colors.white
+                                              : const Color(0xff353433)),
                                     )),
                                     DataCell(Text(
                                       snapshot.data!.data.list[index].name,
                                       style: GoogleFonts.montserrat(
                                           fontSize: 8,
                                           fontWeight: FontWeight.normal,
-                                          color: const Color(0xff353433)),
+                                          color: thisUser
+                                              ? Colors.white
+                                              : const Color(0xff353433)),
                                     )),
                                     DataCell(Text(
                                       snapshot.data!.data.list[index].score,
                                       style: GoogleFonts.montserrat(
                                           fontSize: 8,
                                           fontWeight: FontWeight.normal,
-                                          color: const Color(0xff353433)),
+                                          color: thisUser
+                                              ? Colors.white
+                                              : const Color(0xff353433)),
                                     )),
                                   ],
-                                ),
-                              ),
+                                );
+                              }),
                             ),
                           );
                         } else {
@@ -142,7 +160,7 @@ class _DrawerStatsState extends State<DrawerStats> {
               padding: const EdgeInsets.all(10.0),
               child: GestureDetector(
                 onTap: () {
-                  isCollapsed = true;
+                  isCollapsed = isCollapsed ? false : true;
                   setState(() {});
                 },
                 child: Container(
@@ -162,7 +180,7 @@ class _DrawerStatsState extends State<DrawerStats> {
                     ],
                   ),
                   child: Text(
-                    "показать ещё",
+                    isCollapsed ? "показать меньше" : "показать ещё",
                     style: GoogleFonts.montserrat(
                         fontSize: isTablet ? 16 : 12,
                         fontWeight: FontWeight.w500,
