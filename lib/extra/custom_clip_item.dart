@@ -55,7 +55,7 @@ class CustomClipItem extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(left: 18.w, top: 7, bottom: 7),
                   child: Container(
-                    alignment: Alignment.center,
+                    alignment: Alignment.centerLeft,
                     width: 200,
                     child: Text(
                       title,
@@ -82,17 +82,18 @@ class CustomClipItem extends StatelessWidget {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(64.r),
                           child: Container(
-                            alignment: Alignment.centerLeft,
                             padding: const EdgeInsets.all(7),
                             constraints: BoxConstraints(
                               minWidth: 90.w,
                             ),
                             color: buttonColor,
-                            child: Text(
-                              buttonText,
-                              style: GoogleFonts.montserrat(
-                                color: buttonTextColor,
-                                fontSize: 10.sp,
+                            child: Center(
+                              child: Text(
+                                buttonText,
+                                style: GoogleFonts.montserrat(
+                                  color: buttonTextColor,
+                                  fontSize: 10.sp,
+                                ),
                               ),
                             ),
                           ),
