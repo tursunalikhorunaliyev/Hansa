@@ -18,7 +18,7 @@ class CustomTreningiVideo extends StatelessWidget {
   Widget build(BuildContext context) {
     final providerBlocDownload = Provider.of<DownloadProgressFileBloc>(context);
     final providerBlocDetectTap = Provider.of<BlocDetectTap>(context);
-
+    final isTablet = Provider.of<bool>(context);
     return Padding(
       padding: const EdgeInsets.only(bottom: 11),
       child: Column(
@@ -27,13 +27,13 @@ class CustomTreningiVideo extends StatelessWidget {
             height: 11,
           ),
           SizedBox(
-            width: 355,
+            width: isTablet ? 800 : 355,
             child: Column(
               children: [
                 ClipRRect(
                     borderRadius: BorderRadius.circular(8),
                     child: Container(
-                      width: 355,
+                      width: isTablet ? 800 : 355,
                       color: const Color(0xffffffff),
                       child: Column(
                         children: [
@@ -45,14 +45,14 @@ class CustomTreningiVideo extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.only(left: 15),
                                 child: SizedBox(
-                                  width: 200,
+                                  width: isTablet ? 500 : 200,
                                   child: Text(
                                     title,
                                     overflow: TextOverflow.ellipsis,
                                     softWrap: true,
                                     maxLines: 3,
                                     style: GoogleFonts.montserrat(
-                                      fontSize: 13,
+                                      fontSize: isTablet ? 16 : 13,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -66,14 +66,14 @@ class CustomTreningiVideo extends StatelessWidget {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(64),
                                     child: Container(
-                                      height: 25,
-                                      width: 95,
+                                      height: isTablet ? 30 : 25,
+                                      width: isTablet ? 120 : 95,
                                       color: const Color(0xffff163e),
                                       child: Center(
                                         child: Text(
                                           "Скачать",
                                           style: GoogleFonts.montserrat(
-                                            fontSize: 10,
+                                            fontSize: isTablet ? 14 : 10,
                                             color: const Color(0xffffffff),
                                           ),
                                         ),

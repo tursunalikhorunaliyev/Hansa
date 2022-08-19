@@ -8,7 +8,7 @@ import 'package:hansa_app/api_models.dart/model_glavniy_menu_user_info.dart';
 import 'package:hansa_app/blocs/bloc_change_profile.dart';
 import 'package:hansa_app/blocs/bloc_glavniy_menu_user_info.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
-import 'package:hansa_app/drawer_widgets/change_profile.dart';
+import 'package:hansa_app/classes/tap_favorite.dart';
 import 'package:hansa_app/drawer_widgets/drawer_stats.dart';
 import 'package:hansa_app/drawer_widgets/izbrannoe.dart';
 import 'package:hansa_app/drawer_widgets/nastroyka_widget.dart';
@@ -18,6 +18,7 @@ import 'package:hansa_app/drawer_widgets/text_icon.dart';
 import 'package:hansa_app/drawer_widgets/text_icon_card.dart';
 import 'package:hansa_app/enums/enum_action_view.dart';
 import 'package:hansa_app/extra/sobshit_o_problem.dart';
+import 'package:hansa_app/providers/fullname_provider.dart';
 import 'package:hansa_app/providers/provider_personal_textFields.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
@@ -47,7 +48,8 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
         Provider.of<ProviderPersonalTextFields>(context);
 
     final menuProvider = Provider.of<MenuEventsBloC>(context);
-
+    final providerTapFavorite = Provider.of<TapFavorite>(context);
+    final fullname = Provider.of<FullnameProvider>(context);
     final blocGlavniyMenuUserInfo = BlocGlavniyMenuUserInfo(providerToken);
 
     blocGlavniyMenuUserInfo.eventSink.add(EnumActionView.view);
@@ -184,7 +186,9 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                     child: StreamBuilder<ModelGlavniyMenuUserInfoMain>(
                         stream: blocGlavniyMenuUserInfo.dataStream,
                         builder: (context, snapshot) {
+                          
                           if (snapshot.hasData) {
+                            fullname.setName(snapshot.data!.data.fullname);
                             return Text(
                               snapshot.data!.data.fullname,
                               style: TextStyle(
@@ -243,7 +247,9 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                   padding: EdgeInsets.only(
                       top: isTablet ? 320 : 220, left: isTablet ? 118 : 90),
                   child: StreamBuilder<ActionChange>(
-                      initialData: ActionChange.textIconCard,
+                      initialData: providerTapFavorite.getInt == 2
+                          ? ActionChange.personal
+                          : ActionChange.textIconCard,
                       stream: blocChangeProfileProvider.dataStream,
                       builder: (context, snapshot) {
                         log(snapshot.data!.name);
@@ -291,11 +297,11 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                   .add(EnumActionView.view);
                             }
 
-                            snapshot.data == ActionChange.personRekvizit
+                            snapshot.data == ActionChange.personal
                                 ? blocChangeProfileProvider.dataSink
                                     .add(ActionChange.textIconCard)
                                 : blocChangeProfileProvider.dataSink
-                                    .add(ActionChange.personRekvizit);
+                                    .add(ActionChange.personal);
 
                             if (snapshot.data == ActionChange.nastroyka) {
                               blocChangeProfileProvider.dataSink
@@ -346,6 +352,11 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                       }),
                 ),
                 StreamBuilder<ActionChange>(
+                  initialData: providerTapFavorite.getInt == 1
+                      ? ActionChange.izboreny
+                      : providerTapFavorite.getInt == 2
+                          ? ActionChange.personal
+                          : ActionChange.textIconCard,
                   stream: blocChangeProfileProvider.dataStream,
                   builder: (context, snapshot) {
                     return Visibility(
@@ -357,10 +368,7 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                   ? true
                                   : snapshot.data == ActionChange.nastroyka
                                       ? true
-                                      : snapshot.data ==
-                                              ActionChange.personRekvizit
-                                          ? true
-                                          : false,
+                                      : false,
                       child: Padding(
                         padding: EdgeInsets.only(
                             left: isTablet ? 55 : 45,
@@ -373,17 +381,13 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                             }
                             if (snapshot.data == ActionChange.personal) {
                               blocChangeProfileProvider.dataSink
-                                  .add(ActionChange.personRekvizit);
+                                  .add(ActionChange.textIconCard);
                             }
                             if (snapshot.data == ActionChange.statistik) {
                               blocChangeProfileProvider.dataSink
                                   .add(ActionChange.textIconCard);
                             }
                             if (snapshot.data == ActionChange.nastroyka) {
-                              blocChangeProfileProvider.dataSink
-                                  .add(ActionChange.textIconCard);
-                            }
-                            if (snapshot.data == ActionChange.personRekvizit) {
                               blocChangeProfileProvider.dataSink
                                   .add(ActionChange.textIconCard);
                             }
@@ -411,141 +415,145 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
 
 /////////////////////////////////////menu
           StreamBuilder<ActionChange>(
-              initialData: ActionChange.textIconCard,
+              initialData: providerTapFavorite.getInt == 1
+                  ? ActionChange.izboreny
+                  : providerTapFavorite.getInt == 2
+                      ? ActionChange.personal
+                      : ActionChange.textIconCard,
               stream: blocChangeProfileProvider.dataStream,
               builder: (context, snapshot) {
+                log(providerTapFavorite.getInt.toString() +
+                    " Glavniy menu get bool");
                 return Expanded(
                   child: Container(
                     decoration: const BoxDecoration(color: Color(0xFF2c2c2c)),
                     child: SingleChildScrollView(
                       physics: BouncingScrollPhysics(),
                       padding: EdgeInsets.only(
-                          top: snapshot.data == ActionChange.izboreny || snapshot.data == ActionChange.statistik  ? 0 : 30,
+                          top: snapshot.data == ActionChange.izboreny ||
+                                  snapshot.data == ActionChange.statistik
+                              ? 0
+                              : 30,
                           bottom: 20),
                       child: Column(
                         children: List.generate(
-                        1,
-                        (index) => Column(
-                          children: [
-                            snapshot.data == ActionChange.personRekvizit
-                                ? const ChangeProfile()
-                                : snapshot.data == ActionChange.izboreny
-                                    ? Wrap(
-                                        children: [
-                                          Izbrannoe(),
-                                          SizedBox(
-                                            height: isTablet ? 700 : 509,
-                                          ),
-                                          ReferalSilka(),
-                                        ],
-                                      )
-                                    : snapshot.data == ActionChange.personal
-                                        ? const PersonalniyDaniy()
-                                        : snapshot.data ==
-                                                ActionChange.statistik
-                                            ? Wrap(children: [
-                                                DrawerStats(),
-                                                SizedBox(
-                                                  height: isTablet ? 509 : 460,
+                          1,
+                          (index) => Column(
+                            children: [
+                              snapshot.data == ActionChange.izboreny
+                                  ? Wrap(
+                                      children: [
+                                        Izbrannoe(),
+                                        SizedBox(
+                                          height: isTablet ? 700 : 509,
+                                        ),
+                                        ReferalSilka(),
+                                      ],
+                                    )
+                                  : snapshot.data == ActionChange.personal
+                                      ? const PersonalniyDaniy()
+                                      : snapshot.data == ActionChange.statistik
+                                          ? Wrap(children: [
+                                              DrawerStats(),
+                                              SizedBox(
+                                                height: isTablet ? 509 : 460,
+                                              ),
+                                              ReferalSilka()
+                                            ])
+                                          : snapshot.data ==
+                                                  ActionChange.nastroyka
+                                              ? const NastroykaWidget()
+                                              : const Padding(
+                                                  padding:
+                                                      EdgeInsets.only(left: 39),
+                                                  child: TextIconCard(),
                                                 ),
-                                                ReferalSilka()
-                                              ])
-                                            : snapshot.data ==
-                                                    ActionChange.nastroyka
-                                                ? const NastroykaWidget()
-                                                : const Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 39),
-                                                    child: TextIconCard(),
-                                                  ),
-                            snapshot.data == ActionChange.personRekvizit
-                                ? SizedBox(
-                                    height: isTablet ? 50 : 69,
-                                  )
-                                : snapshot.data == ActionChange.personal
-                                    ? SizedBox(
-                                        height: isTablet ? 50 : 69,
-                                      )
-                                    : snapshot.data == ActionChange.statistik ? SizedBox(
-                                        height: isTablet ? 140 : 30,
-                                      )  : SizedBox(
-                                        height: isTablet ? 140 : 69,
-                                      ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                left: 39,
-                              ),
-                              child: GestureDetector(
-                                onTap: () {
-                                  blocChangeProfileProvider.dataSink
-                                      .add(ActionChange.statistik);
-                                },
-                                child: TextIcon(
-                                  text: "Рейтинг",
-                                  iconUrl:
-                                      "assets/free-icon-rating-4569150.png",
+                              snapshot.data == ActionChange.personal
+                                  ? SizedBox(
+                                      height: isTablet ? 50 : 69,
+                                    )
+                                  : snapshot.data == ActionChange.statistik
+                                      ? SizedBox(
+                                          height: isTablet ? 140 : 30,
+                                        )
+                                      : SizedBox(
+                                          height: isTablet ? 140 : 69,
+                                        ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 39,
+                                ),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    blocChangeProfileProvider.dataSink
+                                        .add(ActionChange.statistik);
+                                  },
+                                  child: TextIcon(
+                                    text: "Рейтинг",
+                                    iconUrl:
+                                        "assets/free-icon-rating-4569150.png",
+                                  ),
                                 ),
                               ),
-                            ),
-                            snapshot.data == ActionChange.nastroyka
-                                ? const SizedBox(
-                                    height: 0,
-                                  )
-                                : SizedBox(height: isTablet ? 30 : 20),
-                            snapshot.data == ActionChange.nastroyka
-                                ? const SizedBox(
-                                    height: 0,
-                                  )
-                                : Padding(
-                                    padding: const EdgeInsets.only(left: 39),
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        blocChangeProfileProvider.dataSink
-                                            .add(ActionChange.nastroyka);
-                                      },
-                                      child: TextIcon(
-                                        text: "Настройки",
-                                        iconUrl: "assets/icon.png",
+                              snapshot.data == ActionChange.nastroyka
+                                  ? const SizedBox(
+                                      height: 0,
+                                    )
+                                  : SizedBox(height: isTablet ? 30 : 20),
+                              snapshot.data == ActionChange.nastroyka
+                                  ? const SizedBox(
+                                      height: 0,
+                                    )
+                                  : Padding(
+                                      padding: const EdgeInsets.only(left: 39),
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          blocChangeProfileProvider.dataSink
+                                              .add(ActionChange.nastroyka);
+                                        },
+                                        child: TextIcon(
+                                          text: "Настройки",
+                                          iconUrl: "assets/icon.png",
+                                        ),
                                       ),
                                     ),
+                              SizedBox(
+                                height: isTablet ? 30 : 20,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  showDialog(
+                                    context: context,
+                                    useRootNavigator: false,
+                                    builder: (contextDialog) =>
+                                        Provider<String>.value(
+                                            value: providerToken.toString(),
+                                            child: SobshitOProblem()),
+                                  );
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 33),
+                                  child: TextIcon(
+                                    text: "Задать вопрос",
+                                    iconUrl: "assets/question.png",
+                                    size: 30,
+                                    widthSize: 18,
                                   ),
-                            SizedBox(
-                              height: isTablet ? 30 : 20,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                showDialog(
-                                  context: context,
-                                  useRootNavigator: false,
-                                  builder: (contextDialog) =>
-                                      Provider<String>.value(
-                                          value: providerToken.toString(),
-                                          child: SobshitOProblem()),
-                                );
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 33),
-                                child: TextIcon(
-                                  text: "Задать вопрос",
-                                  iconUrl: "assets/question.png",
-                                  size: 30,
-                                  widthSize: 18,
                                 ),
                               ),
-                            ),
-                            SizedBox(
-                              height: isTablet ? 30 : 20,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 39),
-                              child: TextIcon(
-                                text: "Выход из акаунта",
-                                iconUrl: "assets/iconiu.png",
+                              SizedBox(
+                                height: isTablet ? 30 : 20,
                               ),
-                            ),
-                          ],
+                              Padding(
+                                padding: const EdgeInsets.only(left: 39),
+                                child: TextIcon(
+                                  text: "Выход из акаунта",
+                                  iconUrl: "assets/iconiu.png",
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
                       ),
                     ),
                   ),

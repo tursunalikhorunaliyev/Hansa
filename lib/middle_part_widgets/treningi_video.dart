@@ -9,7 +9,6 @@ import 'package:hansa_app/api_models.dart/treningi_video_model.dart';
 import 'package:hansa_app/api_services/treningi_photos_api.dart';
 import 'package:hansa_app/api_services/treningi_video_api.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
-import 'package:hansa_app/blocs/treningi_video_controller.dart';
 import 'package:hansa_app/extra/custom_clip_item.dart';
 import 'package:hansa_app/extra/custom_tablet_stati_item.dart';
 import 'package:hansa_app/extra/custom_title.dart';
@@ -18,7 +17,6 @@ import 'package:hansa_app/providers/treningi_photos_provider.dart';
 import 'package:hansa_app/providers/treningi_videos_provider.dart';
 import 'package:hansa_app/training_video_section/custom_tablet_photos.dart';
 import 'package:hansa_app/training_video_section/custom_treningi_photos.dart';
-import 'package:hansa_app/training_video_section/custom_treningi_video_play.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:sticky_headers/sticky_headers/widget.dart';
@@ -37,10 +35,8 @@ class _TreningiVideoState extends State<TreningiVideo> {
 
   ChewieController chewieController = ChewieController(
     aspectRatio: 16 / 9,
-    videoPlayerController: VideoPlayerController.network(
-      '',
-       videoPlayerOptions: VideoPlayerOptions(mixWithOthers: false)
-    ),
+    videoPlayerController: VideoPlayerController.network('',
+        videoPlayerOptions: VideoPlayerOptions(mixWithOthers: false)),
   );
   @override
   void dispose() {
@@ -48,9 +44,9 @@ class _TreningiVideoState extends State<TreningiVideo> {
     chewieController.videoPlayerController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
-    final videoControll = Provider.of<TreningiVideoControll>(context);
     final isTablet = Provider.of<bool>(context);
     final token = Provider.of<String>(context);
     final treningiPhotos = Provider.of<TreningiPhotosProvider>(context);
@@ -87,10 +83,13 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                     treningiVideos.getUrl, token),
                                 builder: (context, snapshot) {
                                   if (snapshot.hasData) {
-                                     chewieController = ChewieController(
+                                    chewieController.dispose();
+                                    chewieController.videoPlayerController
+                                        .dispose();
+                                    chewieController = ChewieController(
                                       autoPlay: true,
                                       allowedScreenSleep: false,
-                                      aspectRatio: 16 / 9,
+                                      aspectRatio: 16 / 10.9,
                                       autoInitialize: true,
                                       deviceOrientationsOnEnterFullScreen: [
                                         DeviceOrientation.landscapeLeft,
@@ -132,7 +131,7 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                               borderRadius:
                                                   BorderRadius.circular(5),
                                               child: SizedBox(
-                                                height: 220,
+                                                height: 235,
                                                 width: double.infinity,
                                                 child: Chewie(
                                                   controller: chewieController,
@@ -391,7 +390,6 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                               .data!.data.similar.data.length,
                                           (index) => CustomStatiTabletItem(
                                             onTap: () {
-                                              videoControll.sink.add(true);
                                               treningiVideos.setUrl(
                                                 snapshot.data!.data.similar
                                                     .data[index].link,
@@ -403,7 +401,6 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                                     milliseconds: 500),
                                                 curve: Curves.ease,
                                               );
-                                              videoControll.sink.add(false);
                                               setState(() {});
                                             },
                                             backgroundColor:
@@ -431,53 +428,11 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                       children: [
                                         CustomClipItem(
                                           onTap: () {
-                                            chewieController.dispose();
-                                            chewieController.videoPlayerController.dispose();
-                                            chewieController = ChewieController(
-                                     
-                                      allowedScreenSleep: false,
-                                      aspectRatio: 16 / 9,
-                                      autoInitialize: true,
-                                      deviceOrientationsOnEnterFullScreen: [
-                                        DeviceOrientation.landscapeLeft,
-                                        DeviceOrientation.landscapeRight
-                                      ],
-                                      deviceOrientationsAfterFullScreen: [
-                                        DeviceOrientation.portraitDown,
-                                        DeviceOrientation.portraitUp
-                                      ],
-                                      allowMuting: false,
-                                      useRootNavigator: true,
-                                      cupertinoProgressColors:
-                                          ChewieProgressColors(
-                                        backgroundColor:
-                                            const Color(0xff090909),
-                                        bufferedColor: const Color(0xff090909),
-                                        playedColor: const Color(0xffff0000),
-                                        handleColor: const Color(0xffff0000),
-                                      ),
-                                      materialProgressColors:
-                                          ChewieProgressColors(
-                                        backgroundColor:
-                                            const Color(0xff090909),
-                                        bufferedColor: const Color(0xff090909),
-                                        playedColor: const Color(0xffff0000),
-                                        handleColor: const Color(0xffff0000),
-                                      ),
-                                      videoPlayerController:
-                                          VideoPlayerController.network(
-                                        snapshot
-                                            .data!.data.data.data[0].videoLink,
-                                      ),
-                                    );
-                                    chewieController.play();
-                                            videoControll.sink.add(true);
                                             treningiVideos.setUrl(
                                               snapshot.data!.data.similar
                                                   .data[index].link,
                                             );
                                             isVideo.setIsVideo(true);
-                                            videoControll.sink.add(false);
 
                                             scroll.animateTo(
                                               0,

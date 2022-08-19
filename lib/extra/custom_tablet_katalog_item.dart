@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hansa_app/extra/custom_bottom_tablet_item.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class TabletKatalogItem extends StatelessWidget {
+class TabletKatalogItem extends StatefulWidget {
   const TabletKatalogItem(
       {Key? key,
       required this.imageUrl,
@@ -27,31 +28,55 @@ class TabletKatalogItem extends StatelessWidget {
   final String title;
   final String linkPDF;
   final String linkPDFSkachat;
+
+  @override
+  State<TabletKatalogItem> createState() => _TabletKatalogItemState();
+}
+
+class _TabletKatalogItemState extends State<TabletKatalogItem> {
   @override
   Widget build(BuildContext context) {
+    Future<void>? launched;
     return Column(
       children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(6.r),
-          child: Image.network(
-            imageUrl,
-            width: 200.w,
-            height: 150.h,
-            fit: BoxFit.cover,
+        InkWell(
+          onTap: () {
+              setState(() {
+                launched =
+                    _launchInBrowser(Uri.parse(widget.linkPDF));
+              });
+            },
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(6.r),
+            child: Image.network(
+              widget.imageUrl,
+              width: 200.w,
+              height: 150.h,
+              fit: BoxFit.cover,
+            ),
           ),
         ),
         TabletKatalogBottomItem(
-          linkPDFSkachat: linkPDFSkachat,
-          linkPDF: linkPDF,
-          backgroundColor: backgroundColor,
-          buttonTextColor: buttonTextColor,
-          buttonColor: buttonColor,
-          titleColor: titleColor,
-          stbuttonText: stbuttonText,
-          ndbuttonText: ndbuttonText,
-          title: title,
+          linkPDFSkachat: widget.linkPDFSkachat,
+          linkPDF: widget.linkPDF,
+          backgroundColor: widget.backgroundColor,
+          buttonTextColor: widget.buttonTextColor,
+          buttonColor: widget.buttonColor,
+          titleColor: widget.titleColor,
+          stbuttonText: widget.stbuttonText,
+          ndbuttonText: widget.ndbuttonText,
+          title: widget.title,
         ),
       ],
     );
+  }
+
+   _launchInBrowser(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw 'Could not launch $url';
+    }
   }
 }

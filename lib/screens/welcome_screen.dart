@@ -1,9 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hansa_app/blocs/bloc_play_video.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
-import 'package:hansa_app/blocs/treningi_video_controller.dart';
+import 'package:hansa_app/classes/tap_favorite.dart';
 import 'package:hansa_app/extra/exit_dialog.dart';
 import 'package:hansa_app/extra/glavniy_menyu.dart';
 import 'package:hansa_app/extra/hamburger.dart';
@@ -21,12 +23,12 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
-    final videoControll = Provider.of<TreningiVideoControll>(context);
     GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     final playProvider = Provider.of<BlocPlayVideo>(context);
     final isTablet = Provider.of<bool>(context);
     final providerScaffoldKey = Provider.of<GlobalKey<ScaffoldState>>(context);
     final menuProvider = Provider.of<MenuEventsBloC>(context);
+    final providerTapFavorite = Provider.of<TapFavorite>(context);
 
     return WillPopScope(
       onWillPop: () async {
@@ -60,8 +62,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     children: [
                       InkWell(
                         onTap: () {
-                          videoControll.sink.add(false);
-
                           if (menuProvider.list.length > 1) {
                             menuProvider.eventSink.add(menuProvider.list
                                 .elementAt(menuProvider.list.length - 2));
@@ -87,6 +87,9 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       ),
                       InkWell(
                         onTap: () {
+                          providerTapFavorite.setInt(1);
+                          log(providerTapFavorite.getInt.toString() +
+                              " Welcome screen get bool");
                           providerScaffoldKey.currentState!.openDrawer();
                         },
                         child: Icon(
@@ -97,6 +100,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       ),
                       InkWell(
                         onTap: () {
+                          providerTapFavorite.setInt(2);
                           providerScaffoldKey.currentState!.openDrawer();
                         },
                         child: Icon(
@@ -127,6 +131,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       children: [
                         IconButton(
                             onPressed: () {
+                              providerTapFavorite.setInt(0);
                               providerScaffoldKey.currentState!.openDrawer();
                             },
                             icon: const HamburgerIcon()),

@@ -18,7 +18,7 @@ class TrainingModel {
 }
 
 class TraningModelData {
-  Webinar? webinar;
+  WebinarList webinar;
   FutureEvents futureEvents;
   Videos videos;
   EventReports eventReports;
@@ -33,11 +33,24 @@ class TraningModelData {
 
   factory TraningModelData.fromMap(Map<String, dynamic> map) {
     return TraningModelData(
-      webinar: Webinar.fromMap(map['webinar']),
+      webinar: WebinarList.fromMap(map['webinar']),
       futureEvents: FutureEvents.fromMap(map['futureEvents']),
       videos: Videos.fromMap(map['videos']),
       eventReports: EventReports.fromMap(map['eventReports']),
       events: Events.fromMap(map['events']),
+    );
+  }
+}
+
+class WebinarList {
+  List<Webinar> data;
+  WebinarList({
+    required this.data,
+  });
+
+  factory WebinarList.fromMap(List<dynamic> map) {
+    return WebinarList(
+      data: map.map((e) => Webinar.fromMap(e)).toList(),
     );
   }
 }

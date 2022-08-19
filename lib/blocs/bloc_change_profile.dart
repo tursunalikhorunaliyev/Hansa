@@ -2,7 +2,6 @@ import 'dart:async';
 
 enum ActionChange {
   textIconCard,
-  personRekvizit,
   personal,
   izboreny,
   statistik,

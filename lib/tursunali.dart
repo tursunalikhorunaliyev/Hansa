@@ -12,7 +12,7 @@ class Tursunali extends StatefulWidget {
 class _TursunaliState extends State<Tursunali> {
 
   List<String> videoLinks = ["https://hansa-lab.ru/storage/upload/videos/ZnaJMRQsLcXP.mp4","https://hansa-lab.ru/storage/upload/videos/1d-otmvmwUva.mp4","https://hansa-lab.ru/storage/upload/videos/o6Qt8FWns68q.mp4","https://hansa-lab.ru/storage/upload/videos/aNLeAmhM70NY.mp4"];
-  String videoLink = "https://hansa-lab.ru/storage/upload/videos/ZnaJMRQsLcXP.mp4";
+  String videoLink = "";
   int index = 0;
   @override
   Widget build(BuildContext context) {
