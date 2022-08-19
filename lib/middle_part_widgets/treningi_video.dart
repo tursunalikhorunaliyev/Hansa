@@ -173,7 +173,7 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                           children: [
                                             ClipRRect(
                                               borderRadius:
-                                                  BorderRadius.circular(5),
+                                                  BorderRadius.circular(10),
                                               child: SizedBox(
                                                 height: 235,
                                                 width: double.infinity,
@@ -189,7 +189,7 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                               borderRadius:
                                                   BorderRadius.circular(8),
                                               child: Container(
-                                                height: 90,
+                                                height: 75,
                                                 width: double.infinity,
                                                 color: const Color(0xffffffff),
                                                 child: Row(

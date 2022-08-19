@@ -17,6 +17,7 @@ import 'package:hansa_app/drawer_widgets/referal_silka.dart';
 import 'package:hansa_app/drawer_widgets/text_icon.dart';
 import 'package:hansa_app/drawer_widgets/text_icon_card.dart';
 import 'package:hansa_app/enums/enum_action_view.dart';
+import 'package:hansa_app/extra/exit_account_dialog.dart';
 import 'package:hansa_app/extra/sobshit_o_problem.dart';
 import 'package:hansa_app/providers/fullname_provider.dart';
 import 'package:hansa_app/providers/provider_personal_textFields.dart';
@@ -77,7 +78,6 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                           spreadRadius: 5,
                           blurRadius: 7,
                           offset: Offset(0, 3),
-                          // changes position of shadow
                         ),
                       ],
                       shape: BoxShape.circle,
@@ -148,11 +148,13 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                       builder: (context, snapshot) {
                         return GestureDetector(
                           onTap: () {
-                            snapshot.data == ActionChange.izboreny
+                            snapshot.data == ActionChange.izboreny ||
+                                    providerTapFavorite.getInt == 1
                                 ? blocChangeProfileProvider.dataSink
                                     .add(ActionChange.textIconCard)
                                 : blocChangeProfileProvider.dataSink
                                     .add(ActionChange.izboreny);
+                                    providerTapFavorite.setInt(0);
                           },
                           child: Container(
                             height: isTablet ? 60 : 46,
@@ -165,8 +167,7 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                   color: Color(0xFF2d2d2d),
                                   spreadRadius: 5,
                                   blurRadius: 7,
-                                  offset: Offset(
-                                      0, 3), // changes position of shadow
+                                  offset: Offset(0, 3),
                                 ),
                               ],
                             ),
@@ -186,7 +187,6 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                     child: StreamBuilder<ModelGlavniyMenuUserInfoMain>(
                         stream: blocGlavniyMenuUserInfo.dataStream,
                         builder: (context, snapshot) {
-                          
                           if (snapshot.hasData) {
                             fullname.setName(snapshot.data!.data.fullname);
                             return Text(
@@ -233,14 +233,18 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                       }),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(
-                      top: isTablet ? 280 : 190, left: isTablet ? 175 : 131),
-                  child: Text(
-                    "баллов",
-                    style: GoogleFonts.montserrat(
-                        fontSize: isTablet ? 20 : 16,
-                        color: const Color(0xFFffffff),
-                        fontWeight: FontWeight.w500),
+                  padding: EdgeInsets.only(top: isTablet ? 280 : 190),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "баллов",
+                        style: GoogleFonts.montserrat(
+                            fontSize: isTablet ? 20 : 16,
+                            color: const Color(0xFFffffff),
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ],
                   ),
                 ),
                 Padding(
@@ -422,8 +426,6 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                       : ActionChange.textIconCard,
               stream: blocChangeProfileProvider.dataStream,
               builder: (context, snapshot) {
-                log(providerTapFavorite.getInt.toString() +
-                    " Glavniy menu get bool");
                 return Expanded(
                   child: Container(
                     decoration: const BoxDecoration(color: Color(0xFF2c2c2c)),
@@ -546,9 +548,14 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                               ),
                               Padding(
                                 padding: const EdgeInsets.only(left: 39),
-                                child: TextIcon(
-                                  text: "Выход из акаунта",
-                                  iconUrl: "assets/iconiu.png",
+                                child: GestureDetector(
+                                  onTap: () {
+                                    ExitAccountDialog();
+                                  },
+                                  child: TextIcon(
+                                    text: "Выход из акаунта",
+                                    iconUrl: "assets/iconiu.png",
+                                  ),
                                 ),
                               ),
                             ],

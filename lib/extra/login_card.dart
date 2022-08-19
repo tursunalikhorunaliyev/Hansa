@@ -19,6 +19,7 @@ import 'package:hansa_app/providers/providers_for_login/password_visibility_prov
 import 'package:hansa_app/screens/welcome_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
+import 'package:url_launcher/url_launcher.dart';
 
 class LoginCard extends StatefulWidget {
   const LoginCard({Key? key}) : super(key: key);
@@ -475,14 +476,22 @@ class _LoginCardState extends State<LoginCard> {
                                             "При возникновении проблем просьба обращаться в службу поддержки. Почта:",
                                             textAlign: TextAlign.center,
                                           ),
-                                          Text(
-                                            "support@hansa-lab.ru",
-                                            style: TextStyle(
-                                                color: Color(0xFFfb002b),
-                                                decoration:
-                                                    TextDecoration.underline,
-                                                fontWeight: FontWeight.w500),
-                                            textAlign: TextAlign.center,
+                                          Material(
+                                            child: InkWell(
+                                              onTap: () {
+                                                log("SSSSSSSSSALOMMMD");
+                                                _launchUrl(Uri.parse("http://support@hansa-lab.ru"));
+                                              },
+                                              child: Text(
+                                                "support@hansa-lab.ru",
+                                                style: TextStyle(
+                                                    color: Color(0xFFfb002b),
+                                                    decoration:
+                                                        TextDecoration.underline,
+                                                    fontWeight: FontWeight.w500),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ),
                                           )
                                         ],
                                       ),
@@ -544,5 +553,13 @@ class _LoginCardState extends State<LoginCard> {
         body: {"email": text});
 
     return jsonDecode(response.body);
+  }
+  _launchUrl(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw 'Not launch $url';
+    }
   }
 }
