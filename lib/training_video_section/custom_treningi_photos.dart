@@ -1,15 +1,71 @@
+import 'dart:developer';
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/treningi_photos_model.dart';
 import 'package:hansa_app/api_services/treningi_photos_api.dart';
+import 'package:hansa_app/blocs/bloc_detect_tap.dart';
+import 'package:hansa_app/blocs/download_progress_bloc.dart';
+import 'package:hansa_app/classes/send__index_trening_photo.dart';
 import 'package:hansa_app/providers/treningi_photos_provider.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 
-class CustomTreningiPhotos extends StatelessWidget {
+class CustomTreningiPhotos extends StatefulWidget {
   const CustomTreningiPhotos({Key? key}) : super(key: key);
+
+  @override
+  State<CustomTreningiPhotos> createState() => _CustomTreningiPhotosState();
+}
+
+class _CustomTreningiPhotosState extends State<CustomTreningiPhotos> {
+  bool downloading = false;
+
+  double progress = 0;
+
+  bool isDownloaded = false;
+
+  Future<String> getFilePath(uniqueFileName, fileName) async {
+    String path = "";
+    String dir = "";
+    if (Platform.isIOS) {
+      Directory directory = await getApplicationSupportDirectory();
+      dir = directory.path;
+    } else if (Platform.isAndroid) {
+      dir = "/storage/emulated/0/Download/";
+    }
+    path = "$dir/$uniqueFileName$fileName.jpg";
+    return path;
+  }
+
+  Future<void> downloadFile(String url, String fileName, String fileNameAdd,
+      DownloadProgressFileBloc downloadProgressFileBloc) async {
+    progress = 0;
+
+    String savePath = await getFilePath(fileName, fileNameAdd);
+    Dio dio = Dio();
+    dio.download(
+      url,
+      savePath,
+      onReceiveProgress: (recieved, total) {
+        print(((recieved / total) * 100).toStringAsFixed(0));
+        progress = double.parse(((recieved / total) * 100).toStringAsFixed(0));
+        downloadProgressFileBloc.streamSink.add(progress);
+      },
+      deleteOnError: true,
+    );
+  }
+
+  final sendIndexTreningPhoto = SendIndexTreningPhoto();
+
   @override
   Widget build(BuildContext context) {
+    final blocProgress = DownloadProgressFileBloc();
+    final blocDetectTap = BlocDetectTap();
     final page = PageController(initialPage: 0);
     final token = Provider.of<String>(context);
     final treningiPhotos = Provider.of<TreningiPhotosProvider>(context);
@@ -40,6 +96,9 @@ class CustomTreningiPhotos extends StatelessWidget {
                                 controller: page,
                                 itemCount: snapshot.data!.data.data.list.length,
                                 itemBuilder: (context, index) {
+                                  log(index.toString());
+                                  sendIndexTreningPhoto.setIndex(index - 1);
+
                                   return SizedBox(
                                     height: 220,
                                     width: 325,
@@ -133,48 +192,132 @@ class CustomTreningiPhotos extends StatelessWidget {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(8),
                       child: Container(
-                        height: 90,
+                        height: 70,
                         width: 325,
                         color: const Color(0xffffffff),
                         child: Row(
                           children: [
                             Padding(
                               padding: const EdgeInsets.only(left: 15),
-                              child: Text(
-                                "Иммерсивное шоу\n\"Увидимся на кухне\"г.\nЕкатеринбург:     18.04.2019",
-                                style: GoogleFonts.montserrat(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.bold,
+                              child: SizedBox(
+                                width: 200,
+                                child: Text(
+                                  snapshot.data!.data.data.list[0].title,
+                                  softWrap: true,
+                                  overflow: TextOverflow.clip,
+                                  style: GoogleFonts.montserrat(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
                             ),
                             const Spacer(),
                             Padding(
                               padding: const EdgeInsets.only(right: 8),
-                              child: GestureDetector(
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(64),
-                                  child: Container(
-                                    height: 25,
-                                    width: 95,
-                                    color: const Color(0xffff163e),
-                                    child: Center(
-                                      child: Text(
-                                        "Скачать",
-                                        style: GoogleFonts.montserrat(
-                                          fontSize: 10,
-                                          color: const Color(0xffffffff),
+                              child: StreamBuilder<double>(
+                                  stream: blocProgress.stream,
+                                  builder: (context, snapshotProgress) {
+                                    return GestureDetector(
+                                      onTap: () {
+                                        log(sendIndexTreningPhoto.getIndex
+                                            .toString());
+                                        blocDetectTap.dataSink.add(true);
+                                        if (snapshotProgress.data == null ||
+                                            snapshotProgress.data == 0) {
+                                          downloadFile(
+                                              snapshot
+                                                  .data!
+                                                  .data
+                                                  .data
+                                                  .list[sendIndexTreningPhoto
+                                                      .getIndex]
+                                                  .picture_link,
+                                              snapshot
+                                                  .data!
+                                                  .data
+                                                  .data
+                                                  .list[sendIndexTreningPhoto
+                                                      .getIndex]
+                                                  .title,
+                                              sendIndexTreningPhoto.getIndex
+                                                  .toString(),
+                                              blocProgress);
+                                        } else {}
+                                      },
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(64),
+                                        child: Container(
+                                          height: 25,
+                                          width: 95,
+                                          color: const Color(0xffff163e),
+                                          child: Center(
+                                            child: Text(
+                                              "Скачать",
+                                              style: GoogleFonts.montserrat(
+                                                fontSize: 10,
+                                                color: const Color(0xffffffff),
+                                              ),
+                                            ),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                  ),
-                                ),
-                              ),
+                                    );
+                                  }),
                             )
                           ],
                         ),
                       ),
                     ),
+                    //////////////////////////////////////////////////////////////////////////
+                    StreamBuilder<bool>(
+                        stream: blocDetectTap.dataStream,
+                        builder: (context, snapshotDetectTap) {
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: AnimatedContainer(
+                                curve: snapshotDetectTap.data == true
+                                    ? Curves.bounceOut
+                                    : Curves.bounceOut,
+                                duration: Duration(milliseconds: 500),
+                                width: 300,
+                                height: snapshotDetectTap.data == true ? 20 : 0,
+                                decoration: BoxDecoration(
+                                    color: const Color(0xffffffff),
+                                    borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(10),
+                                      bottomRight: Radius.circular(10),
+                                    )),
+                                child: AnimatedOpacity(
+                                  duration: Duration(milliseconds: 500),
+                                  opacity:
+                                      snapshotDetectTap.data == true ? 1 : 0,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 15, right: 15),
+                                    child: StreamBuilder<double>(
+                                        initialData: 0,
+                                        stream: blocProgress.stream,
+                                        builder: (context, snapshotDouble) {
+                                          if (snapshotDouble.data == 100) {
+                                            blocProgress.streamSink.add(0);
+                                            blocDetectTap.dataSink.add(false);
+                                          }
+                                          return LinearPercentIndicator(
+                                            alignment: MainAxisAlignment.center,
+                                            padding: const EdgeInsets.all(0),
+                                            barRadius: Radius.circular(5),
+                                            lineHeight: 6,
+                                            percent: snapshotDouble.data! / 100,
+                                            backgroundColor: Colors.transparent,
+                                            progressColor: Colors.green,
+                                          );
+                                        }),
+                                  ),
+                                )),
+                          );
+                        }),
+                    /////////////////////////////////////////////////////////////////////////
                   ],
                 );
               } else {
