@@ -144,7 +144,7 @@ class _PresentArchiveState extends State<PresentArchive> {
                                                             launched =
                                                                 _launchInBrowser(
                                                                     Uri.parse(
-                                                                        "http://${snapshot.data!.data.guides.dataGuides[index].pdfUrl}"));
+                                                                        "https://${snapshot.data!.data.guides.dataGuides[index].pdfUrl}"));
                                                           });
                                                         },
                                                         child: Container(
@@ -279,12 +279,12 @@ class _PresentArchiveState extends State<PresentArchive> {
                                                 onTap: () {
                                                   setState(() {
                                                     launched = _launchInBrowser(
-                                                        Uri.parse(snapshot
+                                                        Uri.parse("https://${snapshot
                                                             .data!
                                                             .data
                                                             .guides
                                                             .dataGuides[index]
-                                                            .link));
+                                                            .pdfUrl}"));
                                                   });
                                                 },
                                                 child: Container(
@@ -441,7 +441,7 @@ class _PresentArchiveState extends State<PresentArchive> {
                                                     setState(() {
                                                       launched = _launchInBrowser(
                                                           Uri.parse(
-                                                              "http://${snapshot.data!.data.guidesArchive.dataGuidesArchive[index].link}"));
+                                                              "https://${snapshot.data!.data.guidesArchive.dataGuidesArchive[index].pdfUrl}"));
                                                     });
                                                   },
                                                   child: Container(
@@ -555,7 +555,7 @@ class _PresentArchiveState extends State<PresentArchive> {
                                                           launched =
                                                               _launchInBrowser(
                                                                   Uri.parse(
-                                                                      "${snapshot.data!.data.guidesArchive.dataGuidesArchive[index].link}"));
+                                                                      "https://${snapshot.data!.data.guidesArchive.dataGuidesArchive[index].pdfUrl}"));
                                                         });
                                                       },
                                                       child: Container(
