@@ -1,6 +1,8 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:chewie/chewie.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -8,6 +10,8 @@ import 'package:hansa_app/api_models.dart/treningi_photos_model.dart';
 import 'package:hansa_app/api_models.dart/treningi_video_model.dart';
 import 'package:hansa_app/api_services/treningi_photos_api.dart';
 import 'package:hansa_app/api_services/treningi_video_api.dart';
+import 'package:hansa_app/blocs/bloc_detect_tap.dart';
+import 'package:hansa_app/blocs/download_progress_bloc.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/extra/custom_clip_item.dart';
 import 'package:hansa_app/extra/custom_tablet_stati_item.dart';
@@ -18,6 +22,8 @@ import 'package:hansa_app/providers/treningi_videos_provider.dart';
 import 'package:hansa_app/training_video_section/custom_tablet_photos.dart';
 import 'package:hansa_app/training_video_section/custom_treningi_photos.dart';
 import 'package:lottie/lottie.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 import 'package:sticky_headers/sticky_headers/widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -33,6 +39,10 @@ class TreningiVideo extends StatefulWidget {
 class _TreningiVideoState extends State<TreningiVideo> {
   final scroll = ScrollController();
 
+  bool downloading = false;
+  double progress = 0;
+  bool isDownloaded = false;
+
   ChewieController chewieController = ChewieController(
     aspectRatio: 16 / 9,
     videoPlayerController: VideoPlayerController.network('',
@@ -45,6 +55,39 @@ class _TreningiVideoState extends State<TreningiVideo> {
     super.dispose();
   }
 
+  Future<String> getFilePath(uniqueFileName) async {
+    String path = "";
+    String dir = "";
+    if (Platform.isIOS) {
+      Directory directory = await getApplicationSupportDirectory();
+      dir = directory.path;
+    } else if (Platform.isAndroid) {
+      dir = "/storage/emulated/0/Download/";
+    }
+    path = "$dir/$uniqueFileName.mp4";
+    return path;
+  }
+
+  Future<void> downloadFile(String url, String fileName,
+      DownloadProgressFileBloc downloadProgressFileBloc) async {
+    progress = 0;
+
+    String savePath = await getFilePath(fileName);
+    Dio dio = Dio();
+    dio.download(
+      url,
+      savePath,
+      onReceiveProgress: (recieved, total) {
+        print(((recieved / total) * 100).toStringAsFixed(0));
+        progress = double.parse(((recieved / total) * 100).toStringAsFixed(0));
+        downloadProgressFileBloc.streamSink.add(progress);
+      },
+      deleteOnError: true,
+    );
+  }
+
+  final blocProgress = DownloadProgressFileBloc();
+  final blocDetectTap = BlocDetectTap();
   @override
   Widget build(BuildContext context) {
     final isTablet = Provider.of<bool>(context);
@@ -53,6 +96,7 @@ class _TreningiVideoState extends State<TreningiVideo> {
     final treningiVideos = Provider.of<TreningiVideosProvider>(context);
     final isVideo = Provider.of<IsVideoprovider>(context);
     final menuBloCProvider = Provider.of<MenuEventsBloC>(context);
+
     return Expanded(
       child: SingleChildScrollView(
         controller: scroll,
@@ -183,37 +227,177 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                                       padding:
                                                           const EdgeInsets.only(
                                                               right: 15),
-                                                      child: GestureDetector(
-                                                        child: ClipRRect(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(64),
-                                                          child: Container(
-                                                            height: 25,
-                                                            width: 95,
-                                                            color: const Color(
-                                                                0xffff163e),
-                                                            child: Center(
-                                                              child: Text(
-                                                                "Скачать",
-                                                                style: GoogleFonts
-                                                                    .montserrat(
-                                                                  fontSize: 10,
-                                                                  color:
-                                                                      const Color(
-                                                                    0xffffffff,
+                                                      child: StreamBuilder<
+                                                              double>(
+                                                          stream: blocProgress
+                                                              .stream,
+                                                          builder: (context,
+                                                              snapshotProgress) {
+                                                            return GestureDetector(
+                                                              onTap: () {
+                                                                blocDetectTap
+                                                                    .dataSink
+                                                                    .add(true);
+                                                                if (snapshotProgress
+                                                                            .data ==
+                                                                        null ||
+                                                                    snapshotProgress
+                                                                            .data ==
+                                                                        0) {
+                                                                  downloadFile(
+                                                                      snapshot
+                                                                          .data!
+                                                                          .data
+                                                                          .data
+                                                                          .data[
+                                                                              0]
+                                                                          .videoLink,
+                                                                      snapshot
+                                                                          .data!
+                                                                          .data
+                                                                          .data
+                                                                          .data[
+                                                                              0]
+                                                                          .title,
+                                                                      blocProgress);
+                                                                } else {}
+                                                              },
+                                                              child: ClipRRect(
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .circular(
+                                                                            64),
+                                                                child:
+                                                                    Container(
+                                                                  height: 25,
+                                                                  width: 95,
+                                                                  color: const Color(
+                                                                      0xffff163e),
+                                                                  child: Center(
+                                                                    child: Text(
+                                                                      "Скачать",
+                                                                      style: GoogleFonts
+                                                                          .montserrat(
+                                                                        fontSize:
+                                                                            10,
+                                                                        color:
+                                                                            const Color(
+                                                                          0xffffffff,
+                                                                        ),
+                                                                      ),
+                                                                    ),
                                                                   ),
                                                                 ),
                                                               ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      ),
+                                                            );
+                                                          }),
                                                     )
                                                   ],
                                                 ),
                                               ),
                                             ),
+                                            ////////
+                                            StreamBuilder<bool>(
+                                                stream:
+                                                    blocDetectTap.dataStream,
+                                                builder: (context,
+                                                    snapshotDetectTap) {
+                                                  return Padding(
+                                                    padding: const EdgeInsets
+                                                            .symmetric(
+                                                        horizontal: 10),
+                                                    child: AnimatedContainer(
+                                                        curve: snapshotDetectTap
+                                                                    .data ==
+                                                                true
+                                                            ? Curves.bounceOut
+                                                            : Curves.bounceOut,
+                                                        duration: Duration(
+                                                            milliseconds: 500),
+                                                        width: 355,
+                                                        height:
+                                                            snapshotDetectTap
+                                                                        .data ==
+                                                                    true
+                                                                ? 18
+                                                                : 0,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                                color: const Color(
+                                                                    0xffffffff),
+                                                                borderRadius:
+                                                                    BorderRadius
+                                                                        .only(
+                                                                  bottomLeft: Radius
+                                                                      .circular(
+                                                                          10),
+                                                                  bottomRight: Radius
+                                                                      .circular(
+                                                                          10),
+                                                                )),
+                                                        child: AnimatedOpacity(
+                                                          duration: Duration(
+                                                              milliseconds:
+                                                                  500),
+                                                          opacity:
+                                                              snapshotDetectTap
+                                                                          .data ==
+                                                                      true
+                                                                  ? 1
+                                                                  : 0,
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    left: 15,
+                                                                    right: 15),
+                                                            child: StreamBuilder<
+                                                                    double>(
+                                                                initialData: 0,
+                                                                stream:
+                                                                    blocProgress
+                                                                        .stream,
+                                                                builder: (context,
+                                                                    snapshotDouble) {
+                                                                  if (snapshotDouble
+                                                                          .data ==
+                                                                      100) {
+                                                                    blocProgress
+                                                                        .streamSink
+                                                                        .add(0);
+                                                                    blocDetectTap
+                                                                        .dataSink
+                                                                        .add(
+                                                                            false);
+                                                                  }
+                                                                  return LinearPercentIndicator(
+                                                                    alignment:
+                                                                        MainAxisAlignment
+                                                                            .center,
+                                                                    padding:
+                                                                        const EdgeInsets
+                                                                            .all(0),
+                                                                    barRadius: Radius
+                                                                        .circular(
+                                                                            5),
+                                                                    lineHeight:
+                                                                        6,
+                                                                    percent:
+                                                                        snapshotDouble.data! /
+                                                                            100,
+                                                                    backgroundColor:
+                                                                        Colors
+                                                                            .transparent,
+                                                                    progressColor:
+                                                                        Colors
+                                                                            .green,
+                                                                  );
+                                                                }),
+                                                          ),
+                                                        )),
+                                                  );
+                                                }),
+                                            //////////////////////////////////////////
                                           ],
                                         ),
                                         Positioned(
