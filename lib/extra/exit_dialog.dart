@@ -41,7 +41,7 @@ class ExitDialog extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      SystemNavigator.pop();
+                      exit(0);
                     },
                     child: Container(
                       alignment: Alignment.center,
