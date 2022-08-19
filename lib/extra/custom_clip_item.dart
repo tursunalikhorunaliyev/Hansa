@@ -82,18 +82,17 @@ class CustomClipItem extends StatelessWidget {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(64.r),
                           child: Container(
+                            alignment: Alignment.centerLeft,
                             padding: const EdgeInsets.all(7),
                             constraints: BoxConstraints(
                               minWidth: 90.w,
                             ),
                             color: buttonColor,
-                            child: Center(
-                              child: Text(
-                                buttonText,
-                                style: GoogleFonts.montserrat(
-                                  color: buttonTextColor,
-                                  fontSize: 10.sp,
-                                ),
+                            child: Text(
+                              buttonText,
+                              style: GoogleFonts.montserrat(
+                                color: buttonTextColor,
+                                fontSize: 10.sp,
                               ),
                             ),
                           ),

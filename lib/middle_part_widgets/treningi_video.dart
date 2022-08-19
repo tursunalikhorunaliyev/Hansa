@@ -35,10 +35,8 @@ class _TreningiVideoState extends State<TreningiVideo> {
 
   ChewieController chewieController = ChewieController(
     aspectRatio: 16 / 9,
-    videoPlayerController: VideoPlayerController.network(
-      '',
-       videoPlayerOptions: VideoPlayerOptions(mixWithOthers: false)
-    ),
+    videoPlayerController: VideoPlayerController.network('',
+        videoPlayerOptions: VideoPlayerOptions(mixWithOthers: false)),
   );
   @override
   void dispose() {
@@ -46,9 +44,9 @@ class _TreningiVideoState extends State<TreningiVideo> {
     chewieController.videoPlayerController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
-    
     final isTablet = Provider.of<bool>(context);
     final token = Provider.of<String>(context);
     final treningiPhotos = Provider.of<TreningiPhotosProvider>(context);
@@ -86,8 +84,9 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                 builder: (context, snapshot) {
                                   if (snapshot.hasData) {
                                     chewieController.dispose();
-                                    chewieController.videoPlayerController.dispose();
-                                     chewieController = ChewieController(
+                                    chewieController.videoPlayerController
+                                        .dispose();
+                                    chewieController = ChewieController(
                                       autoPlay: true,
                                       allowedScreenSleep: false,
                                       aspectRatio: 16 / 9,
@@ -391,7 +390,6 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                               .data!.data.similar.data.length,
                                           (index) => CustomStatiTabletItem(
                                             onTap: () {
-                                             
                                               treningiVideos.setUrl(
                                                 snapshot.data!.data.similar
                                                     .data[index].link,
@@ -403,7 +401,6 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                                     milliseconds: 500),
                                                 curve: Curves.ease,
                                               );
-                                             
                                               setState(() {});
                                             },
                                             backgroundColor:
@@ -431,11 +428,6 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                       children: [
                                         CustomClipItem(
                                           onTap: () {
-
-
-
-               
-                                                                 
                                             treningiVideos.setUrl(
                                               snapshot.data!.data.similar
                                                   .data[index].link,
