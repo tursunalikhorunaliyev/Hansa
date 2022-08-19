@@ -8,7 +8,6 @@ import 'package:hansa_app/api_models.dart/model_glavniy_menu_user_info.dart';
 import 'package:hansa_app/blocs/bloc_change_profile.dart';
 import 'package:hansa_app/blocs/bloc_glavniy_menu_user_info.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
-import 'package:hansa_app/drawer_widgets/change_profile.dart';
 import 'package:hansa_app/drawer_widgets/drawer_stats.dart';
 import 'package:hansa_app/drawer_widgets/izbrannoe.dart';
 import 'package:hansa_app/drawer_widgets/nastroyka_widget.dart';
@@ -291,11 +290,11 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                   .add(EnumActionView.view);
                             }
 
-                            snapshot.data == ActionChange.personRekvizit
+                            snapshot.data == ActionChange.personal
                                 ? blocChangeProfileProvider.dataSink
                                     .add(ActionChange.textIconCard)
                                 : blocChangeProfileProvider.dataSink
-                                    .add(ActionChange.personRekvizit);
+                                    .add(ActionChange.personal);
 
                             if (snapshot.data == ActionChange.nastroyka) {
                               blocChangeProfileProvider.dataSink
@@ -357,10 +356,7 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                   ? true
                                   : snapshot.data == ActionChange.nastroyka
                                       ? true
-                                      : snapshot.data ==
-                                              ActionChange.personRekvizit
-                                          ? true
-                                          : false,
+                                      : false,
                       child: Padding(
                         padding: EdgeInsets.only(
                             left: isTablet ? 55 : 45,
@@ -373,17 +369,13 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                             }
                             if (snapshot.data == ActionChange.personal) {
                               blocChangeProfileProvider.dataSink
-                                  .add(ActionChange.personRekvizit);
+                                  .add(ActionChange.textIconCard);
                             }
                             if (snapshot.data == ActionChange.statistik) {
                               blocChangeProfileProvider.dataSink
                                   .add(ActionChange.textIconCard);
                             }
                             if (snapshot.data == ActionChange.nastroyka) {
-                              blocChangeProfileProvider.dataSink
-                                  .add(ActionChange.textIconCard);
-                            }
-                            if (snapshot.data == ActionChange.personRekvizit) {
                               blocChangeProfileProvider.dataSink
                                   .add(ActionChange.textIconCard);
                             }
@@ -420,132 +412,130 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                     child: SingleChildScrollView(
                       physics: BouncingScrollPhysics(),
                       padding: EdgeInsets.only(
-                          top: snapshot.data == ActionChange.izboreny || snapshot.data == ActionChange.statistik  ? 0 : 30,
+                          top: snapshot.data == ActionChange.izboreny ||
+                                  snapshot.data == ActionChange.statistik
+                              ? 0
+                              : 30,
                           bottom: 20),
                       child: Column(
                         children: List.generate(
-                        1,
-                        (index) => Column(
-                          children: [
-                            snapshot.data == ActionChange.personRekvizit
-                                ? const ChangeProfile()
-                                : snapshot.data == ActionChange.izboreny
-                                    ? Wrap(
-                                        children: [
-                                          Izbrannoe(),
-                                          SizedBox(
-                                            height: isTablet ? 700 : 509,
-                                          ),
-                                          ReferalSilka(),
-                                        ],
-                                      )
-                                    : snapshot.data == ActionChange.personal
-                                        ? const PersonalniyDaniy()
-                                        : snapshot.data ==
-                                                ActionChange.statistik
-                                            ? Wrap(children: [
-                                                DrawerStats(),
-                                                SizedBox(
-                                                  height: isTablet ? 509 : 460,
+                          1,
+                          (index) => Column(
+                            children: [
+                              snapshot.data == ActionChange.izboreny
+                                  ? Wrap(
+                                      children: [
+                                        Izbrannoe(),
+                                        SizedBox(
+                                          height: isTablet ? 700 : 509,
+                                        ),
+                                        ReferalSilka(),
+                                      ],
+                                    )
+                                  : snapshot.data == ActionChange.personal
+                                      ? const PersonalniyDaniy()
+                                      : snapshot.data == ActionChange.statistik
+                                          ? Wrap(children: [
+                                              DrawerStats(),
+                                              SizedBox(
+                                                height: isTablet ? 509 : 460,
+                                              ),
+                                              ReferalSilka()
+                                            ])
+                                          : snapshot.data ==
+                                                  ActionChange.nastroyka
+                                              ? const NastroykaWidget()
+                                              : const Padding(
+                                                  padding:
+                                                      EdgeInsets.only(left: 39),
+                                                  child: TextIconCard(),
                                                 ),
-                                                ReferalSilka()
-                                              ])
-                                            : snapshot.data ==
-                                                    ActionChange.nastroyka
-                                                ? const NastroykaWidget()
-                                                : const Padding(
-                                                    padding: EdgeInsets.only(
-                                                        left: 39),
-                                                    child: TextIconCard(),
-                                                  ),
-                            snapshot.data == ActionChange.personRekvizit
-                                ? SizedBox(
-                                    height: isTablet ? 50 : 69,
-                                  )
-                                : snapshot.data == ActionChange.personal
-                                    ? SizedBox(
-                                        height: isTablet ? 50 : 69,
-                                      )
-                                    : snapshot.data == ActionChange.statistik ? SizedBox(
-                                        height: isTablet ? 140 : 30,
-                                      )  : SizedBox(
-                                        height: isTablet ? 140 : 69,
-                                      ),
-                            Padding(
-                              padding: const EdgeInsets.only(
-                                left: 39,
-                              ),
-                              child: GestureDetector(
-                                onTap: () {
-                                  blocChangeProfileProvider.dataSink
-                                      .add(ActionChange.statistik);
-                                },
-                                child: TextIcon(
-                                  text: "Рейтинг",
-                                  iconUrl:
-                                      "assets/free-icon-rating-4569150.png",
+                              snapshot.data == ActionChange.personal
+                                  ? SizedBox(
+                                      height: isTablet ? 50 : 69,
+                                    )
+                                  : snapshot.data == ActionChange.statistik
+                                      ? SizedBox(
+                                          height: isTablet ? 140 : 30,
+                                        )
+                                      : SizedBox(
+                                          height: isTablet ? 140 : 69,
+                                        ),
+                              Padding(
+                                padding: const EdgeInsets.only(
+                                  left: 39,
+                                ),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    blocChangeProfileProvider.dataSink
+                                        .add(ActionChange.statistik);
+                                  },
+                                  child: TextIcon(
+                                    text: "Рейтинг",
+                                    iconUrl:
+                                        "assets/free-icon-rating-4569150.png",
+                                  ),
                                 ),
                               ),
-                            ),
-                            snapshot.data == ActionChange.nastroyka
-                                ? const SizedBox(
-                                    height: 0,
-                                  )
-                                : SizedBox(height: isTablet ? 30 : 20),
-                            snapshot.data == ActionChange.nastroyka
-                                ? const SizedBox(
-                                    height: 0,
-                                  )
-                                : Padding(
-                                    padding: const EdgeInsets.only(left: 39),
-                                    child: GestureDetector(
-                                      onTap: () {
-                                        blocChangeProfileProvider.dataSink
-                                            .add(ActionChange.nastroyka);
-                                      },
-                                      child: TextIcon(
-                                        text: "Настройки",
-                                        iconUrl: "assets/icon.png",
+                              snapshot.data == ActionChange.nastroyka
+                                  ? const SizedBox(
+                                      height: 0,
+                                    )
+                                  : SizedBox(height: isTablet ? 30 : 20),
+                              snapshot.data == ActionChange.nastroyka
+                                  ? const SizedBox(
+                                      height: 0,
+                                    )
+                                  : Padding(
+                                      padding: const EdgeInsets.only(left: 39),
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          blocChangeProfileProvider.dataSink
+                                              .add(ActionChange.nastroyka);
+                                        },
+                                        child: TextIcon(
+                                          text: "Настройки",
+                                          iconUrl: "assets/icon.png",
+                                        ),
                                       ),
                                     ),
+                              SizedBox(
+                                height: isTablet ? 30 : 20,
+                              ),
+                              InkWell(
+                                onTap: () {
+                                  showDialog(
+                                    context: context,
+                                    useRootNavigator: false,
+                                    builder: (contextDialog) =>
+                                        Provider<String>.value(
+                                            value: providerToken.toString(),
+                                            child: SobshitOProblem()),
+                                  );
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.only(left: 33),
+                                  child: TextIcon(
+                                    text: "Задать вопрос",
+                                    iconUrl: "assets/question.png",
+                                    size: 30,
+                                    widthSize: 18,
                                   ),
-                            SizedBox(
-                              height: isTablet ? 30 : 20,
-                            ),
-                            InkWell(
-                              onTap: () {
-                                showDialog(
-                                  context: context,
-                                  useRootNavigator: false,
-                                  builder: (contextDialog) =>
-                                      Provider<String>.value(
-                                          value: providerToken.toString(),
-                                          child: SobshitOProblem()),
-                                );
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 33),
-                                child: TextIcon(
-                                  text: "Задать вопрос",
-                                  iconUrl: "assets/question.png",
-                                  size: 30,
-                                  widthSize: 18,
                                 ),
                               ),
-                            ),
-                            SizedBox(
-                              height: isTablet ? 30 : 20,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 39),
-                              child: TextIcon(
-                                text: "Выход из акаунта",
-                                iconUrl: "assets/iconiu.png",
+                              SizedBox(
+                                height: isTablet ? 30 : 20,
                               ),
-                            ),
-                          ],
+                              Padding(
+                                padding: const EdgeInsets.only(left: 39),
+                                child: TextIcon(
+                                  text: "Выход из акаунта",
+                                  iconUrl: "assets/iconiu.png",
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
                       ),
                     ),
                   ),
