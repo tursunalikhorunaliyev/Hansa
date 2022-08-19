@@ -178,11 +178,9 @@ class _TreningiState extends State<Treningi> {
                                   ),
                                 )
                               : const SizedBox(),
-                          (snapshot.data!.data.events.events.isNotEmpty)
-                              ? CustomCalendar(
-                                  dates: snapshot.data!.data.events.events)
-                              : const SizedBox(),
-                          isTablet
+                          CustomCalendar(
+                                  dates: (snapshot.data!.data.events.events.isNotEmpty)?snapshot.data!.data.events.events:[]),
+                         (snapshot.data!.data.events.events.isNotEmpty)? isTablet
                               ? const IpadContainer()
                               : CustomClipItem(
                                   backgroundColor: const Color(0xffff163e),
@@ -193,7 +191,7 @@ class _TreningiState extends State<Treningi> {
                                   title:
                                       "Иммерсивное шоу\n\"Увидимся на кухне\"",
                                   onTap: () {},
-                                ),
+                                ):const SizedBox(),
                         ],
                       ),
                     ),
@@ -287,7 +285,7 @@ class _TreningiState extends State<Treningi> {
                                       buttonColor: const Color(0xffe21a37),
                                       buttonTextColor: const Color(0xffffffff),
                                       titleColor: const Color(0xffffffff),
-                                      buttonText: "Смотреть F",
+                                      buttonText: "Смотреть",
                                       title:
                                           data.eventReports.list[index].title,
                                       onTap: () {
