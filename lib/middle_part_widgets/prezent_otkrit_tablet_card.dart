@@ -3,19 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/blocs/favourite_bloc.dart';
+import 'package:hansa_app/extra/custom_paint_clipper.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PrezentOtkritTabletCard extends StatefulWidget {
-  const PrezentOtkritTabletCard({
+  PrezentOtkritTabletCard({
     Key? key,
     required this.title,
     required this.url,
+    required this.onTap,
   }) : super(key: key);
 
   final String url;
   final String title;
+  VoidCallback onTap;
 
   @override
   State<PrezentOtkritTabletCard> createState() =>
@@ -30,17 +33,15 @@ class _PrezentOtkritTabletCardState extends State<PrezentOtkritTabletCard> {
     final isTablet = Provider.of<bool>(context);
     final isFavouriteBLoC = FavouriteBLoC();
     final token = Provider.of<String>(context);
-    return Center(
-      child: SizedBox(
-        height: 360,
-        width: 430,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 5),
-          child: Column(
-            children: [
-              InkWell(
-                onTap: () {},
-                child: SizedBox(
+    return Padding(
+      padding: EdgeInsets.only(bottom: 10.h),
+      child: Column(
+        children: [
+          InkWell(
+            onTap: widget.onTap,
+            child: Row(
+              children: [
+                SizedBox(
                     width: 410,
                     height: 230,
                     child: ClipRRect(
@@ -50,67 +51,87 @@ class _PrezentOtkritTabletCardState extends State<PrezentOtkritTabletCard> {
                         fit: BoxFit.cover,
                       ),
                     )),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                width: 410,
-                height: 77.h,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5.r),
-                    color: const Color(0xffffffff)),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 7.w),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              ],
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.only(top: 6.h, bottom: 5.h),
+            child: SizedBox(
+              width: 500,
+              child: Stack(
+                alignment: Alignment.center,
+                children: [
+                  Row(
                     children: [
-                      Expanded(
-                        child: Text(
-                          widget.title,
-                          overflow: TextOverflow.fade,
-                          style: GoogleFonts.montserrat(
-                              fontSize: isTablet ? 14 : 12,
-                              fontWeight: FontWeight.bold),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(5.r),
+                        child: ClipPath(
+                          clipper: CustomPaintClipper(),
+                          child: Container(
+                            width: 150.w,
+                            height: 75.h,
+                            color: const Color(0xff000004),
+                          ),
                         ),
                       ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 23.w),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(top: 4.h),
-                              child: InkWell(
-                                onTap: () {},
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  width: isTablet ? 100 : 94,
-                                  height: isTablet ? 28 : 25,
-                                  decoration: BoxDecoration(
-                                      color: Colors.amber,
-                                      borderRadius:
-                                          BorderRadius.circular(13.r)),
-                                  child: Text(
-                                    "Salom",
-                                    style: GoogleFonts.montserrat(
-                                        fontSize: isTablet ? 12 : 10,
-                                        color: const Color(0xffffffff),
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                      )
                     ],
                   ),
-                ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20),
+                        child: Container(
+                          width: 180,
+                          height: 70.h,
+                         alignment: Alignment.centerLeft,
+                          child: Text(
+                            widget.title,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                            style: GoogleFonts.montserrat(
+                              color: const Color(0xffffffff),
+                              fontWeight: FontWeight.bold,
+                              fontSize: 9.sp,
+                            ),
+                          ),
+                        ),
+                      ),
+                      PhysicalModel(
+                        shadowColor: Colors.grey.withOpacity(.5),
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.circular(64.r),
+                        elevation: 5.sp,
+                        child: GestureDetector(
+                          onTap: widget.onTap,
+                          child: Container(
+                            padding: const EdgeInsets.all(7),
+                            constraints: BoxConstraints(
+                              minWidth: 60.w,
+                            ),
+                            decoration: BoxDecoration(
+                              color: const Color(0xffff163e),
+                              borderRadius: BorderRadius.circular(64.r),
+                            ),
+                            child: Center(
+                              child: Text(
+                                "Открыть",
+                                style: GoogleFonts.montserrat(
+                                  color: const Color(0xffffffff),
+                                  fontSize: 7.sp,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

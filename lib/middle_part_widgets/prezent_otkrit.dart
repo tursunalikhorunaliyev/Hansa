@@ -100,44 +100,50 @@ class _PrezentOtkritState extends State<PrezentOtkrit> {
                         ),
                       ),
                       content: isTablet
-                          ? NotificationListener(
-                              onNotification: (value) {
-                                welcomeApi.eventSink
-                                    .add(WelcomeApiAction.fetch);
-                                return false;
-                              },
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 25),
-                                child: GridView(
-                                  controller: scroll,
-                                  shrinkWrap: true,
-                                  physics: BouncingScrollPhysics(),
-                                  gridDelegate:
-                                      SliverGridDelegateWithFixedCrossAxisCount(
-                                          crossAxisCount: 2,
-                                          crossAxisSpacing: 10,
-                                          mainAxisExtent: 375),
-                                  children: List.generate(
-                                      snapshot.data!.modelPrezentOtkritList.list
-                                          .length, (index) {
-                                    return Padding(
-                                        padding:
-                                            const EdgeInsets.only(top: 5.0),
-                                        child: PrezentOtkritTabletCard(
-                                            title: snapshot
+                          ? Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 25),
+                            child: GridView(
+                              controller: scroll,
+                              shrinkWrap: true,
+                              physics: BouncingScrollPhysics(),
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      crossAxisSpacing: 10,
+                                      mainAxisExtent: 380),
+                              children: List.generate(
+                                  snapshot.data!.modelPrezentOtkritList.list
+                                      .length, (index) {
+                                return Padding(
+                                    padding:
+                                        const EdgeInsets.only(top: 5.0),
+                                    child: PrezentOtkritTabletCard(
+                                          onTap: () {
+                                        providerMenuEventsBloc.eventSink
+                                            .add(MenuActions.prezentFav);
+                                        log(providerSendUrlPrezentOtkrit
+                                            .getUrl);
+                                        providerSendUrlPrezentOtkrit.setUrl(
+                                            snapshot
                                                 .data!
                                                 .modelPrezentOtkritList
                                                 .list[index]
-                                                .title,
-                                            url: snapshot
-                                                .data!
-                                                .modelPrezentOtkritList
-                                                .list[index]
-                                                .pictureLink));
-                                  }),
-                                ),
-                              ))
+                                                .link);
+                                      },
+                                        title: snapshot
+                                            .data!
+                                            .modelPrezentOtkritList
+                                            .list[index]
+                                            .title,
+                                        url: snapshot
+                                            .data!
+                                            .modelPrezentOtkritList
+                                            .list[index]
+                                            .pictureLink));
+                              }),
+                            ),
+                          )
                           : Column(
                               children: List.generate(
                               snapshot.data!.modelPrezentOtkritList.list.length,
