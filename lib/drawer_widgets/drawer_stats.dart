@@ -21,9 +21,8 @@ class _DrawerStatsState extends State<DrawerStats> {
   @override
   Widget build(BuildContext context) {
     final prov = Provider.of<String>(context);
-    final bloc = BlocRating(prov);
+    final bloc = BlocRating();
     final isTablet = Provider.of<bool>(context);
-    bloc.eventSink.add(RatingEnum.rating);
     final fullname = Provider.of<FullnameProvider>(context);
     return SingleChildScrollView(
       physics: BouncingScrollPhysics(),
@@ -38,10 +37,16 @@ class _DrawerStatsState extends State<DrawerStats> {
             ),
             Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
-                child: SizedBox(
-                  height: isTablet ? 500 : null,
-                  child: StreamBuilder<RatingTopModel>(
-                      stream: bloc.stream,
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 500),
+                  curve: Curves.bounceInOut,
+                  height: isTablet
+                      ? isCollapsed
+                          ? 600
+                          : 500
+                      : null,
+                  child: FutureBuilder<RatingTopModel>(
+                      future: bloc.getStores(prov),
                       builder: (context, snapshot) {
                         if (snapshot.hasData) {
                           return SingleChildScrollView(
@@ -97,7 +102,6 @@ class _DrawerStatsState extends State<DrawerStats> {
                                         fullname.getName.split(' ').last +
                                             " " +
                                             fullname.getName.split(' ').first;
-                                log(snapshot.data!.data.list[index].name);
                                 return DataRow(
                                   color: MaterialStateProperty.all(
                                     thisUser ? Color(0xffe21a37) : Colors.white,
