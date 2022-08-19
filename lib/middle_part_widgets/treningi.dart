@@ -54,7 +54,7 @@ class _TreningiState extends State<Treningi> {
                       content: Column(
                         children: [
                           Row(),
-                         /*  (snapshot.data!.data.webinar != null)
+                          (snapshot.data!.data.webinar.data.isNotEmpty)
                               ? Container(
                                   margin: const EdgeInsets.only(
                                       left: 25, right: 25, bottom: 13),
@@ -79,8 +79,8 @@ class _TreningiState extends State<Treningi> {
                                             Row(
                                               children: [
                                                 Text(
-                                                    snapshot.data!.data.webinar!
-                                                        .date
+                                                    snapshot.data!.data.webinar
+                                                        .data.first.date
                                                         .trim()
                                                         .substring(0, 4),
                                                     style:
@@ -95,8 +95,13 @@ class _TreningiState extends State<Treningi> {
                                                   child: GestureDetector(
                                                     onTap: () {
                                                       launchInBrowser(Uri.parse(
-                                                          snapshot.data!.data
-                                                              .webinar!.link));
+                                                          snapshot
+                                                              .data!
+                                                              .data
+                                                              .webinar
+                                                              .data
+                                                              .first
+                                                              .link));
                                                     },
                                                     child: ClipRRect(
                                                       borderRadius:
@@ -132,12 +137,18 @@ class _TreningiState extends State<Treningi> {
                                               ],
                                             ),
                                             Text(
-                                              snapshot.data!.data.webinar!.date
+                                              snapshot.data!.data.webinar.data
+                                                      .first.date
                                                       .trim()
                                                       .substring(8, 10) +
                                                   " - " +
                                                   toDateString(snapshot
-                                                      .data!.data.webinar!.date
+                                                      .data!
+                                                      .data
+                                                      .webinar
+                                                      .data
+                                                      .first
+                                                      .date
                                                       .trim()
                                                       .substring(5, 7)),
                                               style: GoogleFonts.montserrat(
@@ -148,8 +159,8 @@ class _TreningiState extends State<Treningi> {
                                               height: 20,
                                             ),
                                             Text(
-                                                snapshot
-                                                    .data!.data.webinar!.name
+                                                snapshot.data!.data.webinar.data
+                                                    .first.name
                                                     .trim(),
                                                 softWrap: true,
                                                 overflow: TextOverflow.clip,
@@ -166,9 +177,11 @@ class _TreningiState extends State<Treningi> {
                                     ],
                                   ),
                                 )
-                              :  *//* const SizedBox(),
-                          CustomCalendar(
-                              dates: snapshot.data!.data.events.events), */
+                              : const SizedBox(),
+                          (snapshot.data!.data.events.events.isNotEmpty)
+                              ? CustomCalendar(
+                                  dates: snapshot.data!.data.events.events)
+                              : const SizedBox(),
                           isTablet
                               ? const IpadContainer()
                               : CustomClipItem(
@@ -222,7 +235,8 @@ class _TreningiState extends State<Treningi> {
                                             const Color(0xffffffff),
                                         titleColor: const Color(0xffffffff),
                                         buttonText: "Смотреть",
-                                        title: "data.futureEvents.list[0].title",
+                                        title:
+                                            "data.futureEvents.list[0].title",
                                         onTap: () {
                                           treningiPhotos.setUrl(snapshot
                                               .data!
