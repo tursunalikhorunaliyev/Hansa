@@ -8,6 +8,7 @@ import 'package:hansa_app/api_models.dart/model_glavniy_menu_user_info.dart';
 import 'package:hansa_app/blocs/bloc_change_profile.dart';
 import 'package:hansa_app/blocs/bloc_glavniy_menu_user_info.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
+import 'package:hansa_app/classes/tap_favorite.dart';
 import 'package:hansa_app/drawer_widgets/drawer_stats.dart';
 import 'package:hansa_app/drawer_widgets/izbrannoe.dart';
 import 'package:hansa_app/drawer_widgets/nastroyka_widget.dart';
@@ -46,6 +47,7 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
         Provider.of<ProviderPersonalTextFields>(context);
 
     final menuProvider = Provider.of<MenuEventsBloC>(context);
+    final providerTapFavorite = Provider.of<TapFavorite>(context);
 
     final blocGlavniyMenuUserInfo = BlocGlavniyMenuUserInfo(providerToken);
 
@@ -242,7 +244,9 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                   padding: EdgeInsets.only(
                       top: isTablet ? 320 : 220, left: isTablet ? 118 : 90),
                   child: StreamBuilder<ActionChange>(
-                      initialData: ActionChange.textIconCard,
+                      initialData: providerTapFavorite.getInt == 2
+                          ? ActionChange.personal
+                          : ActionChange.textIconCard,
                       stream: blocChangeProfileProvider.dataStream,
                       builder: (context, snapshot) {
                         log(snapshot.data!.name);
@@ -345,6 +349,11 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                       }),
                 ),
                 StreamBuilder<ActionChange>(
+                  initialData: providerTapFavorite.getInt == 1
+                      ? ActionChange.izboreny
+                      : providerTapFavorite.getInt == 2
+                          ? ActionChange.personal
+                          : ActionChange.textIconCard,
                   stream: blocChangeProfileProvider.dataStream,
                   builder: (context, snapshot) {
                     return Visibility(
@@ -403,9 +412,15 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
 
 /////////////////////////////////////menu
           StreamBuilder<ActionChange>(
-              initialData: ActionChange.textIconCard,
+              initialData: providerTapFavorite.getInt == 1
+                  ? ActionChange.izboreny
+                  : providerTapFavorite.getInt == 2
+                      ? ActionChange.personal
+                      : ActionChange.textIconCard,
               stream: blocChangeProfileProvider.dataStream,
               builder: (context, snapshot) {
+                log(providerTapFavorite.getInt.toString() +
+                    " Glavniy menu get bool");
                 return Expanded(
                   child: Container(
                     decoration: const BoxDecoration(color: Color(0xFF2c2c2c)),
