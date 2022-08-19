@@ -16,6 +16,7 @@ import 'package:hansa_app/blocs/read_stati_bloc.dart';
 import 'package:hansa_app/blocs/voyti_ili_sozdata_bloc.dart';
 import 'package:hansa_app/classes/send_link.dart';
 import 'package:hansa_app/classes/sned_url_prezent_otkrit.dart';
+import 'package:hansa_app/classes/tap_favorite.dart';
 import 'package:hansa_app/middle_part_widgets/permission_handler_screen.dart';
 import 'package:hansa_app/providers/dialog_video_provider.dart';
 import 'package:hansa_app/providers/full_registr_provider.dart';
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     final sendUrlPrezentOtkrit = SendUrlPrezentOtkrit();
+    final tapFavorite = TapFavorite();
 
     Size size = WidgetsBinding.instance.window.physicalSize;
     bool isTablet = (size.width / 3) > 500;
@@ -103,6 +105,9 @@ class MyApp extends StatelessWidget {
           Provider<SendUrlPrezentOtkrit>(
             create: (context) => sendUrlPrezentOtkrit,
           ),
+          Provider<TapFavorite>(
+            create: (context) => tapFavorite,
+          )
         ],
         child: const MaterialApp(
           localizationsDelegates: [
