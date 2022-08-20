@@ -45,15 +45,16 @@ class CustomOKompaniiItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
             child: Container(
               height: 100,
-              width: double.infinity,
+              
               color: const Color(0xffffffff),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 18),
-                    child: SizedBox(
-                      width: 230,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(
+
+                      width: 185,
                       child: Text(
                         title,
                         overflow: TextOverflow.clip,
@@ -63,16 +64,11 @@ class CustomOKompaniiItem extends StatelessWidget {
                         ),
                       ),
                     ),
-                  ),
-                  
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      right: 8,
-                      top: 18,
-                      bottom: 18,
-                    ),
-                    child: Column(
+                    
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
+                      
                         PhysicalModel(
                           shadowColor: Colors.grey.withOpacity(.5),
                           color: Colors.transparent,
@@ -101,7 +97,7 @@ class CustomOKompaniiItem extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const Spacer(),
+                       
                         PhysicalModel(
                           shadowColor: Colors.grey.withOpacity(.5),
                           color: Colors.transparent,
@@ -132,8 +128,8 @@ class CustomOKompaniiItem extends StatelessWidget {
                         ),
                       ],
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

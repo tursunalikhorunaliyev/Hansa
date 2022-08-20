@@ -7,17 +7,19 @@ import 'package:hansa_app/api_models.dart/article_model.dart';
 import 'package:hansa_app/blocs/article_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ArticleScreen extends StatelessWidget {
-  ArticleScreen({Key? key}) : super(key: key);
+  const ArticleScreen({Key? key}) : super(key: key);
 
-  final ScrollController listViewController =
-      ScrollController(keepScrollOffset: true);
-
-  double positionDouble = 240.6666666666667;
+  
 
   @override
   Widget build(BuildContext context) {
+    final ScrollController listViewController =
+      ScrollController(keepScrollOffset: true);
+
+  double positionDouble = 240.6666666666667;
     final articleBloc = Provider.of<ArticleBLoC>(context);
     return StreamBuilder<ArticleModel>(
         stream: articleBloc.stream,
@@ -82,6 +84,11 @@ class ArticleScreen extends StatelessWidget {
                               ),
                               Html(
                                 data: snapshot.data!.article.body,
+                                onLinkTap: (url, context, attributes, element) {
+                                 _launchInBrowser(
+                                                                  Uri.parse(
+                                                                      url!));
+                                },
                               ),
                             ],
                           ),
@@ -109,5 +116,13 @@ class ArticleScreen extends StatelessWidget {
             );
           }
         });
+  }
+  _launchInBrowser(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw 'Could not launch $url';
+    }
   }
 }

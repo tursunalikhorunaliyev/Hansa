@@ -76,7 +76,7 @@ class _UIChangerState extends State<UIChanger> {
                 playProvider.sink.add([false, "", ""]);
               }
               if (snapshot.data == MenuActions.article) {
-                return ArticleScreen();
+                return const ArticleScreen();
               } else if (snapshot.data == MenuActions.welcome) {
                 return const WelcomeWidget();
               } else if (snapshot.data == MenuActions.obuchayushieMaterial) {
