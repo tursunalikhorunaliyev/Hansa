@@ -130,6 +130,7 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                     chewieController.videoPlayerController
                                         .dispose();
                                     chewieController = ChewieController(
+                                     
                                       autoPlay: true,
                                       allowedScreenSleep: false,
                                       aspectRatio: 16 / 10.9,
@@ -146,14 +147,18 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                       useRootNavigator: true,
                                       cupertinoProgressColors:
                                           ChewieProgressColors(
+                                        
                                         backgroundColor:
                                             const Color(0xff090909),
                                         bufferedColor: const Color(0xff090909),
                                         playedColor: const Color(0xffff0000),
                                         handleColor: const Color(0xffff0000),
+                                    
                                       ),
+
                                       materialProgressColors:
                                           ChewieProgressColors(
+                                  
                                         backgroundColor:
                                             const Color(0xff090909),
                                         bufferedColor: const Color(0xff090909),
@@ -162,8 +167,10 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                       ),
                                       videoPlayerController:
                                           VideoPlayerController.network(
+                                           
                                         snapshot
                                             .data!.data.data.data[0].videoLink,
+                                            
                                       ),
                                     );
                                     return Stack(
@@ -178,6 +185,7 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                                 width: double.infinity,
                                                 child: Chewie(
                                                   controller: chewieController,
+
                                                 ),
                                               ),
                                             ),

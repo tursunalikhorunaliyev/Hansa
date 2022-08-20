@@ -369,8 +369,7 @@ class _LoginCardState extends State<LoginCard> {
                                                                             true
                                                                         ? Colors
                                                                             .red
-                                                                        : Colors
-                                                                            .black))),
+                                                                        : Colors.black))),
                                                       ),
                                                     ),
                                                   );
@@ -457,7 +456,8 @@ class _LoginCardState extends State<LoginCard> {
                                               height: 40.h,
                                               width: 250.w,
                                               decoration: BoxDecoration(
-                                                  color: const Color(0xFFfb002b),
+                                                  color:
+                                                      const Color(0xFFfb002b),
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           5.r)),
@@ -480,15 +480,17 @@ class _LoginCardState extends State<LoginCard> {
                                             child: InkWell(
                                               onTap: () {
                                                 log("SSSSSSSSSALOMMMD");
-                                                _launchUrl(Uri.parse("http://support@hansa-lab.ru"));
+                                                _launchUrl(Uri.parse(
+                                                    "http://support@hansa-lab.ru"));
                                               },
                                               child: const Text(
                                                 "support@hansa-lab.ru",
                                                 style: TextStyle(
                                                     color: Color(0xFFfb002b),
-                                                    decoration:
-                                                        TextDecoration.underline,
-                                                    fontWeight: FontWeight.w500),
+                                                    decoration: TextDecoration
+                                                        .underline,
+                                                    fontWeight:
+                                                        FontWeight.w500),
                                                 textAlign: TextAlign.center,
                                               ),
                                             ),
@@ -537,7 +539,7 @@ class _LoginCardState extends State<LoginCard> {
   }
 
   goToWelcome(token) {
-    Navigator.push(
+    Navigator.pushReplacement(
       context,
       MaterialPageRoute(
         builder: (context) => Provider<String>(
@@ -554,6 +556,7 @@ class _LoginCardState extends State<LoginCard> {
 
     return jsonDecode(response.body);
   }
+
   _launchUrl(Uri url) async {
     if (!await launchUrl(
       url,
