@@ -18,12 +18,12 @@ class ModelGlavniyMenuUserInfoMain {
 class Data {
   String fullname;
   int score;
-  String ref_link;
+  String refLink;
   String link;
   Data({
     required this.fullname,
     required this.score,
-    required this.ref_link,
+    required this.refLink,
     required this.link,
   });
 
@@ -31,7 +31,7 @@ class Data {
     return Data(
       fullname: map['fullname'],
       score: map['score'],
-      ref_link: map['ref_link'],
+      refLink: map['ref_link'],
       link: map['_link'],
     );
   }

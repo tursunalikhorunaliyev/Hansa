@@ -12,14 +12,14 @@ class ArticleModel {
 class ArticleModelBody {
   String title;
   String body;
-  String pucture_link;
+  String puctureLink;
   ArticleModelBody(
-      {required this.title, required this.body, required this.pucture_link});
+      {required this.title, required this.body, required this.puctureLink});
 
   factory ArticleModelBody.fromMap(Map<String, dynamic> map) {
     return ArticleModelBody(
         title: map["title"],
         body: map["body"],
-        pucture_link: map["pucture_link"]);
+        puctureLink: map["pucture_link"]);
   }
 }
