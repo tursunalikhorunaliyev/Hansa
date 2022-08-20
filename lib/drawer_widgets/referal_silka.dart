@@ -49,7 +49,7 @@ class ReferalSilka extends StatelessWidget {
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
                       return Text(
-                        snapshot.data!.data.ref_link,
+                        snapshot.data!.data.refLink,
                         style: GoogleFonts.montserrat(
                             fontSize: isTablet ? 17 : 10,
                             color: const Color(0xFFffffff)),
@@ -72,7 +72,7 @@ class ReferalSilka extends StatelessWidget {
                 if(snapshot.hasData){
                   return InkWell(
                   onTap: () {
-                    Share.share(snapshot.data!.data.ref_link);
+                    Share.share(snapshot.data!.data.refLink);
                     
                   },
                   child: Image.asset(

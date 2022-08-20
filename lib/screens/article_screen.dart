@@ -33,7 +33,7 @@ class ArticleScreen extends StatelessWidget {
                               topLeft: Radius.circular(5.333333333333333),
                               topRight: Radius.circular(5.333333333333333)),
                           child: CachedNetworkImage(
-                              imageUrl: snapshot.data!.article.pucture_link)),
+                              imageUrl: snapshot.data!.article.puctureLink)),
                     ],
                   ),
                   SingleChildScrollView(
