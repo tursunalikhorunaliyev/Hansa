@@ -154,7 +154,7 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                     .add(ActionChange.textIconCard)
                                 : blocChangeProfileProvider.dataSink
                                     .add(ActionChange.izboreny);
-                                    providerTapFavorite.setInt(0);
+                            providerTapFavorite.setInt(0);
                           },
                           child: Container(
                             height: isTablet ? 60 : 46,
@@ -550,7 +550,11 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                 padding: const EdgeInsets.only(left: 39),
                                 child: GestureDetector(
                                   onTap: () {
-                                    const ExitAccountDialog();
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) =>
+                                          const ExitAccountDialog(),
+                                    );
                                   },
                                   child: const TextIcon(
                                     text: "Выход из акаунта",
