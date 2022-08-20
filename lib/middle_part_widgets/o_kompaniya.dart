@@ -7,6 +7,7 @@ import 'package:hansa_app/enums/enum_action_view.dart';
 import 'package:hansa_app/extra/sobshit_o_problem.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sticky_headers/sticky_headers.dart';
 
 class Okompaniya extends StatelessWidget {
   const Okompaniya({Key? key}) : super(key: key);
@@ -20,11 +21,13 @@ class Okompaniya extends StatelessWidget {
     return Expanded(
       child: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            Container(
+        child:
+        StickyHeader(header: Container(
               height: isTablet ? 95 : 67,
-              decoration: const BoxDecoration(color: Color(0xFFf1f1f1)),
+              decoration: const BoxDecoration(boxShadow: [BoxShadow(
+          color: Color(0xffeaeaea),
+          offset: Offset(0, -3)
+        )],color: Color(0xFFf1f1f1)),
               child: Row(
                 children: [
                   Container(
@@ -62,8 +65,7 @@ class Okompaniya extends StatelessWidget {
                   )
                 ],
               ),
-            ),
-            Stack(
+            ), content: Stack(
               children: [
                 isTablet
                     ? const SizedBox()
@@ -230,9 +232,7 @@ class Okompaniya extends StatelessWidget {
                   ),
                 ),
               ],
-            ),
-          ],
-        ),
+            ),),
       ),
     );
   }

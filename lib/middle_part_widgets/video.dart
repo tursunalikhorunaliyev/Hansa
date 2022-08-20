@@ -9,6 +9,7 @@ import 'package:hansa_app/video_section/custom_video_item.dart';
 import 'package:hansa_app/video_section/custom_video_subitem.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:sticky_headers/sticky_headers.dart';
 class Video extends StatelessWidget {
   const Video({Key? key}) : super(key: key);
 
@@ -39,13 +40,11 @@ class Video extends StatelessWidget {
                   ),
                 );
               }
-              return Column(
-                children: [
-                  const CustomTitle(
+              return 
+              StickyHeader(header: const CustomTitle(
                     imagePath: "assets/video_title.png",
                     title: "Видео",
-                  ),
-                  Column(
+                  ), content: Column(
                       children: List.generate(
                           snapshot.data!.videoListData.list.length, (i) {
                     return Column(
@@ -72,9 +71,7 @@ class Video extends StatelessWidget {
                         )
                       ],
                     );
-                  })),
-                ],
-              );
+                  })),);
             }),
       ),
     );

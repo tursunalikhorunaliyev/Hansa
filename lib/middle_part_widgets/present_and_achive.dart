@@ -54,7 +54,12 @@ class _PresentArchiveState extends State<PresentArchive> {
                 child: Column(children: [
                   StickyHeader(
                       header: Container(
-                        color: const Color(0xffeaeaea),
+
+                        decoration: const BoxDecoration(
+                        color: Color(0xffeaeaea), boxShadow: [BoxShadow(
+          color: Color(0xffeaeaea),
+          offset: Offset(0, -3)
+        )]),
                         child: Padding(
                           padding: EdgeInsets.only(
                               top: isTablet ? 20 : 9, bottom: isTablet ? 9 : 5),
@@ -65,6 +70,7 @@ class _PresentArchiveState extends State<PresentArchive> {
                                 width: isTablet ? 55.w : 70.w,
                                 height: isTablet ? 46.h : 42.h,
                                 decoration: BoxDecoration(
+                                  
                                     color: const Color(0XFFff163e),
                                     borderRadius: BorderRadius.only(
                                         topRight: Radius.circular(
@@ -348,7 +354,11 @@ class _PresentArchiveState extends State<PresentArchive> {
                               .dataGuidesArchive.isEmpty
                           ? const SizedBox()
                           : Container(
-                              color: const Color(0xffeaeaea),
+                              decoration: const BoxDecoration(    boxShadow: [BoxShadow(
+          color: Color(0xffeaeaea),
+          offset: Offset(0, -3)
+        )],
+                              color: Color(0xffeaeaea),),
                               child: Padding(
                                 padding: EdgeInsets.only(
                                     top: isTablet ? 20 : 9,
@@ -360,6 +370,7 @@ class _PresentArchiveState extends State<PresentArchive> {
                                       width: isTablet ? 55.w : 70.w,
                                       height: isTablet ? 46.h : 42.h,
                                       decoration: BoxDecoration(
+                                      
                                           color: const Color(0XFFff163e),
                                           borderRadius: BorderRadius.only(
                                               topRight: Radius.circular(

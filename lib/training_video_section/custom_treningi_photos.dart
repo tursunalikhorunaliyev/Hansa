@@ -98,7 +98,6 @@ class _CustomTreningiPhotosState extends State<CustomTreningiPhotos> {
                                 itemBuilder: (context, index) {
                                   log(index.toString());
                                   sendIndexTreningPhoto.setIndex(index - 1);
-
                                   return SizedBox(
                                     height: 220,
                                     width: 325,
