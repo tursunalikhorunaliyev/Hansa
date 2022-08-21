@@ -18,6 +18,7 @@ import 'package:hansa_app/classes/send_data_personal_update.dart';
 import 'package:hansa_app/classes/send_link.dart';
 import 'package:hansa_app/classes/sned_url_prezent_otkrit.dart';
 import 'package:hansa_app/classes/tap_favorite.dart';
+import 'package:hansa_app/download_exists.dart';
 import 'package:hansa_app/middle_part_widgets/permission_handler_screen.dart';
 import 'package:hansa_app/providers/dialog_video_provider.dart';
 import 'package:hansa_app/providers/full_registr_provider.dart';
