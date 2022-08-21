@@ -444,7 +444,7 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                           ? Wrap(children: [
                                               const DrawerStats(),
                                               SizedBox(
-                                                height: isTablet ? 509 : 460,
+                                                height: isTablet ? 600 : 460,
                                               ),
                                               const ReferalSilka()
                                             ])
