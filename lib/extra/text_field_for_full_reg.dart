@@ -60,7 +60,7 @@ class _TextFieldForFullRegisterState extends State<TextFieldForFullRegister> {
                     setState(() {});
                   }
                 },
-                cursorHeight: 18,
+                cursorHeight: 15,
                 style: GoogleFonts.montserrat(
                     fontSize: isTablet ? 13 : 10,
                     fontWeight: FontWeight.w500,
