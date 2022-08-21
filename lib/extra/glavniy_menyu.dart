@@ -8,6 +8,7 @@ import 'package:hansa_app/api_models.dart/model_glavniy_menu_user_info.dart';
 import 'package:hansa_app/blocs/bloc_change_profile.dart';
 import 'package:hansa_app/blocs/bloc_glavniy_menu_user_info.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
+import 'package:hansa_app/classes/send_data_personal_update.dart';
 import 'package:hansa_app/classes/tap_favorite.dart';
 import 'package:hansa_app/drawer_widgets/drawer_stats.dart';
 import 'package:hansa_app/drawer_widgets/izbrannoe.dart';
@@ -55,6 +56,8 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
 
     blocGlavniyMenuUserInfo.eventSink.add(EnumActionView.view);
     final scafforlKeyProvider = Provider.of<GlobalKey<ScaffoldState>>(context);
+    final providerSendDataPersonalUpdate =
+        Provider.of<SendDataPersonalUpdate>(context);
 
     return Drawer(
       backgroundColor: const Color(0xFF333333),
@@ -279,6 +282,16 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                               log(providerPersonalDannieTextFilelds
                                   .getAddressController.text);
 
+                              log(providerSendDataPersonalUpdate.getDoljnostId
+                                      .toString() +
+                                  " doljnost new");
+                              log(providerSendDataPersonalUpdate.getGorodId
+                                      .toString() +
+                                  " Gorod new");
+                              log(providerSendDataPersonalUpdate.getMagazinId
+                                      .toString() +
+                                  " Magazin new");
+
                               getData(
                                   providerToken,
                                   providerPersonalDannieTextFilelds
@@ -290,9 +303,11 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                   providerPersonalDannieTextFilelds
                                       .getTelefonController.text,
                                   "1",
-                                  providerPersonalDannieTextFilelds.getCityId,
-                                  providerPersonalDannieTextFilelds.getJobId,
-                                  providerPersonalDannieTextFilelds.getStoreId
+                                  providerSendDataPersonalUpdate.getGorodId
+                                      .toString(),
+                                  providerSendDataPersonalUpdate.getDoljnostId
+                                      .toString(),
+                                  providerSendDataPersonalUpdate.getMagazinId
                                       .toString(),
                                   providerPersonalDannieTextFilelds
                                       .getAddressController.text);

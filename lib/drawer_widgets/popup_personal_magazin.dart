@@ -5,6 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/model_magazin.dart';
 import 'package:hansa_app/blocs/bloc_magazin.dart';
 import 'package:hansa_app/blocs/bloc_popup_drawer.dart';
+import 'package:hansa_app/classes/send_data_personal_update.dart';
 import 'package:hansa_app/enums/enum_action_view.dart';
 import 'package:provider/provider.dart';
 
@@ -26,6 +27,8 @@ class _PopupPersonalMagazinState extends State<PopupPersonalMagazin> {
   Widget build(BuildContext context) {
     final isTablet = Provider.of<bool>(context);
     final providerToken = Provider.of<String>(context);
+    final providerSendDataPersonalUpdate =
+        Provider.of<SendDataPersonalUpdate>(context);
 
     final blocMagazin = BlocMagazin(providerToken);
 
@@ -88,6 +91,7 @@ class _PopupPersonalMagazinState extends State<PopupPersonalMagazin> {
                                         textEditingController.text;
                                     blocPopupDrawer.dataSink.add(36);
                                     radius = radius == 54 ? 10 : 54;
+                                    providerSendDataPersonalUpdate.setTap(true);
                                     textEditingController.clear();
                                   }
                                 },
@@ -134,6 +138,9 @@ class _PopupPersonalMagazinState extends State<PopupPersonalMagazin> {
                                   itemBuilder: (context, index) {
                                     return MaterialButton(
                                       onPressed: () {
+                                        providerSendDataPersonalUpdate
+                                            .setMagazinId(snapshot.data!
+                                                .modelMagazin2.list[index].id);
                                         widget.controller.text = snapshot.data!
                                             .modelMagazin2.list[index].name;
                                         blocPopupDrawer.dataSink.add(

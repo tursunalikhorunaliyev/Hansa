@@ -9,7 +9,7 @@ class ProviderPersonalTextFields{
   final gorodController = TextEditingController();
   final addressController = TextEditingController();
   final storeName = TextEditingController();
-  String country_typeId = "";
+  String countryTypeId = "";
   String cityId = "";
   String jobId = "";
   String storeId = "";
@@ -23,7 +23,7 @@ class ProviderPersonalTextFields{
   TextEditingController get getGorodController => gorodController;
   TextEditingController get getAddressController => addressController;
   TextEditingController get getStoreName => storeName;
-  String get getCountry_typeId => country_typeId;
+  String get getCountryTypeId => countryTypeId;
   String get getCityId => cityId;
   String get getJobId => jobId;
   String get getStoreId => storeId;

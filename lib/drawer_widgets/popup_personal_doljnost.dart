@@ -3,13 +3,15 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/model_doljnost.dart';
 import 'package:hansa_app/blocs/bloc_doljnost.dart';
 import 'package:hansa_app/blocs/bloc_popup_drawer.dart';
+import 'package:hansa_app/classes/send_data_personal_update.dart';
 import 'package:hansa_app/enums/enum_action_view.dart';
 import 'package:provider/provider.dart';
 
 class PopupPersonalDoljnost extends StatefulWidget {
   final TextEditingController controller;
 
-  const PopupPersonalDoljnost({Key? key, required this.controller}) : super(key: key);
+  const PopupPersonalDoljnost({Key? key, required this.controller})
+      : super(key: key);
 
   @override
   State<PopupPersonalDoljnost> createState() => _PopupPersonalDoljnostState();
@@ -23,6 +25,8 @@ class _PopupPersonalDoljnostState extends State<PopupPersonalDoljnost> {
   Widget build(BuildContext context) {
     final isTablet = Provider.of<bool>(context);
     final providerToken = Provider.of<String>(context);
+    final providerSendDataPersonalUpdate =
+        Provider.of<SendDataPersonalUpdate>(context);
 
     final blocDoljnost = BlocDoljnost(providerToken);
 
@@ -47,7 +51,7 @@ class _PopupPersonalDoljnostState extends State<PopupPersonalDoljnost> {
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.all(isTablet ? 14  : 11),
+                    padding: EdgeInsets.all(isTablet ? 14 : 11),
                     child: Padding(
                       padding: const EdgeInsets.only(right: 10),
                       child: Row(
@@ -79,12 +83,17 @@ class _PopupPersonalDoljnostState extends State<PopupPersonalDoljnost> {
                                 itemCount:
                                     snapshot.data!.modelDoljnost2.list.length,
                                 itemBuilder: (context, index) {
+                                 
                                   return MaterialButton(
                                     onPressed: () {
-                                      widget.controller.text = snapshot.data!
-                                          .modelDoljnost2.list[index].name;
-                                      blocPopupDrawer.dataSink.add(
-                                          snapshot.data! == 36 ? 200 : 36);
+                                      providerSendDataPersonalUpdate
+                                          .setDoljnostId(snapshot.data!
+                                              .modelDoljnost2.list[index].id);
+                                      widget.controller.text = snapshot
+                                          .data!.modelDoljnost2.list[index].name
+                                          .toString();
+                                      blocPopupDrawer.dataSink
+                                          .add(snapshot.data! == 36 ? 200 : 36);
                                       radius = radius == 54 ? 10 : 54;
                                     },
                                     height: 30,
@@ -95,8 +104,7 @@ class _PopupPersonalDoljnostState extends State<PopupPersonalDoljnost> {
                                         snapshot.data!.modelDoljnost2
                                             .list[index].name,
                                         style: const TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 10),
+                                            color: Colors.white, fontSize: 10),
                                       ),
                                     ),
                                   );

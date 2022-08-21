@@ -3,6 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/model_personal.dart';
 import 'package:hansa_app/blocs/bloc_personal.dart';
+import 'package:hansa_app/classes/send_data_personal_update.dart';
 import 'package:hansa_app/drawer_widgets/popup_personal_doljnost.dart';
 import 'package:hansa_app/drawer_widgets/popup_personal_gorod.dart';
 import 'package:hansa_app/drawer_widgets/popup_personal_magazin.dart';
@@ -38,12 +39,20 @@ class _PersonalniyDaniyState extends State<PersonalniyDaniy> {
 
     final personalInfoEditTextFieldsProvider =
         Provider.of<ProviderPersonalTextFields>(context);
+    final providerSendDataPersonalUpdate =
+        Provider.of<SendDataPersonalUpdate>(context);
 
     return Center(
       child: FutureBuilder<ModelPersonalMain>(
           future: blocPersonal.getData(providerToken),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
+              providerSendDataPersonalUpdate
+                  .setMagazinId(snapshot.data!.modelPersonal1.store.id);
+              providerSendDataPersonalUpdate
+                  .setDoljnostId(snapshot.data!.modelPersonal1.job.id);
+              providerSendDataPersonalUpdate
+                  .setGorodId(snapshot.data!.modelPersonal1.cityId.id);
               personalInfoEditTextFieldsProvider.imyaController.text =
                   snapshot.data!.modelPersonal1.firstname;
               personalInfoEditTextFieldsProvider.familiyaController.text =
@@ -53,16 +62,15 @@ class _PersonalniyDaniyState extends State<PersonalniyDaniy> {
               personalInfoEditTextFieldsProvider.gorodController.text =
                   snapshot.data!.modelPersonal1.cityId.name;
               personalInfoEditTextFieldsProvider.addressController.text =
-                  snapshot.data!.modelPersonal1.shopAddress;
+                  snapshot.data!.modelPersonal1.shopAddress; 
               personalInfoEditTextFieldsProvider.doljnostController.text =
                   snapshot.data!.modelPersonal1.job.name;
               personalInfoEditTextFieldsProvider.telefonController.text =
                   snapshot.data!.modelPersonal1.phone;
-                  personalInfoEditTextFieldsProvider.storeName.text =
+              personalInfoEditTextFieldsProvider.storeName.text =
                   snapshot.data!.modelPersonal1.store.name;
 
-
-              personalInfoEditTextFieldsProvider.country_typeId =
+              personalInfoEditTextFieldsProvider.countryTypeId =
                   snapshot.data!.modelPersonal1.countryType.id.toString();
 
               personalInfoEditTextFieldsProvider.cityId =
@@ -118,13 +126,10 @@ class _PersonalniyDaniyState extends State<PersonalniyDaniy> {
                     opacity: 0.5,
                     child: AbsorbPointer(
                       absorbing: true,
-                      child: (
-                         TextFieldForPersonal(
-                            text: "E-mail",
-                           
-                            controller:
-                                TextEditingController(text: snapshot.data!.modelPersonal1.email))
-                      ),
+                      child: (TextFieldForPersonal(
+                          text: "E-mail",
+                          controller: TextEditingController(
+                              text: snapshot.data!.modelPersonal1.email))),
                     ),
                   ),
                   SizedBox(
@@ -138,8 +143,7 @@ class _PersonalniyDaniyState extends State<PersonalniyDaniy> {
                     height: isTablet ? 15 : 8,
                   ),
                   PopupPersonalMagazin(
-                    controller:
-                        personalInfoEditTextFieldsProvider.storeName,
+                    controller: personalInfoEditTextFieldsProvider.storeName,
                   ),
                   SizedBox(
                     height: isTablet ? 15 : 8,

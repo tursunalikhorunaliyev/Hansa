@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/model_gorod.dart';
 import 'package:hansa_app/blocs/bloc_gorod.dart';
 import 'package:hansa_app/blocs/bloc_popup_drawer.dart';
+import 'package:hansa_app/classes/send_data_personal_update.dart';
 import 'package:hansa_app/enums/enum_action_view.dart';
 import 'package:provider/provider.dart';
 
@@ -23,6 +24,8 @@ class _PopupPersonalGorodState extends State<PopupPersonalGorod> {
   Widget build(BuildContext context) {
     final isTablet = Provider.of<bool>(context);
     final providerToken = Provider.of<String>(context);
+        final providerSendDataPersonalUpdate =
+        Provider.of<SendDataPersonalUpdate>(context);
 
     final blocGorod = BlocGorod(providerToken);
 
@@ -79,6 +82,8 @@ class _PopupPersonalGorodState extends State<PopupPersonalGorod> {
                                   itemBuilder: (context, index) {
                                     return MaterialButton(
                                       onPressed: () {
+                                        providerSendDataPersonalUpdate.setGorodId(snapshot
+                                            .data!.modelGorod2.list[index].id);
                                         widget.controller.text = snapshot
                                             .data!.modelGorod2.list[index].name;
                                         blocPopupDrawer.dataSink.add(

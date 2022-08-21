@@ -14,6 +14,7 @@ import 'package:hansa_app/blocs/login_clicked_bloc.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/blocs/read_stati_bloc.dart';
 import 'package:hansa_app/blocs/voyti_ili_sozdata_bloc.dart';
+import 'package:hansa_app/classes/send_data_personal_update.dart';
 import 'package:hansa_app/classes/send_link.dart';
 import 'package:hansa_app/classes/sned_url_prezent_otkrit.dart';
 import 'package:hansa_app/classes/tap_favorite.dart';
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
     GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
     final sendUrlPrezentOtkrit = SendUrlPrezentOtkrit();
     final tapFavorite = TapFavorite();
+    final sendDataPersonalUpdate = SendDataPersonalUpdate();
 
     Size size = WidgetsBinding.instance.window.physicalSize;
     bool isTablet = (size.width / 3) > 500;
@@ -99,18 +101,16 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (context) => SendLink()),
           Provider<SendUrlPrezentOtkrit>(
               create: (context) => sendUrlPrezentOtkrit),
-          Provider<TapFavorite>(create: (context) => tapFavorite)
+          Provider<TapFavorite>(create: (context) => tapFavorite),
+          Provider<SendDataPersonalUpdate>(
+              create: (context) => sendDataPersonalUpdate)
         ],
         child: const MaterialApp(
           localizationsDelegates: [
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate
           ],
-          supportedLocales: [
-            Locale("en"),
-            Locale("ru"),
-            Locale("ar")
-          ],
+          supportedLocales: [Locale("en"), Locale("ru"), Locale("ar")],
           locale: Locale("ru"),
           debugShowCheckedModeBanner: false,
           home: PermissionHandlerScreen(),
