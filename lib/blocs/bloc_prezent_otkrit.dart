@@ -5,15 +5,11 @@ import 'package:hansa_app/api_models.dart/model_prezent_otkrit.dart';
 import 'package:http/http.dart' as http;
 
 class BlocPrezentOtkrit {
-  
   Future<ModelPrezentOtkritMain> getData(token) async {
     http.Response response = await http.get(
       Uri.parse("https://hansa-lab.ru/api/site/category-presentation"),
       headers: {"token": token},
     );
-    print(response.statusCode);
-    print(response.body);
-    print("Bloc Prezent Otkrit----------------------------------");
 
     return ModelPrezentOtkritMain.fromMap(jsonDecode(response.body));
   }

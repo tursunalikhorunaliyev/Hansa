@@ -5,8 +5,6 @@ import 'package:hansa_app/api_models.dart/model_magazin.dart';
 import 'package:hansa_app/enums/enum_action_view.dart';
 import 'package:http/http.dart' as http;
 
-
-
 class BlocMagazin {
   final dataController = StreamController<ModelMagazinMain>.broadcast();
   final eventController = StreamController<EnumActionView>.broadcast();
@@ -30,9 +28,6 @@ class BlocMagazin {
       Uri.parse("https://hansa-lab.ru/api/dictionary/store"),
       headers: {"token": token},
     );
-    print(response.statusCode);
-    print(response.body);
-    print("Bloc Magazin----------------------------------");
 
     return ModelMagazinMain.fromMap(jsonDecode(response.body));
   }

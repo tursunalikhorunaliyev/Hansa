@@ -73,16 +73,16 @@ class TreningiPhotosdSimilarModelData {
 
 class TreningiPhotosdModelData {
   String title;
-  String picture_link;
+  String pictureLink;
   TreningiPhotosdModelData({
     required this.title,
-    required this.picture_link,
+    required this.pictureLink,
   });
 
   factory TreningiPhotosdModelData.fromMap(Map<String, dynamic> map) {
     return TreningiPhotosdModelData(
       title: map['title'] as String,
-      picture_link: map['picture_link'] as String,
+      pictureLink: map['picture_link'] as String,
     );
   }
 }

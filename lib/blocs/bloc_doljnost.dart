@@ -5,7 +5,6 @@ import 'package:hansa_app/api_models.dart/model_doljnost.dart';
 import 'package:hansa_app/enums/enum_action_view.dart';
 import 'package:http/http.dart' as http;
 
-
 class BlocDoljnost {
   final dataController = StreamController<ModelDoljnostMain>.broadcast();
   final eventController = StreamController<EnumActionView>.broadcast();
@@ -16,22 +15,19 @@ class BlocDoljnost {
   StreamSink<EnumActionView> get eventSink => eventController.sink;
   Stream<EnumActionView> get eventStream => eventController.stream;
 
-    BlocDoljnost(token) {
+  BlocDoljnost(token) {
     eventStream.listen((event) async {
-      if (event == EnumActionView.view){
+      if (event == EnumActionView.view) {
         dataSink.add(await getData(token));
       }
     });
   }
 
-    Future<ModelDoljnostMain> getData(token) async {
+  Future<ModelDoljnostMain> getData(token) async {
     http.Response response = await http.get(
       Uri.parse("https://hansa-lab.ru/api/dictionary/job"),
       headers: {"token": token},
     );
-    print(response.statusCode);
-    print(response.body);
-    print("Bloc Doljnost----------------------------------");
 
     return ModelDoljnostMain.fromMap(jsonDecode(response.body));
   }

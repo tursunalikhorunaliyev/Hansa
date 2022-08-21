@@ -263,35 +263,6 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                         return GestureDetector(
                           onTap: () {
                             if (snapshot.data == ActionChange.personal) {
-                              log(providerPersonalDannieTextFilelds
-                                  .getImyaController.text);
-                              log(providerPersonalDannieTextFilelds
-                                  .getFamiliyaController.text);
-                              log(providerPersonalDannieTextFilelds
-                                  .getDataRojdeniyaController.text);
-
-                              log(providerPersonalDannieTextFilelds
-                                  .getTelefonController.text);
-                              log("1");
-                              log(providerPersonalDannieTextFilelds.cityId
-                                  .toString());
-                              log(providerPersonalDannieTextFilelds.getJobId
-                                  .toString());
-                              log(providerPersonalDannieTextFilelds.getStoreId
-                                  .toString());
-                              log(providerPersonalDannieTextFilelds
-                                  .getAddressController.text);
-
-                              log(providerSendDataPersonalUpdate.getDoljnostId
-                                      .toString() +
-                                  " doljnost new");
-                              log(providerSendDataPersonalUpdate.getGorodId
-                                      .toString() +
-                                  " Gorod new");
-                              log(providerSendDataPersonalUpdate.getMagazinId
-                                      .toString() +
-                                  " Magazin new");
-
                               getData(
                                   providerToken,
                                   providerPersonalDannieTextFilelds
@@ -616,8 +587,6 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
       "store_id": storeId,
       "shop_address": shopAddress,
     });
-    print(response.statusCode);
-    print(response.body);
 
     return jsonDecode(response.body);
   }

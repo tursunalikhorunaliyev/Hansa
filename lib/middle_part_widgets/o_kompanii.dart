@@ -43,7 +43,6 @@ class _OKompaniiState extends State<OKompanii> {
       url,
       savePath,
       onReceiveProgress: (recieved, total) {
-        print(((recieved / total) * 100).toStringAsFixed(0));
         progress = double.parse(((recieved / total) * 100).toStringAsFixed(0));
         blocDownload.streamSink.add(progress);
       },
@@ -177,8 +176,9 @@ class _OKompaniiState extends State<OKompanii> {
                                             context: context,
                                             builder: (context) {
                                               return AlertDialog(
-                                                actionsPadding: const EdgeInsets.only(
-                                                    bottom: 20, right: 20),
+                                                actionsPadding:
+                                                    const EdgeInsets.only(
+                                                        bottom: 20, right: 20),
                                                 alignment: Alignment.center,
                                                 content: StreamBuilder<double>(
                                                     stream: blocDownload.stream,
@@ -223,8 +223,9 @@ class _OKompaniiState extends State<OKompanii> {
                                                               padding:
                                                                   const EdgeInsets
                                                                       .all(0),
-                                                              barRadius: const Radius
-                                                                  .circular(5),
+                                                              barRadius:
+                                                                  const Radius
+                                                                      .circular(5),
                                                               lineHeight: 15,
                                                               //width: 325,
                                                               percent:
@@ -364,7 +365,8 @@ class _OKompaniiState extends State<OKompanii> {
                                                           const EdgeInsets.all(
                                                               0),
                                                       barRadius:
-                                                          const Radius.circular(5),
+                                                          const Radius.circular(
+                                                              5),
                                                       lineHeight: 15,
                                                       //width: 325,
                                                       percent:

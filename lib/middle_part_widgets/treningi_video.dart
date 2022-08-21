@@ -77,7 +77,6 @@ class _TreningiVideoState extends State<TreningiVideo> {
       url,
       savePath,
       onReceiveProgress: (recieved, total) {
-        print(((recieved / total) * 100).toStringAsFixed(0));
         progress = double.parse(((recieved / total) * 100).toStringAsFixed(0));
         downloadProgressFileBloc.streamSink.add(progress);
       },
@@ -130,7 +129,6 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                     chewieController.videoPlayerController
                                         .dispose();
                                     chewieController = ChewieController(
-                                     
                                       autoPlay: true,
                                       allowedScreenSleep: false,
                                       aspectRatio: 16 / 10.9,
@@ -147,18 +145,14 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                       useRootNavigator: true,
                                       cupertinoProgressColors:
                                           ChewieProgressColors(
-                                        
                                         backgroundColor:
                                             const Color(0xff090909),
                                         bufferedColor: const Color(0xff090909),
                                         playedColor: const Color(0xffff0000),
                                         handleColor: const Color(0xffff0000),
-                                    
                                       ),
-
                                       materialProgressColors:
                                           ChewieProgressColors(
-                                  
                                         backgroundColor:
                                             const Color(0xff090909),
                                         bufferedColor: const Color(0xff090909),
@@ -167,10 +161,8 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                       ),
                                       videoPlayerController:
                                           VideoPlayerController.network(
-                                           
                                         snapshot
                                             .data!.data.data.data[0].videoLink,
-                                            
                                       ),
                                     );
                                     return Stack(
@@ -185,7 +177,6 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                                 width: double.infinity,
                                                 child: Chewie(
                                                   controller: chewieController,
-
                                                 ),
                                               ),
                                             ),
@@ -319,8 +310,10 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                                                 true
                                                             ? Curves.bounceOut
                                                             : Curves.bounceOut,
-                                                        duration: const Duration(
-                                                            milliseconds: 500),
+                                                        duration:
+                                                            const Duration(
+                                                                milliseconds:
+                                                                    500),
                                                         width: 355,
                                                         height:
                                                             snapshotDetectTap
@@ -343,9 +336,10 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                                                           10),
                                                                 )),
                                                         child: AnimatedOpacity(
-                                                          duration: const Duration(
-                                                              milliseconds:
-                                                                  500),
+                                                          duration:
+                                                              const Duration(
+                                                                  milliseconds:
+                                                                      500),
                                                           opacity:
                                                               snapshotDetectTap
                                                                           .data ==
@@ -384,9 +378,9 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                                                     padding:
                                                                         const EdgeInsets
                                                                             .all(0),
-                                                                    barRadius: const Radius
-                                                                        .circular(
-                                                                            5),
+                                                                    barRadius:
+                                                                        const Radius
+                                                                            .circular(5),
                                                                     lineHeight:
                                                                         6,
                                                                     percent:
@@ -429,7 +423,7 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                       ],
                                     );
                                   } else {
-                                    return Container(
+                                    return SizedBox(
                                       child: Center(
                                         child: Lottie.asset(
                                           'assets/pre.json',
@@ -651,7 +645,6 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                 );
                         } else {
                           return SizedBox(
-                            
                             width: MediaQuery.of(context).size.width,
                           );
                         }

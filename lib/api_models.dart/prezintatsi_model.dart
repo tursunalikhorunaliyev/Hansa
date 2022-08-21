@@ -1,4 +1,3 @@
-
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class PrezintatsiaModel {
   bool status;
@@ -57,15 +56,15 @@ class PrezintatsiaModelGuidesItem {
   String title;
   String pdfUrl;
   bool isFavourite;
-  String picture_link;
-  String favourite_link;
+  String pictureLink;
+  String favouriteLink;
   String link;
   PrezintatsiaModelGuidesItem(
       {required this.title,
       required this.pdfUrl,
       required this.isFavourite,
-      required this.picture_link,
-      required this.favourite_link,
+      required this.pictureLink,
+      required this.favouriteLink,
       required this.link});
 
   factory PrezintatsiaModelGuidesItem.fromMap(Map<String, dynamic> map) {
@@ -73,8 +72,8 @@ class PrezintatsiaModelGuidesItem {
         title: map["title"],
         pdfUrl: map["PdfUrl"],
         isFavourite: map["isFavourite"],
-        picture_link: map["picture_link"],
-        favourite_link: map["favourite_link"],
+        pictureLink: map["picture_link"],
+        favouriteLink: map["favourite_link"],
         link: map["_link"]);
   }
 }
@@ -83,15 +82,15 @@ class PrezintatsiaModelGuidesArchiveItem {
   String title;
   String pdfUrl;
   bool isFavourite;
-  String picture_link;
-  String favourite_link;
+  String pictureLink;
+  String favouriteLink;
   String link;
   PrezintatsiaModelGuidesArchiveItem(
       {required this.title,
       required this.pdfUrl,
       required this.isFavourite,
-      required this.picture_link,
-      required this.favourite_link,
+      required this.pictureLink,
+      required this.favouriteLink,
       required this.link});
 
   factory PrezintatsiaModelGuidesArchiveItem.fromMap(Map<String, dynamic> map) {
@@ -99,8 +98,8 @@ class PrezintatsiaModelGuidesArchiveItem {
         title: map["title"],
         pdfUrl: map["PdfUrl"],
         isFavourite: map["isFavourite"],
-        picture_link: map["picture_link"],
-        favourite_link: map["favourite_link"],
+        pictureLink: map["picture_link"],
+        favouriteLink: map["favourite_link"],
         link: map["_link"]);
   }
 }

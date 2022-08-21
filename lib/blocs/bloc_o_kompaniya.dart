@@ -5,8 +5,6 @@ import 'package:hansa_app/api_models.dart/model_o_kompaniya.dart';
 import 'package:hansa_app/enums/enum_action_view.dart';
 import 'package:http/http.dart' as http;
 
-
-
 class BlocOKompaniya {
   final dataController = StreamController<ModelOKompaniyaMain>.broadcast();
   final eventController = StreamController<EnumActionView>.broadcast();
@@ -30,9 +28,6 @@ class BlocOKompaniya {
       Uri.parse("http://hansa-lab.ru/api/site/greeting"),
       headers: {"token": token},
     );
-    print(response.statusCode);
-    print(response.body);
-    print("Bloc O Kompaniya----------------------------------");
 
     return ModelOKompaniyaMain.fromMap(jsonDecode(response.body));
   }

@@ -132,7 +132,7 @@ class _DrawerStatsState extends State<DrawerStats> {
                                       ),
                                     ),
                                     DataCell(Text(
-                                      snapshot.data!.data.list[index].shop_net,
+                                      snapshot.data!.data.list[index].shopNet,
                                       style: GoogleFonts.montserrat(
                                           fontSize: isTablet ? 12 : 8,
                                           fontWeight: FontWeight.normal,

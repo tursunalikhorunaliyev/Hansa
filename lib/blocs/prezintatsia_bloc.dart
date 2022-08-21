@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:hansa_app/api_models.dart/prezintatsi_model.dart';
 import 'package:http/http.dart' as http;
@@ -29,12 +28,6 @@ class PrezintatsiaBLoC {
       Uri.parse("http://hansa-lab.ru/$url"),
       headers: {"token": token},
     );
-
-    print(response.statusCode);
-    print(response.body);
-    print(
-        "Status Code==========================================================================================");
-    log("http://hansa-lab.ru/$url BIZZZZZZZZZZZZZZZZZZZZZZZZZZZ");
 
     return PrezintatsiaModel.fromMap(jsonDecode(response.body));
   }

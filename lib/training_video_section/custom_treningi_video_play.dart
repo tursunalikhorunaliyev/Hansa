@@ -1,4 +1,3 @@
-
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,21 +21,20 @@ class CustomTreningiVideoPlay extends StatefulWidget {
 }
 
 class _CustomTreningiVideoPlayState extends State<CustomTreningiVideoPlay> {
-
-
   @override
   void dispose() {
     widget.chewieController.dispose();
     widget.chewieController.videoPlayerController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     final isTablet = Provider.of<bool>(context);
     final treningiVideos = Provider.of<TreningiVideosProvider>(context);
     final token = Provider.of<String>(context);
     ChewieController ch = widget.chewieController;
-    
+
     setState(() {});
     return Padding(
       padding: const EdgeInsets.only(bottom: 11, left: 25, right: 25),
@@ -47,7 +45,6 @@ class _CustomTreningiVideoPlayState extends State<CustomTreningiVideoPlay> {
               TreningiVideoApi.getTreningiVideo(treningiVideos.getUrl, token),
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-             
               ch = ChewieController(
                 autoPlay: true,
                 allowedScreenSleep: false,
@@ -170,7 +167,7 @@ class _CustomTreningiVideoPlayState extends State<CustomTreningiVideoPlay> {
                 ],
               );
             } else {
-              return Container(
+              return SizedBox(
                 child: Center(
                   child: Lottie.asset(
                     'assets/pre.json',

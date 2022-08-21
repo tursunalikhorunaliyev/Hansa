@@ -15,7 +15,6 @@ class BlocGorod {
   StreamSink<EnumActionView> get eventSink => eventController.sink;
   Stream<EnumActionView> get eventStream => eventController.stream;
 
-
   BlocGorod(token) {
     eventStream.listen((event) async {
       if (event == EnumActionView.view) {
@@ -29,9 +28,6 @@ class BlocGorod {
       Uri.parse("https://hansa-lab.ru/api/dictionary/city?id=1"),
       headers: {"token": token},
     );
-    print(response.statusCode);
-    print(response.body);
-    print("Bloc Gorod----------------------------------");
 
     return ModelGorodMain.fromMap(jsonDecode(response.body));
   }

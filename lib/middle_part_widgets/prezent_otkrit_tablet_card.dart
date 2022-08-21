@@ -1,9 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hansa_app/blocs/favourite_bloc.dart';
 import 'package:hansa_app/extra/custom_paint_clipper.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PrezentOtkritTabletCard extends StatefulWidget {
@@ -28,9 +26,6 @@ class _PrezentOtkritTabletCardState extends State<PrezentOtkritTabletCard> {
   Future<void>? launched;
   @override
   Widget build(BuildContext context) {
-    final isTablet = Provider.of<bool>(context);
-    final isFavouriteBLoC = FavouriteBLoC();
-    final token = Provider.of<String>(context);
     return Padding(
       padding: EdgeInsets.only(bottom: 10.h),
       child: Column(
@@ -88,7 +83,7 @@ class _PrezentOtkritTabletCardState extends State<PrezentOtkritTabletCard> {
                         child: Container(
                           width: 180,
                           height: 70.h,
-                         alignment: Alignment.centerLeft,
+                          alignment: Alignment.centerLeft,
                           child: Text(
                             widget.title,
                             overflow: TextOverflow.ellipsis,

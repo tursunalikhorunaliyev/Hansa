@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:hansa_app/api_models.dart/country_model.dart';
 import 'package:http/http.dart' as http;
 
-
 enum CityEnum { city }
 
 class HansaCountryBloC {
@@ -32,16 +31,8 @@ class HansaCountryBloC {
   Future<CountryModel> getData(id) async {
     http.Response response = await http.get(
       Uri.parse("http://hansa-lab.ru/api/dictionary/city?id=$id"),
-      
     );
-    print(response.statusCode);
-    print(response.body);
-    print("Hansa country api----------------------------------");
 
     return CountryModel.fromMap(jsonDecode(response.body));
   }
-
-
-
-
 }

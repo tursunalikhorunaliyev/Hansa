@@ -117,7 +117,8 @@ class _FullRegistrState extends State<FullRegistr> {
                             isTablet ? FontWeight.normal : FontWeight.normal,
                         borderColor:
                             nameIsEmpty ? Colors.red : const Color(0xFF000000),
-                        hintColor: nameIsEmpty ? Colors.red : const Color(0xFF444444),
+                        hintColor:
+                            nameIsEmpty ? Colors.red : const Color(0xFF444444),
                         onTap: () => setState(() => nameIsEmpty = false),
                       ),
                       const SizedBox(
@@ -246,8 +247,8 @@ class _FullRegistrState extends State<FullRegistr> {
                                         String year = dateRangeController
                                             .selectedDate!.year
                                             .toString();
-                                        dateBurnBloC.streamSink.add(
-                                            "$day.$month.$year");
+                                        dateBurnBloC.streamSink
+                                            .add("$day.$month.$year");
                                         Navigator.pop(context);
                                       },
                                     ));
@@ -325,8 +326,9 @@ class _FullRegistrState extends State<FullRegistr> {
                           child: PopupFullRegistrGorod(
                             borderColor:
                                 gorodIsEmpty ? Colors.red : Colors.black,
-                            hintColor:
-                                gorodIsEmpty ? Colors.red : const Color(0xff444444),
+                            hintColor: gorodIsEmpty
+                                ? Colors.red
+                                : const Color(0xff444444),
                             onTap: () => setState(() => gorodIsEmpty = false),
                           )),
                       const SizedBox(
@@ -371,9 +373,7 @@ class _FullRegistrState extends State<FullRegistr> {
                                     tickerSize: 21,
                                     colorCircle: Colors.green[600],
                                     colorContainer: Colors.grey[300],
-                                    onButton: () {
-                                      print("Не выходить из приложения");
-                                    },
+                                    onButton: () {},
                                   ),
                                 ),
                               ],
@@ -394,9 +394,7 @@ class _FullRegistrState extends State<FullRegistr> {
                                     tickerSize: 21,
                                     colorCircle: Colors.green[600],
                                     colorContainer: Colors.grey[300],
-                                    onButton: () {
-                                      print("Согласен на СМС и Email рассылку");
-                                    },
+                                    onButton: () {},
                                   ),
                                 ),
                               ],
@@ -417,9 +415,7 @@ class _FullRegistrState extends State<FullRegistr> {
                                     tickerSize: 21,
                                     colorCircle: Colors.green[600],
                                     colorContainer: Colors.grey[300],
-                                    onButton: () {
-                                      print("Подтверждаю подлиность данных");
-                                    },
+                                    onButton: () {},
                                   ),
                                 ),
                               ],
@@ -443,10 +439,7 @@ class _FullRegistrState extends State<FullRegistr> {
                                     tickerSize: 21,
                                     colorCircle: Colors.green[600],
                                     colorContainer: Colors.grey[300],
-                                    onButton: () {
-                                      print(
-                                          "Соглашаюсь на обработку персональных данных");
-                                    },
+                                    onButton: () {},
                                   ),
                                 ),
                               ],
