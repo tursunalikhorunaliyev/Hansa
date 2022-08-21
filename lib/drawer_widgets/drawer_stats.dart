@@ -55,7 +55,7 @@ class _DrawerStatsState extends State<DrawerStats> {
             Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: SizedBox(
-                  height: 330,
+                  height:isTablet?490: 330,
                   child: FutureBuilder<RatingTopModel>(
                       future: bloc.getStores(prov),
                       builder: (context, snapshot) {
@@ -167,8 +167,8 @@ class _DrawerStatsState extends State<DrawerStats> {
                             ),
                           );
                         } else {
-                          return const SizedBox(
-                            height: 330,
+                          return  SizedBox(
+                            height:isTablet?530: 330,
                             child: SpinKitPulse(
                               color: Color(0xffe21a37),
                             ),

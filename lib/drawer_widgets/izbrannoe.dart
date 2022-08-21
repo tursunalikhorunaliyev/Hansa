@@ -140,6 +140,7 @@ class _IzbrannoeState extends State<Izbrannoe> {
                                             height: 5,
                                           ),
                                           Row(
+                                            mainAxisAlignment: MainAxisAlignment.end,
                                             children: [
                                               SizedBox(
                                                 width: isTablet ? 140 : 90,
