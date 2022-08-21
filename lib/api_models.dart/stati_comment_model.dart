@@ -30,13 +30,13 @@ class StatiCommentModelItems {
   String fullname;
   String date;
   String body;
-  String picture_link;
+  String pictureLink;
   String rang;
   StatiCommentModelItems({
     required this.fullname,
     required this.date,
     required this.body,
-    required this.picture_link,
+    required this.pictureLink,
     required this.rang,
   });
 
@@ -45,7 +45,7 @@ class StatiCommentModelItems {
       fullname: map['fullname'],
       date: map['date'],
       body: map['body'],
-      picture_link: map['picture_link'],
+      pictureLink: map['picture_link'],
       rang: map['rang'].toString(),
     );
   }

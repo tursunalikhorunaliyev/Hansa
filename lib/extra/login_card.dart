@@ -67,10 +67,8 @@ class _LoginCardState extends State<LoginCard> {
     pagerBloc.stream.listen((event) {
       if (event[2]) {
         goToWelcome(event[3]);
-        print("object");
       } else {
         showSnac();
-        print("NO object");
       }
     });
     super.initState();
@@ -432,16 +430,12 @@ class _LoginCardState extends State<LoginCard> {
                                                   if (value["status"] == true) {
                                                     blocText.dataSink
                                                         .add(value["data"]);
-                                                    print(value["data"]);
                                                   }
                                                   if (value["status"] ==
                                                       false) {
                                                     blocText.dataSink.add(
                                                         value["message"]
                                                             ["email"][0]);
-                                                    print(value["message"]
-                                                            ["email"][0] +
-                                                        " bazaaaa");
                                                   }
                                                 });
                                               }

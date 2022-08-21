@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 
@@ -9,26 +11,22 @@ class FlipCardAnimated extends StatefulWidget {
 }
 
 class _FlipCardAnimatedState extends State<FlipCardAnimated> {
-GlobalKey<FlipCardState> cardKey = GlobalKey<FlipCardState>();
+  GlobalKey<FlipCardState> cardKey = GlobalKey<FlipCardState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: FlipCard(
-    key: cardKey,
-    flipOnTouch: false,
-    front:  RaisedButton(
-      onPressed: () => cardKey.currentState!.toggleCard(),
-      child: const Text('Toggle'),
-    ),
-    back: Container(
-      child: const Text('Back'),
-    ),
-  ),
+        key: cardKey,
+        flipOnTouch: false,
+        front: RaisedButton(
+          onPressed: () => cardKey.currentState!.toggleCard(),
+          child: const Text('Toggle'),
+        ),
+        back: Container(
+          child: const Text('Back'),
+        ),
+      ),
     );
-    
   }
 }
-
-
-

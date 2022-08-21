@@ -39,8 +39,6 @@ class _PrezentOtkritState extends State<PrezentOtkrit> {
 
     final isTablet = Provider.of<bool>(context);
 
-    late dynamic response;
-    Future<void>? launched;
     return Expanded(
       child: FutureBuilder<ModelPrezentOtkritMain>(
           future: blocPrezentOtkrit.getData(token),
@@ -51,15 +49,13 @@ class _PrezentOtkritState extends State<PrezentOtkrit> {
                 child: Column(children: [
                   StickyHeader(
                       header: Container(
-                         decoration: BoxDecoration(
-              color: const Color(0xffeaeaea),
-
-        boxShadow: [BoxShadow(
-          color: const Color(0xffeaeaea),
-          offset: Offset(0, -1)
-        )]
-      ),
-                        
+                        decoration: BoxDecoration(
+                            color: const Color(0xffeaeaea),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: const Color(0xffeaeaea),
+                                  offset: Offset(0, -1))
+                            ]),
                         child: Padding(
                           padding: EdgeInsets.only(
                               top: isTablet ? 20 : 9, bottom: isTablet ? 9 : 5),
@@ -105,50 +101,48 @@ class _PrezentOtkritState extends State<PrezentOtkrit> {
                       ),
                       content: isTablet
                           ? Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 25),
-                            child: GridView(
-
-                              controller: scroll,
-                              shrinkWrap: true,
-                              physics: const BouncingScrollPhysics(),
-                              gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2,
-                                      crossAxisSpacing: 10,
-                                      mainAxisExtent: 380),
-                              children: List.generate(
-                                  snapshot.data!.modelPrezentOtkritList.list
-                                      .length, (index) {
-                                return Padding(
-                                    padding:
-                                        const EdgeInsets.only(top: 5.0),
-                                    child: PrezentOtkritTabletCard(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 25),
+                              child: GridView(
+                                controller: scroll,
+                                shrinkWrap: true,
+                                physics: const BouncingScrollPhysics(),
+                                gridDelegate:
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 2,
+                                        crossAxisSpacing: 10,
+                                        mainAxisExtent: 380),
+                                children: List.generate(
+                                    snapshot.data!.modelPrezentOtkritList.list
+                                        .length, (index) {
+                                  return Padding(
+                                      padding: const EdgeInsets.only(top: 5.0),
+                                      child: PrezentOtkritTabletCard(
                                           onTap: () {
-                                        providerMenuEventsBloc.eventSink
-                                            .add(MenuActions.prezentFav);
-                                        log(providerSendUrlPrezentOtkrit
-                                            .getUrl);
-                                        providerSendUrlPrezentOtkrit.setUrl(
-                                            snapshot
-                                                .data!
-                                                .modelPrezentOtkritList
-                                                .list[index]
-                                                .link);
-                                      },
-                                        title: snapshot
-                                            .data!
-                                            .modelPrezentOtkritList
-                                            .list[index]
-                                            .title,
-                                        url: snapshot
-                                            .data!
-                                            .modelPrezentOtkritList
-                                            .list[index]
-                                            .pictureLink));
-                              }),
-                            ),
-                          )
+                                            providerMenuEventsBloc.eventSink
+                                                .add(MenuActions.prezentFav);
+                                            log(providerSendUrlPrezentOtkrit
+                                                .getUrl);
+                                            providerSendUrlPrezentOtkrit.setUrl(
+                                                snapshot
+                                                    .data!
+                                                    .modelPrezentOtkritList
+                                                    .list[index]
+                                                    .link);
+                                          },
+                                          title: snapshot
+                                              .data!
+                                              .modelPrezentOtkritList
+                                              .list[index]
+                                              .title,
+                                          url: snapshot
+                                              .data!
+                                              .modelPrezentOtkritList
+                                              .list[index]
+                                              .pictureLink));
+                                }),
+                              ),
+                            )
                           : Column(
                               children: List.generate(
                               snapshot.data!.modelPrezentOtkritList.list.length,

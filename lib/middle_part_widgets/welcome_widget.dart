@@ -35,14 +35,14 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
     final scroll = ScrollController();
     final isTablet = Provider.of<bool>(context);
     final token = Provider.of<String>(context);
-    final welcomeApi = WelcomeApi(token);
-    welcomeApi.eventSink.add(WelcomeApiAction.fetch);
+    final providerWelcomeApi = Provider.of<WelcomeApi>(context);
+    providerWelcomeApi.eventSink.add(WelcomeApiAction.fetch);
     final articleBLoC = Provider.of<ArticleBLoC>(context);
     final menuProvider = Provider.of<MenuEventsBloC>(context);
 
     return Expanded(
       child: StreamBuilder<List<WelcomeModelData>>(
-          stream: welcomeApi.dataStream,
+          stream: providerWelcomeApi.dataStream,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               final data = snapshot.requireData;
@@ -121,7 +121,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                 padding: const EdgeInsets.only(bottom: 10.0),
                                 child: GestureDetector(
                                   onTap: () {
-                                    welcomeApi.eventSink
+                                    providerWelcomeApi.eventSink
                                         .add(WelcomeApiAction.fetch);
                                   },
                                   child: Container(
@@ -163,6 +163,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                           Column(
                             children: List.generate(data.length, (index) {
                               return EventCards(
+                                index: index,
                                 imageOnTap: () async {
                                   menuProvider.eventSink
                                       .add(MenuActions.article);
@@ -198,7 +199,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                             padding: const EdgeInsets.only(bottom: 10.0),
                             child: GestureDetector(
                               onTap: () {
-                                welcomeApi.eventSink
+                                providerWelcomeApi.eventSink
                                     .add(WelcomeApiAction.fetch);
                               },
                               child: Container(
@@ -230,7 +231,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                       ),
                     );
             } else {
-              welcomeApi.eventSink.add(WelcomeApiAction.fetch);
+              providerWelcomeApi.eventSink.add(WelcomeApiAction.fetch);
               return Center(
                   child: Lottie.asset(
                 'assets/pre.json',

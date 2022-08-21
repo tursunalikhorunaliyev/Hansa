@@ -158,19 +158,15 @@ class _ReadStatiState extends State<ReadStati> {
                                             width: isTablet ? 15 : 0,
                                           ),
                                           Text(
-                                            "Коментариев ${snapshot
-                                                    .data!
-                                                    .article
-                                                    .read
-                                                    .listMessageComment
-                                                    .list
-                                                    .length}",
+                                            "Коментариев ${snapshot.data!.article.read.listMessageComment.list.length}",
                                             style: GoogleFonts.montserrat(
                                               color: const Color(0xFF777777),
                                               fontSize: 13.81,
                                             ),
                                           ),
-                                          isTablet ? const Spacer() : const SizedBox(),
+                                          isTablet
+                                              ? const Spacer()
+                                              : const SizedBox(),
                                           SizedBox(
                                             height: 46.03666666666667,
                                             width: 46.03666666666667,
@@ -190,47 +186,46 @@ class _ReadStatiState extends State<ReadStati> {
                                     ),
                                     Column(
                                       children: List.generate(
-                                        snapshot.data!.article.read
-                                            .listMessageComment.list.length,
-                                        (index) {
-                                          int length = snapshot
-                                                .data!
-                                                .article
-                                                .read
-                                                .listMessageComment
-                                                .list.length;
-                                          return StatiComment(
+                                          snapshot
+                                              .data!
+                                              .article
+                                              .read
+                                              .listMessageComment
+                                              .list
+                                              .length, (index) {
+                                        int length = snapshot.data!.article.read
+                                            .listMessageComment.list.length;
+                                        return StatiComment(
                                             comment: snapshot
                                                 .data!
                                                 .article
                                                 .read
                                                 .listMessageComment
-                                                .list[length-index-1]
+                                                .list[length - index - 1]
                                                 .body,
                                             imageURl: snapshot
                                                 .data!
                                                 .article
                                                 .read
                                                 .listMessageComment
-                                                .list[length-index-1]
-                                                .picture_link,
+                                                .list[length - index - 1]
+                                                .pictureLink,
                                             name: snapshot
                                                 .data!
                                                 .article
                                                 .read
                                                 .listMessageComment
-                                                .list[length-index-1]
+                                                .list[length - index - 1]
                                                 .fullname,
                                             rating: snapshot
                                                 .data!
                                                 .article
                                                 .read
                                                 .listMessageComment
-                                                .list[length-index-1]
+                                                .list[length - index - 1]
                                                 .rang
                                                 .toString());
-                                        }
-                                      ),
+                                      }),
                                     ),
                                     const SizedBox(
                                       height: 10,
@@ -268,7 +263,7 @@ class _ReadStatiState extends State<ReadStati> {
                                                               .data!
                                                               .article
                                                               .read
-                                                              .messages_link,
+                                                              .messagesLink,
                                                           {
                                                         "body":
                                                             textFieldController
@@ -277,12 +272,12 @@ class _ReadStatiState extends State<ReadStati> {
                                                             .article.read.id
                                                             .toString()
                                                       }).then((value) {
-                                                        if(value["status"]==true){
-                                                          textFieldController.clear();
-                                                          setState(() {
-                                                            
-                                                          });                                                  
-                                                        }
+                                                    if (value["status"] ==
+                                                        true) {
+                                                      textFieldController
+                                                          .clear();
+                                                      setState(() {});
+                                                    }
                                                     log(value["status"]
                                                         .toString());
                                                     ReadStatieServices.getData(

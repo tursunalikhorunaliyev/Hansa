@@ -15,7 +15,6 @@ class LoginAction {
         body: {"username": username, "password": password});
     Map<String, dynamic> responseMap =
         jsonDecode(response.body) as Map<String, dynamic>;
-    print(response.body);
     bool hasToken = false;
     if (responseMap["status"].toString().endsWith("true")) {
       hasToken = true;
@@ -24,19 +23,15 @@ class LoginAction {
         box.put("username", username);
         box.put("password", password);
         box.put("isSaved", true);
-       
-      }
-      else{
+      } else {
         box.put("username", username);
         box.put("password", password);
-          box.put("isSaved", false);
+        box.put("isSaved", false);
       }
 
-       return [username, password, hasToken, responseMap["data"]["token"]];
-      
+      return [username, password, hasToken, responseMap["data"]["token"]];
     } else {
       return ["", "", false];
     }
-
   }
 }

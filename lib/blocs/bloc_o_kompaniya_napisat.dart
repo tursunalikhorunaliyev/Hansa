@@ -34,9 +34,6 @@ class BlocOKompaniyaNapisat {
         Uri.parse("http://hansa-lab.ru/api/site/add-problem"),
         headers: {"token": token},
         body: body);
-    print(response.statusCode);
-    print(response.body);
-    print("Bloc O Kompaniya Napisat ----------------------------------");
 
     return ModelOKompaniyaNapisatMain.fromMap(jsonDecode(response.body));
   }

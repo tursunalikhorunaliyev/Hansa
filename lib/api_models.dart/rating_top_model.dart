@@ -28,18 +28,18 @@ class RatingListData {
 }
 
 class RatingTopModelData {
-  String shop_net;
+  String shopNet;
   String name;
   String score;
   RatingTopModelData({
-    required this.shop_net,
+    required this.shopNet,
     required this.name,
     required this.score,
   });
 
   factory RatingTopModelData.fromMap(Map<String, dynamic> map) {
     return RatingTopModelData(
-      shop_net: map['shop_net'] as String,
+      shopNet: map['shop_net'] as String,
       name: map['name'] as String,
       score: map['score'] as String,
     );

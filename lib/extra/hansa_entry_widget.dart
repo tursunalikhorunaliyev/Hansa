@@ -36,7 +36,6 @@ class _HansaEntryState extends State<HansaEntry> {
 
   @override
   Widget build(BuildContext context) {
-    print("Hansa Entryyyyyyyyyyyyyyyyyyy");
     final isTablet = Provider.of<bool>(context);
     return ScreenUtilInit(
       designSize: const Size(375, 812),
@@ -94,7 +93,8 @@ class _HansaEntryState extends State<HansaEntry> {
                   top: 240.h,
                   left: 27.w,
                   right: 27.w,
-                  child: Lottie.asset("assets/pre.json", width: 120, height: 120))
+                  child:
+                      Lottie.asset("assets/pre.json", width: 120, height: 120))
               : const SizedBox(),
           Positioned(
             top: -58.h,

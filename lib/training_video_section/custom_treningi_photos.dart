@@ -52,7 +52,6 @@ class _CustomTreningiPhotosState extends State<CustomTreningiPhotos> {
       url,
       savePath,
       onReceiveProgress: (recieved, total) {
-        print(((recieved / total) * 100).toStringAsFixed(0));
         progress = double.parse(((recieved / total) * 100).toStringAsFixed(0));
         downloadProgressFileBloc.streamSink.add(progress);
       },
@@ -103,7 +102,7 @@ class _CustomTreningiPhotosState extends State<CustomTreningiPhotos> {
                                     width: 325,
                                     child: CachedNetworkImage(
                                       imageUrl: snapshot.data!.data.data
-                                          .list[index].picture_link,
+                                          .list[index].pictureLink,
                                       fit: BoxFit.cover,
                                     ),
                                   );
@@ -231,7 +230,7 @@ class _CustomTreningiPhotosState extends State<CustomTreningiPhotos> {
                                                   .data
                                                   .list[sendIndexTreningPhoto
                                                       .getIndex]
-                                                  .picture_link,
+                                                  .pictureLink,
                                               snapshot
                                                   .data!
                                                   .data

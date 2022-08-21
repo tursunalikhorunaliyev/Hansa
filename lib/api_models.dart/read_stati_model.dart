@@ -24,7 +24,7 @@ class ReadStatiModelApi {
   String pictureLink;
   String body;
   ListMessageComment listMessageComment;
-  String messages_link;
+  String messagesLink;
   double rating;
   ReadStatiModelApi({
     required this.id,
@@ -32,7 +32,7 @@ class ReadStatiModelApi {
     required this.pictureLink,
     required this.body,
     required this.listMessageComment,
-    required this.messages_link,
+    required this.messagesLink,
     required this.rating,
   });
 
@@ -43,7 +43,7 @@ class ReadStatiModelApi {
       pictureLink: map['picture_link'],
       body: map['body'],
       listMessageComment: ListMessageComment.fromJson(map["messages"]),
-      messages_link: map['messages_link'],
+      messagesLink: map['messages_link'],
       rating: map['rating'],
     );
   }
@@ -63,13 +63,13 @@ class MessageComment {
   String fullname;
   String date;
   String body;
-  String picture_link;
+  String pictureLink;
   dynamic rang;
   MessageComment(
       {required this.fullname,
       required this.date,
       required this.body,
-      required this.picture_link,
+      required this.pictureLink,
       required this.rang});
 
   factory MessageComment.fromJson(Map<String, dynamic> map) {
@@ -77,7 +77,7 @@ class MessageComment {
         fullname: map["fullname"],
         date: map["date"],
         body: map["body"],
-        picture_link: map["picture_link"],
+        pictureLink: map["picture_link"],
         rang: map["rang"]);
   }
 }

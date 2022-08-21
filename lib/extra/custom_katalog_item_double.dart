@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hansa_app/extra/custom_double_clip_item.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -44,14 +45,13 @@ class _CustomKatalogItemDoubleState extends State<CustomKatalogItemDouble> {
           InkWell(
             onTap: () {
               setState(() {
-                launched =
-                    _launchInBrowser(Uri.parse(widget.linkPDF));
+                launched = _launchInBrowser(Uri.parse(widget.linkPDF));
               });
             },
             child: ClipRRect(
               borderRadius: BorderRadius.circular(6.r),
-              child: Image.network(
-                widget.imageUrl,
+              child: CachedNetworkImage(
+                imageUrl: widget.imageUrl,
                 width: double.infinity,
                 height: 206.h,
                 fit: BoxFit.cover,
