@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hansa_app/blocs/bloc_detect_tap.dart';
 import 'package:hansa_app/blocs/download_progress_bloc.dart';
+import 'package:hansa_app/classes/send_analise_download.dart';
 import 'package:hansa_app/extra/custom_black_appbar.dart';
 import 'package:hansa_app/providers/providers_for_video_title/video_index_provider.dart';
 import 'package:hansa_app/training_section/custom_treningi_video.dart';
@@ -89,7 +90,7 @@ class _TopVideoVidgetState extends State<TopVideoVidget> {
     } else if (Platform.isAndroid) {
       dir = "/storage/emulated/0/Download/";
     }
-    path = "$dir/$uniqueFileName";
+    path = "$dir/$uniqueFileName.mp4";
     return path;
   }
 
@@ -125,6 +126,7 @@ class _TopVideoVidgetState extends State<TopVideoVidget> {
     final token = Provider.of<String>(context);
     final providerIndex = Provider.of<int>(context);
     final isTablet = Provider.of<bool>(context);
+    final providerSendAnaliseDownload = Provider.of<SendAnaliseDownload>(context);
     return WillPopScope(
       onWillPop: () async {
         chewieController
@@ -219,7 +221,9 @@ class _TopVideoVidgetState extends State<TopVideoVidget> {
                                                         .list[providerIndex]
                                                         .title,
                                                     providerBlocProgress,
-                                                  );
+                                                  ).then((value) {
+                                                    providerSendAnaliseDownload.setAnalise(value);
+                                                  });
                                                 } else {
                                                   log("asdffffffffffff=----------------------------------------");
                                                 }

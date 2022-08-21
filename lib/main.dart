@@ -15,6 +15,7 @@ import 'package:hansa_app/blocs/login_clicked_bloc.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/blocs/read_stati_bloc.dart';
 import 'package:hansa_app/blocs/voyti_ili_sozdata_bloc.dart';
+import 'package:hansa_app/classes/send_analise_download.dart';
 import 'package:hansa_app/classes/send_data_personal_update.dart';
 import 'package:hansa_app/classes/send_link.dart';
 import 'package:hansa_app/classes/sned_url_prezent_otkrit.dart';
@@ -56,6 +57,7 @@ class MyApp extends StatelessWidget {
     final sendUrlPrezentOtkrit = SendUrlPrezentOtkrit();
     final tapFavorite = TapFavorite();
     final sendDataPersonalUpdate = SendDataPersonalUpdate();
+    final sendAnaliseDownload = SendAnaliseDownload();
 
     Size size = WidgetsBinding.instance.window.physicalSize;
     bool isTablet = (size.width / 3) > 500;
@@ -105,7 +107,9 @@ class MyApp extends StatelessWidget {
               create: (context) => sendUrlPrezentOtkrit),
           Provider<TapFavorite>(create: (context) => tapFavorite),
           Provider<SendDataPersonalUpdate>(
-              create: (context) => sendDataPersonalUpdate)
+              create: (context) => sendDataPersonalUpdate),
+          Provider<SendAnaliseDownload>(
+              create: (context) => sendAnaliseDownload),
         ],
         child: const MaterialApp(
           localizationsDelegates: [

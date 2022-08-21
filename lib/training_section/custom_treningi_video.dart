@@ -1,8 +1,10 @@
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/blocs/bloc_detect_tap.dart';
 import 'package:hansa_app/blocs/download_progress_bloc.dart';
+import 'package:hansa_app/classes/send_analise_download.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
 
@@ -17,6 +19,8 @@ class CustomTreningiVideo extends StatelessWidget {
     final providerBlocDownload = Provider.of<DownloadProgressFileBloc>(context);
     final providerBlocDetectTap = Provider.of<BlocDetectTap>(context);
     final isTablet = Provider.of<bool>(context);
+    final providerSendAnaliseDownload =
+        Provider.of<SendAnaliseDownload>(context);
     return Padding(
       padding: const EdgeInsets.only(bottom: 11),
       child: Column(
@@ -91,6 +95,8 @@ class CustomTreningiVideo extends StatelessWidget {
                 StreamBuilder<bool>(
                     stream: providerBlocDetectTap.dataStream,
                     builder: (context, snapshotDetectTap) {
+                      log(providerSendAnaliseDownload.getAnalise.toString() +
+                          " custom");
                       return Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: AnimatedContainer(
@@ -109,29 +115,49 @@ class CustomTreningiVideo extends StatelessWidget {
                             child: AnimatedOpacity(
                               duration: const Duration(milliseconds: 500),
                               opacity: snapshotDetectTap.data == true ? 1 : 0,
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 15, right: 15),
-                                child: StreamBuilder<double>(
-                                    initialData: 0,
-                                    stream: providerBlocDownload.stream,
-                                    builder: (context, snapshotDouble) {
-                                      if (snapshotDouble.data == 100) {
-                                        providerBlocDownload.streamSink.add(0);
-                                        providerBlocDetectTap.dataSink
-                                            .add(false);
-                                      }
-                                      return LinearPercentIndicator(
-                                        alignment: MainAxisAlignment.center,
-                                        padding: const EdgeInsets.all(0),
-                                        barRadius: const Radius.circular(5),
-                                        lineHeight: 6,
-                                        percent: snapshotDouble.data! / 100,
-                                        backgroundColor: Colors.transparent,
-                                        progressColor: Colors.green,
-                                      );
-                                    }),
-                              ),
+                              child: providerSendAnaliseDownload.getAnalise ==
+                                      true
+                                  ? Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 15, right: 15),
+                                      child: StreamBuilder<double>(
+                                          initialData: 0,
+                                          stream: providerBlocDownload.stream,
+                                          builder: (context, snapshotDouble) {
+                                            if (snapshotDouble.data == 100) {
+                                              providerBlocDownload.streamSink
+                                                  .add(0);
+                                              providerBlocDetectTap.dataSink
+                                                  .add(false);
+                                            }
+                                            return LinearPercentIndicator(
+                                              alignment:
+                                                  MainAxisAlignment.center,
+                                              padding: const EdgeInsets.all(0),
+                                              barRadius:
+                                                  const Radius.circular(5),
+                                              lineHeight: 6,
+                                              percent:
+                                                  snapshotDouble.data! / 100,
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              progressColor: Colors.green,
+                                            );
+                                          }),
+                                    )
+                                  : Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "Этот файл уже скачан",
+                                          style: GoogleFonts.montserrat(
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                             )),
                       );
                     }),

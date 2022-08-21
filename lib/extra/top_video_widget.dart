@@ -9,6 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/blocs/bloc_detect_tap.dart';
 import 'package:hansa_app/blocs/download_progress_bloc.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
+import 'package:hansa_app/classes/send_analise_download.dart';
 import 'package:hansa_app/extra/black_custom_title.dart';
 import 'package:hansa_app/extra/custom_black_appbar.dart';
 import 'package:hansa_app/providers/providers_for_video_title/video_index_provider.dart';
@@ -88,7 +89,7 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
   final blocDetectTap = BlocDetectTap();
   final blocVideoApi = BlocVideoApi();
 
-   bool downloading = false;
+  bool downloading = false;
   double progress = 0;
   bool isDownloaded = false;
 
@@ -101,12 +102,12 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
     } else if (Platform.isAndroid) {
       dir = "/storage/emulated/0/Download/";
     }
-    path = "$dir/$uniqueFileName";
+    path = "$dir/$uniqueFileName.mp4";
     return path;
   }
 
-  Future<bool> downloadFile(
-      String url, String fileName, DownloadProgressFileBloc downloadProgressFileBloc) async {
+  Future<bool> downloadFile(String url, String fileName,
+      DownloadProgressFileBloc downloadProgressFileBloc) async {
     progress = 0;
 
     String savePath = await getFilePath(fileName);
@@ -130,7 +131,6 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     final isTablet = Provider.of<bool>(context);
@@ -139,6 +139,8 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
     final index = Provider.of<VideoIndexProvider>(context);
     final providerBlocProgress = Provider.of<DownloadProgressFileBloc>(context);
     final token = Provider.of<String>(context);
+    final providerSendAnaliseDownload =
+        Provider.of<SendAnaliseDownload>(context);
     return SafeArea(
       child: Stack(
         children: [
@@ -275,7 +277,15 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
                                                 .list[widget.selectedIndex]
                                                 .title,
                                             providerBlocProgress,
-                                          );
+                                          ).then((value) {
+                                         
+                                              log("Not download");
+                                              providerSendAnaliseDownload
+                                                  .setAnalise(value);
+                                                  log(value.toString() + " video widget value");
+                                            
+                                            
+                                          });
                                         } else {
                                           log("asdffffffffffff=----------------------------------------");
                                         }

@@ -10,6 +10,7 @@ import 'package:hansa_app/api_services/treningi_photos_api.dart';
 import 'package:hansa_app/blocs/bloc_detect_tap.dart';
 import 'package:hansa_app/blocs/download_progress_bloc.dart';
 import 'package:hansa_app/classes/send__index_trening_photo.dart';
+import 'package:hansa_app/classes/send_analise_download.dart';
 import 'package:hansa_app/providers/treningi_photos_provider.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -74,6 +75,7 @@ class _CustomTreningiPhotosState extends State<CustomTreningiPhotos> {
     final page = PageController(initialPage: 0);
     final token = Provider.of<String>(context);
     final treningiPhotos = Provider.of<TreningiPhotosProvider>(context);
+    final providerSendAnaliseDonwload = Provider.of<SendAnaliseDownload>(context);
     return Padding(
       padding: const EdgeInsets.only(bottom: 11),
       child: SizedBox(
@@ -247,7 +249,7 @@ class _CustomTreningiPhotosState extends State<CustomTreningiPhotos> {
                                               sendIndexTreningPhoto.getIndex
                                                   .toString(),
                                               blocProgress).then((value) {
-                                              
+                                              providerSendAnaliseDonwload.setAnalise(value);
                                               });
                                         } else {}
                                       },
@@ -298,7 +300,7 @@ class _CustomTreningiPhotosState extends State<CustomTreningiPhotos> {
                                   duration: const Duration(milliseconds: 500),
                                   opacity:
                                       snapshotDetectTap.data == true ? 1 : 0,
-                                  child: Padding(
+                                  child: providerSendAnaliseDonwload.getAnalise ? Padding(
                                     padding: const EdgeInsets.only(
                                         left: 15, right: 15),
                                     child: StreamBuilder<double>(
@@ -319,7 +321,19 @@ class _CustomTreningiPhotosState extends State<CustomTreningiPhotos> {
                                             progressColor: Colors.green,
                                           );
                                         }),
-                                  ),
+                                  ) : Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "Этот файл уже скачан",
+                                          style: GoogleFonts.montserrat(
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                 )),
                           );
                         }),
