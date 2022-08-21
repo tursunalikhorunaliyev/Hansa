@@ -63,7 +63,7 @@ class _DrawerStatsState extends State<DrawerStats> {
                           return SingleChildScrollView(
                             controller: scroll,
                             child: DataTable(
-                              headingRowHeight: 20,
+                              headingRowHeight: 40,
                               columnSpacing: 10,
                               dataRowHeight: isTablet ? 45 : 30,
                               horizontalMargin: 1,
