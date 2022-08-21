@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hansa_app/blocs/bloc_play_video.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/classes/tap_favorite.dart';
 import 'package:hansa_app/extra/exit_dialog.dart';
@@ -23,8 +22,6 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
-    GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-    final playProvider = Provider.of<BlocPlayVideo>(context);
     final isTablet = Provider.of<bool>(context);
     final providerScaffoldKey = Provider.of<GlobalKey<ScaffoldState>>(context);
     final menuProvider = Provider.of<MenuEventsBloC>(context);

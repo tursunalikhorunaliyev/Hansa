@@ -10,9 +10,6 @@ class BlocPersonal {
       Uri.parse("https://hansa-lab.ru/api/site/account"),
       headers: {"token": token},
     );
-    print(response.statusCode);
-    print(response.body);
-    print("Bloc Personal----------------------------------");
 
     return ModelPersonalMain.fromMap(jsonDecode(response.body));
   }

@@ -14,7 +14,7 @@ class CustomVideoSubItem extends StatelessWidget {
     final isTablet = Provider.of<bool>(context);
     return Align(
       alignment: Alignment.centerLeft,
-      child: Container(
+      child: SizedBox(
         child: Padding(
           padding: const EdgeInsets.only(left: 40, right: 20, top: 15),
           child: Row(

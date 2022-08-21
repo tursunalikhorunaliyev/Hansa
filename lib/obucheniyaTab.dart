@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hansa_app/api_models.dart/favourite_model.dart';
 import 'package:hansa_app/blocs/favourite_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -40,7 +39,6 @@ class _StackedStackObuchState extends State<StackedStackObuch> {
   Widget build(BuildContext context) {
     final isFavouriteBLoC = FavouriteBLoC();
     final token = Provider.of<String>(context);
-    final favouriteModel = FavouriteModel(status: true, data: true);
     bool fav = widget.isFavourite;
     return Center(
       child: SizedBox(

@@ -41,7 +41,6 @@ class _PresentArchiveState extends State<PresentArchive> {
 
     final isTablet = Provider.of<bool>(context);
 
-    late dynamic response;
     Future<void>? launched;
     return Expanded(
       child: FutureBuilder<PrezintatsiaModel>(
@@ -54,12 +53,13 @@ class _PresentArchiveState extends State<PresentArchive> {
                 child: Column(children: [
                   StickyHeader(
                       header: Container(
-
                         decoration: const BoxDecoration(
-                        color: Color(0xffeaeaea), boxShadow: [BoxShadow(
-          color: Color(0xffeaeaea),
-          offset: Offset(0, -3)
-        )]),
+                            color: Color(0xffeaeaea),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Color(0xffeaeaea),
+                                  offset: Offset(0, -3))
+                            ]),
                         child: Padding(
                           padding: EdgeInsets.only(
                               top: isTablet ? 20 : 9, bottom: isTablet ? 9 : 5),
@@ -70,7 +70,6 @@ class _PresentArchiveState extends State<PresentArchive> {
                                 width: isTablet ? 55.w : 70.w,
                                 height: isTablet ? 46.h : 42.h,
                                 decoration: BoxDecoration(
-                                  
                                     color: const Color(0XFFff163e),
                                     borderRadius: BorderRadius.only(
                                         topRight: Radius.circular(
@@ -106,120 +105,102 @@ class _PresentArchiveState extends State<PresentArchive> {
                       ),
                       content: isTablet
                           ? Padding(
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 25),
-                            child: GridView(
-                              controller: scroll,
-                              shrinkWrap: true,
-                              physics: const BouncingScrollPhysics(),
-                              gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2,
-                                      crossAxisSpacing: 10,
-                                      mainAxisExtent: 375),
-                              children: List.generate(
-                                  snapshot.data!.data.guides.dataGuides
-                                      .length, (index) {
-                                return Padding(
-                                    padding:
-                                        const EdgeInsets.only(top: 5.0),
-                                    child: StackedStackPrezentatsiyaTab(
-                                      buttonLink:
-                                          snapshot
-                                                      .data!
-                                                      .data
-                                                      .guides
-                                                      .dataGuides[index]
-                                                      .pdfUrl ==
-                                                  ''
-                                              ? const SizedBox()
-                                              : Padding(
-                                                  padding: EdgeInsets.only(
-                                                      top: isTablet
-                                                          ? 22.h
-                                                          : 15.h),
-                                                  child: InkWell(
-                                                    onTap: () {
-                                                      setState(() {
-                                                        launched =
-                                                            _launchInBrowser(
-                                                                Uri.parse(
-                                                                    "https://${snapshot.data!.data.guides.dataGuides[index].pdfUrl}"));
-                                                      });
-                                                    },
-                                                    child: Container(
-                                                      alignment:
-                                                          Alignment.center,
-                                                      width: isTablet
-                                                          ? 100
-                                                          : 94,
-                                                      height: isTablet
-                                                          ? 28
-                                                          : 25,
-                                                      decoration: BoxDecoration(
-                                                          color: const Color(
-                                                              0xff31353b),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      13.r)),
-                                                      child: Text(
-                                                        'Скачать',
-                                                        style: GoogleFonts.montserrat(
-                                                            fontSize:
-                                                                isTablet
-                                                                    ? 12
-                                                                    : 10,
-                                                            color: const Color(
-                                                                0xffffffff),
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w500),
-                                                      ),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 25),
+                              child: GridView(
+                                controller: scroll,
+                                shrinkWrap: true,
+                                physics: const BouncingScrollPhysics(),
+                                gridDelegate:
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 2,
+                                        crossAxisSpacing: 10,
+                                        mainAxisExtent: 375),
+                                children: List.generate(
+                                    snapshot.data!.data.guides.dataGuides
+                                        .length, (index) {
+                                  return Padding(
+                                      padding: const EdgeInsets.only(top: 5.0),
+                                      child: StackedStackPrezentatsiyaTab(
+                                        buttonLink: snapshot.data!.data.guides
+                                                    .dataGuides[index].pdfUrl ==
+                                                ''
+                                            ? const SizedBox()
+                                            : Padding(
+                                                padding: EdgeInsets.only(
+                                                    top:
+                                                        isTablet ? 22.h : 15.h),
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    setState(() {
+                                                      launched = _launchInBrowser(
+                                                          Uri.parse(
+                                                              "https://${snapshot.data!.data.guides.dataGuides[index].pdfUrl}"));
+                                                    });
+                                                  },
+                                                  child: Container(
+                                                    alignment: Alignment.center,
+                                                    width: isTablet ? 100 : 94,
+                                                    height: isTablet ? 28 : 25,
+                                                    decoration: BoxDecoration(
+                                                        color: const Color(
+                                                            0xff31353b),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                                    13.r)),
+                                                    child: Text(
+                                                      'Скачать',
+                                                      style: GoogleFonts
+                                                          .montserrat(
+                                                              fontSize: isTablet
+                                                                  ? 12
+                                                                  : 10,
+                                                              color: const Color(
+                                                                  0xffffffff),
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500),
                                                     ),
                                                   ),
                                                 ),
-                                      isFavouriteURL: snapshot
-                                          .data!
-                                          .data
-                                          .guides
-                                          .dataGuides[index]
-                                          .favourite_link,
-                                      linkPDFSkachat: snapshot.data!.data
-                                          .guides.dataGuides[index].pdfUrl,
-                                      linkPDF: snapshot.data!.data.guides
-                                          .dataGuides[index].link,
-                                      buttonColor: const Color(0xffff163e),
-                                      topButtonText: 'Скачать',
-                                      bottomButtonText: 'Читать',
-                                      isFavourite: snapshot
-                                          .data!
-                                          .data
-                                          .guides
-                                          .dataGuides[index]
-                                          .isFavourite,
-                                      skachat: Container(
-                                        alignment: Alignment.center,
-                                        width: 94,
-                                        height: 25,
-                                        decoration: BoxDecoration(
-                                            color: const Color(0xff31353b),
-                                            borderRadius:
-                                                BorderRadius.circular(13)),
-                                        child: Text(
-                                          'skachat',
-                                          style: GoogleFonts.montserrat(
-                                              fontSize: 10,
-                                              color:
-                                                  const Color(0xffffffff),
-                                              fontWeight: FontWeight.w500),
+                                              ),
+                                        isFavouriteURL: snapshot
+                                            .data!
+                                            .data
+                                            .guides
+                                            .dataGuides[index]
+                                            .favouriteLink,
+                                        linkPDFSkachat: snapshot.data!.data
+                                            .guides.dataGuides[index].pdfUrl,
+                                        linkPDF: snapshot.data!.data.guides
+                                            .dataGuides[index].link,
+                                        buttonColor: const Color(0xffff163e),
+                                        topButtonText: 'Скачать',
+                                        bottomButtonText: 'Читать',
+                                        isFavourite: snapshot.data!.data.guides
+                                            .dataGuides[index].isFavourite,
+                                        skachat: Container(
+                                          alignment: Alignment.center,
+                                          width: 94,
+                                          height: 25,
+                                          decoration: BoxDecoration(
+                                              color: const Color(0xff31353b),
+                                              borderRadius:
+                                                  BorderRadius.circular(13)),
+                                          child: Text(
+                                            'skachat',
+                                            style: GoogleFonts.montserrat(
+                                                fontSize: 10,
+                                                color: const Color(0xffffffff),
+                                                fontWeight: FontWeight.w500),
+                                          ),
                                         ),
-                                      ),
-                                      title: snapshot.data!.data.guides
-                                          .dataGuides[index].title,
-                                      url: snapshot.data!.data.guides
-                                          .dataGuides[index].picture_link,
-                                    ) /* StackedStackPrezentatsiyaTab(
+                                        title: snapshot.data!.data.guides
+                                            .dataGuides[index].title,
+                                        url: snapshot.data!.data.guides
+                                            .dataGuides[index].pictureLink,
+                                      ) /* StackedStackPrezentatsiyaTab(
                                     isFavouriteURL: snapshot
                                         .data!
                                         .data
@@ -256,10 +237,10 @@ class _PresentArchiveState extends State<PresentArchive> {
                                     url: snapshot.data!.data.guides
                                         .dataGuides[index].picture_link,
                                   ), */
-                                    );
-                              }),
-                            ),
-                          )
+                                      );
+                                }),
+                              ),
+                            )
                           : Column(
                               children: List.generate(
                               snapshot.data!.data.guides.dataGuides.length,
@@ -279,12 +260,8 @@ class _PresentArchiveState extends State<PresentArchive> {
                                                 onTap: () {
                                                   setState(() {
                                                     launched = _launchInBrowser(
-                                                        Uri.parse("https://${snapshot
-                                                            .data!
-                                                            .data
-                                                            .guides
-                                                            .dataGuides[index]
-                                                            .pdfUrl}"));
+                                                        Uri.parse(
+                                                            "https://${snapshot.data!.data.guides.dataGuides[index].pdfUrl}"));
                                                   });
                                                 },
                                                 child: Container(
@@ -314,7 +291,7 @@ class _PresentArchiveState extends State<PresentArchive> {
                                               ),
                                             ),
                                       isFavouriteURL: snapshot.data!.data.guides
-                                          .dataGuides[index].favourite_link,
+                                          .dataGuides[index].favouriteLink,
                                       linkPDFSkachat: snapshot.data!.data.guides
                                           .dataGuides[index].pdfUrl,
                                       linkPDF: snapshot.data!.data.guides
@@ -343,7 +320,7 @@ class _PresentArchiveState extends State<PresentArchive> {
                                       title: snapshot.data!.data.guides
                                           .dataGuides[index].title,
                                       url: snapshot.data!.data.guides
-                                          .dataGuides[index].picture_link,
+                                          .dataGuides[index].pictureLink,
                                     )
                                   ],
                                 );
@@ -354,11 +331,14 @@ class _PresentArchiveState extends State<PresentArchive> {
                               .dataGuidesArchive.isEmpty
                           ? const SizedBox()
                           : Container(
-                              decoration: const BoxDecoration(    boxShadow: [BoxShadow(
-          color: Color(0xffeaeaea),
-          offset: Offset(0, -3)
-        )],
-                              color: Color(0xffeaeaea),),
+                              decoration: const BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: Color(0xffeaeaea),
+                                      offset: Offset(0, -3))
+                                ],
+                                color: Color(0xffeaeaea),
+                              ),
                               child: Padding(
                                 padding: EdgeInsets.only(
                                     top: isTablet ? 20 : 9,
@@ -370,7 +350,6 @@ class _PresentArchiveState extends State<PresentArchive> {
                                       width: isTablet ? 55.w : 70.w,
                                       height: isTablet ? 46.h : 42.h,
                                       decoration: BoxDecoration(
-                                      
                                           color: const Color(0XFFff163e),
                                           borderRadius: BorderRadius.only(
                                               topRight: Radius.circular(
@@ -481,7 +460,7 @@ class _PresentArchiveState extends State<PresentArchive> {
                                             .data
                                             .guidesArchive
                                             .dataGuidesArchive[index]
-                                            .favourite_link,
+                                            .favouriteLink,
                                         linkPDFSkachat: snapshot
                                             .data!
                                             .data
@@ -526,7 +505,7 @@ class _PresentArchiveState extends State<PresentArchive> {
                                             .data
                                             .guidesArchive
                                             .dataGuidesArchive[index]
-                                            .picture_link,
+                                            .pictureLink,
                                       ),
                                     );
                                   }),
@@ -599,7 +578,7 @@ class _PresentArchiveState extends State<PresentArchive> {
                                                 .data
                                                 .guidesArchive
                                                 .dataGuidesArchive[index]
-                                                .favourite_link,
+                                                .favouriteLink,
                                             linkPDFSkachat: snapshot
                                                 .data!
                                                 .data
@@ -653,7 +632,7 @@ class _PresentArchiveState extends State<PresentArchive> {
                                                 .data
                                                 .guidesArchive
                                                 .dataGuidesArchive[index]
-                                                .picture_link,
+                                                .pictureLink,
                                           )
                                         ],
                                       ))))

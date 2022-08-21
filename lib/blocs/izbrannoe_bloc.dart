@@ -11,8 +11,6 @@ class IzbrannoeBLoC {
       Uri.parse("https://hansa-lab.ru/api/site/favouriete"),
       headers: {"token": token},
     );
-    print(response.statusCode);
-    print(response.body);
 
     return IzbrannoeModel.fromMap(jsonDecode(response.body));
   }

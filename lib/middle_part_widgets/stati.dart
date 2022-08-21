@@ -7,7 +7,6 @@ import 'package:hansa_app/classes/send_link.dart';
 import 'package:hansa_app/extra/custom_clip_item.dart';
 import 'package:hansa_app/extra/custom_tablet_stati_item.dart';
 import 'package:hansa_app/extra/custom_title.dart';
-import 'package:hansa_app/providers/stati_id_provider.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -33,9 +32,7 @@ class _StatiState extends State<Stati> {
   Widget build(BuildContext context) {
     final providerToken = Provider.of<String>(context);
     final isTablet = Provider.of<bool>(context);
-    final providerReadStati = Provider.of<ReadStatiBLoC>(context);
     final statiBloCProvider = Provider.of<MenuEventsBloC>(context);
-    final statiIdProvider = Provider.of<StatiIdProvider>(context);
     final providerSendLink = Provider.of<SendLink>(context);
     return Expanded(
       child: SingleChildScrollView(
@@ -45,34 +42,35 @@ class _StatiState extends State<Stati> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return isTablet
-                    ? 
-                    StickyHeader(header: const CustomTitle(
-                            imagePath: "assets/stati_title.png",
-                            title: "Статьи",
-                          ), content: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 11.w),
-                            child: GridView(
-                              physics: const BouncingScrollPhysics(),
-                              shrinkWrap: true,
-                              gridDelegate:
-                                  const SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2,
-                                      childAspectRatio: 10 / 3.3),
-                              children: List.generate(
-                                snapshot.data!.list.list.length,
-                                (index) => CustomStatiTabletItem(
-                                  backgroundColor: const Color(0xffffffff),
-                                  buttonTextColor: const Color(0xffffffff),
-                                  buttonColor: const Color(0xffe21a37),
-                                  titleColor: const Color(0xff272624),
-                                  title: snapshot.data!.list.list[index].title,
-                                  buttonText: "Читать",
-                                  onTap: () async {
-                                    providerSendLink.setLink(
-                                        snapshot.data!.list.list[index].link);
-                                    statiBloCProvider.eventSink
-                                        .add(MenuActions.chitatStati);
-                                    /* statiBloCProvider.eventSink
+                    ? StickyHeader(
+                        header: const CustomTitle(
+                          imagePath: "assets/stati_title.png",
+                          title: "Статьи",
+                        ),
+                        content: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 11.w),
+                          child: GridView(
+                            physics: const BouncingScrollPhysics(),
+                            shrinkWrap: true,
+                            gridDelegate:
+                                const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    childAspectRatio: 10 / 3.3),
+                            children: List.generate(
+                              snapshot.data!.list.list.length,
+                              (index) => CustomStatiTabletItem(
+                                backgroundColor: const Color(0xffffffff),
+                                buttonTextColor: const Color(0xffffffff),
+                                buttonColor: const Color(0xffe21a37),
+                                titleColor: const Color(0xff272624),
+                                title: snapshot.data!.list.list[index].title,
+                                buttonText: "Читать",
+                                onTap: () async {
+                                  providerSendLink.setLink(
+                                      snapshot.data!.list.list[index].link);
+                                  statiBloCProvider.eventSink
+                                      .add(MenuActions.chitatStati);
+                                  /* statiBloCProvider.eventSink
                                       .add(MenuActions.chitatStati);
                                   ReadStatiModel model =
                                       await readStati.getReadStati(
@@ -80,13 +78,13 @@ class _StatiState extends State<Stati> {
                                           snapshot.data!.list.list[index].link);
 
                                   providerReadStati.sink.add(model); */
-                                  },
-                                ),
+                                },
                               ),
                             ),
-                          ),)
-                    : 
-                    Column(
+                          ),
+                        ),
+                      )
+                    : Column(
                         children: [
                           const CustomTitle(
                             imagePath: "assets/stati_title.png",

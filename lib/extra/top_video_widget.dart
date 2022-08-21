@@ -115,7 +115,6 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
       url,
       savePath,
       onReceiveProgress: (recieved, total) {
-        print(((recieved / total) * 100).toStringAsFixed(0));
         progress = double.parse(((recieved / total) * 100).toStringAsFixed(0));
         downloadProgressFileBloc.streamSink.add(progress);
       },

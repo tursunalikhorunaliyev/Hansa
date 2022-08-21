@@ -6,7 +6,8 @@ import 'package:hansa_app/enums/enum_action_view.dart';
 import 'package:http/http.dart' as http;
 
 class BlocGlavniyMenuUserInfo {
-  final dataController = StreamController<ModelGlavniyMenuUserInfoMain>.broadcast();
+  final dataController =
+      StreamController<ModelGlavniyMenuUserInfoMain>.broadcast();
   final eventController = StreamController<EnumActionView>.broadcast();
 
   StreamSink<ModelGlavniyMenuUserInfoMain> get dataSink => dataController.sink;
@@ -28,9 +29,6 @@ class BlocGlavniyMenuUserInfo {
       Uri.parse("https://hansa-lab.ru/api/site/user-short-info"),
       headers: {"token": token},
     );
-    print(response.statusCode);
-    print(response.body);
-    print("Bloc Glavniy Menu User Info----------------------------------");
 
     return ModelGlavniyMenuUserInfoMain.fromMap(jsonDecode(response.body));
   }
