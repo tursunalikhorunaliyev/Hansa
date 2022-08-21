@@ -11,6 +11,7 @@ import 'package:hansa_app/providers/stati_id_provider.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:sticky_headers/sticky_headers.dart';
 
 class Stati extends StatefulWidget {
   const Stati({Key? key}) : super(key: key);
@@ -44,13 +45,11 @@ class _StatiState extends State<Stati> {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return isTablet
-                    ? Column(
-                        children: [
-                          const CustomTitle(
+                    ? 
+                    StickyHeader(header: const CustomTitle(
                             imagePath: "assets/stati_title.png",
                             title: "Статьи",
-                          ),
-                          Padding(
+                          ), content: Padding(
                             padding: EdgeInsets.symmetric(horizontal: 11.w),
                             child: GridView(
                               physics: const BouncingScrollPhysics(),
@@ -85,10 +84,9 @@ class _StatiState extends State<Stati> {
                                 ),
                               ),
                             ),
-                          ),
-                        ],
-                      )
-                    : Column(
+                          ),)
+                    : 
+                    Column(
                         children: [
                           const CustomTitle(
                             imagePath: "assets/stati_title.png",

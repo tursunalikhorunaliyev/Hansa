@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -13,10 +14,17 @@ class CustomTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     final isTablet = Provider.of<bool>(context);
     return Container(
-      color: const Color(0xffeaeaea),
+      decoration: const BoxDecoration(
+              color: Color(0xffeaeaea),
+
+        boxShadow: [BoxShadow(
+          color: Color(0xffeaeaea),
+          offset: Offset(0, -3)
+        )]
+      ),
       child: Padding(
         padding: EdgeInsets.only(
-          top: isTablet ? 7.h : 10.h,
+         top: isTablet ? 7.h : 10.h,
           bottom: isTablet ? 8 : 10.h,
         ),
         child: Row(

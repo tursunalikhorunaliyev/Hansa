@@ -651,6 +651,7 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                 );
                         } else {
                           return SizedBox(
+                            
                             width: MediaQuery.of(context).size.width,
                           );
                         }

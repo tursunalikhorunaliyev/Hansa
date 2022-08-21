@@ -47,10 +47,19 @@ class _PrezentOtkritState extends State<PrezentOtkrit> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               return SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
                 child: Column(children: [
                   StickyHeader(
                       header: Container(
-                        color: const Color(0xffeaeaea),
+                         decoration: BoxDecoration(
+              color: const Color(0xffeaeaea),
+
+        boxShadow: [BoxShadow(
+          color: const Color(0xffeaeaea),
+          offset: Offset(0, -1)
+        )]
+      ),
+                        
                         child: Padding(
                           padding: EdgeInsets.only(
                               top: isTablet ? 20 : 9, bottom: isTablet ? 9 : 5),
@@ -99,6 +108,7 @@ class _PrezentOtkritState extends State<PrezentOtkrit> {
                             padding:
                                 const EdgeInsets.symmetric(horizontal: 25),
                             child: GridView(
+
                               controller: scroll,
                               shrinkWrap: true,
                               physics: const BouncingScrollPhysics(),
