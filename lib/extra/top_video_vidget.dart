@@ -80,7 +80,8 @@ class _TopVideoVidgetState extends State<TopVideoVidget> {
   double progress = 0;
   bool isDownloaded = false;
 
-  Future<String> getFilePath(uniqueFileName) async {
+  Future<Map<String, dynamic>> getFilePath(uniqueFileName) async {
+    Map<String, dynamic> temp = {};
     String path = "";
     String dir = "";
     if (Platform.isIOS) {
@@ -90,23 +91,37 @@ class _TopVideoVidgetState extends State<TopVideoVidget> {
       dir = "/storage/emulated/0/Download/";
     }
     path = "$dir/$uniqueFileName";
-    return path;
+    final fileExist = File(path);
+
+    if (await fileExist.exists()) {
+      temp = {"uri": path, "isExist": true};
+    } else {
+      temp = {"uri": path, "isExist": false};
+    }
+    return temp;
   }
 
-  Future<void> downloadFile(String url, String fileName,
+  Future<String> downloadFile(String url, String fileName,
       DownloadProgressFileBloc downloadProgressFileBloc) async {
     progress = 0;
-    String savePath = await getFilePath(fileName);
-    Dio dio = Dio();
-    dio.download(
-      url,
-      savePath,
-      onReceiveProgress: (recieved, total) {
-        progress = double.parse(((recieved / total) * 100).toStringAsFixed(0));
-        downloadProgressFileBloc.streamSink.add(progress);
-      },
-      deleteOnError: true,
-    );
+    Map<String, dynamic> savePath = await getFilePath(fileName);
+    if (!savePath["isExist"]) {
+      Dio dio = Dio();
+      dio.download(
+        url,
+        savePath,
+        onReceiveProgress: (recieved, total) {
+          print(((recieved / total) * 100).toStringAsFixed(0));
+          progress =
+              double.parse(((recieved / total) * 100).toStringAsFixed(0));
+          downloadProgressFileBloc.streamSink.add(progress);
+        },
+        deleteOnError: true,
+      );
+      return "can download";
+    } else {
+      return "can't download";
+    }
   }
 
   @override

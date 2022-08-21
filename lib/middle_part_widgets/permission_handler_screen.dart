@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hansa_app/screens/splash_screen.dart';
+import 'package:hansa_app/download_exists.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class PermissionHandlerScreen extends StatefulWidget {
@@ -15,7 +15,7 @@ class _PermissionHandlerScreenState extends State<PermissionHandlerScreen> {
     getPermission().then((value) {
       if (value) {
         Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => const SplashScreen()));
+            context, MaterialPageRoute(builder: (context) => const ExistsCheck()));
       }
     });
     super.initState();
