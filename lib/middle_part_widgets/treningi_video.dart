@@ -38,9 +38,6 @@ class TreningiVideo extends StatefulWidget {
 class _TreningiVideoState extends State<TreningiVideo> {
   final scroll = ScrollController();
 
-  bool downloading = false;
-  double progress = 0;
-  bool isDownloaded = false;
 
   ChewieController chewieController = ChewieController(
     aspectRatio: 16 / 9,
@@ -54,6 +51,10 @@ class _TreningiVideoState extends State<TreningiVideo> {
     super.dispose();
   }
 
+   bool downloading = false;
+  double progress = 0;
+  bool isDownloaded = false;
+
   Future<String> getFilePath(uniqueFileName) async {
     String path = "";
     String dir = "";
@@ -63,25 +64,33 @@ class _TreningiVideoState extends State<TreningiVideo> {
     } else if (Platform.isAndroid) {
       dir = "/storage/emulated/0/Download/";
     }
-    path = "$dir/$uniqueFileName.mp4";
+    path = "$dir/$uniqueFileName";
     return path;
   }
 
-  Future<void> downloadFile(String url, String fileName,
-      DownloadProgressFileBloc downloadProgressFileBloc) async {
+  Future<bool> downloadFile(
+      String url, String fileName, DownloadProgressFileBloc downloadProgressFileBloc) async {
     progress = 0;
 
     String savePath = await getFilePath(fileName);
-    Dio dio = Dio();
-    dio.download(
-      url,
-      savePath,
-      onReceiveProgress: (recieved, total) {
-        progress = double.parse(((recieved / total) * 100).toStringAsFixed(0));
-        downloadProgressFileBloc.streamSink.add(progress);
-      },
-      deleteOnError: true,
-    );
+
+    if (await File(savePath).exists()) {
+    
+      return false;
+    } else {
+      Dio dio = Dio();
+      dio.download(
+        url,
+        savePath,
+        onReceiveProgress: (recieved, total) {
+          progress =
+              double.parse(((recieved / total) * 100).toStringAsFixed(0));
+          downloadProgressFileBloc.streamSink.add(progress);
+        },
+        deleteOnError: true,
+      );
+      return true;
+    }
   }
 
   final blocProgress = DownloadProgressFileBloc();

@@ -24,8 +24,11 @@ class DownLoad {
 
 class _ExistsCheckState extends State<ExistsCheck> {
   final bloc = DownLoad();
-  Future<Map<String, dynamic>> getFilePath(uniqueFileName) async {
-    Map<String, dynamic> temp = {};
+  bool downloading = false;
+  double progress = 0;
+  bool isDownloaded = false;
+
+  Future<String> getFilePath(uniqueFileName) async {
     String path = "";
     String dir = "";
     if (Platform.isIOS) {
@@ -34,65 +37,63 @@ class _ExistsCheckState extends State<ExistsCheck> {
     } else if (Platform.isAndroid) {
       dir = "/storage/emulated/0/Download/";
     }
-    path = "$dir/$uniqueFileName.mp4";
-    final fileExist = File(path);
-
-    if (await fileExist.exists()) {
-    
-      temp = {"uri": path, "isExist": true};
-    } else {
-      
-      temp = {"uri": path, "isExist": false};
-    }
-    return temp;
+    path = "$dir/$uniqueFileName";
+    return path;
   }
 
-  Future<String> downloadFile(String url, String fileName,
-      DownLoad downloadProgressFileBloc) async {
-    double progress = 0;
-    Map<String, dynamic> savePath = await getFilePath(fileName);
-    if (!savePath["isExist"]) {
+  Future<bool> downloadFile(
+      String url, String fileName, DownLoad downloadProgressFileBloc) async {
+    progress = 0;
+
+    String savePath = await getFilePath(fileName);
+
+    if (await File(savePath).exists()) {
+      log("exists");
+      return false;
+    } else {
       Dio dio = Dio();
       dio.download(
         url,
         savePath,
         onReceiveProgress: (recieved, total) {
-          print(((recieved / total) * 100).toStringAsFixed(0));
-
           progress =
               double.parse(((recieved / total) * 100).toStringAsFixed(0));
           downloadProgressFileBloc.sink.add(progress);
         },
         deleteOnError: true,
       );
-      return "can download";
-    } else {
-      return "can't download";
+      return true;
     }
   }
 
-   
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
         children: [
-    
           StreamBuilder<double>(
             stream: bloc.stream,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
+                log(snapshot.data.toString());
                 return Text(snapshot.data.toString());
               } else {
                 return const SizedBox();
               }
             },
           ),
-          const SizedBox(height: 50,),
-          TextButton(onPressed: (){
-            downloadFile("https://hansa-lab.ru/storage/upload/videos/ZnaJMRQsLcXP.mp4", "video", bloc).then((value) {
-              log(value);
-            });
-          }, child: const Text("Download"))
+          const SizedBox(
+            height: 50,
+          ),
+          TextButton(
+              onPressed: () {
+                downloadFile(
+                    "https://hansa-lab.ru/storage/upload/videos/ZnaJMRQsLcXP.mp4",
+                    "video",
+                    bloc).then((value) {
+                      
+                    });
+              },
+              child: const Text("Download"))
         ],
       ),
     );

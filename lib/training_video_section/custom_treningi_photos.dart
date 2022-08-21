@@ -42,21 +42,27 @@ class _CustomTreningiPhotosState extends State<CustomTreningiPhotos> {
     return path;
   }
 
-  Future<void> downloadFile(String url, String fileName, String fileNameAdd,
+  Future<bool> downloadFile(String url, String fileName, String fileNameAdd,
       DownloadProgressFileBloc downloadProgressFileBloc) async {
     progress = 0;
 
     String savePath = await getFilePath(fileName, fileNameAdd);
-    Dio dio = Dio();
-    dio.download(
-      url,
-      savePath,
-      onReceiveProgress: (recieved, total) {
-        progress = double.parse(((recieved / total) * 100).toStringAsFixed(0));
-        downloadProgressFileBloc.streamSink.add(progress);
-      },
-      deleteOnError: true,
-    );
+    if (await File(savePath).exists()) {
+      return false;
+    } else {
+      Dio dio = Dio();
+      dio.download(
+        url,
+        savePath,
+        onReceiveProgress: (recieved, total) {
+          progress =
+              double.parse(((recieved / total) * 100).toStringAsFixed(0));
+          downloadProgressFileBloc.streamSink.add(progress);
+        },
+        deleteOnError: true,
+      );
+      return true;
+    }
   }
 
   final sendIndexTreningPhoto = SendIndexTreningPhoto();
@@ -240,7 +246,9 @@ class _CustomTreningiPhotosState extends State<CustomTreningiPhotos> {
                                                   .title,
                                               sendIndexTreningPhoto.getIndex
                                                   .toString(),
-                                              blocProgress);
+                                              blocProgress).then((value) {
+                                              
+                                              });
                                         } else {}
                                       },
                                       child: ClipRRect(

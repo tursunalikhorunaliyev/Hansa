@@ -88,7 +88,7 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
   final blocDetectTap = BlocDetectTap();
   final blocVideoApi = BlocVideoApi();
 
-  bool downloading = false;
+   bool downloading = false;
   double progress = 0;
   bool isDownloaded = false;
 
@@ -105,22 +105,31 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
     return path;
   }
 
-  Future<void> downloadFile(String url, String fileName,
-      DownloadProgressFileBloc downloadProgressFileBloc) async {
+  Future<bool> downloadFile(
+      String url, String fileName, DownloadProgressFileBloc downloadProgressFileBloc) async {
     progress = 0;
 
     String savePath = await getFilePath(fileName);
-    Dio dio = Dio();
-    dio.download(
-      url,
-      savePath,
-      onReceiveProgress: (recieved, total) {
-        progress = double.parse(((recieved / total) * 100).toStringAsFixed(0));
-        downloadProgressFileBloc.streamSink.add(progress);
-      },
-      deleteOnError: true,
-    );
+
+    if (await File(savePath).exists()) {
+      log("exists");
+      return false;
+    } else {
+      Dio dio = Dio();
+      dio.download(
+        url,
+        savePath,
+        onReceiveProgress: (recieved, total) {
+          progress =
+              double.parse(((recieved / total) * 100).toStringAsFixed(0));
+          downloadProgressFileBloc.streamSink.add(progress);
+        },
+        deleteOnError: true,
+      );
+      return true;
+    }
   }
+
 
   @override
   Widget build(BuildContext context) {
