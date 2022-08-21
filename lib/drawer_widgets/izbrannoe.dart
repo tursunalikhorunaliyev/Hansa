@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/article_model.dart';
 import 'package:hansa_app/api_models.dart/izbrannoe_model.dart';
 import 'package:hansa_app/blocs/article_bloc.dart';
+import 'package:hansa_app/blocs/favourite_bloc.dart';
 import 'package:hansa_app/blocs/izbrannoe_bloc.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:lottie/lottie.dart';
@@ -18,6 +21,7 @@ class Izbrannoe extends StatefulWidget {
 }
 
 class _IzbrannoeState extends State<Izbrannoe> {
+  double radius = 0;
   @override
   Widget build(BuildContext context) {
     final scafforlKeyProvider = Provider.of<GlobalKey<ScaffoldState>>(context);
@@ -27,6 +31,8 @@ class _IzbrannoeState extends State<Izbrannoe> {
     final menuProvider = Provider.of<MenuEventsBloC>(context);
     final izbrannoeBLoC = IzbrannoeBLoC();
     Future<void>? launched;
+
+    final isFavouriteBLoC = FavouriteBLoC();
     return Center(
       child: Container(
         height: isTablet ? 650 : 470,
@@ -77,7 +83,6 @@ class _IzbrannoeState extends State<Izbrannoe> {
               height: 10,
             ),
             Expanded(
-              //height: 370,
               child: FutureBuilder<IzbrannoeModel>(
                   future: izbrannoeBLoC.getData(token),
                   builder: (context, snapshot) {
@@ -86,158 +91,202 @@ class _IzbrannoeState extends State<Izbrannoe> {
                         child: Column(
                           children: List.generate(
                             snapshot.data!.data.list.length,
-                            (index) => Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 10),
-                              child: Column(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
+                            (index) => Dismissible(
+                              direction: DismissDirection.endToStart,
+                              background:
+                                  Container(color: const Color(0XFFff163e)),
+                              secondaryBackground: Container(
+                                alignment: Alignment.centerRight,
+                                color: const Color(0XFFff163e),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(right: 20),
+                                  child: const Icon(
+                                    Icons.delete_rounded,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              key: UniqueKey(),
+                              confirmDismiss: (direction) async {
+                                if (direction == DismissDirection.endToStart) {
+                                  isFavouriteBLoC.getFavourite(token,
+                                      snapshot.data!.data.list[index].link);
+                                  return true;
+                                } else {
+                                  return false;
+                                }
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 10, right: 10, top: 20),
+                                child: SizedBox(
+                                  child: Column(
                                     children: [
-                                      ClipRRect(
-                                        borderRadius: BorderRadius.circular(5),
-                                        child: SizedBox(
-                                          height: 65,
-                                          width: 120,
-                                          child: CachedNetworkImage(
-                                            fit: BoxFit.cover,
-                                            imageUrl: snapshot.data!.data
-                                                .list[index].pictureLink,
-                                            height: isTablet
-                                                ? 110
-                                                : 66.66666666666667,
-                                            width: isTablet
-                                                ? 150
-                                                : 101.6666666666667,
-                                          ),
-                                        ),
-                                      ),
-                                      const SizedBox(
-                                        width: 11,
-                                      ),
-                                      Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
                                         children: [
-                                          SizedBox(
-                                            width: 140,
-                                            child: Text(
-                                              snapshot
-                                                  .data!.data.list[index].title,
-                                              softWrap: true,
-                                              maxLines: 3,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: GoogleFonts.montserrat(
-                                                  color:
-                                                      const Color(0xFF272624),
-                                                  fontSize: isTablet
-                                                      ? 14
-                                                      : 9.666666666666667,
-                                                  fontWeight: FontWeight.bold),
+                                          ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                            child: SizedBox(
+                                              height: 65,
+                                              width: 120,
+                                              child: CachedNetworkImage(
+                                                fit: BoxFit.cover,
+                                                imageUrl: snapshot.data!.data
+                                                    .list[index].pictureLink,
+                                                height: isTablet
+                                                    ? 110
+                                                    : 66.66666666666667,
+                                                width: isTablet
+                                                    ? 150
+                                                    : 101.6666666666667,
+                                              ),
                                             ),
                                           ),
                                           const SizedBox(
-                                            height: 5,
+                                            width: 11,
                                           ),
-                                          Row(
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
                                               SizedBox(
-                                                width: isTablet ? 140 : 90,
+                                                width: 140,
+                                                child: Text(
+                                                  snapshot.data!.data
+                                                      .list[index].title,
+                                                  softWrap: true,
+                                                  maxLines: 3,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  style: GoogleFonts.montserrat(
+                                                      color: const Color(
+                                                          0xFF272624),
+                                                      fontSize: isTablet
+                                                          ? 14
+                                                          : 9.666666666666667,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
                                               ),
-                                              InkWell(
-                                                onTap: () async {
-                                                  if (snapshot.data!.data
-                                                          .list[index].type ==
-                                                      1) {
-                                                    scafforlKeyProvider
-                                                        .currentState!
-                                                        .closeDrawer();
-                                                    menuProvider.eventSink.add(
-                                                        MenuActions.article);
+                                              const SizedBox(
+                                                height: 5,
+                                              ),
+                                              Row(
+                                                children: [
+                                                  SizedBox(
+                                                    width: isTablet ? 140 : 90,
+                                                  ),
+                                                  InkWell(
+                                                    onTap: () async {
+                                                      if (snapshot
+                                                              .data!
+                                                              .data
+                                                              .list[index]
+                                                              .type ==
+                                                          1) {
+                                                        scafforlKeyProvider
+                                                            .currentState!
+                                                            .closeDrawer();
+                                                        menuProvider.eventSink
+                                                            .add(MenuActions
+                                                                .article);
 
-                                                    ArticleModel statiModel =
-                                                        await articleBLoC
-                                                            .getArticle(
-                                                                token,
-                                                                snapshot
+                                                        ArticleModel
+                                                            statiModel =
+                                                            await articleBLoC
+                                                                .getArticle(
+                                                                    token,
+                                                                    snapshot
+                                                                        .data!
+                                                                        .data
+                                                                        .list[
+                                                                            index]
+                                                                        .link);
+                                                        articleBLoC.sink
+                                                            .add(statiModel);
+                                                      } else {
+                                                        setState(() {
+                                                          launched =
+                                                              launchInBrowser(
+                                                                  Uri.parse(
+                                                                      "http://${snapshot.data!.data.list[index].pdfUrl}"));
+                                                        });
+                                                      }
+                                                    },
+                                                    child: Container(
+                                                      alignment:
+                                                          Alignment.center,
+                                                      height:
+                                                          isTablet ? 22 : 21,
+                                                      width: isTablet ? 74 : 63,
+                                                      decoration: BoxDecoration(
+                                                        border: snapshot
                                                                     .data!
                                                                     .data
                                                                     .list[index]
-                                                                    .link);
-                                                    articleBLoC.sink
-                                                        .add(statiModel);
-                                                  } else {
-                                                    setState(() {
-                                                      launched = launchInBrowser(
-                                                          Uri.parse(
-                                                              "http://${snapshot.data!.data.list[index].pdfUrl}"));
-                                                    });
-                                                  }
-                                                },
-                                                child: Container(
-                                                  alignment: Alignment.center,
-                                                  height: isTablet ? 22 : 21,
-                                                  width: isTablet ? 74 : 63,
-                                                  decoration: BoxDecoration(
-                                                    border: snapshot
-                                                                .data!
-                                                                .data
-                                                                .list[index]
-                                                                .type ==
-                                                            2
-                                                        ? Border.all(
-                                                            width: 2,
-                                                            color: const Color(
-                                                                0xFF313131))
-                                                        : Border.all(
-                                                            color: Colors
-                                                                .transparent),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10.5),
-                                                    color: snapshot
-                                                                .data!
-                                                                .data
-                                                                .list[index]
-                                                                .type ==
-                                                            2
-                                                        ? Colors.white
-                                                        : const Color(0xFF313131),
-                                                  ),
-                                                  child: Text(
-                                                    snapshot
-                                                                .data!
-                                                                .data
-                                                                .list[index]
-                                                                .type ==
-                                                            2
-                                                        ? "Скачать"
-                                                        : "Смотреть",
-                                                    style: GoogleFonts.montserrat(
+                                                                    .type ==
+                                                                2
+                                                            ? Border.all(
+                                                                width: 2,
+                                                                color: const Color(
+                                                                    0xFF313131))
+                                                            : Border.all(
+                                                                color: Colors
+                                                                    .transparent),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10.5),
                                                         color: snapshot
                                                                     .data!
                                                                     .data
                                                                     .list[index]
                                                                     .type ==
-                                                                1
-                                                            ? const Color(
-                                                                0xFFFFFFFF)
-                                                            : const Color(0xFF313131),
-                                                        fontSize: 10),
+                                                                2
+                                                            ? Colors.white
+                                                            : const Color(
+                                                                0xFF313131),
+                                                      ),
+                                                      child: Text(
+                                                        snapshot
+                                                                    .data!
+                                                                    .data
+                                                                    .list[index]
+                                                                    .type ==
+                                                                2
+                                                            ? "Скачать"
+                                                            : "Смотреть",
+                                                        style: GoogleFonts.montserrat(
+                                                            color: snapshot
+                                                                        .data!
+                                                                        .data
+                                                                        .list[
+                                                                            index]
+                                                                        .type ==
+                                                                    1
+                                                                ? const Color(
+                                                                    0xFFFFFFFF)
+                                                                : const Color(
+                                                                    0xFF313131),
+                                                            fontSize: 10),
+                                                      ),
+                                                    ),
                                                   ),
-                                                ),
+                                                ],
                                               ),
                                             ],
-                                          ),
+                                          )
                                         ],
+                                      ),
+                                      const Divider(
+                                        color: Color(0xFF8c8c8b),
+                                        thickness: 1,
                                       )
                                     ],
                                   ),
-                                  const Divider(
-                                    color: Color(0xFF8c8c8b),
-                                    thickness: 1,
-                                  )
-                                ],
+                                ),
                               ),
                             ),
                           ),
