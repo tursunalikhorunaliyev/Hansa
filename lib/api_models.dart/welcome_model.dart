@@ -1,4 +1,3 @@
-
 class WelcomeModel {
   bool status;
   WelcomeData data;
@@ -50,6 +49,11 @@ class WelcomeModelData {
   String pictureLink;
   String favoriteLink;
   String link;
+  setBool(bool fav) {
+    isFavorite = fav;
+  }
+
+  bool get getFavorite => isFavorite;
   WelcomeModelData({
     required this.date,
     required this.title,

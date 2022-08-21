@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:hansa_app/api_models.dart/welcome_model.dart';
 import 'package:hansa_app/api_services/api_urls.dart';
@@ -14,17 +15,21 @@ class WelcomeApi {
   final eventController = StreamController<WelcomeApiAction>.broadcast();
   StreamSink<WelcomeApiAction> get eventSink => eventController.sink;
   Stream<WelcomeApiAction> get eventStream => eventController.stream;
+  List<WelcomeModelData>  list = [];
 
   WelcomeApi(token) {
     int i = 0;
-    List<WelcomeModelData> list = [];
+    
     eventStream.listen(
       (event) async {
         if (event == WelcomeApiAction.fetch) {
           i++;
+
           await getWelcome(token: token, i: i).then((value) {
             list += value.data.welcomeModelListData.list;
+
             dataSink.add(list);
+            
           });
         }
       },

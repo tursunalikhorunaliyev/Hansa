@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:hansa_app/api_services/welcome_api.dart';
 import 'package:hansa_app/blocs/bloc_play_video.dart';
 import 'package:hansa_app/blocs/bloc_video_controll.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
@@ -62,6 +63,9 @@ class _UIChangerState extends State<UIChanger> {
     final provider = Provider.of<MenuEventsBloC>(context);
     final videoControlProvider = Provider.of<BlocVideoControll>(context);
     final playProvider = Provider.of<BlocPlayVideo>(context);
+    final providerToken = Provider.of<String>(context);
+
+    final welcomeApi = WelcomeApi(providerToken);
     return StreamBuilder<bool>(
       initialData: false,
       stream: checkNet().asStream(),
@@ -78,7 +82,9 @@ class _UIChangerState extends State<UIChanger> {
               if (snapshot.data == MenuActions.article) {
                 return const ArticleScreen();
               } else if (snapshot.data == MenuActions.welcome) {
-                return const WelcomeWidget();
+                return Provider<WelcomeApi>(
+                    create: (context) => welcomeApi,
+                    child: const WelcomeWidget());
               } else if (snapshot.data == MenuActions.obuchayushieMaterial) {
                 return const ObucheniyaWidget();
               } else if (snapshot.data == MenuActions.prezintatsiya) {

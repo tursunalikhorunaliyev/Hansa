@@ -3,6 +3,7 @@ import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hansa_app/api_services/country_type_service.dart';
+import 'package:hansa_app/api_services/welcome_api.dart';
 import 'package:hansa_app/blocs/article_bloc.dart';
 import 'package:hansa_app/blocs/bloc_change_profile.dart';
 import 'package:hansa_app/blocs/bloc_change_title.dart';
