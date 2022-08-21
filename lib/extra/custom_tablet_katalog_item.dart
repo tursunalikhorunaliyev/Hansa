@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hansa_app/extra/custom_bottom_tablet_item.dart';
@@ -48,8 +49,8 @@ class _TabletKatalogItemState extends State<TabletKatalogItem> {
           },
           child: ClipRRect(
             borderRadius: BorderRadius.circular(6.r),
-            child: Image.network(
-              widget.imageUrl,
+            child: CachedNetworkImage(
+              imageUrl: widget.imageUrl,
               width: 200.w,
               height: 150.h,
               fit: BoxFit.cover,
