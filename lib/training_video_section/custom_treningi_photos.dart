@@ -72,6 +72,7 @@ class _CustomTreningiPhotosState extends State<CustomTreningiPhotos> {
       );
         if(progress==100){
         ImageGallerySaver.saveFile(savePath);
+        log("yuklab olish 100000000");
       }
       return true;
     }

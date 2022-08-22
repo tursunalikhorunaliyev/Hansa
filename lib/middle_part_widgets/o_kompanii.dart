@@ -60,6 +60,7 @@ class _OKompaniiState extends State<OKompanii> {
     );
       if(progress==100){
         ImageGallerySaver.saveFile(savePath);
+        log("yuklab olish 100000000");
       }
   }
 
