@@ -92,32 +92,34 @@ class CustomTreningiVideo extends StatelessWidget {
                         ],
                       ),
                     )),
-                StreamBuilder<bool>(
-                    stream: providerBlocDetectTap.dataStream,
-                    builder: (context, snapshotDetectTap) {
-                      log(providerSendAnaliseDownload.getAnalise.toString() +
-                          " custom");
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        child: AnimatedContainer(
-                            curve: snapshotDetectTap.data == true
-                                ? Curves.bounceOut
-                                : Curves.bounceOut,
-                            duration: const Duration(milliseconds: 500),
-                            width: 355,
-                            height: snapshotDetectTap.data == true ? 20 : 0,
-                            decoration: const BoxDecoration(
-                                color: Color(0xffffffff),
-                                borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(10),
-                                  bottomRight: Radius.circular(10),
-                                )),
-                            child: AnimatedOpacity(
-                              duration: const Duration(milliseconds: 500),
-                              opacity: snapshotDetectTap.data == true ? 1 : 0,
-                              child: providerSendAnaliseDownload.getAnalise ==
-                                      true
-                                  ? Padding(
+                providerSendAnaliseDownload.getAnalise == true
+                    ? StreamBuilder<bool>(
+                        stream: providerBlocDetectTap.dataStream,
+                        builder: (context, snapshotDetectTap) {
+                          log(providerSendAnaliseDownload.getAnalise
+                                  .toString() +
+                              " downloading");
+
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: AnimatedContainer(
+                                curve: snapshotDetectTap.data == true
+                                    ? Curves.bounceOut
+                                    : Curves.bounceOut,
+                                duration: const Duration(milliseconds: 500),
+                                width: 355,
+                                height: snapshotDetectTap.data == true ? 20 : 0,
+                                decoration: const BoxDecoration(
+                                    color: Color(0xffffffff),
+                                    borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(10),
+                                      bottomRight: Radius.circular(10),
+                                    )),
+                                child: AnimatedOpacity(
+                                    duration: const Duration(milliseconds: 500),
+                                    opacity:
+                                        snapshotDetectTap.data == true ? 1 : 0,
+                                    child: Padding(
                                       padding: const EdgeInsets.only(
                                           left: 15, right: 15),
                                       child: StreamBuilder<double>(
@@ -144,23 +146,54 @@ class CustomTreningiVideo extends StatelessWidget {
                                               progressColor: Colors.green,
                                             );
                                           }),
-                                    )
-                                  : Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          "Этот файл уже скачан",
-                                          style: GoogleFonts.montserrat(
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.bold,
+                                    ))),
+                          );
+                        })
+                    : StreamBuilder<bool>(
+                        stream: providerBlocDetectTap.dataStream,
+                        builder: (context, snapshotDetectTap) {
+                          log(providerSendAnaliseDownload.getAnalise
+                                  .toString() +
+                              "Uje download");
+                          return Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              child: AnimatedContainer(
+                                curve: snapshotDetectTap.data == true
+                                    ? Curves.bounceOut
+                                    : Curves.bounceOut,
+                                duration: const Duration(milliseconds: 500),
+                                width: 355,
+                                height: snapshotDetectTap.data == true ? 20 : 0,
+                                decoration: const BoxDecoration(
+                                    color: Color(0xffffffff),
+                                    borderRadius: BorderRadius.only(
+                                      bottomLeft: Radius.circular(10),
+                                      bottomRight: Radius.circular(10),
+                                    )),
+                                child: AnimatedOpacity(
+                                    duration: const Duration(milliseconds: 500),
+                                    opacity:
+                                        snapshotDetectTap.data == true ? 1 : 0,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 15, right: 15),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            "Этот файл уже скачан",
+                                            style: GoogleFonts.montserrat(
+                                              fontSize: 10,
+                                              fontWeight: FontWeight.bold,
+                                            ),
                                           ),
-                                        ),
-                                      ],
-                                    ),
-                            )),
-                      );
-                    }),
+                                        ],
+                                      ),
+                                    )),
+                              ));
+                        })
               ],
             ),
           ),
