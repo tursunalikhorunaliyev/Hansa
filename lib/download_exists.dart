@@ -1,12 +1,10 @@
 import 'dart:async';
 import 'dart:developer';
 import 'dart:io';
+import 'dart:html' as html;
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:hansa_app/blocs/download_progress_bloc.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:path_provider/path_provider.dart';
 
