@@ -125,20 +125,16 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
           progress =
               double.parse(((recieved / total) * 100).toStringAsFixed(0));
           downloadProgressFileBloc.streamSink.add(progress);
-            if(progress == 100){
+          if (progress == 100) {
             log("tugadi");
             ImageGallerySaver.saveFile(savePath);
-          }
-          else{
+          } else {
             log("hali tugamadi");
           }
         },
         deleteOnError: true,
       );
-      if(progress==100){
-        ImageGallerySaver.saveFile(savePath);
-        log("yuklab olish 100000000");
-      }
+
       return true;
     }
   }
@@ -290,13 +286,11 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
                                                 .title,
                                             providerBlocProgress,
                                           ).then((value) {
-                                         
-                                              log("Not download");
-                                              providerSendAnaliseDownload
-                                                  .setAnalise(value);
-                                                  log(value.toString() + " video widget value");
-                                            
-                                            
+                                            log("Not download");
+                                            providerSendAnaliseDownload
+                                                .setAnalise(value);
+                                            log(value.toString() +
+                                                " video widget value");
                                           });
                                         } else {
                                           log("asdffffffffffff=----------------------------------------");

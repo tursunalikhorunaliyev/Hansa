@@ -88,20 +88,16 @@ class _TreningiVideoState extends State<TreningiVideo> {
               double.parse(((recieved / total) * 100).toStringAsFixed(0));
           downloadProgressFileBloc.streamSink.add(progress);
             if(progress == 100){
-            log("tugadi");
-            ImageGallerySaver.saveFile(savePath);
+            log("Download success");
           }
           else{
-            log("hali tugamadi");
+            log(progress.toString() + " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
           }
         },
         deleteOnError: true,
         
       );
-        if(progress==100){
-        ImageGallerySaver.saveFile(savePath);
-        log("yuklab olish 100000000");
-      }
+       
       return true;
     }
   }

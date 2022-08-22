@@ -60,20 +60,15 @@ class _CustomTreningiPhotosState extends State<CustomTreningiPhotos> {
           progress =
               double.parse(((recieved / total) * 100).toStringAsFixed(0));
           downloadProgressFileBloc.streamSink.add(progress);
-            if(progress == 100) {
-            log("tugadi");
-             ImageGallerySaver.saveFile(savePath);
-          }
-          else{
-            log("hali tugamadi");
+          if (progress == 100) {
+            log("Download picture complate");
+          } else {
+            log(progress.toString() + " %%%%%%%%%%%%%%%%%%");
           }
         },
         deleteOnError: true,
       );
-        if(progress==100){
-        ImageGallerySaver.saveFile(savePath);
-        log("yuklab olish 100000000");
-      }
+
       return true;
     }
   }
@@ -87,7 +82,8 @@ class _CustomTreningiPhotosState extends State<CustomTreningiPhotos> {
     final page = PageController(initialPage: 0);
     final token = Provider.of<String>(context);
     final treningiPhotos = Provider.of<TreningiPhotosProvider>(context);
-    final providerSendAnaliseDonwload = Provider.of<SendAnaliseDownload>(context);
+    final providerSendAnaliseDonwload =
+        Provider.of<SendAnaliseDownload>(context);
     return Padding(
       padding: const EdgeInsets.only(bottom: 11),
       child: SizedBox(
@@ -244,25 +240,29 @@ class _CustomTreningiPhotosState extends State<CustomTreningiPhotos> {
                                         if (snapshotProgress.data == null ||
                                             snapshotProgress.data == 0) {
                                           downloadFile(
-                                              snapshot
-                                                  .data!
-                                                  .data
-                                                  .data
-                                                  .list[sendIndexTreningPhoto
-                                                      .getIndex]
-                                                  .pictureLink,
-                                              snapshot
-                                                  .data!
-                                                  .data
-                                                  .data
-                                                  .list[sendIndexTreningPhoto
-                                                      .getIndex]
-                                                  .title,
-                                              sendIndexTreningPhoto.getIndex
-                                                  .toString(),
-                                              blocProgress).then((value) {
-                                              providerSendAnaliseDonwload.setAnalise(value);
-                                              });
+                                                  snapshot
+                                                      .data!
+                                                      .data
+                                                      .data
+                                                      .list[
+                                                          sendIndexTreningPhoto
+                                                              .getIndex]
+                                                      .pictureLink,
+                                                  snapshot
+                                                      .data!
+                                                      .data
+                                                      .data
+                                                      .list[
+                                                          sendIndexTreningPhoto
+                                                              .getIndex]
+                                                      .title,
+                                                  sendIndexTreningPhoto.getIndex
+                                                      .toString(),
+                                                  blocProgress)
+                                              .then((value) {
+                                            providerSendAnaliseDonwload
+                                                .setAnalise(value);
+                                          });
                                         } else {}
                                       },
                                       child: ClipRRect(
@@ -293,6 +293,7 @@ class _CustomTreningiPhotosState extends State<CustomTreningiPhotos> {
                     StreamBuilder<bool>(
                         stream: blocDetectTap.dataStream,
                         builder: (context, snapshotDetectTap) {
+                          log( providerSendAnaliseDonwload.getAnalise.toString() + " BIZ KUTGAN JOY");
                           return Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 10),
                             child: AnimatedContainer(
@@ -312,40 +313,38 @@ class _CustomTreningiPhotosState extends State<CustomTreningiPhotos> {
                                   duration: const Duration(milliseconds: 500),
                                   opacity:
                                       snapshotDetectTap.data == true ? 1 : 0,
-                                  child: providerSendAnaliseDonwload.getAnalise ? Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 15, right: 15),
-                                    child: StreamBuilder<double>(
-                                        initialData: 0,
-                                        stream: blocProgress.stream,
-                                        builder: (context, snapshotDouble) {
-                                          if (snapshotDouble.data == 100) {
-                                            blocProgress.streamSink.add(0);
-                                            blocDetectTap.dataSink.add(false);
-                                          }
-                                          return LinearPercentIndicator(
-                                            alignment: MainAxisAlignment.center,
-                                            padding: const EdgeInsets.all(0),
-                                            barRadius: const Radius.circular(5),
-                                            lineHeight: 6,
-                                            percent: snapshotDouble.data! / 100,
-                                            backgroundColor: Colors.transparent,
-                                            progressColor: Colors.green,
-                                          );
-                                        }),
-                                  ) : Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          "Этот файл уже скачан",
-                                          style: GoogleFonts.montserrat(
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.bold,
-                                          ),
+                                  child: providerSendAnaliseDonwload.getAnalise == true
+                                      ? Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 15, right: 15),
+                                          child: StreamBuilder<double>(
+                                              initialData: 0,
+                                              stream: blocProgress.stream,
+                                              builder:
+                                                  (context, snapshotDouble) {
+                                                if (snapshotDouble.data ==
+                                                    100) {
+                                                  blocProgress.streamSink
+                                                      .add(0);
+                                                  blocDetectTap.dataSink
+                                                      .add(false);
+                                                }
+                                                return const Text("GGGGGGGGGGGGGGGGGG");
+                                              }),
+                                        )
+                                      : Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              "Этот файл уже скачан",
+                                              style: GoogleFonts.montserrat(
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      ],
-                                    ),
                                 )),
                           );
                         }),

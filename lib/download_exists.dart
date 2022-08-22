@@ -57,13 +57,10 @@ class _ExistsCheckState extends State<ExistsCheck> {
           progress =
               double.parse(((recieved / total) * 100).toStringAsFixed(0));
           downloadProgressFileBloc.sink.add(progress);
-       
         },
         deleteOnError: true,
       );
-      if(progress==100){
-        ImageGallerySaver.saveFile(savePath);
-      }
+
       return true;
     }
   }
@@ -89,11 +86,10 @@ class _ExistsCheckState extends State<ExistsCheck> {
           TextButton(
               onPressed: () {
                 downloadFile(
-                    "https://hansa-lab.ru/storage/upload/videos/ZnaJMRQsLcXP.mp4",
-                    "video",
-                    bloc).then((value) {
-                      
-                    });
+                        "https://hansa-lab.ru/storage/upload/videos/ZnaJMRQsLcXP.mp4",
+                        "video",
+                        bloc)
+                    .then((value) {});
               },
               child: const Text("Download"))
         ],

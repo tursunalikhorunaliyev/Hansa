@@ -58,10 +58,7 @@ class _OKompaniiState extends State<OKompanii> {
       deleteOnError: true,
       
     );
-      if(progress==100){
-        ImageGallerySaver.saveFile(savePath);
-        log("yuklab olish 100000000");
-      }
+   
   }
 
   Future<String> getFilePath(uniqueFileName) async {
