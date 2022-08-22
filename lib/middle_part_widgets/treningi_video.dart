@@ -409,7 +409,7 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                                                             percent:
                                                                                 snapshotDouble.data! / 100,
                                                                             backgroundColor:
-                                                                                Colors.transparent,
+                                                                                Colors.grey[400],
                                                                             progressColor:
                                                                                 Colors.green,
                                                                           );

@@ -92,8 +92,7 @@ class CustomTreningiVideo extends StatelessWidget {
                         ],
                       ),
                     )),
-                providerSendAnaliseDownload.getAnalise == true
-                    ? StreamBuilder<bool>(
+              StreamBuilder<bool>(
                         stream: providerBlocDetectTap.dataStream,
                         builder: (context, snapshotDetectTap) {
                           log(providerSendAnaliseDownload.getAnalise
@@ -119,7 +118,7 @@ class CustomTreningiVideo extends StatelessWidget {
                                     duration: const Duration(milliseconds: 500),
                                     opacity:
                                         snapshotDetectTap.data == true ? 1 : 0,
-                                    child: Padding(
+                                    child: providerSendAnaliseDownload.getAnalise == true ? Padding(
                                       padding: const EdgeInsets.only(
                                           left: 15, right: 15),
                                       child: StreamBuilder<double>(
@@ -146,39 +145,7 @@ class CustomTreningiVideo extends StatelessWidget {
                                               progressColor: Colors.green,
                                             );
                                           }),
-                                    ))),
-                          );
-                        })
-                    : StreamBuilder<bool>(
-                        stream: providerBlocDetectTap.dataStream,
-                        builder: (context, snapshotDetectTap) {
-                          log(providerSendAnaliseDownload.getAnalise
-                                  .toString() +
-                              "Uje download");
-                          return Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              child: AnimatedContainer(
-                                curve: snapshotDetectTap.data == true
-                                    ? Curves.bounceOut
-                                    : Curves.bounceOut,
-                                duration: const Duration(milliseconds: 500),
-                                width: 355,
-                                height: snapshotDetectTap.data == true ? 20 : 0,
-                                decoration: const BoxDecoration(
-                                    color: Color(0xffffffff),
-                                    borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(10),
-                                      bottomRight: Radius.circular(10),
-                                    )),
-                                child: AnimatedOpacity(
-                                    duration: const Duration(milliseconds: 500),
-                                    opacity:
-                                        snapshotDetectTap.data == true ? 1 : 0,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(
-                                          left: 15, right: 15),
-                                      child: Row(
+                                    ) : Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
@@ -190,10 +157,10 @@ class CustomTreningiVideo extends StatelessWidget {
                                             ),
                                           ),
                                         ],
-                                      ),
-                                    )),
-                              ));
+                                      ),)),
+                          );
                         })
+               
               ],
             ),
           ),

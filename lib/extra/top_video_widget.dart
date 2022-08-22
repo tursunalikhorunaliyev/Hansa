@@ -126,10 +126,9 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
               double.parse(((recieved / total) * 100).toStringAsFixed(0));
           downloadProgressFileBloc.streamSink.add(progress);
           if (progress == 100) {
-            log("tugadi");
-            ImageGallerySaver.saveFile(savePath);
+            log("Download complate");
           } else {
-            log("hali tugamadi");
+            log(progress.toString() + " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
           }
         },
         deleteOnError: true,
@@ -289,6 +288,7 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
                                             log("Not download");
                                             providerSendAnaliseDownload
                                                 .setAnalise(value);
+
                                             log(value.toString() +
                                                 " video widget value");
                                           });

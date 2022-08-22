@@ -6,6 +6,7 @@ import 'package:hansa_app/api_services/country_type_service.dart';
 import 'package:hansa_app/blocs/article_bloc.dart';
 import 'package:hansa_app/blocs/bloc_change_profile.dart';
 import 'package:hansa_app/blocs/bloc_change_title.dart';
+import 'package:hansa_app/blocs/bloc_detect_tap.dart';
 import 'package:hansa_app/blocs/bloc_flip_login.dart';
 import 'package:hansa_app/blocs/bloc_play_video.dart';
 import 'package:hansa_app/blocs/bloc_video_controll.dart';
@@ -56,6 +57,7 @@ class MyApp extends StatelessWidget {
     final tapFavorite = TapFavorite();
     final sendDataPersonalUpdate = SendDataPersonalUpdate();
     final sendAnaliseDownload = SendAnaliseDownload();
+    final blocDetectTap = BlocDetectTap();
 
     Size size = WidgetsBinding.instance.window.physicalSize;
     bool isTablet = (size.width / 3) > 500;
@@ -108,6 +110,8 @@ class MyApp extends StatelessWidget {
               create: (context) => sendDataPersonalUpdate),
           ChangeNotifierProvider<SendAnaliseDownload>(
               create: (context) => sendAnaliseDownload),
+          Provider<BlocDetectTap>(
+              create: (context) => blocDetectTap),
         ],
         child: const MaterialApp(
           localizationsDelegates: [
