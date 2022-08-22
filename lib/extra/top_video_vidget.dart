@@ -13,6 +13,7 @@ import 'package:hansa_app/providers/providers_for_video_title/video_index_provid
 import 'package:hansa_app/training_section/custom_treningi_video.dart';
 import 'package:hansa_app/video/bloc_video_api.dart';
 import 'package:hansa_app/video/model_video.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
@@ -112,9 +113,20 @@ class _TopVideoVidgetState extends State<TopVideoVidget> {
           progress =
               double.parse(((recieved / total) * 100).toStringAsFixed(0));
           downloadProgressFileBloc.streamSink.add(progress);
+        
+          if(progress == 100){
+            log("tugadi");
+            
+          }
+          else{
+            log("hali tugamadi");
+          }
         },
         deleteOnError: true,
       );
+      if(progress == 100){
+        ImageGallerySaver.saveFile(savePath);
+      }
       return true;
     }
   }

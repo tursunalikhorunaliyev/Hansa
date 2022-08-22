@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
@@ -12,6 +13,7 @@ import 'package:hansa_app/providers/providers_for_video_title/video_index_provid
 import 'package:hansa_app/providers/providers_for_video_title/video_title_provider.dart';
 import 'package:hansa_app/video/bloc_video_api.dart';
 import 'package:hansa_app/video/model_video.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:lottie/lottie.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -45,9 +47,20 @@ class _OKompaniiState extends State<OKompanii> {
       onReceiveProgress: (recieved, total) {
         progress = double.parse(((recieved / total) * 100).toStringAsFixed(0));
         blocDownload.streamSink.add(progress);
+          if(progress == 100){
+            log("tugadi");
+            ImageGallerySaver.saveFile(savePath);
+          }
+          else{
+            log("hali tugamadi");
+          }
       },
       deleteOnError: true,
+      
     );
+      if(progress==100){
+        ImageGallerySaver.saveFile(savePath);
+      }
   }
 
   Future<String> getFilePath(uniqueFileName) async {

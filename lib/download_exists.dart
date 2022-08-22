@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:hansa_app/blocs/download_progress_bloc.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:path_provider/path_provider.dart';
 
 class ExistsCheck extends StatefulWidget {
@@ -59,9 +60,13 @@ class _ExistsCheckState extends State<ExistsCheck> {
           progress =
               double.parse(((recieved / total) * 100).toStringAsFixed(0));
           downloadProgressFileBloc.sink.add(progress);
+       
         },
         deleteOnError: true,
       );
+      if(progress==100){
+        ImageGallerySaver.saveFile(savePath);
+      }
       return true;
     }
   }

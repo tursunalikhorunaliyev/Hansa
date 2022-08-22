@@ -12,6 +12,7 @@ import 'package:hansa_app/blocs/download_progress_bloc.dart';
 import 'package:hansa_app/classes/send__index_trening_photo.dart';
 import 'package:hansa_app/classes/send_analise_download.dart';
 import 'package:hansa_app/providers/treningi_photos_provider.dart';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:provider/provider.dart';
@@ -59,9 +60,19 @@ class _CustomTreningiPhotosState extends State<CustomTreningiPhotos> {
           progress =
               double.parse(((recieved / total) * 100).toStringAsFixed(0));
           downloadProgressFileBloc.streamSink.add(progress);
+            if(progress == 100) {
+            log("tugadi");
+             ImageGallerySaver.saveFile(savePath);
+          }
+          else{
+            log("hali tugamadi");
+          }
         },
         deleteOnError: true,
       );
+        if(progress==100){
+        ImageGallerySaver.saveFile(savePath);
+      }
       return true;
     }
   }
