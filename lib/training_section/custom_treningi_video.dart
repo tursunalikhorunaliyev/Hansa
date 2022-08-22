@@ -142,7 +142,7 @@ class CustomTreningiVideo extends StatelessWidget {
                                               percent:
                                                   snapshotDouble.data! / 100,
                                               backgroundColor:
-                                                  Colors.transparent,
+                                                  Colors.grey[400],
                                               progressColor: Colors.green,
                                             );
                                           }),
