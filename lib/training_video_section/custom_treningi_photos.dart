@@ -349,7 +349,7 @@ class _CustomTreningiPhotosState extends State<CustomTreningiPhotos> {
                                                         snapshotDouble.data! /
                                                             100,
                                                     backgroundColor:
-                                                        Colors.grey[400],
+                                                        Colors.grey[200],
                                                     progressColor: Colors.green,
                                                   );
                                                 }),
