@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:hansa_app/download_exists.dart';
 import 'package:hansa_app/screens/splash_screen.dart';
@@ -17,6 +19,9 @@ class _PermissionHandlerScreenState extends State<PermissionHandlerScreen> {
       if (value) {
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => const SplashScreen()));
+      }
+      else{
+        exit(0);
       }
     });
     super.initState();
