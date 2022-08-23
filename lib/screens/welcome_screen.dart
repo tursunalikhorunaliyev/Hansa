@@ -29,13 +29,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
 
     return WillPopScope(
       onWillPop: () async {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return const ExitDialog();
-          },
-        );
-
+        backPressed(menuProvider);
         return false;
       },
       child: Scaffold(
@@ -59,12 +53,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     children: [
                       InkWell(
                         onTap: () {
-                          if (menuProvider.list.length > 1) {
-                            menuProvider.eventSink.add(menuProvider.list
-                                .elementAt(menuProvider.list.length - 2));
-                            menuProvider.list.remove(menuProvider.list
-                                .elementAt(menuProvider.list.length - 1));
-                          }
+                          backPressed(menuProvider);
                         },
                         child: Icon(
                           CupertinoIcons.chevron_left_circle,
@@ -158,5 +147,21 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         ),
       ),
     );
+  }
+
+  backPressed(MenuEventsBloC menuProvider) {
+    if (menuProvider.list.length > 1) {
+      menuProvider.eventSink
+          .add(menuProvider.list.elementAt(menuProvider.list.length - 2));
+      menuProvider.list
+          .remove(menuProvider.list.elementAt(menuProvider.list.length - 1));
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return const ExitDialog();
+        },
+      );
+    }
   }
 }
