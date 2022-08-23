@@ -27,12 +27,10 @@ class CustomTreningiPhotos extends StatefulWidget {
 
 class _CustomTreningiPhotosState extends State<CustomTreningiPhotos> {
   bool downloading = false;
-
   double progress = 0;
-
   bool isDownloaded = false;
 
-  Future<String> getFilePath(uniqueFileName, fileName) async {
+  Future<String> getFilePath(uniqueFileName, String index) async {
     String path = "";
     String dir = "";
     if (Platform.isIOS) {
@@ -41,15 +39,16 @@ class _CustomTreningiPhotosState extends State<CustomTreningiPhotos> {
     } else if (Platform.isAndroid) {
       dir = "/storage/emulated/0/Download/";
     }
-    path = "$dir/$uniqueFileName$fileName.jpg";
+    path = "$dir/$uniqueFileName$index.jpg";
     return path;
   }
 
-  Future<bool> downloadFile(String url, String fileName, String fileNameAdd,
-       downloadProgressFileBloc) async {
-    // progress = 0;
+  Future<bool> downloadFile(String url, String fileName,
+      DownloadProgressFileBloc downloadProgressFileBloc, String index) async {
+    progress = 0;
 
-    String savePath = await getFilePath(fileName, fileNameAdd);
+    String savePath = await getFilePath(fileName, index);
+
     if (await File(savePath).exists()) {
       return false;
     } else {
@@ -61,11 +60,10 @@ class _CustomTreningiPhotosState extends State<CustomTreningiPhotos> {
           progress =
               double.parse(((recieved / total) * 100).toStringAsFixed(0));
           downloadProgressFileBloc.streamSink.add(progress);
-          
           if (progress == 100) {
-            log("Download picture complate");
+            log("Download success");
           } else {
-            log(progress.toString() + " %%%%%%%%%%%%%%%%%%");
+            log(progress.toString() + " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
           }
         },
         deleteOnError: true,
@@ -76,11 +74,11 @@ class _CustomTreningiPhotosState extends State<CustomTreningiPhotos> {
   }
 
   final sendIndexTreningPhoto = SendIndexTreningPhoto();
+  final blocProgress = DownloadProgressFileBloc();
+  final blocDetectTap = BlocDetectTap();
 
   @override
   Widget build(BuildContext context) {
-    final blocProgress = DownloadProgressFileBloc();
-    final blocDetectTap = BlocDetectTap();
     final page = PageController(initialPage: 0);
     final token = Provider.of<String>(context);
     final treningiPhotos = Provider.of<TreningiPhotosProvider>(context);
@@ -245,26 +243,24 @@ class _CustomTreningiPhotosState extends State<CustomTreningiPhotos> {
                                         if (snapshotProgress.data == null ||
                                             snapshotProgress.data == 0) {
                                           downloadFile(
-                                                  snapshot
-                                                      .data!
-                                                      .data
-                                                      .data
-                                                      .list[
-                                                          sendIndexTreningPhoto
-                                                              .getIndex]
-                                                      .pictureLink,
-                                                  snapshot
-                                                      .data!
-                                                      .data
-                                                      .data
-                                                      .list[
-                                                          sendIndexTreningPhoto
-                                                              .getIndex]
-                                                      .title,
-                                                  sendIndexTreningPhoto.getIndex
-                                                      .toString(),
-                                                  blocProgress)
-                                              .then((value) {
+                                            snapshot
+                                                .data!
+                                                .data
+                                                .data
+                                                .list[sendIndexTreningPhoto
+                                                    .getIndex]
+                                                .pictureLink,
+                                            snapshot
+                                                .data!
+                                                .data
+                                                .data
+                                                .list[sendIndexTreningPhoto
+                                                    .getIndex]
+                                                .title,
+                                            blocProgress,
+                                            sendIndexTreningPhoto.getIndex
+                                                .toString(),
+                                          ).then((value) {
                                             providerSendAnaliseDonwload
                                                 .setAnalise(value);
                                           });
@@ -298,18 +294,15 @@ class _CustomTreningiPhotosState extends State<CustomTreningiPhotos> {
                     StreamBuilder<bool>(
                         stream: blocDetectTap.dataStream,
                         builder: (context, snapshotDetectTap) {
-                          log("SO'ZLAAAAAAA");
-                          log(snapshotDetectTap.data.toString() + " ON TAP");
-
                           return Padding(
                               padding:
-                                  const EdgeInsets.symmetric(horizontal: 23),
+                                  const EdgeInsets.symmetric(horizontal: 10),
                               child: AnimatedContainer(
                                   curve: snapshotDetectTap.data == true
                                       ? Curves.bounceOut
                                       : Curves.bounceOut,
                                   duration: const Duration(milliseconds: 500),
-                                  width: 355,
+                                  width: 290,
                                   height:
                                       snapshotDetectTap.data == true ? 18 : 0,
                                   decoration: const BoxDecoration(
@@ -329,18 +322,19 @@ class _CustomTreningiPhotosState extends State<CustomTreningiPhotos> {
                                             padding: const EdgeInsets.only(
                                                 left: 15, right: 15),
                                             child: StreamBuilder<double>(
-                                               
+                                                initialData: 0,
                                                 stream: blocProgress.stream,
                                                 builder:
                                                     (context, snapshotDouble) {
-                                                      log(snapshotDouble.data.toString() + " DIYORBEK");
+                                                  log(snapshotDouble.data!
+                                                          .toString() +
+                                                      " SALOM");
                                                   if (snapshotDouble.data ==
                                                       100) {
                                                     blocProgress.streamSink
                                                         .add(0);
                                                     blocDetectTap.dataSink
                                                         .add(false);
-                                                    log("Tushyaptimi");
                                                   }
                                                   return LinearPercentIndicator(
                                                     alignment: MainAxisAlignment
@@ -375,7 +369,6 @@ class _CustomTreningiPhotosState extends State<CustomTreningiPhotos> {
                                           ),
                                   )));
                         }),
-                    /////////////////////////////////////////////////////////////////////////
                   ],
                 );
               } else {

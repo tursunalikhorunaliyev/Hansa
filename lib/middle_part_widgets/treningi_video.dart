@@ -318,7 +318,6 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                                 ),
                                               ),
                                             ),
-                                            ////////
                                             StreamBuilder<bool>(
                                                 stream:
                                                     blocDetectTap.dataStream,
