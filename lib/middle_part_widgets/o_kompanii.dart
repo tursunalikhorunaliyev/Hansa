@@ -49,7 +49,6 @@ class _OKompaniiState extends State<OKompanii> {
         blocDownload.streamSink.add(progress);
           if(progress == 100){
             log("tugadi");
-            ImageGallerySaver.saveFile(savePath);
           }
           else{
             log("hali tugamadi");
@@ -58,9 +57,7 @@ class _OKompaniiState extends State<OKompanii> {
       deleteOnError: true,
       
     );
-      if(progress==100){
-        ImageGallerySaver.saveFile(savePath);
-      }
+   
   }
 
   Future<String> getFilePath(uniqueFileName) async {

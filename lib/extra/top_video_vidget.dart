@@ -119,13 +119,14 @@ class _TopVideoVidgetState extends State<TopVideoVidget> {
             
           }
           else{
-            log("hali tugamadi");
+            log(progress.toString() + " download progress");
           }
         },
         deleteOnError: true,
       );
       if(progress == 100){
-        ImageGallerySaver.saveFile(savePath);
+      
+        log("yuklab olish 100000000");
       }
       return true;
     }
@@ -234,6 +235,7 @@ class _TopVideoVidgetState extends State<TopVideoVidget> {
                                                         .title,
                                                     providerBlocProgress,
                                                   ).then((value) {
+                                                    log(value.toString() + " download status");
                                                     providerSendAnaliseDownload.setAnalise(value);
                                                   });
                                                 } else {

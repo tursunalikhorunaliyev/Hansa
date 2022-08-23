@@ -4,9 +4,6 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:hansa_app/blocs/download_progress_bloc.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:path_provider/path_provider.dart';
 
@@ -60,13 +57,10 @@ class _ExistsCheckState extends State<ExistsCheck> {
           progress =
               double.parse(((recieved / total) * 100).toStringAsFixed(0));
           downloadProgressFileBloc.sink.add(progress);
-       
         },
         deleteOnError: true,
       );
-      if(progress==100){
-        ImageGallerySaver.saveFile(savePath);
-      }
+
       return true;
     }
   }
@@ -92,11 +86,10 @@ class _ExistsCheckState extends State<ExistsCheck> {
           TextButton(
               onPressed: () {
                 downloadFile(
-                    "https://hansa-lab.ru/storage/upload/videos/ZnaJMRQsLcXP.mp4",
-                    "video",
-                    bloc).then((value) {
-                      
-                    });
+                        "https://hansa-lab.ru/storage/upload/videos/ZnaJMRQsLcXP.mp4",
+                        "video",
+                        bloc)
+                    .then((value) {});
               },
               child: const Text("Download"))
         ],
