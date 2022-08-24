@@ -10,6 +10,7 @@ import 'package:hansa_app/extra/glavniy_menyu.dart';
 import 'package:hansa_app/extra/hamburger.dart';
 import 'package:hansa_app/extra/ui_changer.dart';
 import 'package:hansa_app/providers/provider_personal_textFields.dart';
+import 'package:hansa_app/screens/search_screen.dart';
 import 'package:provider/provider.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -130,9 +131,18 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                             width: isTablet ? 230.w : 214.w,
                           ),
                         ),
-                        Icon(
-                          CupertinoIcons.search,
-                          size: isTablet ? 19.sp : 21.sp,
+                        InkWell(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => const SearchScreen(),
+                              ),
+                            );
+                          },
+                          child: Icon(
+                            CupertinoIcons.search,
+                            size: isTablet ? 19.sp : 21.sp,
+                          ),
                         ),
                       ],
                     ),
