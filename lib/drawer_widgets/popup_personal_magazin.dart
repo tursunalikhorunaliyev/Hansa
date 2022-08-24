@@ -71,57 +71,6 @@ class _PopupPersonalMagazinState extends State<PopupPersonalMagazin> {
                         ],
                       ),
                     ),
-                    Visibility(
-                      visible: snapshot.data! == 36 ? false : true,
-                      child: SizedBox(
-                        height: 45,
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 10, bottom: 10),
-                          child: TextField(
-                            controller: textEditingController,
-                            style: const TextStyle(
-                                color: Colors.white, fontSize: 10),
-                            decoration: InputDecoration(
-                              suffixIcon: GestureDetector(
-                                onTap: () {
-                                  if (textEditingController.text.isNotEmpty) {
-                                    widget.controller.text =
-                                        textEditingController.text;
-                                    blocPopupDrawer.dataSink.add(36);
-                                    radius = radius == 54 ? 10 : 54;
-                                    providerSendDataPersonalUpdate.setTap(true);
-                                    textEditingController.clear();
-                                  }
-                                },
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  height: 20,
-                                  width: 20,
-                                  decoration: const BoxDecoration(
-                                      color: Color(0xFF25b049),
-                                      borderRadius: BorderRadius.only(
-                                          bottomRight: Radius.circular(4),
-                                          topRight: Radius.circular(4))),
-                                  child: const Text(
-                                    "Добавлять",
-                                    style: TextStyle(
-                                        fontSize: 8, color: Colors.white),
-                                  ),
-                                ),
-                              ),
-                              hintText: "Новый",
-                              contentPadding: const EdgeInsets.all(6),
-                              hintStyle: const TextStyle(
-                                  fontSize: 10, color: Colors.white),
-                              focusedBorder: const OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white)),
-                              enabledBorder: const OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white)),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
                     StreamBuilder<ModelMagazinMain>(
                         stream: blocMagazin.dataStream,
                         builder: (context, snapshot) {
