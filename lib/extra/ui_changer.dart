@@ -81,6 +81,8 @@ class _UIChangerState extends State<UIChanger> {
               }
               if (snapshot.data == MenuActions.article) {
                 return const ArticleScreen();
+              } else if (snapshot.data == MenuActions.articleTab) {
+                return const ArticleScreenTab();
               } else if (snapshot.data == MenuActions.welcome) {
                 return Provider<WelcomeApi>(
                     create: (context) => welcomeApi,

@@ -14,6 +14,7 @@ enum MenuActions {
   trainingVideo,
   oKompanii,
   article,
+  articleTab,
   prezentFav
 }
 
