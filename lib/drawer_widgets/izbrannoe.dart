@@ -153,7 +153,7 @@ class _IzbrannoeState extends State<Izbrannoe> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               SizedBox(
-                                                width: 140,
+                                                width: 240,
                                                 child: Text(
                                                   snapshot.data!.data
                                                       .list[index].title,
@@ -177,7 +177,7 @@ class _IzbrannoeState extends State<Izbrannoe> {
                                               Row(
                                                 children: [
                                                   SizedBox(
-                                                    width: isTablet ? 140 : 90,
+                                                    width: isTablet ? 240 : 90,
                                                   ),
                                                   InkWell(
                                                     onTap: () async {
