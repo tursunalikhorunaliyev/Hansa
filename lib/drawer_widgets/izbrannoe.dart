@@ -110,7 +110,7 @@ class _IzbrannoeState extends State<Izbrannoe> {
                               confirmDismiss: (direction) async {
                                 if (direction == DismissDirection.endToStart) {
                                   isFavouriteBLoC.getFavourite(token,
-                                      snapshot.data!.data.list[index].link);
+                                      snapshot.data!.data.list[index].unlink);
                                   return true;
                                 } else {
                                   return false;
