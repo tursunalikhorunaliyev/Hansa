@@ -190,9 +190,15 @@ class _IzbrannoeState extends State<Izbrannoe> {
                                                         scafforlKeyProvider
                                                             .currentState!
                                                             .closeDrawer();
-                                                        menuProvider.eventSink
-                                                            .add(MenuActions
-                                                                .article);
+                                                        isTablet
+                                                            ? menuProvider
+                                                                .eventSink
+                                                                .add(MenuActions
+                                                                    .articleTab)
+                                                            : menuProvider
+                                                                .eventSink
+                                                                .add(MenuActions
+                                                                    .article);
 
                                                         ArticleModel
                                                             statiModel =
