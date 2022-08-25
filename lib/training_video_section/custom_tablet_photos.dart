@@ -99,21 +99,18 @@ class _TabletPhotosItemState extends State<TabletPhotosItem> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: Center(
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: ConstrainedBox(
-                                constraints: const BoxConstraints(
-                                    maxHeight: 520, maxWidth: double.infinity),
-                                child: PageView.builder(
-                                  allowImplicitScrolling: true,
-                                  physics: const BouncingScrollPhysics(),
-                                  controller: page,
-                                  itemCount:
-                                      snapshot.data!.data.data.list.length,
-                                  itemBuilder: (context, index) {
-                                    sendIndexTreningPhoto.setIndex(index - 1);
-
-                                    return Center(
+                            child: SizedBox(
+                                  height: 500, width: double.infinity,
+                              child: PageView.builder(
+                                allowImplicitScrolling: true,
+                                physics: const BouncingScrollPhysics(),
+                                controller: page,
+                                itemCount:
+                                    snapshot.data!.data.data.list.length,
+                                itemBuilder: (context, index) {
+                                  return Center(
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(8),
                                       child: SizedBox(
                                         height: 450,
                                         width: double.infinity,
@@ -123,9 +120,9 @@ class _TabletPhotosItemState extends State<TabletPhotosItem> {
                                           fit: BoxFit.cover,
                                         ),
                                       ),
-                                    );
-                                  },
-                                ),
+                                    ),
+                                  );
+                                },
                               ),
                             ),
                           ),
@@ -205,15 +202,15 @@ class _TabletPhotosItemState extends State<TabletPhotosItem> {
                         ),
                       ],
                     ),
-                    const SizedBox(
+                   /*  const SizedBox(
                       height: 11,
-                    ),
+                    ), */
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8),
                         child: Container(
-                          height: 150,
+                          height: 100,
                           padding: const EdgeInsets.only(right: 20, left: 20),
                           width: double.infinity,
                           color: const Color(0xffffffff),

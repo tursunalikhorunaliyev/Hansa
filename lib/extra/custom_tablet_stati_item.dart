@@ -52,7 +52,7 @@ class CustomStatiTabletItem extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(left: 8.w, top: 5, bottom: 5),
                   child: Container(
-                    alignment: Alignment.center,
+                    alignment: Alignment.centerLeft,
                     width: 200,
                     height: 100,
                     child: Text(
