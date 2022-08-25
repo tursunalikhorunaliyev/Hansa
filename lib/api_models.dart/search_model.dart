@@ -25,12 +25,12 @@ class SearchModelData {
   int type;
   String title;
   String picturelink;
-  // String link;
+  String link;
   SearchModelData({
     required this.type,
     required this.title,
     required this.picturelink,
-    // required this.link,
+    required this.link,
   });
 
   factory SearchModelData.fromMap(Map<String, dynamic> map) {
@@ -38,7 +38,7 @@ class SearchModelData {
       type: map['type'] as int,
       title: map['title'] as String,
       picturelink: map['picture_link'] as String,
-      // link: map[(map['type'] as int != 4) ? '_link' : "video_link"] as String,
+      link: map[(map['type'] as int != 4) ? '_link' : "video_link"] as String,
     );
   }
 }

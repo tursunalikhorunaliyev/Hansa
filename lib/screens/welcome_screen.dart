@@ -27,6 +27,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     final providerScaffoldKey = Provider.of<GlobalKey<ScaffoldState>>(context);
     final menuProvider = Provider.of<MenuEventsBloC>(context);
     final providerTapFavorite = Provider.of<TapFavorite>(context);
+    final token = Provider.of<String>(context);
 
     return WillPopScope(
       onWillPop: () async {
@@ -135,7 +136,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                           onTap: () {
                             Navigator.of(context).push(
                               MaterialPageRoute(
-                                builder: (context) => const SearchScreen(),
+                                builder: (context) => Provider.value(
+                                  value: token,
+                                  child: const SearchScreen(),
+                                ),
                               ),
                             );
                           },
