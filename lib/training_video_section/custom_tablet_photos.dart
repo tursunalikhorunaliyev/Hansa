@@ -31,19 +31,18 @@ class TabletPhotosItem extends StatelessWidget {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: Center(
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: ConstrainedBox(
-                                constraints: const BoxConstraints(
-                                    maxHeight: 520, maxWidth: double.infinity),
-                                child: PageView.builder(
-                                  allowImplicitScrolling: true,
-                                  physics: const BouncingScrollPhysics(),
-                                  controller: page,
-                                  itemCount:
-                                      snapshot.data!.data.data.list.length,
-                                  itemBuilder: (context, index) {
-                                    return Center(
+                            child: SizedBox(
+                                  height: 500, width: double.infinity,
+                              child: PageView.builder(
+                                allowImplicitScrolling: true,
+                                physics: const BouncingScrollPhysics(),
+                                controller: page,
+                                itemCount:
+                                    snapshot.data!.data.data.list.length,
+                                itemBuilder: (context, index) {
+                                  return Center(
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(8),
                                       child: SizedBox(
                                         height: 450,
                                         width: double.infinity,
@@ -53,9 +52,9 @@ class TabletPhotosItem extends StatelessWidget {
                                           fit: BoxFit.cover,
                                         ),
                                       ),
-                                    );
-                                  },
-                                ),
+                                    ),
+                                  );
+                                },
                               ),
                             ),
                           ),
@@ -135,15 +134,15 @@ class TabletPhotosItem extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(
+                   /*  const SizedBox(
                       height: 11,
-                    ),
+                    ), */
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(8),
                         child: Container(
-                          height: 150,
+                          height: 100,
                           padding: const EdgeInsets.only(right: 20, left: 20),
                           width: double.infinity,
                           color: const Color(0xffffffff),
@@ -166,7 +165,7 @@ class TabletPhotosItem extends StatelessWidget {
                               ),
                               const Spacer(),
                               Padding(
-                                padding: const EdgeInsets.only(right: 35),
+                                padding: const EdgeInsets.only(right: 10),
                                 child: GestureDetector(
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(64),
