@@ -64,7 +64,7 @@ class _UIChangerState extends State<UIChanger> {
     final videoControlProvider = Provider.of<BlocVideoControll>(context);
     final playProvider = Provider.of<BlocPlayVideo>(context);
     final providerToken = Provider.of<String>(context);
-
+    final isTablet = Provider.of<bool>(context);
     final welcomeApi = WelcomeApi(providerToken);
     return StreamBuilder<bool>(
       initialData: false,
@@ -80,7 +80,9 @@ class _UIChangerState extends State<UIChanger> {
                 playProvider.sink.add([false, "", ""]);
               }
               if (snapshot.data == MenuActions.article) {
-                return const ArticleScreen();
+                return isTablet
+                    ? const ArticleScreenTab()
+                    : const ArticleScreen();
               } else if (snapshot.data == MenuActions.welcome) {
                 return Provider<WelcomeApi>(
                     create: (context) => welcomeApi,

@@ -110,7 +110,7 @@ class _IzbrannoeState extends State<Izbrannoe> {
                               confirmDismiss: (direction) async {
                                 if (direction == DismissDirection.endToStart) {
                                   isFavouriteBLoC.getFavourite(token,
-                                      snapshot.data!.data.list[index].link);
+                                      snapshot.data!.data.list[index].unlink);
                                   return true;
                                 } else {
                                   return false;
@@ -153,7 +153,7 @@ class _IzbrannoeState extends State<Izbrannoe> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               SizedBox(
-                                                width: 140,
+                                                width: isTablet ? 240 : 140,
                                                 child: Text(
                                                   snapshot.data!.data
                                                       .list[index].title,
@@ -177,7 +177,7 @@ class _IzbrannoeState extends State<Izbrannoe> {
                                               Row(
                                                 children: [
                                                   SizedBox(
-                                                    width: isTablet ? 140 : 90,
+                                                    width: isTablet ? 200 : 90,
                                                   ),
                                                   InkWell(
                                                     onTap: () async {

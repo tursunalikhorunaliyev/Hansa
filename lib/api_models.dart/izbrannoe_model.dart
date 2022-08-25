@@ -35,19 +35,24 @@ class IzbrannoeModelData {
   String pdfUrl;
   int type;
   String link;
-  IzbrannoeModelData(
-      {required this.title,
-      required this.pictureLink,
-      required this.pdfUrl,
-      required this.type,
-      required this.link});
+  String unlink;
+  IzbrannoeModelData({
+    required this.title,
+    required this.pictureLink,
+    required this.pdfUrl,
+    required this.type,
+    required this.link,
+    required this.unlink,
+  });
 
   factory IzbrannoeModelData.fromMap(Map<String, dynamic> map) {
     return IzbrannoeModelData(
-        title: map["title"],
-        pictureLink: map["picture_link"],
-        pdfUrl: map["PdfUrl"] ?? "",
-        type: map["type"],
-        link: map["_link"]);
+      title: map["title"],
+      pictureLink: map["picture_link"],
+      pdfUrl: map["PdfUrl"] ?? "",
+      type: map["type"],
+      link: map["_link"],
+      unlink: map["unlink"],
+    );
   }
 }
