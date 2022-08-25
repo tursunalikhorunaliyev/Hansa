@@ -1,11 +1,18 @@
 import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hansa_app/api_models.dart/article_model.dart';
 import 'package:hansa_app/api_models.dart/search_model.dart';
 import 'package:hansa_app/api_services/search_api.dart';
+import 'package:hansa_app/blocs/article_bloc.dart';
+import 'package:hansa_app/blocs/menu_events_bloc.dart';
+import 'package:hansa_app/classes/send_link.dart';
 import 'package:hansa_app/enums/search_action.dart';
+import 'package:hansa_app/extra/top_video_vidget.dart';
+import 'package:hansa_app/video/model_video.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -24,6 +31,11 @@ class _SearchScreenState extends State<SearchScreen> {
     final isTablet = Provider.of<bool>(context);
     final token = Provider.of<String>(context);
     SearchApi searchApi = SearchApi(token, search.text);
+
+    final articleBLoC = Provider.of<ArticleBLoC>(context);
+    final menuProvider = Provider.of<MenuEventsBloC>(context);
+
+    final providerSendLink = Provider.of<SendLink>(context);
     searchApi.eventSink.add(SearchAction.search);
     return Scaffold(
       body: Column(
@@ -40,11 +52,10 @@ class _SearchScreenState extends State<SearchScreen> {
                     onChanged: (value) {
                       if (value.length > 2) {
                         value = search.text;
-                        setState(() {});
                       } else {
                         value = "   ";
-                        setState(() {});
                       }
+                      setState(() {});
                     },
                     cursorColor: const Color(0xFF272624),
                     decoration: InputDecoration(
@@ -106,16 +117,46 @@ class _SearchScreenState extends State<SearchScreen> {
                                               child: SizedBox(
                                                 height: 65,
                                                 width: 120,
-                                                child: CachedNetworkImage(
-                                                  fit: BoxFit.cover,
-                                                  imageUrl:
-                                                      data[index].picturelink,
-                                                  height: isTablet
-                                                      ? 110
-                                                      : 66.66666666666667,
-                                                  width: isTablet
-                                                      ? 150
-                                                      : 101.6666666666667,
+                                                child: Stack(
+                                                  children: [
+                                                    ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      child: CachedNetworkImage(
+                                                        fit: BoxFit.cover,
+                                                        imageUrl: data[index]
+                                                            .picturelink,
+                                                        height: isTablet
+                                                            ? 110
+                                                            : 66.66666666666667,
+                                                        width: isTablet
+                                                            ? 150
+                                                            : 101.6666666666667,
+                                                      ),
+                                                    ),
+                                                    (data[index].type == 4)
+                                                        ? Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    left: 40,
+                                                                    top: 21),
+                                                            child: Opacity(
+                                                              opacity: .5,
+                                                              child: Icon(
+                                                                CupertinoIcons
+                                                                    .play_circle_fill,
+                                                                size: isTablet
+                                                                    ? 45
+                                                                    : 25,
+                                                                color: Colors
+                                                                    .white,
+                                                              ),
+                                                            ),
+                                                          )
+                                                        : const SizedBox(),
+                                                  ],
                                                 ),
                                               ),
                                             ),
@@ -154,8 +195,79 @@ class _SearchScreenState extends State<SearchScreen> {
                                                           isTablet ? 240 : 90,
                                                     ),
                                                     InkWell(
-                                                      onTap: () {
+                                                      onTap: () async {
                                                         log(data[index].link);
+
+                                                        Navigator.pop(context);
+
+                                                        if (data[index].type ==
+                                                            1) {
+                                                          menuProvider.eventSink
+                                                              .add(MenuActions
+                                                                  .article);
+                                                          ArticleModel
+                                                              statiModel =
+                                                              await articleBLoC
+                                                                  .getArticle(
+                                                                      token,
+                                                                      data[index]
+                                                                          .link);
+                                                          articleBLoC.sink
+                                                              .add(statiModel);
+                                                        } else if (data[index]
+                                                                .type ==
+                                                            3) {
+                                                          providerSendLink
+                                                              .setLink(
+                                                                  data[index]
+                                                                      .link);
+                                                          menuProvider.eventSink
+                                                              .add(MenuActions
+                                                                  .chitatStati);
+                                                        } else if (data[index]
+                                                                .type ==
+                                                            4) {
+                                                          final video = VideoDetails(
+                                                              title: data[index]
+                                                                  .title,
+                                                              pictureLink: data[
+                                                                      index]
+                                                                  .picturelink,
+                                                              videoLink:
+                                                                  data[index]
+                                                                      .link);
+
+                                                          showDialog(
+                                                            context: context,
+                                                            builder: (context) {
+                                                              return Scaffold(
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                body:
+                                                                    MultiProvider(
+                                                                  providers: [
+                                                                    Provider(
+                                                                      create: (context) =>
+                                                                          index,
+                                                                    ),
+                                                                    Provider(
+                                                                      create: (context) =>
+                                                                          token,
+                                                                    ),
+                                                                  ],
+                                                                  child:
+                                                                      TopVideoVidget(
+                                                                    url: video
+                                                                        .videoLink,
+                                                                    title: video
+                                                                        .title,
+                                                                  ),
+                                                                ),
+                                                              );
+                                                            },
+                                                          );
+                                                        }
                                                       },
                                                       child: Container(
                                                         alignment:
