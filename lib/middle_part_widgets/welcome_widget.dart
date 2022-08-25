@@ -39,6 +39,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
     providerWelcomeApi.eventSink.add(WelcomeApiAction.fetch);
     final articleBLoC = Provider.of<ArticleBLoC>(context);
     final menuProvider = Provider.of<MenuEventsBloC>(context);
+    String videoLink = providerWelcomeApi.getVideoLink;
 
     return Expanded(
       child: StreamBuilder<List<WelcomeModelData>>(
@@ -66,8 +67,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                         controller: ChewieController(
                                             videoPlayerController:
                                                 VideoPlayerController.network(
-                                                    providerWelcomeApi
-                                                        .getVideoLink),
+                                                    videoLink),
                                             aspectRatio: 13.6 / 7.2,
                                             autoPlay: true)),
                                   ),

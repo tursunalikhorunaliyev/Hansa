@@ -20,29 +20,29 @@ class WelcomeApi {
   List<WelcomeModelData> list = [];
 
   WelcomeApi(token) {
-    int i = 0;
+    int i = 1;
 
     eventStream.listen(
       (event) async {
         if (event == WelcomeApiAction.fetch) {
-          i++;
-
           await getWelcome(token: token, i: i).then((value) {
             list += value.data.welcomeModelListData.list;
-
             dataSink.add(list);
           });
+          i++;
         }
       },
     );
   }
 
-  Future<WelcomeModel> getWelcome({required String token, int i = 0}) async {
+  Future<WelcomeModel> getWelcome({required String token, int i = 1}) async {
     Response response = await get(
       Uri.parse(APIUrls().getWelcomeUrl + i.toString()),
       headers: {"token": token},
     );
-    videoLink = jsonDecode(response.body)["video"];
+    if (i == 1) {
+      videoLink = jsonDecode(response.body)['data']['video'];
+    }
     return WelcomeModel.fromMap(jsonDecode(response.body));
   }
 }
