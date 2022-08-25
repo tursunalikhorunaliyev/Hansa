@@ -237,7 +237,7 @@ class _TabletPhotosItemState extends State<TabletPhotosItem> {
                               ),
                               const Spacer(),
                               Padding(
-                                padding: const EdgeInsets.only(right: 35),
+                                padding: const EdgeInsets.only(right: 10),
                                 child: StreamBuilder<double>(
                                     stream: blocProgress.stream,
                                     builder: (context, snapshotProgress) {
