@@ -1,4 +1,7 @@
+import 'dart:async';
+import 'dart:convert';
 import 'dart:developer';
+import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -7,8 +10,10 @@ import 'package:hansa_app/api_models.dart/nastroyka_model.dart';
 import 'package:hansa_app/blocs/bloc_for_nastroyka.dart';
 import 'package:hansa_app/drawer_widgets/text_icon.dart';
 import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
+import 'package:hansa_app/providers/provider_otpravit_rassilku.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:http/http.dart' as http;
 
 class NastroykaWidget extends StatefulWidget {
   const NastroykaWidget({Key? key}) : super(key: key);
@@ -18,15 +23,38 @@ class NastroykaWidget extends StatefulWidget {
 }
 
 class _NastroykaWidgetState extends State<NastroykaWidget> {
-  Alignment? alignment;
+  Future<NastroykaModel> getData(token) async {
+    http.Response response = await http.get(
+      Uri.parse("https://hansa-lab.ru/api/site/unsubscribe"),
+      headers: {"token": token},
+    );
+
+    return NastroykaModel.fromMap(jsonDecode(response.body));
+  }
+
+  int firstTime = 0;
+  @override
+  void initState() {
+    firstTime = 1;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final providerToken = Provider.of<String>(context);
     final blocForNastroyka = BlocForNastroyka(providerToken);
+    final providerOtpravitRassilku =
+        Provider.of<ProviderOtpravitRassilku>(context);
 
     blocForNastroyka.eventSink.add(Nastroyka.nastroyka);
-
+    if (firstTime == 1) {
+      getData(providerToken).then((value) {
+        providerOtpravitRassilku.setAlignment(value.data.subscribe == 1
+            ? Alignment.centerLeft
+            : Alignment.centerRight);
+      });
+      firstTime = 2;
+    }
     return Wrap(
       children: [
         const Padding(
@@ -56,10 +84,7 @@ class _NastroykaWidgetState extends State<NastroykaWidget> {
             stream: blocForNastroyka.dataStream,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                alignment = snapshot.data!.data.subscribe == 0
-                    ? Alignment.centerLeft
-                    : Alignment.centerRight;
-
+                log(snapshot.data!.data.subscribe.toString() + " in builder");
                 return Wrap(
                   children: [
                     Padding(
@@ -122,17 +147,22 @@ class _NastroykaWidgetState extends State<NastroykaWidget> {
                                 width: 40,
                                 child: GestureDetector(
                                     onTap: () {
-                                      setState(() {
-                                        alignment =
-                                            alignment == Alignment.centerRight
-                                                ? Alignment.centerLeft
-                                                : Alignment.centerRight;
-                                      });
-                                      blocForNastroyka
-                                          .postData(providerToken)
-                                          .then((value) => blocForNastroyka
-                                              .eventSink
-                                              .add(Nastroyka.nastroyka));
+                                      providerOtpravitRassilku.setAlignment(
+                                          providerOtpravitRassilku
+                                                      .getAlignment ==
+                                                  Alignment.centerRight
+                                              ? Alignment.centerLeft
+                                              : Alignment.centerRight);
+                                      Timer(
+                                        const Duration(seconds: 3),
+                                        () {
+                                          blocForNastroyka
+                                              .postData(providerToken)
+                                              .then((value) => blocForNastroyka
+                                                  .eventSink
+                                                  .add(Nastroyka.nastroyka));
+                                        },
+                                      );
                                     },
                                     child: Stack(
                                       alignment: Alignment.center,
@@ -144,21 +174,27 @@ class _NastroykaWidgetState extends State<NastroykaWidget> {
                                               borderRadius:
                                                   BorderRadius.circular(10)),
                                         ),
-                                        AnimatedAlign(
-                                          alignment: alignment!,
-                                          duration:
-                                              const Duration(milliseconds: 100),
-                                          child: Container(
-                                            width: 21,
-                                            decoration: BoxDecoration(
-                                                color: alignment ==
-                                                        Alignment.centerRight
-                                                    ? const Color(0xFF25b049)
-                                                    : Colors.grey[350],
-                                                borderRadius:
-                                                    BorderRadius.circular(
-                                                        25.r)),
-                                          ),
+                                        Consumer<ProviderOtpravitRassilku>(
+                                          builder: (context, value, child) {
+                                            return AnimatedAlign(
+                                              alignment: value.getAlignment,
+                                              duration: const Duration(
+                                                  milliseconds: 100),
+                                              child: Container(
+                                                width: 21,
+                                                decoration: BoxDecoration(
+                                                    color: value.getAlignment ==
+                                                            Alignment
+                                                                .centerRight
+                                                        ? const Color(
+                                                            0xFF25b049)
+                                                        : Colors.grey[350],
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            25.r)),
+                                              ),
+                                            );
+                                          },
                                         )
                                       ],
                                     )),

@@ -21,6 +21,7 @@ import 'package:hansa_app/enums/enum_action_view.dart';
 import 'package:hansa_app/extra/exit_account_dialog.dart';
 import 'package:hansa_app/extra/sobshit_o_problem.dart';
 import 'package:hansa_app/providers/fullname_provider.dart';
+import 'package:hansa_app/providers/provider_otpravit_rassilku.dart';
 import 'package:hansa_app/providers/provider_personal_textFields.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
@@ -450,7 +451,9 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                             ])
                                           : snapshot.data ==
                                                   ActionChange.nastroyka
-                                              ? const NastroykaWidget()
+                                              ? ChangeNotifierProvider(
+                                                create: (context) => ProviderOtpravitRassilku(),
+                                                child: const NastroykaWidget())
                                               : const Padding(
                                                   padding:
                                                       EdgeInsets.only(left: 39),

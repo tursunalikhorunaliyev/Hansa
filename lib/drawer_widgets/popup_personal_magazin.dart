@@ -33,23 +33,23 @@ class _PopupPersonalMagazinState extends State<PopupPersonalMagazin> {
     blocMagazin.eventSink.add(EnumActionView.view);
 
     return StreamBuilder<double>(
-        initialData: 36,
+        initialData: isTablet ? 45  : 36,
         stream: blocPopupDrawer.dataStream,
         builder: (context, snapshot) {
           return InkWell(
             onTap: () {
-              blocPopupDrawer.dataSink.add(snapshot.data! == 36 ? 200 : 36);
+              blocPopupDrawer.dataSink.add(snapshot.data! == (isTablet ? 45 : 36) ? 200 : (isTablet ? 45 : 36));
               radius = radius == 54 ? 10 : 54;
             },
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 100),
-              height: isTablet ? 45 : snapshot.data!,
+              height: isTablet ? snapshot.data! : snapshot.data!,
               width: isTablet ? 350 : 269,
               decoration: BoxDecoration(
                   color: const Color(0xFF000000),
                   borderRadius: BorderRadius.circular(radius)),
               child: Padding(
-                padding: EdgeInsets.all(isTablet ? 14 : 11),
+                padding: EdgeInsets.all(isTablet ? 13 : 11),
                 child: Column(
                   children: [
                     Padding(
@@ -66,7 +66,7 @@ class _PopupPersonalMagazinState extends State<PopupPersonalMagazin> {
                           Text(
                             widget.controller.text,
                             style: GoogleFonts.montserrat(
-                                color: const Color(0xFFffffff), fontSize: 10),
+                                color: const Color(0xFFffffff), fontSize: isTablet ? 13  : 10),
                           )
                         ],
                       ),
@@ -91,7 +91,7 @@ class _PopupPersonalMagazinState extends State<PopupPersonalMagazin> {
                                         widget.controller.text = snapshot.data!
                                             .modelMagazin2.list[index].name;
                                         blocPopupDrawer.dataSink.add(
-                                            snapshot.data! == 36 ? 200 : 36);
+                                            snapshot.data! == (isTablet ? 45 : 36)  ? 200 : (isTablet ? 45 : 36));
                                         radius = radius == 54 ? 10 : 54;
                                       },
                                       height: 30,

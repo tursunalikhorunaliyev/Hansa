@@ -1,5 +1,6 @@
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/shims/dart_ui_real.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/article_model.dart';
 import 'package:hansa_app/api_models.dart/welcome_model.dart';
@@ -25,13 +26,25 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
   RefreshController refreshController =
       RefreshController(initialRefresh: false);
 
+  ChewieController chewieController = ChewieController(
+      videoPlayerController: VideoPlayerController.network(""),
+      aspectRatio: 13.6 / 7.2,
+      autoPlay: true);
   @override
   void initState() {
     super.initState();
   }
 
   @override
+  void dispose() {
+    chewieController.dispose();
+    chewieController.videoPlayerController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    int snapshotCount = 0;
     final scroll = ScrollController();
     final isTablet = Provider.of<bool>(context);
     final token = Provider.of<String>(context);
@@ -39,7 +52,6 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
     providerWelcomeApi.eventSink.add(WelcomeApiAction.fetch);
     final articleBLoC = Provider.of<ArticleBLoC>(context);
     final menuProvider = Provider.of<MenuEventsBloC>(context);
-    String videoLink = providerWelcomeApi.getVideoLink;
 
     return Expanded(
       child: StreamBuilder<List<WelcomeModelData>>(
@@ -47,6 +59,17 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               final data = snapshot.requireData;
+              final videoLink = providerWelcomeApi.getVideoLink;
+
+             if(snapshotCount==0){
+                chewieController = ChewieController(
+                  videoPlayerController:
+                      VideoPlayerController.network(videoLink),
+                  aspectRatio: 13.6 / 7.2,
+                  autoPlay: true);
+                  snapshotCount=1;
+             }
+
               return isTablet
                   ? Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -63,13 +86,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                   borderRadius: BorderRadius.circular(5),
                                   child: SizedBox(
                                     height: 450,
-                                    child: Chewie(
-                                        controller: ChewieController(
-                                            videoPlayerController:
-                                                VideoPlayerController.network(
-                                                    videoLink),
-                                            aspectRatio: 13.6 / 7.2,
-                                            autoPlay: true)),
+                                    child: Chewie(controller: chewieController),
                                   ),
                                 ),
                               ),

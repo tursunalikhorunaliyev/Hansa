@@ -34,7 +34,7 @@ class _TextFieldForPersonalState extends State<TextFieldForPersonal> {
         textDirection: TextDirection.rtl,
         controller: widget.controller!,
         style: GoogleFonts.montserrat(
-            color: const Color(0xFFffffff), fontSize: 10),
+            color: const Color(0xFFffffff), fontSize: isTablet ? 13  : 10),
         decoration: InputDecoration(
           prefixIcon: Padding(
             padding:  EdgeInsets.all( isTablet ? 15  : 10),
