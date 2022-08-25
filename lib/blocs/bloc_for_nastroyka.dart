@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:hansa_app/api_models.dart/nastroyka_model.dart';
 import 'package:http/http.dart' as http;
@@ -37,5 +38,7 @@ class BlocForNastroyka {
       Uri.parse("https://hansa-lab.ru/api/site/unsubscribe"),
       headers: {"token": token},
     );
+    log(response.body + " bloc nastroyka");
+    log(response.statusCode.toString() + " bloc nastroyka");
   }
 }
