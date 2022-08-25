@@ -29,44 +29,53 @@ class _SearchScreenState extends State<SearchScreen> {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 10, bottom: 10),
+            padding: const EdgeInsets.only(top: 50, bottom: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 SizedBox(
-                  width: .85.sw,
+                  width: .90.sw,
                   child: TextField(
                     controller: search,
                     onChanged: (value) {
-                      value = search.text;
-                      setState(() {});
+                      if (value.length > 2) {
+                        value = search.text;
+                        setState(() {});
+                      } else {
+                        value = "   ";
+                        setState(() {});
+                      }
                     },
                     cursorColor: const Color(0xFF272624),
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       isDense: true,
-                      border: UnderlineInputBorder(
+                      border: const UnderlineInputBorder(
                         borderSide: BorderSide(
                           color: Color(0xFF272624),
                         ),
                       ),
                       hintText: "Поиск",
-                      focusedBorder: UnderlineInputBorder(
+                      focusedBorder: const UnderlineInputBorder(
                         borderSide: BorderSide(
+                          color: Color(0xFF272624),
+                        ),
+                      ),
+                      suffixIcon: InkWell(
+                        onTap: () async {
+                          if (search.text.length > 2) {
+                            log("Search button clicked...");
+                            setState(() {});
+                          }
+                        },
+                        child: const Icon(
+                          Icons.search,
+                          size: 24,
                           color: Color(0xFF272624),
                         ),
                       ),
                     ),
                   ),
                 ),
-                InkWell(
-                  onTap: () async {
-                    if (search.text.length > 2) {
-                      log("Search button clicked...");
-                      setState(() {});
-                    }
-                  },
-                  child: const Icon(Icons.search),
-                )
               ],
             ),
           ),
@@ -76,113 +85,128 @@ class _SearchScreenState extends State<SearchScreen> {
                 if (snapshot.hasData) {
                   final data = snapshot.data!.data.data;
                   log("Length of data ${data.length}");
-                  return Expanded(
-                    child: SingleChildScrollView(
-                        child: Column(
-                      children: List.generate(data.length, (index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(
-                              left: 10, right: 10, top: 20),
-                          child: SizedBox(
+                  return (search.text.length > 2)
+                      ? Expanded(
+                          child: SingleChildScrollView(
                             child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(5),
-                                      child: SizedBox(
-                                        height: 65,
-                                        width: 120,
-                                        child: CachedNetworkImage(
-                                          fit: BoxFit.cover,
-                                          imageUrl: data[index].picturelink,
-                                          height: isTablet
-                                              ? 110
-                                              : 66.66666666666667,
-                                          width: isTablet
-                                              ? 150
-                                              : 101.6666666666667,
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(
-                                      width: 11,
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+                              children: List.generate(data.length, (index) {
+                                return Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 10, right: 10, top: 20),
+                                  child: SizedBox(
+                                    child: Column(
                                       children: [
-                                        SizedBox(
-                                          width: 240,
-                                          child: Text(
-                                            data[index].title,
-                                            softWrap: true,
-                                            maxLines: 3,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: GoogleFonts.montserrat(
-                                                color: const Color(0xFF272624),
-                                                fontSize: isTablet
-                                                    ? 14
-                                                    : 9.666666666666667,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                        const SizedBox(
-                                          height: 5,
-                                        ),
                                         Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
                                           children: [
-                                            SizedBox(
-                                              width: isTablet ? 240 : 90,
-                                            ),
-                                            InkWell(
-                                              onTap: () {},
-                                              child: Container(
-                                                alignment: Alignment.center,
-                                                height: isTablet ? 22 : 21,
-                                                width: isTablet ? 74 : 63,
-                                                decoration: BoxDecoration(
-                                                  border: Border.all(
-                                                      color:
-                                                          Colors.transparent),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10.5),
-                                                  color:
-                                                      const Color(0xFF313131),
-                                                ),
-                                                child: Text(
-                                                  "Показать",
-                                                  style: GoogleFonts.montserrat(
-                                                      color: Colors.white,
-                                                      fontSize: 10),
+                                            ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              child: SizedBox(
+                                                height: 65,
+                                                width: 120,
+                                                child: CachedNetworkImage(
+                                                  fit: BoxFit.cover,
+                                                  imageUrl:
+                                                      data[index].picturelink,
+                                                  height: isTablet
+                                                      ? 110
+                                                      : 66.66666666666667,
+                                                  width: isTablet
+                                                      ? 150
+                                                      : 101.6666666666667,
                                                 ),
                                               ),
                                             ),
+                                            const SizedBox(
+                                              width: 11,
+                                            ),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                SizedBox(
+                                                  width: 240,
+                                                  child: Text(
+                                                    data[index].title,
+                                                    softWrap: true,
+                                                    maxLines: 3,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: GoogleFonts.montserrat(
+                                                        color: const Color(
+                                                            0xFF272624),
+                                                        fontSize: isTablet
+                                                            ? 14
+                                                            : 9.666666666666667,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ),
+                                                const SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    SizedBox(
+                                                      width:
+                                                          isTablet ? 240 : 90,
+                                                    ),
+                                                    InkWell(
+                                                      onTap: () {
+                                                        log(data[index].link);
+                                                      },
+                                                      child: Container(
+                                                        alignment:
+                                                            Alignment.center,
+                                                        height:
+                                                            isTablet ? 22 : 21,
+                                                        width:
+                                                            isTablet ? 74 : 63,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          border: Border.all(
+                                                              color: Colors
+                                                                  .transparent),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      10.5),
+                                                          color: const Color(
+                                                              0xFF313131),
+                                                        ),
+                                                        child: Text(
+                                                          "Показать",
+                                                          style: GoogleFonts
+                                                              .montserrat(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontSize: 10),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            )
                                           ],
                                         ),
+                                        const Divider(
+                                          color: Color(0xFF8c8c8b),
+                                          thickness: 1,
+                                        )
                                       ],
-                                    )
-                                  ],
-                                ),
-                                const Divider(
-                                  color: Color(0xFF8c8c8b),
-                                  thickness: 1,
-                                )
-                              ],
+                                    ),
+                                  ),
+                                );
+                              }),
                             ),
                           ),
-                        );
-                      }),
-                    )
-                        // : const Text("There is nothing"),
-                        ),
-                  );
+                        )
+                      : const Center();
                 } else {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
+                  return const Center();
                 }
               }),
         ],
