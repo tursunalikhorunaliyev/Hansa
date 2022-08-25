@@ -110,8 +110,7 @@ class MyApp extends StatelessWidget {
               create: (context) => sendDataPersonalUpdate),
           ChangeNotifierProvider<SendAnaliseDownload>(
               create: (context) => sendAnaliseDownload),
-          Provider<BlocDetectTap>(
-              create: (context) => blocDetectTap),
+          Provider<BlocDetectTap>(create: (context) => blocDetectTap),
         ],
         child: const MaterialApp(
           localizationsDelegates: [
