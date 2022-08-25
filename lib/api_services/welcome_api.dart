@@ -15,11 +15,13 @@ class WelcomeApi {
   final eventController = StreamController<WelcomeApiAction>.broadcast();
   StreamSink<WelcomeApiAction> get eventSink => eventController.sink;
   Stream<WelcomeApiAction> get eventStream => eventController.stream;
-  List<WelcomeModelData>  list = [];
+  String videoLink = "";
+  String get getVideoLink => videoLink;
+  List<WelcomeModelData> list = [];
 
   WelcomeApi(token) {
     int i = 0;
-    
+
     eventStream.listen(
       (event) async {
         if (event == WelcomeApiAction.fetch) {
@@ -29,7 +31,6 @@ class WelcomeApi {
             list += value.data.welcomeModelListData.list;
 
             dataSink.add(list);
-            
           });
         }
       },
@@ -41,6 +42,7 @@ class WelcomeApi {
       Uri.parse(APIUrls().getWelcomeUrl + i.toString()),
       headers: {"token": token},
     );
+    videoLink = jsonDecode(response.body)["video"];
     return WelcomeModel.fromMap(jsonDecode(response.body));
   }
 }

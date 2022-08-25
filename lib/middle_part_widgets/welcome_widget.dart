@@ -66,7 +66,8 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                         controller: ChewieController(
                                             videoPlayerController:
                                                 VideoPlayerController.network(
-                                                    "https://hansa-lab.ru/storage/upload/videos/1d-otmvmwUva.mp4"),
+                                                    providerWelcomeApi
+                                                        .getVideoLink),
                                             aspectRatio: 13.6 / 7.2,
                                             autoPlay: true)),
                                   ),
