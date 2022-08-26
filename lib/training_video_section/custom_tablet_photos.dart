@@ -104,14 +104,16 @@ class _TabletPhotosItemState extends State<TabletPhotosItem> {
                           padding: const EdgeInsets.symmetric(horizontal: 20),
                           child: Center(
                             child: SizedBox(
-                                  height: 500, width: double.infinity,
+                              height: 500,
+                              width: double.infinity,
                               child: PageView.builder(
                                 allowImplicitScrolling: true,
                                 physics: const BouncingScrollPhysics(),
                                 controller: page,
-                                itemCount:
-                                    snapshot.data!.data.data.list.length,
+                                itemCount: snapshot.data!.data.data.list.length,
                                 itemBuilder: (context, index) {
+                                  sendIndexTreningPhoto.setIndex(index - 1);
+
                                   return Center(
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(8),
@@ -206,7 +208,7 @@ class _TabletPhotosItemState extends State<TabletPhotosItem> {
                         ),
                       ],
                     ),
-                   /*  const SizedBox(
+                    /*  const SizedBox(
                       height: 11,
                     ), */
                     Padding(
