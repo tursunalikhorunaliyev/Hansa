@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/training_model.dart';
@@ -244,7 +246,7 @@ class _TreningiState extends State<Treningi> {
                                               title:
                                                   data.videos.list[index].title,
                                               onTap: () {
-                                                treningiPhotos.setUrl(snapshot
+                                                treningiVideos.setUrl(snapshot
                                                     .data!
                                                     .data
                                                     .videos

@@ -60,7 +60,7 @@ class TabletItemTreningi extends StatelessWidget {
                         child: Container(
                           width: 100.w,
                           height: 65.h,
-                          alignment: Alignment.center,
+                          alignment: Alignment.centerLeft,
                           child: Text(
                             title,
                             overflow: TextOverflow.fade,
