@@ -41,7 +41,7 @@ class _SearchScreenState extends State<SearchScreen> {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 50, bottom: 10),
+            padding: const EdgeInsets.only(top: 50, bottom: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -108,7 +108,7 @@ class _SearchScreenState extends State<SearchScreen> {
                               children: List.generate(data.length, (index) {
                                 return Padding(
                                   padding: const EdgeInsets.only(
-                                      left: 10, right: 10, top: 20),
+                                      left: 10, right: 10, top: 5),
                                   child: SizedBox(
                                     child: Column(
                                       children: [
@@ -165,9 +165,6 @@ class _SearchScreenState extends State<SearchScreen> {
                                                 ),
                                               ),
                                             ),
-                                            const SizedBox(
-                                              width: 11,
-                                            ),
                                             Column(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.start,
@@ -197,7 +194,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                                   children: [
                                                     SizedBox(
                                                       width:
-                                                          isTablet ? 240 : 90,
+                                                          isTablet ? 240 : 175,
                                                     ),
                                                     InkWell(
                                                       onTap: () async {
@@ -281,18 +278,16 @@ class _SearchScreenState extends State<SearchScreen> {
                                                             isTablet ? 22 : 21,
                                                         width:
                                                             isTablet ? 74 : 63,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          border: Border.all(
-                                                              color: Colors
-                                                                  .transparent),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      10.5),
-                                                          color: const Color(
-                                                              0xFF313131),
-                                                        ),
+                                                        decoration: BoxDecoration(
+                                                            border: Border.all(
+                                                                color: Colors
+                                                                    .transparent),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10.5),
+                                                            color: const Color(
+                                                                0xffe21a37)),
                                                         child: Text(
                                                           "Показать",
                                                           style: GoogleFonts
