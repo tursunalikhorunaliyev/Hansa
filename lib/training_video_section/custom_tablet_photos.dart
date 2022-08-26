@@ -46,7 +46,7 @@ class _TabletPhotosItemState extends State<TabletPhotosItem> {
     } else if (Platform.isAndroid) {
       dir = "/storage/emulated/0/Download/";
     }
-    path = "$dir/$uniqueFileName$index.jpg";
+    path = "$dir$uniqueFileName$index.jpg";
     return path;
   }
 

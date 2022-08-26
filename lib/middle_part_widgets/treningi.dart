@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/training_model.dart';
@@ -7,6 +9,7 @@ import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/drawer_widgets/izbrannoe.dart';
 import 'package:hansa_app/extra/custom_tablet_item.dart';
 import 'package:hansa_app/extra/custom_treningi_ipad_container.dart';
+import 'package:hansa_app/extra/my_behavior%20.dart';
 import 'package:hansa_app/providers/is_video_provider.dart';
 import 'package:hansa_app/providers/treningi_photos_provider.dart';
 import 'package:hansa_app/providers/treningi_videos_provider.dart';
@@ -35,7 +38,6 @@ class _TreningiState extends State<Treningi> {
     final isVideo = Provider.of<IsVideoprovider>(context);
     final trainingBloc = TrainingAPIBloc();
     final scroll = ScrollController();
-    final welcomeApi = WelcomeApi(token);
     return Expanded(
       child: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -46,189 +48,162 @@ class _TreningiState extends State<Treningi> {
                 final data = snapshot.data!.data;
                 return Column(
                   children: [
-                        Visibility(
-                          visible: (snapshot.data!.data.webinar.data.isNotEmpty &&
-                            snapshot.data!.data.events.events.isNotEmpty),
-                          child: StickyHeader(
-                              header: const CustomTitle(
-                                imagePath: "assets/treningi_title.png",
-                                title: "Тренинги",
-                              ),
-                              content: Column(
-                                children: [
-                                  Row(),
-                                  (snapshot.data!.data.webinar.data.isNotEmpty)
-                                      ? Container(
-                                          margin: const EdgeInsets.only(
-                                              left: 25, right: 25, bottom: 13),
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              image: const DecorationImage(
-                                                  image: AssetImage(
-                                                      'assets/event-default.png'),
-                                                  fit: BoxFit.cover)),
+                    Visibility(
+                      visible: (snapshot.data!.data.webinar.data.isNotEmpty &&
+                          snapshot.data!.data.events.events.isNotEmpty),
+                      child: StickyHeader(
+                        header: const CustomTitle(
+                          imagePath: "assets/treningi_title.png",
+                          title: "Тренинги",
+                        ),
+                        content: Column(
+                          children: [
+                            Row(),
+                            (snapshot.data!.data.webinar.data.isNotEmpty)
+                                ? Container(
+                                    margin: const EdgeInsets.only(
+                                        left: 25, right: 25, bottom: 13),
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
+                                        image: const DecorationImage(
+                                            image: AssetImage(
+                                                'assets/event-default.png'),
+                                            fit: BoxFit.cover)),
+                                    child: Column(
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 14),
                                           child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
                                             children: [
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    left: 14),
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    const SizedBox(
-                                                      height: 13,
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        Text(
-                                                            snapshot
+                                              const SizedBox(
+                                                height: 13,
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                      snapshot
+                                                          .data!
+                                                          .data
+                                                          .webinar
+                                                          .data
+                                                          .first
+                                                          .date
+                                                          .trim()
+                                                          .substring(0, 4),
+                                                      style: GoogleFonts
+                                                          .montserrat(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 20)),
+                                                  const Spacer(),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            right: 10),
+                                                    child: GestureDetector(
+                                                      onTap: () {
+                                                        launchInBrowser(
+                                                            Uri.parse(snapshot
                                                                 .data!
                                                                 .data
                                                                 .webinar
                                                                 .data
                                                                 .first
-                                                                .date
-                                                                .trim()
-                                                                .substring(0, 4),
-                                                            style: GoogleFonts
-                                                                .montserrat(
+                                                                .link));
+                                                      },
+                                                      child: ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(64),
+                                                        child: Container(
+                                                          height: 25,
+                                                          color: const Color(
+                                                              0xff25b049),
+                                                          child: Center(
+                                                            child: Padding(
+                                                              padding: const EdgeInsets
+                                                                      .symmetric(
+                                                                  horizontal:
+                                                                      15),
+                                                              child: Text(
+                                                                'Зарегистрироваться',
+                                                                style: GoogleFonts.montserrat(
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w700,
+                                                                    fontSize: 8,
                                                                     color: Colors
-                                                                        .white,
-                                                                    fontSize:
-                                                                        20)),
-                                                        const Spacer(),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  right: 10),
-                                                          child: GestureDetector(
-                                                            onTap: () {
-                                                              launchInBrowser(
-                                                                  Uri.parse(
-                                                                      snapshot
-                                                                          .data!
-                                                                          .data
-                                                                          .webinar
-                                                                          .data
-                                                                          .first
-                                                                          .link));
-                                                            },
-                                                            child: ClipRRect(
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          64),
-                                                              child: Container(
-                                                                height: 25,
-                                                                color: const Color(
-                                                                    0xff25b049),
-                                                                child: Center(
-                                                                  child: Padding(
-                                                                    padding: const EdgeInsets
-                                                                            .symmetric(
-                                                                        horizontal:
-                                                                            15),
-                                                                    child: Text(
-                                                                      'Зарегистрироваться',
-                                                                      style: GoogleFonts.montserrat(
-                                                                          fontWeight:
-                                                                              FontWeight
-                                                                                  .w700,
-                                                                          fontSize:
-                                                                              8,
-                                                                          color: Colors
-                                                                              .white),
-                                                                    ),
-                                                                  ),
-                                                                ),
+                                                                        .white),
                                                               ),
                                                             ),
                                                           ),
                                                         ),
-                                                      ],
+                                                      ),
                                                     ),
-                                                    Text(
-                                                      "${snapshot.data!.data.webinar
-                                                              .data.first.date
-                                                              .trim()
-                                                              .substring(8, 10)} - ${toDateString(snapshot
-                                                              .data!
-                                                              .data
-                                                              .webinar
-                                                              .data
-                                                              .first
-                                                              .date
-                                                              .trim()
-                                                              .substring(5, 7))}",
-                                                      style:
-                                                          GoogleFonts.montserrat(
-                                                              color: Colors.white,
-                                                              fontSize: 20),
-                                                    ),
-                                                    const SizedBox(
-                                                      height: 20,
-                                                    ),
-                                                    Text(
-                                                        snapshot
-                                                            .data!
-                                                            .data
-                                                            .webinar
-                                                            .data
-                                                            .first
-                                                            .name
-                                                            .trim(),
-                                                        softWrap: true,
-                                                        overflow: TextOverflow
-                                                            .clip,
-                                                        style:
-                                                            GoogleFonts
-                                                                .montserrat(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w200,
-                                                                    fontSize:
-                                                                        24)),
-                                                    const SizedBox(
-                                                      height: 50,
-                                                    ),
-                                                  ],
-                                                ),
+                                                  ),
+                                                ],
+                                              ),
+                                              Text(
+                                                "${snapshot.data!.data.webinar.data.first.date.trim().substring(8, 10)} - ${toDateString(snapshot.data!.data.webinar.data.first.date.trim().substring(5, 7))}",
+                                                style: GoogleFonts.montserrat(
+                                                    color: Colors.white,
+                                                    fontSize: 20),
+                                              ),
+                                              const SizedBox(
+                                                height: 20,
+                                              ),
+                                              Text(
+                                                  snapshot.data!.data.webinar
+                                                      .data.first.name
+                                                      .trim(),
+                                                  softWrap: true,
+                                                  overflow: TextOverflow.clip,
+                                                  style: GoogleFonts.montserrat(
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.w200,
+                                                      fontSize: 24)),
+                                              const SizedBox(
+                                                height: 50,
                                               ),
                                             ],
                                           ),
-                                        )
-                                      : const SizedBox(),
-                                  (snapshot.data!.data.events.events.isNotEmpty)
-                                      ? CustomCalendar(
-                                          dates:
-                                              snapshot.data!.data.events.events)
-                                      : const SizedBox(),
-                                  (snapshot.data!.data.events.events.isNotEmpty)
-                                      ? isTablet
-                                          ? const IpadContainer()
-                                          : CustomClipItem(
-                                              backgroundColor:
-                                                  const Color(0xffff163e),
-                                              buttonColor:
-                                                  const Color(0xff232323),
-                                              buttonTextColor:
-                                                  const Color(0xffffffff),
-                                              titleColor: const Color(0xffffffff),
-                                              buttonText: "Записаться",
-                                              title:
-                                                  "Иммерсивное шоу\n\"Увидимся на кухне\"",
-                                              onTap: () {},
-                                            )
-                                      : const SizedBox(),
-                                ],
-                              ),
-                            ),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                : const SizedBox(),
+                            (snapshot.data!.data.events.events.isNotEmpty)
+                                ? CustomCalendar(
+                                    dates: snapshot.data!.data.events.events)
+                                : const SizedBox(),
+                            (snapshot.data!.data.events.events.isNotEmpty)
+                                ? isTablet
+                                    ? IpadContainer(
+                                        title: snapshot
+                                            .data!.data.events.events.first,
+                                        titleColor: const Color(0xffffffff),
+                                      )
+                                    : CustomClipItem(
+                                        backgroundColor:
+                                            const Color(0xffff163e),
+                                        buttonColor: const Color(0xff232323),
+                                        buttonTextColor:
+                                            const Color(0xffffffff),
+                                        titleColor: const Color(0xffffffff),
+                                        buttonText: "Записаться",
+                                        title: snapshot
+                                            .data!.data.events.events.first,
+                                        onTap: () {},
+                                      )
+                                : const SizedBox(),
+                          ],
                         ),
+                      ),
+                    ),
                     StickyHeader(
                       header: const CustomTitle(
                         imagePath: "assets/kak_title.png",
@@ -236,99 +211,99 @@ class _TreningiState extends State<Treningi> {
                       ),
                       content: Builder(builder: (context) {
                         if (isTablet) {
-                          return NotificationListener(
-                              onNotification: (value) {
-                                welcomeApi.eventSink
-                                    .add(WelcomeApiAction.fetch);
-                                return false;
-                              },
+                          return ScrollConfiguration(
+                              behavior: MyBehavior(),
                               child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 25),
-                                child: Column(
-                                  children: [
-                                    GridView(
-                                      controller: scroll,
-                                      physics: const BouncingScrollPhysics(),
-                                      shrinkWrap: true,
-                                      gridDelegate:
-                                          const SliverGridDelegateWithFixedCrossAxisCount(
-                                              crossAxisCount: 2,
-                                              crossAxisSpacing: 30,
-                                              childAspectRatio: 3.4),
-                                      children: List.generate(
-                                          snapshot.data!.data.videos.list
-                                              .length, (index) {
-                                        return Padding(
-                                          padding: const EdgeInsets.only(top: 5.0),
-                                          child: TabletItemTreningi(
-                                            backgroundColor:
-                                                const Color(0xff000004),
-                                            buttonColor: const Color(0xffe21a37),
-                                            buttonTextColor:
-                                                const Color(0xffffffff),
-                                            titleColor: const Color(0xffffffff),
-                                            buttonText: "Смотреть",
-                                            title:
-                                               data.videos.list[index].title,
-                                            onTap: () {
-                                              treningiPhotos.setUrl(snapshot
-                                                  .data!
-                                                  .data
-                                                  .videos
-                                                  .list[index]
-                                                  .link);
-                                              isVideo.setIsVideo(true);
-                                              menuBloCProvider.eventSink
-                                                  .add(MenuActions.trainingVideo);
-                                            },
-                                          ),
-                                        );
-                                      }),
-                                    ),
-                                    GridView(
-                                      controller: scroll,
-                                      physics: const BouncingScrollPhysics(),
-                                      shrinkWrap: true,
-                                      gridDelegate:
-                                          const SliverGridDelegateWithFixedCrossAxisCount(
-                                              crossAxisCount: 2,
-                                              crossAxisSpacing: 30,
-                                              childAspectRatio: 3.4),
-                                      children: List.generate(
-                                          snapshot.data!.data.eventReports.list
-                                              .length, (index) {
-                                        return Padding(
-                                          padding: const EdgeInsets.only(top: 5.0),
-                                          child: TabletItemTreningi(
-                                            backgroundColor:
-                                                const Color(0xff000004),
-                                            buttonColor: const Color(0xffe21a37),
-                                            buttonTextColor:
-                                                const Color(0xffffffff),
-                                            titleColor: const Color(0xffffffff),
-                                            buttonText: "Смотреть",
-                                            title:
-                                               data.eventReports.list[index].title,
-                                            onTap: () {
-                                              treningiPhotos.setUrl(snapshot
-                                                  .data!
-                                                  .data
-                                                  .eventReports
-                                                  .list[index]
-                                                  .link);
-                                              isVideo.setIsVideo(false);
-                                              menuBloCProvider.eventSink
-                                                  .add(MenuActions.trainingVideo);
-                                            },
-                                          ),
-                                        );
-                                      }),
-                                    ),
-                                
-                                  ],
-                                )
-                              ));
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 25),
+                                  child: Column(
+                                    children: [
+                                      GridView(
+                                        controller: scroll,
+                                        physics: const BouncingScrollPhysics(),
+                                        shrinkWrap: true,
+                                        gridDelegate:
+                                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                                crossAxisCount: 2,
+                                                crossAxisSpacing: 30,
+                                                childAspectRatio: 3.4),
+                                        children: List.generate(
+                                            snapshot.data!.data.videos.list
+                                                .length, (index) {
+                                          return Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 5.0),
+                                            child: TabletItemTreningi(
+                                              backgroundColor:
+                                                  const Color(0xff000004),
+                                              buttonColor:
+                                                  const Color(0xffe21a37),
+                                              buttonTextColor:
+                                                  const Color(0xffffffff),
+                                              titleColor:
+                                                  const Color(0xffffffff),
+                                              buttonText: "Смотреть",
+                                              title:
+                                                  data.videos.list[index].title,
+                                              onTap: () {
+                                                treningiVideos.setUrl(snapshot
+                                                    .data!
+                                                    .data
+                                                    .videos
+                                                    .list[index]
+                                                    .link);
+                                                isVideo.setIsVideo(true);
+                                                menuBloCProvider.eventSink.add(
+                                                    MenuActions.trainingVideo);
+                                              },
+                                            ),
+                                          );
+                                        }),
+                                      ),
+                                      GridView(
+                                        controller: scroll,
+                                        physics: const BouncingScrollPhysics(),
+                                        shrinkWrap: true,
+                                        gridDelegate:
+                                            const SliverGridDelegateWithFixedCrossAxisCount(
+                                                crossAxisCount: 2,
+                                                crossAxisSpacing: 30,
+                                                childAspectRatio: 3.4),
+                                        children: List.generate(
+                                            snapshot.data!.data.eventReports
+                                                .list.length, (index) {
+                                          return Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 5.0),
+                                            child: TabletItemTreningi(
+                                              backgroundColor:
+                                                  const Color(0xff000004),
+                                              buttonColor:
+                                                  const Color(0xffe21a37),
+                                              buttonTextColor:
+                                                  const Color(0xffffffff),
+                                              titleColor:
+                                                  const Color(0xffffffff),
+                                              buttonText: "Смотреть",
+                                              title: data.eventReports
+                                                  .list[index].title,
+                                              onTap: () {
+                                                treningiPhotos.setUrl(snapshot
+                                                    .data!
+                                                    .data
+                                                    .eventReports
+                                                    .list[index]
+                                                    .link);
+                                                isVideo.setIsVideo(false);
+                                                menuBloCProvider.eventSink.add(
+                                                    MenuActions.trainingVideo);
+                                              },
+                                            ),
+                                          );
+                                        }),
+                                      ),
+                                    ],
+                                  )));
                         } else {
                           return Column(
                             children: [
