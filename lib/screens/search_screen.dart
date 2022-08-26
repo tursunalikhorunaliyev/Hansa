@@ -58,6 +58,8 @@ class _SearchScreenState extends State<SearchScreen> {
                       setState(() {});
                     },
                     cursorColor: const Color(0xFF272624),
+                    cursorHeight: 18,
+                    style: const TextStyle(fontSize: 12),
                     decoration: InputDecoration(
                       isDense: true,
                       border: const UnderlineInputBorder(
@@ -65,12 +67,15 @@ class _SearchScreenState extends State<SearchScreen> {
                           color: Color(0xFF272624),
                         ),
                       ),
+                      hintStyle: const TextStyle(fontSize: 12),
                       hintText: "Поиск",
                       focusedBorder: const UnderlineInputBorder(
                         borderSide: BorderSide(
                           color: Color(0xFF272624),
                         ),
                       ),
+                      suffixIconConstraints:
+                          const BoxConstraints(maxHeight: 20),
                       suffixIcon: InkWell(
                         onTap: () async {
                           if (search.text.length > 2) {
@@ -80,7 +85,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         },
                         child: const Icon(
                           Icons.search,
-                          size: 24,
+                          size: 20,
                           color: Color(0xFF272624),
                         ),
                       ),
