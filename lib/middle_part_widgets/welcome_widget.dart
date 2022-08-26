@@ -1,6 +1,7 @@
+import 'dart:developer';
+
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/shims/dart_ui_real.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/article_model.dart';
 import 'package:hansa_app/api_models.dart/welcome_model.dart';
@@ -29,7 +30,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
   ChewieController chewieController = ChewieController(
       videoPlayerController: VideoPlayerController.network(""),
       aspectRatio: 13.6 / 7.2,
-      autoPlay: true);
+      autoPlay: false);
   @override
   void initState() {
     super.initState();
@@ -60,15 +61,16 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
             if (snapshot.hasData) {
               final data = snapshot.requireData;
               final videoLink = providerWelcomeApi.getVideoLink;
-
-             if(snapshotCount==0){
+              if (snapshotCount == 0 && isTablet) {
                 chewieController = ChewieController(
                   videoPlayerController:
                       VideoPlayerController.network(videoLink),
                   aspectRatio: 13.6 / 7.2,
-                  autoPlay: true);
-                  snapshotCount=1;
-             }
+                  autoPlay: true
+                );
+                snapshotCount = 1;
+               
+              }
 
               return isTablet
                   ? Padding(
