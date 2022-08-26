@@ -3,7 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class IpadContainer extends StatelessWidget {
-  const IpadContainer({Key? key}) : super(key: key);
+  final String title;
+  final Color titleColor;
+  const IpadContainer({Key? key, required this.title, required this.titleColor})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,23 +24,19 @@ class IpadContainer extends StatelessWidget {
             ),
             child: Padding(
               padding: EdgeInsets.only(top: 20.h),
-              child: Column(
-                children: [
-                  Text(
-                    " Иммерсивное шоу",
-                    style: GoogleFonts.montserrat(
-                        fontSize: 11.sp,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white),
+              child: SizedBox(
+                width: 500,
+                child: Text(
+                  title,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 4,
+                  softWrap: true,
+                  style: GoogleFonts.montserrat(
+                    color: titleColor,
+                    fontSize: 13.sp,
+                    fontWeight: FontWeight.bold,
                   ),
-                  Text(
-                    " \"Увидимся на кухне\"",
-                    style: GoogleFonts.montserrat(
-                        fontSize: 13.sp,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white),
-                  ),
-                ],
+                ),
               ),
             ),
           ),
