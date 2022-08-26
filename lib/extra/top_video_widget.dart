@@ -98,6 +98,7 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
     if (Platform.isIOS) {
       Directory directory = await getApplicationSupportDirectory();
       dir = directory.path;
+      log(dir+"kkkkkkkkkkkkk");
     } else if (Platform.isAndroid) {
       dir = "/storage/emulated/0/Download/";
     }
