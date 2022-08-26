@@ -98,9 +98,9 @@ class _IzbrannoeState extends State<Izbrannoe> {
                               secondaryBackground: Container(
                                 alignment: Alignment.centerRight,
                                 color: const Color(0XFFff163e),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(right: 20),
-                                  child: const Icon(
+                                child: const Padding(
+                                  padding: EdgeInsets.only(right: 20),
+                                  child: Icon(
                                     Icons.delete_rounded,
                                     color: Colors.white,
                                   ),
@@ -111,6 +111,7 @@ class _IzbrannoeState extends State<Izbrannoe> {
                                 if (direction == DismissDirection.endToStart) {
                                   isFavouriteBLoC.getFavourite(token,
                                       snapshot.data!.data.list[index].unlink);
+                                  setState(() {});
                                   return true;
                                 } else {
                                   return false;
