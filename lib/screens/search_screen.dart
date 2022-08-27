@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +17,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key? key}) : super(key: key);
-
   @override
   State<SearchScreen> createState() => _SearchScreenState();
 }
@@ -31,17 +29,15 @@ class _SearchScreenState extends State<SearchScreen> {
     final isTablet = Provider.of<bool>(context);
     final token = Provider.of<String>(context);
     SearchApi searchApi = SearchApi(token, search.text);
-
     final articleBLoC = Provider.of<ArticleBLoC>(context);
     final menuProvider = Provider.of<MenuEventsBloC>(context);
-
     final providerSendLink = Provider.of<SendLink>(context);
     searchApi.eventSink.add(SearchAction.search);
     return Scaffold(
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 50, bottom: 20),
+            padding: const EdgeInsets.only(top: 50, bottom: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -106,172 +102,147 @@ class _SearchScreenState extends State<SearchScreen> {
                           child: SingleChildScrollView(
                             child: Column(
                               children: List.generate(data.length, (index) {
-                                return Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 10, right: 10, top: 5),
-                                  child: SizedBox(
-                                    child: Column(
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                              child: SizedBox(
-                                                height: 65,
-                                                width: 120,
-                                                child: Stack(
-                                                  children: [
-                                                    ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      child: CachedNetworkImage(
-                                                        fit: BoxFit.cover,
-                                                        imageUrl: data[index]
-                                                            .picturelink,
-                                                        height: isTablet
-                                                            ? 110
-                                                            : 66.66666666666667,
-                                                        width: isTablet
-                                                            ? 150
-                                                            : 101.6666666666667,
-                                                      ),
-                                                    ),
-                                                    (data[index].type == 4)
-                                                        ? Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                        .only(
-                                                                    left: 40,
-                                                                    top: 21),
-                                                            child: Opacity(
-                                                              opacity: .5,
-                                                              child: Icon(
-                                                                CupertinoIcons
-                                                                    .play_circle_fill,
-                                                                size: isTablet
-                                                                    ? 45
-                                                                    : 25,
-                                                                color: Colors
-                                                                    .white,
-                                                              ),
-                                                            ),
-                                                          )
-                                                        : const SizedBox(),
-                                                  ],
+                                return InkWell(
+                                  onTap: () async {
+                                    log(data[index].link);
+                                    Navigator.pop(context);
+                                    if (data[index].type == 1) {
+                                      menuProvider.eventSink
+                                          .add(MenuActions.article);
+                                      ArticleModel statiModel =
+                                          await articleBLoC.getArticle(
+                                              token, data[index].link);
+                                      articleBLoC.sink.add(statiModel);
+                                    } else if (data[index].type == 3) {
+                                      providerSendLink
+                                          .setLink(data[index].link);
+                                      menuProvider.eventSink
+                                          .add(MenuActions.chitatStati);
+                                    } else if (data[index].type == 4) {
+                                      final video = VideoDetails(
+                                          title: data[index].title,
+                                          pictureLink: data[index].picturelink,
+                                          videoLink: data[index].link);
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return Scaffold(
+                                            backgroundColor: Colors.transparent,
+                                            body: MultiProvider(
+                                              providers: [
+                                                Provider(
+                                                  create: (context) => index,
                                                 ),
+                                                Provider(
+                                                  create: (context) => token,
+                                                ),
+                                              ],
+                                              child: TopVideoVidget(
+                                                url: video.videoLink,
+                                                title: video.title,
                                               ),
                                             ),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                SizedBox(
-                                                  width: 240,
-                                                  child: Text(
-                                                    data[index].title,
-                                                    softWrap: true,
-                                                    maxLines: 3,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    style: GoogleFonts.montserrat(
-                                                        color: const Color(
-                                                            0xFF272624),
-                                                        fontSize: isTablet
-                                                            ? 14
-                                                            : 9.666666666666667,
-                                                        fontWeight:
-                                                            FontWeight.bold),
+                                          );
+                                        },
+                                      );
+                                    }
+                                  },
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 10, right: 10, top: 20),
+                                    child: SizedBox(
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                child: SizedBox(
+                                                  height: 65,
+                                                  width: 120,
+                                                  child: Stack(
+                                                    children: [
+                                                      ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        child:
+                                                            CachedNetworkImage(
+                                                          fit: BoxFit.cover,
+                                                          imageUrl: data[index]
+                                                              .picturelink,
+                                                          height: isTablet
+                                                              ? 110
+                                                              : 66.66666666666667,
+                                                          width: isTablet
+                                                              ? 150
+                                                              : 101.6666666666667,
+                                                        ),
+                                                      ),
+                                                      (data[index].type == 4)
+                                                          ? Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                          .only(
+                                                                      left: 40,
+                                                                      top: 21),
+                                                              child: Opacity(
+                                                                opacity: .5,
+                                                                child: Icon(
+                                                                  CupertinoIcons
+                                                                      .play_circle_fill,
+                                                                  size: isTablet
+                                                                      ? 45
+                                                                      : 25,
+                                                                  color: Colors
+                                                                      .white,
+                                                                ),
+                                                              ),
+                                                            )
+                                                          : const SizedBox(),
+                                                    ],
                                                   ),
                                                 ),
-                                                const SizedBox(
-                                                  height: 5,
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    SizedBox(
-                                                      width:
-                                                          isTablet ? 240 : 175,
+                                              ),
+                                              const SizedBox(
+                                                width: 11,
+                                              ),
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  SizedBox(
+                                                    width: 240,
+                                                    child: Text(
+                                                      data[index].title,
+                                                      softWrap: true,
+                                                      maxLines: 3,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      style: GoogleFonts.montserrat(
+                                                          color: const Color(
+                                                              0xFF272624),
+                                                          fontSize: isTablet
+                                                              ? 14
+                                                              : 9.666666666666667,
+                                                          fontWeight:
+                                                              FontWeight.bold),
                                                     ),
-                                                    InkWell(
-                                                      onTap: () async {
-                                                        log(data[index].link);
-
-                                                        Navigator.pop(context);
-
-                                                        if (data[index].type ==
-                                                            1) {
-                                                          menuProvider.eventSink
-                                                              .add(MenuActions
-                                                                  .article);
-                                                          ArticleModel
-                                                              statiModel =
-                                                              await articleBLoC
-                                                                  .getArticle(
-                                                                      token,
-                                                                      data[index]
-                                                                          .link);
-                                                          articleBLoC.sink
-                                                              .add(statiModel);
-                                                        } else if (data[index]
-                                                                .type ==
-                                                            3) {
-                                                          providerSendLink
-                                                              .setLink(
-                                                                  data[index]
-                                                                      .link);
-                                                          menuProvider.eventSink
-                                                              .add(MenuActions
-                                                                  .chitatStati);
-                                                        } else if (data[index]
-                                                                .type ==
-                                                            4) {
-                                                          final video = VideoDetails(
-                                                              title: data[index]
-                                                                  .title,
-                                                              pictureLink: data[
-                                                                      index]
-                                                                  .picturelink,
-                                                              videoLink:
-                                                                  data[index]
-                                                                      .link);
-
-                                                          showDialog(
-                                                            context: context,
-                                                            builder: (context) {
-                                                              return Scaffold(
-                                                                backgroundColor:
-                                                                    Colors
-                                                                        .transparent,
-                                                                body:
-                                                                    MultiProvider(
-                                                                  providers: [
-                                                                    Provider(
-                                                                      create: (context) =>
-                                                                          index,
-                                                                    ),
-                                                                    Provider(
-                                                                      create: (context) =>
-                                                                          token,
-                                                                    ),
-                                                                  ],
-                                                                  child:
-                                                                      TopVideoVidget(
-                                                                    url: video
-                                                                        .videoLink,
-                                                                    title: video
-                                                                        .title,
-                                                                  ),
-                                                                ),
-                                                              );
-                                                            },
-                                                          );
-                                                        }
-                                                      },
-                                                      child: Container(
+                                                  ),
+                                                  const SizedBox(
+                                                    height: 5,
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      SizedBox(
+                                                        width: isTablet
+                                                            ? 240
+                                                            : 175,
+                                                      ),
+                                                      Container(
                                                         alignment:
                                                             Alignment.center,
                                                         height:
@@ -297,18 +268,18 @@ class _SearchScreenState extends State<SearchScreen> {
                                                                   fontSize: 10),
                                                         ),
                                                       ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                        const Divider(
-                                          color: Color(0xFF8c8c8b),
-                                          thickness: 1,
-                                        )
-                                      ],
+                                                    ],
+                                                  ),
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                          const Divider(
+                                            color: Color(0xFF8c8c8b),
+                                            thickness: 1,
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 );

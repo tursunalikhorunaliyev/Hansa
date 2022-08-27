@@ -36,7 +36,6 @@ class SearchApi {
       headers: {"token": token},
       body: {"search": query},
     );
-    log("Data length in fun ${jsonDecode(response.body)['data'].length}");
     return SearchModel.fromMap(jsonDecode(response.body));
   }
 }

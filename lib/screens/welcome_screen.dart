@@ -11,6 +11,7 @@ import 'package:hansa_app/extra/exit_dialog.dart';
 import 'package:hansa_app/extra/glavniy_menyu.dart';
 import 'package:hansa_app/extra/hamburger.dart';
 import 'package:hansa_app/extra/ui_changer.dart';
+import 'package:hansa_app/page_routes/bottom_slide_page_route.dart';
 import 'package:hansa_app/providers/provider_personal_textFields.dart';
 import 'package:hansa_app/screens/search_screen.dart';
 import 'package:provider/provider.dart';
@@ -144,14 +145,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         ),
                         InkWell(
                           onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => Provider.value(
-                                  value: token,
-                                  child: const SearchScreen(),
-                                ),
+                            Navigator.of(context).push(SlideTransitionBottom(
+                              Provider.value(
+                                value: token,
+                                child: const SearchScreen(),
                               ),
-                            );
+                            ));
                           },
                           child: Icon(
                             CupertinoIcons.search,
