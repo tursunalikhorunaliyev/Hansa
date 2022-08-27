@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/obucheniya_model_api.dart';
@@ -19,7 +18,7 @@ class ObucheniyaWidget extends StatelessWidget {
     final isTablet = Provider.of<bool>(context);
 
     final token = Provider.of<String>(context);
-    final bloc = BlocObucheniya(token);
+    final bloc = Provider.of<BlocObucheniya>(context);
     bloc.eventSink.add(ObucheniyaEnum.obucheniya);
     final welcomeApi = WelcomeApi(token);
     welcomeApi.eventSink.add(WelcomeApiAction.fetch);
@@ -34,8 +33,8 @@ class ObucheniyaWidget extends StatelessWidget {
               children: List.generate(
             1,
             (index) {
-              return FutureBuilder<ObucheniyaModel>(
-                  future: bloc.getObucheniya(token),
+              return StreamBuilder<ObucheniyaModel>(
+                  stream: bloc.stream,
                   builder: (context, snapshot) {
                     if (snapshot.data != null) {
                       return Column(
@@ -86,57 +85,59 @@ class ObucheniyaWidget extends StatelessWidget {
                             ),
                             content: isTablet
                                 ? Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                                  child: GridView(
-                                    controller: scroll,
-                                    shrinkWrap: true,
-                                    gridDelegate:
-                                         const SliverGridDelegateWithFixedCrossAxisCount(
-                                            crossAxisCount: 2,
-                                            crossAxisSpacing: 10,
-                                            mainAxisExtent: 375),
-                                    children: List.generate(
-                                        snapshot.data!.data.listGuides.list
-                                            .length, (index) {
-                                      return Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 5.0),
-                                          child: StackedStackObuch(
-                                              isFavouriteURL: snapshot
-                                                  .data!
-                                                  .data
-                                                  .listGuides
-                                                  .list[index]
-                                                  .favouriteLink,
-                                              buttonColor: const Color(0xffff163e),
-                                              bottomButtonText: 'скачать ',
-                                              title: snapshot
-                                                  .data!
-                                                  .data
-                                                  .listGuides
-                                                  .list[index]
-                                                  .title,
-                                              url: snapshot
-                                                  .data!
-                                                  .data
-                                                  .listGuides
-                                                  .list[index]
-                                                  .pictureLink,
-                                              isFavourite: snapshot
-                                                  .data!
-                                                  .data
-                                                  .listGuides
-                                                  .list[index]
-                                                  .isFavourite,
-                                              linkPDF: snapshot
-                                                  .data!
-                                                  .data
-                                                  .listGuides
-                                                  .list[index]
-                                                  .pdfUrl));
-                                    }),
-                                  ),
-                                )
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 25),
+                                    child: GridView(
+                                      controller: scroll,
+                                      shrinkWrap: true,
+                                      gridDelegate:
+                                          const SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 2,
+                                              crossAxisSpacing: 10,
+                                              mainAxisExtent: 375),
+                                      children: List.generate(
+                                          snapshot.data!.data.listGuides.list
+                                              .length, (index) {
+                                        return Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 5.0),
+                                            child: StackedStackObuch(
+                                                isFavouriteURL: snapshot
+                                                    .data!
+                                                    .data
+                                                    .listGuides
+                                                    .list[index]
+                                                    .favouriteLink,
+                                                buttonColor:
+                                                    const Color(0xffff163e),
+                                                bottomButtonText: 'скачать ',
+                                                title: snapshot
+                                                    .data!
+                                                    .data
+                                                    .listGuides
+                                                    .list[index]
+                                                    .title,
+                                                url: snapshot
+                                                    .data!
+                                                    .data
+                                                    .listGuides
+                                                    .list[index]
+                                                    .pictureLink,
+                                                isFavourite: snapshot
+                                                    .data!
+                                                    .data
+                                                    .listGuides
+                                                    .list[index]
+                                                    .isFavourite,
+                                                linkPDF: snapshot
+                                                    .data!
+                                                    .data
+                                                    .listGuides
+                                                    .list[index]
+                                                    .pdfUrl));
+                                      }),
+                                    ),
+                                  )
                                 : Column(
                                     children: [
                                       Row(),
@@ -148,7 +149,8 @@ class ObucheniyaWidget extends StatelessWidget {
                                                 .listGuides
                                                 .list[index]
                                                 .favouriteLink,
-                                            buttonColor: const Color(0xffff163e),
+                                            buttonColor:
+                                                const Color(0xffff163e),
                                             bottomButtonText: 'скачать ',
                                             title: snapshot.data!.data
                                                 .listGuides.list[index].title,
@@ -222,7 +224,7 @@ class ObucheniyaWidget extends StatelessWidget {
                                           const SliverGridDelegateWithFixedCrossAxisCount(
                                               crossAxisCount: 2,
                                               crossAxisSpacing: 10,
-                                             mainAxisExtent: 375),
+                                              mainAxisExtent: 375),
                                       children: List.generate(
                                           snapshot.data!.data.listArchiveGuides
                                               .list.length, (index) {
@@ -236,7 +238,8 @@ class ObucheniyaWidget extends StatelessWidget {
                                                     .listArchiveGuides
                                                     .list[index]
                                                     .favouriteLink,
-                                                buttonColor: const Color(0xffff163e),
+                                                buttonColor:
+                                                    const Color(0xffff163e),
                                                 bottomButtonText: 'скачать ',
                                                 title: snapshot
                                                     .data!
@@ -277,7 +280,8 @@ class ObucheniyaWidget extends StatelessWidget {
                                                   .listArchiveGuides
                                                   .list[index]
                                                   .favouriteLink,
-                                              buttonColor: const Color(0xffff163e),
+                                              buttonColor:
+                                                  const Color(0xffff163e),
                                               bottomButtonText: 'скачать ',
                                               title: snapshot
                                                   .data!
@@ -311,6 +315,8 @@ class ObucheniyaWidget extends StatelessWidget {
                         ],
                       );
                     } else {
+                      bloc.eventSink.add(ObucheniyaEnum.obucheniya);
+                      welcomeApi.eventSink.add(WelcomeApiAction.fetch);
                       return Padding(
                         padding: EdgeInsets.only(
                             top:

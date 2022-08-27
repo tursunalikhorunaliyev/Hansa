@@ -65,7 +65,7 @@ class _UIChangerState extends State<UIChanger> {
     final playProvider = Provider.of<BlocPlayVideo>(context);
     final providerToken = Provider.of<String>(context);
     final isTablet = Provider.of<bool>(context);
-    final welcomeApi = WelcomeApi(providerToken);
+
     return StreamBuilder<bool>(
       initialData: false,
       stream: checkNet().asStream(),
@@ -84,9 +84,7 @@ class _UIChangerState extends State<UIChanger> {
                     ? const ArticleScreenTab()
                     : const ArticleScreen();
               } else if (snapshot.data == MenuActions.welcome) {
-                return Provider<WelcomeApi>(
-                    create: (context) => welcomeApi,
-                    child: const WelcomeWidget());
+                return const WelcomeWidget();
               } else if (snapshot.data == MenuActions.obuchayushieMaterial) {
                 return const ObucheniyaWidget();
               } else if (snapshot.data == MenuActions.prezintatsiya) {

@@ -3,6 +3,8 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hansa_app/api_services/welcome_api.dart';
+import 'package:hansa_app/blocs/bloc_obucheniya.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/classes/tap_favorite.dart';
 import 'package:hansa_app/extra/exit_dialog.dart';
@@ -28,6 +30,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     final menuProvider = Provider.of<MenuEventsBloC>(context);
     final providerTapFavorite = Provider.of<TapFavorite>(context);
     final token = Provider.of<String>(context);
+    final welcomeApi = WelcomeApi(token);
+    final bloc = BlocObucheniya(token);
 
     return WillPopScope(
       onWillPop: () async {
@@ -39,7 +43,13 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         resizeToAvoidBottomInset: false,
         drawer: MultiProvider(providers: [
           Provider(create: (context) => ProviderPersonalTextFields()),
-          Provider(create: (context) => providerScaffoldKey)
+          Provider(create: (context) => providerScaffoldKey),
+          Provider<WelcomeApi>(
+            create: (context) => welcomeApi,
+          ),
+          Provider<BlocObucheniya>(
+            create: (context) => bloc,
+          )
         ], child: const GlavniyMenyu()),
         key: providerScaffoldKey,
         bottomNavigationBar: StreamBuilder<MenuActions>(
@@ -152,9 +162,20 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     ),
                   ),
                 ),
-                Provider(
-                    create: (context) => providerScaffoldKey,
-                    child: const UIChanger()),
+                MultiProvider(
+                  providers: [
+                    Provider<BlocObucheniya>(
+                      create: (context) => bloc,
+                    ),
+                    Provider(
+                      create: (context) => providerScaffoldKey,
+                    ),
+                    Provider(
+                      create: (context) => welcomeApi,
+                    )
+                  ],
+                  child: const UIChanger(),
+                ),
               ],
             ),
           ],
