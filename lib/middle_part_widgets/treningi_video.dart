@@ -22,7 +22,6 @@ import 'package:hansa_app/providers/treningi_photos_provider.dart';
 import 'package:hansa_app/providers/treningi_videos_provider.dart';
 import 'package:hansa_app/training_video_section/custom_tablet_photos.dart';
 import 'package:hansa_app/training_video_section/custom_treningi_photos.dart';
-import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:lottie/lottie.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -133,7 +132,7 @@ class _TreningiVideoState extends State<TreningiVideo> {
                           ? const TabletPhotosItem()
                           : const CustomTreningiPhotos()
                       : SizedBox(
-                          height: 350,
+                          height: isTablet ? 500 : 350,
                           child: Padding(
                             padding: const EdgeInsets.only(
                                 bottom: 11, left: 25, right: 25),
@@ -150,7 +149,8 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                     chewieController = ChewieController(
                                       autoPlay: true,
                                       allowedScreenSleep: false,
-                                      aspectRatio: 16 / 10.9,
+                                      aspectRatio:
+                                          isTablet ? 13.6 / 7.2 : 16 / 10.9,
                                       autoInitialize: true,
                                       deviceOrientationsOnEnterFullScreen: [
                                         DeviceOrientation.landscapeLeft,
@@ -192,7 +192,7 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                               borderRadius:
                                                   BorderRadius.circular(10),
                                               child: SizedBox(
-                                                height: 235,
+                                                height: isTablet ? 400 : 235,
                                                 width: double.infinity,
                                                 child: Chewie(
                                                   controller: chewieController,
@@ -440,8 +440,8 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                           ],
                                         ),
                                         Positioned(
-                                          top: 500,
-                                          right: 110,
+                                          top: isTablet ? 377 : 500,
+                                          right: isTablet ? 35 : 110,
                                           child: Container(
                                             height: 55,
                                             width: 55,

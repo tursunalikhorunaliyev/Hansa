@@ -13,7 +13,6 @@ import 'package:hansa_app/extra/my_behavior%20.dart';
 import 'package:hansa_app/stacked_stack.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:video_player/video_player.dart';
 
 class WelcomeWidget extends StatefulWidget {
@@ -24,8 +23,7 @@ class WelcomeWidget extends StatefulWidget {
 }
 
 class _WelcomeWidgetState extends State<WelcomeWidget> {
-  RefreshController refreshController =
-      RefreshController(initialRefresh: false);
+
 
   ChewieController chewieController = ChewieController(
       videoPlayerController: VideoPlayerController.network(""),

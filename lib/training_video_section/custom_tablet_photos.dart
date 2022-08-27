@@ -55,6 +55,7 @@ class _TabletPhotosItemState extends State<TabletPhotosItem> {
     progress = 0;
 
     String savePath = await getFilePath(fileName, index);
+  
 
     if (await File(savePath).exists()) {
       return false;

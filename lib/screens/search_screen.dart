@@ -41,7 +41,7 @@ class _SearchScreenState extends State<SearchScreen> {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 50, bottom: 10),
+            padding: const EdgeInsets.only(top: 50, bottom: 20),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -108,193 +108,237 @@ class _SearchScreenState extends State<SearchScreen> {
                               children: List.generate(data.length, (index) {
                                 return Padding(
                                   padding: const EdgeInsets.only(
-                                      left: 10, right: 10, top: 20),
-                                  child: SizedBox(
-                                    child: Column(
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
-                                              child: SizedBox(
-                                                height: 65,
-                                                width: 120,
-                                                child: Stack(
-                                                  children: [
-                                                    ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      child: CachedNetworkImage(
-                                                        fit: BoxFit.cover,
-                                                        imageUrl: data[index]
-                                                            .picturelink,
-                                                        height: isTablet
-                                                            ? 110
-                                                            : 66.66666666666667,
-                                                        width: isTablet
-                                                            ? 150
-                                                            : 101.6666666666667,
-                                                      ),
-                                                    ),
-                                                    (data[index].type == 4)
-                                                        ? Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                        .only(
-                                                                    left: 40,
-                                                                    top: 21),
-                                                            child: Opacity(
-                                                              opacity: .5,
-                                                              child: Icon(
-                                                                CupertinoIcons
-                                                                    .play_circle_fill,
-                                                                size: isTablet
-                                                                    ? 45
-                                                                    : 25,
-                                                                color: Colors
-                                                                    .white,
-                                                              ),
-                                                            ),
-                                                          )
-                                                        : const SizedBox(),
-                                                  ],
+                                      left: 10, right: 10, top: 5),
+                                  child: InkWell(
+                                    onTap: () async {
+                                      log(data[index].link);
+
+                                      Navigator.pop(context);
+
+                                      if (data[index].type == 1) {
+                                        menuProvider.eventSink
+                                            .add(MenuActions.article);
+                                        ArticleModel statiModel =
+                                            await articleBLoC.getArticle(
+                                                token, data[index].link);
+                                        articleBLoC.sink.add(statiModel);
+                                      } else if (data[index].type == 3) {
+                                        providerSendLink
+                                            .setLink(data[index].link);
+                                        menuProvider.eventSink
+                                            .add(MenuActions.chitatStati);
+                                      } else if (data[index].type == 4) {
+                                        final video = VideoDetails(
+                                            title: data[index].title,
+                                            pictureLink:
+                                                data[index].picturelink,
+                                            videoLink: data[index].link);
+
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) {
+                                            return Scaffold(
+                                              backgroundColor:
+                                                  Colors.transparent,
+                                              body: MultiProvider(
+                                                providers: [
+                                                  Provider(
+                                                    create: (context) => index,
+                                                  ),
+                                                  Provider(
+                                                    create: (context) => token,
+                                                  ),
+                                                ],
+                                                child: TopVideoVidget(
+                                                  url: video.videoLink,
+                                                  title: video.title,
                                                 ),
                                               ),
-                                            ),
-                                            const SizedBox(
-                                              width: 11,
-                                            ),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                SizedBox(
-                                                  width: 240,
-                                                  child: Text(
-                                                    data[index].title,
-                                                    softWrap: true,
-                                                    maxLines: 3,
-                                                    overflow:
-                                                        TextOverflow.ellipsis,
-                                                    style: GoogleFonts.montserrat(
-                                                        color: const Color(
-                                                            0xFF272624),
-                                                        fontSize: isTablet
-                                                            ? 14
-                                                            : 9.666666666666667,
-                                                        fontWeight:
-                                                            FontWeight.bold),
+                                            );
+                                          },
+                                        );
+                                      }
+                                    },
+                                    child: SizedBox(
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            children: [
+                                              ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(5),
+                                                child: SizedBox(
+                                                  height: 65,
+                                                  width: 120,
+                                                  child: Stack(
+                                                    children: [
+                                                      ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(5),
+                                                        child:
+                                                            CachedNetworkImage(
+                                                          fit: BoxFit.cover,
+                                                          imageUrl: data[index]
+                                                              .picturelink,
+                                                          height: isTablet
+                                                              ? 110
+                                                              : 66.66666666666667,
+                                                          width: isTablet
+                                                              ? 150
+                                                              : 101.6666666666667,
+                                                        ),
+                                                      ),
+                                                      (data[index].type == 4)
+                                                          ? Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                          .only(
+                                                                      left: 40,
+                                                                      top: 21),
+                                                              child: Opacity(
+                                                                opacity: .5,
+                                                                child: Icon(
+                                                                  CupertinoIcons
+                                                                      .play_circle_fill,
+                                                                  size: isTablet
+                                                                      ? 45
+                                                                      : 25,
+                                                                  color: Colors
+                                                                      .white,
+                                                                ),
+                                                              ),
+                                                            )
+                                                          : const SizedBox(),
+                                                    ],
                                                   ),
                                                 ),
-                                                const SizedBox(
-                                                  height: 5,
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    SizedBox(
-                                                      width:
-                                                          isTablet ? 240 : 90,
+                                              ),
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  SizedBox(
+                                                    width: 240,
+                                                    child: Text(
+                                                      data[index].title,
+                                                      softWrap: true,
+                                                      maxLines: 3,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
+                                                      style: GoogleFonts.montserrat(
+                                                          color: const Color(
+                                                              0xFF272624),
+                                                          fontSize: isTablet
+                                                              ? 14
+                                                              : 9.666666666666667,
+                                                          fontWeight:
+                                                              FontWeight.bold),
                                                     ),
-                                                    InkWell(
-                                                      onTap: () async {
-                                                        log(data[index].link);
+                                                  ),
+                                                  InkWell(
+                                                    onTap: () async {
+                                                      log(data[index].link);
 
-                                                        if (data[index].type ==
-                                                            1) {
-                                                          Navigator.pop(
-                                                              context);
-                                                          menuProvider.eventSink
-                                                              .add(MenuActions
-                                                                  .article);
-                                                          ArticleModel
-                                                              statiModel =
-                                                              await articleBLoC
-                                                                  .getArticle(
-                                                                      token,
-                                                                      data[index]
-                                                                          .link);
-                                                          articleBLoC.sink
-                                                              .add(statiModel);
-                                                        } else if (data[index]
-                                                                .type ==
-                                                            3) {
-                                                          Navigator.pop(
-                                                              context);
-                                                          providerSendLink
-                                                              .setLink(
-                                                                  data[index]
-                                                                      .link);
-                                                          menuProvider.eventSink
-                                                              .add(MenuActions
-                                                                  .chitatStati);
-                                                        } else if (data[index]
-                                                                .type ==
-                                                            4) {
-                                                          final video = VideoDetails(
-                                                              title: data[index]
-                                                                  .title,
-                                                              pictureLink: data[
-                                                                      index]
-                                                                  .picturelink,
-                                                              videoLink:
-                                                                  data[index]
-                                                                      .link);
+                                                      if (data[index].type ==
+                                                          1) {
+                                                        Navigator.pop(context);
+                                                        menuProvider.eventSink
+                                                            .add(MenuActions
+                                                                .article);
+                                                        ArticleModel
+                                                            statiModel =
+                                                            await articleBLoC
+                                                                .getArticle(
+                                                                    token,
+                                                                    data[index]
+                                                                        .link);
+                                                        articleBLoC.sink
+                                                            .add(statiModel);
+                                                      } else if (data[index]
+                                                              .type ==
+                                                          3) {
+                                                        Navigator.pop(context);
+                                                        providerSendLink
+                                                            .setLink(data[index]
+                                                                .link);
+                                                        menuProvider.eventSink
+                                                            .add(MenuActions
+                                                                .chitatStati);
+                                                      } else if (data[index]
+                                                              .type ==
+                                                          4) {
+                                                        final video = VideoDetails(
+                                                            title: data[index]
+                                                                .title,
+                                                            pictureLink: data[
+                                                                    index]
+                                                                .picturelink,
+                                                            videoLink:
+                                                                data[index]
+                                                                    .link);
 
-                                                          showDialog(
-                                                            context: context,
-                                                            builder: (context) {
-                                                              return Scaffold(
-                                                                backgroundColor:
-                                                                    Colors
-                                                                        .transparent,
-                                                                body:
-                                                                    MultiProvider(
-                                                                  providers: [
-                                                                    Provider(
-                                                                      create: (context) =>
-                                                                          index,
-                                                                    ),
-                                                                    Provider(
-                                                                      create: (context) =>
-                                                                          token,
-                                                                    ),
-                                                                  ],
-                                                                  child:
-                                                                      TopVideoVidget(
-                                                                    url: video
-                                                                        .videoLink,
-                                                                    title: video
-                                                                        .title,
+                                                        showDialog(
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return Scaffold(
+                                                              backgroundColor:
+                                                                  Colors
+                                                                      .transparent,
+                                                              body:
+                                                                  MultiProvider(
+                                                                providers: [
+                                                                  Provider(
+                                                                    create:
+                                                                        (context) =>
+                                                                            index,
                                                                   ),
+                                                                  Provider(
+                                                                    create:
+                                                                        (context) =>
+                                                                            token,
+                                                                  ),
+                                                                ],
+                                                                child:
+                                                                    TopVideoVidget(
+                                                                  url: video
+                                                                      .videoLink,
+                                                                  title: video
+                                                                      .title,
                                                                 ),
-                                                              );
-                                                            },
-                                                          );
-                                                        }
-                                                      },
-                                                      child: Container(
+                                                              ),
+                                                            );
+                                                          },
+                                                        );
+                                                      }
+                                                    },
+                                                  ),
+                                                  Row(
+                                                    children: [
+                                                      SizedBox(
+                                                        width: isTablet
+                                                            ? 240
+                                                            : 175,
+                                                      ),
+                                                      Container(
                                                         alignment:
                                                             Alignment.center,
                                                         height:
                                                             isTablet ? 22 : 21,
                                                         width:
                                                             isTablet ? 74 : 63,
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          border: Border.all(
-                                                              color: Colors
-                                                                  .transparent),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      10.5),
-                                                          color: const Color(
-                                                              0xFF313131),
-                                                        ),
+                                                        decoration: BoxDecoration(
+                                                            border: Border.all(
+                                                                color: Colors
+                                                                    .transparent),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10.5),
+                                                            color: const Color(
+                                                                0xffe21a37)),
                                                         child: Text(
                                                           "Показать",
                                                           style: GoogleFonts
@@ -304,18 +348,18 @@ class _SearchScreenState extends State<SearchScreen> {
                                                                   fontSize: 10),
                                                         ),
                                                       ),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                        const Divider(
-                                          color: Color(0xFF8c8c8b),
-                                          thickness: 1,
-                                        )
-                                      ],
+                                                    ],
+                                                  ),
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                          const Divider(
+                                            color: Color(0xFF8c8c8b),
+                                            thickness: 1,
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   ),
                                 );
