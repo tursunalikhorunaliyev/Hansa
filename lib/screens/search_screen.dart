@@ -203,10 +203,10 @@ class _SearchScreenState extends State<SearchScreen> {
                                                       onTap: () async {
                                                         log(data[index].link);
 
-                                                        Navigator.pop(context);
-
                                                         if (data[index].type ==
                                                             1) {
+                                                          Navigator.pop(
+                                                              context);
                                                           menuProvider.eventSink
                                                               .add(MenuActions
                                                                   .article);
@@ -222,6 +222,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                                         } else if (data[index]
                                                                 .type ==
                                                             3) {
+                                                          Navigator.pop(
+                                                              context);
                                                           providerSendLink
                                                               .setLink(
                                                                   data[index]
