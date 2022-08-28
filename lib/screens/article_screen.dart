@@ -96,14 +96,14 @@ class ArticleScreen extends StatelessWidget {
             return Expanded(
               child: Column(
                 children: [
-                  Spacer(),
+                const   Spacer(),
                   Center(
                       child: Lottie.asset(
                     'assets/pre.json',
                     height: 70,
                     width: 70,
                   )),
-                  Spacer()
+                const  Spacer()
                 ],
               ),
             );
