@@ -283,7 +283,8 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                       .toString(),
                                   providerPersonalDannieTextFilelds
                                       .getAddressController.text);
-
+                              log(providerPersonalDannieTextFilelds
+                                  .getDataRojdeniyaController.text);
                               blocGlavniyMenuUserInfo.eventSink
                                   .add(EnumActionView.view);
                             }
@@ -452,8 +453,10 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                           : snapshot.data ==
                                                   ActionChange.nastroyka
                                               ? ChangeNotifierProvider(
-                                                create: (context) => ProviderOtpravitRassilku(),
-                                                child: const NastroykaWidget())
+                                                  create: (context) =>
+                                                      ProviderOtpravitRassilku(),
+                                                  child:
+                                                      const NastroykaWidget())
                                               : const Padding(
                                                   padding:
                                                       EdgeInsets.only(left: 39),
