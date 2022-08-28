@@ -28,7 +28,8 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
   ChewieController chewieController = ChewieController(
       videoPlayerController: VideoPlayerController.network(""),
       aspectRatio: 13.6 / 7.2,
-      autoPlay: false);
+    
+      autoPlay: false)..setVolume(0);
   @override
   void initState() {
     super.initState();
@@ -65,7 +66,7 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                       VideoPlayerController.network(videoLink),
                   aspectRatio: 13.6 / 7.2,
                   autoPlay: true
-                );
+                )..setVolume(0);
                 snapshotCount = 1;
                
               }

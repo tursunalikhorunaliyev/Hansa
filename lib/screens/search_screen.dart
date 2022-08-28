@@ -37,12 +37,21 @@ class _SearchScreenState extends State<SearchScreen> {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 50, bottom: 10),
+            padding: const EdgeInsets.only(top: 50, bottom: 10, left: 10, right: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
+                 InkWell(
+                   onTap: () {
+                     Navigator.pop(context);
+                   },
+                   child: Icon(
+                    Icons.arrow_back,
+                    color: Colors.grey[500],
+                                 ),
+                 ),
                 SizedBox(
-                  width: .90.sw,
+                  width: .85.sw,
                   child: TextField(
                     controller: search,
                     onChanged: (value) {
@@ -82,7 +91,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         child: Icon(
                           Icons.search,
                           size: isTablet ? 25 : 20,
-                          color: Color(0xFF272624),
+                          color: const Color(0xFF272624),
                         ),
                       ),
                     ),
@@ -104,8 +113,9 @@ class _SearchScreenState extends State<SearchScreen> {
                               children: List.generate(data.length, (index) {
                                 return InkWell(
                                   onTap: () async {
-                                    Navigator.pop(context);
                                     if (data[index].type == 1) {
+
+                                    Navigator.pop(context);
                                       menuProvider.eventSink
                                           .add(MenuActions.article);
                                       ArticleModel statiModel =
@@ -113,6 +123,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                               token, data[index].link);
                                       articleBLoC.sink.add(statiModel);
                                     } else if (data[index].type == 3) {
+
+                                    Navigator.pop(context);
                                       providerSendLink
                                           .setLink(data[index].link);
                                       menuProvider.eventSink
@@ -148,12 +160,14 @@ class _SearchScreenState extends State<SearchScreen> {
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.only(
-                                        left: 10, right: 10, top: 10),
+                                        left: 30, right: 32),
                                     child: Column(
+                                      
                                       children: [
+                                      
                                         Row(
                                           mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
+                                              MainAxisAlignment.start,
                                           children: [
                                             ClipRRect(
                                               borderRadius:
@@ -165,10 +179,9 @@ class _SearchScreenState extends State<SearchScreen> {
                                                   children: [
                                                     ClipRRect(
                                                       borderRadius:
-                                                          BorderRadius
-                                                              .circular(5),
-                                                      child:
-                                                          CachedNetworkImage(
+                                                          BorderRadius.circular(
+                                                              5),
+                                                      child: CachedNetworkImage(
                                                         fit: BoxFit.cover,
                                                         imageUrl: data[index]
                                                             .picturelink,
@@ -205,14 +218,15 @@ class _SearchScreenState extends State<SearchScreen> {
                                                 ),
                                               ),
                                             ),
-                                           
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.end,
-                                              children: [
-                                                SizedBox(
-                                                  width: MediaQuery.of(context).size.width*0.6,
-                                                  child: Text(
+                                          isTablet? const SizedBox(
+                                              width: 20,
+                                            ): const SizedBox(),
+                                            Expanded(
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
                                                     data[index].title,
                                                     softWrap: true,
                                                     maxLines: 3,
@@ -227,44 +241,44 @@ class _SearchScreenState extends State<SearchScreen> {
                                                         fontWeight:
                                                             FontWeight.bold),
                                                   ),
-                                                ),
-                                                const SizedBox(
-                                                  height: 5,
-                                                ),
-                                                Row(
-                                                 
-                                                  children: [
-                                                   
-                                                    Container(
-                                                      alignment:
-                                                          Alignment.center,
-                                                      height:
-                                                          isTablet ? 22 : 21,
-                                                      width:
-                                                          isTablet ? 74 : 63,
-                                                      decoration: BoxDecoration(
-                                                          border: Border.all(
-                                                              color: Colors
-                                                                  .transparent),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      10.5),
-                                                          color: const Color(
-                                                              0xffe21a37)),
-                                                      child: Text(
-                                                        "Показать",
-                                                        style: GoogleFonts
-                                                            .montserrat(
+                                                  const SizedBox(
+                                                    height: 12,
+                                                  ),
+                                                  Row(
+                                                    mainAxisAlignment: MainAxisAlignment.end,
+                                                    children: [
+                                                      Container(
+                                                        alignment:
+                                                            Alignment.center,
+                                                        height:
+                                                            isTablet ? 22 : 21,
+                                                        width: isTablet ? 74 : 63,
+                                                        decoration: BoxDecoration(
+                                                            border: Border.all(
                                                                 color: Colors
-                                                                    .white,
-                                                                fontSize: 10),
+                                                                    .transparent),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10.5),
+                                                            color: const Color(
+                                                                0xffe21a37)),
+                                                        child: Text(
+                                                          "Показать",
+                                                          style: GoogleFonts
+                                                              .montserrat(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontSize: 10),
+                                                        ),
                                                       ),
-                                                    ),
-                                                    const SizedBox(width: 10,)
-                                                  ],
-                                                ),
-                                              ],
+                                                      const SizedBox(
+                                                        width: 10,
+                                                      )
+                                                    ],
+                                                  ),
+                                                ],
+                                              ),
                                             )
                                           ],
                                         ),
