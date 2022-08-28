@@ -28,11 +28,10 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     final isTablet = Provider.of<bool>(context);
     final token = Provider.of<String>(context);
-    SearchApi searchApi = SearchApi(token, search.text);
+    SearchApi searchApi = SearchApi();
     final articleBLoC = Provider.of<ArticleBLoC>(context);
     final menuProvider = Provider.of<MenuEventsBloC>(context);
     final providerSendLink = Provider.of<SendLink>(context);
-    searchApi.eventSink.add(SearchAction.search);
     return Scaffold(
       body: Column(
         children: [
@@ -46,7 +45,7 @@ class _SearchScreenState extends State<SearchScreen> {
                      Navigator.pop(context);
                    },
                    child: Icon(
-                    Icons.arrow_back,
+                    CupertinoIcons.back,
                     color: Colors.grey[500],
                                  ),
                  ),
@@ -100,8 +99,8 @@ class _SearchScreenState extends State<SearchScreen> {
               ],
             ),
           ),
-          StreamBuilder<SearchModel>(
-              stream: searchApi.dataStream,
+          FutureBuilder<SearchModel>(
+              future: searchApi.getSearchData(token, search.text),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   final data = snapshot.data!.data.data;
@@ -109,6 +108,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   return (search.text.length > 2)
                       ? Expanded(
                           child: SingleChildScrollView(
+                            physics: const BouncingScrollPhysics(),
                             child: Column(
                               children: List.generate(data.length, (index) {
                                 return InkWell(
@@ -160,7 +160,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.only(
-                                        left: 30, right: 32),
+                                        left: 15, right: 15),
                                     child: Column(
                                       
                                       children: [
