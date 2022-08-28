@@ -63,7 +63,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           color: Color(0xFF272624),
                         ),
                       ),
-                      hintStyle: const TextStyle(fontSize: 12),
+                      hintStyle: TextStyle(fontSize: isTablet ? 18 : 12),
                       hintText: "Поиск",
                       focusedBorder: const UnderlineInputBorder(
                         borderSide: BorderSide(
@@ -79,9 +79,9 @@ class _SearchScreenState extends State<SearchScreen> {
                             setState(() {});
                           }
                         },
-                        child: const Icon(
+                        child: Icon(
                           Icons.search,
-                          size: 20,
+                          size: isTablet ? 25 : 20,
                           color: Color(0xFF272624),
                         ),
                       ),
@@ -104,7 +104,6 @@ class _SearchScreenState extends State<SearchScreen> {
                               children: List.generate(data.length, (index) {
                                 return InkWell(
                                   onTap: () async {
-                                    log(data[index].link);
                                     Navigator.pop(context);
                                     if (data[index].type == 1) {
                                       menuProvider.eventSink
@@ -161,8 +160,8 @@ class _SearchScreenState extends State<SearchScreen> {
                                                 borderRadius:
                                                     BorderRadius.circular(5),
                                                 child: SizedBox(
-                                                  height: 65,
-                                                  width: 120,
+                                                  height: isTablet ? 110 : 65,
+                                                  width: isTablet ? 200 : 120,
                                                   child: Stack(
                                                     children: [
                                                       ClipRRect(
@@ -178,7 +177,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                                               ? 110
                                                               : 66.66666666666667,
                                                           width: isTablet
-                                                              ? 150
+                                                              ? 200
                                                               : 101.6666666666667,
                                                         ),
                                                       ),
@@ -236,9 +235,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                                     height: 5,
                                                   ),
                                                   Row(
-                                                   
                                                     children: [
-                                                     
                                                       Container(
                                                         alignment:
                                                             Alignment.center,
