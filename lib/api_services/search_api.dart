@@ -1,9 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:hansa_app/api_models.dart/search_model.dart';
-import 'package:hansa_app/enums/search_action.dart';
 import 'package:http/http.dart' as http;
 
 class SearchApi {

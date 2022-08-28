@@ -4,7 +4,6 @@ import 'package:chewie/chewie.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gallery_saver/gallery_saver.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/blocs/bloc_detect_tap.dart';
 import 'package:hansa_app/blocs/download_progress_bloc.dart';
@@ -99,7 +98,7 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
     if (Platform.isIOS) {
       Directory directory = await getApplicationSupportDirectory();
       dir = directory.path;
-      log(dir+"kkkkkkkkkkkkk");
+      log("${dir}kkkkkkkkkkkkk");
     } else if (Platform.isAndroid) {
       dir = "/storage/emulated/0/Download/";
     }
@@ -128,7 +127,7 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
           if (progress == 100) {
             log("Download complate");
           } else {
-            log(progress.toString() + " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+            log("$progress %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
           }
         },
         deleteOnError: true,

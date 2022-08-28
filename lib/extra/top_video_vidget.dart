@@ -118,7 +118,7 @@ class _TopVideoVidgetState extends State<TopVideoVidget> {
             
           }
           else{
-            log(progress.toString() + " download progress");
+            log("$progress download progress");
           }
         },
         deleteOnError: true,
@@ -234,7 +234,7 @@ class _TopVideoVidgetState extends State<TopVideoVidget> {
                                                         .title,
                                                     providerBlocProgress,
                                                   ).then((value) {
-                                                    log(value.toString() + " download status");
+                                                    log("$value download status");
                                                     providerSendAnaliseDownload.setAnalise(value);
                                                   });
                                                 } else {

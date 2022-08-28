@@ -89,7 +89,7 @@ class _TreningiVideoState extends State<TreningiVideo> {
           if (progress == 100) {
             log("Download success");
           } else {
-            log(progress.toString() + " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+            log("$progress %%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
           }
         },
         deleteOnError: true,

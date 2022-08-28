@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:hansa_app/download_exists.dart';
 import 'package:hansa_app/screens/splash_screen.dart';
 import 'package:permission_handler/permission_handler.dart';
 
