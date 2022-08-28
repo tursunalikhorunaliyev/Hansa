@@ -63,7 +63,7 @@ class _SearchScreenState extends State<SearchScreen> {
                           color: Color(0xFF272624),
                         ),
                       ),
-                      hintStyle: const TextStyle(fontSize: 12),
+                      hintStyle: TextStyle(fontSize: isTablet ? 18 : 12),
                       hintText: "Поиск",
                       focusedBorder: const UnderlineInputBorder(
                         borderSide: BorderSide(
@@ -79,9 +79,9 @@ class _SearchScreenState extends State<SearchScreen> {
                             setState(() {});
                           }
                         },
-                        child: const Icon(
+                        child: Icon(
                           Icons.search,
-                          size: 20,
+                          size: isTablet ? 25 : 20,
                           color: Color(0xFF272624),
                         ),
                       ),
@@ -104,7 +104,6 @@ class _SearchScreenState extends State<SearchScreen> {
                               children: List.generate(data.length, (index) {
                                 return InkWell(
                                   onTap: () async {
-                                    log(data[index].link);
                                     Navigator.pop(context);
                                     if (data[index].type == 1) {
                                       menuProvider.eventSink
@@ -177,7 +176,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                                             ? 110
                                                             : 66.66666666666667,
                                                         width: isTablet
-                                                            ? 150
+                                                            ? 200
                                                             : 101.6666666666667,
                                                       ),
                                                     ),
@@ -262,6 +261,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                                                 fontSize: 10),
                                                       ),
                                                     ),
+                                                    const SizedBox(width: 10,)
                                                   ],
                                                 ),
                                               ],
