@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/treningi_photos_model.dart';
 import 'package:hansa_app/api_services/treningi_photos_api.dart';
@@ -262,6 +263,7 @@ class _CustomTreningiPhotosState extends State<CustomTreningiPhotos> {
                                           ).then((value) {
                                             providerSendAnaliseDonwload
                                                 .setAnalise(value);
+                                             
                                           });
                                           log("StreamSink");
                                         } else {}

@@ -236,12 +236,9 @@ class _SearchScreenState extends State<SearchScreen> {
                                                     height: 5,
                                                   ),
                                                   Row(
+                                                   
                                                     children: [
-                                                      SizedBox(
-                                                        width: isTablet
-                                                            ? 240
-                                                            : 175,
-                                                      ),
+                                                     
                                                       Container(
                                                         alignment:
                                                             Alignment.center,

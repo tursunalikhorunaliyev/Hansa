@@ -61,6 +61,7 @@ dependencies:
   share_plus: ^4.0.10+1
   permission_handler: ^10.0.0
   flutter_widget_from_html: ^0.8.5
+  gallery_saver: ^2.3.2
 
 dev_dependencies:
   flutter_test:

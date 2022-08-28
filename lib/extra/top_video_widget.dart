@@ -4,6 +4,7 @@ import 'package:chewie/chewie.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/blocs/bloc_detect_tap.dart';
 import 'package:hansa_app/blocs/download_progress_bloc.dart';
@@ -105,7 +106,7 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
     path = "$dir/$uniqueFileName.mp4";
     return path;
   }
-
+  
   Future<bool> downloadFile(String url, String fileName,
       DownloadProgressFileBloc downloadProgressFileBloc) async {
     progress = 0;
@@ -288,8 +289,7 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
                                             providerSendAnaliseDownload
                                                 .setAnalise(value);
 
-                                            log(value.toString() +
-                                                " video widget value");
+                                           
                                           });
                                         } else {
                                           log("asdffffffffffff=----------------------------------------");
