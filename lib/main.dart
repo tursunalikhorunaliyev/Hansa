@@ -1,3 +1,7 @@
+import 'dart:developer';
+
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -15,11 +19,13 @@ import 'package:hansa_app/blocs/login_clicked_bloc.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/blocs/read_stati_bloc.dart';
 import 'package:hansa_app/blocs/voyti_ili_sozdata_bloc.dart';
+import 'package:hansa_app/classes/notification_functions.dart';
 import 'package:hansa_app/classes/send_analise_download.dart';
 import 'package:hansa_app/classes/send_data_personal_update.dart';
 import 'package:hansa_app/classes/send_link.dart';
 import 'package:hansa_app/classes/sned_url_prezent_otkrit.dart';
 import 'package:hansa_app/classes/tap_favorite.dart';
+import 'package:hansa_app/firebase_options.dart';
 import 'package:hansa_app/middle_part_widgets/permission_handler_screen.dart';
 import 'package:hansa_app/providers/dialog_video_provider.dart';
 import 'package:hansa_app/providers/full_registr_provider.dart';
@@ -44,6 +50,13 @@ void main(List<String> args) async {
   Provider.debugCheckInvalidValueType = null;
   await Hive.initFlutter();
   await Hive.openBox("savedUser");
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  initMessaging();
+  log(await getToken());
+  listenForeground(channel);
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   runApp(const MyApp());
 }
 

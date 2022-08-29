@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "216755190091",
+    "project_id": "hansa-lab-d6e55",
+    "storage_bucket": "hansa-lab-d6e55.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:216755190091:android:2dba3866859abb3899d0ce",
+        "android_client_info": {
+          "package_name": "com.example.hansa_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "216755190091-ppbknfq0cstge0j59645t1t0ga0g4669.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDHqbjFnNFWUciOFiYYq49N4m65_CdHhvE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "216755190091-ppbknfq0cstge0j59645t1t0ga0g4669.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
