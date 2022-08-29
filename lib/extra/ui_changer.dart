@@ -17,6 +17,7 @@ import 'package:hansa_app/middle_part_widgets/treningi.dart';
 import 'package:hansa_app/middle_part_widgets/treningi_video.dart';
 import 'package:hansa_app/middle_part_widgets/video.dart';
 import 'package:hansa_app/screens/article_screen.dart';
+import 'package:hansa_app/screens/article_screen_tab.dart';
 import 'package:hansa_app/screens/read_stati.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';

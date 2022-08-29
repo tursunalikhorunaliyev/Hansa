@@ -35,7 +35,7 @@ class _SearchScreenState extends State<SearchScreen> {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 50, bottom: 10, left: 10, right: 10),
+            padding: const EdgeInsets.only(top: 40, bottom: 10, left: 10, right: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [

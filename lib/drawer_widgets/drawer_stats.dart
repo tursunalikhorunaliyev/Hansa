@@ -55,7 +55,7 @@ class _DrawerStatsState extends State<DrawerStats> {
             Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 child: SizedBox(
-                  height:isTablet?490: 330,
+                  height: isTablet ? 490 : 330,
                   child: FutureBuilder<RatingTopModel>(
                       future: bloc.getStores(prov),
                       builder: (context, snapshot) {
@@ -167,8 +167,8 @@ class _DrawerStatsState extends State<DrawerStats> {
                             ),
                           );
                         } else {
-                          return  SizedBox(
-                            height:isTablet?530: 330,
+                          return SizedBox(
+                            height: isTablet ? 530 : 330,
                             child: const SpinKitPulse(
                               color: Color(0xffe21a37),
                             ),
@@ -176,7 +176,7 @@ class _DrawerStatsState extends State<DrawerStats> {
                         }
                       }),
                 )),
-            /* Padding(
+            Padding(
               padding: const EdgeInsets.all(10.0),
               child: GestureDetector(
                 onTap: () {
@@ -208,7 +208,7 @@ class _DrawerStatsState extends State<DrawerStats> {
                   ),
                 ),
               ),
-            ), */
+            ),
           ],
         ),
       ),
