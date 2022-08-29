@@ -1,10 +1,8 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/training_model.dart';
 import 'package:hansa_app/api_services/training_api_bloc.dart';
-import 'package:hansa_app/api_services/welcome_api.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/drawer_widgets/izbrannoe.dart';
 import 'package:hansa_app/extra/custom_tablet_item.dart';

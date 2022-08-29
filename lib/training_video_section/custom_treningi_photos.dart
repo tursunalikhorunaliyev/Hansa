@@ -62,7 +62,7 @@ class _CustomTreningiPhotosState extends State<CustomTreningiPhotos> {
           if (progress == 100) {
             log("Download success");
           } else {
-            log(progress.toString() + " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+            log("$progress %%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
           }
         },
         deleteOnError: true,
@@ -262,6 +262,7 @@ class _CustomTreningiPhotosState extends State<CustomTreningiPhotos> {
                                           ).then((value) {
                                             providerSendAnaliseDonwload
                                                 .setAnalise(value);
+                                             
                                           });
                                           log("StreamSink");
                                         } else {}
@@ -325,9 +326,7 @@ class _CustomTreningiPhotosState extends State<CustomTreningiPhotos> {
                                                 stream: blocProgress.stream,
                                                 builder:
                                                     (context, snapshotDouble) {
-                                                  log(snapshotDouble.data!
-                                                          .toString() +
-                                                      " SALOM");
+                                                  log("${snapshotDouble.data!} SALOM");
                                                   if (snapshotDouble.data ==
                                                       100) {
                                                     blocProgress.streamSink

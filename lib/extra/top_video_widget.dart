@@ -98,14 +98,14 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
     if (Platform.isIOS) {
       Directory directory = await getApplicationSupportDirectory();
       dir = directory.path;
-      log(dir+"kkkkkkkkkkkkk");
+      log("${dir}kkkkkkkkkkkkk");
     } else if (Platform.isAndroid) {
       dir = "/storage/emulated/0/Download/";
     }
     path = "$dir/$uniqueFileName.mp4";
     return path;
   }
-
+  
   Future<bool> downloadFile(String url, String fileName,
       DownloadProgressFileBloc downloadProgressFileBloc) async {
     progress = 0;
@@ -127,7 +127,7 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
           if (progress == 100) {
             log("Download complate");
           } else {
-            log(progress.toString() + " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+            log("$progress %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
           }
         },
         deleteOnError: true,
@@ -288,8 +288,7 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
                                             providerSendAnaliseDownload
                                                 .setAnalise(value);
 
-                                            log(value.toString() +
-                                                " video widget value");
+                                           
                                           });
                                         } else {
                                           log("asdffffffffffff=----------------------------------------");

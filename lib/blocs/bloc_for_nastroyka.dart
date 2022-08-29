@@ -38,7 +38,7 @@ class BlocForNastroyka {
       Uri.parse("https://hansa-lab.ru/api/site/unsubscribe"),
       headers: {"token": token},
     );
-    log(response.body + " bloc nastroyka");
-    log(response.statusCode.toString() + " bloc nastroyka");
+    log("${response.body} bloc nastroyka");
+    log("${response.statusCode} bloc nastroyka");
   }
 }

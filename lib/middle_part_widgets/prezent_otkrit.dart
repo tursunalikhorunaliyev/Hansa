@@ -49,11 +49,11 @@ class _PrezentOtkritState extends State<PrezentOtkrit> {
                 child: Column(children: [
                   StickyHeader(
                       header: Container(
-                        decoration: BoxDecoration(
-                            color: const Color(0xffeaeaea),
+                        decoration: const BoxDecoration(
+                            color: Color(0xffeaeaea),
                             boxShadow: [
                               BoxShadow(
-                                  color: const Color(0xffeaeaea),
+                                  color: Color(0xffeaeaea),
                                   offset: Offset(0, -1))
                             ]),
                         child: Padding(

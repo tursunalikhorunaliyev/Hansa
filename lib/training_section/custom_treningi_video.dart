@@ -95,9 +95,7 @@ class CustomTreningiVideo extends StatelessWidget {
               StreamBuilder<bool>(
                         stream: providerBlocDetectTap.dataStream,
                         builder: (context, snapshotDetectTap) {
-                          log(providerSendAnaliseDownload.getAnalise
-                                  .toString() +
-                              " downloading");
+                          log("${providerSendAnaliseDownload.getAnalise} downloading");
 
                           return Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 10),

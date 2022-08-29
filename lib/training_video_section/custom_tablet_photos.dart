@@ -71,7 +71,7 @@ class _TabletPhotosItemState extends State<TabletPhotosItem> {
           if (progress == 100) {
             log("Download success");
           } else {
-            log(progress.toString() + " %%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+            log("$progress %%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
           }
         },
         deleteOnError: true,
@@ -246,9 +246,7 @@ class _TabletPhotosItemState extends State<TabletPhotosItem> {
                                     builder: (context, snapshotProgress) {
                                       return GestureDetector(
                                         onTap: () {
-                                          log(sendIndexTreningPhoto.getIndex
-                                                  .toString() +
-                                              " Uzbekistan");
+                                          log("${sendIndexTreningPhoto.getIndex} Uzbekistan");
                                           blocDetectTap.dataSink.add(true);
 
                                           if (snapshotProgress.data == null ||
@@ -340,9 +338,7 @@ class _TabletPhotosItemState extends State<TabletPhotosItem> {
                                                 stream: blocProgress.stream,
                                                 builder:
                                                     (context, snapshotDouble) {
-                                                  log(snapshotDouble.data!
-                                                          .toString() +
-                                                      " SALOM");
+                                                  log("${snapshotDouble.data!} SALOM");
                                                   if (snapshotDouble.data ==
                                                       100) {
                                                     blocProgress.streamSink

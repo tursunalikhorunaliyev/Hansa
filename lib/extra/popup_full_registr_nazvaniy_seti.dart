@@ -56,7 +56,7 @@ class _PopupFullRegistrNazvaniySetiState
                 height: isTablet
                     ? snapshotSizeDrawer.data!
                     : snapshotSizeDrawer.data!,
-                width: isTablet ? double.infinity : 360,
+                width: isTablet ? double.infinity : 360, 
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(radius),

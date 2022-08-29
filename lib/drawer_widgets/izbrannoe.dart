@@ -1,11 +1,12 @@
-import 'dart:developer';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/article_model.dart';
 import 'package:hansa_app/api_models.dart/izbrannoe_model.dart';
+import 'package:hansa_app/api_services/welcome_api.dart';
 import 'package:hansa_app/blocs/article_bloc.dart';
+import 'package:hansa_app/blocs/bloc_obucheniya.dart';
 import 'package:hansa_app/blocs/favourite_bloc.dart';
 import 'package:hansa_app/blocs/izbrannoe_bloc.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
@@ -30,6 +31,9 @@ class _IzbrannoeState extends State<Izbrannoe> {
     final articleBLoC = Provider.of<ArticleBLoC>(context);
     final menuProvider = Provider.of<MenuEventsBloC>(context);
     final izbrannoeBLoC = IzbrannoeBLoC();
+    final providerWelcomeApi = Provider.of<WelcomeApi>(context);
+    final bloc = Provider.of<BlocObucheniya>(context);
+
     Future<void>? launched;
 
     final isFavouriteBLoC = FavouriteBLoC();
@@ -109,9 +113,27 @@ class _IzbrannoeState extends State<Izbrannoe> {
                               key: UniqueKey(),
                               confirmDismiss: (direction) async {
                                 if (direction == DismissDirection.endToStart) {
-                                  isFavouriteBLoC.getFavourite(token,
-                                      snapshot.data!.data.list[index].unlink);
-                                  setState(() {});
+                                  if (snapshot.data!.data.list[index].type ==
+                                      2) {
+                                    isFavouriteBLoC.sink.add(false);
+                                    isFavouriteBLoC.getFavourite(token,
+                                        snapshot.data!.data.list[index].unlink);
+                                    bloc.eventSink
+                                        .add(ObucheniyaEnum.obucheniya);
+                                  } else {
+                                    isFavouriteBLoC.sink.add(false);
+                                    providerWelcomeApi.setList(
+                                        true,
+                                        snapshot.data!.data.list[index].link,
+                                        snapshot
+                                            .data!.data.list[index].pictureLink,
+                                        snapshot.data!.data.list[index].title);
+                                    isFavouriteBLoC.getFavourite(token,
+                                        snapshot.data!.data.list[index].unlink);
+                                    providerWelcomeApi.eventSink
+                                        .add(WelcomeApiAction.update);
+                                  }
+
                                   return true;
                                 } else {
                                   return false;

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:developer';
-import 'dart:ffi';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -84,7 +83,7 @@ class _NastroykaWidgetState extends State<NastroykaWidget> {
             stream: blocForNastroyka.dataStream,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-                log(snapshot.data!.data.subscribe.toString() + " in builder");
+                log("${snapshot.data!.data.subscribe} in builder");
                 return Wrap(
                   children: [
                     Padding(

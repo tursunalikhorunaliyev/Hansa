@@ -169,7 +169,7 @@ class _DrawerStatsState extends State<DrawerStats> {
                         } else {
                           return  SizedBox(
                             height:isTablet?530: 330,
-                            child: SpinKitPulse(
+                            child: const SpinKitPulse(
                               color: Color(0xffe21a37),
                             ),
                           );
