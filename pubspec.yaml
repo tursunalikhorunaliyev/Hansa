@@ -61,12 +61,9 @@ dependencies:
   share_plus: ^4.0.10+1
   permission_handler: ^10.0.0
   flutter_widget_from_html: ^0.8.5
-<<<<<<< HEAD
   firebase_core: ^1.21.1
   firebase_messaging: ^13.0.0
-=======
   gallery_saver: ^2.3.2
->>>>>>> 6ab9c1e533afd2a1960fd06810f16b7db85fb96a
 
 dev_dependencies:
   flutter_test:
