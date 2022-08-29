@@ -7,6 +7,8 @@ import 'package:hansa_app/api_models.dart/article_model.dart';
 import 'package:hansa_app/blocs/article_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class ArticleScreen extends StatelessWidget {
   const ArticleScreen({Key? key}) : super(key: key);
@@ -82,6 +84,9 @@ class ArticleScreen extends StatelessWidget {
                               ),
                               Html(
                                 data: snapshot.data!.article.body,
+                                onLinkTap: (url, context, attributes, element) {
+                                  _launchInBrowser(Uri.parse(url.toString()));
+                                },
                               ),
                             ],
                           ),
@@ -90,88 +95,6 @@ class ArticleScreen extends StatelessWidget {
                     ),
                   )
                 ],
-              ),
-            );
-          } else {
-            return Expanded(
-              child: Column(
-                children: [
-                const   Spacer(),
-                  Center(
-                      child: Lottie.asset(
-                    'assets/pre.json',
-                    height: 70,
-                    width: 70,
-                  )),
-                const  Spacer()
-                ],
-              ),
-            );
-          }
-        });
-  }
-}
-
-class ArticleScreenTab extends StatelessWidget {
-  const ArticleScreenTab({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    final ScrollController listViewController =
-        ScrollController(keepScrollOffset: true);
-
-    double positionDouble = 240.6666666666667;
-
-    final articleBloc = Provider.of<ArticleBLoC>(context);
-    return StreamBuilder<ArticleModel>(
-        stream: articleBloc.stream,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            return Expanded(
-              child: SingleChildScrollView(
-                controller: listViewController,
-                physics: const BouncingScrollPhysics(),
-                child: Column(
-                  children: [
-                    Column(
-                      children: [
-                        ClipRRect(
-                            borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(5.333333333333333),
-                                topRight: Radius.circular(5.333333333333333)),
-                            child: CachedNetworkImage(
-                                imageUrl: snapshot.data!.article.puctureLink)),
-                      ],
-                    ),
-                    Container(
-                      width: double.infinity,
-                      decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(5.333333333333333),
-                              topRight: Radius.circular(5.333333333333333)),
-                          color: Color(0xFFffffff)),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              snapshot.data!.article.title,
-                              overflow: TextOverflow.clip,
-                              style: GoogleFonts.montserrat(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                  fontSize: 18),
-                            ),
-                          ),
-                          Html(
-                            data: snapshot.data!.article.body,
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
               ),
             );
           } else {
@@ -192,4 +115,14 @@ class ArticleScreenTab extends StatelessWidget {
           }
         });
   }
+
+  _launchInBrowser(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw 'Could not launch $url';
+    }
+  }
 }
+
