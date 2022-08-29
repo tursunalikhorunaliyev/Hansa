@@ -8,7 +8,7 @@ enum RatingEnum { rating }
 class BlocRating {
   Future<RatingTopModel> getStores(token) async {
     Response response = await get(
-      Uri.parse('https://hansa-lab.ru/api/site/rating-top'),
+      Uri.parse('https://hansa-lab.ru/api/site/rating'),
       headers: {"token": token},
     );
     return RatingTopModel.fromMap(jsonDecode(response.body));
