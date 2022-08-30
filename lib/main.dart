@@ -21,6 +21,7 @@ import 'package:hansa_app/blocs/read_stati_bloc.dart';
 import 'package:hansa_app/blocs/voyti_ili_sozdata_bloc.dart';
 import 'package:hansa_app/classes/notification_functions.dart';
 import 'package:hansa_app/classes/send_analise_download.dart';
+import 'package:hansa_app/classes/send_check_switcher.dart';
 import 'package:hansa_app/classes/send_data_personal_update.dart';
 import 'package:hansa_app/classes/send_link.dart';
 import 'package:hansa_app/classes/sned_url_prezent_otkrit.dart';
@@ -70,6 +71,7 @@ class MyApp extends StatelessWidget {
     final sendDataPersonalUpdate = SendDataPersonalUpdate();
     final sendAnaliseDownload = SendAnaliseDownload();
     final blocDetectTap = BlocDetectTap();
+    final sendCheckSwitcher = SendCheckSwitcher();
 
     Size size = WidgetsBinding.instance.window.physicalSize;
     bool isTablet = (size.width / 3) > 500;
@@ -123,6 +125,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider<SendAnaliseDownload>(
               create: (context) => sendAnaliseDownload),
           Provider<BlocDetectTap>(create: (context) => blocDetectTap),
+          Provider<SendCheckSwitcher>(create: (context) => sendCheckSwitcher),
         ],
         child: const MaterialApp(
           localizationsDelegates: [

@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hansa_app/api_services/welcome_api.dart';
 import 'package:hansa_app/blocs/bloc_obucheniya.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
+import 'package:hansa_app/classes/send_check_switcher.dart';
 import 'package:hansa_app/classes/tap_favorite.dart';
 import 'package:hansa_app/extra/exit_dialog.dart';
 import 'package:hansa_app/extra/glavniy_menyu.dart';
@@ -14,6 +15,7 @@ import 'package:hansa_app/extra/ui_changer.dart';
 import 'package:hansa_app/page_routes/bottom_slide_page_route.dart';
 import 'package:hansa_app/providers/provider_personal_textFields.dart';
 import 'package:hansa_app/screens/search_screen.dart';
+import 'package:move_to_background/move_to_background.dart';
 import 'package:provider/provider.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -31,12 +33,15 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     final menuProvider = Provider.of<MenuEventsBloC>(context);
     final providerTapFavorite = Provider.of<TapFavorite>(context);
     final token = Provider.of<String>(context);
+    final providerSendCheckSwitcher = Provider.of<SendCheckSwitcher>(context);
     final welcomeApi = WelcomeApi(token);
     final bloc = BlocObucheniya(token);
 
     return WillPopScope(
       onWillPop: () async {
-        backPressed(menuProvider);
+        providerSendCheckSwitcher.getBool == true
+            ? MoveToBackground.moveTaskToBack()
+            : backPressed(menuProvider);
         return false;
       },
       child: Scaffold(
@@ -145,6 +150,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         ),
                         InkWell(
                           onTap: () {
+                            log(providerSendCheckSwitcher.getBool.toString() +
+                                " SEARCH");
                             Navigator.of(context).push(SlideTransitionBottom(
                               Provider.value(
                                 value: token,
