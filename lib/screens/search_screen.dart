@@ -52,6 +52,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   width: .85.sw,
                   child: TextField(
                     controller: search,
+                    autofocus: true,
                     onChanged: (value) {
                       if (value.length > 2) {
                         value = search.text;
