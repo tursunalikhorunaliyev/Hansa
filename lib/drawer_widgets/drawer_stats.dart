@@ -176,39 +176,6 @@ class _DrawerStatsState extends State<DrawerStats> {
                         }
                       }),
                 )),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: GestureDetector(
-                onTap: () {
-                  isCollapsed = isCollapsed ? false : true;
-                  setState(() {});
-                },
-                child: Container(
-                  alignment: Alignment.center,
-                  height: isTablet ? 34 : 20,
-                  width: isTablet ? 200 : 100,
-                  decoration: BoxDecoration(
-                    color: const Color(0xffe21a37),
-                    borderRadius: BorderRadius.circular(70),
-                    boxShadow: const [
-                      BoxShadow(
-                          color: Color(0XFFDBDBDB),
-                          blurRadius: 5,
-                          spreadRadius: 4,
-                          offset: Offset(0, 4) // changes position of shadow
-                          ),
-                    ],
-                  ),
-                  child: Text(
-                    isCollapsed ? "Только топ 10" : "Весь рейтинг",
-                    style: GoogleFonts.montserrat(
-                        fontSize: isTablet ? 16 : 9,
-                        fontWeight: FontWeight.w500,
-                        color: const Color(0xFFffffff)),
-                  ),
-                ),
-              ),
-            ),
           ],
         ),
       ),
