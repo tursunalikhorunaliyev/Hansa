@@ -34,7 +34,6 @@ import 'package:hansa_app/providers/full_registr_provider.dart';
 import 'package:hansa_app/providers/fullname_provider.dart';
 import 'package:hansa_app/providers/is_video_provider.dart';
 import 'package:hansa_app/providers/new_shop_provider.dart';
-import 'package:hansa_app/providers/notification_provider.dart';
 import 'package:hansa_app/providers/provider_for_flipping/flip_login_provider.dart';
 import 'package:hansa_app/providers/provider_for_flipping/login_clicked_provider.dart';
 import 'package:hansa_app/providers/provider_for_flipping/provider_for_flipping.dart';
@@ -74,7 +73,6 @@ class MyApp extends StatelessWidget {
     final sendAnaliseDownload = SendAnaliseDownload();
     final blocDetectTap = BlocDetectTap();
     final menuEventsBloC = MenuEventsBloC();
-    final notificationProvider = NotificationProvider();
     final sendCheckSwitcher = SendCheckSwitcher();
 
     Size size = WidgetsBinding.instance.window.physicalSize;
@@ -88,7 +86,6 @@ class MyApp extends StatelessWidget {
       builder: (context, child) => MultiProvider(
         providers: [
           Provider(create: (context) => DownloadProgressFileBloc()),
-          ChangeNotifierProvider(create: (context) => notificationProvider),
           ChangeNotifierProvider(create: (context) => StatiIdProvider()),
           ChangeNotifierProvider(
               create: (context) => TreningiVideoChangerProvider()),
@@ -138,7 +135,6 @@ class MyApp extends StatelessWidget {
           },
           onTap: (navigatorKey, appState, payload) {
             log("Clicked!");
-            notificationProvider.changeDetector(true);
           },
           enableLogs: true,
           channelId: 'high_importance_channel',

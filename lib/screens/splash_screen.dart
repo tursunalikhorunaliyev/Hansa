@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hansa_app/providers/notification_provider.dart';
 import 'package:hansa_app/screens/hansa_zagruzka.dart';
 import 'package:hansa_app/screens/welcome_screen.dart';
 import 'package:hive/hive.dart';
@@ -20,7 +19,6 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   final box = Hive.box("savedUser");
-  bool notification = false;
 
   @override
   void initState() {
@@ -33,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
       Map<String, dynamic> map =
           await login(box.get("username"), box.get("password"));
       await Future.delayed(const Duration(seconds: 1));
-      goToHome(await map["data"]["token"], notification);
+      goToHome(await map["data"]["token"]);
     } else {
       await Future.delayed(const Duration(seconds: 2));
       goToHansaZagruzka();
@@ -50,8 +48,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     final isTablet = Provider.of<bool>(context);
-    final notificationProvider = Provider.of<NotificationProvider>(context);
-    notification = notificationProvider.getDetectedValue;
     return Scaffold(
       body: Center(
         child: Column(
@@ -97,14 +93,13 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
-  goToHome(token, bool not) {
+  goToHome(token) {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => MultiProvider(providers: [
-                  Provider(create: (context) => token.toString()),
-                  Provider(create: (context) => not),
-                ], child: const WelcomeScreen())));
+            builder: (context) => Provider(
+                create: (context) => token.toString(),
+                child: const WelcomeScreen())));
   }
 
   goToHansaZagruzka() {
