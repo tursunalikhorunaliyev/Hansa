@@ -1,4 +1,3 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -139,107 +138,93 @@ class _IzbrannoeState extends State<Izbrannoe> {
                                   return false;
                                 }
                               },
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 10, right: 10, top: 20),
-                                child: SizedBox(
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(5),
-                                            child: SizedBox(
-                                              height: 65,
-                                              width: 120,
-                                              child: CachedNetworkImage(
-                                                fit: BoxFit.cover,
-                                                imageUrl: snapshot.data!.data
-                                                    .list[index].pictureLink,
-                                                height: isTablet
-                                                    ? 110
-                                                    : 66.66666666666667,
-                                                width: isTablet
-                                                    ? 150
-                                                    : 101.6666666666667,
-                                              ),
-                                            ),
-                                          ),
-                                          const SizedBox(
-                                            width: 11,
-                                          ),
-                                          Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              SizedBox(
-                                                width: isTablet ? 240 : 140,
-                                                child: Text(
-                                                  snapshot.data!.data
-                                                      .list[index].title,
-                                                  softWrap: true,
-                                                  maxLines: 3,
-                                                  overflow:
-                                                      TextOverflow.ellipsis,
-                                                  style: GoogleFonts.montserrat(
-                                                      color: const Color(
-                                                          0xFF272624),
-                                                      fontSize: isTablet
-                                                          ? 14
-                                                          : 9.666666666666667,
-                                                      fontWeight:
-                                                          FontWeight.bold),
+                              child: InkWell(
+                                onTap: () async {
+                                  if (snapshot.data!.data.list[index].type ==
+                                      1) {
+                                    scafforlKeyProvider.currentState!
+                                        .closeDrawer();
+                                    menuProvider.eventSink
+                                        .add(MenuActions.article);
+
+                                    ArticleModel statiModel =
+                                        await articleBLoC.getArticle(
+                                            token,
+                                            snapshot
+                                                .data!.data.list[index].link);
+                                    articleBLoC.sink.add(statiModel);
+                                  } else {
+                                    setState(() {
+                                      launched = launchInBrowser(Uri.parse(
+                                          "http://${snapshot.data!.data.list[index].pdfUrl}"));
+                                    });
+                                  }
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 10, right: 10, top: 20),
+                                  child: SizedBox(
+                                    child: Column(
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
+                                          children: [
+                                            ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
+                                              child: SizedBox(
+                                                height: 65,
+                                                width: 120,
+                                                child: CachedNetworkImage(
+                                                  fit: BoxFit.cover,
+                                                  imageUrl: snapshot.data!.data
+                                                      .list[index].pictureLink,
+                                                  height: isTablet
+                                                      ? 110
+                                                      : 66.66666666666667,
+                                                  width: isTablet
+                                                      ? 150
+                                                      : 101.6666666666667,
                                                 ),
                                               ),
-                                              const SizedBox(
-                                                height: 5,
-                                              ),
-                                              Row(
-                                                children: [
-                                                  SizedBox(
-                                                    width: isTablet ? 200 : 90,
+                                            ),
+                                            const SizedBox(
+                                              width: 11,
+                                            ),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                SizedBox(
+                                                  width: isTablet ? 240 : 140,
+                                                  child: Text(
+                                                    snapshot.data!.data
+                                                        .list[index].title,
+                                                    softWrap: true,
+                                                    maxLines: 3,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: GoogleFonts.montserrat(
+                                                        color: const Color(
+                                                            0xFF272624),
+                                                        fontSize: isTablet
+                                                            ? 14
+                                                            : 9.666666666666667,
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   ),
-                                                  InkWell(
-                                                    onTap: () async {
-                                                      if (snapshot
-                                                              .data!
-                                                              .data
-                                                              .list[index]
-                                                              .type ==
-                                                          1) {
-                                                        scafforlKeyProvider
-                                                            .currentState!
-                                                            .closeDrawer();
-                                                        menuProvider.eventSink
-                                                            .add(MenuActions
-                                                                .article);
-
-                                                        ArticleModel
-                                                            statiModel =
-                                                            await articleBLoC
-                                                                .getArticle(
-                                                                    token,
-                                                                    snapshot
-                                                                        .data!
-                                                                        .data
-                                                                        .list[
-                                                                            index]
-                                                                        .link);
-                                                        articleBLoC.sink
-                                                            .add(statiModel);
-                                                      } else {
-                                                        setState(() {
-                                                          launched =
-                                                              launchInBrowser(
-                                                                  Uri.parse(
-                                                                      "http://${snapshot.data!.data.list[index].pdfUrl}"));
-                                                        });
-                                                      }
-                                                    },
-                                                    child: Container(
+                                                ),
+                                                const SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    SizedBox(
+                                                      width:
+                                                          isTablet ? 200 : 90,
+                                                    ),
+                                                    Container(
                                                       alignment:
                                                           Alignment.center,
                                                       height:
@@ -296,18 +281,18 @@ class _IzbrannoeState extends State<Izbrannoe> {
                                                             fontSize: 10),
                                                       ),
                                                     ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          )
-                                        ],
-                                      ),
-                                      const Divider(
-                                        color: Color(0xFF8c8c8b),
-                                        thickness: 1,
-                                      )
-                                    ],
+                                                  ],
+                                                ),
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                        const Divider(
+                                          color: Color(0xFF8c8c8b),
+                                          thickness: 1,
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ),
