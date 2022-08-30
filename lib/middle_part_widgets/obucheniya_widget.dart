@@ -306,6 +306,16 @@ class ObucheniyaWidget extends StatelessWidget {
                                                   .data
                                                   .listArchiveGuides
                                                   .list[index]
+                                                  .pdfUrl.toString().isEmpty?snapshot
+                                                  .data!
+                                                  .data
+                                                  .listArchiveGuides
+                                                  .list[index]
+                                                  .link:snapshot
+                                                  .data!
+                                                  .data
+                                                  .listArchiveGuides
+                                                  .list[index]
                                                   .pdfUrl)
                                         ],
                                       )
