@@ -33,6 +33,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     final token = Provider.of<String>(context);
     final welcomeApi = WelcomeApi(token);
     final bloc = BlocObucheniya(token);
+    final not = Provider.of<bool>(context);
 
     return WillPopScope(
       onWillPop: () async {
@@ -54,7 +55,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
         ], child: const GlavniyMenyu()),
         key: providerScaffoldKey,
         bottomNavigationBar: StreamBuilder<MenuActions>(
-            initialData: MenuActions.welcome,
+            initialData: (not) ? MenuActions.stati : MenuActions.welcome,
             stream: menuProvider.eventStream,
             builder: (context, snapshot) {
               return SizedBox(

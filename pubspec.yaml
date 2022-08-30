@@ -66,6 +66,7 @@ dependencies:
   firebase_crashlytics: ^2.5.0
   gallery_saver: ^2.3.2
   flutter_local_notifications: ^9.1.4
+  firebase_notifications_handler: any
 
 dev_dependencies:
   flutter_test:
