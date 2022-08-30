@@ -62,7 +62,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       setState(() {});
                     },
                     cursorColor: const Color(0xFF272624),
-                    cursorHeight: 18,
+                    cursorHeight: 14,
                     style: const TextStyle(fontSize: 12),
                     decoration: InputDecoration(
                       isDense: true,
