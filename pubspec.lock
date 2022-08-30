@@ -218,6 +218,7 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.4.4"
+<<<<<<< HEAD
   firebase_notifications_handler:
     dependency: "direct main"
     description:
@@ -225,6 +226,8 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.8"
+=======
+>>>>>>> d24a94b00c8956ce14d7a7c3653ebc70889bc450
   flip_card:
     dependency: "direct main"
     description:
