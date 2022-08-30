@@ -18,8 +18,7 @@ const AndroidNotificationChannel channel = AndroidNotificationChannel(
 
 initMessaging() async {
   log("FirebaseMessaging initializing...");
-  var androidInit =
-      const AndroidInitializationSettings("@mipmap/launcher_icon");
+  var androidInit = const AndroidInitializationSettings("@mipmap/ic_launcher");
   var iosInit = const IOSInitializationSettings();
   var initSettings = InitializationSettings(android: androidInit, iOS: iosInit);
   flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
@@ -42,6 +41,7 @@ Future getToken() async {
     Uri.parse("https://hansa-lab.ru/api/auth/register-token"),
     body: body,
   );
+  log(fcmToken.toString());
 }
 
 listenForeground(AndroidNotificationChannel channel) {
@@ -85,4 +85,8 @@ requestMessaging() async {
     provisional: false,
     sound: true,
   );
+  flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>()!
+      .requestPermission();
 }
