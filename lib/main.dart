@@ -22,7 +22,6 @@ import 'package:hansa_app/blocs/read_stati_bloc.dart';
 import 'package:hansa_app/blocs/voyti_ili_sozdata_bloc.dart';
 import 'package:hansa_app/classes/notification_functions.dart';
 import 'package:hansa_app/classes/send_analise_download.dart';
-import 'package:hansa_app/classes/send_check_switcher.dart';
 import 'package:hansa_app/classes/send_data_personal_update.dart';
 import 'package:hansa_app/classes/send_link.dart';
 import 'package:hansa_app/classes/sned_url_prezent_otkrit.dart';
@@ -34,7 +33,6 @@ import 'package:hansa_app/providers/full_registr_provider.dart';
 import 'package:hansa_app/providers/fullname_provider.dart';
 import 'package:hansa_app/providers/is_video_provider.dart';
 import 'package:hansa_app/providers/new_shop_provider.dart';
-import 'package:hansa_app/providers/notification_provider.dart';
 import 'package:hansa_app/providers/provider_for_flipping/flip_login_provider.dart';
 import 'package:hansa_app/providers/provider_for_flipping/login_clicked_provider.dart';
 import 'package:hansa_app/providers/provider_for_flipping/provider_for_flipping.dart';
@@ -74,8 +72,6 @@ class MyApp extends StatelessWidget {
     final sendAnaliseDownload = SendAnaliseDownload();
     final blocDetectTap = BlocDetectTap();
     final menuEventsBloC = MenuEventsBloC();
-    final notificationProvider = NotificationProvider();
-    final sendCheckSwitcher = SendCheckSwitcher();
 
     Size size = WidgetsBinding.instance.window.physicalSize;
     bool isTablet = (size.width / 3) > 500;
@@ -88,7 +84,6 @@ class MyApp extends StatelessWidget {
       builder: (context, child) => MultiProvider(
         providers: [
           Provider(create: (context) => DownloadProgressFileBloc()),
-          ChangeNotifierProvider(create: (context) => notificationProvider),
           ChangeNotifierProvider(create: (context) => StatiIdProvider()),
           ChangeNotifierProvider(
               create: (context) => TreningiVideoChangerProvider()),
@@ -130,7 +125,6 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider<SendAnaliseDownload>(
               create: (context) => sendAnaliseDownload),
           Provider<BlocDetectTap>(create: (context) => blocDetectTap),
-          Provider<SendCheckSwitcher>(create: (context) => sendCheckSwitcher),
         ],
         child: FirebaseNotificationsHandler(
           onOpenNotificationArrive: (_, payload) {
@@ -138,7 +132,6 @@ class MyApp extends StatelessWidget {
           },
           onTap: (navigatorKey, appState, payload) {
             log("Clicked!");
-            notificationProvider.changeDetector(true);
           },
           enableLogs: true,
           channelId: 'high_importance_channel',
