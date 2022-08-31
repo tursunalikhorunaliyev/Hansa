@@ -544,7 +544,11 @@ class _LoginCardState extends State<LoginCard> {
       context,
       MaterialPageRoute(
         builder: (context) => Provider<String>(
-            create: (context) => token.toString(),
+            create: (context){
+              print(token.toString()+'aaaaaasssssaaaaallllloolm');
+              return 
+              token.toString();
+            },
             child: const WelcomeScreen()),
       ),
     );
