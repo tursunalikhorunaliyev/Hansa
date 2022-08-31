@@ -20,6 +20,7 @@ import 'package:hansa_app/blocs/menu_events_bloc.dart';
 import 'package:hansa_app/blocs/read_stati_bloc.dart';
 import 'package:hansa_app/blocs/voyti_ili_sozdata_bloc.dart';
 import 'package:hansa_app/classes/notification_functions.dart';
+import 'package:hansa_app/classes/notification_token.dart';
 import 'package:hansa_app/classes/send_analise_download.dart';
 import 'package:hansa_app/classes/send_check_switcher.dart';
 import 'package:hansa_app/classes/send_data_personal_update.dart';
@@ -55,7 +56,7 @@ void main(List<String> args) async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   initMessaging();
-  log(await getToken() ?? "Null");
+  NotificationToken().getToken();
   listenForeground(channel);
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   runApp(const MyApp());
@@ -84,6 +85,7 @@ class MyApp extends StatelessWidget {
       designSize: const Size(375, 812),
       builder: (context, child) => MultiProvider(
         providers: [
+          Provider(create: (context) => NotificationToken()),
           Provider(create: (context) => DownloadProgressFileBloc()),
           ChangeNotifierProvider(create: (context) => StatiIdProvider()),
           ChangeNotifierProvider(
