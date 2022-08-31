@@ -106,7 +106,7 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
     path = "$dir/$uniqueFileName.mp4";
     return path;
   }
-  
+
   Future<bool> downloadFile(String url, String fileName,
       DownloadProgressFileBloc downloadProgressFileBloc) async {
     progress = 0;
@@ -286,17 +286,17 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
                                             providerBlocProgress,
                                           ).then((v) {
                                             log("Not download");
-                                            GallerySaver.saveVideo( snapshot
-                                                .data!
-                                                .videoListData
-                                                .list[value.getIndex]
-                                                .data
-                                                .list[widget.selectedIndex]
-                                                .videoLink);
+                                            if (Platform.isIOS) {
+                                              GallerySaver.saveVideo(snapshot
+                                                  .data!
+                                                  .videoListData
+                                                  .list[value.getIndex]
+                                                  .data
+                                                  .list[widget.selectedIndex]
+                                                  .videoLink);
+                                            }
                                             providerSendAnaliseDownload
                                                 .setAnalise(v);
-
-                                           
                                           });
                                         } else {
                                           log("asdffffffffffff=----------------------------------------");
