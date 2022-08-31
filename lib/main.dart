@@ -38,6 +38,7 @@ import 'package:hansa_app/providers/provider_for_flipping/flip_login_provider.da
 import 'package:hansa_app/providers/provider_for_flipping/login_clicked_provider.dart';
 import 'package:hansa_app/providers/provider_for_flipping/provider_for_flipping.dart';
 import 'package:hansa_app/blocs/toggle_switcher_bloc.dart';
+import 'package:hansa_app/providers/provider_otpravit_push_uvodamleniya.dart';
 import 'package:hansa_app/providers/providers_for_video_title/video_index_provider.dart';
 import 'package:hansa_app/providers/providers_for_video_title/video_title_provider.dart';
 import 'package:hansa_app/providers/stati_id_provider.dart';
@@ -56,7 +57,6 @@ void main(List<String> args) async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   initMessaging();
-  NotificationToken().getToken();
   listenForeground(channel);
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   runApp(const MyApp());
@@ -74,6 +74,7 @@ class MyApp extends StatelessWidget {
     final sendAnaliseDownload = SendAnaliseDownload();
     final blocDetectTap = BlocDetectTap();
     final sendCheckSwitcher = SendCheckSwitcher();
+    final providerOtpravitPushUvodamleniya = ProviderOtpravitPushUvodamleniya();
 
     Size size = WidgetsBinding.instance.window.physicalSize;
     bool isTablet = (size.width / 3) > 500;
@@ -129,6 +130,7 @@ class MyApp extends StatelessWidget {
               create: (context) => sendAnaliseDownload),
           Provider<BlocDetectTap>(create: (context) => blocDetectTap),
           Provider<SendCheckSwitcher>(create: (context) => sendCheckSwitcher),
+          ChangeNotifierProvider<ProviderOtpravitPushUvodamleniya>(create: (context) => providerOtpravitPushUvodamleniya),
         ],
         child: const MaterialApp(
           localizationsDelegates: [

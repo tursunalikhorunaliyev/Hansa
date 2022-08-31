@@ -4,7 +4,6 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:http/http.dart';
 
 class NotificationToken {
-  Future<String> Function() get getMessagingToken => getToken;
   Future<String> getToken() async {
     final fcmToken = await FirebaseMessaging.instance.getToken();
     Map<String, String> body = {"token": fcmToken.toString()};

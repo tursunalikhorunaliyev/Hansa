@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hansa_app/api_services/welcome_api.dart';
 import 'package:hansa_app/blocs/bloc_obucheniya.dart';
 import 'package:hansa_app/blocs/menu_events_bloc.dart';
+import 'package:hansa_app/classes/notification_token.dart';
 import 'package:hansa_app/classes/send_check_switcher.dart';
 import 'package:hansa_app/classes/tap_favorite.dart';
 import 'package:hansa_app/extra/exit_dialog.dart';
@@ -37,6 +38,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     final welcomeApi = WelcomeApi(token);
     final bloc = BlocObucheniya(token);
     final not = Provider.of<bool>(context);
+    final providerNotificationToken = Provider.of<NotificationToken>(context);
+    providerNotificationToken.getToken().then((value) => log(value + " KLLLK"));
 
     return WillPopScope(
       onWillPop: () async {
