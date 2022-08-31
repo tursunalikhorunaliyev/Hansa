@@ -296,12 +296,6 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
                                                   .list[widget.selectedIndex]
                                                   .videoLink);
                                             }
-                                            providerSendAnaliseDownload
-<<<<<<< HEAD
-                                                .setAnalise(value);
-=======
-                                                .setAnalise(v);
->>>>>>> 83264cd513a3008592b7e98844148ad51530b623
                                           });
                                         } else {
                                           log("asdffffffffffff=----------------------------------------");
