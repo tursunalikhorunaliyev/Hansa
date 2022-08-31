@@ -33,6 +33,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
       padding:
           EdgeInsets.only(left: 25.w, right: 25.w, top: isTablet ? 12.h : 0.h),
       child: SfDateRangePicker(
+      
         monthViewSettings: const DateRangePickerMonthViewSettings(
             viewHeaderStyle: DateRangePickerViewHeaderStyle(
                 textStyle: TextStyle(color: Colors.white))),
@@ -42,13 +43,13 @@ class _CustomCalendarState extends State<CustomCalendar> {
         headerStyle: const DateRangePickerHeaderStyle(
             textStyle: TextStyle(color: Colors.white)),
         onSelectionChanged: (date) {
-          List<DateTime> list1 = date.value as List<DateTime>;
-          if (listDate.length != list1.length) {}
+          log(date.value.toString());
         },
+
         monthCellStyle: DateRangePickerMonthCellStyle(
           cellDecoration: BoxDecoration(
-              color: const Color(0xFFFFFFFF),
-              borderRadius: BorderRadius.circular(0)),
+              color:const Color.fromARGB(255, 213, 0, 50),
+              borderRadius: BorderRadius.circular(10)),
           disabledDatesDecoration: BoxDecoration(
               color: const Color(0xFF232323),
               borderRadius: BorderRadius.circular(0)),
@@ -60,6 +61,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
         initialDisplayDate: listDate.first,
         selectableDayPredicate: (date) {
           if (listDate.contains(date)) {
+            log("data bosildi");
             return true;
           } else {
             return false;
