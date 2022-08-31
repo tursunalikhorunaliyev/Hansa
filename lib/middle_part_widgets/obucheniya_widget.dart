@@ -16,13 +16,11 @@ class ObucheniyaWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isTablet = Provider.of<bool>(context);
-
     final token = Provider.of<String>(context);
     final bloc = Provider.of<BlocObucheniya>(context);
     bloc.eventSink.add(ObucheniyaEnum.obucheniya);
     final welcomeApi = WelcomeApi(token);
     welcomeApi.eventSink.add(WelcomeApiAction.fetch);
-
     final scroll = ScrollController();
 
     return Expanded(
@@ -51,7 +49,7 @@ class ObucheniyaWidget extends StatelessWidget {
                                       width: isTablet ? 55.w : 70.w,
                                       height: isTablet ? 46.h : 42.h,
                                       decoration: BoxDecoration(
-                                          color: const Color(0XFFff163e),
+                                          color: const Color.fromARGB(255, 213, 0, 50),
                                           borderRadius: BorderRadius.only(
                                               topRight: Radius.circular(
                                                   isTablet ? 45.r : 21.r),
@@ -69,7 +67,7 @@ class ObucheniyaWidget extends StatelessWidget {
                                           style: GoogleFonts.montserrat(
                                             fontSize: isTablet ? 10.sp : 14.sp,
                                             fontWeight: FontWeight.w500,
-                                            color: const Color(0xffff163e),
+                                            color: const Color.fromARGB(255, 213, 0, 50),
                                           )),
                                     ),
                                     Text(
@@ -109,7 +107,7 @@ class ObucheniyaWidget extends StatelessWidget {
                                                     .list[index]
                                                     .favouriteLink,
                                                 buttonColor:
-                                                    const Color(0xffff163e),
+                                                    const Color.fromARGB(255, 213, 0, 50),
                                                 bottomButtonText: 'скачать ',
                                                 title: snapshot
                                                     .data!
@@ -150,7 +148,7 @@ class ObucheniyaWidget extends StatelessWidget {
                                                 .list[index]
                                                 .favouriteLink,
                                             buttonColor:
-                                                const Color(0xffff163e),
+                                                const Color.fromARGB(255, 213, 0, 50),
                                             bottomButtonText: 'скачать ',
                                             title: snapshot.data!.data
                                                 .listGuides.list[index].title,
@@ -180,7 +178,7 @@ class ObucheniyaWidget extends StatelessWidget {
                                       width: isTablet ? 55.w : 70.w,
                                       height: isTablet ? 46.h : 42.h,
                                       decoration: BoxDecoration(
-                                          color: const Color(0XFFff163e),
+                                          color: const Color.fromARGB(255, 213, 0, 50),
                                           borderRadius: BorderRadius.only(
                                               topRight: Radius.circular(
                                                   isTablet ? 45.r : 21.r),
@@ -199,7 +197,7 @@ class ObucheniyaWidget extends StatelessWidget {
                                         style: GoogleFonts.montserrat(
                                             fontSize: isTablet ? 10.sp : 14.sp,
                                             fontWeight: FontWeight.w500,
-                                            color: const Color(0xffff163e)),
+                                            color: const Color.fromARGB(255, 213, 0, 50)),
                                       ),
                                     ),
                                     Text(
@@ -239,7 +237,7 @@ class ObucheniyaWidget extends StatelessWidget {
                                                     .list[index]
                                                     .favouriteLink,
                                                 buttonColor:
-                                                    const Color(0xffff163e),
+                                                    const Color.fromARGB(255, 213, 0, 50),
                                                 bottomButtonText: 'скачать ',
                                                 title: snapshot
                                                     .data!
@@ -281,7 +279,7 @@ class ObucheniyaWidget extends StatelessWidget {
                                                   .list[index]
                                                   .favouriteLink,
                                               buttonColor:
-                                                  const Color(0xffff163e),
+                                                  const Color.fromARGB(255, 213, 0, 50),
                                               bottomButtonText: 'скачать ',
                                               title: snapshot
                                                   .data!

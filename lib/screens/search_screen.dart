@@ -35,19 +35,20 @@ class _SearchScreenState extends State<SearchScreen> {
       body: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(top: 40, bottom: 10, left: 10, right: 10),
+            padding:
+                const EdgeInsets.only(top: 40, bottom: 10, left: 10, right: 10),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                 InkWell(
-                   onTap: () {
-                     Navigator.pop(context);
-                   },
-                   child: Icon(
+                InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Icon(
                     CupertinoIcons.back,
                     color: Colors.grey[500],
-                                 ),
-                 ),
+                  ),
+                ),
                 SizedBox(
                   width: .85.sw,
                   child: TextField(
@@ -114,8 +115,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                 return InkWell(
                                   onTap: () async {
                                     if (data[index].type == 1) {
-
-                                    Navigator.pop(context);
+                                      Navigator.pop(context);
                                       menuProvider.eventSink
                                           .add(MenuActions.article);
                                       ArticleModel statiModel =
@@ -123,8 +123,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                               token, data[index].link);
                                       articleBLoC.sink.add(statiModel);
                                     } else if (data[index].type == 3) {
-
-                                    Navigator.pop(context);
+                                      Navigator.pop(context);
                                       providerSendLink
                                           .setLink(data[index].link);
                                       menuProvider.eventSink
@@ -162,9 +161,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                     padding: const EdgeInsets.only(
                                         left: 15, right: 15),
                                     child: Column(
-                                      
                                       children: [
-                                      
                                         Row(
                                           mainAxisAlignment:
                                               MainAxisAlignment.start,
@@ -218,9 +215,11 @@ class _SearchScreenState extends State<SearchScreen> {
                                                 ),
                                               ),
                                             ),
-                                          isTablet? const SizedBox(
-                                              width: 20,
-                                            ): const SizedBox(),
+                                            isTablet
+                                                ? const SizedBox(
+                                                    width: 20,
+                                                  )
+                                                : const SizedBox(),
                                             Expanded(
                                               child: Column(
                                                 crossAxisAlignment:
@@ -245,14 +244,16 @@ class _SearchScreenState extends State<SearchScreen> {
                                                     height: 12,
                                                   ),
                                                   Row(
-                                                    mainAxisAlignment: MainAxisAlignment.end,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.end,
                                                     children: [
                                                       Container(
                                                         alignment:
                                                             Alignment.center,
                                                         height:
                                                             isTablet ? 22 : 21,
-                                                        width: isTablet ? 74 : 63,
+                                                        width:
+                                                            isTablet ? 74 : 63,
                                                         decoration: BoxDecoration(
                                                             border: Border.all(
                                                                 color: Colors
@@ -261,8 +262,12 @@ class _SearchScreenState extends State<SearchScreen> {
                                                                 BorderRadius
                                                                     .circular(
                                                                         10.5),
-                                                            color: const Color(
-                                                                0xffe21a37)),
+                                                            color: const Color
+                                                                    .fromARGB(
+                                                                255,
+                                                                213,
+                                                                0,
+                                                                50)),
                                                         child: Text(
                                                           "Показать",
                                                           style: GoogleFonts

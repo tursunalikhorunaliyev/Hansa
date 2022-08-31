@@ -45,7 +45,9 @@ class _CustomKatalogItemDoubleState extends State<CustomKatalogItemDouble> {
           InkWell(
             onTap: () {
               setState(() {
-                launched = _launchInBrowser(Uri.parse(widget.linkPDF));
+                launched = _launchInBrowser(
+                  Uri.parse(widget.linkPDF),
+                );
               });
             },
             child: ClipRRect(

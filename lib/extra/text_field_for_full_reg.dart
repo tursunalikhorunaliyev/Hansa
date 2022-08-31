@@ -73,7 +73,10 @@ class _TextFieldForFullRegisterState extends State<TextFieldForFullRegister> {
                   ),
                   enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(
-                          width: widget.borderColor == Colors.red ? 0.9 : 0.1,
+                          width: widget.borderColor ==
+                                  Color.fromARGB(255, 213, 0, 50)
+                              ? 0.9
+                              : 0.1,
                           color: widget.borderColor),
                       borderRadius: BorderRadius.circular(54)),
                   contentPadding:
@@ -105,7 +108,7 @@ class _TextFieldForFullRegisterState extends State<TextFieldForFullRegister> {
                               style: GoogleFonts.montserrat(
                                   fontWeight: widget.weight,
                                   fontSize: widget.size,
-                                  color: Colors.red))
+                                  color: Color.fromARGB(255, 213, 0, 50)))
                         ])),
                       ),
                     ),

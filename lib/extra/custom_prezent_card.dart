@@ -1,4 +1,3 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -104,7 +103,7 @@ class _CustomPrezentCardState extends State<CustomPrezentCard> {
                               minWidth: 90.w,
                             ),
                             decoration: BoxDecoration(
-                              color: const Color(0xffff163e),
+                              color: const Color.fromARGB(255, 213, 0, 50),
                               borderRadius: BorderRadius.circular(64.r),
                             ),
                             child: Center(
@@ -129,6 +128,4 @@ class _CustomPrezentCardState extends State<CustomPrezentCard> {
       ),
     );
   }
-
-
 }

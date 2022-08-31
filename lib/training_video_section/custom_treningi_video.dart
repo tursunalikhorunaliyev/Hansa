@@ -40,7 +40,7 @@ class CustomTreningiVideo extends StatelessWidget {
                         child: Container(
                           height: 25,
                           width: 95,
-                          color: const Color(0xffff163e),
+                          color: const Color.fromARGB(255, 213, 0, 50),
                           child: Center(
                             child: Text(
                               "Скачать",

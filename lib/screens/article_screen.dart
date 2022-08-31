@@ -8,7 +8,6 @@ import 'package:hansa_app/blocs/article_bloc.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 class ArticleScreen extends StatelessWidget {
   const ArticleScreen({Key? key}) : super(key: key);
@@ -125,4 +124,3 @@ class ArticleScreen extends StatelessWidget {
     }
   }
 }
-

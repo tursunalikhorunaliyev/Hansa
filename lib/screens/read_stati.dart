@@ -133,7 +133,8 @@ class _ReadStatiState extends State<ReadStati> {
                                                 borderRadius:
                                                     BorderRadius.circular(
                                                         11.66666666666667),
-                                                color: const Color(0xFFe21a37)),
+                                                color: const Color.fromARGB(
+                                                    255, 213, 0, 50)),
                                             child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.spaceEvenly,
@@ -238,7 +239,8 @@ class _ReadStatiState extends State<ReadStati> {
                                             "#",
                                             style: GoogleFonts.montserrat(
                                                 fontWeight: FontWeight.bold,
-                                                color: Colors.red,
+                                                color: const Color.fromARGB(
+                                                    255, 213, 0, 50),
                                                 fontSize: 15),
                                           ),
                                           Text(

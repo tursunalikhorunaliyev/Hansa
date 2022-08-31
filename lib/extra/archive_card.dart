@@ -168,11 +168,11 @@ class _ArchiveCardState extends State<ArchiveCard> {
                           child: fav
                               ? const Icon(
                                   Icons.favorite,
-                                  color: Color(0xffed3851),
+                                  color: Color.fromARGB(255, 213, 0, 50),
                                 )
                               : const Icon(
                                   Icons.favorite_border_sharp,
-                                  color: Color(0xffed3851),
+                                  color: Color.fromARGB(255, 213, 0, 50),
                                 ),
                         ),
                       );

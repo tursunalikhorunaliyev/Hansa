@@ -85,9 +85,6 @@ class _NastroykaWidgetState extends State<NastroykaWidget> {
         const SizedBox(
           height: 43,
         ),
-        /////////////////////////////////////////////////////////////////////////////////
-        ////////////////////////////////////////////////////////////////////////////////
-        ///////////////////////////////////////////////////////////////////////////////
         StreamBuilder<NastroykaModel>(
             stream: blocForNastroyka.dataStream,
             builder: (context, snapshot) {
@@ -242,7 +239,6 @@ class _NastroykaWidgetState extends State<NastroykaWidget> {
                 );
               }
             }),
-
         const SizedBox(
           height: 186,
         ),

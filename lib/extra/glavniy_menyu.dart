@@ -117,7 +117,7 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                               );
                             } else {
                               return const CircularProgressIndicator(
-                                color: Color(0xFFe21a37),
+                                color: Color.fromARGB(255, 213, 0, 50),
                               );
                             }
                           }),
@@ -133,7 +133,7 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                     height: isTablet ? 33 : 26,
                     width: isTablet ? 33 : 26,
                     decoration: const BoxDecoration(
-                      color: Color(0xFFe21a37),
+                      color: Color.fromARGB(255, 213, 0, 50),
                       shape: BoxShape.circle,
                     ),
                     child: Icon(
@@ -226,7 +226,8 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                                 snapshot.data!.data.score.toString(),
                                 style: GoogleFonts.montserrat(
                                     fontSize: isTablet ? 30 : 23,
-                                    color: const Color(0xFFff0025),
+                                    color:
+                                        const Color.fromARGB(255, 213, 0, 50),
                                     fontWeight: FontWeight.bold),
                               ),
                             ],
@@ -306,11 +307,12 @@ class _GlavniyMenyuState extends State<GlavniyMenyu> {
                             width: isTablet ? 200 : 140,
                             decoration: BoxDecoration(
                               color: snapshot.data == ActionChange.textIconCard
-                                  ? const Color(0xFFe21a37)
+                                  ? const Color.fromARGB(255, 213, 0, 50)
                                   : snapshot.data == ActionChange.izboreny
-                                      ? const Color(0xFFe21a37)
+                                      ? const Color.fromARGB(255, 213, 0, 50)
                                       : snapshot.data == ActionChange.statistik
-                                          ? const Color(0xFFe21a37)
+                                          ? const Color.fromARGB(
+                                              255, 213, 0, 50)
                                           : const Color(0xFF25b049),
                               borderRadius: BorderRadius.circular(70),
                               boxShadow: [

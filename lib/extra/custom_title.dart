@@ -14,17 +14,12 @@ class CustomTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     final isTablet = Provider.of<bool>(context);
     return Container(
-      decoration: const BoxDecoration(
-              color: Color(0xffeaeaea),
-
-        boxShadow: [BoxShadow(
-          color: Color(0xffeaeaea),
-          offset: Offset(0, -3)
-        )]
-      ),
+      decoration: const BoxDecoration(color: Color(0xffeaeaea), boxShadow: [
+        BoxShadow(color: Color(0xffeaeaea), offset: Offset(0, -3))
+      ]),
       child: Padding(
         padding: EdgeInsets.only(
-         top: isTablet ? 7.h : 10.h,
+          top: isTablet ? 7.h : 10.h,
           bottom: isTablet ? 8 : 10.h,
         ),
         child: Row(
@@ -34,7 +29,7 @@ class CustomTitle extends StatelessWidget {
               width: isTablet ? 50.w : 70.w,
               height: isTablet ? 45.h : 42.h,
               decoration: const BoxDecoration(
-                  color: Color(0XFFff163e),
+                  color: Color.fromARGB(255, 213, 0, 50),
                   borderRadius: BorderRadius.only(
                       topRight: Radius.circular(64),
                       bottomRight: Radius.circular(64))),
@@ -54,7 +49,7 @@ class CustomTitle extends StatelessWidget {
                     text: "#",
                     style: GoogleFonts.montserrat(
                       fontSize: isTablet ? 11.sp : 14.sp,
-                      color: const Color(0xffff163e),
+                      color: const Color.fromARGB(255, 213, 0, 50),
                     ),
                   ),
                   TextSpan(

@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:firebase_notifications_handler/firebase_notifications_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:flip_card/flip_card_controller.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -22,7 +21,6 @@ import 'package:hansa_app/blocs/read_stati_bloc.dart';
 import 'package:hansa_app/blocs/voyti_ili_sozdata_bloc.dart';
 import 'package:hansa_app/classes/notification_functions.dart';
 import 'package:hansa_app/classes/send_analise_download.dart';
-import 'package:hansa_app/classes/send_check_switcher.dart';
 import 'package:hansa_app/classes/send_data_personal_update.dart';
 import 'package:hansa_app/classes/send_link.dart';
 import 'package:hansa_app/classes/sned_url_prezent_otkrit.dart';
@@ -56,6 +54,7 @@ void main(List<String> args) async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   initMessaging();
+  log(await getToken());
   listenForeground(channel);
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   runApp(const MyApp());
@@ -72,8 +71,6 @@ class MyApp extends StatelessWidget {
     final sendDataPersonalUpdate = SendDataPersonalUpdate();
     final sendAnaliseDownload = SendAnaliseDownload();
     final blocDetectTap = BlocDetectTap();
-    final menuEventsBloC = MenuEventsBloC();
-    final sendCheckSwitcher = SendCheckSwitcher();
 
     Size size = WidgetsBinding.instance.window.physicalSize;
     bool isTablet = (size.width / 3) > 500;
@@ -109,7 +106,7 @@ class MyApp extends StatelessWidget {
           Provider(create: (context) => map),
           Provider(create: (context) => VoytiIliSozdatBloC()),
           Provider(create: (context) => ReadStatiBLoC()),
-          Provider(create: (context) => menuEventsBloC),
+          Provider(create: (context) => MenuEventsBloC()),
           Provider(create: (context) => ArticleBLoC()),
           Provider(create: (context) => BlocPlayVideo()),
           Provider(create: (context) => BlocChangeProfile()),
@@ -127,27 +124,16 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider<SendAnaliseDownload>(
               create: (context) => sendAnaliseDownload),
           Provider<BlocDetectTap>(create: (context) => blocDetectTap),
-          Provider<SendCheckSwitcher>(create: (context) => sendCheckSwitcher),
         ],
-        child: FirebaseNotificationsHandler(
-          onOpenNotificationArrive: (_, payload) {
-            log("Notification received while app is open with payload $payload");
-          },
-          onTap: (navigatorKey, appState, payload) {
-            log("Clicked!");
-          },
-          enableLogs: true,
-          channelId: 'high_importance_channel',
-          child: const MaterialApp(
-            localizationsDelegates: [
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate
-            ],
-            supportedLocales: [Locale("en"), Locale("ru"), Locale("ar")],
-            locale: Locale("ru"),
-            debugShowCheckedModeBanner: false,
-            home: PermissionHandlerScreen(),
-          ),
+        child: const MaterialApp(
+          localizationsDelegates: [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate
+          ],
+          supportedLocales: [Locale("en"), Locale("ru"), Locale("ar")],
+          locale: Locale("ru"),
+          debugShowCheckedModeBanner: false,
+          home: PermissionHandlerScreen(),
         ),
       ),
     );

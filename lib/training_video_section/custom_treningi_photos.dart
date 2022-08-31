@@ -155,7 +155,7 @@ class _CustomTreningiPhotosState extends State<CustomTreningiPhotos> {
                                     topLeft: Radius.circular(16),
                                     bottomLeft: Radius.circular(16),
                                   ),
-                                  color: Color(0xffff163e),
+                                  color: Color.fromARGB(255, 213, 0, 50),
                                 ),
                                 child: Center(
                                   child: Image.asset(
@@ -186,7 +186,7 @@ class _CustomTreningiPhotosState extends State<CustomTreningiPhotos> {
                                     topRight: Radius.circular(16),
                                     bottomRight: Radius.circular(16),
                                   ),
-                                  color: Color(0xffff163e),
+                                  color: Color.fromARGB(255, 213, 0, 50),
                                 ),
                                 child: Center(
                                   child: Image.asset(
@@ -262,7 +262,6 @@ class _CustomTreningiPhotosState extends State<CustomTreningiPhotos> {
                                           ).then((value) {
                                             providerSendAnaliseDonwload
                                                 .setAnalise(value);
-                                             
                                           });
                                           log("StreamSink");
                                         } else {}
@@ -272,7 +271,8 @@ class _CustomTreningiPhotosState extends State<CustomTreningiPhotos> {
                                         child: Container(
                                           height: 25,
                                           width: 95,
-                                          color: const Color(0xffff163e),
+                                          color: const Color.fromARGB(
+                                              255, 213, 0, 50),
                                           child: Center(
                                             child: Text(
                                               "Скачать",

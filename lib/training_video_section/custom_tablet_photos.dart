@@ -55,7 +55,6 @@ class _TabletPhotosItemState extends State<TabletPhotosItem> {
     progress = 0;
 
     String savePath = await getFilePath(fileName, index);
-  
 
     if (await File(savePath).exists()) {
       return false;
@@ -161,7 +160,7 @@ class _TabletPhotosItemState extends State<TabletPhotosItem> {
                                       topLeft: Radius.circular(35),
                                       bottomLeft: Radius.circular(35),
                                     ),
-                                    color: Color(0xffff163e),
+                                    color: Color.fromARGB(255, 213, 0, 50),
                                   ),
                                   child: Center(
                                     child: Image.asset(
@@ -193,7 +192,7 @@ class _TabletPhotosItemState extends State<TabletPhotosItem> {
                                       topRight: Radius.circular(35),
                                       bottomRight: Radius.circular(35),
                                     ),
-                                    color: Color(0xffff163e),
+                                    color: Color.fromARGB(255, 213, 0, 50),
                                   ),
                                   child: Center(
                                     child: Image.asset(
@@ -282,7 +281,8 @@ class _TabletPhotosItemState extends State<TabletPhotosItem> {
                                           child: Container(
                                             height: 35,
                                             width: 130,
-                                            color: const Color(0xffff163e),
+                                            color: const Color.fromARGB(
+                                                255, 213, 0, 50),
                                             child: Center(
                                               child: Text(
                                                 "Скачать",

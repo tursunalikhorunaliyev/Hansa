@@ -6,9 +6,9 @@ class BlackPaintedCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  ScreenUtilInit(
+    return ScreenUtilInit(
       designSize: const Size(375, 812),
-      builder: (context, child)=>Positioned(
+      builder: (context, child) => Positioned(
         child: Image.asset(
           'assets/bg.png',
         ),

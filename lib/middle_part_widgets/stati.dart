@@ -61,7 +61,8 @@ class _StatiState extends State<Stati> {
                               (index) => CustomStatiTabletItem(
                                 backgroundColor: const Color(0xffffffff),
                                 buttonTextColor: const Color(0xffffffff),
-                                buttonColor: const Color(0xffe21a37),
+                                buttonColor:
+                                    const Color.fromARGB(255, 213, 0, 50),
                                 titleColor: const Color(0xff272624),
                                 title: snapshot.data!.list.list[index].title,
                                 buttonText: "Читать",
@@ -96,7 +97,8 @@ class _StatiState extends State<Stati> {
                               (index) => CustomClipItem(
                                 backgroundColor: const Color(0xffffffff),
                                 buttonTextColor: const Color(0xffffffff),
-                                buttonColor: const Color(0xffe21a37),
+                                buttonColor:
+                                    const Color.fromARGB(255, 213, 0, 50),
                                 titleColor: const Color(0xff272624),
                                 title: snapshot.data!.list.list[index].title,
                                 buttonText: "Читать",

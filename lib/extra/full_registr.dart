@@ -115,10 +115,12 @@ class _FullRegistrState extends State<FullRegistr> {
                         size: isTablet ? 13 : 10,
                         weight:
                             isTablet ? FontWeight.normal : FontWeight.normal,
-                        borderColor:
-                            nameIsEmpty ? Colors.red : const Color(0xFF000000),
-                        hintColor:
-                            nameIsEmpty ? Colors.red : const Color(0xFF444444),
+                        borderColor: nameIsEmpty
+                            ? const Color.fromARGB(255, 213, 0, 50)
+                            : const Color(0xFF000000),
+                        hintColor: nameIsEmpty
+                            ? const Color.fromARGB(255, 213, 0, 50)
+                            : const Color(0xFF444444),
                         onTap: () => setState(() => nameIsEmpty = false),
                       ),
                       const SizedBox(
@@ -132,10 +134,10 @@ class _FullRegistrState extends State<FullRegistr> {
                         weight:
                             isTablet ? FontWeight.normal : FontWeight.normal,
                         borderColor: lastnameIsEmpty
-                            ? Colors.red
+                            ? Color.fromARGB(255, 213, 0, 50)
                             : const Color(0xFF000000),
                         hintColor: lastnameIsEmpty
-                            ? Colors.red
+                            ? Color.fromARGB(255, 213, 0, 50)
                             : const Color(0xFF444444),
                         onTap: () => setState(() => lastnameIsEmpty = false),
                       ),
@@ -149,10 +151,12 @@ class _FullRegistrState extends State<FullRegistr> {
                         size: isTablet ? 13 : 10,
                         weight:
                             isTablet ? FontWeight.normal : FontWeight.normal,
-                        borderColor:
-                            emailIsEmpty ? Colors.red : const Color(0xFF000000),
-                        hintColor:
-                            emailIsEmpty ? Colors.red : const Color(0xFF444444),
+                        borderColor: emailIsEmpty
+                            ? Color.fromARGB(255, 213, 0, 50)
+                            : const Color(0xFF000000),
+                        hintColor: emailIsEmpty
+                            ? Color.fromARGB(255, 213, 0, 50)
+                            : const Color(0xFF444444),
                         onTap: () => setState(() => emailIsEmpty = false),
                       ),
                       const SizedBox(
@@ -175,16 +179,26 @@ class _FullRegistrState extends State<FullRegistr> {
                                   },
                                   inputDecoration: inputDecoration(
                                     isTablet,
-                                    phoneIsEmpty ? Colors.red : Colors.black,
-                                    phoneIsEmpty ? Colors.red : null,
+                                    phoneIsEmpty
+                                        ? Color.fromARGB(255, 213, 0, 50)
+                                        : Colors.black,
+                                    phoneIsEmpty
+                                        ? Color.fromARGB(255, 213, 0, 50)
+                                        : null,
                                   ),
                                   keyboardType: TextInputType.phone,
                                   selectorTextStyle: style(
                                       FontWeight.w500,
                                       isTablet,
-                                      phoneIsEmpty ? Colors.red : Colors.black),
-                                  textStyle: style(FontWeight.w500, isTablet,
-                                      phoneIsEmpty ? Colors.red : Colors.black),
+                                      phoneIsEmpty
+                                          ? Color.fromARGB(255, 213, 0, 50)
+                                          : Colors.black),
+                                  textStyle: style(
+                                      FontWeight.w500,
+                                      isTablet,
+                                      phoneIsEmpty
+                                          ? Color.fromARGB(255, 213, 0, 50)
+                                          : Colors.black),
                                   selectorConfig: const SelectorConfig(
                                       leadingPadding: 0,
                                       useEmoji: false,
@@ -223,8 +237,10 @@ class _FullRegistrState extends State<FullRegistr> {
                                             BorderRadius.circular(10)),
                                     child: SfDateRangePicker(
                                       controller: dateRangeController,
-                                      selectionColor: Colors.pink[600],
-                                      todayHighlightColor: Colors.pink[600],
+                                      selectionColor:
+                                          Color.fromARGB(255, 213, 0, 50),
+                                      todayHighlightColor:
+                                          Color.fromARGB(255, 213, 0, 50),
                                       onSelectionChanged: (a) {
                                         String day = dateRangeController
                                                     .selectedDate!.day
@@ -263,7 +279,9 @@ class _FullRegistrState extends State<FullRegistr> {
                             borderRadius: BorderRadius.circular(54),
                             border: Border.all(
                                 width: dateIsEmpty ? 0.9 : 0.1,
-                                color: dateIsEmpty ? Colors.red : Colors.black),
+                                color: dateIsEmpty
+                                    ? Color.fromARGB(255, 213, 0, 50)
+                                    : Colors.black),
                           ),
                           child: Padding(
                             padding: const EdgeInsets.only(left: 14),
@@ -277,13 +295,15 @@ class _FullRegistrState extends State<FullRegistr> {
                                         ? GoogleFonts.montserrat(
                                             fontSize: isTablet ? 13 : 10,
                                             color: dateIsEmpty
-                                                ? Colors.red
+                                                ? Color.fromARGB(
+                                                    255, 213, 0, 50)
                                                 : const Color(0xFF444444))
                                         : GoogleFonts.montserrat(
                                             fontSize: isTablet ? 13 : 10,
                                             fontWeight: FontWeight.w500,
                                             color: dateIsEmpty
-                                                ? Colors.red
+                                                ? Color.fromARGB(
+                                                    255, 213, 0, 50)
                                                 : Colors.black),
                                   );
                                 }),
@@ -296,10 +316,11 @@ class _FullRegistrState extends State<FullRegistr> {
                       Provider(
                           create: (context) => nazvaniyaTextFieldController,
                           child: PopupFullRegistrNazvaniySeti(
-                            borderColor:
-                                nazvaniyaIsEmpty ? Colors.red : Colors.black,
+                            borderColor: nazvaniyaIsEmpty
+                                ? Color.fromARGB(255, 213, 0, 50)
+                                : Colors.black,
                             hintColor: nazvaniyaIsEmpty
-                                ? Colors.red
+                                ? Color.fromARGB(255, 213, 0, 50)
                                 : const Color(0xff444444),
                             onTap: () =>
                                 setState(() => nazvaniyaIsEmpty = false),
@@ -310,10 +331,11 @@ class _FullRegistrState extends State<FullRegistr> {
                       Provider(
                           create: (context) => doljnostTextFieldController,
                           child: PopupFullRegistrDoljnost(
-                            borderColor:
-                                doljnostIsEmpty ? Colors.red : Colors.black,
+                            borderColor: doljnostIsEmpty
+                                ? Color.fromARGB(255, 213, 0, 50)
+                                : Colors.black,
                             hintColor: doljnostIsEmpty
-                                ? Colors.red
+                                ? Color.fromARGB(255, 213, 0, 50)
                                 : const Color(0xff444444),
                             onTap: () =>
                                 setState(() => doljnostIsEmpty = false),
@@ -324,10 +346,11 @@ class _FullRegistrState extends State<FullRegistr> {
                       Provider(
                           create: (context) => gorodTextFieldController,
                           child: PopupFullRegistrGorod(
-                            borderColor:
-                                gorodIsEmpty ? Colors.red : Colors.black,
+                            borderColor: gorodIsEmpty
+                                ? Color.fromARGB(255, 213, 0, 50)
+                                : Colors.black,
                             hintColor: gorodIsEmpty
-                                ? Colors.red
+                                ? Color.fromARGB(255, 213, 0, 50)
                                 : const Color(0xff444444),
                             onTap: () => setState(() => gorodIsEmpty = false),
                           )),
@@ -343,10 +366,10 @@ class _FullRegistrState extends State<FullRegistr> {
                         weight:
                             isTablet ? FontWeight.normal : FontWeight.normal,
                         borderColor: adressIsEmpty
-                            ? Colors.red
+                            ? Color.fromARGB(255, 213, 0, 50)
                             : const Color(0xFF000000),
                         hintColor: adressIsEmpty
-                            ? Colors.red
+                            ? Color.fromARGB(255, 213, 0, 50)
                             : const Color(0xFF444444),
                         onTap: () => setState(() => adressIsEmpty = false),
                       ),
@@ -623,7 +646,7 @@ class _FullRegistrState extends State<FullRegistr> {
         if (value['status'] as bool == false) {
           ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
             content: Text("Проверьте корректность заполненных данных"),
-            backgroundColor: Colors.red,
+            backgroundColor: Color.fromARGB(255, 213, 0, 50),
           ));
         } else {
           providerFlip['signin']!.toggleCard();
@@ -632,7 +655,7 @@ class _FullRegistrState extends State<FullRegistr> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         content: Text("Заполните пустые поля"),
-        backgroundColor: Colors.red,
+        backgroundColor: Color.fromARGB(255, 213, 0, 50),
       ));
     }
   }
@@ -646,11 +669,13 @@ class _FullRegistrState extends State<FullRegistr> {
         borderRadius: BorderRadius.circular(54),
       ),
       focusedErrorBorder: outlineInputBorder(
-        color == Colors.red ? 0.9 : .1,
+        color == Color.fromARGB(255, 213, 0, 50) ? 0.9 : .1,
         Colors.black,
       ),
-      enabledBorder: outlineInputBorder(color == Colors.red ? 0.9 : 0.2, color),
-      errorBorder: outlineInputBorder(color == Colors.red ? 0.9 : .1, color),
+      enabledBorder: outlineInputBorder(
+          color == Color.fromARGB(255, 213, 0, 50) ? 0.9 : 0.2, color),
+      errorBorder: outlineInputBorder(
+          color == Color.fromARGB(255, 213, 0, 50) ? 0.9 : .1, color),
       contentPadding: const EdgeInsets.symmetric(vertical: 2),
       hintStyle: TextStyle(color: hintColor),
     );

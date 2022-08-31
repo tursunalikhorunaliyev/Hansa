@@ -20,7 +20,7 @@ class IpadContainer extends StatelessWidget {
             width: 325.w,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.r),
-              color: const Color(0xffff163e),
+              color: const Color.fromARGB(255, 213, 0, 50),
             ),
             child: Padding(
               padding: EdgeInsets.only(top: 20.h),

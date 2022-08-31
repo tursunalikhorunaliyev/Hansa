@@ -92,8 +92,9 @@ class _TabletKatalogBottomItemState extends State<TabletKatalogBottomItem> {
                         child: GestureDetector(
                           onTap: () {
                             setState(() {
-                              launched = _launchInBrowser(Uri.parse(
-                                  "https://${widget.linkPDFSkachat}"));
+                              launched = _launchInBrowser(
+                                Uri.parse("https://${widget.linkPDFSkachat}"),
+                              );
                             });
                           },
                           child: ClipRRect(
