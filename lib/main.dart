@@ -30,6 +30,7 @@ import 'package:hansa_app/classes/tap_favorite.dart';
 import 'package:hansa_app/firebase_options.dart';
 import 'package:hansa_app/middle_part_widgets/permission_handler_screen.dart';
 import 'package:hansa_app/providers/dialog_video_provider.dart';
+import 'package:hansa_app/providers/event_title_provider.dart';
 import 'package:hansa_app/providers/full_registr_provider.dart';
 import 'package:hansa_app/providers/fullname_provider.dart';
 import 'package:hansa_app/providers/is_video_provider.dart';
@@ -87,6 +88,7 @@ class MyApp extends StatelessWidget {
         providers: [
           Provider(create: (context) => NotificationToken()),
           Provider(create: (context) => DownloadProgressFileBloc()),
+          ChangeNotifierProvider(create: (context) => EventTitleProvider()),
           ChangeNotifierProvider(create: (context) => StatiIdProvider()),
           ChangeNotifierProvider(
               create: (context) => TreningiVideoChangerProvider()),
