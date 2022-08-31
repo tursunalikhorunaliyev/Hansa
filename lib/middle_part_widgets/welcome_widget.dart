@@ -1,4 +1,3 @@
-
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,13 +21,11 @@ class WelcomeWidget extends StatefulWidget {
 }
 
 class _WelcomeWidgetState extends State<WelcomeWidget> {
-
-
   ChewieController chewieController = ChewieController(
       videoPlayerController: VideoPlayerController.network(""),
       aspectRatio: 13.6 / 7.2,
-    
-      autoPlay: false)..setVolume(0);
+      autoPlay: false)
+    ..setVolume(0);
   @override
   void initState() {
     super.initState();
@@ -61,13 +58,12 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
               final videoLink = providerWelcomeApi.getVideoLink;
               if (snapshotCount == 0 && isTablet) {
                 chewieController = ChewieController(
-                  videoPlayerController:
-                      VideoPlayerController.network(videoLink),
-                  aspectRatio: 13.6 / 7.2,
-                  autoPlay: true
-                )..setVolume(0);
+                    videoPlayerController:
+                        VideoPlayerController.network(videoLink),
+                    aspectRatio: 13.6 / 7.2,
+                    autoPlay: true)
+                  ..setVolume(0);
                 snapshotCount = 1;
-               
               }
 
               return isTablet
@@ -122,7 +118,8 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                                     snapshot.data![index].link);
                                             articleBLoC.sink.add(statiModel);
                                           },
-                                          buttonColor: const Color(0xffff163e),
+                                          buttonColor: const Color.fromARGB(
+                                              255, 213, 0, 50),
                                           buttonText: 'Смотреть',
                                           isDate: true,
                                           month: toDateString(snapshot
@@ -200,7 +197,8 @@ class _WelcomeWidgetState extends State<WelcomeWidget> {
                                           token, snapshot.data![index].link);
                                   articleBLoC.sink.add(statiModel);
                                 },
-                                buttonColor: const Color(0xffff163e),
+                                buttonColor:
+                                    const Color.fromARGB(255, 213, 0, 50),
                                 buttonText: 'Смотреть',
                                 isDate: true,
                                 month: toDateString(

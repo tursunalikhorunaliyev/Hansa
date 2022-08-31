@@ -3,7 +3,10 @@ import 'package:provider/provider.dart';
 
 class HamburgerIcon extends StatelessWidget {
   final Color color;
-  const HamburgerIcon({this.color = Colors.black, Key? key}) : super(key: key);
+  const HamburgerIcon({
+    this.color = Colors.black,
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

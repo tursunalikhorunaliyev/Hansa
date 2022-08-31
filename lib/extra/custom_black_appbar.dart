@@ -12,7 +12,6 @@ class CustomBlackAppBar extends StatelessWidget {
     final providerScaffoldKey = Provider.of<GlobalKey<ScaffoldState>>(context);
     final providerChewieController = Provider.of<ChewieController>(context);
 
-
     return Container(
       height: 81.h,
       color: const Color(0xff333333),
@@ -22,7 +21,9 @@ class CustomBlackAppBar extends StatelessWidget {
           IconButton(
             onPressed: () {
               Navigator.pop(context);
-              providerChewieController..seekTo(Duration.zero)..pause();
+              providerChewieController
+                ..seekTo(Duration.zero)
+                ..pause();
               providerScaffoldKey.currentState!.openDrawer();
             },
             icon: const HamburgerIcon(

@@ -87,8 +87,9 @@ class _CustomDoubleClipItemState extends State<CustomDoubleClipItem> {
                         child: GestureDetector(
                           onTap: () {
                             setState(() {
-                              launched = _launchInBrowser(Uri.parse(
-                                  "https://${widget.linkPDFSkachat}"));
+                              launched = _launchInBrowser(
+                                Uri.parse("https://${widget.linkPDFSkachat}"),
+                              );
                             });
                           },
                           child: ClipRRect(
@@ -123,8 +124,8 @@ class _CustomDoubleClipItemState extends State<CustomDoubleClipItem> {
                         child: GestureDetector(
                           onTap: () {
                             setState(() {
-                              launched = _launchInBrowser(
-                                  Uri.parse(widget.linkPDF));
+                              launched =
+                                  _launchInBrowser(Uri.parse(widget.linkPDF));
                             });
                           },
                           child: ClipRRect(

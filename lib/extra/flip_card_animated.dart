@@ -1,5 +1,3 @@
-// ignore_for_file: deprecated_member_use
-
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 

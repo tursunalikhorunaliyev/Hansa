@@ -14,7 +14,7 @@ class CustomAppBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Column(
-            children:  [
+            children: [
               SizedBox(
                 height: 20.h,
               ),
@@ -29,7 +29,7 @@ class CustomAppBar extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding:  EdgeInsets.only(top: 13.h),
+                padding: EdgeInsets.only(top: 13.h),
                 child: Image.asset(
                   'assets/logoHansa.png',
                   height: 25.h,
@@ -37,7 +37,7 @@ class CustomAppBar extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding:  EdgeInsets.only(top: 5.h),
+                padding: EdgeInsets.only(top: 5.h),
                 child: RichText(
                   text: TextSpan(
                     children: [
@@ -69,7 +69,7 @@ class CustomAppBar extends StatelessWidget {
             ],
           ),
           Column(
-            children:  [
+            children: [
               SizedBox(
                 height: 20.h,
               ),

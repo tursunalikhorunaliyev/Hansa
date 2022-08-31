@@ -49,7 +49,7 @@ class _IzbrannoeState extends State<Izbrannoe> {
                 children: [
                   Container(
                     decoration: const BoxDecoration(
-                        color: Color(0XFFff163e),
+                        color: Color.fromARGB(255, 213, 0, 50),
                         borderRadius: BorderRadius.only(
                             topRight: Radius.circular(21),
                             bottomRight: Radius.circular(21))),
@@ -71,7 +71,7 @@ class _IzbrannoeState extends State<Izbrannoe> {
                   ),
                   Text("#",
                       style: GoogleFonts.montserrat(
-                          color: const Color(0xFFff163e),
+                          color: const Color.fromARGB(255, 213, 0, 50),
                           fontSize: isTablet ? 18 : 13.66666666666667)),
                   Text("Избранное",
                       style: GoogleFonts.montserrat(
@@ -96,11 +96,11 @@ class _IzbrannoeState extends State<Izbrannoe> {
                             snapshot.data!.data.list.length,
                             (index) => Dismissible(
                               direction: DismissDirection.endToStart,
-                              background:
-                                  Container(color: const Color(0XFFff163e)),
+                              background: Container(
+                                  color: const Color.fromARGB(255, 213, 0, 50)),
                               secondaryBackground: Container(
                                 alignment: Alignment.centerRight,
-                                color: const Color(0XFFff163e),
+                                color: const Color.fromARGB(255, 213, 0, 50),
                                 child: const Padding(
                                   padding: EdgeInsets.only(right: 20),
                                   child: Icon(

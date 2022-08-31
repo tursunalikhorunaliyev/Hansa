@@ -94,7 +94,8 @@ class _HansaEntryState extends State<HansaEntry> {
                   left: 27.w,
                   right: 27.w,
                   child:
-                      Lottie.asset("assets/pre.json", width: 120, height: 120))
+                      Lottie.asset("assets/pre.json", width: 120, height: 120),
+                )
               : const SizedBox(),
           Positioned(
             top: -58.h,
@@ -107,10 +108,11 @@ class _HansaEntryState extends State<HansaEntry> {
                   ),
           ),
           AnimatedPositioned(
-              duration: const Duration(milliseconds: 200),
-              top: pos.h,
-              bottom: isTablet ? 25.h : 20.h,
-              child: const VoytiIliSozdatAccaunt()),
+            duration: const Duration(milliseconds: 200),
+            top: pos.h,
+            bottom: isTablet ? 25.h : 20.h,
+            child: const VoytiIliSozdatAccaunt(),
+          ),
         ],
       ),
     );

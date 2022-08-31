@@ -44,7 +44,9 @@ class _TabletKatalogItemState extends State<TabletKatalogItem> {
         InkWell(
           onTap: () {
             setState(() {
-              launched = _launchInBrowser(Uri.parse(widget.linkPDF));
+              launched = _launchInBrowser(
+                Uri.parse(widget.linkPDF),
+              );
             });
           },
           child: ClipRRect(

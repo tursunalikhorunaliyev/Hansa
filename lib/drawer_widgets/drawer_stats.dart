@@ -27,7 +27,6 @@ class _DrawerStatsState extends State<DrawerStats> {
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       child: Container(
-        // height: isTablet ? 650 : null,
         color: const Color(0xFFffffff),
         child: Column(
           children: [
@@ -47,7 +46,7 @@ class _DrawerStatsState extends State<DrawerStats> {
                           curve: Curves.fastLinearToSlowEaseIn);
                     },
                     child: const Icon(CupertinoIcons.chevron_up_circle_fill,
-                        color: Color(0xffe21a37), size: 25),
+                        color: Color.fromARGB(255, 213, 0, 50), size: 25),
                   ),
                 ),
               ],
@@ -113,7 +112,7 @@ class _DrawerStatsState extends State<DrawerStats> {
                                 return DataRow(
                                   color: MaterialStateProperty.all(
                                     thisUser
-                                        ? const Color(0xffe21a37)
+                                        ? const Color.fromARGB(255, 213, 0, 50)
                                         : Colors.white,
                                   ),
                                   cells: [
@@ -170,7 +169,7 @@ class _DrawerStatsState extends State<DrawerStats> {
                           return SizedBox(
                             height: isTablet ? 530 : 330,
                             child: const SpinKitPulse(
-                              color: Color(0xffe21a37),
+                              color: Color.fromARGB(255, 213, 0, 50),
                             ),
                           );
                         }

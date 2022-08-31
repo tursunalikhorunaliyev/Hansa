@@ -77,24 +77,26 @@ class CompleteRegistr extends StatelessWidget {
                           width: isTablet ? 525 : 319,
                           height: isTablet ? 55 : 47,
                           decoration: BoxDecoration(
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.3),
-                                  spreadRadius: 7,
-                                  blurRadius: 9,
-                                  offset: const Offset(
-                                      0, 15), // changes position of shadow
-                                ),
-                              ],
-                              color: const Color(0xff25b049),
-                              borderRadius:
-                                  BorderRadius.circular(isTablet ? 28 : 23)),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.3),
+                                spreadRadius: 7,
+                                blurRadius: 9,
+                                offset: const Offset(
+                                    0, 15), // changes position of shadow
+                              ),
+                            ],
+                            color: const Color(0xff25b049),
+                            borderRadius:
+                                BorderRadius.circular(isTablet ? 28 : 23),
+                          ),
                           child: Text(
                             'Войти в приложение',
                             style: GoogleFonts.montserrat(
-                                fontSize: isTablet ? 16 : 13,
-                                fontWeight: FontWeight.w500,
-                                color: const Color(0xffffffff)),
+                              fontSize: isTablet ? 16 : 13,
+                              fontWeight: FontWeight.w500,
+                              color: const Color(0xffffffff),
+                            ),
                           ),
                         ),
                       )

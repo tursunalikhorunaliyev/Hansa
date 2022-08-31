@@ -63,7 +63,6 @@ class _UIChangerState extends State<UIChanger> {
     final provider = Provider.of<MenuEventsBloC>(context);
     final videoControlProvider = Provider.of<BlocVideoControll>(context);
     final playProvider = Provider.of<BlocPlayVideo>(context);
-    final providerToken = Provider.of<String>(context);
     final isTablet = Provider.of<bool>(context);
 
     return StreamBuilder<bool>(
