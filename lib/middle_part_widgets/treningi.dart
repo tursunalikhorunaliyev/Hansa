@@ -227,7 +227,7 @@ class _TreningiState extends State<Treningi> {
                                                   : const Color(0xFF232323),
                                               titleColor:
                                                   const Color(0xffffffff),
-                                              buttonText: value.getTitle!,
+                                              buttonText: value.getTitle,
                                               buttonTextColor:
                                                   const Color(0xffffffff),
                                               onTap: () {
@@ -262,7 +262,7 @@ class _TreningiState extends State<Treningi> {
                                                   const Color(0xffffffff),
                                               titleColor:
                                                   const Color(0xffffffff),
-                                              buttonText: value.getTitle!,
+                                              buttonText: value.getTitle,
                                               title: snapshot
                                                   .data!
                                                   .data
