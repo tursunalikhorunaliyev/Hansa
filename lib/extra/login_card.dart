@@ -248,7 +248,7 @@ class _LoginCardState extends State<LoginCard> {
                                                           .text ==
                                                       "1")
                                           .sendRequest();
-                                      getToken();
+                                   
                                       pagerBloc.sink.add(isCorrectList);
                                       chekNet();
                                     }
