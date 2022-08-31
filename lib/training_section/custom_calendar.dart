@@ -15,6 +15,7 @@ class CustomCalendar extends StatefulWidget {
 
 class _CustomCalendarState extends State<CustomCalendar> {
   bool isEvent = false;
+  DateRangePickerController calendarController = DateRangePickerController();
   @override
   Widget build(BuildContext context) {
     List<DateTime> listDate = [];
@@ -33,7 +34,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
       padding:
           EdgeInsets.only(left: 25.w, right: 25.w, top: isTablet ? 12.h : 0.h),
       child: SfDateRangePicker(
-      
+        controller: calendarController,
         monthViewSettings: const DateRangePickerMonthViewSettings(
             viewHeaderStyle: DateRangePickerViewHeaderStyle(
                 textStyle: TextStyle(color: Colors.white))),
@@ -44,11 +45,11 @@ class _CustomCalendarState extends State<CustomCalendar> {
             textStyle: TextStyle(color: Colors.white)),
         onSelectionChanged: (date) {
           log(date.value.toString());
+          log(calendarController.selectedRange!.toStringShort());
         },
-
         monthCellStyle: DateRangePickerMonthCellStyle(
           cellDecoration: BoxDecoration(
-              color:const Color.fromARGB(255, 213, 0, 50),
+              color: const Color.fromARGB(255, 213, 0, 50),
               borderRadius: BorderRadius.circular(10)),
           disabledDatesDecoration: BoxDecoration(
               color: const Color(0xFF232323),

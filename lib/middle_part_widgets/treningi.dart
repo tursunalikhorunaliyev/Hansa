@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/training_model.dart';
@@ -15,6 +18,7 @@ import 'package:hansa_app/training_section/custom_calendar.dart';
 import 'package:hansa_app/extra/custom_clip_item.dart';
 import 'package:hansa_app/extra/custom_title.dart';
 import 'package:lottie/lottie.dart';
+import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:sticky_headers/sticky_headers.dart';
 
@@ -26,6 +30,7 @@ class Treningi extends StatefulWidget {
 }
 
 class _TreningiState extends State<Treningi> {
+  int i = 0;
   @override
   Widget build(BuildContext context) {
     final menuBloCProvider = Provider.of<MenuEventsBloC>(context);
@@ -36,6 +41,15 @@ class _TreningiState extends State<Treningi> {
     final isVideo = Provider.of<IsVideoprovider>(context);
     final trainingBloc = TrainingAPIBloc();
     final scroll = ScrollController();
+    final eventTitleProvider = Provider.of<EventTitleProvider>(context);
+    if (i == 0) {
+      trainingBloc.getTrainingData(token).then((value) {
+        (value.data.futureEvents.list.first.checked == true)
+            ? eventTitleProvider.changeTitle("Отписация")
+            : eventTitleProvider.changeTitle("Записаться");
+      });
+      i = 1;
+    }
     return Expanded(
       child: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
@@ -213,7 +227,7 @@ class _TreningiState extends State<Treningi> {
                                                   : const Color(0xFF232323),
                                               titleColor:
                                                   const Color(0xffffffff),
-                                              buttonText: value.getTitle,
+                                              buttonText: value.getTitle!,
                                               buttonTextColor:
                                                   const Color(0xffffffff),
                                               onTap: () {
@@ -225,6 +239,15 @@ class _TreningiState extends State<Treningi> {
                                                   value.changeTitle(
                                                       "Записаться");
                                                 }
+                                                postChecked(
+                                                    token,
+                                                    snapshot
+                                                        .data!
+                                                        .data
+                                                        .futureEvents
+                                                        .list
+                                                        .first
+                                                        .link);
                                               },
                                             )
                                           : CustomClipItem(
@@ -239,7 +262,7 @@ class _TreningiState extends State<Treningi> {
                                                   const Color(0xffffffff),
                                               titleColor:
                                                   const Color(0xffffffff),
-                                              buttonText: value.getTitle,
+                                              buttonText: value.getTitle!,
                                               title: snapshot
                                                   .data!
                                                   .data
@@ -256,6 +279,15 @@ class _TreningiState extends State<Treningi> {
                                                   value.changeTitle(
                                                       "Записаться");
                                                 }
+                                                postChecked(
+                                                    token,
+                                                    snapshot
+                                                        .data!
+                                                        .data
+                                                        .futureEvents
+                                                        .list
+                                                        .first
+                                                        .link);
                                               },
                                             );
                                     },
@@ -466,5 +498,18 @@ class _TreningiState extends State<Treningi> {
     } else {
       return "Декабрь";
     }
+  }
+
+  postChecked(token, url) async {
+    log(token);
+    Timer(const Duration(seconds: 3), () async {
+      await http.post(
+        Uri.parse("https://hansa-lab.ru/api/site/notification?id=191"),
+        headers: {
+          "token":
+              "022412a69ac3e9df2bdff39b1188f5ee97b474eecad20f51fa7dc2971237643b"
+        },
+      );
+    });
   }
 }
