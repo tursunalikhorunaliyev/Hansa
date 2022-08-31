@@ -45,7 +45,7 @@ class _StatiCommentState extends State<StatiComment> {
                     children: [
                       const Icon(
                         Icons.star,
-                        color: Color(0xFFe21a37),
+                        color: Color.fromARGB(255, 213, 0, 50),
                         size: 12.66666666666667,
                       ),
                       const SizedBox(
