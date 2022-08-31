@@ -54,7 +54,7 @@ void main(List<String> args) async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   initMessaging();
-  log(await getToken());
+
   listenForeground(channel);
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   runApp(const MyApp());
