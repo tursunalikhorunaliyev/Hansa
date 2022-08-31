@@ -61,14 +61,14 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
       cupertinoProgressColors: ChewieProgressColors(
         backgroundColor: const Color(0xff090909),
         bufferedColor: const Color(0xff090909),
-        playedColor: const Color(0xffff0000),
-        handleColor: const Color(0xffff0000),
+        playedColor: const Color.fromARGB(255, 213, 0, 50),
+        handleColor: const Color.fromARGB(255, 213, 0, 50),
       ),
       materialProgressColors: ChewieProgressColors(
         backgroundColor: const Color(0xff090909),
         bufferedColor: const Color(0xff090909),
-        playedColor: const Color(0xffff0000),
-        handleColor: const Color(0xffff0000),
+        playedColor: const Color.fromARGB(255, 213, 0, 50),
+        handleColor: const Color.fromARGB(255, 213, 0, 50),
       ),
     );
   }
@@ -213,7 +213,8 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
                                     constraints: BoxConstraints(
                                       minWidth: isTablet ? 150 : 90,
                                     ),
-                                    color: const Color(0xffff163e),
+                                    color:
+                                        const Color.fromARGB(255, 213, 0, 50),
                                     child: Center(
                                       child: Text(
                                         "Открыть раздел",
@@ -295,8 +296,6 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
                                                   .list[widget.selectedIndex]
                                                   .videoLink);
                                             }
-                                            providerSendAnaliseDownload
-                                                .setAnalise(v);
                                           });
                                         } else {
                                           log("asdffffffffffff=----------------------------------------");

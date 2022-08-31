@@ -190,8 +190,8 @@ class _TreningiState extends State<Treningi> {
                                         titleColor: const Color(0xffffffff),
                                       )
                                     : CustomClipItem(
-                                        backgroundColor:
-                                            const Color(0xffff163e),
+                                        backgroundColor: const Color.fromARGB(
+                                            255, 213, 0, 50),
                                         buttonColor: const Color(0xff232323),
                                         buttonTextColor:
                                             const Color(0xffffffff),
@@ -238,8 +238,8 @@ class _TreningiState extends State<Treningi> {
                                             child: TabletItemTreningi(
                                               backgroundColor:
                                                   const Color(0xff000004),
-                                              buttonColor:
-                                                  const Color(0xffe21a37),
+                                              buttonColor: const Color.fromARGB(
+                                                  255, 213, 0, 50),
                                               buttonTextColor:
                                                   const Color(0xffffffff),
                                               titleColor:
@@ -280,8 +280,8 @@ class _TreningiState extends State<Treningi> {
                                             child: TabletItemTreningi(
                                               backgroundColor:
                                                   const Color(0xff000004),
-                                              buttonColor:
-                                                  const Color(0xffe21a37),
+                                              buttonColor: const Color.fromARGB(
+                                                  255, 213, 0, 50),
                                               buttonTextColor:
                                                   const Color(0xffffffff),
                                               titleColor:
@@ -315,7 +315,8 @@ class _TreningiState extends State<Treningi> {
                                   (index) {
                                     return CustomClipItem(
                                       backgroundColor: const Color(0xff000004),
-                                      buttonColor: const Color(0xffe21a37),
+                                      buttonColor:
+                                          const Color.fromARGB(255, 213, 0, 50),
                                       buttonTextColor: const Color(0xffffffff),
                                       titleColor: const Color(0xffffffff),
                                       buttonText: "Смотреть",
@@ -337,7 +338,8 @@ class _TreningiState extends State<Treningi> {
                                   (index) {
                                     return CustomClipItem(
                                       backgroundColor: const Color(0xff000004),
-                                      buttonColor: const Color(0xffe21a37),
+                                      buttonColor:
+                                          const Color.fromARGB(255, 213, 0, 50),
                                       buttonTextColor: const Color(0xffffffff),
                                       titleColor: const Color(0xffffffff),
                                       buttonText: "Смотреть",

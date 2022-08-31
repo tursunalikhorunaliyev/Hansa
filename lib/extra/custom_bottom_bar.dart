@@ -13,6 +13,7 @@ class CustomBottomBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           GestureDetector(
+            onTap: () {},
             child: Icon(
               CupertinoIcons.chevron_left_circle,
               size: 25.sp,
@@ -20,6 +21,7 @@ class CustomBottomBar extends StatelessWidget {
             ),
           ),
           GestureDetector(
+            onTap: () {},
             child: Icon(
               CupertinoIcons.search,
               size: 25.sp,
@@ -27,6 +29,7 @@ class CustomBottomBar extends StatelessWidget {
             ),
           ),
           GestureDetector(
+            onTap: () {},
             child: Icon(
               CupertinoIcons.heart,
               size: 25.sp,
@@ -34,6 +37,7 @@ class CustomBottomBar extends StatelessWidget {
             ),
           ),
           GestureDetector(
+            onTap: () {},
             child: Icon(
               CupertinoIcons.person,
               size: 25.sp,

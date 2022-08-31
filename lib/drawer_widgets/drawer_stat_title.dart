@@ -18,7 +18,7 @@ class DrawerStatTitle extends StatelessWidget {
             width: 70,
             alignment: Alignment.centerRight,
             decoration: const BoxDecoration(
-              color: Color(0xffff163e),
+              color: Color.fromARGB(255, 213, 0, 50),
               borderRadius: BorderRadius.only(
                 topRight: Radius.circular(64),
                 bottomRight: Radius.circular(64),
@@ -43,7 +43,7 @@ class DrawerStatTitle extends StatelessWidget {
                 TextSpan(
                   text: "#",
                   style: GoogleFonts.montserrat(
-                    color: const Color(0xffff163e),
+                    color: const Color.fromARGB(255, 213, 0, 50),
                   ),
                 ),
                 TextSpan(

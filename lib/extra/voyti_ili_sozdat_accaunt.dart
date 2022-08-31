@@ -20,7 +20,7 @@ class VoytiIliSozdatAccaunt extends StatelessWidget {
     final isTablet = Provider.of<bool>(context);
     final providerFlip = Provider.of<Map<String, FlipCardController>>(context);
     final flipLoginProvider = Provider.of<FlipLoginProvider>(context);
-    
+
     final loginActionProvider = Provider.of<LoginClickedProvider>(context);
 
     return ScreenUtilInit(
@@ -46,8 +46,9 @@ class VoytiIliSozdatAccaunt extends StatelessWidget {
                 decoration: BoxDecoration(
                     color: Colors.transparent,
                     borderRadius: BorderRadius.circular(23.33333333333333.r),
-                    border:
-                        Border.all(color: const Color(0xFFa1b7c2), width: isTablet ? 1.w  :  2.w)),
+                    border: Border.all(
+                        color: const Color(0xFFa1b7c2),
+                        width: isTablet ? 1.w : 2.w)),
                 child: Center(
                   child: Text(
                     "Создать аккаунт",
@@ -88,7 +89,7 @@ class VoytiIliSozdatAccaunt extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-               loginActionProvider.changeLoginAction(LoginAction.login);
+                loginActionProvider.changeLoginAction(LoginAction.login);
                 flipLoginProvider.changeIsClosed(true);
                 providerFlip['login']!.toggleCard();
               },
@@ -96,7 +97,7 @@ class VoytiIliSozdatAccaunt extends StatelessWidget {
                 height: isTablet ? 50.h : 46.66666666666667.h,
                 width: isTablet ? 220.w : 320.3333333333333.w,
                 decoration: BoxDecoration(
-                    color: const Color(0xFFe21a37),
+                    color: const Color.fromARGB(255, 213, 0, 50),
                     borderRadius: BorderRadius.circular(23.33333333333333.r)),
                 child: Center(
                   child: Text(

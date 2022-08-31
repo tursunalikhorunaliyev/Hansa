@@ -9,7 +9,7 @@ class SpinKitFadingFourWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding:  EdgeInsets.only(top: 78.66666666666667.h),
+        padding: EdgeInsets.only(top: 78.66666.h),
         child: SpinKitFadingFour(
           shape: BoxShape.circle,
           size: 80.sp,

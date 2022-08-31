@@ -50,14 +50,14 @@ class _TopVideoVidgetState extends State<TopVideoVidget> {
       cupertinoProgressColors: ChewieProgressColors(
         backgroundColor: const Color(0xff090909),
         bufferedColor: const Color(0xff090909),
-        playedColor: const Color(0xffff0000),
-        handleColor: const Color(0xffff0000),
+        playedColor: const Color.fromARGB(255, 213, 0, 50),
+        handleColor: const Color.fromARGB(255, 213, 0, 50),
       ),
       materialProgressColors: ChewieProgressColors(
         backgroundColor: const Color(0xff090909),
         bufferedColor: const Color(0xff090909),
-        playedColor: const Color(0xffff0000),
-        handleColor: const Color(0xffff0000),
+        playedColor: const Color.fromARGB(255, 213, 0, 50),
+        handleColor: const Color.fromARGB(255, 213, 0, 50),
       ),
     );
   }
@@ -94,8 +94,8 @@ class _TopVideoVidgetState extends State<TopVideoVidget> {
     return path;
   }
 
-  Future<bool> downloadFile(
-      String url, String fileName, DownloadProgressFileBloc downloadProgressFileBloc) async {
+  Future<bool> downloadFile(String url, String fileName,
+      DownloadProgressFileBloc downloadProgressFileBloc) async {
     progress = 0;
 
     String savePath = await getFilePath(fileName);
@@ -112,25 +112,21 @@ class _TopVideoVidgetState extends State<TopVideoVidget> {
           progress =
               double.parse(((recieved / total) * 100).toStringAsFixed(0));
           downloadProgressFileBloc.streamSink.add(progress);
-        
-          if(progress == 100){
+
+          if (progress == 100) {
             log("tugadi");
-            
-          }
-          else{
+          } else {
             log("$progress download progress");
           }
         },
         deleteOnError: true,
       );
-      if(progress == 100){
-      
+      if (progress == 100) {
         log("yuklab olish 100000000");
       }
       return true;
     }
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +134,8 @@ class _TopVideoVidgetState extends State<TopVideoVidget> {
     final token = Provider.of<String>(context);
     final providerIndex = Provider.of<int>(context);
     final isTablet = Provider.of<bool>(context);
-    final providerSendAnaliseDownload = Provider.of<SendAnaliseDownload>(context);
+    final providerSendAnaliseDownload =
+        Provider.of<SendAnaliseDownload>(context);
     return WillPopScope(
       onWillPop: () async {
         chewieController
@@ -235,7 +232,8 @@ class _TopVideoVidgetState extends State<TopVideoVidget> {
                                                     providerBlocProgress,
                                                   ).then((value) {
                                                     log("$value download status");
-                                                    providerSendAnaliseDownload.setAnalise(value);
+                                                    providerSendAnaliseDownload
+                                                        .setAnalise(value);
                                                   });
                                                 } else {
                                                   log("asdffffffffffff=----------------------------------------");

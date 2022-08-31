@@ -70,7 +70,8 @@ class CustomTreningiVideo extends StatelessWidget {
                                     child: Container(
                                       height: isTablet ? 30 : 25,
                                       width: isTablet ? 120 : 95,
-                                      color: const Color(0xffff163e),
+                                      color:
+                                          const Color.fromARGB(255, 213, 0, 50),
                                       child: Center(
                                         child: Text(
                                           "Скачать",
@@ -92,31 +93,32 @@ class CustomTreningiVideo extends StatelessWidget {
                         ],
                       ),
                     )),
-              StreamBuilder<bool>(
-                        stream: providerBlocDetectTap.dataStream,
-                        builder: (context, snapshotDetectTap) {
-                          log("${providerSendAnaliseDownload.getAnalise} downloading");
+                StreamBuilder<bool>(
+                    stream: providerBlocDetectTap.dataStream,
+                    builder: (context, snapshotDetectTap) {
+                      log("${providerSendAnaliseDownload.getAnalise} downloading");
 
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: AnimatedContainer(
-                                curve: snapshotDetectTap.data == true
-                                    ? Curves.bounceOut
-                                    : Curves.bounceOut,
-                                duration: const Duration(milliseconds: 500),
-                                width: 355,
-                                height: snapshotDetectTap.data == true ? 20 : 0,
-                                decoration: const BoxDecoration(
-                                    color: Color(0xffffffff),
-                                    borderRadius: BorderRadius.only(
-                                      bottomLeft: Radius.circular(10),
-                                      bottomRight: Radius.circular(10),
-                                    )),
-                                child: AnimatedOpacity(
-                                    duration: const Duration(milliseconds: 500),
-                                    opacity:
-                                        snapshotDetectTap.data == true ? 1 : 0,
-                                    child: providerSendAnaliseDownload.getAnalise == true ? Padding(
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: AnimatedContainer(
+                            curve: snapshotDetectTap.data == true
+                                ? Curves.bounceOut
+                                : Curves.bounceOut,
+                            duration: const Duration(milliseconds: 500),
+                            width: 355,
+                            height: snapshotDetectTap.data == true ? 20 : 0,
+                            decoration: const BoxDecoration(
+                                color: Color(0xffffffff),
+                                borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(10),
+                                  bottomRight: Radius.circular(10),
+                                )),
+                            child: AnimatedOpacity(
+                              duration: const Duration(milliseconds: 500),
+                              opacity: snapshotDetectTap.data == true ? 1 : 0,
+                              child: providerSendAnaliseDownload.getAnalise ==
+                                      true
+                                  ? Padding(
                                       padding: const EdgeInsets.only(
                                           left: 15, right: 15),
                                       child: StreamBuilder<double>(
@@ -138,26 +140,27 @@ class CustomTreningiVideo extends StatelessWidget {
                                               lineHeight: 6,
                                               percent:
                                                   snapshotDouble.data! / 100,
-                                              backgroundColor:
-   Colors.grey[200],                                              progressColor: Colors.green,
+                                              backgroundColor: Colors.grey[200],
+                                              progressColor: Colors.green,
                                             );
                                           }),
-                                    ) : Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                            "Этот файл уже скачан",
-                                            style: GoogleFonts.montserrat(
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.bold,
-                                            ),
+                                    )
+                                  : Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "Этот файл уже скачан",
+                                          style: GoogleFonts.montserrat(
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.bold,
                                           ),
-                                        ],
-                                      ),)),
-                          );
-                        })
-               
+                                        ),
+                                      ],
+                                    ),
+                            )),
+                      );
+                    })
               ],
             ),
           ),

@@ -109,7 +109,7 @@ class _PrezentOtkritTabletCardState extends State<PrezentOtkritTabletCard> {
                               minWidth: 60.w,
                             ),
                             decoration: BoxDecoration(
-                              color: const Color(0xffff163e),
+                              color: const Color.fromARGB(255, 213, 0, 50),
                               borderRadius: BorderRadius.circular(64.r),
                             ),
                             child: Center(

@@ -10,6 +10,7 @@ import 'package:hansa_app/video_section/custom_video_subitem.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:sticky_headers/sticky_headers.dart';
+
 class Video extends StatelessWidget {
   const Video({Key? key}) : super(key: key);
 
@@ -40,38 +41,39 @@ class Video extends StatelessWidget {
                   ),
                 );
               }
-              return 
-              StickyHeader(header: const CustomTitle(
-                    imagePath: "assets/video_title.png",
-                    title: "Видео",
-                  ), content: Column(
-                      children: List.generate(
-                          snapshot.data!.videoListData.list.length, (i) {
-                    return Column(
-                      children: [
-                        CustomVideoSubItem(
-                            onTap: () {
-                              title.changeTitle(
-                                  snapshot.data!.videoListData.list[i].title);
-                              menuEventsBloCProvider.eventSink
-                                  .add(MenuActions.oKompanii);
-                              index.changeIndex(i);
-                            },
-                            title: snapshot.data!.videoListData.list[i].title),
-                        listView(
-                          (snapshot.data!.videoListData.list[i].data.list
-                                      .length <
-                                  5)
-                              ? snapshot
-                                  .data!.videoListData.list[i].data.list.length
-                              : 5,
-                          i,
-                          isTablet,
-                          snapshot.data!.videoListData.list[i].title,
-                        )
-                      ],
-                    );
-                  })),);
+              return StickyHeader(
+                header: const CustomTitle(
+                  imagePath: "assets/video_title.png",
+                  title: "Видео",
+                ),
+                content: Column(
+                    children: List.generate(
+                        snapshot.data!.videoListData.list.length, (i) {
+                  return Column(
+                    children: [
+                      CustomVideoSubItem(
+                          onTap: () {
+                            title.changeTitle(
+                                snapshot.data!.videoListData.list[i].title);
+                            menuEventsBloCProvider.eventSink
+                                .add(MenuActions.oKompanii);
+                            index.changeIndex(i);
+                          },
+                          title: snapshot.data!.videoListData.list[i].title),
+                      listView(
+                        (snapshot.data!.videoListData.list[i].data.list.length <
+                                5)
+                            ? snapshot
+                                .data!.videoListData.list[i].data.list.length
+                            : 5,
+                        i,
+                        isTablet,
+                        snapshot.data!.videoListData.list[i].title,
+                      )
+                    ],
+                  );
+                })),
+              );
             }),
       ),
     );

@@ -154,12 +154,12 @@ class _StackedStackObuchState extends State<StackedStackObuch> {
                           child: fav
                               ? const Icon(
                                   Icons.favorite,
-                                  color: Color(0xffed3851),
+                                  color: Color.fromARGB(255, 213, 0, 50),
                                   size: 30,
                                 )
                               : const Icon(
                                   Icons.favorite_border_sharp,
-                                  color: Color(0xffed3851),
+                                  color: Color.fromARGB(255, 213, 0, 50),
                                   size: 30,
                                 ),
                         ),

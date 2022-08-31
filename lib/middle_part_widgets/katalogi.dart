@@ -23,7 +23,6 @@ class _KatalogiState extends State<Katalogi> {
     final token = Provider.of<String>(context);
     final isTablet = Provider.of<bool>(context);
     final catalogBloc = CatalogBloc(token);
-
     final scroll = ScrollController();
     final welcomeApi = WelcomeApi(token);
     welcomeApi.eventSink.add(WelcomeApiAction.fetch);
@@ -78,7 +77,8 @@ class _KatalogiState extends State<Katalogi> {
                                               const Color(0xff000004),
                                           buttonTextColor:
                                               const Color(0xffffffff),
-                                          buttonColor: const Color(0xffff163e),
+                                          buttonColor: const Color.fromARGB(
+                                              255, 213, 0, 50),
                                           titleColor: const Color(0xffffffff),
                                           title: data.guides.list[index].title,
                                           stbuttonText: "Скачать",
@@ -98,7 +98,8 @@ class _KatalogiState extends State<Katalogi> {
                                   imageUrl: data.guides.list[index].pictureLink,
                                   backgroundColor: const Color(0xff000004),
                                   buttonTextColor: const Color(0xffffffff),
-                                  buttonColor: const Color(0xffff163e),
+                                  buttonColor:
+                                      const Color.fromARGB(255, 213, 0, 50),
                                   titleColor: const Color(0xffffffff),
                                   title: data.guides.list[index].title,
                                   stbuttonText: "Скачать",
@@ -147,7 +148,8 @@ class _KatalogiState extends State<Katalogi> {
                                               const Color(0xff000004),
                                           buttonTextColor:
                                               const Color(0xffffffff),
-                                          buttonColor: const Color(0xffff163e),
+                                          buttonColor: const Color.fromARGB(
+                                              255, 213, 0, 50),
                                           titleColor: const Color(0xffffffff),
                                           title: data
                                               .guidesArchive.list[index].title,
@@ -169,7 +171,8 @@ class _KatalogiState extends State<Katalogi> {
                                       .guidesArchive.list[index].pictureLink,
                                   backgroundColor: const Color(0xff000004),
                                   buttonTextColor: const Color(0xffffffff),
-                                  buttonColor: const Color(0xffff163e),
+                                  buttonColor:
+                                      const Color.fromARGB(255, 213, 0, 50),
                                   titleColor: const Color(0xffffffff),
                                   title: data.guidesArchive.list[index].title,
                                   stbuttonText: "Скачать",

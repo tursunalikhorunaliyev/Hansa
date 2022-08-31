@@ -7,12 +7,12 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
+    return MaterialApp(
       title: 'Flutter Demo',
-      theme:  ThemeData(
+      theme: ThemeData(
         primarySwatch: Colors.deepPurple,
       ),
-      home:  const MyHomePage(title: 'flutter_html Example'),
+      home: const MyHomePage(title: 'flutter_html Example'),
     );
   }
 }
@@ -242,7 +242,7 @@ const htmlData = r"""
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
+    return Scaffold(
       appBar: AppBar(
         title: const Text('flutter_html Example'),
         centerTitle: true,
@@ -250,10 +250,6 @@ class _MyHomePageState extends State<MyHomePage> {
       body: SingleChildScrollView(
         child: Html(
           data: htmlData,
-          
-          
-         
-          
         ),
       ),
     );

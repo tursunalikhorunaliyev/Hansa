@@ -63,14 +63,14 @@ class _CustomTreningiVideoPlayState extends State<CustomTreningiVideoPlay> {
                 cupertinoProgressColors: ChewieProgressColors(
                   backgroundColor: const Color(0xff090909),
                   bufferedColor: const Color(0xff090909),
-                  playedColor: const Color(0xffff0000),
-                  handleColor: const Color(0xffff0000),
+                  playedColor: const Color.fromARGB(255, 213, 0, 50),
+                  handleColor: const Color.fromARGB(255, 213, 0, 50),
                 ),
                 materialProgressColors: ChewieProgressColors(
                   backgroundColor: const Color(0xff090909),
                   bufferedColor: const Color(0xff090909),
-                  playedColor: const Color(0xffff0000),
-                  handleColor: const Color(0xffff0000),
+                  playedColor: const Color.fromARGB(255, 213, 0, 50),
+                  handleColor: const Color.fromARGB(255, 213, 0, 50),
                 ),
                 videoPlayerController: VideoPlayerController.network(
                   snapshot.data!.data.data.data[0].videoLink,
@@ -125,7 +125,8 @@ class _CustomTreningiVideoPlayState extends State<CustomTreningiVideoPlay> {
                                     child: Container(
                                       height: 25,
                                       width: 95,
-                                      color: const Color(0xffff163e),
+                                      color:
+                                          const Color.fromARGB(255, 213, 0, 50),
                                       child: Center(
                                         child: Text(
                                           "Скачать",
@@ -158,7 +159,7 @@ class _CustomTreningiVideoPlayState extends State<CustomTreningiVideoPlay> {
                       child: const Center(
                         child: Icon(
                           Icons.favorite,
-                          color: Color(0xffed3851),
+                          color: Color.fromARGB(255, 213, 0, 50),
                           size: 35,
                         ),
                       ),

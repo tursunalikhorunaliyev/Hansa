@@ -1,8 +1,6 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:hansa_app/classes/send_check_switcher.dart';
 import 'package:provider/provider.dart';
 
@@ -45,10 +43,8 @@ class ExitDialog extends StatelessWidget {
                   GestureDetector(
                     onTap: () {
                       if (providerSendCheckSwitcher.getBool == true) {
-                        log("minimaze");
                         Navigator.pop(context);
                       } else {
-                        log("EXIT 0");
                         exit(0);
                       }
                     },
