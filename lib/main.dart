@@ -87,6 +87,7 @@ class MyApp extends StatelessWidget {
       builder: (context, child) => MultiProvider(
         providers: [
           Provider(create: (context) => NotificationToken()),
+          Provider(create: (context) => SendCheckSwitcher()),
           Provider(create: (context) => DownloadProgressFileBloc()),
           ChangeNotifierProvider(create: (context) => EventTitleProvider()),
           ChangeNotifierProvider(create: (context) => StatiIdProvider()),
