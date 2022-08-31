@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
@@ -34,7 +36,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
         monthViewSettings: const DateRangePickerMonthViewSettings(
             viewHeaderStyle: DateRangePickerViewHeaderStyle(
                 textStyle: TextStyle(color: Colors.white))),
-        selectionColor: Color.fromARGB(255, 213, 0, 50),
+        selectionColor: const Color.fromARGB(255, 213, 0, 50),
         selectionShape: DateRangePickerSelectionShape.rectangle,
         backgroundColor: const Color(0xFF232323),
         headerStyle: const DateRangePickerHeaderStyle(
@@ -55,6 +57,7 @@ class _CustomCalendarState extends State<CustomCalendar> {
         ),
         selectionMode: DateRangePickerSelectionMode.multiple,
         initialSelectedDates: listDate,
+        initialDisplayDate: listDate.first,
         selectableDayPredicate: (date) {
           if (listDate.contains(date)) {
             return true;
