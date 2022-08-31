@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/training_model.dart';
@@ -58,121 +57,126 @@ class _TreningiState extends State<Treningi> {
                           children: [
                             Row(),
                             (snapshot.data!.data.webinar.data.isNotEmpty)
-                                ? Container(
-                                    margin: const EdgeInsets.only(
-                                        left: 25, right: 25, bottom: 13),
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(8),
-                                        image: const DecorationImage(
-                                            image: AssetImage(
-                                                'assets/event-default.png'),
-                                            fit: BoxFit.cover)),
-                                    child: Column(
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 14),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              const SizedBox(
-                                                height: 13,
-                                              ),
-                                              Row(
-                                                children: [
-                                                  Text(
-                                                      snapshot
-                                                          .data!
-                                                          .data
-                                                          .webinar
-                                                          .data
-                                                          .first
-                                                          .date
-                                                          .trim()
-                                                          .substring(0, 4),
-                                                      style: GoogleFonts
-                                                          .montserrat(
-                                                              color:
-                                                                  Colors.white,
-                                                              fontSize: 20)),
-                                                  const Spacer(),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 10),
-                                                    child: GestureDetector(
-                                                      onTap: () {
-                                                        launchInBrowser(
-                                                            Uri.parse(snapshot
-                                                                .data!
-                                                                .data
-                                                                .webinar
-                                                                .data
-                                                                .first
-                                                                .link));
-                                                      },
-                                                      child: ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(64),
-                                                        child: Container(
-                                                          height: 25,
-                                                          color: const Color(
-                                                              0xff25b049),
-                                                          child: Center(
-                                                            child: Padding(
-                                                              padding: const EdgeInsets
-                                                                      .symmetric(
-                                                                  horizontal:
-                                                                      15),
-                                                              child: Text(
-                                                                'Зарегистрироваться',
-                                                                style: GoogleFonts.montserrat(
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w700,
-                                                                    fontSize: 8,
-                                                                    color: Colors
-                                                                        .white),
+                                ? Column(
+                                    children: List.generate(
+                                    snapshot.data!.data.webinar.data.length,
+                                    (index) => Container(
+                                      margin: const EdgeInsets.only(
+                                          left: 25, right: 25, bottom: 13),
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                          image: const DecorationImage(
+                                              image: AssetImage(
+                                                  'assets/event-default.png'),
+                                              fit: BoxFit.cover)),
+                                      child: Column(
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 14),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                const SizedBox(
+                                                  height: 13,
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                        snapshot
+                                                            .data!
+                                                            .data
+                                                            .webinar
+                                                            .data[index]
+                                                            .date
+                                                            .trim()
+                                                            .substring(0, 4),
+                                                        style: GoogleFonts
+                                                            .montserrat(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 20)),
+                                                    const Spacer(),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 10),
+                                                      child: GestureDetector(
+                                                        onTap: () {
+                                                          launchInBrowser(
+                                                              Uri.parse(snapshot
+                                                                  .data!
+                                                                  .data
+                                                                  .webinar
+                                                                  .data[index]
+                                                                  .link));
+                                                        },
+                                                        child: ClipRRect(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(64),
+                                                          child: Container(
+                                                            height: 25,
+                                                            color: const Color(
+                                                                0xff25b049),
+                                                            child: Center(
+                                                              child: Padding(
+                                                                padding: const EdgeInsets
+                                                                        .symmetric(
+                                                                    horizontal:
+                                                                        15),
+                                                                child: Text(
+                                                                  'Зарегистрироваться',
+                                                                  style: GoogleFonts.montserrat(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w700,
+                                                                      fontSize:
+                                                                          8,
+                                                                      color: Colors
+                                                                          .white),
+                                                                ),
                                                               ),
                                                             ),
                                                           ),
                                                         ),
                                                       ),
                                                     ),
-                                                  ),
-                                                ],
-                                              ),
-                                              Text(
-                                                "${snapshot.data!.data.webinar.data.first.date.trim().substring(8, 10)} - ${toDateString(snapshot.data!.data.webinar.data.first.date.trim().substring(5, 7))}",
-                                                style: GoogleFonts.montserrat(
-                                                    color: Colors.white,
-                                                    fontSize: 20),
-                                              ),
-                                              const SizedBox(
-                                                height: 20,
-                                              ),
-                                              Text(
-                                                  snapshot.data!.data.webinar
-                                                      .data.first.name
-                                                      .trim(),
-                                                  softWrap: true,
-                                                  overflow: TextOverflow.clip,
+                                                  ],
+                                                ),
+                                                Text(
+                                                  "${snapshot.data!.data.webinar.data[index].date.trim().substring(8, 10)} - ${toDateString(snapshot.data!.data.webinar.data[index].date.trim().substring(5, 7))}",
                                                   style: GoogleFonts.montserrat(
                                                       color: Colors.white,
-                                                      fontWeight:
-                                                          FontWeight.w200,
-                                                      fontSize: 24)),
-                                              const SizedBox(
-                                                height: 50,
-                                              ),
-                                            ],
+                                                      fontSize: 20),
+                                                ),
+                                                const SizedBox(
+                                                  height: 20,
+                                                ),
+                                                Text(
+                                                    snapshot.data!.data.webinar
+                                                        .data[index].name
+                                                        .trim(),
+                                                    softWrap: true,
+                                                    overflow: TextOverflow.clip,
+                                                    style:
+                                                        GoogleFonts.montserrat(
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight.w200,
+                                                            fontSize: 24)),
+                                                const SizedBox(
+                                                  height: 50,
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                  )
+                                  ))
                                 : const SizedBox(),
                             (snapshot.data!.data.events.events.isNotEmpty)
                                 ? CustomCalendar(

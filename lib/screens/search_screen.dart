@@ -52,6 +52,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   width: .85.sw,
                   child: TextField(
                     controller: search,
+                    autofocus: true,
                     onChanged: (value) {
                       if (value.length > 2) {
                         value = search.text;
@@ -61,7 +62,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       setState(() {});
                     },
                     cursorColor: const Color(0xFF272624),
-                    cursorHeight: 18,
+                    cursorHeight: 14,
                     style: const TextStyle(fontSize: 12),
                     decoration: InputDecoration(
                       isDense: true,

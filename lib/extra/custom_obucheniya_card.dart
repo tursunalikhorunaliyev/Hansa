@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -76,9 +78,12 @@ class _ObucheniyaCardState extends State<ObucheniyaCard> {
                         children: [
                           InkWell(
                             onTap: () {
+                              String fullUrl = widget.linkPDF.startsWith("http")
+                                  ? widget.linkPDF
+                                  : "http://${widget.linkPDF}";
+
                               setState(() {
-                                launched = _launchInBrowser(
-                                    Uri.parse("http://${widget.linkPDF}"));
+                                launched = _launchInBrowser(Uri.parse(fullUrl));
                               });
                             },
                             child: Container(
@@ -107,9 +112,12 @@ class _ObucheniyaCardState extends State<ObucheniyaCard> {
           ),
           InkWell(
             onTap: () {
+              String fullUrl = widget.linkPDF.startsWith("http")
+                  ? widget.linkPDF
+                  : "http://${widget.linkPDF}";
+
               setState(() {
-                launched =
-                    _launchInBrowser(Uri.parse("http://${widget.linkPDF}"));
+                launched = _launchInBrowser(Uri.parse(fullUrl));
               });
             },
             child: SizedBox(

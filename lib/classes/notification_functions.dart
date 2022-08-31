@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:http/http.dart';
 
 FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
@@ -33,9 +34,14 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
 }
 
-Future<String> getToken() async {
+Future getToken() async {
   final fcmToken = await FirebaseMessaging.instance.getToken();
-  return (fcmToken ?? "No token");
+  Map<String, String> body = {"token": fcmToken.toString()};
+  await post(
+    Uri.parse("https://hansa-lab.ru/api/auth/register-token"),
+    body: body,
+  );
+  log(fcmToken.toString());
 }
 
 listenForeground(AndroidNotificationChannel channel) {
@@ -79,4 +85,8 @@ requestMessaging() async {
     provisional: false,
     sound: true,
   );
+  flutterLocalNotificationsPlugin
+      .resolvePlatformSpecificImplementation<
+          AndroidFlutterLocalNotificationsPlugin>()!
+      .requestPermission();
 }

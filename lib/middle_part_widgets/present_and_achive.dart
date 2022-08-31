@@ -261,6 +261,7 @@ class _PresentArchiveState extends State<PresentArchive> {
                                                   top: isTablet ? 22.h : 15.h),
                                               child: InkWell(
                                                 onTap: () {
+                                                  log("https://${snapshot.data!.data.guides.dataGuides[index].pdfUrl}");
                                                   setState(() {
                                                     launched = _launchInBrowser(
                                                         Uri.parse(
@@ -542,6 +543,7 @@ class _PresentArchiveState extends State<PresentArchive> {
                                                             : 15.h),
                                                     child: InkWell(
                                                       onTap: () {
+                                                        log("https://${snapshot.data!.data.guidesArchive.dataGuidesArchive[index].pdfUrl}");
                                                         setState(() {
                                                           launched =
                                                               _launchInBrowser(

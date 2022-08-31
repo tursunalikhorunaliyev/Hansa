@@ -4,6 +4,7 @@ import 'package:chewie/chewie.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gallery_saver/gallery_saver.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/blocs/bloc_detect_tap.dart';
 import 'package:hansa_app/blocs/download_progress_bloc.dart';
@@ -284,10 +285,23 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
                                                 .list[widget.selectedIndex]
                                                 .title,
                                             providerBlocProgress,
-                                          ).then((value) {
+                                          ).then((v) {
                                             log("Not download");
+                                            if (Platform.isIOS) {
+                                              GallerySaver.saveVideo(snapshot
+                                                  .data!
+                                                  .videoListData
+                                                  .list[value.getIndex]
+                                                  .data
+                                                  .list[widget.selectedIndex]
+                                                  .videoLink);
+                                            }
                                             providerSendAnaliseDownload
+<<<<<<< HEAD
                                                 .setAnalise(value);
+=======
+                                                .setAnalise(v);
+>>>>>>> 83264cd513a3008592b7e98844148ad51530b623
                                           });
                                         } else {
                                           log("asdffffffffffff=----------------------------------------");

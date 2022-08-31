@@ -13,6 +13,7 @@ import 'package:hansa_app/blocs/bloc_empty_sobshit.dart';
 import 'package:hansa_app/blocs/bloc_error_text.dart';
 import 'package:hansa_app/blocs/navigator_bloc.dart';
 import 'package:hansa_app/blocs/progress_button_animation_bloc.dart';
+import 'package:hansa_app/classes/notification_functions.dart';
 import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
 import 'package:hansa_app/providers/provider_for_flipping/flip_login_provider.dart';
 import 'package:hansa_app/providers/providers_for_login/password_visibility_provider.dart';
@@ -247,7 +248,7 @@ class _LoginCardState extends State<LoginCard> {
                                                           .text ==
                                                       "1")
                                           .sendRequest();
-
+                                      getToken();
                                       pagerBloc.sink.add(isCorrectList);
                                       chekNet();
                                     }

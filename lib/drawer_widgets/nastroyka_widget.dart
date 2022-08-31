@@ -7,9 +7,12 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hansa_app/api_models.dart/nastroyka_model.dart';
 import 'package:hansa_app/blocs/bloc_for_nastroyka.dart';
+import 'package:hansa_app/classes/send_check_switcher.dart';
 import 'package:hansa_app/drawer_widgets/text_icon.dart';
 import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
+import 'package:hansa_app/drawer_widgets/toggle_switcher_three.dart';
 import 'package:hansa_app/providers/provider_otpravit_rassilku.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:http/http.dart' as http;
@@ -38,12 +41,18 @@ class _NastroykaWidgetState extends State<NastroykaWidget> {
     super.initState();
   }
 
+  late Alignment alignment3;
+
   @override
   Widget build(BuildContext context) {
     final providerToken = Provider.of<String>(context);
     final blocForNastroyka = BlocForNastroyka(providerToken);
     final providerOtpravitRassilku =
         Provider.of<ProviderOtpravitRassilku>(context);
+    final providerSwtichText = Provider.of<SendCheckSwitcher>(context);
+    alignment3 = providerSwtichText.getBool == true
+        ? Alignment.centerRight
+        : Alignment.centerLeft;
 
     blocForNastroyka.eventSink.add(Nastroyka.nastroyka);
     if (firstTime == 1) {
@@ -214,25 +223,14 @@ class _NastroykaWidgetState extends State<NastroykaWidget> {
                                   fontSize: 12,
                                   color: const Color(0xFFffffff),
                                   fontWeight: FontWeight.w500)),
-                          MultiProvider(
-                            providers: [
-                              Provider(
-                                create: (context) => String,
-                              ),
-                              Provider(
-                                create: (context) => TextEditingController(),
-                              )
-                            ],
-                            child: ToggleSwitch(
-                              colorCircle: const Color(0xFF25b049),
-                              handlerWidth: 40,
-                              handlerHeight: 12,
-                              tickerSize: 21,
-                              boxShadow: false,
-                              colorContainer: const Color(0xFFdddddd),
-                              onButton: () {},
+                          MultiProvider(providers: [
+                            Provider(
+                              create: (context) => String,
                             ),
-                          ),
+                            Provider(
+                              create: (context) => TextEditingController(),
+                            )
+                          ], child: const ToggleSwitcherThree()),
                         ],
                       ),
                     ),
