@@ -113,7 +113,7 @@ class _NazvaniyaWidgetState extends State<NazvaniyaWidget> {
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: const Color(0xffe21a37),
+                      color: const Color.fromARGB(255, 213, 0, 50),
                     ),
                     child: Text(
                       'OK',

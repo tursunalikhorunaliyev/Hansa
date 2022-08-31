@@ -70,7 +70,8 @@ class _PresentArchiveState extends State<PresentArchive> {
                                 width: isTablet ? 55.w : 70.w,
                                 height: isTablet ? 46.h : 42.h,
                                 decoration: BoxDecoration(
-                                    color: const Color(0XFFff163e),
+                                    color:
+                                        const Color.fromARGB(255, 213, 0, 50),
                                     borderRadius: BorderRadius.only(
                                         topRight: Radius.circular(
                                             isTablet ? 45.r : 21.r),
@@ -89,7 +90,8 @@ class _PresentArchiveState extends State<PresentArchive> {
                                   style: GoogleFonts.montserrat(
                                       fontSize: isTablet ? 22 : 20,
                                       fontWeight: FontWeight.w500,
-                                      color: const Color(0xffff163e)),
+                                      color: const Color.fromARGB(
+                                          255, 213, 0, 50)),
                                 ),
                               ),
                               Text(
@@ -175,7 +177,8 @@ class _PresentArchiveState extends State<PresentArchive> {
                                             .guides.dataGuides[index].pdfUrl,
                                         linkPDF: snapshot.data!.data.guides
                                             .dataGuides[index].link,
-                                        buttonColor: const Color(0xffff163e),
+                                        buttonColor: const Color.fromARGB(
+                                            255, 213, 0, 50),
                                         topButtonText: 'Скачать',
                                         bottomButtonText: 'Читать',
                                         isFavourite: snapshot.data!.data.guides
@@ -296,7 +299,8 @@ class _PresentArchiveState extends State<PresentArchive> {
                                           .dataGuides[index].pdfUrl,
                                       linkPDF: snapshot.data!.data.guides
                                           .dataGuides[index].link,
-                                      buttonColor: const Color(0xffff163e),
+                                      buttonColor:
+                                          const Color.fromARGB(255, 213, 0, 50),
                                       topButtonText: 'Скачать',
                                       bottomButtonText: 'Читать',
                                       isFavourite: snapshot.data!.data.guides
@@ -350,7 +354,8 @@ class _PresentArchiveState extends State<PresentArchive> {
                                       width: isTablet ? 55.w : 70.w,
                                       height: isTablet ? 46.h : 42.h,
                                       decoration: BoxDecoration(
-                                          color: const Color(0XFFff163e),
+                                          color: const Color.fromARGB(
+                                              255, 213, 0, 50),
                                           borderRadius: BorderRadius.only(
                                               topRight: Radius.circular(
                                                   isTablet ? 45.r : 21.r),
@@ -369,7 +374,8 @@ class _PresentArchiveState extends State<PresentArchive> {
                                         style: GoogleFonts.montserrat(
                                             fontSize: isTablet ? 22 : 20,
                                             fontWeight: FontWeight.w500,
-                                            color: const Color(0xffff163e)),
+                                            color: const Color.fromARGB(
+                                                255, 213, 0, 50)),
                                       ),
                                     ),
                                     Text(
@@ -473,7 +479,8 @@ class _PresentArchiveState extends State<PresentArchive> {
                                             .guidesArchive
                                             .dataGuidesArchive[index]
                                             .link,
-                                        buttonColor: const Color(0xffff163e),
+                                        buttonColor: const Color.fromARGB(
+                                            255, 213, 0, 50),
                                         topButtonText: 'Скачать',
                                         bottomButtonText: 'Читать',
                                         isFavourite: snapshot
@@ -585,8 +592,8 @@ class _PresentArchiveState extends State<PresentArchive> {
                                                 .guidesArchive
                                                 .dataGuidesArchive[index]
                                                 .pdfUrl,
-                                            buttonColor:
-                                                const Color(0xffff163e),
+                                            buttonColor: const Color.fromARGB(
+                                                255, 213, 0, 50),
                                             topButtonText: 'Скачать',
                                             bottomButtonText: 'Читать',
                                             linkPDF: snapshot

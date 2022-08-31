@@ -281,7 +281,8 @@ class _LoginCardState extends State<LoginCard> {
                                               15.h), // changes position of shadow
                                         ),
                                       ],
-                                      color: const Color(0xffe21a37),
+                                      color:
+                                          const Color.fromARGB(255, 213, 0, 50),
                                       borderRadius:
                                           BorderRadius.circular(23.r)),
                                   child: snapshot.data!
@@ -355,18 +356,18 @@ class _LoginCardState extends State<LoginCard> {
                                                                 fontSize: 14),
                                                             enabledBorder: OutlineInputBorder(
                                                                 borderSide: BorderSide(
-                                                                    color: snapshot.data ==
-                                                                            true
-                                                                        ? Colors
-                                                                            .red
+                                                                    color: snapshot.data == true
+                                                                        ? Color.fromARGB(
+                                                                            255,
+                                                                            213,
+                                                                            0,
+                                                                            50)
                                                                         : Colors
                                                                             .black)),
                                                             focusedBorder: OutlineInputBorder(
                                                                 borderSide: BorderSide(
-                                                                    color: snapshot.data ==
-                                                                            true
-                                                                        ? Colors
-                                                                            .red
+                                                                    color: snapshot.data == true
+                                                                        ? Color.fromARGB(255, 213, 0, 50)
                                                                         : Colors.black))),
                                                       ),
                                                     ),
@@ -408,8 +409,12 @@ class _LoginCardState extends State<LoginCard> {
                                                                         "Письмо")
                                                                 ? const Color(
                                                                     0xFF25b049)
-                                                                : const Color(
-                                                                    0xFFe21a37)),
+                                                                : const Color
+                                                                        .fromARGB(
+                                                                    255,
+                                                                    213,
+                                                                    0,
+                                                                    50)),
                                                       ),
                                                     ],
                                                   );
@@ -450,8 +455,8 @@ class _LoginCardState extends State<LoginCard> {
                                               height: 40.h,
                                               width: 250.w,
                                               decoration: BoxDecoration(
-                                                  color:
-                                                      const Color(0xFFfb002b),
+                                                  color: const Color.fromARGB(
+                                                      255, 213, 0, 50),
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           5.r)),
@@ -480,7 +485,8 @@ class _LoginCardState extends State<LoginCard> {
                                               child: const Text(
                                                 "support@hansa-lab.ru",
                                                 style: TextStyle(
-                                                    color: Color(0xFFfb002b),
+                                                    color: Color.fromARGB(
+                                                        255, 213, 0, 50),
                                                     decoration: TextDecoration
                                                         .underline,
                                                     fontWeight:
@@ -528,7 +534,7 @@ class _LoginCardState extends State<LoginCard> {
   showSnac() {
     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
       content: Text("Неверный E-mail или пароль"),
-      backgroundColor: Colors.red,
+      backgroundColor: Color.fromARGB(255, 213, 0, 50),
     ));
   }
 

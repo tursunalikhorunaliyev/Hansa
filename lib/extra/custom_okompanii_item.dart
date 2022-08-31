@@ -45,7 +45,6 @@ class CustomOKompaniiItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
             child: Container(
               height: 100,
-              
               color: const Color(0xffffffff),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -53,7 +52,6 @@ class CustomOKompaniiItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
-
                       width: 185,
                       child: Text(
                         title,
@@ -64,11 +62,9 @@ class CustomOKompaniiItem extends StatelessWidget {
                         ),
                       ),
                     ),
-                    
                     Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                      
                         PhysicalModel(
                           shadowColor: Colors.grey.withOpacity(.5),
                           color: Colors.transparent,
@@ -97,7 +93,6 @@ class CustomOKompaniiItem extends StatelessWidget {
                             ),
                           ),
                         ),
-                       
                         PhysicalModel(
                           shadowColor: Colors.grey.withOpacity(.5),
                           color: Colors.transparent,
@@ -112,7 +107,7 @@ class CustomOKompaniiItem extends StatelessWidget {
                                 constraints: const BoxConstraints(
                                   minWidth: 90,
                                 ),
-                                color: const Color(0xffff163e),
+                                color: const Color.fromARGB(255, 213, 0, 50),
                                 child: Center(
                                   child: Text(
                                     "Скачать",

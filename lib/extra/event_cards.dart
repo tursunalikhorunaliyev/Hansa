@@ -21,8 +21,7 @@ class EventCards extends StatelessWidget {
       required this.isFavourite,
       required this.onTap,
       required this.imageOnTap,
-      required this.index
-      })
+      required this.index})
       : super(key: key);
   final String url;
   final String isFavouriteURL;
@@ -91,7 +90,7 @@ class EventCards extends StatelessWidget {
                                   offset: const Offset(0, 3),
                                 ),
                               ],
-                              color: const Color(0xffff163e),
+                              color: const Color.fromARGB(255, 213, 0, 50),
                               borderRadius: BorderRadius.circular(13)),
                           child: Text(
                             buttonText,
@@ -196,11 +195,11 @@ class EventCards extends StatelessWidget {
                           child: (fav)
                               ? const Icon(
                                   Icons.favorite,
-                                  color: Color(0xffed3851),
+                                  color: Color.fromARGB(255, 213, 0, 50),
                                 )
                               : const Icon(
                                   Icons.favorite_border_sharp,
-                                  color: Color(0xffed3851),
+                                  color: Color.fromARGB(255, 213, 0, 50),
                                 ),
                         ),
                       );

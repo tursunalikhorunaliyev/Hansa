@@ -114,8 +114,8 @@ class _SobshitOProblemState extends State<SobshitOProblem> {
                                                     "assets/free-icon-maps-and-flags-446099.png",
                                                     scale: isTablet ? 2 : 3,
                                                     color: snapshot.data!
-                                                        ? const Color(
-                                                            0xFFff163e)
+                                                        ? const Color.fromARGB(
+                                                            255, 213, 0, 50)
                                                         : const Color(
                                                             0xffa1b7c2),
                                                   ),
@@ -128,16 +128,17 @@ class _SobshitOProblemState extends State<SobshitOProblem> {
                                                             ? 23
                                                             : null,
                                                         color: snapshot.data!
-                                                            ? const Color(
-                                                                0xFFff163e)
+                                                            ? const Color
+                                                                    .fromARGB(
+                                                                255, 213, 0, 50)
                                                             : const Color(
                                                                 0xffa1b7c2)),
                                                 enabledBorder:
                                                     UnderlineInputBorder(
                                                   borderSide: BorderSide(
                                                     color: snapshot.data!
-                                                        ? const Color(
-                                                            0xFFff163e)
+                                                        ? const Color.fromARGB(
+                                                            255, 213, 0, 50)
                                                         : const Color(
                                                             0xffa1b7c2),
                                                   ),
@@ -146,8 +147,8 @@ class _SobshitOProblemState extends State<SobshitOProblem> {
                                                     UnderlineInputBorder(
                                                   borderSide: BorderSide(
                                                     color: snapshot.data!
-                                                        ? const Color(
-                                                            0xFFff163e)
+                                                        ? const Color.fromARGB(
+                                                            255, 213, 0, 50)
                                                         : const Color(
                                                             0xffa1b7c2),
                                                   ),
