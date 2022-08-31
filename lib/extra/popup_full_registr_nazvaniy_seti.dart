@@ -56,12 +56,15 @@ class _PopupFullRegistrNazvaniySetiState
                 height: isTablet
                     ? snapshotSizeDrawer.data!
                     : snapshotSizeDrawer.data!,
-                width: isTablet ? double.infinity : 360, 
+                width: isTablet ? double.infinity : 360,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(radius),
                   border: Border.all(
-                      width: widget.borderColor == Colors.red ? 0.9 : 0.1,
+                      width:
+                          widget.borderColor == Color.fromARGB(255, 213, 0, 50)
+                              ? 0.9
+                              : 0.1,
                       color: widget.borderColor),
                 ),
                 child: Padding(
@@ -172,7 +175,8 @@ class _PopupFullRegistrNazvaniySetiState
                                         },
                                         height: 30,
                                         minWidth: 300,
-                                        color: const Color(0xFFe21a37),
+                                        color: const Color.fromARGB(
+                                            255, 213, 0, 50),
                                         child: Text(
                                           "OK",
                                           style: GoogleFonts.montserrat(

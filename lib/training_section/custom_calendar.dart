@@ -12,11 +12,9 @@ class CustomCalendar extends StatefulWidget {
 }
 
 class _CustomCalendarState extends State<CustomCalendar> {
-  
   bool isEvent = false;
   @override
   Widget build(BuildContext context) {
-  
     List<DateTime> listDate = [];
     for (String element in widget.dates) {
       List<String> date = element.split('-');
@@ -34,42 +32,24 @@ class _CustomCalendarState extends State<CustomCalendar> {
           EdgeInsets.only(left: 25.w, right: 25.w, top: isTablet ? 12.h : 0.h),
       child: SfDateRangePicker(
         monthViewSettings: const DateRangePickerMonthViewSettings(
-         viewHeaderStyle: DateRangePickerViewHeaderStyle(
-           
-           textStyle: TextStyle(color: Colors.white)
-         )
-        ),
-        
-        selectionColor: Colors.red,
-        
+            viewHeaderStyle: DateRangePickerViewHeaderStyle(
+                textStyle: TextStyle(color: Colors.white))),
+        selectionColor: Color.fromARGB(255, 213, 0, 50),
         selectionShape: DateRangePickerSelectionShape.rectangle,
-        
-       
         backgroundColor: const Color(0xFF232323),
-
         headerStyle: const DateRangePickerHeaderStyle(
-          
             textStyle: TextStyle(color: Colors.white)),
         onSelectionChanged: (date) {
           List<DateTime> list1 = date.value as List<DateTime>;
-          if (listDate.length != list1.length) {
-             
-          }
+          if (listDate.length != list1.length) {}
         },
-        
-        
-      
-        monthCellStyle:  DateRangePickerMonthCellStyle(
-        
+        monthCellStyle: DateRangePickerMonthCellStyle(
           cellDecoration: BoxDecoration(
-            color: const Color(0xFFFFFFFF),
-            borderRadius: BorderRadius.circular(0)
-          ),
-        
+              color: const Color(0xFFFFFFFF),
+              borderRadius: BorderRadius.circular(0)),
           disabledDatesDecoration: BoxDecoration(
-            color: const Color(0xFF232323),
-             borderRadius: BorderRadius.circular(0)
-          ),
+              color: const Color(0xFF232323),
+              borderRadius: BorderRadius.circular(0)),
           disabledDatesTextStyle: const TextStyle(color: Colors.white),
           textStyle: const TextStyle(color: Colors.white),
         ),

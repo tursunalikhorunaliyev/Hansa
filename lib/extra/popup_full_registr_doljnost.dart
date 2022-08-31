@@ -59,7 +59,10 @@ class _PopupFullRegistrDoljnostState extends State<PopupFullRegistrDoljnost> {
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(radius),
                   border: Border.all(
-                      width: widget.borderColor == Colors.red ? 0.9 : 0.1,
+                      width:
+                          widget.borderColor == Color.fromARGB(255, 213, 0, 50)
+                              ? 0.9
+                              : 0.1,
                       color: widget.borderColor),
                 ),
                 child: Padding(

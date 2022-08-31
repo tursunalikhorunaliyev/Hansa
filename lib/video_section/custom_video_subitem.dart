@@ -26,7 +26,7 @@ class CustomVideoSubItem extends StatelessWidget {
                     height: 10,
                     width: 10,
                     decoration: const BoxDecoration(
-                      color: Color(0xffff163e),
+                      color: Color.fromARGB(255, 213, 0, 50),
                       shape: BoxShape.circle,
                     ),
                   ),
@@ -56,7 +56,7 @@ class CustomVideoSubItem extends StatelessWidget {
                       constraints: BoxConstraints(
                         minWidth: 90.w,
                       ),
-                      color: const Color(0xffff163e),
+                      color: const Color.fromARGB(255, 213, 0, 50),
                       child: Center(
                         child: Text(
                           "Открыть раздел",

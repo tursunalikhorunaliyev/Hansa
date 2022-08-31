@@ -61,14 +61,14 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
       cupertinoProgressColors: ChewieProgressColors(
         backgroundColor: const Color(0xff090909),
         bufferedColor: const Color(0xff090909),
-        playedColor: const Color(0xffff0000),
-        handleColor: const Color(0xffff0000),
+        playedColor: const Color.fromARGB(255, 213, 0, 50),
+        handleColor: const Color.fromARGB(255, 213, 0, 50),
       ),
       materialProgressColors: ChewieProgressColors(
         backgroundColor: const Color(0xff090909),
         bufferedColor: const Color(0xff090909),
-        playedColor: const Color(0xffff0000),
-        handleColor: const Color(0xffff0000),
+        playedColor: const Color.fromARGB(255, 213, 0, 50),
+        handleColor: const Color.fromARGB(255, 213, 0, 50),
       ),
     );
   }
@@ -106,7 +106,7 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
     path = "$dir/$uniqueFileName.mp4";
     return path;
   }
-  
+
   Future<bool> downloadFile(String url, String fileName,
       DownloadProgressFileBloc downloadProgressFileBloc) async {
     progress = 0;
@@ -213,7 +213,8 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
                                     constraints: BoxConstraints(
                                       minWidth: isTablet ? 150 : 90,
                                     ),
-                                    color: const Color(0xffff163e),
+                                    color:
+                                        const Color.fromARGB(255, 213, 0, 50),
                                     child: Center(
                                       child: Text(
                                         "Открыть раздел",
@@ -286,17 +287,15 @@ class _TopVideoWidgetState extends State<TopVideoWidget> {
                                             providerBlocProgress,
                                           ).then((v) {
                                             log("Not download");
-                                            GallerySaver.saveVideo( snapshot
-                                                .data!
-                                                .videoListData
-                                                .list[value.getIndex]
-                                                .data
-                                                .list[widget.selectedIndex]
-                                                .videoLink);
-                                            providerSendAnaliseDownload
-                                                .setAnalise(v);
-
-                                           
+                                            if (Platform.isIOS) {
+                                              GallerySaver.saveVideo(snapshot
+                                                  .data!
+                                                  .videoListData
+                                                  .list[value.getIndex]
+                                                  .data
+                                                  .list[widget.selectedIndex]
+                                                  .videoLink);
+                                            }
                                           });
                                         } else {
                                           log("asdffffffffffff=----------------------------------------");
