@@ -45,7 +45,7 @@ class _TreningiState extends State<Treningi> {
                 final data = snapshot.data!.data;
                 return Column(
                   children: [
-                    Visibility(
+                   /*  Visibility(
                       visible: (snapshot.data!.data.webinar.data.isNotEmpty &&
                           snapshot.data!.data.events.events.isNotEmpty),
                       child: StickyHeader(
@@ -205,7 +205,7 @@ class _TreningiState extends State<Treningi> {
                           ],
                         ),
                       ),
-                    ),
+                    ), */
                     StickyHeader(
                       header: const CustomTitle(
                         imagePath: "assets/kak_title.png",
