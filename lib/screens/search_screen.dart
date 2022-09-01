@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:developer';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,6 +24,7 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   Map<String, dynamic>? globalData;
   final search = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final isTablet = Provider.of<bool>(context);
@@ -63,7 +65,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       setState(() {});
                     },
                     cursorColor: const Color(0xFF272624),
-                    cursorHeight: 14,
+                    cursorHeight: isTablet ? 22 : 14,
                     style: const TextStyle(fontSize: 12),
                     decoration: InputDecoration(
                       isDense: true,
