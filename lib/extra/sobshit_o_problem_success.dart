@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class SobshitOProblemSuccess extends StatefulWidget {
   const SobshitOProblemSuccess({Key? key}) : super(key: key);
@@ -11,6 +12,8 @@ class SobshitOProblemSuccess extends StatefulWidget {
 class _SobshitOProblemSuccessState extends State<SobshitOProblemSuccess> {
   @override
   Widget build(BuildContext context) {
+        final isTablet = Provider.of<bool>(context);
+
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Padding(
@@ -32,7 +35,7 @@ class _SobshitOProblemSuccessState extends State<SobshitOProblemSuccess> {
                         child: Container(
                           color: Colors.white,
                           height: 170,
-                          width: 350,
+                          width: isTablet ? 500 : 350,
                           child:
                               Column(mainAxisSize: MainAxisSize.min, children: [
                             Row(
@@ -44,26 +47,27 @@ class _SobshitOProblemSuccessState extends State<SobshitOProblemSuccess> {
                                     onTap: () {
                                       Navigator.of(context).pop();
                                     },
-                                    child: const Icon(
+                                    child:  Icon(
                                       Icons.close,
-                                      size: 22,
-                                      color: Color(0xff8c8c8b),
+                                      size: isTablet ? 30  : 22,
+                                      color: const Color(0xff8c8c8b),
                                     ),
                                   ),
                                 ),
                               ],
                             ),
-                            const SizedBox(
-                              height: 45,
+                             SizedBox(
+                              height: isTablet ? 30   : 45,
                             ),
-                            const Icon(
+                             Icon(
                               Icons.check,
-                              color: Color(0xFF25b049),
+                              color: const Color(0xFF25b049),
+                              size: isTablet  ? 40  : null ,
                             ),
                             Text(
                               "Спасибо за комментарий",
                               style: GoogleFonts.montserrat(
-                                  color: const Color(0xff444444), fontSize: 24),
+                                  color: const Color(0xff444444), fontSize: isTablet ?  30 : 24),
                             )
                           ]),
                         ),
