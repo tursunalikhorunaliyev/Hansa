@@ -17,13 +17,11 @@ class _FlipCardAnimatedState extends State<FlipCardAnimated> {
       body: FlipCard(
         key: cardKey,
         flipOnTouch: false,
-        front: RaisedButton(
+        front: TextButton(
           onPressed: () => cardKey.currentState!.toggleCard(),
           child: const Text('Toggle'),
         ),
-        back: Container(
-          child: const Text('Back'),
-        ),
+        back: const Text('Back'),
       ),
     );
   }
