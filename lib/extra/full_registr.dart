@@ -134,10 +134,10 @@ class _FullRegistrState extends State<FullRegistr> {
                         weight:
                             isTablet ? FontWeight.normal : FontWeight.normal,
                         borderColor: lastnameIsEmpty
-                            ? Color.fromARGB(255, 213, 0, 50)
+                            ? const Color.fromARGB(255, 213, 0, 50)
                             : const Color(0xFF000000),
                         hintColor: lastnameIsEmpty
-                            ? Color.fromARGB(255, 213, 0, 50)
+                            ? const Color.fromARGB(255, 213, 0, 50)
                             : const Color(0xFF444444),
                         onTap: () => setState(() => lastnameIsEmpty = false),
                       ),
@@ -152,10 +152,10 @@ class _FullRegistrState extends State<FullRegistr> {
                         weight:
                             isTablet ? FontWeight.normal : FontWeight.normal,
                         borderColor: emailIsEmpty
-                            ? Color.fromARGB(255, 213, 0, 50)
+                            ? const Color.fromARGB(255, 213, 0, 50)
                             : const Color(0xFF000000),
                         hintColor: emailIsEmpty
-                            ? Color.fromARGB(255, 213, 0, 50)
+                            ? const Color.fromARGB(255, 213, 0, 50)
                             : const Color(0xFF444444),
                         onTap: () => setState(() => emailIsEmpty = false),
                       ),
@@ -180,10 +180,10 @@ class _FullRegistrState extends State<FullRegistr> {
                                   inputDecoration: inputDecoration(
                                     isTablet,
                                     phoneIsEmpty
-                                        ? Color.fromARGB(255, 213, 0, 50)
+                                        ? const Color.fromARGB(255, 213, 0, 50)
                                         : Colors.black,
                                     phoneIsEmpty
-                                        ? Color.fromARGB(255, 213, 0, 50)
+                                        ? const Color.fromARGB(255, 213, 0, 50)
                                         : null,
                                   ),
                                   keyboardType: TextInputType.phone,
@@ -191,13 +191,13 @@ class _FullRegistrState extends State<FullRegistr> {
                                       FontWeight.w500,
                                       isTablet,
                                       phoneIsEmpty
-                                          ? Color.fromARGB(255, 213, 0, 50)
+                                          ? const Color.fromARGB(255, 213, 0, 50)
                                           : Colors.black),
                                   textStyle: style(
                                       FontWeight.w500,
                                       isTablet,
                                       phoneIsEmpty
-                                          ? Color.fromARGB(255, 213, 0, 50)
+                                          ? const Color.fromARGB(255, 213, 0, 50)
                                           : Colors.black),
                                   selectorConfig: const SelectorConfig(
                                       leadingPadding: 0,
@@ -238,9 +238,9 @@ class _FullRegistrState extends State<FullRegistr> {
                                     child: SfDateRangePicker(
                                       controller: dateRangeController,
                                       selectionColor:
-                                          Color.fromARGB(255, 213, 0, 50),
+                                          const Color.fromARGB(255, 213, 0, 50),
                                       todayHighlightColor:
-                                          Color.fromARGB(255, 213, 0, 50),
+                                          const Color.fromARGB(255, 213, 0, 50),
                                       onSelectionChanged: (a) {
                                         String day = dateRangeController
                                                     .selectedDate!.day
@@ -280,7 +280,7 @@ class _FullRegistrState extends State<FullRegistr> {
                             border: Border.all(
                                 width: dateIsEmpty ? 0.9 : 0.1,
                                 color: dateIsEmpty
-                                    ? Color.fromARGB(255, 213, 0, 50)
+                                    ? const Color.fromARGB(255, 213, 0, 50)
                                     : Colors.black),
                           ),
                           child: Padding(
@@ -295,14 +295,14 @@ class _FullRegistrState extends State<FullRegistr> {
                                         ? GoogleFonts.montserrat(
                                             fontSize: isTablet ? 13 : 10,
                                             color: dateIsEmpty
-                                                ? Color.fromARGB(
+                                                ? const Color.fromARGB(
                                                     255, 213, 0, 50)
                                                 : const Color(0xFF444444))
                                         : GoogleFonts.montserrat(
                                             fontSize: isTablet ? 13 : 10,
                                             fontWeight: FontWeight.w500,
                                             color: dateIsEmpty
-                                                ? Color.fromARGB(
+                                                ? const Color.fromARGB(
                                                     255, 213, 0, 50)
                                                 : Colors.black),
                                   );
@@ -317,10 +317,10 @@ class _FullRegistrState extends State<FullRegistr> {
                           create: (context) => nazvaniyaTextFieldController,
                           child: PopupFullRegistrNazvaniySeti(
                             borderColor: nazvaniyaIsEmpty
-                                ? Color.fromARGB(255, 213, 0, 50)
+                                ? const Color.fromARGB(255, 213, 0, 50)
                                 : Colors.black,
                             hintColor: nazvaniyaIsEmpty
-                                ? Color.fromARGB(255, 213, 0, 50)
+                                ? const Color.fromARGB(255, 213, 0, 50)
                                 : const Color(0xff444444),
                             onTap: () =>
                                 setState(() => nazvaniyaIsEmpty = false),
@@ -332,10 +332,10 @@ class _FullRegistrState extends State<FullRegistr> {
                           create: (context) => doljnostTextFieldController,
                           child: PopupFullRegistrDoljnost(
                             borderColor: doljnostIsEmpty
-                                ? Color.fromARGB(255, 213, 0, 50)
+                                ? const Color.fromARGB(255, 213, 0, 50)
                                 : Colors.black,
                             hintColor: doljnostIsEmpty
-                                ? Color.fromARGB(255, 213, 0, 50)
+                                ? const Color.fromARGB(255, 213, 0, 50)
                                 : const Color(0xff444444),
                             onTap: () =>
                                 setState(() => doljnostIsEmpty = false),
@@ -347,10 +347,10 @@ class _FullRegistrState extends State<FullRegistr> {
                           create: (context) => gorodTextFieldController,
                           child: PopupFullRegistrGorod(
                             borderColor: gorodIsEmpty
-                                ? Color.fromARGB(255, 213, 0, 50)
+                                ? const Color.fromARGB(255, 213, 0, 50)
                                 : Colors.black,
                             hintColor: gorodIsEmpty
-                                ? Color.fromARGB(255, 213, 0, 50)
+                                ? const Color.fromARGB(255, 213, 0, 50)
                                 : const Color(0xff444444),
                             onTap: () => setState(() => gorodIsEmpty = false),
                           )),
@@ -366,10 +366,10 @@ class _FullRegistrState extends State<FullRegistr> {
                         weight:
                             isTablet ? FontWeight.normal : FontWeight.normal,
                         borderColor: adressIsEmpty
-                            ? Color.fromARGB(255, 213, 0, 50)
+                            ? const Color.fromARGB(255, 213, 0, 50)
                             : const Color(0xFF000000),
                         hintColor: adressIsEmpty
-                            ? Color.fromARGB(255, 213, 0, 50)
+                            ? const Color.fromARGB(255, 213, 0, 50)
                             : const Color(0xFF444444),
                         onTap: () => setState(() => adressIsEmpty = false),
                       ),
@@ -669,13 +669,13 @@ class _FullRegistrState extends State<FullRegistr> {
         borderRadius: BorderRadius.circular(54),
       ),
       focusedErrorBorder: outlineInputBorder(
-        color == Color.fromARGB(255, 213, 0, 50) ? 0.9 : .1,
+        color == const Color.fromARGB(255, 213, 0, 50) ? 0.9 : .1,
         Colors.black,
       ),
       enabledBorder: outlineInputBorder(
-          color == Color.fromARGB(255, 213, 0, 50) ? 0.9 : 0.2, color),
+          color == const Color.fromARGB(255, 213, 0, 50) ? 0.9 : 0.2, color),
       errorBorder: outlineInputBorder(
-          color == Color.fromARGB(255, 213, 0, 50) ? 0.9 : .1, color),
+          color == const Color.fromARGB(255, 213, 0, 50) ? 0.9 : .1, color),
       contentPadding: const EdgeInsets.symmetric(vertical: 2),
       hintStyle: TextStyle(color: hintColor),
     );

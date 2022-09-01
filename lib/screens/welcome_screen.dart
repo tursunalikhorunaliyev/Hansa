@@ -39,7 +39,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     final bloc = BlocObucheniya(token);
     final not = Provider.of<bool>(context);
     final providerNotificationToken = Provider.of<NotificationToken>(context);
-    providerNotificationToken.getToken().then((value) => log(value + " KLLLK"));
+    providerNotificationToken.getToken().then((value) => log("$value KLLLK"));
 
     return WillPopScope(
       onWillPop: () async {
@@ -154,8 +154,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                         ),
                         InkWell(
                           onTap: () {
-                            log(providerSendCheckSwitcher.getBool.toString() +
-                                " SEARCH");
+                            log("${providerSendCheckSwitcher.getBool} SEARCH");
                             Navigator.of(context).push(SlideTransitionBottom(
                               Provider.value(
                                 value: token,

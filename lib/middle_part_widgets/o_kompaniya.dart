@@ -32,7 +32,7 @@ class Okompaniya extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.only(
                       top: isTablet ? 22 : 16,
-                      left: isTablet ? 25 : 14,
+                      left: isTablet ? 30 : 14,
                       right: isTablet ? 15 : 13,
                       bottom: isTablet ? 25 : 16),
                   height: isTablet ? 63 : 42,

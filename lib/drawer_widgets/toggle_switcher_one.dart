@@ -59,7 +59,7 @@ class _ToggleSwitcherOneState extends State<ToggleSwitcherOne> {
     final blocPushUvodamleniya =
         BlocPushUvodamleniya(providerNotificationToken);
 
-        log(providerOtpravitPushUvodamleniya.getAlignment.toString() + " DFG");
+        log("${providerOtpravitPushUvodamleniya.getAlignment} DFG");
 
     return Center(
       child: SizedBox(

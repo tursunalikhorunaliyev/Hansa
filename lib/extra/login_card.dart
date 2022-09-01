@@ -13,7 +13,6 @@ import 'package:hansa_app/blocs/bloc_empty_sobshit.dart';
 import 'package:hansa_app/blocs/bloc_error_text.dart';
 import 'package:hansa_app/blocs/navigator_bloc.dart';
 import 'package:hansa_app/blocs/progress_button_animation_bloc.dart';
-import 'package:hansa_app/classes/notification_functions.dart';
 import 'package:hansa_app/classes/notification_token.dart';
 import 'package:hansa_app/drawer_widgets/toggle_switcher.dart';
 import 'package:hansa_app/providers/provider_for_flipping/flip_login_provider.dart';
@@ -359,7 +358,7 @@ class _LoginCardState extends State<LoginCard> {
                                                             enabledBorder: OutlineInputBorder(
                                                                 borderSide: BorderSide(
                                                                     color: snapshot.data == true
-                                                                        ? Color.fromARGB(
+                                                                        ? const Color.fromARGB(
                                                                             255,
                                                                             213,
                                                                             0,
@@ -369,7 +368,7 @@ class _LoginCardState extends State<LoginCard> {
                                                             focusedBorder: OutlineInputBorder(
                                                                 borderSide: BorderSide(
                                                                     color: snapshot.data == true
-                                                                        ? Color.fromARGB(255, 213, 0, 50)
+                                                                        ? const Color.fromARGB(255, 213, 0, 50)
                                                                         : Colors.black))),
                                                       ),
                                                     ),
