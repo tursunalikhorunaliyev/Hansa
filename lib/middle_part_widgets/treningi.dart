@@ -44,9 +44,12 @@ class _TreningiState extends State<Treningi> {
     final eventTitleProvider = Provider.of<EventTitleProvider>(context);
     if (i == 0) {
       trainingBloc.getTrainingData(token).then((value) {
-        (value.data.futureEvents.list.first.checked == true)
-            ? eventTitleProvider.changeTitle("Отписация")
-            : eventTitleProvider.changeTitle("Записаться");
+        List list = value.data.futureEvents.list;
+        for (var i = 0; i < list.length; i++) {
+          (value.data.futureEvents.list[i].checked == true)
+              ? eventTitleProvider.addTitles("Отписация")
+              : eventTitleProvider.addTitles("Записаться");
+        }
       });
       i = 1;
     }
@@ -212,84 +215,92 @@ class _TreningiState extends State<Treningi> {
                             (snapshot.data!.data.futureEvents.list.isNotEmpty)
                                 ? Consumer<EventTitleProvider>(
                                     builder: (context, value, child) {
-                                      return isTablet
-                                          ? IpadContainer(
-                                              title: snapshot
-                                                  .data!
-                                                  .data
-                                                  .futureEvents
-                                                  .list
-                                                  .first
-                                                  .title,
-                                              buttonColor: (value.getTitle ==
-                                                      "Записаться")
-                                                  ? const Color(0xff25b049)
-                                                  : const Color(0xFF232323),
-                                              titleColor:
-                                                  const Color(0xffffffff),
-                                              buttonText: value.getTitle!,
-                                              buttonTextColor:
-                                                  const Color(0xffffffff),
-                                              onTap: () {
-                                                if (value.getTitle ==
-                                                    "Записаться") {
-                                                  value
-                                                      .changeTitle("Отписация");
-                                                } else {
-                                                  value.changeTitle(
-                                                      "Записаться");
-                                                }
-                                                postChecked(
-                                                    token,
-                                                    snapshot
-                                                        .data!
-                                                        .data
-                                                        .futureEvents
-                                                        .list
-                                                        .first
-                                                        .link);
-                                              },
-                                            )
-                                          : CustomClipItem(
-                                              backgroundColor:
-                                                  const Color.fromARGB(
-                                                      255, 213, 0, 50),
-                                              buttonColor: (value.getTitle ==
-                                                      "Записаться")
-                                                  ? const Color(0xff25b049)
-                                                  : const Color(0xFF232323),
-                                              buttonTextColor:
-                                                  const Color(0xffffffff),
-                                              titleColor:
-                                                  const Color(0xffffffff),
-                                              buttonText: value.getTitle!,
-                                              title: snapshot
-                                                  .data!
-                                                  .data
-                                                  .futureEvents
-                                                  .list
-                                                  .first
-                                                  .title,
-                                              onTap: () {
-                                                if (value.getTitle ==
-                                                    "Записаться") {
-                                                  value
-                                                      .changeTitle("Отписация");
-                                                } else {
-                                                  value.changeTitle(
-                                                      "Записаться");
-                                                }
-                                                postChecked(
-                                                    token,
-                                                    snapshot
-                                                        .data!
-                                                        .data
-                                                        .futureEvents
-                                                        .list
-                                                        .first
-                                                        .link);
-                                              },
-                                            );
+                                      return Column(
+                                        children: List.generate(
+                                            snapshot.data!.data.futureEvents
+                                                .list.length, (index) {
+                                          return isTablet
+                                              ? IpadContainer(
+                                                  title: snapshot
+                                                      .data!
+                                                      .data
+                                                      .futureEvents
+                                                      .list[index]
+                                                      .title,
+                                                  buttonColor: (value.getTitles[
+                                                              index] ==
+                                                          "Записаться")
+                                                      ? const Color(0xff25b049)
+                                                      : const Color(0xFF232323),
+                                                  titleColor:
+                                                      const Color(0xffffffff),
+                                                  buttonText:
+                                                      value.getTitles[index],
+                                                  buttonTextColor:
+                                                      const Color(0xffffffff),
+                                                  onTap: () {
+                                                    if (value
+                                                            .getTitles[index] ==
+                                                        "Записаться") {
+                                                      value.changeTitles(
+                                                          "Отписация", index);
+                                                    } else {
+                                                      value.changeTitles(
+                                                          "Записаться", index);
+                                                    }
+                                                    postChecked(
+                                                        token,
+                                                        snapshot
+                                                            .data!
+                                                            .data
+                                                            .futureEvents
+                                                            .list[index]
+                                                            .link);
+                                                  },
+                                                )
+                                              : CustomClipItem(
+                                                  backgroundColor:
+                                                      const Color.fromARGB(
+                                                          255, 213, 0, 50),
+                                                  buttonColor: (value.getTitles[
+                                                              index] ==
+                                                          "Записаться")
+                                                      ? const Color(0xff25b049)
+                                                      : const Color(0xFF232323),
+                                                  buttonTextColor:
+                                                      const Color(0xffffffff),
+                                                  titleColor:
+                                                      const Color(0xffffffff),
+                                                  buttonText:
+                                                      value.getTitles[index],
+                                                  title: snapshot
+                                                      .data!
+                                                      .data
+                                                      .futureEvents
+                                                      .list[index]
+                                                      .title,
+                                                  onTap: () {
+                                                    if (value
+                                                            .getTitles[index] ==
+                                                        "Записаться") {
+                                                      value.changeTitles(
+                                                          "Отписация", index);
+                                                    } else {
+                                                      value.changeTitles(
+                                                          "Записаться", index);
+                                                    }
+                                                    postChecked(
+                                                        token,
+                                                        snapshot
+                                                            .data!
+                                                            .data
+                                                            .futureEvents
+                                                            .list[index]
+                                                            .link);
+                                                  },
+                                                );
+                                        }),
+                                      );
                                     },
                                   )
                                 : const SizedBox(),
@@ -502,14 +513,13 @@ class _TreningiState extends State<Treningi> {
 
   postChecked(token, url) async {
     log(token);
+    log(url);
     Timer(const Duration(seconds: 3), () async {
-      await http.post(
-        Uri.parse("https://hansa-lab.ru/api/site/notification?id=191"),
-        headers: {
-          "token":
-              "022412a69ac3e9df2bdff39b1188f5ee97b474eecad20f51fa7dc2971237643b"
-        },
+      http.Response response = await http.post(
+        Uri.parse("https://hansa-lab.ru/$url"),
+        headers: {"token": token},
       );
+      log(response.body);
     });
   }
 }
