@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 
 class EventTitleProvider extends ChangeNotifier {
-  String get getTitle => title;
-  String title = "";
-  changeTitle(String newTitle) {
-    title = newTitle;
+  List<String> get getTitles => titles;
+  List<String> titles = [];
+  changeTitles(newTitle, index) {
+    titles.removeAt(index);
+    titles.insert(index, newTitle);
+    notifyListeners();
+  }
+
+  addTitles(newTitle) {
+    titles.add(newTitle);
     notifyListeners();
   }
 }
