@@ -40,19 +40,23 @@ class _SearchScreenState extends State<SearchScreen> {
             padding:
                 const EdgeInsets.only(top: 40, bottom: 10, left: 10, right: 10),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 InkWell(
                   onTap: () {
                     Navigator.pop(context);
                   },
-                  child: Icon(
-                    CupertinoIcons.back,
-                    color: Colors.grey[500],
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: Icon(
+                      CupertinoIcons.back,
+                      color: Colors.grey[500],
+                      size: isTablet ? 33  : null,
+                    ),
                   ),
                 ),
                 SizedBox(
-                  width: .85.sw,
+                  width: isTablet ?   .90.sw : .85.sw,
                   child: TextField(
                     controller: search,
                     autofocus: true,
@@ -65,8 +69,8 @@ class _SearchScreenState extends State<SearchScreen> {
                       setState(() {});
                     },
                     cursorColor: const Color(0xFF272624),
-                    cursorHeight: isTablet ? 22 : 14,
-                    style: const TextStyle(fontSize: 12),
+                    cursorHeight: isTablet ? 20 : 14,
+                    style: TextStyle(fontSize: isTablet ? 18 : 12),
                     decoration: InputDecoration(
                       isDense: true,
                       border: const UnderlineInputBorder(
@@ -74,7 +78,6 @@ class _SearchScreenState extends State<SearchScreen> {
                           color: Color(0xFF272624),
                         ),
                       ),
-                      hintStyle: TextStyle(fontSize: isTablet ? 18 : 12),
                       hintText: "Поиск",
                       focusedBorder: const UnderlineInputBorder(
                         borderSide: BorderSide(
