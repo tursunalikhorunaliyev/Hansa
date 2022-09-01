@@ -44,7 +44,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     return WillPopScope(
       onWillPop: () async {
         providerSendCheckSwitcher.getBool == true
-            ? MoveToBackground.moveTaskToBack()
+            ? backPressedTrue(menuProvider)
             : backPressed(menuProvider);
         return false;
       },
@@ -207,6 +207,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           return const ExitDialog();
         },
       );
+    }
+  }
+
+  backPressedTrue(MenuEventsBloC menuProvider) {
+    if (menuProvider.list.length > 1) {
+      menuProvider.eventSink
+          .add(menuProvider.list.elementAt(menuProvider.list.length - 2));
+      menuProvider.list
+          .remove(menuProvider.list.elementAt(menuProvider.list.length - 1));
+    } else {
+      MoveToBackground.moveTaskToBack();
     }
   }
 }
