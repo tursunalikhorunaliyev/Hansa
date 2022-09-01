@@ -8,5 +8,5 @@ class ProviderOtpravitRassilku extends ChangeNotifier {
     notifyListeners();
   } 
 
-  Alignment get getAlignment => alignment!;
+  Alignment get getAlignment => alignment;
 }
