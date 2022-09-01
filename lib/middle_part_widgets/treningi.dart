@@ -32,6 +32,12 @@ class Treningi extends StatefulWidget {
 class _TreningiState extends State<Treningi> {
   int i = 0;
   @override
+  void dispose() {
+    super.dispose();
+    i = 0;
+  }
+
+  @override
   Widget build(BuildContext context) {
     final menuBloCProvider = Provider.of<MenuEventsBloC>(context);
     final isTablet = Provider.of<bool>(context);
