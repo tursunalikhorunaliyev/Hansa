@@ -48,6 +48,7 @@ class _ToggleSwitcherOneState extends State<ToggleSwitcherOne> {
     if (firstTime == 1) {
       providerNotificationToken.getToken().then((valueToken) {
         getData(valueToken).then((valueBool) {
+          
           providerOtpravitPushUvodamleniya.setAlignment(
               valueBool == false ? Alignment.centerLeft : Alignment.centerRight);
         });
