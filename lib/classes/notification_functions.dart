@@ -17,7 +17,7 @@ const AndroidNotificationChannel channel = AndroidNotificationChannel(
 
 initMessaging() async {
   log("FirebaseMessaging initializing...");
-  var androidInit = const AndroidInitializationSettings("@mipmap/ic_launcher");
+  var androidInit = const AndroidInitializationSettings("@mipmap/launcher_icon");
   var iosInit = const IOSInitializationSettings();
   var initSettings = InitializationSettings(android: androidInit, iOS: iosInit);
   flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
