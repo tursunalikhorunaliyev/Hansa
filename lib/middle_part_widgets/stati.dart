@@ -55,6 +55,7 @@ class _StatiState extends State<Stati> {
                             gridDelegate:
                                 const SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: 2,
+                                   // crossAxisSpacing: 30,
                                     childAspectRatio: 10 / 3.3),
                             children: List.generate(
                               snapshot.data!.list.list.length,
