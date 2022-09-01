@@ -26,7 +26,7 @@ class IpadContainer extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(top: 10.h),
           child: Container(
-            alignment: Alignment.center,
+            alignment: Alignment.topCenter,
             height: 120.h,
             width: 325.w,
             decoration: BoxDecoration(
@@ -34,11 +34,12 @@ class IpadContainer extends StatelessWidget {
               color: const Color.fromARGB(255, 213, 0, 50),
             ),
             child: Padding(
-              padding: EdgeInsets.only(top: 20.h),
+              padding: EdgeInsets.only(top: 10.h),
               child: SizedBox(
                 width: 500,
                 child: Text(
                   title,
+                  textAlign: TextAlign.center,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 4,
                   softWrap: true,

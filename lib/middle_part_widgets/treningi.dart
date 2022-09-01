@@ -85,8 +85,8 @@ class _TreningiState extends State<Treningi> {
                                     children: List.generate(
                                       snapshot.data!.data.webinar.data.length,
                                       (index) => Container(
-                                        margin: const EdgeInsets.only(
-                                            left: 25, right: 25, bottom: 13),
+                                        margin:  EdgeInsets.only(
+                                            left:isTablet?53: 25, right:isTablet?53: 25, bottom: 13),
                                         decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(8),
@@ -145,7 +145,8 @@ class _TreningiState extends State<Treningi> {
                                                                     .circular(
                                                                         64),
                                                             child: Container(
-                                                              height: 25,
+                                                              height:isTablet?35: 25,
+                                                              width: 170,
                                                               color: const Color(
                                                                   0xff25b049),
                                                               child: Center(
@@ -161,7 +162,7 @@ class _TreningiState extends State<Treningi> {
                                                                             FontWeight
                                                                                 .w700,
                                                                         fontSize:
-                                                                            8,
+                                                                          isTablet?12:  8,
                                                                         color: Colors
                                                                             .white),
                                                                   ),

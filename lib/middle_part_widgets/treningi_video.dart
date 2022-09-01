@@ -196,7 +196,7 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                               borderRadius:
                                                   BorderRadius.circular(10),
                                               child: SizedBox(
-                                                height: isTablet ? 400 : 235,
+                                                height: isTablet ? 380 : 235,
                                                 width: double.infinity,
                                                 child: Chewie(
                                                   controller: chewieController,
@@ -447,26 +447,7 @@ class _TreningiVideoState extends State<TreningiVideo> {
                                                 }),
                                           ],
                                         ),
-                                        Positioned(
-                                          top: isTablet ? 377 : 500,
-                                          right: isTablet ? 35 : 110,
-                                          child: Container(
-                                            height: 55,
-                                            width: 55,
-                                            decoration: const BoxDecoration(
-                                              color: Color(0xfff1f1f1),
-                                              shape: BoxShape.circle,
-                                            ),
-                                            child: const Center(
-                                              child: Icon(
-                                                Icons.favorite,
-                                                color: Color.fromARGB(
-                                                    255, 213, 0, 50),
-                                                size: 35,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
+                                    
                                       ],
                                     );
                                   } else {

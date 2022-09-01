@@ -48,13 +48,12 @@ class CustomStatiTabletItem extends StatelessWidget {
                   padding: EdgeInsets.only(left: 8.w, top: 5, bottom: 5),
                   child: Container(
                     alignment: Alignment.centerLeft,
-                    width: 185,
+                    width: 175,
                     height: 100,
                     child: Text(
                       title, overflow: TextOverflow.ellipsis,
                       maxLines: 3,
                       softWrap: true,
-                      // overflow: TextOverflow.fade,
                       style: GoogleFonts.montserrat(
                         color: titleColor,
                         fontSize: 7.sp,
@@ -76,7 +75,7 @@ class CustomStatiTabletItem extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(64.r),
                       child: Container(
-                        // width: 150,
+                      //  width: 150,
                         height: 35,
                         padding: const EdgeInsets.symmetric(horizontal: 35),
                         color: buttonColor,
