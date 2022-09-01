@@ -113,7 +113,7 @@ class _PrezentOtkritState extends State<PrezentOtkrit> {
                                     const SliverGridDelegateWithFixedCrossAxisCount(
                                         crossAxisCount: 2,
                                         crossAxisSpacing: 10,
-                                        mainAxisExtent: 380),
+                                        mainAxisExtent: 390),
                                 children: List.generate(
                                     snapshot.data!.modelPrezentOtkritList.list
                                         .length, (index) {

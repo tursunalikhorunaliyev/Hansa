@@ -250,9 +250,7 @@ class _ReadStatiState extends State<ReadStati> {
                                                 color: Colors.black,
                                                 fontSize: 20),
                                           ),
-                                          const SizedBox(
-                                            width: 30,
-                                          ),
+                                         const Spacer(),
                                           IconButton(
                                               onPressed: () {
                                                 log("FGFGGFGGFGFGG");

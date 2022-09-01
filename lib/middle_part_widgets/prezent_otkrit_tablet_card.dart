@@ -26,30 +26,32 @@ class _PrezentOtkritTabletCardState extends State<PrezentOtkritTabletCard> {
   Future<void>? launched;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 10.h),
-      child: Column(
-        children: [
-          InkWell(
+    return Center(
+      child: SizedBox(
+        height: 390,
+        width: 430,
+        child: Stack(
+          children: [
+            Padding(padding: const EdgeInsets.only(left: 5,right: 5,bottom: 10 ),
+            child: Column(children: [
+                  InkWell(
             onTap: widget.onTap,
-            child: Row(
-              children: [
-                SizedBox(
-                    width: 410,
-                    height: 230,
-                    child: GestureDetector(
-                      onTap: widget.onTap,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(5.r),
-                        child: CachedNetworkImage(
-                          imageUrl: widget.url,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    )),
-              ],
-            ),
-          ),
+            child: SizedBox(
+               width: 350,
+                height: 230,
+                child: GestureDetector(
+                  onTap: widget.onTap,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(5.r),
+                    child: CachedNetworkImage(
+                      imageUrl: widget.url,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                )),
+          ),const SizedBox(
+                    height: 10,
+                  ),
           Padding(
             padding: EdgeInsets.only(top: 6.h, bottom: 5.h),
             child: SizedBox(
@@ -130,8 +132,11 @@ class _PrezentOtkritTabletCardState extends State<PrezentOtkritTabletCard> {
               ),
             ),
           ),
-        ],
+            ],),)
+          ],
+        ),
       ),
     );
+    
   }
 }

@@ -27,37 +27,34 @@ class CustomStatiTabletItem extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.only(left: 5.w, right: 5.w, top: 3.h, bottom: 3.h),
       child: SizedBox(
-        width: 190,
+        //   width: 190,
         child: Stack(
-          alignment: Alignment.center,
+          alignment: Alignment.centerLeft,
           children: [
-            Row(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(5.r),
-                  child: ClipPath(
-                    clipper: CustomPaintClipper(),
-                    child: Container(
-                      width: 350,
-                      height: 110,
-                      color: backgroundColor,
-                    ),
-                  ),
+            ClipRRect(
+              borderRadius: BorderRadius.circular(5.r),
+              child: ClipPath(
+                clipper: CustomPaintClipper(),
+                child: Container(
+                  width: 300,
+                  height: 110,
+                  color: backgroundColor,
                 ),
-              ],
+              ),
             ),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
                   padding: EdgeInsets.only(left: 8.w, top: 5, bottom: 5),
                   child: Container(
                     alignment: Alignment.centerLeft,
-                    width: 200,
+                    width: 185,
                     height: 100,
                     child: Text(
-                      title,
-                      overflow: TextOverflow.fade,
+                      title, overflow: TextOverflow.ellipsis,
+                      maxLines: 3,
+                      softWrap: true,
+                      // overflow: TextOverflow.fade,
                       style: GoogleFonts.montserrat(
                         color: titleColor,
                         fontSize: 7.sp,
@@ -66,38 +63,38 @@ class CustomStatiTabletItem extends StatelessWidget {
                     ),
                   ),
                 ),
-                Row(
-                  children: [
-                    PhysicalModel(
-                      shadowColor: Colors.grey.withOpacity(.5),
-                      color: Colors.transparent,
+                const SizedBox(
+                  width: 20,
+                ),
+                PhysicalModel(
+                  shadowColor: Colors.grey.withOpacity(.5),
+                  color: Colors.transparent,
+                  borderRadius: BorderRadius.circular(64.r),
+                  elevation: 5.sp,
+                  child: GestureDetector(
+                    onTap: onTap,
+                    child: ClipRRect(
                       borderRadius: BorderRadius.circular(64.r),
-                      elevation: 5.sp,
-                      child: GestureDetector(
-                        onTap: onTap,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(64.r),
-                          child: Container(
-                            height: 35,
-                            padding: const EdgeInsets.symmetric(horizontal: 35),
-                            color: buttonColor,
-                            child: Center(
-                              child: Text(
-                                buttonText,
-                                style: GoogleFonts.montserrat(
-                                  color: buttonTextColor,
-                                  fontSize: 7.sp,
-                                ),
-                              ),
+                      child: Container(
+                        // width: 150,
+                        height: 35,
+                        padding: const EdgeInsets.symmetric(horizontal: 35),
+                        color: buttonColor,
+                        child: Center(
+                          child: Text(
+                            buttonText,
+                            style: GoogleFonts.montserrat(
+                              color: buttonTextColor,
+                              fontSize: 7.sp,
                             ),
                           ),
                         ),
                       ),
                     ),
-                  ],
+                  ),
                 ),
               ],
-            ),
+            )
           ],
         ),
       ),

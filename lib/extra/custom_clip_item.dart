@@ -60,7 +60,7 @@ class CustomClipItem extends StatelessWidget {
                     child: Text(
                       title,
                       overflow: TextOverflow.ellipsis,
-                      maxLines: 4,
+                      maxLines: 3,
                       softWrap: true,
                       style: GoogleFonts.montserrat(
                         color: titleColor,
