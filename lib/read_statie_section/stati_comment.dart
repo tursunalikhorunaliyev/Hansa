@@ -1,5 +1,8 @@
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class StatiComment extends StatefulWidget {
@@ -41,22 +44,26 @@ class _StatiCommentState extends State<StatiComment> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.star,
-                        color: Color.fromARGB(255, 213, 0, 50),
-                        size: 12.66666666666667,
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 0),
+                      child: RatingBar.builder(
+                        unratedColor: Colors.grey[300],
+                        initialRating: 3,
+                        itemCount: 5,
+                        itemSize: 12,
+                        itemBuilder: (context, index) {
+                          return const Icon(
+                            Icons.star,
+                            color: Colors.red,
+                          );
+                        },
+                        onRatingUpdate: (value) {
+                          log(value.toString());
+                        },
                       ),
-                      const SizedBox(
-                        width: 3,
-                      ),
-                      Text(
-                        widget.rating,
-                        style: GoogleFonts.montserrat(
-                            fontSize: 11.51, color: const Color(0xFF919191)),
-                      )
-                    ],
+                    ),
                   ),
                   const SizedBox(
                     height: 7,

@@ -13,6 +13,7 @@ import 'package:hansa_app/extra/custom_title.dart';
 import 'package:hansa_app/read_statie_section/stati_comment.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class ReadStati extends StatefulWidget {
   const ReadStati({Key? key}) : super(key: key);
@@ -91,6 +92,27 @@ class _ReadStatiState extends State<ReadStati> {
                                   topRight: Radius.circular(5.333333333333333)),
                               color: Color(0xFFffffff)),
                           child: Wrap(children: [
+                            Align(
+                              alignment: Alignment.topCenter,
+                              child: Padding(
+                                padding: const EdgeInsets.only(top: 26),
+                                child: RatingBar.builder(
+                                  unratedColor: Colors.grey[300],
+                                  initialRating: 3,
+                                  itemCount: 5,
+                                  itemSize: 24,
+                                  itemBuilder: (context, index) {
+                                    return const Icon(
+                                      Icons.star,
+                                      color: Colors.amber,
+                                    );
+                                  },
+                                  onRatingUpdate: (value) {
+                                    log(value.toString());
+                                  },
+                                ),
+                              ),
+                            ),
                             Html(
                               data: snapshot.data!.article.read.body,
                             ),
@@ -250,7 +272,7 @@ class _ReadStatiState extends State<ReadStati> {
                                                 color: Colors.black,
                                                 fontSize: 20),
                                           ),
-                                         const Spacer(),
+                                          const Spacer(),
                                           IconButton(
                                               onPressed: () {
                                                 log("FGFGGFGGFGFGG");
