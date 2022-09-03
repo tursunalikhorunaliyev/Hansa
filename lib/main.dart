@@ -131,12 +131,14 @@ class MyApp extends StatelessWidget {
               create: (context) => sendAnaliseDownload),
           Provider<BlocDetectTap>(create: (context) => blocDetectTap),
           Provider<SendCheckSwitcher>(create: (context) => sendCheckSwitcher),
-          ChangeNotifierProvider<ProviderOtpravitPushUvodamleniya>(create: (context) => providerOtpravitPushUvodamleniya),
+          ChangeNotifierProvider<ProviderOtpravitPushUvodamleniya>(
+              create: (context) => providerOtpravitPushUvodamleniya),
         ],
         child: const MaterialApp(
           localizationsDelegates: [
             GlobalMaterialLocalizations.delegate,
-            GlobalWidgetsLocalizations.delegate
+            GlobalCupertinoLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
           ],
           supportedLocales: [Locale("en"), Locale("ru"), Locale("ar")],
           locale: Locale("ru"),
