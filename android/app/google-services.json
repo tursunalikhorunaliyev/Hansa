@@ -1,41 +1,34 @@
 {
   "project_info": {
-    "project_number": "216755190091",
-    "project_id": "hansa-lab-d6e55",
-    "storage_bucket": "hansa-lab-d6e55.appspot.com"
+    "project_number": "180272152187",
+    "project_id": "hansa-lab-b2da5",
+    "storage_bucket": "hansa-lab-b2da5.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:216755190091:android:2dba3866859abb3899d0ce",
+        "mobilesdk_app_id": "1:180272152187:android:d9f44d9a77c97c57a7acde",
         "android_client_info": {
           "package_name": "com.example.hansa_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "216755190091-ppbknfq0cstge0j59645t1t0ga0g4669.apps.googleusercontent.com",
+          "client_id": "180272152187-0g8f5841ee3rrki6nm3gmg4nuoh8p6l9.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDHqbjFnNFWUciOFiYYq49N4m65_CdHhvE"
+          "current_key": "AIzaSyAxaCZ0xRXwlk-KLJDlkxLrkzxDeWnx8AE"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "216755190091-ppbknfq0cstge0j59645t1t0ga0g4669.apps.googleusercontent.com",
+              "client_id": "180272152187-0g8f5841ee3rrki6nm3gmg4nuoh8p6l9.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "216755190091-88nhd63v4c3ntmj6m5p3l5pu90dca8s2.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.hansaApp"
-              }
             }
           ]
         }
