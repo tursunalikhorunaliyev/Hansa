@@ -29,6 +29,13 @@
             {
               "client_id": "216755190091-ppbknfq0cstge0j59645t1t0ga0g4669.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "216755190091-88nhd63v4c3ntmj6m5p3l5pu90dca8s2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.hansaApp"
+              }
             }
           ]
         }
